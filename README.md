@@ -8,7 +8,7 @@ Developed at Wayne State University, Department of Neurology.
 
 ## Try it now
 
-**[▶ Open AutoEDSSguide](https://anaszakarya.github.io/AutoEDSSguide/)**
+**[▶ Open AutoEDSSguide](https://anaszakarya.github.io/AutoEDSSguide/index.html)**
 
 No installation. No login. Works in any modern browser.
 
