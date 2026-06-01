@@ -401,8 +401,11 @@ body {
 .ways-grid-3 {
   grid-template-columns: repeat(3, 1fr);
 }
+.ways-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
 @media (max-width: 1024px) {
-  .ways-grid-3 { grid-template-columns: 1fr; }
+  .ways-grid-3, .ways-grid-2 { grid-template-columns: 1fr; }
 }
 .way-card.patient-card {
   border-color: #d4b896;
@@ -597,6 +600,106 @@ body {
   margin: 0 auto;
   text-align: center;
 }
+
+/* ============================================================
+   CLINICAL EDSS MODE
+============================================================ */
+.clinical-view {
+  display: none; flex-direction: column; flex: 1;
+  background: linear-gradient(180deg, #faf8ff 0%, #f0eaf8 100%);
+  min-height: 100vh;
+}
+.clinical-view.active { display: flex; }
+.clinical-header {
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 16px; padding: 14px 24px;
+  background: var(--paper); border-bottom: 1px solid var(--rule);
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+.clinical-brand { font-size: 18px; font-weight: 700; color: var(--ink); text-align: center; }
+.clinical-brand em { color: #e65c00; font-style: normal; }
+.clinical-progress-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; min-width: 180px; }
+.clinical-progress-bar { width: 160px; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
+.clinical-progress-fill { height: 100%; background: linear-gradient(90deg, #7b3fa0 0%, #a855c8 100%); border-radius: 3px; transition: width 0.3s; }
+.clinical-progress-text { font-size: 11px; font-variant: small-caps; letter-spacing: 0.1em; color: var(--ink-faint); font-weight: 500; }
+.clinical-main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 40px 24px 80px; }
+.clinical-card {
+  background: var(--paper); border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.09);
+  padding: 32px 28px; width: 100%; max-width: 720px;
+  animation: clin-fade 0.25s ease;
+}
+@keyframes clin-fade { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.clinical-system-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #e8edf8; color: #1e4fa3;
+  border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 700;
+  margin-bottom: 16px;
+}
+.clinical-q { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 8px; line-height: 1.35; }
+.clinical-hint { font-size: 13px; color: var(--ink-soft); margin-bottom: 22px; line-height: 1.5; }
+.clinical-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.clinical-opt {
+  display: flex; align-items: center; gap: 14px;
+  border: 2px solid var(--rule); border-radius: 12px;
+  padding: 14px 16px; cursor: pointer; transition: border-color 0.15s, background 0.15s;
+  background: var(--paper);
+}
+.clinical-opt:hover { border-color: #1e4fa3; background: #f0f4ff; }
+.clinical-opt.selected { border-color: #1e4fa3; background: #e8edf8; }
+.clinical-opt-key {
+  width: 28px; height: 28px; border-radius: 50%; background: #e8edf8;
+  color: #1e4fa3; font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.clinical-opt.selected .clinical-opt-key { background: #1e4fa3; color: #fff; }
+.clinical-opt-body { flex: 1; }
+.clinical-opt-title { font-size: 14px; font-weight: 700; color: var(--ink); }
+.clinical-opt-desc { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+.clinical-opt-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; margin-left: auto; flex-shrink: 0; }
+.clinical-opt-badge.normal { background: #e6f4ea; color: #2a6e2a; }
+.clinical-fs-nc { color: #94a3b8 !important; font-size: 12px !important; font-weight: 500 !important; }
+.clinical-earlyexit-banner {
+  background: #fdf6ff; border: 1.5px solid #c084fc; border-radius: 12px;
+  padding: 18px 20px; margin-bottom: 12px; width: 100%; max-width: 560px;
+}
+.clinical-earlyexit-title { font-size: 14px; font-weight: 700; color: #7b3fa0; margin-bottom: 6px; }
+.clinical-earlyexit-desc { font-size: 13px; color: var(--ink-soft); margin: 0 0 14px; line-height: 1.5; }
+.clinical-earlyexit-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.clinical-opt-badge.mild { background: #fff8e6; color: #b85c1a; }
+.clinical-opt-badge.mod { background: #fff0e6; color: #c0390a; }
+.clinical-opt-badge.severe { background: #fde8e8; color: #b00020; }
+.clinical-nav { display: flex; gap: 10px; }
+.clinical-btn {
+  flex: 1; padding: 13px; border-radius: 10px; border: 2px solid var(--rule);
+  font-size: 14px; font-weight: 700; cursor: pointer; background: var(--paper);
+  color: var(--ink); transition: all 0.15s;
+}
+.clinical-btn:hover { border-color: #1e4fa3; color: #1e4fa3; }
+.clinical-btn.primary { background: #1e4fa3; border-color: #1e4fa3; color: #fff; }
+.clinical-btn.primary:hover { background: #1251a3; }
+.clinical-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.clinical-exit-banner {
+  background: linear-gradient(135deg, #fff8e6 0%, #fef3e2 100%);
+  border: 2px solid #e8a000; border-radius: 14px;
+  padding: 20px; margin-bottom: 20px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.clinical-exit-icon { font-size: 24px; }
+.clinical-exit-body { flex: 1; }
+.clinical-exit-title { font-weight: 700; font-size: 15px; color: #7a4500; margin-bottom: 4px; }
+.clinical-exit-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+.clinical-result { text-align: center; padding: 8px 0; }
+.clinical-result-label { font-size: 13px; color: var(--ink-soft); margin-bottom: 8px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+.clinical-result-score { font-size: 72px; font-weight: 900; line-height: 1; color: #1e4fa3; margin-bottom: 8px; }
+.clinical-result-desc { font-size: 15px; color: var(--ink); margin-bottom: 20px; }
+.clinical-fs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0; text-align: left; }
+.clinical-fs-item { background: #f0f4ff; border-radius: 8px; padding: 8px 12px; }
+.clinical-fs-name { font-size: 11px; color: var(--ink-soft); font-weight: 600; }
+.clinical-fs-val { font-size: 18px; font-weight: 800; color: #1e4fa3; }
+.clinical-result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.clinical-disclaimer { background: #f8f8f8; border-radius: 10px; padding: 12px 16px; font-size: 11px; color: var(--ink-soft); margin-top: 20px; line-height: 1.6; }
 
 /* ============================================================
    QUICK CHECK VIEW (patient-facing)
@@ -2087,8 +2190,8 @@ input[type="checkbox"] {
   .sc-sheet-wrap .sc-page:last-of-type { page-break-after: auto; }
   .sc-sheet-wrap .sc-field-row { height: 16px !important; font-size: 7.8pt !important; }
   .sc-sheet-wrap .sc-row-label { font-size: 8pt !important; }
-  .sc-sheet-wrap .sc-box-input { width: 26px !important; height: 16px !important; font-size: 9pt !important; }
-  .sc-sheet-wrap .sc-box-input.fs-box { width: 28px !important; height: 18px !important; font-size: 10pt !important; }
+  .sc-sheet-wrap .sc-box-input { width: 34px !important; height: 18px !important; font-size: 8pt !important; }
+  .sc-sheet-wrap .sc-box-input.fs-box { width: 32px !important; height: 20px !important; font-size: 10pt !important; }
   .sc-sheet-wrap .sc-section-bar { font-size: 7.8pt !important; padding: 2px 8px !important; margin-top: 6px !important; margin-bottom: 4px !important; }
   .sc-sheet-wrap .sc-header-grid { margin-bottom: 10px !important; gap: 12px !important; }
   .sc-sheet-wrap .sc-info-block { gap: 4px !important; }
@@ -2571,7 +2674,7 @@ input[type="checkbox"] {
 .sc-sheet-wrap .sc-col-boxes-headers.triple span { width:32px; }
 .sc-sheet-wrap .sc-field-row.input-boxes-row { justify-content:space-between;height:24px;border-bottom:1px dotted #e2e8f0; }
 .sc-sheet-wrap .sc-row-label { font-size:10.5px;color:#000; }
-.sc-sheet-wrap .sc-box-input { width:32px;height:20px;border:1.5px solid var(--border-color-default);text-align:center;font-size:11.5px;outline:none;font-weight:700;padding:0;border-radius:2px;transition:border-color .2s,background-color .2s; }
+.sc-sheet-wrap .sc-box-input { width:36px;height:22px;border:1.5px solid var(--border-color-default);text-align:center;font-size:12px;outline:none;font-weight:700;padding:0;border-radius:2px;transition:border-color .2s,background-color .2s; }
 .sc-sheet-wrap .sc-box-input:focus { border-color:var(--primary-green) !important; }
 .sc-sheet-wrap .sc-box-input.syn-box { background-color:#f1f5f9; }
 .sc-sheet-wrap .sc-boxes-pair { display:flex;gap:4px; }
@@ -2613,7 +2716,7 @@ input[type="checkbox"] {
 .sc-sheet-wrap .sc-footnotes-area { margin-top:28px;border-top:1.5px solid #000;padding-top:10px;display:flex;justify-content:space-between;gap:32px; }
 .sc-sheet-wrap .sc-fn-col { flex:1;font-size:8px;color:#475569;display:flex;flex-direction:column;gap:4px;line-height:1.4; }
 .sc-sheet-wrap .sc-fn-col.right-align { text-align:right;align-items:flex-end; }
-.sc-sheet-wrap .sc-page-number { position:absolute;bottom:12px;right:24px;font-size:9px;font-weight:700;color:#475569; }
+.sc-sheet-wrap .sc-page-number { font-size:9px;font-weight:700;color:#475569;text-align:right;margin-top:8px; }
 
 /* Disclaimer bar */
 .disclaimer-bar {
@@ -2636,6 +2739,12 @@ input[type="checkbox"] {
 /* Way card for scanner on landing */
 .way-card.scanner-card { border-color: #4a9a4a; }
 .way-card.scanner-card:hover { border-color: var(--green,#2a6e2a); }
+.way-card.system-card { border-color: #1e6fa3; }
+.way-card.system-card:hover { border-color: #14527a; box-shadow: 0 4px 14px rgba(30,111,163,0.12); }
+.way-card.system-card .way-cta { color: #1e6fa3; }
+.way-card.clinical-waycard { border-color: #7b3fa0; background: linear-gradient(180deg, #ffffff 0%, #fdf6ff 100%); }
+.way-card.clinical-waycard:hover { border-color: #5a2a7a; box-shadow: 0 4px 14px rgba(123,63,160,0.12); }
+.way-card.clinical-waycard .way-cta { color: #7b3fa0; }
 
 </style>
 </head>
@@ -2675,85 +2784,92 @@ input[type="checkbox"] {
       <div class="feature-card">
         <div class="feature-icon">📋</div>
         <h3>Structured roadmap</h3>
-        <p>Follow the full exam step-by-step, in the order you actually examine — history first, then face/head, then whole-body.</p>
+        <p>Full exam guided step-by-step in the order you actually examine — history first, then cranial nerves, then body. Captures every Neurostatus item for trials, registries, and research records.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">⚡</div>
         <h3>Real-time scoring</h3>
-        <p>Each Functional System score and the final EDSS step update live as you fill the form.</p>
+        <p>Each Functional System score and the final EDSS step update live as you fill the form — no manual table look-up.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🔬</div>
-        <h3>Granular detail</h3>
-        <p>Captures every Neurostatus item — ideal for trial data, registries, and observational research records.</p>
+        <div class="feature-icon">🧠</div>
+        <h3>Clinical EDSS mode</h3>
+        <p>Fast adaptive scoring for neurologists in routine follow-up. Ambulation assessed first — wheelchair-bound patients done in under a minute. Uses worst-limb scoring for speed without sacrificing accuracy.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>Patient self-check</h3>
+        <p>A plain-language adaptive questionnaire for people with MS to estimate their own EDSS. Questions adapt in real time — only the most relevant ones appear.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🖨️</div>
         <h3>Print-ready Neurostatus sheet</h3>
-        <p>Generate a clean 2-page form ready for the patient chart or study CRF.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔒</div>
-        <h3>Privacy first</h3>
-        <p>All entries stay in your browser. Nothing is uploaded, no account is needed, no tracking.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📱</div>
-        <h3>Free &amp; works offline</h3>
-        <p>No login, no cost. Use it on any device — desktop, tablet, or phone — with or without internet after first load.</p>
+        <p>Generate a clean 2-page form ready for the patient chart or study CRF with one click.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📷</div>
         <h3>OCR sheet scanner</h3>
-        <p>Upload a completed Neurostatus PDF or photograph it page by page — all fields are auto-extracted, scored, and color-coded by confidence.</p>
+        <p>Upload a completed Neurostatus PDF or photograph it page by page — fields are auto-extracted, scored, and color-coded by confidence.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🚩</div>
         <h3>Validation &amp; inconsistency flags</h3>
-        <p>Bilateral entry mismatches, cross-system scoring conflicts, and unusual FS combinations are automatically detected and flagged for review.</p>
+        <p>Bilateral mismatches, cross-system conflicts, and unusual FS combinations are automatically detected and flagged for review.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📤</div>
         <h3>REDCap &amp; CSV export</h3>
-        <p>Export a flat CSV with REDCap-compatible variable names or download a REDCap data dictionary — ready for direct instrument import.</p>
+        <p>Export a flat CSV with REDCap-compatible variable names or a REDCap data dictionary — ready for direct instrument import.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Private &amp; offline</h3>
+        <p>All data stays in your browser — nothing uploaded, no account, no tracking. Works on any device with or without internet after first load.</p>
       </div>
     </div>
   </div>
 
   <div class="section-block">
-    <h2>Three ways to use AutoEDSSguide</h2>
+    <h2>Ways to use AutoEDSSguide</h2>
     <div class="section-rule"></div>
-    <div class="ways-grid ways-grid-3">
+    <p class="ways-group-label" style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 10px;">Full Neurostatus — detailed assessment</p>
+    <div class="ways-grid ways-grid-3" style="margin-bottom:28px;">
       <button type="button" class="way-card recommended" data-enter-view="roadmap" aria-label="Start with Roadmap view">
         <span class="badge">Recommended</span>
-        <h3>Roadmap view</h3>
-        <div class="way-sub">For clinicians · re-organized exam flow</div>
-        <p>Our re-organized examination flow, designed to be faster for both the rater and the patient.</p>
-        <p>Includes structured questions and detailed bedside guidance not found in the standard Neurostatus form.</p>
+        <h3>Roadmap</h3>
+        <div class="way-sub">Step-by-step · optimized exam order</div>
+        <p>Guided exam flow designed around how you actually examine — history first, then cranial nerves, then body. Includes bedside prompts and structured questions.</p>
         <span class="way-cta">Start Roadmap →</span>
       </button>
-      <button type="button" class="way-card" data-enter-view="system" aria-label="Start with System view">
+      <button type="button" class="way-card system-card" data-enter-view="system" aria-label="Start with System view">
         <h3>System view</h3>
-        <div class="way-sub">For clinicians · Neurostatus order</div>
-        <p>Follows the classic Neurostatus form layout — seven Functional Systems in the standard order.</p>
-        <p>Best for raters who prefer the traditional Neurostatus workflow or follow-up visits with focused updates.</p>
+        <div class="way-sub">Classic Neurostatus layout</div>
+        <p>Seven Functional Systems in the standard Neurostatus order. Best for raters who prefer the traditional form or focused follow-up visits.</p>
         <span class="way-cta">Start System →</span>
-      </button>
-      <button type="button" class="way-card patient-card" data-enter-view="quickcheck" aria-label="Start Quick Check">
-        <span class="badge badge-patient">For patients</span>
-        <h3>Quick Check</h3>
-        <div class="way-sub">Adaptive questions · tailored to your answers</div>
-        <p>A short, plain-language questionnaire for <strong>people with MS</strong> to estimate their EDSS score.</p>
-        <p>Questions adapt based on your answers — only the most relevant ones are asked, keeping it brief and focused. Result is an estimate, not a clinical diagnosis.</p>
-        <span class="way-cta">Start Quick Check →</span>
       </button>
       <button type="button" class="way-card scanner-card" data-enter-view="scanner" aria-label="Scan paper sheet">
         <span class="badge" style="background:#4a9a4a;color:white;">OCR</span>
         <h3>Sheet Scanner</h3>
-        <div class="way-sub">Upload or photograph · PDF or camera</div>
-        <p>Upload a completed Neurostatus form to auto-extract all fields, calculate FS &amp; EDSS scores, and flag inconsistencies.</p>
-        <p>Supports direct camera capture for page-by-page photography on any device.</p>
+        <div class="way-sub">Upload or photograph a paper form</div>
+        <p>Upload a completed Neurostatus PDF or photograph it page by page — fields are auto-extracted, scored, and color-coded by confidence.</p>
         <span class="way-cta">Open Scanner →</span>
+      </button>
+    </div>
+    <p class="ways-group-label" style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 10px;">Quick &amp; tailored</p>
+    <div class="ways-grid ways-grid-2">
+      <button type="button" class="way-card clinical-waycard" id="clinical-way-btn" aria-label="Start Clinical EDSS">
+        <span class="badge" style="background:#7b3fa0;color:white;">For neurologists</span>
+        <h3>Clinical EDSS</h3>
+        <div class="way-sub">5–10 min · Adaptive · Routine follow-up</div>
+        <p>Fast scoring for clinic visits. Ambulation assessed first — if the patient is wheelchair-bound, scoring completes in under a minute. Uses worst-limb scoring (no bilateral R/L) for speed without sacrificing accuracy.</p>
+        <span class="way-cta">Start Clinical →</span>
+      </button>
+      <button type="button" class="way-card patient-card" data-enter-view="quickcheck" aria-label="Start Quick Check">
+        <span class="badge badge-patient">For patients</span>
+        <h3>Quick Check</h3>
+        <div class="way-sub">Plain language · Adaptive questions</div>
+        <p>A short plain-language questionnaire for <strong>people with MS</strong> to estimate their own EDSS. Questions adapt in real time — only the most relevant ones appear. Result is an estimate, not a clinical diagnosis.</p>
+        <span class="way-cta">Start Quick Check →</span>
       </button>
     </div>
     <div class="cta-row">
@@ -2972,7 +3088,14 @@ input[type="checkbox"] {
               <div class="sc-section-content two-columns">
                 <div class="sc-section-col">
                   <div class="sc-table-header-row"><span class="sc-col-label">OPTIC FUNCTIONS</span><div class="sc-col-boxes-headers"><span>OD</span><span>OS</span></div></div>
-                  <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Visual acuity (corrected)</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input" id="v-acuity-od" data-section="visual" oninput="scGeminiCalc()"><input type="text" class="sc-box-input" id="v-acuity-os" data-section="visual" oninput="scGeminiCalc()"></div></div>
+                  <div class="sc-field-row input-boxes-row">
+                    <span class="sc-row-label">Visual acuity</span>
+                    <span class="sc-cc-group" style="display:inline-flex;align-items:center;gap:6px;margin-right:8px;font-size:11px;">
+                      <input type="checkbox" class="sc-checkbox" id="v-cc-od" style="width:13px;height:13px;margin:0;"><label for="v-cc-od" style="margin:0;font-size:11px;cursor:pointer;">cc</label>
+                      <input type="checkbox" class="sc-checkbox" id="v-sc-od" style="width:13px;height:13px;margin:0;"><label for="v-sc-od" style="margin:0;font-size:11px;cursor:pointer;">sc</label>
+                    </span>
+                    <div class="sc-boxes-pair"><input type="text" class="sc-box-input" id="v-acuity-od" data-section="visual" oninput="scGeminiCalc()"><input type="text" class="sc-box-input" id="v-acuity-os" data-section="visual" oninput="scGeminiCalc()"></div>
+                  </div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Visual fields</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input" id="v-fields-od" data-section="visual" oninput="scGeminiCalc()"><input type="text" class="sc-box-input" id="v-fields-os" data-section="visual" oninput="scGeminiCalc()"></div></div>
                 </div>
                 <div class="sc-section-col">
@@ -3045,7 +3168,7 @@ input[type="checkbox"] {
                   <div class="sc-fs-score-row" style="margin-top:25px;"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><input type="text" class="sc-box-input fs-box" id="fs-pyramidal" oninput="calculateEDSS()"></div>
                 </div>
               </div>
-              <div class="sc-page-number">Page 1</div>
+              <div class="sc-page-number" style="position:static;text-align:right;margin-top:10px;font-size:9px;font-weight:700;color:#475569;">Page 1</div>
             </div>
 
             <!-- Uploaded image preview for Page 2 -->
@@ -3133,46 +3256,51 @@ input[type="checkbox"] {
 
               <!-- SECTION 8: AMBULATION -->
               <div class="sc-section-bar">8. AMBULATION</div>
-              <div class="sc-section-content two-columns">
-                <div class="sc-section-col border-right" style="padding-right:15px;">
-                  <div class="sc-amb-title">Walking range as reported (without help or sticks)</div>
-                  <div class="sc-field-row input-boxes-row inline-val"><span class="sc-row-label">meters</span><input type="text" class="sc-box-input numeric-input" id="amb-meters-reported" oninput="calculateEDSS()"></div>
-                  <div class="sc-field-row input-boxes-row inline-val"><span class="sc-row-label">in min</span><input type="text" class="sc-box-input numeric-input" id="amb-min-reported"></div>
-                  <div class="sc-amb-subtitle" style="margin-top:10px;">Distance able to walk without rest or assistance</div>
-                  <div class="sc-checkbox-row"><input type="checkbox" class="sc-checkbox" id="amb-range-100-200" name="amb-range" onclick="selectRangeOnly(this)"><label for="amb-range-100-200" class="sc-checkbox-label">&ge; 100 meters, but &lt; 200 meters</label></div>
-                  <div class="sc-checkbox-row"><input type="checkbox" class="sc-checkbox" id="amb-range-200-300" name="amb-range" onclick="selectRangeOnly(this)"><label for="amb-range-200-300" class="sc-checkbox-label">&ge; 200 meters, but &lt; 300 meters</label></div>
-                  <div class="sc-checkbox-row"><input type="checkbox" class="sc-checkbox" id="amb-range-300-500" name="amb-range" onclick="selectRangeOnly(this)"><label for="amb-range-300-500" class="sc-checkbox-label">&ge; 300 meters, but &lt; 500 meters</label></div>
-                  <div class="sc-checkbox-row"><input type="checkbox" class="sc-checkbox" id="amb-range-500-unrestricted" name="amb-range" onclick="selectRangeOnly(this)"><label for="amb-range-500-unrestricted" class="sc-checkbox-label">&ge; 500 meters but not unrestricted</label></div>
-                  <div class="sc-checkbox-row"><input type="checkbox" class="sc-checkbox" id="amb-unrestricted" name="amb-range" onclick="selectRangeOnly(this)"><label for="amb-unrestricted" class="sc-checkbox-label">Unrestricted</label></div>
-                  <div class="sc-amb-title" style="margin-top:12px;">Actual distance (obligatory up to 500 m if possible)</div>
-                  <div class="sc-field-row input-boxes-row inline-val"><span class="sc-row-label">meters</span><input type="text" class="sc-box-input numeric-input" id="amb-meters-actual" oninput="calculateEDSS()"></div>
+              <div class="sc-section-content" style="display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0;">
+                <div style="padding:8px 14px 8px 0;border-right:1px solid #cbd5e1;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;border-bottom:1px dashed #e2e8f0;padding-bottom:5px;">
+                    <span style="font-size:11px;color:#334155;">Distance reported by patient (in meters)</span>
+                    <input type="text" class="sc-box-input numeric-input" id="amb-meters-reported" oninput="scAmbSync()" style="width:48px;flex-shrink:0;">
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:11px;color:#334155;">Time reported by patient (in minutes)</span>
+                    <input type="text" class="sc-box-input numeric-input" id="amb-min-reported" style="width:48px;flex-shrink:0;">
+                  </div>
                 </div>
-                <div class="sc-section-col" style="padding-left:15px;">
-                  <div class="sc-checkbox-row bold-row" style="margin-bottom:8px;"><input type="checkbox" class="sc-checkbox" id="amb-constant-100m" onchange="calculateEDSS()"><label for="amb-constant-100m" class="sc-checkbox-label font-sans-bold">Requires constant assistance to walk 100 meters</label></div>
-                  <div class="sc-amb-section-divider"></div>
-                  <div class="sc-assistance-section">
-                    <div class="sc-assistance-header"><span class="font-sans-bold">Unilateral assistance</span> (in meters)<input type="text" class="sc-box-input numeric-input" id="amb-unilateral-meters" oninput="calculateEDSS()"></div>
-                    <div class="sc-checkbox-row nested"><input type="checkbox" class="sc-checkbox" id="amb-uni-cane" name="uni-assist" onclick="selectUniAssistOnly(this)"><label for="amb-uni-cane" class="sc-checkbox-label">Cane/crutch</label></div>
-                    <div class="sc-checkbox-row nested"><input type="checkbox" class="sc-checkbox" id="amb-uni-other" name="uni-assist" onclick="selectUniAssistOnly(this)"><label for="amb-uni-other" class="sc-checkbox-label">Other</label></div>
+                <div style="padding:8px 0 8px 14px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;border-bottom:1px dashed #e2e8f0;padding-bottom:5px;">
+                    <span style="font-size:11px;color:#334155;">Assistance</span>
+                    <input type="text" class="sc-box-input numeric-input" id="amb-assistance-text" oninput="scAmbSync()" style="width:48px;flex-shrink:0;font-size:11px;">
                   </div>
-                  <div class="sc-amb-section-divider"></div>
-                  <div class="sc-assistance-section">
-                    <div class="sc-assistance-header"><span class="font-sans-bold">Bilateral assistance</span> (in meters)<input type="text" class="sc-box-input numeric-input" id="amb-bilateral-meters" oninput="calculateEDSS()"></div>
-                    <div class="sc-checkbox-row nested"><input type="checkbox" class="sc-checkbox" id="amb-bi-canes" name="bi-assist" onclick="selectBiAssistOnly(this)"><label for="amb-bi-canes" class="sc-checkbox-label">Canes/crutches</label></div>
-                    <div class="sc-checkbox-row nested"><input type="checkbox" class="sc-checkbox" id="amb-bi-other" name="bi-assist" onclick="selectBiAssistOnly(this)"><label for="amb-bi-other" class="sc-checkbox-label">Other</label></div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                    <span style="font-size:11px;color:#334155;">Distance measured (in meters)</span>
+                    <input type="text" class="sc-box-input numeric-input" id="amb-meters-actual" oninput="scAmbSync()" style="width:48px;flex-shrink:0;">
                   </div>
-                  <div class="sc-amb-section-divider"></div>
-                  <div class="sc-assistance-section">
-                    <div class="sc-assistance-header"><span class="font-sans-bold">Assistance by another person</span> (in meters)<input type="text" class="sc-box-input numeric-input" id="amb-person-meters" oninput="calculateEDSS()"></div>
+                  <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:4px;">
+                    <span style="font-size:11px;font-weight:700;color:#1e3a5f;letter-spacing:.04em;text-transform:uppercase;">Ambulation Score</span>
+                    <input type="text" class="sc-box-input fs-box" id="sc-amb-score-display" readonly style="width:36px;font-weight:700;font-size:13px;text-align:center;border:2px solid #1e3a5f;">
                   </div>
                 </div>
               </div>
 
-              <div class="sc-footnotes-area">
-                <div class="sc-fn-col"><div>* = optional</div><div><sup>1</sup> = converted FS Score</div></div>
-                <div class="sc-fn-col right-align"><div>AutoEDSSguide</div><div>Based on Neurostatus 09/08 &copy; Ludwig Kappos, MD</div></div>
+              <div class="sc-footnotes-area" style="margin-top:20px;border-top:1.5px solid #000;padding-top:8px;display:block;">
+                <div style="font-size:8px;color:#334155;line-height:1.5;margin-bottom:6px;">
+                  <span style="font-weight:700;">Notes</span><br>
+                  * = optional &nbsp;&nbsp; <sup>1</sup> = converted FS Score<br>
+                  + Because depression, euphoria and fatigue are difficult to evaluate objectively, in some studies they do not contribute to the Cerebral FS score or EDSS step. Please adhere to the study&apos;s specific instructions.
+                </div>
+                <div style="font-size:7.5px;color:#64748b;line-height:1.6;margin-bottom:6px;">
+                  <span style="font-weight:700;">References</span><br>
+                  AutoEDSSguide &mdash; Zakarya A, et al. Wayne State University, Department of Neurology, 2025. Available at: https://github.com/AnasZakarya/AutoEDSSguide<br>
+                  Standardised Neurological Examination and Assessment of Kurtzke&apos;s Functional Systems and EDSS. Slightly modified from J.F. Kurtzke, Neurology 1983;33:1444&ndash;52.<br>
+                  &copy;2009 Ludwig Kappos, MD, University Hospital Basel; Version 09/08.
+                </div>
+                <div style="font-size:7.5px;color:#64748b;line-height:1.5;">
+                  <span style="font-weight:700;">Disclaimer</span><br>
+                  AutoEDSSguide provides automated scoring for guidance purposes only and does not replace clinical judgment. Results must be verified by a qualified neurologist prior to any clinical or research use.
+                </div>
               </div>
-              <div class="sc-page-number">Page 2</div>
+              <div class="sc-page-number" style="position:static;text-align:right;margin-top:8px;font-size:9px;font-weight:700;color:#475569;">Page 2</div>
             </div>
 
           </div>
@@ -3233,6 +3361,21 @@ AutoEDSSguide provides automated scoring for guidance purposes only and does not
 </section>
 
 <!-- ========================================================== -->
+<!-- CLINICAL EDSS MODE -->
+<section class="clinical-view" id="clinical">
+  <header class="clinical-header">
+    <button class="home-btn" id="clin-home-btn" aria-label="Back to home">← Home</button>
+    <div class="clinical-brand brand-mark">Auto<em>EDSS</em>guide · Clinical</div>
+    <div class="clinical-progress-wrap">
+      <div class="clinical-progress-bar"><div class="clinical-progress-fill" id="clin-progress-fill"></div></div>
+      <div class="clinical-progress-text" id="clin-progress-text">Step 1</div>
+    </div>
+  </header>
+  <main class="clinical-main">
+    <div id="clin-stage"></div>
+  </main>
+</section>
+
 <!-- QUICK CHECK VIEW (patient-facing)                           -->
 <!-- ========================================================== -->
 <section class="quick-check-view" id="quickcheck">
@@ -3652,35 +3795,70 @@ function shouldSuggestCerebellarX(strength, sensoryArgs) {
 // Final EDSS step
 // ============================================================
 function _fsOnlyStep(fs_list) {
+    // Neurostatus / Fouad 2023 combination rules.
+    // Final FS-only step = N, N+0.5, or N+1 where N = max FS grade.
+    // Determination: (a) count of N occurrences; (b) whether others are 0, =1, or >1.
+
     const N = Math.max(...fs_list);
     if (N === 0) return 0.0;
 
-    if (N === 1) {
-        const n_ones = fs_list.filter(v => v === 1).length;
-        return n_ones === 1 ? 1.0 : 1.5;
-    }
+    const nN    = fs_list.filter(v => v === N).length;           // times N appears
+    const rest  = fs_list.filter(v => v !== N);                   // all others
+    const anyGt0 = rest.some(v => v > 0);                        // any other ≥1
+    const anyGt1 = rest.some(v => v > 1);                        // any other ≥2
+    const nOnes  = rest.filter(v => v === 1).length;
 
+    // ── N = 1 ─────────────────────────────────────────────────────────────────
+    // EDSS 1.0 = 1 FS grade 1; EDSS 1.5 = ≥2 FS grade 1
+    if (N === 1) return nN >= 2 ? 1.5 : 1.0;
+
+    // ── N = 2 ─────────────────────────────────────────────────────────────────
+    // Special: ≥5 FS at grade 2 → 5.0 (Fouad exception)
     if (N === 2) {
-        const n_fs_2 = fs_list.filter(v => v === 2).length;
-        if (n_fs_2 >= 5) return 5.0;
-        if (n_fs_2 === 1) return 2.0;
-        if (n_fs_2 === 2) return 2.5;
-        return 3.0;
+        if (nN >= 5) return 5.0;
+        // 1×N:  others 0 → 2.0;  others ≥1 → 2.5
+        if (nN === 1) return anyGt0 ? 2.5 : 2.0;
+        // 2×N:  others 0 or 1 → 2.5;  any other >1 → 3.0
+        if (nN === 2) return anyGt1 ? 3.0 : 2.5;
+        // 3–4×N: others 0 or 1 → 3.0;  any other >1 → 3.5
+        return anyGt1 ? 3.5 : 3.0;
     }
 
+    // ── N = 3 ─────────────────────────────────────────────────────────────────
+    // 1×N:  others all 0 → 3.0;  any =1 → 3.5;  any >1 → 3.5
     if (N === 3) {
-        const k = fs_list.filter(v => v === 3).length;
-        const n_twos = fs_list.filter(v => v === 2).length;
-        if (k === 1 && n_twos === 0) return 3.0;
-        if (k === 1) return 3.5;
-        if (k === 2) return 3.5;
-        return 4.0; // k >= 3
+        if (nN === 1) return anyGt0 ? 3.5 : 3.0;
+        // 2×N:  no >1 others → 3.5;  any >1 → 4.0
+        if (nN === 2) return anyGt1 ? 4.0 : 3.5;
+        // ≥3×N: always 4.0 (or 4.5 if any other >1)
+        return anyGt1 ? 4.5 : 4.0;
     }
 
-    if (N === 4) return 4.0;
-    if (N === 5) return 5.0;
-    if (N >= 6) return 6.0;
-    return Number(N);
+    // ── N = 4 ─────────────────────────────────────────────────────────────────
+    // 1×N:  others 0 → 4.0;  any 1 → 4.5;  any >1 → 5.0
+    if (N === 4) {
+        // Neurostatus exact:
+        // EDSS 4.0 = 1 FS=4, others all 0 or 1
+        // EDSS 4.5 = 1 FS=4 + 1 other ≥2 (combinations exceeding 4.0)
+        // EDSS 5.0 = 1 FS=4 + ≥2 others ≥2, OR ≥2 FS=4
+        if (nN === 1) {
+            const nGt1 = rest.filter(v => v > 1).length;
+            if (nGt1 === 0) return 4.0;   // others all 0 or 1
+            if (nGt1 === 1) return 4.5;   // 1 other ≥2
+            return 5.0;                   // ≥2 others ≥2
+        }
+        // ≥2 FS=4: others 0 or 1 → 5.0; any other ≥2 → 5.5
+        return anyGt1 ? 5.5 : 5.0;
+    }
+
+    // ── N = 5 ─────────────────────────────────────────────────────────────────
+    if (N === 5) {
+        if (nN === 1) return anyGt1 ? 5.5 : 5.0;
+        return anyGt1 ? 6.0 : 5.5;
+    }
+
+    // ── N ≥ 6 ────────────────────────────────────────────────────────────────
+    return 6.0;
 }
 
 function calcEDSSStep(fs, ambulation_score) {
@@ -3696,15 +3874,23 @@ function calcEDSSStep(fs, ambulation_score) {
     if (AS === 10) return 7.0;
     if (AS === 8 || AS === 9) return 6.5;
     if (AS === 6 || AS === 7) return 6.0;
-    if (AS === 5) return 6.0;
+    // AS=5 = unaided <100m → EDSS floor 5.5 (computed below with fs_step)
 
     const fs_step = _fsOnlyStep(fs_list);
 
-    if (AS === 4) return Math.max(5.5, fs_step);
+    // AS 0–5: FS-dominant range with ambulation floors (Neurostatus Kappos 2011)
+    // AS=0 (unrestricted) → no floor (EDSS 0–1.5)
+    // AS=1 (>500m restricted) → floor 2.0
+    // AS=2 (300–500m) → floor 4.5
+    // AS=3 (200–300m) → floor 5.0
+    // AS=4 (100–200m) → floor 5.0
+    // AS=5 (<100m) → floor 5.5
+    if (AS === 5) return Math.max(5.5, fs_step);
+    if (AS === 4) return Math.max(5.0, fs_step);
     if (AS === 3) return Math.max(5.0, fs_step);
     if (AS === 2) return Math.max(4.5, fs_step);
-    if (AS === 1) return Math.max(4.0, fs_step);
-    return fs_step; // AS == 0
+    if (AS === 1) return Math.max(2.0, fs_step);
+    return fs_step; // AS == 0 (unrestricted)
 }
 
 // ============================================================
@@ -4041,7 +4227,7 @@ const CARDS = {
         options: [["", "—"], ...SNELLEN_OPTS.map(s => [s, s])]},
       { type: "select", id: "v_va_os", label: "Visual acuity — OS (best corrected)",
         options: [["", "—"], ...SNELLEN_OPTS.map(s => [s, s])]},
-      { type: "text", id: "v_correction", label: "Correction used" },
+      { type: "checkbox", id: "v_cc", label: "Corrected (cc) — patient wearing glasses or contact lenses during testing" },
       { type: "list-compact", id: "v_vf_od", label: "Visual fields — OD",
         options: [$(0,"Normal"),$(1,"Signs only"),$(2,"Moderate / incomplete hemianopsia"),$(3,"Marked / complete hemianopsia")]},
       { type: "list-compact", id: "v_vf_os", label: "Visual fields — OS",
@@ -4717,7 +4903,7 @@ function renderCard(cardId) {
         <div class="vp-row-label">Visual acuity</div>
         <div class="vp-field">${renderField(f[0])}</div>
         <div class="vp-field">${renderField(f[1])}</div>
-        <div class="vp-row-label">Correction used</div>
+        <div class="vp-row-label">Correction</div>
         <div class="vp-field" style="grid-column:2 / span 2">${renderField(f[2])}</div>
         <div class="vp-row-label">Visual fields</div>
         <div class="vp-field">${renderField(f[3])}</div>
@@ -4756,7 +4942,7 @@ function renderSection(s) {
   const fsLabel = s.fsKey
     ? `<div class="section-fs-display"><span class="label">FS</span><span class="value" id="fs-${s.id}">—</span></div>`
     : "";
-  const callout = (CURRENT_VIEW === "roadmap") ? s.callout : ""
+  const callout = (CURRENT_VIEW === "roadmap" && s.callout)
     ? `<div class="callout"><div class="callout-title">Method</div>${s.callout}</div>`
     : "";
   // Phase desc shown as small callout — the section-title already names the phase
@@ -4858,10 +5044,6 @@ function renderFinalSheet() {
         </div>
       </div>
 
-      <!-- Disclaimer -->
-      <div class="disclaimer-bar">
-AutoEDSSguide provides automated scoring for guidance purposes only and does not replace clinical judgment. Results must be verified by a qualified neurologist prior to any clinical or research use.
-      </div>
       <!-- Gemini Neurostatus sheet (populated by syncFinalSheet) -->
       <div id="fs-gemini-container" style="margin-top:16px;"></div>
     </div>
@@ -5509,6 +5691,11 @@ function syncFinalSheet(inp, r) {
   // ── Visual ──
   setVal("v-acuity-od",  inp.v_va_od);
   setVal("v-acuity-os",  inp.v_va_os);
+  // CC checkbox: if corrected, tick cc; if uncorrected, tick sc
+  const ccEl_od = document.getElementById("v-cc-od");
+  const scEl_od = document.getElementById("v-sc-od");
+  if (ccEl_od) ccEl_od.checked = !!inp.v_cc;
+  if (scEl_od) scEl_od.checked = !inp.v_cc;
   setVal("v-fields-od",  inp.v_vf_od);
   setVal("v-fields-os",  inp.v_vf_os);
   setVal("v-scotoma-od", inp.v_scotoma_R);
@@ -5566,6 +5753,23 @@ function syncFinalSheet(inp, r) {
   setVal("s-pos-ue-r",   inp.s_pos_ue_R);    setVal("s-pos-ue-l",   inp.s_pos_ue_L);
   setVal("s-pos-le-r",   inp.s_pos_le_R);    setVal("s-pos-le-l",   inp.s_pos_le_L);
 
+  // ── Ambulation ── (simplified 4-field sheet)
+  setVal("amb-meters-reported", inp.amb_distance_reported || "");
+  setVal("amb-min-reported",    inp.amb_time_reported || "");
+  setVal("amb-meters-actual",   inp.amb_distance_measured || "");
+  // Map assistance type to human-readable text
+  const assistMap = {
+    "none": "None", "unilateral": "Unilateral (cane/crutch)",
+    "bilateral": "Bilateral (walker/two canes)",
+    "wheelchair_indep": "Wheelchair — independent",
+    "wheelchair_help": "Wheelchair — with help",
+    "bedbound": "Bedbound / chair-bound"
+  };
+  setVal("amb-assistance-text", assistMap[inp.amb_assistance] || inp.amb_assistance || "");
+  // Show auto-calculated AS in display field
+  const el = document.getElementById("sc-amb-score-display");
+  if (el) el.value = r.ambulation_score !== null && r.ambulation_score !== undefined ? r.ambulation_score : "—";
+
   // ── Bowel / Bladder ──
   setVal("bb-hesitancy", inp.bb_hes);
   setVal("bb-urgency",   inp.bb_urg);
@@ -5597,6 +5801,33 @@ function syncFinalSheet(inp, r) {
     container.innerHTML = "";
     container.appendChild(clone);
   }
+}
+
+// ============================================================
+// Ambulation sheet sync — simplified sheet → EDSS engine
+// ============================================================
+function scAmbSync() {
+  const distReported = document.getElementById("amb-meters-reported")?.value || "";
+  const distActual   = document.getElementById("amb-meters-actual")?.value || "";
+  const assistText   = (document.getElementById("amb-assistance-text")?.value || "").toLowerCase();
+
+  // Map assistance text to engine keys
+  let assist = "none";
+  if (assistText.includes("bilateral") || assistText.includes("walker") || assistText.includes("two")) assist = "bilateral";
+  else if (assistText.includes("unilateral") || assistText.includes("cane") || assistText.includes("crutch") || assistText.includes("one")) assist = "unilateral";
+  else if (assistText.includes("wheelchair") && assistText.includes("help")) assist = "wheelchair_help";
+  else if (assistText.includes("wheelchair")) assist = "wheelchair_indep";
+  else if (assistText.includes("bed") || assistText.includes("chair-bound")) assist = "bedbound";
+
+  // Prefer measured distance for AS calc
+  const d = parseFloat(distActual || distReported || "");
+
+  const AS = calcAmbulationScore({ assistance: assist, distance_m: isNaN(d) ? null : d, is_normal: false });
+  const el = document.getElementById("sc-amb-score-display");
+  if (el) el.value = AS !== null ? AS : "—";
+
+  // Trigger full EDSS recalc if gemini calc exists
+  if (typeof scGeminiCalc === "function") scGeminiCalc();
 }
 
 // ============================================================
@@ -5817,6 +6048,9 @@ document.addEventListener("click", function(e) {
   const el = document.getElementById(id);
   if (el) el.addEventListener("click", () => showApp());
 });
+
+// Clinical way card
+document.getElementById("clinical-way-btn")?.addEventListener("click", showClinical);
 
 // Way cards on landing → enter app with chosen view
 document.querySelectorAll("[data-enter-view]").forEach(btn => {
@@ -6069,7 +6303,12 @@ const QC_QUESTIONS = [
     help: "Estimate your usual outdoor distance. One city block ≈ 200 meters (~650 feet).",
     skipIf: (answers) => {
       const a = answers.qc_walk_assist;
-      return a && ["wheelchair_indep", "wheelchair_help", "bedbound"].includes(a.mapping.amb_assistance);
+      if (!a) return false;
+      // Skip if wheelchair or bedbound
+      if (["wheelchair_indep", "wheelchair_help", "bedbound"].includes(a.mapping.amb_assistance)) return true;
+      // Skip if fully unrestricted — no distance needed, EDSS driven by FS only
+      if (a.mapping.amb_is_normal === true) return true;
+      return false;
     },
     // Distance options vary by assistance type (set dynamically in render)
     dynamicOptions: (answers) => {
@@ -6362,6 +6601,28 @@ const QC_QUESTIONS = [
         mapping: { m_fat: 3 } },
     ],
   },
+
+  // ---- 15. Bedbound — arm function (only shown when bedbound) ----
+  // Distinguishes EDSS 8.0 (effective arm use) vs 8.5 (some arm use) vs 9.0 (communicate/eat) vs 9.5 (none)
+  {
+    id: "qc_bedbound_arms",
+    title: "How well can you use your arms and hands?",
+    help: "Think about reaching, holding objects, feeding yourself, or pressing buttons. Only answer what applies to your typical day.",
+    skipIf: (answers) => {
+      const a = answers.qc_walk_assist;
+      return !(a && a.mapping.amb_assistance === "bedbound");
+    },
+    options: [
+      { icon: "🟢", title: "I'm out of bed most of the day and can care for myself", desc: "I use my arms well — I can feed myself, adjust position, and handle most personal care.",
+        mapping: { _bedbound_arms: 0 } },   // EDSS 8.0
+      { icon: "🟡", title: "I'm mostly in bed but have some arm use", desc: "I can do a few things with my arms but rely on others for most activities.",
+        mapping: { _bedbound_arms: 1 } },   // EDSS 8.5
+      { icon: "🟠", title: "I'm in bed all day — I can still talk and eat", desc: "I can communicate and swallow, but my arms are not useful for self-care.",
+        mapping: { _bedbound_arms: 2 } },   // EDSS 9.0
+      { icon: "🔴", title: "I'm fully dependent — I cannot talk or eat on my own", desc: "I cannot communicate effectively or eat/swallow safely without help.",
+        mapping: { _bedbound_arms: 3 } },   // EDSS 9.5
+    ],
+  },
 ];
 
 // ---- Quick Check state ----
@@ -6376,7 +6637,16 @@ function qcCheckEarlyExit() {
   const assist = ans1.mapping && ans1.mapping.amb_assistance;
   if (assist === "wheelchair_indep") return { as:10, edss:7.0, label:"Wheelchair — independent",  isBedbound:false };
   if (assist === "wheelchair_help")  return { as:11, edss:7.5, label:"Wheelchair — with help",     isBedbound:false };
-  if (assist === "bedbound")         return { as:12, edss:8.0, label:"Mostly in bed / chair",       isBedbound:true  };
+  if (assist === "bedbound") {
+    // Refine bedbound EDSS based on arm function answer (if available)
+    const armsAns = QC_ANSWERS["qc_bedbound_arms"];
+    const armsScore = armsAns ? (armsAns.mapping._bedbound_arms ?? 0) : 0;
+    const edssMap = [8.0, 8.5, 9.0, 9.5];
+    const asMap   = [12,  12,  12,  12 ];
+    const lblMap  = ["Bedbound — effective arm use", "Bedbound — limited arm use",
+                     "Bedbound — can communicate/eat", "Bedbound — total care needed"];
+    return { as: asMap[armsScore], edss: edssMap[armsScore], label: lblMap[armsScore], isBedbound: true };
+  }
   const ans2 = QC_ANSWERS["qc_walk_dist"];
   if (!ans2) return null;
   const dist = ans2.mapping && ans2.mapping.amb_distance_reported;
@@ -6392,7 +6662,7 @@ function qcCheckEarlyExit() {
 }
 
 // Bedbound partial mode: only cerebral + B/B questions
-const QC_BEDBOUND_ALLOWED = new Set(["qc_walk_assist","qc_cog","qc_fatigue","qc_bladder","qc_bowel"]);
+const QC_BEDBOUND_ALLOWED = new Set(["qc_walk_assist","qc_bedbound_arms"]);
 
 function qcGetVisibleQuestions() {
   const exit = qcCheckEarlyExit();
@@ -6731,6 +7001,675 @@ document.getElementById("qc-home-btn")?.addEventListener("click", () => {
   document.getElementById("landing").classList.add("active");
   window.scrollTo({ top: 0, behavior: "instant" });
 });
+
+
+// ============================================================
+// CLINICAL EDSS MODE
+// ============================================================
+let CLIN_STATE = {};   // stores answers keyed by step id
+let CLIN_STEP  = 0;
+let CLIN_STEPS = [];   // computed adaptive sequence
+
+// ---- Step definitions ----
+// Each step: { id, system, badge, q, hint, options, optional?, skip? }
+// options: [{ key, title, desc, badge, score }]
+// score = numeric value stored in CLIN_STATE
+
+function clinBuildSteps() {
+  return [
+    // ── AMBULATION STEP 1: Assistance type ────────────────────────────────────
+    {
+      id: "amb",
+      system: "🚶 Ambulation",
+      q: "What assistance does the patient need to walk?",
+      hint: "Choose the level of support used on a typical day.",
+      options: [
+        { key: "A", title: "No aid — walks unaided",           desc: "No device or person needed. May or may not have distance restriction.", badge: "normal", score: 0 },
+        { key: "B", title: "Unilateral aid (cane / crutch)",   desc: "One cane, crutch, or brace on one side.", badge: "mod",    score: 1 },
+        { key: "C", title: "Bilateral aid (walker / 2 canes)", desc: "Walker, two canes, two crutches, or another person.", badge: "severe", score: 2 },
+        { key: "D", title: "Wheelchair",                        desc: "Cannot walk — uses a wheelchair.", badge: "severe", score: 3 },
+        { key: "E", title: "Bedbound / chair-bound",            desc: "Essentially confined to bed or chair; arms may still function.", badge: "severe", score: 4 },
+      ]
+    },
+    // ── AMBULATION STEP 2: Distance (options adapt to assistance type) ────────
+    // Shown only for unaided (amb=0) and aided walkers (amb=1,2)
+    // Wheelchair and bedbound skip this — distance irrelevant for AS calc
+    {
+      id: "amb_dist",
+      system: "🚶 Ambulation — Distance",
+      q: "How far can the patient walk before needing to stop and rest?",
+      hint: "Use patient-reported distance or direct observation. Usual maximum distance — not best performance.",
+      dynamicOptions: (state) => {
+        const assist = state.amb ?? 0;
+        if (assist === 0) return [  // unaided
+          { key: "A", title: "Unrestricted (normal for age)", desc: "No limitation whatsoever.", badge: "normal", score: 0 },
+          { key: "B", title: "≥ 500 m",    desc: "Walks freely but notes some restriction.", badge: "mild",   score: 1 },
+          { key: "C", title: "300–500 m",  desc: "3–5 city blocks. Stops before 500 m.", badge: "mild",   score: 2 },
+          { key: "D", title: "200–300 m",  desc: "2–3 city blocks.", badge: "mod",    score: 3 },
+          { key: "E", title: "100–200 m",  desc: "1–2 city blocks.", badge: "mod",    score: 4 },
+          { key: "F", title: "< 100 m",    desc: "Less than 1 block — mostly indoors.", badge: "severe", score: 5 },
+        ];
+        if (assist === 1) return [  // unilateral — Neurostatus: ≥50m → AS6(EDSS6.0), <50m → AS8(EDSS6.5)
+          { key: "A", title: "≥ 50 m with cane / crutch",
+            desc: "Walks at least 50 meters with unilateral support.", badge: "mod",    score: 0 },
+          { key: "B", title: "< 50 m with cane / crutch",
+            desc: "Cannot manage 50 meters even with one-sided aid.", badge: "severe", score: 1 },
+        ];
+        if (assist === 2) return [  // bilateral — Neurostatus: ≥120m → AS7(EDSS6.0), <120m → AS9(EDSS6.5)
+          { key: "A", title: "≥ 120 m with bilateral aid",
+            desc: "Walks at least 120 meters with walker / two canes.", badge: "mod",    score: 0 },
+          { key: "B", title: "< 120 m with bilateral aid",
+            desc: "Cannot manage 120 meters even with bilateral support.", badge: "severe", score: 1 },
+        ];
+        return []; // wheelchair/bedbound — no distance needed
+      },
+      options: [] // populated dynamically
+    },
+    // ── BEDBOUND DETAIL: distinguishes EDSS 8.0–9.5 ─────────────────────────
+    // Only shown when amb=5 (bedbound). Matches Neurostatus definitions exactly.
+    {
+      id: "bed_detail",
+      system: "🛏 Bedbound — Function",
+      q: "How much function does the patient retain in bed?",
+      hint: "Neurostatus definitions for EDSS 8.0–9.5. Assess arm use and ability to communicate and eat.",
+      options: [
+        { key: "A", title: "Out of bed most of the day — effective arm use",
+          desc: "Restricted to bed/chair but up most of the day. Retains many self-care functions. Effective use of arms.", badge: "mod",    score: 0 },  // EDSS 8.0
+        { key: "B", title: "Mostly in bed — some arm use",
+          desc: "In bed much of the day. Has some effective use of arm(s). Retains some self-care functions.", badge: "severe", score: 1 },  // EDSS 8.5
+        { key: "C", title: "Helpless in bed — can communicate and eat",
+          desc: "Essentially helpless. Can still communicate and eat/swallow.", badge: "severe", score: 2 },  // EDSS 9.0
+        { key: "D", title: "Totally helpless — cannot communicate or eat",
+          desc: "Unable to communicate effectively or eat/swallow. Requires total care.", badge: "severe", score: 3 },  // EDSS 9.5
+      ]
+    },
+    // ── WHEELCHAIR DETAIL: distinguishes EDSS 7.0 vs 7.5 ──────────────────────
+    // Only shown when amb=3 or amb=4.
+    {
+      id: "wc_detail",
+      system: "♿ Wheelchair",
+      q: "What best describes the patient's wheelchair use?",
+      hint: "Determines EDSS 7.0 vs 7.5. Neurostatus definitions.",
+      options: [
+        { key: "A", title: "Self-propelling — wheels self, transfers alone",
+          desc: "Restricted to wheelchair but fully independent. Up and about in wheelchair ~12 hrs/day.", badge: "severe", score: 0 },  // EDSS 7.0
+        { key: "B", title: "Needs help to wheel or transfer",
+          desc: "Cannot self-propel well or transfer without assistance.", badge: "severe", score: 1 },  // EDSS 7.5
+      ]
+    },
+    // ── PYRAMIDAL ──────────────────────────────────────────────────────────────
+    // Baldassari sEDSS: score only strength (not reflexes, not spasticity).
+    // Weakness = ≥2 weak muscles in same limb. Score worst limb (no bilateral split).
+    // Fine finger movements + hopping included when power is 5/5 (sensitive CST markers).
+    {
+      id: "pyr",
+      system: "💪 Pyramidal",
+      q: "Worst limb strength and corticospinal signs?",
+      hint: "Ignore isolated abnormal reflexes — they don't contribute (Baldassari). Score the single most-affected limb. Test fine finger movement and hopping if power is 5/5 throughout.",
+      options: [
+        { key: "0", title: "Normal",                  desc: "Power 5/5 all limbs. Fine finger movement and hopping normal.", badge: "normal", score: 0 },
+        { key: "1", title: "Subtle CST signs only",   desc: "Power 5/5 but fine finger movement or hopping impaired. No functional weakness.", badge: "mild",   score: 1 },
+        { key: "2", title: "Mild weakness (4+/5 or 4/5)", desc: "≥2 weak muscles in one limb; not disabling.", badge: "mild",   score: 2 },
+        { key: "3", title: "Moderate weakness (3/5)", desc: "One or more limbs. Disabling but some useful movement.", badge: "mod",    score: 3 },
+        { key: "4", title: "Marked weakness (2/5)",   desc: "Severe — some voluntary movement preserved.", badge: "severe", score: 4 },
+        { key: "5", title: "Monoplegia / paraplegia", desc: "One or both lower limbs plegic.", badge: "severe", score: 5 },
+        { key: "6", title: "Quadriplegia",            desc: "All four limbs essentially plegic.", badge: "severe", score: 6 },
+      ]
+    },
+    // ── CEREBELLAR ─────────────────────────────────────────────────────────────
+    // Baldassari: finger-nose, heel-shin, tandem gait, tremor. Severe gait ataxia 
+    // counts more (scores higher) than mild limb ataxia. No bilateral split needed.
+    {
+      id: "cer",
+      system: "🔄 Cerebellar",
+      q: "Cerebellar function — ataxia, tremor, coordination?",
+      hint: "Finger-nose, heel-shin, tandem gait. Severe gait ataxia alone can score 3–4. Tremor at rest or with intention both count.",
+      options: [
+        { key: "0", title: "Normal",                  desc: "No ataxia, tremor, or dysmetria.", badge: "normal", score: 0 },
+        { key: "1", title: "Signs without disability", desc: "Subtle dysmetria or tremor — no functional impact.", badge: "mild",   score: 1 },
+        { key: "2", title: "Mild ataxia",             desc: "Noticeable coordination deficit; some functional impact.", badge: "mild",   score: 2 },
+        { key: "3", title: "Moderate ataxia",         desc: "Significant disability from tremor or gait ataxia.", badge: "mod",    score: 3 },
+        { key: "4", title: "Severe ataxia",           desc: "Unable to perform coordinated movements in most limbs.", badge: "severe", score: 4 },
+        { key: "5", title: "Unable to coordinate",    desc: "All four limbs. Essentially unable to perform any coordinated task.", badge: "severe", score: 5 },
+      ]
+    },
+    // ── BRAINSTEM ──────────────────────────────────────────────────────────────
+    // Baldassari: Brainstem correlated highest with EDSS (rho 0.97). 
+    // Include: nystagmus, INO, gaze palsy, trigeminal, facial, dysarthria, dysphagia.
+    // Exclude: hearing (ePR-EDSS found it contributed to overscoring).
+    {
+      id: "bst",
+      system: "🧠 Brainstem",
+      q: "Brainstem — eye movements, speech, swallowing, face?",
+      hint: "Check: nystagmus, INO/diplopia, gaze palsy, facial sensation/weakness, dysarthria, dysphagia. Exclude hearing unless clearly MS-related.",
+      options: [
+        { key: "0", title: "Normal",                  desc: "No brainstem signs on exam.", badge: "normal", score: 0 },
+        { key: "1", title: "Signs only, no disability", desc: "Nystagmus, subtle INO, or minor facial finding — no functional impact.", badge: "mild",   score: 1 },
+        { key: "2", title: "Moderate dysfunction",    desc: "Intermittent diplopia, mild dysarthria, or mild facial weakness.", badge: "mild",   score: 2 },
+        { key: "3", title: "Significant dysfunction", desc: "Marked dysarthria, dysphagia, or sustained gaze palsy.", badge: "mod",    score: 3 },
+        { key: "4", title: "Severe dysfunction",      desc: "Major disability — near-inability to speak or swallow.", badge: "severe", score: 4 },
+        { key: "5", title: "Complete dysfunction",    desc: "Unable to swallow or speak intelligibly.", badge: "severe", score: 5 },
+      ]
+    },
+    // ── SENSORY ────────────────────────────────────────────────────────────────
+    // Baldassari: use vibration (tuning fork) only — proprioception shares pathways
+    // and is redundant. Add light touch/superficial sensation for scoring when vibration
+    // is normal. Score by worst affected region AND number of limbs.
+    {
+      id: "sen",
+      system: "✋ Sensory",
+      q: "Sensory loss — vibration (worst limb) and light touch?",
+      hint: "Use tuning fork for vibration; pinprick or light touch for superficial. Proprioception not needed (redundant with vibration). Score worst region and extent.",
+      options: [
+        { key: "0", title: "Normal",                  desc: "No sensory loss in any modality.", badge: "normal", score: 0 },
+        { key: "1", title: "Decreased vibration in 1–2 limbs", desc: "Mild, no functional impact.", badge: "mild",   score: 1 },
+        { key: "2", title: "Mild touch/pain loss in 1–2 limbs", desc: "Noticeable but limited.", badge: "mild",   score: 2 },
+        { key: "3", title: "Moderate loss in 3–4 limbs OR severe in 1–2", desc: "Including any trunk involvement.", badge: "mod",    score: 3 },
+        { key: "4", title: "Severe loss in most limbs, including trunk", desc: "Marked anesthesia below neck.", badge: "severe", score: 4 },
+        { key: "5", title: "Loss of sensation below the neck", desc: "Essentially anesthetic trunk and limbs.", badge: "severe", score: 5 },
+        { key: "6", title: "Loss including head/face", desc: "Anesthesia extending above the neck.", badge: "severe", score: 6 },
+      ]
+    },
+    // ── VISUAL ─────────────────────────────────────────────────────────────────
+    // Baldassari: acuity + VF only. Disc pallor eliminated (no functional disability alone).
+    // Key change vs Neurostatus: 20/25 = NORMAL unless prior optic neuritis in that eye.
+    {
+      id: "vis",
+      system: "👁️ Visual",
+      q: "Best-corrected visual acuity — worse eye?",
+      hint: "20/25 is NORMAL unless there is a known history of optic neuritis in that eye (Baldassari). Do not score disc pallor alone.",
+      options: [
+        { key: "0", title: "20/20 – 20/25",           desc: "Normal (or 20/25 with no prior optic neuritis).", badge: "normal", score: 0 },
+        { key: "1", title: "20/30 – 20/59",           desc: "Mild impairment.", badge: "mild",   score: 1 },
+        { key: "2", title: "20/60 – 20/99",           desc: "Moderate impairment.", badge: "mod",    score: 2 },
+        { key: "3", title: "20/100 – 20/199",         desc: "Severe impairment.", badge: "severe", score: 3 },
+        { key: "4", title: "≤ 20/200 in worse eye",   desc: "Functional blindness in one eye.", badge: "severe", score: 4 },
+        { key: "5", title: "≤ 20/200 in both eyes",   desc: "Functional blindness bilaterally.", badge: "severe", score: 5 },
+      ],
+      optional: {
+        label: "Visual fields (improves accuracy — check worse eye)",
+        id: "vis_vf",
+        options: [
+          { key: "0", title: "Normal",                score: 0 },
+          { key: "1", title: "Scotoma or partial VF defect", score: 1 },
+          { key: "2", title: "Hemianopia or severe VF loss", score: 2 },
+        ]
+      }
+    },
+    // ── BOWEL & BLADDER ────────────────────────────────────────────────────────
+    // Baldassari: bladder symptoms only in sEDSS (bowel eliminated — accounted for
+    // discrepancies in 11% of patients). We keep mild bowel symptoms as optional context
+    // but bladder drives the score. "Must use pads" rubric (Romeo ePR-EDSS) is useful.
+    {
+      id: "bb",
+      system: "🚻 Bladder / Bowel",
+      q: "Urinary dysfunction? (Bowel symptoms if present)",
+      hint: "Bladder scores drive this FS. Urgency, hesitancy, incontinence, retention, catheter use. Note: bowel was excluded from sEDSS (Baldassari) — only include if clearly MS-related and severe.",
+      options: [
+        { key: "0", title: "Normal",                  desc: "No urinary or bowel symptoms.", badge: "normal", score: 0 },
+        { key: "1", title: "Mild urgency or hesitancy", desc: "No incontinence. No catheter.", badge: "mild",   score: 1 },
+        { key: "2", title: "Moderate urgency / occasional leakage", desc: "Uses pads sometimes. No catheter.", badge: "mild",   score: 2 },
+        { key: "3", title: "Frequent incontinence or intermittent catheter", desc: "Significantly affecting daily life.", badge: "mod",    score: 3 },
+        { key: "4", title: "Near-constant catheterisation or severe dysfunction", desc: "Indwelling catheter or complete retention.", badge: "severe", score: 4 },
+        { key: "5", title: "Loss of bladder and bowel control", desc: "Complete incontinence or dependence.", badge: "severe", score: 5 },
+      ]
+    },
+    // ── CEREBRAL ───────────────────────────────────────────────────────────────
+    // Baldassari: fatigue included (score 1 if fatigue only). Cognitive symptoms add.
+    // Depression excluded (CombiRx scoring didn't record it; contributed to discrepancies).
+    // Only score if clearly MS-related — not depression, not generalized fatigue.
+    {
+      id: "cbr",
+      system: "🧩 Cerebral",
+      q: "MS-related fatigue or cognitive symptoms?",
+      hint: "Score 1 for MS fatigue alone. Cognitive impairment adds. Do NOT score depression or generalized fatigue as cerebral FS (Baldassari).",
+      options: [
+        { key: "0", title: "None",                    desc: "No MS-related cognitive or fatigue symptoms.", badge: "normal", score: 0 },
+        { key: "1", title: "MS fatigue only",         desc: "Fatigue clearly attributable to MS; no cognitive deficit.", badge: "mild",   score: 1 },
+        { key: "2", title: "Mild cognitive symptoms", desc: "Word-finding difficulty, slowed processing — not disabling.", badge: "mild",   score: 2 },
+        { key: "3", title: "Moderate cognitive impairment", desc: "Memory or executive dysfunction affecting daily activities.", badge: "mod",    score: 3 },
+        { key: "4", title: "Severe cognitive impairment", desc: "Major disability from cognitive MS involvement.", badge: "severe", score: 4 },
+        { key: "5", title: "Dementia",                desc: "Severe MS-related cognitive failure.", badge: "severe", score: 5 },
+      ]
+    },
+  ];
+}
+
+function clinCalcEDSS() {
+  const amb     = CLIN_STATE.amb     ?? 0;
+  const amb_dist = CLIN_STATE.amb_dist ?? null;  // 0-4, null if not asked
+  const pyr  = CLIN_STATE.pyr  ?? 0;
+  const cer  = CLIN_STATE.cer  ?? 0;
+  const bst  = CLIN_STATE.bst  ?? 0;
+  const sen  = CLIN_STATE.sen  ?? 0;
+  const vis  = Math.max(CLIN_STATE.vis ?? 0, CLIN_STATE.vis_vf ?? 0);
+  const bb   = CLIN_STATE.bb   ?? 0;
+  const cbr  = CLIN_STATE.cbr  ?? 0;
+
+  const fs = [pyr, cer, bst, sen, vis, bb, cbr];
+
+  // Map clinical amb scores to Neurostatus AS values:
+  // amb=5 (bedbound) → EDSS 8.0-9.5 range (use FS for precision, but AS=12 as floor)
+  // amb=4 (WC help) → AS 11 → EDSS 7.5
+  // amb=3 (WC indep) → AS 10 → EDSS 7.0
+  if (amb === 4) {
+    // Bedbound
+    const detail = CLIN_STATE.bed_detail ?? 0;
+    const edssMap = [8.0, 8.5, 9.0, 9.5];
+    const lblMap  = ["Restricted to bed/chair — effective arm use",
+                     "Mostly in bed — some arm use",
+                     "Helpless — can communicate and eat",
+                     "Totally helpless — cannot communicate or eat"];
+    return { edss: edssMap[detail], fs, label: lblMap[detail] };
+  }
+  if (amb === 3) {
+    // Wheelchair: wc_detail 0=indep(7.0), 1=needs help(7.5)
+    const detail = CLIN_STATE.wc_detail ?? 0;
+    return detail === 0
+      ? { edss: 7.0, fs, label: "Wheelchair — self-propelling, transfers alone" }
+      : { edss: 7.5, fs, label: "Wheelchair — needs help to wheel or transfer" };
+  }
+
+  // Aided walkers: use amb_dist to determine exact AS
+  // amb=2 (bilateral): dist=0 (≥20m) → AS7 → EDSS 6.0; dist=1 (<20m) → AS9 → EDSS 6.5
+  // amb=2 (bilateral): dist=0 (≥120m) → AS7 → EDSS 6.0; dist=1 (<120m) → AS9 → EDSS 6.5
+  if (amb === 2) {
+    const as = (amb_dist === null || amb_dist === 0) ? 7 : 9;
+    const edssVal = as === 7 ? 6.0 : 6.5;
+    return { edss: edssVal, fs, label: as === 7 ? "Bilateral aid — walks ≥ 120 m" : "Bilateral aid — walks < 120 m" };
+  }
+  // amb=1 (unilateral): dist=0 (≥50m) → AS6 → EDSS 6.0; dist=1 (<50m) → AS8 → EDSS 6.5
+  if (amb === 1) {
+    const as = (amb_dist === null || amb_dist === 0) ? 6 : 8;
+    const edssVal = as === 6 ? 6.0 : 6.5;
+    return { edss: edssVal, fs, label: as === 6 ? "Unilateral aid — walks ≥ 50 m" : "Unilateral aid — walks < 50 m" };
+  }
+
+  // amb=0 (unaided): use amb_dist to set AS and floor
+  // dist: 0=unrestricted→AS0, 1=≥500m restricted→AS1, 2=300-500m→AS2, 3=200-300m→AS3, 4=100-200m→AS4, 5=<100m→AS5
+  const asFromDist = (amb_dist !== null) ? amb_dist : 0;
+  const distFloor = [0, 2.0, 4.5, 5.0, 5.0, 5.5][asFromDist] ?? 0;
+
+  // FS-dominant range
+  const N  = Math.max(...fs);
+  const nN = fs.filter(x => x === N).length;
+  const others = fs.filter(x => x !== N);
+  const anyOtherGt1 = others.some(x => x > 1);
+  const anyOtherGt0 = others.some(x => x > 0);
+
+  // Override for ambulation score 2 (< 200m unaided) → EDSS ≥ 4.0
+  let edss = 0;
+
+  if (N === 0) { edss = 0; }
+  else if (N === 1) { edss = nN >= 2 ? 2.0 : 1.0; }
+  else if (N === 2) {
+    if (nN >= 5) edss = 5.0;
+    else if (nN >= 3) edss = anyOtherGt1 ? 3.5 : 3.0;
+    else if (nN === 2) edss = anyOtherGt1 ? 3.0 : 2.5;
+    else edss = anyOtherGt0 ? 2.5 : 2.0;
+  }
+  else if (N === 3) {
+    if (nN >= 3) edss = anyOtherGt1 ? 5.0 : 4.5;
+    else if (nN === 2) edss = anyOtherGt1 ? 4.5 : 4.0;
+    else edss = anyOtherGt1 ? 4.0 : 3.5;
+  }
+  else if (N === 4) {
+    edss = nN >= 2 ? (anyOtherGt1 ? 6.0 : 5.5) : (anyOtherGt1 ? 5.5 : 5.0);
+  }
+  else if (N === 5) { edss = nN >= 2 ? 6.5 : 6.0; }
+  else { edss = 7.0; }
+
+  // Ambulation override: apply distance-based floor
+  if (distFloor && edss < distFloor) edss = distFloor;
+  // Legacy fallback if amb_dist not collected
+  if (amb_dist === null) {
+    if (amb === 2 && edss < 4.0) edss = 4.0;
+    if (amb === 1 && edss < 2.0) edss = 2.0;
+  }
+
+  const label = clinEdssLabel(edss);
+  return { edss, fs, label };
+}
+
+function clinEdssLabel(e) {
+  if (e === 0)   return "Normal neurological exam";
+  if (e <= 1.5)  return "No disability, minimal signs";
+  if (e <= 2.5)  return "Minimal disability";
+  if (e <= 3.5)  return "Moderate disability in one FS";
+  if (e <= 4.5)  return "Relatively severe disability — fully ambulatory";
+  if (e <= 5.5)  return "Ambulatory for ~200 m without aid";
+  if (e <= 6.5)  return "Requires walking aid";
+  if (e <= 7.5)  return "Restricted to wheelchair";
+  if (e <= 8.5)  return "Restricted to bed/chair";
+  return "Bedbound";
+}
+
+// ---- Adaptive step sequence ----
+function clinComputeSteps() {
+  const all = clinBuildSteps();
+  // Index map:
+  // all[0]=amb, all[1]=amb_dist, all[2]=bed_detail, all[3]=wc_detail
+  // all[4]=pyr, all[5]=cer, all[6]=bst, all[7]=sen, all[8]=vis, all[9]=bb, all[10]=cbr
+  const ambScore = CLIN_STATE.amb ?? -1;
+  const fs = [all[4], all[5], all[6], all[7], all[8], all[9], all[10]];
+
+  if (ambScore === 4) {
+    // Bedbound: amb → bed_detail → banner
+    const hasDetail = CLIN_STATE.bed_detail !== undefined && CLIN_STATE.bed_detail !== null;
+    return hasDetail && CLIN_STATE._cont_fs
+      ? [all[0], all[2], ...fs]
+      : [all[0], all[2]];
+  }
+  if (ambScore === 3) {
+    // Wheelchair: amb → wc_detail → banner
+    const hasDetail = CLIN_STATE.wc_detail !== undefined && CLIN_STATE.wc_detail !== null;
+    return hasDetail && CLIN_STATE._cont_fs
+      ? [all[0], all[3], ...fs]
+      : [all[0], all[3]];
+  }
+  // Unaided/unilateral/bilateral: amb + dist + all FS
+  return [all[0], all[1], ...fs];
+}
+
+// ---- Rendering ----
+function clinRender() {
+  CLIN_STEPS = clinComputeSteps();
+  const total = CLIN_STEPS.length;
+  const pct   = total > 1 ? Math.round((CLIN_STEP / total) * 100) : 0;
+  document.getElementById("clin-progress-fill").style.width = pct + "%";
+  document.getElementById("clin-progress-text").textContent =
+    CLIN_STEP >= total ? "Complete" : `Step ${CLIN_STEP + 1} of ${total}`;
+
+  const stage = document.getElementById("clin-stage");
+
+  // Show result if done
+  if (CLIN_STEP >= CLIN_STEPS.length) {
+    clinShowResult(stage);
+    return;
+  }
+
+  const step = CLIN_STEPS[CLIN_STEP];
+  const selected = CLIN_STATE[step.id] ?? null;
+
+  // Early exit banner when ambulation is severe
+  let exitBanner = "";
+  // exitBanner removed — replaced by early-exit banner in nav section
+
+  // Options — use dynamicOptions if defined (adapts to current CLIN_STATE)
+  const stepOptions = step.dynamicOptions ? step.dynamicOptions(CLIN_STATE) : step.options;
+
+  const opts = stepOptions.map((o, i) => `
+    <div class="clinical-opt${CLIN_STATE[step.id] === o.score ? " selected" : ""}"
+         onclick="clinSelect('${step.id}', ${o.score}, ${i})">
+      <div class="clinical-opt-key">${o.key}</div>
+      <div class="clinical-opt-body">
+        <div class="clinical-opt-title">${o.title}</div>
+        ${o.desc ? `<div class="clinical-opt-desc">${o.desc}</div>` : ""}
+      </div>
+      ${o.badge ? `<div class="clinical-opt-badge ${o.badge}">${o.badge}</div>` : ""}
+    </div>`).join("");
+
+  // Optional sub-question
+  let optionalHTML = "";
+  if (step.optional && CLIN_STATE[step.id] !== null && CLIN_STATE[step.id] !== undefined) {
+    const selOpt = CLIN_STATE[step.optional.id] ?? null;
+    const subOpts = step.optional.options.map(o => `
+      <div class="clinical-opt${selOpt === o.score ? " selected" : ""}" style="padding:10px 14px;"
+           onclick="clinSelect('${step.optional.id}', ${o.score})">
+        <div class="clinical-opt-key" style="width:22px;height:22px;font-size:11px;">${o.key}</div>
+        <div class="clinical-opt-body"><div class="clinical-opt-title" style="font-size:13px;">${o.title}</div></div>
+      </div>`).join("");
+    optionalHTML = `
+      <div class="clinical-optional-section">
+        <div class="clinical-optional-label">📐 ${step.optional.label}</div>
+        <div class="clinical-options" style="gap:6px;">${subOpts}</div>
+      </div>`;
+  }
+
+  const canNext = CLIN_STATE[step.id] !== null && CLIN_STATE[step.id] !== undefined
+    && (step.dynamicOptions ? step.dynamicOptions(CLIN_STATE).length > 0 : step.options.length > 0);
+
+  stage.innerHTML = `
+    ${exitBanner}
+    <div class="clinical-card">
+      <div class="clinical-system-badge">${step.system}</div>
+      <div class="clinical-q">${step.q}</div>
+      ${step.hint ? `<div class="clinical-hint">${step.hint}</div>` : ""}
+      <div class="clinical-options">${opts}</div>
+      ${optionalHTML}
+      ${(() => {
+        const ambS = CLIN_STATE.amb ?? -1;
+        const onDetailStep = (step.id === "bed_detail" || step.id === "wc_detail");
+        const onDistStep   = step.id === "amb_dist";
+        const onFSStep     = !["amb","amb_dist","bed_detail","wc_detail"].includes(step.id);
+        const showBanner   = canNext && ambS >= 1 && (onDetailStep || onDistStep || (onFSStep && CLIN_STEP < CLIN_STEPS.length - 1));
+        return showBanner;
+      })() ? `
+        <div class="clinical-earlyexit-banner">
+          <div class="clinical-earlyexit-title">EDSS determinable now</div>
+          <p class="clinical-earlyexit-desc">Ambulation score is known. You can get the EDSS result immediately, or continue to score all Functional Systems for a complete record.</p>
+          <div class="clinical-earlyexit-btns">
+            <button class="clinical-btn" style="background:#7b3fa0;color:white;border-color:#7b3fa0;" onclick="clinSkipToResult()">Get EDSS now (FS = N/C)</button>
+            <button class="clinical-btn primary" onclick="clinContinueFS()">Continue &amp; score all FS →</button>
+          </div>
+        </div>
+        <div class="clinical-nav">
+          <button class="clinical-btn" onclick="clinBack()" ${CLIN_STEP === 0 ? "disabled" : ""}>← Back</button>
+        </div>` : `
+      <div class="clinical-nav">
+        <button class="clinical-btn" onclick="clinBack()" ${CLIN_STEP === 0 ? "disabled" : ""}>← Back</button>
+        <button class="clinical-btn primary" onclick="clinNext()" ${canNext ? "" : "disabled"}>
+          ${CLIN_STEP >= CLIN_STEPS.length - 1 ? "Calculate EDSS →" : "Next →"}
+        </button>
+      </div>`}
+    </div>`;
+}
+
+function clinShowResult(stage) {
+  const { edss, fs, label } = clinCalcEDSS();
+  // Determine which systems were actually assessed
+  const collectedIds = CLIN_STEPS.map(s => s.id);
+  const fsMap = { pyr:0, cer:1, bst:2, sen:3, vis:4, bb:5, cbr:6 };
+  const fsNames = ["Pyramidal","Cerebellar","Brainstem","Sensory","Visual","Bowel/Bladder","Cerebral"];
+  const fsGrid = fs.map((v, i) => {
+    const key = Object.keys(fsMap).find(k => fsMap[k] === i);
+    const calculated = collectedIds.includes(key) || collectedIds.includes("vis_vf");
+    const display = calculated ? v : "N/C";
+    return `
+    <div class="clinical-fs-item">
+      <div class="clinical-fs-name">${fsNames[i]}</div>
+      <div class="clinical-fs-val${calculated ? "" : " clinical-fs-nc"}">${display}</div>
+    </div>`;
+  }).join("");
+
+  document.getElementById("clin-progress-fill").style.width = "100%";
+  document.getElementById("clin-progress-text").textContent = "Complete";
+
+  stage.innerHTML = `
+    <div class="clinical-card" id="clin-result-card">
+      <div class="clinical-result">
+        <div class="clinical-result-label">EDSS Score</div>
+        <div class="clinical-result-score">${edss.toFixed(1)}</div>
+        <div class="clinical-result-desc">${label}</div>
+        <div class="clinical-fs-grid">${fsGrid}</div>
+        <p style="font-size:11px;color:var(--ink-faint);text-align:center;margin:0 0 16px;">N/C = not calculated (ambulation-dominant scoring)</p>
+        <div class="clinical-result-actions">
+          <button class="clinical-btn primary" onclick="clinRestart()">New Assessment</button>
+          <button class="clinical-btn" id="clin-export-btn">⬇ Save as image</button>
+          <button class="clinical-btn" onclick="clinGoHome()">← Home</button>
+        </div>
+        <div class="clinical-disclaimer">
+          ⚠️ Calculated from streamlined clinical input. For research or trial use, full Neurostatus assessment is recommended. Clinical judgement always takes precedence.
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById("clin-export-btn")?.addEventListener("click", () => {
+    clinSaveAsImage(edss.toFixed(1), label, fs, collectedIds);
+  });
+}
+
+function clinSaveAsImage(edssText, labelText, fs, collectedIds) {
+  const W = 1080, H = 1080;
+  const canvas = document.createElement("canvas");
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext("2d");
+
+  // Background — clinical purple tint
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, "#faf8ff");
+  bg.addColorStop(1, "#f0eaf8");
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Inner card
+  ctx.fillStyle = "#ffffff";
+  ctx.shadowColor = "rgba(20,10,40,0.09)";
+  ctx.shadowBlur = 30;
+  ctx.shadowOffsetY = 4;
+  const padX = 80, padY = 90;
+  roundRect(ctx, padX, padY, W - 2*padX, H - 2*padY, 24);
+  ctx.fill();
+  ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+
+  // Brand
+  ctx.fillStyle = "#0d2c47";
+  ctx.font = "600 36px 'Fraunces', Georgia, serif";
+  ctx.textAlign = "center";
+  ctx.fillText("AutoEDSSguide", W/2, 195);
+  ctx.fillStyle = "#7b3fa0";
+  ctx.font = "italic 20px 'Fraunces', Georgia, serif";
+  ctx.fillText("Clinical EDSS Result", W/2, 228);
+
+  // Divider
+  ctx.strokeStyle = "#e2d9ef";
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(240, 268); ctx.lineTo(W-240, 268); ctx.stroke();
+
+  // Label
+  ctx.fillStyle = "#8a8f9d";
+  ctx.font = "600 20px 'IBM Plex Sans', sans-serif";
+  drawSpacedText(ctx, "EDSS STEP", W/2, 320, 4);
+
+  // Big score
+  ctx.fillStyle = "#7b3fa0";
+  ctx.font = "700 200px 'Fraunces', Georgia, serif";
+  ctx.fillText(edssText, W/2, 510);
+
+  // Label below score
+  ctx.fillStyle = "#334155";
+  ctx.font = "400 22px 'IBM Plex Sans', sans-serif";
+  ctx.fillText(labelText, W/2, 558);
+
+  // Divider
+  ctx.strokeStyle = "#e2d9ef";
+  ctx.beginPath(); ctx.moveTo(240, 590); ctx.lineTo(W-240, 590); ctx.stroke();
+
+  // FS grid — 7 systems in 2 rows
+  const fsNames = ["Pyramidal","Cerebellar","Brainstem","Sensory","Visual","BB","Cerebral"];
+  const fsMap = { pyr:0, cer:1, bst:2, sen:3, vis:4, bb:5, cbr:6 };
+  const cols = 4, cellW = (W-200)/cols, startX = 100, startY = 630;
+  ctx.font = "700 16px 'IBM Plex Sans', sans-serif";
+  fsNames.forEach((name, i) => {
+    const col = i % cols, row = Math.floor(i / cols);
+    const cx = startX + col * cellW + cellW/2;
+    const cy = startY + row * 100;
+    const key = Object.keys(fsMap).find(k => fsMap[k] === i);
+    const calculated = collectedIds.includes(key);
+    const val = calculated ? fs[i] : "N/C";
+    // Box
+    ctx.fillStyle = calculated ? "#f0eaf8" : "#f1f5f9";
+    roundRect(ctx, cx - cellW/2 + 10, cy - 28, cellW - 20, 60, 8);
+    ctx.fill();
+    ctx.fillStyle = calculated ? "#7b3fa0" : "#94a3b8";
+    ctx.font = "700 22px 'Fraunces', Georgia, serif";
+    ctx.textAlign = "center";
+    ctx.fillText(String(val), cx, cy + 8);
+    ctx.fillStyle = "#64748b";
+    ctx.font = "500 14px 'IBM Plex Sans', sans-serif";
+    ctx.fillText(name, cx, cy + 28);
+  });
+
+  // Disclaimer
+  ctx.fillStyle = "#94a3b8";
+  ctx.font = "400 15px 'IBM Plex Sans', sans-serif";
+  wrapText(ctx, "Streamlined clinical scoring. Clinical judgement takes precedence.", W/2, 900, W-200, 24);
+
+  // Date
+  ctx.fillStyle = "#cbd5e1";
+  ctx.font = "400 14px 'IBM Plex Sans', sans-serif";
+  ctx.fillText(new Date().toLocaleDateString(), W/2, 940);
+
+  canvas.toBlob(blob => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `clinical-edss-${edssText.replace(".","_")}.png`;
+    a.click();
+  }, "image/png");
+}
+
+function clinSelect(id, score, optIdx) {
+  CLIN_STATE[id] = score;
+  // If ambulation type changed, clear distance answer (options may change)
+  if (id === "amb") {
+    delete CLIN_STATE["amb_dist"];
+    delete CLIN_STATE["bed_detail"];
+    delete CLIN_STATE["wc_detail"];
+    delete CLIN_STATE["_cont_fs"];
+    CLIN_STEPS = clinComputeSteps();
+    if (CLIN_STEP >= CLIN_STEPS.length) CLIN_STEP = CLIN_STEPS.length - 1;
+  }
+  clinRender();
+}
+
+function clinNext() {
+  CLIN_STEPS = clinComputeSteps();
+  CLIN_STEP = Math.min(CLIN_STEP + 1, CLIN_STEPS.length);
+  clinRender();
+}
+
+function clinSkipToResult() {
+  delete CLIN_STATE["_cont_fs"];
+  CLIN_STEPS = clinComputeSteps();
+  CLIN_STEP = CLIN_STEPS.length;
+  clinRender();
+}
+
+function clinContinueFS() {
+  CLIN_STATE["_cont_fs"] = true;
+  CLIN_STEPS = clinComputeSteps();
+  CLIN_STEP = Math.min(CLIN_STEP + 1, CLIN_STEPS.length - 1);
+  clinRender();
+}
+
+function clinBack() {
+  CLIN_STEP = Math.max(0, CLIN_STEP - 1);
+  clinRender();
+}
+
+function clinRestart() {
+  CLIN_STATE = {}; CLIN_STEP = 0;
+  clinRender();
+}
+
+function clinGoHome() {
+  document.getElementById("clinical").classList.remove("active");
+  document.getElementById("landing").classList.add("active");
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+function showClinical() {
+  document.getElementById("landing").classList.remove("active");
+  document.getElementById("app").classList.remove("active");
+  document.getElementById("quickcheck").classList.remove("active");
+  document.getElementById("scanner").classList.remove("active");
+  document.getElementById("clinical").classList.add("active");
+  CLIN_STATE = {}; CLIN_STEP = 0;
+  clinRender();
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+document.getElementById("clin-home-btn")?.addEventListener("click", clinGoHome);
 
 // ============================================================
 // Privacy banner (first visit)
