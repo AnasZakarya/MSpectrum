@@ -1238,6 +1238,8 @@ body {
   font-variation-settings: "opsz" 9;
   line-height: 1.5;
 }
+/* FIX (Bug 7): toggle to hide the copper bedside-prompt questions (guidance only, no FS). */
+.hide-prompts .card-question { display: none !important; }
 .card-question {
   font-family: var(--serif);
   font-variation-settings: "opsz" 14;
@@ -1455,6 +1457,12 @@ input[type="checkbox"] {
   grid-template-columns: 1fr;
   gap: 8px;
 }
+/* FIX (per Nour): Set-normal / Clear toolbars (per system, per big card, global). */
+.exam-toolbar { display:flex; gap:8px; margin:0 0 10px; flex-wrap:wrap; }
+.exam-btn { padding:5px 11px; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer; border:1px solid var(--rule-strong,#cbd5e1); background:#fff; }
+.exam-btn.normal { background:#e7f3ec; color:#216e39; border-color:#b6dcc3; }
+.exam-btn.clear  { background:#fdeaea; color:#9b2c2c; border-color:#f0c2c2; }
+@media print { .exam-toolbar { display:none !important; } }
 @media (min-width: 720px) {
   .bmrc-grid { grid-template-columns: repeat(2, 1fr); gap: 12px 24px; }
 }
@@ -2179,15 +2187,17 @@ input[type="checkbox"] {
     padding: 14mm 12mm !important;
     width: 210mm !important;
     max-width: 210mm !important;
-    page-break-after: always;
   }
-  .ns-page:last-child { page-break-after: auto; }
+  /* FIX (Bug 20): break only BETWEEN pages; a forced break after the last page
+     makes iPad/Safari emit a blank extra sheet (the 3rd page). */
+  .ns-page:not(:last-child) { page-break-after: always; break-after: page; }
   /* Gemini sc-page print — scale to fit A4, 2 pages */
   .sc-sheet-wrap { width: 100% !important; }
   .sc-sheet-wrap .sc-sheet-card { box-shadow: none !important; border: none !important; padding: 0 !important; background: white !important; border-radius: 0 !important; overflow: visible !important; }
   .sc-sheet-wrap .sc-pages-container { gap: 0 !important; padding: 0 !important; align-items: stretch !important; }
-  .sc-sheet-wrap .sc-page { page-break-after: always; box-shadow: none !important; border: none !important; width: 100% !important; min-width: 0 !important; max-width: 100% !important; padding: 5mm 8mm !important; margin: 0 !important; font-size: 7.8pt !important; line-height: 1.15 !important; }
-  .sc-sheet-wrap .sc-page:last-of-type { page-break-after: auto; }
+  .sc-sheet-wrap .sc-page { box-shadow: none !important; border: none !important; width: 100% !important; min-width: 0 !important; max-width: 100% !important; padding: 5mm 8mm !important; margin: 0 !important; font-size: 7.8pt !important; line-height: 1.15 !important; }
+  /* FIX (Bug 20): break only between pages, not after the last one. */
+  .sc-sheet-wrap .sc-page:not(:last-of-type) { page-break-after: always; break-after: page; }
   .sc-sheet-wrap .sc-field-row { height: 16px !important; font-size: 7.8pt !important; }
   .sc-sheet-wrap .sc-row-label { font-size: 8pt !important; }
   .sc-sheet-wrap .sc-box-input { width: 34px !important; height: 18px !important; font-size: 8pt !important; }
@@ -2199,7 +2209,7 @@ input[type="checkbox"] {
   .sc-sheet-wrap .sc-char-box { width: 13px !important; height: 16px !important; font-size: 9pt !important; }
   .sc-sheet-wrap .sc-rect-input { height: 18px !important; font-size: 9pt !important; }
   .sc-sheet-wrap .sc-borderless-input { font-size: 9pt !important; }
-  .sc-sheet-wrap .sc-edss-value-input { width: 80px !important; height: 28px !important; font-size: 15pt !important; }
+  .sc-sheet-wrap .sc-edss-value-input { width: 58px !important; height: 26px !important; font-size: 11pt !important; line-height: 24px !important; padding: 0 !important; box-sizing: border-box !important; }
   .sc-sheet-wrap .sc-footnotes-area { margin-top: 12px !important; }
   .sc-sheet-wrap .sc-section-content.two-columns { gap: 12px !important; }
   .sc-sheet-wrap .sc-synopsis-block { padding: 6px 8px !important; }
@@ -2457,6 +2467,9 @@ input[type="checkbox"] {
   letter-spacing: 0.02em;
 }
 .system-group-body { padding: 2px 0 0; }
+/* FIX (per Nour): place Set-normal/Clear opposite the system name, in the header bar. */
+.system-group-header .exam-toolbar { margin: 0 0 0 auto; }
+.section-header .exam-toolbar { margin: 0 0 0 auto; align-self: center; }
 
 /* ── Visual Paired Grid ─────────────────────────────── */
 .visual-paired-grid {
@@ -2653,7 +2666,7 @@ input[type="checkbox"] {
 .sc-sheet-wrap .sc-edss-box-container { display:flex;flex-direction:column;gap:4px; }
 .sc-sheet-wrap .sc-edss-label { font-size:11px;color:#000; }
 .sc-sheet-wrap .sc-edss-relative { position:relative;display:inline-flex;align-items:center; }
-.sc-sheet-wrap .sc-edss-value-input { width:100px;height:34px;border:3.5px solid #000;text-align:center;font-size:19px;font-weight:800;outline:none;background:white;color:#000;transition:all .2s; }
+.sc-sheet-wrap .sc-edss-value-input { width:64px;height:30px;border:2.5px solid #000;text-align:center;font-size:13px;line-height:28px;padding:0;box-sizing:border-box;font-weight:800;outline:none;background:white;color:#000;transition:all .2s; }
 .sc-sheet-wrap .sc-edss-value-input.manual-override { border-color:#0284c7;background-color:#f0f9ff; }
 .sc-sheet-wrap .sc-edss-reset-btn { position:absolute;right:-24px;top:6px;background:none;border:none;cursor:pointer;font-size:14px;color:#64748b;padding:0 4px;display:none;line-height:1;font-weight:bold; }
 .sc-sheet-wrap .sc-edss-reset-btn:hover { color:#0284c7; }
@@ -3137,7 +3150,7 @@ input[type="checkbox"] {
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Knee</span><div class="sc-boxes-triple"><input type="text" class="sc-box-input" id="p-ref-knee-r"><input type="text" class="sc-box-input" id="p-ref-knee-asym"><input type="text" class="sc-box-input" id="p-ref-knee-l"></div></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Ankle</span><div class="sc-boxes-triple"><input type="text" class="sc-box-input" id="p-ref-ankle-r"><input type="text" class="sc-box-input" id="p-ref-ankle-asym"><input type="text" class="sc-box-input" id="p-ref-ankle-l"></div></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Plantar response</span><div class="sc-boxes-triple"><input type="text" class="sc-box-input" id="p-ref-plantar-r"><input type="text" class="sc-box-input" id="p-ref-plantar-asym"><input type="text" class="sc-box-input" id="p-ref-plantar-l"></div></div>
-                  <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Cutaneous reflexes</span><div class="sc-boxes-triple"><input type="text" class="sc-box-input" id="p-ref-cut-r"><input type="text" class="sc-box-input" id="p-ref-cut-asym"><input type="text" class="sc-box-input" id="p-ref-cut-l"></div></div>
+                  <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Cutaneous (abdominal) reflexes</span><div class="sc-boxes-triple"><input type="text" class="sc-box-input" id="p-ref-cut-r"><input type="text" class="sc-box-input" id="p-ref-cut-asym"><input type="text" class="sc-box-input" id="p-ref-cut-l"></div></div>
                   <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Palmomental reflex</span><div class="sc-boxes-triple"><input type="text" class="sc-box-input optional" id="p-ref-palmo-r"><input type="text" class="sc-box-input optional" id="p-ref-palmo-asym"><input type="text" class="sc-box-input optional" id="p-ref-palmo-l"></div></div>
                   <div class="sc-table-header-row" style="margin-top:18px;"><span class="sc-col-label font-sans-bold">LIMB STRENGTH</span><div class="sc-col-boxes-headers"><span>R</span><span>L</span></div></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Deltoids</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input strength-val" id="p-str-deltoids-r" oninput="scGeminiCalc()"><input type="text" class="sc-box-input strength-val" id="p-str-deltoids-l" oninput="scGeminiCalc()"></div></div>
@@ -3503,12 +3516,23 @@ function _safe(v, def = 0) {
 // ============================================================
 // Visual FS
 // ============================================================
+// FIX (Bug 2): table was shifted one grade low, so every acuity scored one
+// grade too low (e.g. 20/25 -> 0 instead of 1, 20/30 -> 1 instead of 2) and
+// NLP scored 6 (a grade that requires BOTH eyes impaired). Rebuilt to the
+// Neurostatus visual-acuity FS grades (worse eye):
+//   1 = worse than 20/20 but better than 20/30  -> 20/25
+//   2 = 20/30 to 20/59                          -> 20/30, 20/40, 20/50
+//   3 = 20/60 to 20/99                          -> 20/60, 20/70, 20/80
+//   4 = 20/100 to 20/200                        -> 20/100, 20/200
+//   5 = worse than 20/200                       -> 20/400, CF, HM, LP, NLP
+// (Grade 6 requires the better eye also impaired; handled in calcVisualFS.)
 const SNELLEN_LOOKUP = {
-    "20/20": 0, "20/25": 0, "20/30": 1,
-    "20/40": 1, "20/50": 1, "20/60": 2,
-    "20/70": 2, "20/80": 2, "20/100": 3,
-    "20/200": 4, "20/400": 5, "CF": 5,
-    "HM": 5, "LP": 5, "NLP": 6,
+    "20/20": 0,
+    "20/25": 1,
+    "20/30": 2, "20/40": 2, "20/50": 2,
+    "20/60": 3, "20/70": 3, "20/80": 3,
+    "20/100": 4, "20/200": 4,
+    "20/400": 5, "CF": 5, "HM": 5, "LP": 5, "NLP": 5,
 };
 
 function snellenToScore(snellen) {
@@ -3517,27 +3541,26 @@ function snellenToScore(snellen) {
     return SNELLEN_LOOKUP[key] ?? 0;
 }
 
-function calcVisualFS({ va_od, va_os, vf_od, vf_os, scotoma_od, scotoma_os } = {}) {
-    const od_score = Math.max(snellenToScore(va_od), _safe(vf_od), _safe(scotoma_od));
-    const os_score = Math.max(snellenToScore(va_os), _safe(vf_os), _safe(scotoma_os));
+function calcVisualFS({ va_od, va_os, vf_od, vf_os, scotoma_od, scotoma_os, pallor_od, pallor_os } = {}) {
+    // FIX (per Nour): disc pallor is a Neurostatus grade-1 sign, so a present pallor
+    // contributes a capped grade of 1 to that eye (won't inflate beyond worse-eye logic).
+    const od_score = Math.max(snellenToScore(va_od), _safe(vf_od), _safe(scotoma_od), _safe(pallor_od) > 0 ? 1 : 0);
+    const os_score = Math.max(snellenToScore(va_os), _safe(vf_os), _safe(scotoma_os), _safe(pallor_os) > 0 ? 1 : 0);
     const worse = Math.max(od_score, os_score);
     const better = Math.min(od_score, os_score);
 
-    if (worse === 0) return 0;
-    if (worse <= 1) return 1;
-    if (worse === 2) return 2;
-    if (worse === 3) return 3;
-    if (worse === 4 && better >= 3) return 4;
-    if (worse === 4) return 3;
-    if (worse === 5 && better >= 4) return 5;
-    if (worse === 5) return 4;
-    // worse >= 6
-    if (better >= 5) return 6;
-    return 5;
+    // FIX (Bug 2): previous logic DOWNGRADED a bad worse-eye when the better eye
+    // was good (e.g. worse=4 -> returned 3), which is not Neurostatus. Grades 0-2
+    // depend on the worse eye alone; for grade >=3 the FS is bumped one grade only
+    // when the BETTER eye is also <=20/60 (raw grade >=3): grade3->4, 4->5, 5->6.
+    if (worse <= 2) return worse;
+    return better >= 3 ? Math.min(worse + 1, 6) : worse;
 }
 
 function visualFSConverted(visual_fs) {
-    const table = [0, 1, 2, 3, 3, 4, 5];
+    // FIX (Neurostatus): converted Visual FS = raw 1->1, 2->2, 3->2, 4->3, 5->3, 6->4.
+    // Was [0,1,2,3,3,4,5] (raw3->3, raw5->4, raw6->5) which over-converted.
+    const table = [0, 1, 2, 2, 3, 3, 4];
     return table[Math.min(visual_fs, 6)];
 }
 
@@ -3556,7 +3579,7 @@ const MUSCLE_KEYS = [
     "hipflex", "kneeflex", "kneeext", "ankdorsi", "ankplant",
 ];
 
-function calcPyramidalFS({ strength, overall_motor } = {}) {
+function calcPyramidalFS({ strength, overall_motor, plantar, reflexes } = {}) {
     strength = strength || {};
 
     const muscle_min = {};
@@ -3608,8 +3631,21 @@ function calcPyramidalFS({ strength, overall_motor } = {}) {
     // Minimal: BMRC 4 in 1-2
     if (n_grade4 >= 1) return 2;
 
-    // Signs only (motor fatigability)
-    if (_safe(overall_motor, 0) >= 1) return 1;
+    // Motor fatigability / reduced performance on demanding tasks (p_overall >= 1).
+    // FIX (per Nour): Neurostatus grades fatigability as FS 2 ("minimal disability:
+    // fatigability or reduced performance in strenuous motor tasks"). Was 1.
+    // NOTE: pure "signs only" (isolated Babinski/hyperreflexia, Neurostatus grade 1)
+    // is not currently fed into the engine (reflexes/plantar are recorded but not
+    // scored), so FS 1 is not reachable from these inputs alone — see review notes.
+    if (_safe(overall_motor, 0) >= 1) return 2;
+
+    // Signs only (Neurostatus grade 1): pyramidal signs WITHOUT weakness/fatigability.
+    // Counted: definite Babinski (extensor plantar) or clonus (reflex grade >= 4).
+    // Deliberately conservative — equivocal plantar and merely brisk ("exaggerated"=3)
+    // reflexes are NOT counted, to avoid over-scoring a normal variant.
+    const _babinski = _safe(plantar && plantar.R) >= 2 || _safe(plantar && plantar.L) >= 2;
+    const _clonus = Object.values(reflexes || {}).some(v => _safe(v) >= 4);
+    if (_babinski || _clonus) return 1;
 
     return 0;
 }
@@ -3757,7 +3793,7 @@ function calcAmbulationScore({ assistance, distance_m, is_normal } = {}) {
     if (assistance === "none" || assistance === undefined || assistance === null || assistance === "") {
         if (is_normal === true) return 0;
         if (d === null) return null;
-        if (d > 500) return 1;
+        if (d >= 500) return 1;   // FIX (Bug 3): >=500 m (restricted) is AS 1 per Neurostatus; was d>500 so exactly 500 fell through to AS 2
         if (d >= 300) return 2;
         if (d >= 200) return 3;
         if (d >= 100) return 4;
@@ -3903,6 +3939,7 @@ function calculateFullEDSS(inputs) {
         va_od: g("v_va_od"), va_os: g("v_va_os"),
         vf_od: g("v_vf_od"), vf_os: g("v_vf_os"),
         scotoma_od: g("v_scotoma_R"), scotoma_os: g("v_scotoma_L"),
+        pallor_od: g("v_pallor_od"), pallor_os: g("v_pallor_os"),
     });
     const visual_fs_conv = visualFSConverted(visual_fs);
 
@@ -3923,6 +3960,14 @@ function calculateFullEDSS(inputs) {
     const pyramidal_fs = calcPyramidalFS({
         strength,
         overall_motor: g("p_overall"),
+        plantar: { R: g("p_plantar_R"), L: g("p_plantar_L") },
+        reflexes: {
+            biceps_R: g("p_refl_biceps_R"),  biceps_L: g("p_refl_biceps_L"),
+            triceps_R: g("p_refl_triceps_R"),triceps_L: g("p_refl_triceps_L"),
+            brach_R: g("p_refl_brach_R"),     brach_L: g("p_refl_brach_L"),
+            knee_R: g("p_refl_knee_R"),       knee_L: g("p_refl_knee_L"),
+            ankle_R: g("p_refl_ankle_R"),     ankle_L: g("p_refl_ankle_L"),
+        },
     });
 
     const cerebellar_fs = calcCerebellarFS({
@@ -4027,6 +4072,8 @@ if (false) {
 ============================================================ */
 
 const SNELLEN_OPTS = ["20/20","20/25","20/30","20/40","20/50","20/60","20/70","20/80","20/100","20/200","20/400","CF","HM","LP","NLP"];
+// FIX (per Nour): show the full term for the abbreviated low-vision categories (value unchanged for scoring).
+const SNELLEN_LABELS = { "CF":"CF — Counting Fingers", "HM":"HM — Hand Motion", "LP":"LP — Light Perception", "NLP":"NLP — No Light Perception" };
 const $ = (val, label) => ({ v: val, t: label });
 
 // ============================================================
@@ -4101,8 +4148,8 @@ const CARDS = {
           $(2, "2 — 300–499 m without help (→ EDSS ≥4.5)"),
           $(3, "3 — 200–299 m without help (→ EDSS ≥5.0)"),
           $(4, "4 — 100–199 m without help (→ EDSS 5.5)"),
-          $(5, "5 — <100 m without assistance (→ EDSS 6.0)"),
-          $(6, "6 — Unilateral assistance, ≥120 m (→ EDSS 6.0)"),
+          $(5, "5 — <100 m without assistance (→ EDSS 5.5)"),
+          $(6, "6 — Unilateral assistance, ≥50 m (→ EDSS 6.0)"),
           $(7, "7 — Bilateral assistance, ≥120 m (→ EDSS 6.0)"),
           $(8, "8 — Unilateral assistance, <50 m (→ EDSS 6.5)"),
           $(9, "9 — Bilateral assistance, 5–120 m (→ EDSS 6.5)"),
@@ -4224,9 +4271,9 @@ const CARDS = {
     custom: "visual-paired",
     fields: [
       { type: "select", id: "v_va_od", label: "Visual acuity — OD (best corrected)",
-        options: [["", "—"], ...SNELLEN_OPTS.map(s => [s, s])]},
+        options: [["", "—"], ...SNELLEN_OPTS.map(s => [s, SNELLEN_LABELS[s] || s])]},
       { type: "select", id: "v_va_os", label: "Visual acuity — OS (best corrected)",
-        options: [["", "—"], ...SNELLEN_OPTS.map(s => [s, s])]},
+        options: [["", "—"], ...SNELLEN_OPTS.map(s => [s, SNELLEN_LABELS[s] || s])]},
       { type: "checkbox", id: "v_cc", label: "Corrected (cc) — patient wearing glasses or contact lenses during testing" },
       { type: "list-compact", id: "v_vf_od", label: "Visual fields — OD",
         options: [$(0,"Normal"),$(1,"Signs only"),$(2,"Moderate / incomplete hemianopsia"),$(3,"Marked / complete hemianopsia")]},
@@ -4355,24 +4402,41 @@ const CARDS = {
       ],
     },
   },
-  sensory_deep: {
-    title: "Deep sensation (vibration + proprioception)",
-    question: "Vibration at most distal joint. Proprioception: I'll move your toe — tell me up or down.",
-    tip: `<p><strong>Vibration:</strong> <span class="cmd">"Close your eyes. Tell me when the vibration stops."</span> Big toe, ankle, knee, wrist, elbow (5R+5L). Graded 0–8/8 or seconds.</p>
-      <p><strong>Proprioception:</strong> <span class="cmd">"Close your eyes. Tell me if I move your toe up or down."</span> 4 tests (big toe + index finger, R&amp;L). 1–2 errors=mild · many/proximal=moderate · none=marked.</p>`,
+  sensory_vibration: {
+    title: "Vibration sense (tuning fork)",
+    question: "I'll place a tuning fork on the joint — tell me when the buzzing stops.",
+    tip: `<p><span class="cmd">"Close your eyes. Tell me when the vibration stops."</span> Test the <strong>most distal joint first</strong> — big toe (legs), distal finger/IP joint (arms). Move proximally only if reduced distally; grade the worst level per limb.</p>
+      <p><strong>0</strong>=normal · <strong>1</strong>=mild (5&ndash;7/8, or &gt;10 s but less than examiner) · <strong>2</strong>=moderate (1&ndash;4/8, or 2&ndash;10 s) · <strong>3</strong>=marked (complete loss).</p>`,
     bilateral: {
       rows: [
         ["s_vib_ue", "Vibration UE"],
         ["s_vib_le", "Vibration LE"],
-        ["s_pos_ue", "Position UE"],
-        ["s_pos_le", "Position LE"],
       ],
       options: [
         ["", "—"],
         [0,"0 Normal"],
-        [1,"1 Mild — vibration 5–7/8 or detects >10 sec but less than examiner; position: 1–2 errors (distal only)"],
-        [2,"2 Moderate — vibration 1–4/8 or detects 2–10 sec; position: misses many movements or proximal joints"],
-        [3,"3 Marked / lost — complete loss of vibration sense; position: no perception of movement"],
+        [1,"1 Mild — tuning fork 5–7/8 (or detects >10 sec, less than examiner)"],
+        [2,"2 Moderate — tuning fork 1–4/8 (or detects 2–10 sec)"],
+        [3,"3 Marked — complete loss of vibration sense"],
+      ],
+    },
+  },
+  sensory_position: {
+    title: "Position sense (proprioception)",
+    question: "Close your eyes — tell me if I move your toe/finger up or down.",
+    tip: `<p><span class="cmd">"Close your eyes. Tell me if I move your toe up or down."</span> Test big toe and index finger (R &amp; L). Start distal; test proximal joints if distal is impaired.</p>
+      <p><strong>0</strong>=normal · <strong>1</strong>=mild (1&ndash;2 wrong, distal only) · <strong>2</strong>=moderate (misses many, or proximal joints) · <strong>3</strong>=marked (no perception of movement).</p>`,
+    bilateral: {
+      rows: [
+        ["s_pos_ue", "Position sense UE"],
+        ["s_pos_le", "Position sense LE"],
+      ],
+      options: [
+        ["", "—"],
+        [0,"0 Normal"],
+        [1,"1 Mild — 1–2 incorrect responses, distal joints only"],
+        [2,"2 Moderate — misses many movements, or proximal joints affected"],
+        [3,"3 Marked — no perception of movement"],
       ],
     },
   },
@@ -4740,14 +4804,14 @@ const ROADMAP_VIEW = [
       <li>Items marked ° = optional, documented only — do <strong>not</strong> contribute to FS score.</li>
       </ul>`,
     systemGroups: [
-      { num: "5",  title: "Sensory",    cards: ["sensory_superficial","sensory_deep","sensory_lhermitte"],
+      { num: "5",  title: "Sensory",    cards: ["sensory_superficial","sensory_vibration", "sensory_position","sensory_lhermitte"],
         fsSummary: { id: "sensory",    label: "Sensory",    conv: false } },
       { num: "4",  title: "Cerebellar (Coordination)", cards: ["cerebellar_truncal","cerebellar_tremor","cerebellar_rapid","cerebellar_gait","cerebellar_rebound","cerebellar_x"],
         fsSummary: { id: "cerebellar", label: "Cerebellar", conv: false } },
       { num: "3",  title: "Pyramidal (Motor)", cards: ["pyramidal_strength","pyramidal_overall","pyramidal_spasticity","pyramidal_reflexes","pyramidal_plantar","pyramidal_optional"],
         fsSummary: { id: "pyramidal",  label: "Pyramidal",  conv: false } },
     ],
-    cards: ["sensory_superficial", "sensory_deep", "sensory_lhermitte",
+    cards: ["sensory_superficial", "sensory_vibration", "sensory_position", "sensory_lhermitte",
             "cerebellar_truncal", "cerebellar_tremor", "cerebellar_rapid",
             "cerebellar_gait", "cerebellar_rebound", "cerebellar_x",
             "pyramidal_strength", "pyramidal_overall", "pyramidal_spasticity",
@@ -4783,7 +4847,7 @@ const SYSTEM_VIEW = [
     fsKey: "cerebellar_fs",
     callout: "Severe limb ataxia in ≥3 limbs + severe gait/truncal → 4. The X marker indicates pyramidal weakness or sensory deficits interfere with testing." },
   { id: "sensory", num: "5", title: "Sensory", subtitle: "Touch · vibration · proprioception",
-    cards: ["sensory_superficial", "sensory_deep", "sensory_lhermitte"],
+    cards: ["sensory_superficial", "sensory_vibration", "sensory_position", "sensory_lhermitte"],
     fsKey: "sensory_fs",
     callout: "Combines superficial and deep subscores. Special rule: superficial 4 + deep 4 → FS 5; both 5 → 6." },
   { id: "bowelbladder", num: "6", title: "Bowel/Bladder", subtitle: "Urinary · bowel",
@@ -4865,6 +4929,102 @@ function renderBMRC(rows) {
   return `<div class="bmrc-grid">${cells}</div>`;
 }
 
+// FIX (Bug 12): set every limb-strength dropdown to 5 (normal) and recalc.
+function setAllStrengthNormal() {
+  document.querySelectorAll('#form-root select[id^="p_str_"]').forEach(sel => {
+    sel.value = "5";
+    if (typeof FORM_STATE !== "undefined") FORM_STATE[sel.id] = "5";
+  });
+  if (typeof recalc === "function") recalc();
+}
+
+// FIX (Bug 17): floating scroll-to-top button (hidden until scrolled, hidden on print).
+(function(){
+  if (typeof document === "undefined") return;
+  const mk = () => {
+    if (document.getElementById("scroll-top-btn")) return;
+    const btn = document.createElement("button");
+    btn.id = "scroll-top-btn";
+    btn.className = "no-print";
+    btn.textContent = "\u2191 Top";
+    btn.setAttribute("aria-label", "Scroll to top");
+    btn.style.cssText = "position:fixed;bottom:20px;right:20px;z-index:200;display:none;padding:10px 14px;border:none;border-radius:24px;background:#1e4a6e;color:#fff;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);";
+    btn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+    document.body.appendChild(btn);
+    window.addEventListener("scroll", () => {
+      btn.style.display = window.scrollY > 300 ? "block" : "none";
+    }, { passive: true });
+  };
+  if (document.body) mk(); else document.addEventListener("DOMContentLoaded", mk);
+})();
+
+// FIX (Bug 7): floating toggle to hide/show the copper bedside-prompt questions
+// (they are guidance and do not affect the FS score).
+(function(){
+  if (typeof document === "undefined") return;
+  const mk = () => {
+    if (document.getElementById("toggle-prompts-btn")) return;
+    const btn = document.createElement("button");
+    btn.id = "toggle-prompts-btn";
+    btn.className = "no-print";
+    btn.textContent = "Hide prompts";
+    btn.setAttribute("aria-label", "Hide or show bedside prompt questions");
+    btn.style.cssText = "position:fixed;bottom:20px;left:20px;z-index:200;padding:8px 12px;border:1px solid #cbd5e1;border-radius:20px;background:#fff;color:#1e4a6e;font-weight:600;font-size:12px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18);";
+    btn.onclick = () => {
+      const hidden = document.body.classList.toggle("hide-prompts");
+      btn.textContent = hidden ? "Show prompts" : "Hide prompts";
+    };
+    document.body.appendChild(btn);
+  };
+  if (document.body) mk(); else document.addEventListener("DOMContentLoaded", mk);
+})();
+
+const BIG_CARDS = new Set(["pyramidal_strength", "pyramidal_reflexes"]);
+const GLOBAL_TOOLBAR = `<div class="exam-toolbar no-print" style="margin-bottom:14px;">`
+  + `<button type="button" class="exam-btn normal" onclick="examGlobal('normal')">&#10003; Set entire exam normal</button>`
+  + `<button type="button" class="exam-btn clear" onclick="examGlobal('clear')">&#10005; Clear all fields</button></div>`;
+function _examToolbar(label) {
+  const t = label ? (label + " ") : "";
+  return `<div class="exam-toolbar no-print">`
+    + `<button type="button" class="exam-btn normal" onclick="examScope(this,'normal')">&#10003; ${t}normal</button>`
+    + `<button type="button" class="exam-btn clear" onclick="examScope(this,'clear')">&#10005; Clear</button></div>`;
+}
+function _examNormalVal(id) {
+  if (!id) return "0";
+  if (id.indexOf("p_str_") === 0)  return "5";
+  if (id.indexOf("p_refl_") === 0) return "2";
+  if (id === "v_va_od" || id === "v_va_os") return "20/20";
+  if (id === "amb_assistance") return "none";
+  if (id === "a_score") return "";   // leave AS override empty; auto-calc handles it
+  if (id.indexOf("amb_distance") === 0 || id === "amb_time_reported") return "";
+  return "0";
+}
+function _examApply(container, mode) {
+  if (!container) return;
+  container.querySelectorAll("input, select").forEach(el => {
+    const id = el.id || el.name || "";
+    if (id.indexOf("pt_") === 0) return;                 // never touch patient identifiers
+    if (el.type === "radio") {
+      // list/list-compact/compact questions render as radios — SELECT the normal option.
+      el.checked = (mode === "normal") && (el.value === _examNormalVal(el.name));
+      if (typeof FORM_STATE !== "undefined") {
+        if (el.checked) FORM_STATE[el.name] = el.value;
+        else if (mode === "clear") delete FORM_STATE[el.name];
+      }
+      return;
+    }
+    if (el.type === "checkbox") {
+      el.checked = (mode === "normal") ? (id === "amb_is_normal") : false;
+    } else {
+      el.value = (mode === "normal") ? _examNormalVal(id) : "";
+    }
+    if (el.id && typeof FORM_STATE !== "undefined") FORM_STATE[el.id] = (el.type === "checkbox") ? el.checked : el.value;
+  });
+  if (typeof recalc === "function") recalc();
+}
+function examScope(btn, mode) { _examApply(btn.closest("[data-exam-scope]"), mode); }
+function examGlobal(mode) { _examApply(document.getElementById("form-root"), mode); }
+
 function renderCard(cardId) {
   // Handle system separators injected in ROADMAP_VIEW card arrays
   if (cardId.startsWith("SEPARATOR:")) {
@@ -4929,12 +5089,15 @@ function renderCard(cardId) {
     `;
   }
 
-  return `<div class="card">
+  const _bigCard = BIG_CARDS.has(cardId);
+  return `<div class="card"${_bigCard ? " data-exam-scope" : ""}>
     ${card.title ? `<h3 class="card-title">${card.title}</h3>` : ""}
     ${(card.desc && CURRENT_VIEW === "roadmap") ? `<p class="card-desc">${card.desc}</p>` : ""}
     ${(card.tip && CURRENT_VIEW === "roadmap") ? renderTip(card.tip, cardId.replace(/[^a-z0-9]/gi,'_')) : ""}
     ${(card.question && CURRENT_VIEW === "roadmap") ? `<p class="card-question">"${card.question}"</p>` : ""}
+    ${_bigCard ? _examToolbar(card.title) : ""}
     ${body}
+    ${cardId === "amb_history" ? '<div id="amb-guidance-slot" style="margin-top:10px;"></div>' : ""}
   </div>`;
 }
 
@@ -4949,6 +5112,9 @@ function renderSection(s) {
   const phase = (s.phase && s.phase.desc)
     ? `<div class="callout" style="margin-top:0;margin-bottom:12px"><div class="callout-title">Guidance</div>${s.phase.desc}</div>`
     : "";
+  // System view: per-section (= per-system) Set-normal/Clear, placed in the name bar.
+  const _sectionTools = (CURRENT_VIEW !== "roadmap" && s.id !== "patient" && s.id !== "finalsheet")
+    ? _examToolbar(s.title) : "";
 
   let body;
   if (s.id === "finalsheet") {
@@ -4958,8 +5124,10 @@ function renderSection(s) {
       const cards = (grp.cards || []).map(renderCard).join("");
       const fs = grp.fsSummary;
       const fsBox = fs ? renderFSBox(fs) : "";
-      const grpHeader = (CURRENT_VIEW === "roadmap") ? `<div class="system-group-header"><span class="system-group-num">${grp.num}</span><span class="system-group-title">${grp.title}</span></div>` : "";
-      return `<div class="system-group">${grpHeader}<div class="system-group-body">${cards}${fsBox}</div></div>`;
+      const grpHeader = (CURRENT_VIEW === "roadmap")
+        ? `<div class="system-group-header"><span class="system-group-num">${grp.num}</span><span class="system-group-title">${grp.title}</span>${_examToolbar("")}</div>`
+        : "";
+      return `<div class="system-group" data-exam-scope>${grpHeader}<div class="system-group-body">${cards}${fsBox}</div></div>`;
     }).join("");
   } else {
     body = (s.cards || []).map(renderCard).join("");
@@ -4979,12 +5147,13 @@ function renderSection(s) {
       </button>
     </div>` : "";
 
-  return `<section class="tab-panel" id="tab-${s.id}" data-section="${s.id}">
+  return `<section class="tab-panel" id="tab-${s.id}" data-section="${s.id}"${_sectionTools ? " data-exam-scope" : ""}>
     <div class="section-header">
       <h2 class="section-title"><span class="section-num">${s.num}.</span>${s.title}
         <div class="section-subtitle">${s.subtitle || ""}</div>
       </h2>
       ${fsLabel}
+      ${_sectionTools}
     </div>
     ${phase}
     ${callout}
@@ -5015,6 +5184,7 @@ function renderTabs(view) {
 function renderFinalSheet() {
   return `
     <div class="final-sheet-wrap">
+      ${GLOBAL_TOOLBAR}
       <div class="final-sheet-toolbar no-print">
         <div class="label">Final Scoring Sheet — Neurostatus (auto-populated)</div>
         <div class="actions" style="margin:0;">
@@ -5068,6 +5238,14 @@ function buildView(viewName) {
 
   // Apply persisted form state
   applyState();
+
+  // FIX (Bug 21): default the examination date to today's date when empty (local time).
+  const _examEl = document.getElementById("pt_exam");
+  if (_examEl && !_examEl.value) {
+    const _d = new Date();
+    _examEl.value = `${_d.getFullYear()}-${String(_d.getMonth()+1).padStart(2,"0")}-${String(_d.getDate()).padStart(2,"0")}`;
+    FORM_STATE.pt_exam = _examEl.value;
+  }
 
   // Recalc
   recalc();
@@ -5172,6 +5350,8 @@ function recalc() {
 
   // AS auto-calc display
   renderASDisplay(r);
+  const _ambSlot = document.getElementById("amb-guidance-slot");
+  if (_ambSlot) _ambSlot.innerHTML = _ambGuidanceNote();
 
   // Cerebellar X banner
   const xBanner = document.getElementById("x-marker-banner");
@@ -5208,6 +5388,21 @@ function renderASDisplay(r) {
       </div>
     </div>
   `;
+}
+
+// FIX (per Nour): contextual note shown once an assistance type is chosen — explains the
+// distance brackets relevant to THAT choice, so the rater knows what to ask/measure.
+function _ambGuidanceNote() {
+  const a = (typeof FORM_STATE !== "undefined") ? FORM_STATE["amb_assistance"] : "";
+  const wrap = (body) => `<div class="amb-guidance-note" style="background:var(--hl-soft,#fdf2e9);border-left:3px solid var(--hl,#b85c1a);border-radius:6px;padding:9px 12px;margin-bottom:10px;font-size:12.5px;line-height:1.55;color:var(--ink,#222);">${body}</div>`;
+  if (!a) return wrap(`<strong>Pick an assistance type above.</strong> The distance brackets you need to ask about will appear here.`);
+  if (a === "none") return wrap(`<strong>No aid &mdash; ask how far they walk, and whether it is truly unrestricted:</strong><br>Fully normal for their age &rarr; tick &ldquo;walks fully normally&rdquo; (AS 0) &middot; &gt;500 m but with any restriction &rarr; AS 1 &middot; 300&ndash;500 m &rarr; AS 2 &middot; 200&ndash;300 m &rarr; AS 3 &middot; 100&ndash;200 m &rarr; AS 4 &middot; &lt;100 m &rarr; AS 5`);
+  if (a === "unilateral") return wrap(`<strong>Unilateral aid (one cane/crutch/brace) &mdash; ask the distance with the aid:</strong><br>&ge;50 m &rarr; AS 6 (EDSS 6.0) &middot; &lt;50 m &rarr; AS 8 (EDSS 6.5)`);
+  if (a === "bilateral") return wrap(`<strong>Bilateral aid (two aids or another person) &mdash; ask the distance:</strong><br>&ge;120 m &rarr; AS 7 (EDSS 6.0) &middot; &lt;120 m &rarr; AS 9 (EDSS 6.5)`);
+  if (a === "wheelchair_indep") return wrap(`<strong>Wheelchair, self-propelled / transfers alone &rarr; AS 10 (EDSS 7.0).</strong> Distance not needed.`);
+  if (a === "wheelchair_help") return wrap(`<strong>Wheelchair, needs help to wheel or transfer &rarr; AS 11 (EDSS 7.5).</strong> Distance not needed.`);
+  if (a === "bedbound") return wrap(`<strong>Essentially bed/chair-bound &rarr; AS 12 (EDSS &ge; 8.0).</strong> The exact step (8.0&ndash;9.5) depends on arm function and ability to communicate/eat.`);
+  return "";
 }
 
 function setText(id, val) {
@@ -5435,14 +5630,14 @@ function runConsistencyCheck(inp, r) {
     inp.c_rapid_ue_R, inp.c_rapid_ue_L, inp.c_rapid_le_R, inp.c_rapid_le_L,
   ].some(v => !isMissing(v) && v !== "0" && v !== 0 && v !== "none" && v !== "normal" && v !== "absent");
 
-  if (pyrFS !== null && pyrFS >= 2 && hasAnyAtaxia && !inp.c_x_marker) {
+  if (pyrFS !== null && pyrFS >= 2 && hasAnyAtaxia && !r.cerebellar_x) {
     issues.push({ sev: "info", tab: "cerebellar",
       msg: `Pyramidal FS = ${pyrFS} (weakness present) with cerebellar findings recorded but X marker not set. Consider marking X if weakness confounds ataxia assessment (Neurostatus convention).` });
   }
 
   // ── 3. CROSS-SYSTEM: Cerebellar FS ≥ 3 without X → ambulation ─
   // Significant cerebellar dysfunction (FS ≥ 3) should typically elevate AS
-  if (crbFS !== null && crbFS >= 3 && !inp.c_x_marker && AS !== null && AS < 4) {
+  if (crbFS !== null && crbFS >= 3 && !r.cerebellar_x && AS !== null && AS < 4) {
     issues.push({ sev: "warning", tab: "cerebellar",
       msg: `Cerebellar FS = ${crbFS} (moderate–severe ataxia) but Ambulation Score = ${AS}. Ataxia of this severity typically restricts ambulation — verify AS.` });
   }
@@ -5450,13 +5645,13 @@ function runConsistencyCheck(inp, r) {
   // ── 4. CROSS-SYSTEM: Bowel/Bladder FS ↔ Ambulation ─────────
   // BB FS 4 = essentially dependent (catheter); expected EDSS ≥ 6.0
   if (bbFS !== null && bbFS >= 4 && edss !== null && edss < 6.0) {
-    issues.push({ sev: "warning", tab: "bowelbladder",
+    issues.push({ sev: "info", tab: "bowelbladder",
       msg: `Bowel/Bladder FS (converted) = ${bbFS} — urinary dependence/catheter — but EDSS = ${edss.toFixed(1)} (<6.0). Per Neurostatus, BB FS ≥4 is typically associated with EDSS ≥ 6.0.` });
   }
 
   // BB FS 5 = complete loss of bladder/bowel function; expected EDSS ≥ 8.0
   if (bbFS !== null && bbFS >= 5 && edss !== null && edss < 8.0) {
-    issues.push({ sev: "warning", tab: "bowelbladder",
+    issues.push({ sev: "info", tab: "bowelbladder",
       msg: `Bowel/Bladder FS (converted) = ${bbFS} (complete loss of function) but EDSS = ${edss.toFixed(1)} (<8.0). Per Neurostatus, this level typically corresponds to EDSS ≥ 8.0.` });
   }
 
@@ -5493,7 +5688,7 @@ function runConsistencyCheck(inp, r) {
     inp.s_pos_ue_R, inp.s_pos_ue_L, inp.s_pos_le_R, inp.s_pos_le_L
   ].filter(v => !isMissing(v) && num(v) !== null && num(v) <= 1).length;
 
-  if (posDeficits >= 2 && hasAnyAtaxia && !inp.c_x_marker) {
+  if (posDeficits >= 2 && hasAnyAtaxia && !r.cerebellar_x) {
     issues.push({ sev: "info", tab: "sensory",
       msg: `Proprioceptive loss in ≥2 limbs and cerebellar findings present — X marker not set. Position-sense loss can mimic/confound ataxia; consider marking X (Neurostatus).` });
   }
@@ -5675,7 +5870,35 @@ function applyChecks(inp, r) {
   }
 }
 
+// FIX (per Nour): connect the input patient info (first section) to the output
+// sheet header, including the auto-filled examination date.
+const _NS_MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function _fillDateBoxes(prefix, ymd, yearDigits) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(ymd || "");
+  const setb = (id, ch) => { const e = document.getElementById(id); if (e) e.value = ch || ""; };
+  if (!m) { // clear if no valid date
+    ["d1","d2","m1","m2","m3","y1","y2","y3","y4"].forEach(suf => setb(prefix+"-"+suf, ""));
+    return;
+  }
+  const Y = m[1], M = m[2], D = m[3];
+  const mon = _NS_MONTHS[parseInt(M,10)-1] || "";
+  setb(prefix+"-d1", D[0]); setb(prefix+"-d2", D[1]);
+  setb(prefix+"-m1", mon[0]); setb(prefix+"-m2", mon[1]); setb(prefix+"-m3", mon[2]);
+  if (yearDigits === 4) { setb(prefix+"-y1", Y[0]); setb(prefix+"-y2", Y[1]); setb(prefix+"-y3", Y[2]); setb(prefix+"-y4", Y[3]); }
+  else { setb(prefix+"-y1", Y[2]); setb(prefix+"-y2", Y[3]); } // DOE row has a fixed "20" prefix
+}
+function syncPatientHeader(inp) {
+  const setv = (id, v) => { const e = document.getElementById(id); if (e) e.value = (v == null ? "" : String(v)); };
+  setv("study-name", inp.pt_study);
+  setv("patient-id", inp.pt_id);
+  setv("rater-name", inp.pt_rater);
+  _fillDateBoxes("dob", inp.pt_dob, 4);
+  _fillDateBoxes("doe", inp.pt_exam, 2);
+}
+
 function syncFinalSheet(inp, r) {
+  // Connect patient identifiers + dates from the input form to the printed sheet header.
+  syncPatientHeader(inp);
   // Populate Gemini sheet IDs with FORM_STATE values
   const setVal = (id, v) => {
     const el = document.getElementById(id);
@@ -5733,6 +5956,18 @@ function syncFinalSheet(inp, r) {
   setVal("p-str-plantar-r",   inp.p_str_ankplant_R);setVal("p-str-plantar-l",   inp.p_str_ankplant_L);
   setVal("p-str-dorsi-r",     inp.p_str_ankdorsi_R);setVal("p-str-dorsi-l",     inp.p_str_ankdorsi_L);
 
+  // FIX (Bug 15): spasticity -> print sheet (form has arms + legs only; sheet's
+  // gait-spasticity boxes have no form source so they stay blank).
+  setVal("p-spas-arms-r", inp.p_spast_arms_R); setVal("p-spas-arms-l", inp.p_spast_arms_L);
+  setVal("p-spas-legs-r", inp.p_spast_legs_R); setVal("p-spas-legs-l", inp.p_spast_legs_L);
+  // Gait spasticity is a single value in the form (p_gait_spast); mirror into both R/L sheet boxes.
+  setVal("p-spas-gait-r", inp.p_gait_spast);   setVal("p-spas-gait-l", inp.p_gait_spast);
+  // FIX (Bug 14): optional pyramidal functional tests -> print sheet.
+  setVal("p-opt-hop-r",   inp.p_hop_R);        setVal("p-opt-hop-l",   inp.p_hop_L);
+  // Heels/toes walking is a single bilateral observation in the form; mirror into both R/L boxes.
+  setVal("p-opt-heels-r", inp.p_walk_heels);   setVal("p-opt-heels-l", inp.p_walk_heels);
+  setVal("p-opt-toes-r",  inp.p_walk_toes);    setVal("p-opt-toes-l",  inp.p_walk_toes);
+
   // ── Cerebellar ──
   setVal("c-head-tremor",   inp.c_head);
   setVal("c-truncal-ataxia",inp.c_trunc);
@@ -5743,6 +5978,11 @@ function syncFinalSheet(inp, r) {
   setVal("c-tandem-walk",   inp.c_tandem);
   setVal("c-gait-ataxia",   inp.c_gait_ataxia);
   setVal("c-romberg",       inp.c_romberg);
+  // FIX (Bug 16): cerebellar rebound -> single "Other, e.g. rebound" sheet box.
+  // Form captures arm + leg separately; show the worse of the two.
+  if (inp.c_rebound_arm !== undefined || inp.c_rebound_leg !== undefined) {
+    setVal("c-other-rebound", Math.max(_safe(inp.c_rebound_arm), _safe(inp.c_rebound_leg)));
+  }
 
   // ── Sensory ──
   setVal("s-sup-ue-r",   inp.s_sup_ue_R);    setVal("s-sup-ue-l",   inp.s_sup_ue_L);
@@ -5752,6 +5992,11 @@ function syncFinalSheet(inp, r) {
   setVal("s-vib-le-r",   inp.s_vib_le_R);    setVal("s-vib-le-l",   inp.s_vib_le_L);
   setVal("s-pos-ue-r",   inp.s_pos_ue_R);    setVal("s-pos-ue-l",   inp.s_pos_ue_L);
   setVal("s-pos-le-r",   inp.s_pos_le_R);    setVal("s-pos-le-l",   inp.s_pos_le_L);
+  // FIX (Bug 14): optional sensory fields (Lhermitte, paraesthesiae) -> print sheet.
+  setVal("s-lhermitte",   inp.s_lhermitte);
+  setVal("s-para-ue-r",   inp.s_par_ue_R);    setVal("s-para-ue-l",   inp.s_par_ue_L);
+  setVal("s-para-trunk-r",inp.s_par_trunk_R); setVal("s-para-trunk-l",inp.s_par_trunk_L);
+  setVal("s-para-le-r",   inp.s_par_le_R);    setVal("s-para-le-l",   inp.s_par_le_L);
 
   // ── Ambulation ── (simplified 4-field sheet)
   setVal("amb-meters-reported", inp.amb_distance_reported || "");
@@ -5786,6 +6031,39 @@ function syncFinalSheet(inp, r) {
   // ── Trigger Gemini engine to compute FS scores ──
   if (typeof calculateSectionScores === "function") calculateSectionScores();
 
+  // FIX (Bug 1): the scanner/"Gemini" sheet engine (calculateSectionScores ->
+  // calculateEDSS) is a SECOND, simpler EDSS implementation with different
+  // conversion tables and FS rules, so the printed sheet could disagree with the
+  // header readout. For the final/print sheet we treat calculateFullEDSS()
+  // (engine A, full Neurostatus/Fouad) as the single source of truth: overwrite
+  // the sheet's FS result fields and EDSS step with engine A's result (r) before
+  // cloning, so the printed sheet always matches the header.
+  const _setSheet = (id, v) => {
+    const e = document.getElementById(id);
+    if (e && v !== undefined && v !== null) e.value = v;
+  };
+  _setSheet("fs-visual-raw",         r.visual_fs);
+  _setSheet("fs-visual-conv",        r.visual_fs_conv);
+  _setSheet("fs-brainstem",          r.brainstem_fs);
+  _setSheet("fs-pyramidal",          r.pyramidal_fs);
+  _setSheet("fs-cerebellar",         r.cerebellar_fs);
+  _setSheet("fs-sensory",            r.sensory_fs);
+  _setSheet("fs-bowel-bladder-raw",  r.bb_fs);
+  _setSheet("fs-bowel-bladder-conv", r.bb_fs_conv);
+  _setSheet("fs-cerebral",           r.cerebral_fs);
+  const _syn = {
+    "syn-visual": r.visual_fs_conv, "syn-brainstem": r.brainstem_fs,
+    "syn-pyramidal": r.pyramidal_fs, "syn-cerebellar": r.cerebellar_fs,
+    "syn-sensory": r.sensory_fs, "syn-bowel-bladder": r.bb_fs_conv,
+    "syn-cerebral": r.cerebral_fs,
+  };
+  for (const id in _syn) _setSheet(id, _syn[id]);
+  // EDSS step: respect an explicit manual override on the sheet; otherwise engine A wins.
+  if (!(typeof scUserOverrides !== "undefined" && scUserOverrides["edss-step-val"])) {
+    const _e = document.getElementById("edss-step-val");
+    if (_e && r.edss_step !== undefined && r.edss_step !== null) _e.value = r.edss_step.toFixed(1);
+  }
+
   // ── Clone Gemini sheet into final-sheet container ──
   const container = document.getElementById("fs-gemini-container");
   const source = document.querySelector("#sc-review .sc-sheet-wrap");
@@ -5814,7 +6092,7 @@ function scAmbSync() {
   // Map assistance text to engine keys
   let assist = "none";
   if (assistText.includes("bilateral") || assistText.includes("walker") || assistText.includes("two")) assist = "bilateral";
-  else if (assistText.includes("unilateral") || assistText.includes("cane") || assistText.includes("crutch") || assistText.includes("one")) assist = "unilateral";
+  else if (assistText.includes("unilateral") || assistText.includes("cane") || assistText.includes("crutch")) assist = "unilateral";
   else if (assistText.includes("wheelchair") && assistText.includes("help")) assist = "wheelchair_help";
   else if (assistText.includes("wheelchair")) assist = "wheelchair_indep";
   else if (assistText.includes("bed") || assistText.includes("chair-bound")) assist = "bedbound";
@@ -5833,7 +6111,23 @@ function scAmbSync() {
 // ============================================================
 // Tab navigation
 // ============================================================
+// FIX (Bug 18): does a section have ANY entry yet?
+function sectionHasAnyInput(sectionId) {
+  const panel = document.getElementById("tab-" + sectionId);
+  if (!panel) return true; // unknown -> don't block
+  for (const el of panel.querySelectorAll("input, select")) {
+    if (el.type === "checkbox" || el.type === "radio") { if (el.checked) return true; }
+    else if (el.value && String(el.value).trim() !== "") return true;
+  }
+  return false;
+}
+
 function navToAdjacentTab(currentId, direction) {
+  // FIX (Bug 18): moving FORWARD from a completely empty section -> gentle confirm.
+  if (direction > 0 && currentId !== "patient" && currentId !== "finalsheet"
+      && !sectionHasAnyInput(currentId)) {
+    if (!confirm("This section has no entries yet. Move to the next section anyway?")) return;
+  }
   const allBtns = [...document.querySelectorAll(".tab-btn")];
   const idx = allBtns.findIndex(b => b.dataset.tab === currentId);
   if (idx === -1) return;
@@ -6026,22 +6320,69 @@ function showLanding() {
 })();
 // ── END Hero animation ──────────────────────────────────────
 
+// FIX (per Nour): generate a PDF of the final sheet and ATTACH it via the Web Share
+// API (works on iPad / phones — opens Mail with the PDF attached). On desktop, where
+// sharing files isn't supported, it downloads the PDF and opens the email with an
+// attach reminder. mailto alone can never carry an attachment, so this is the path.
+function _loadScriptOnce(src) {
+  return new Promise((resolve, reject) => {
+    if ([...document.scripts].some(sc => sc.src === src)) return resolve();
+    const sc = document.createElement("script");
+    sc.src = src; sc.onload = () => resolve(); sc.onerror = () => reject(new Error("load failed: " + src));
+    document.head.appendChild(sc);
+  });
+}
+async function emailFinalSheet() {
+  const pt = (typeof FORM_STATE !== "undefined" && FORM_STATE.pt_id) ? FORM_STATE.pt_id : "patient";
+  const dt = (typeof FORM_STATE !== "undefined" && FORM_STATE.pt_exam) ? FORM_STATE.pt_exam : new Date().toISOString().slice(0,10);
+  const edss = document.getElementById("edss-step-val")?.value?.trim() || document.getElementById("edss-live")?.textContent?.trim() || "—";
+  const fname = ("EDSS_" + pt + "_" + dt + ".pdf").replace(/[^A-Za-z0-9_.-]+/g, "_");
+  const subj = "[Confidential] EDSS Assessment \u2014 " + pt + " \u2014 " + dt;
+  const body = "EDSS scoring sheet attached (PDF).\nFinal EDSS step: " + edss + ".\n\nCompleted using AutoEDSSguide.\nConfidential \u2014 may contain protected patient information.";
+  const pages = document.querySelectorAll("#fs-gemini-container .sc-page");
+  if (!pages.length) { showToast("Open the Final Sheet tab first, then press Email again."); return; }
+  try {
+    showToast("Preparing the PDF\u2026");
+    await _loadScriptOnce("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
+    await _loadScriptOnce("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
+    const JsPDF = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : null;
+    if (!JsPDF || typeof html2canvas === "undefined") throw new Error("libs missing");
+    const pdf = new JsPDF({ orientation: "p", unit: "mm", format: "a4", compress: true });
+    const W = 210, H = 297;
+    for (let i = 0; i < pages.length; i++) {
+      const canvas = await html2canvas(pages[i], { scale: 1.5, backgroundColor: "#ffffff", useCORS: true, logging: false });
+      // JPEG (quality 0.85) keeps the PDF small — PNG made it ~30 MB for two pages.
+      const img = canvas.toDataURL("image/jpeg", 0.85);
+      const ratio = Math.min(W / canvas.width, H / canvas.height);
+      const w = canvas.width * ratio, h = canvas.height * ratio;
+      if (i > 0) pdf.addPage();
+      pdf.addImage(img, "JPEG", (W - w) / 2, 0, w, h);
+    }
+    const blob = pdf.output("blob");
+    if (!blob || blob.size < 1500) throw new Error("empty pdf");   // generation failed -> clean fallback
+    const file = new File([blob], fname, { type: "application/pdf" });
+    // Attach automatically ONLY on touch devices (iPad / phone), where Web Share files are reliable.
+    // On desktop, sharing a file into Outlook is flaky (it attaches an empty "no_name" file and drops
+    // the subject), so we download the PDF and open mailto with subject + body instead.
+    const isTouch = (navigator.maxTouchPoints || 0) > 0 || /iP(hone|ad|od)|Android/i.test(navigator.userAgent || "");
+    if (isTouch && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: subj, text: body }); return; }
+      catch (err) { if (err && err.name === "AbortError") return; }
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = fname; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    showToast("PDF saved \u2014 attach \"" + fname + "\" to the email that just opened.");
+    setTimeout(() => { window.location.href = "mailto:?subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body + "\n\n(Please attach the downloaded file: " + fname + ")"); }, 700);
+  } catch (err) {
+    showToast("Couldn't build the PDF automatically \u2014 use \"Print / Export to PDF\", then attach it to email.");
+    setTimeout(() => { window.location.href = "mailto:?subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body); }, 700);
+  }
+}
 // Email sheet button
 document.addEventListener("click", function(e) {
-  if (e.target && e.target.id === "btn-email-sheet") {
-    const pt   = (typeof FORM_STATE !== "undefined" && FORM_STATE.pt_id)   ? FORM_STATE.pt_id   : (document.getElementById("p-pt")?.textContent?.trim()   || "Patient");
-    const dt   = (typeof FORM_STATE !== "undefined" && FORM_STATE.pt_exam) ? FORM_STATE.pt_exam : (document.getElementById("p-exam")?.textContent?.trim() || new Date().toISOString().slice(0,10));
-    const edss = document.getElementById("edss-live")?.textContent?.trim() || document.getElementById("edss-step-val")?.value?.trim() || "—";
-    const subj = encodeURIComponent("EDSS Assessment — " + pt + " — " + dt);
-    const body = encodeURIComponent(
-      "Dear colleague,\n\nPlease find attached the EDSS scoring sheet for " + pt + " (assessed " + dt + ").\n\n" +
-      "Final EDSS Step: " + edss + "\n\n" +
-      "This assessment was completed using AutoEDSSguide (Wayne State University, Neurology / MS Research Center).\n\n" +
-      "To view the full scoring sheet, please open the attached PDF.\n\nBest regards,"
-    );
-    window.location.href = "mailto:?subject=" + subj + "&body=" + body;
-    setTimeout(() => showToast("Print this page to PDF first, then attach it to the email.", 5000), 600);
-  }
+  if (e.target && e.target.id === "btn-email-sheet") { emailFinalSheet(); }
 });
 
 ["landing-start-btn", "hero-start-btn", "ways-start-btn"].forEach(id => {
@@ -6469,7 +6810,7 @@ const QC_QUESTIONS = [
                    p_str_kneeext_R: 5, p_str_kneeext_L: 5, p_str_ankdorsi_R: 5, p_str_ankdorsi_L: 5,
                    p_str_ankplant_R: 5, p_str_ankplant_L: 5 } },
       { icon: "🟡", title: "Mild fatigue only", desc: "My legs get tired on long walks or many flights of stairs.",
-        mapping: { p_str_hipflex_R: 5, p_str_hipflex_L: 5, p_str_kneeflex_R: 5, p_str_kneeflex_L: 5 } },
+        mapping: { p_str_hipflex_R: 5, p_str_hipflex_L: 5, p_str_kneeflex_R: 5, p_str_kneeflex_L: 5, p_overall: 1 } }, // FIX: leg fatigability now registers (matches arms)
       { icon: "🟠", title: "Mild weakness — I notice it daily", desc: "Stairs feel harder; getting up from a low chair takes effort.",
         mapping: { p_str_hipflex_R: 4, p_str_hipflex_L: 4, p_str_kneeflex_R: 4, p_str_kneeflex_L: 4 } },
       { icon: "🔴", title: "Moderate weakness", desc: "I struggle with stairs — sometimes I need to grab onto things or use the railing.",
@@ -6651,13 +6992,14 @@ function qcCheckEarlyExit() {
   if (!ans2) return null;
   const dist = ans2.mapping && ans2.mapping.amb_distance_reported;
   if (assist === "unilateral") return dist >= 50
-    ? { as:6, edss:6.0, label:"Unilateral aid, ≥120 m", isBedbound:false }
+    ? { as:6, edss:6.0, label:"Unilateral aid, ≥50 m", isBedbound:false }
     : { as:8, edss:6.5, label:"Unilateral aid, <50 m",  isBedbound:false };
   if (assist === "bilateral") return dist >= 120
     ? { as:7, edss:6.0, label:"Bilateral aid, ≥120 m",  isBedbound:false }
     : { as:9, edss:6.5, label:"Bilateral aid, 5–120 m", isBedbound:false };
   if ((assist === "none" || !assist) && dist !== undefined && dist < 100)
-    return { as:5, edss:6.0, label:"Walks <100 m without aid", isBedbound:false };
+    // FIX (review): unaided <100 m = AS5 -> EDSS floor 5.5 (6.0 requires unilateral aid).
+    return { as:5, edss:5.5, label:"Walks <100 m without aid", isBedbound:false };
   return null;
 }
 
@@ -7271,8 +7613,9 @@ function clinCalcEDSS() {
   }
 
   // Aided walkers: use amb_dist to determine exact AS
-  // amb=2 (bilateral): dist=0 (≥20m) → AS7 → EDSS 6.0; dist=1 (<20m) → AS9 → EDSS 6.5
   // amb=2 (bilateral): dist=0 (≥120m) → AS7 → EDSS 6.0; dist=1 (<120m) → AS9 → EDSS 6.5
+  // FIX (Bug 4): removed stale duplicate comment that said "≥20m"; Neurostatus
+  // bilateral threshold is 120 m (>120 m -> 6.0, 10-120 m -> 6.5). Code already correct.
   if (amb === 2) {
     const as = (amb_dist === null || amb_dist === 0) ? 7 : 9;
     const edssVal = as === 7 ? 6.0 : 6.5;
@@ -8485,87 +8828,116 @@ function parseAcidity(val) {
   return isNaN(n) ? 1.0 : n;
 }
 
+// ============================================================
+// UNIFIED SCANNER ENGINE (per Nour): the Sheet Scanner now computes via the
+// single source-of-truth engine `calculateFullEDSS` (engine A), exactly like the
+// roadmap/header. This replaces the old simplified "Gemini" per-FS logic so the
+// scanner, header, roadmap and printed sheet all produce identical numbers.
+// ============================================================
+
+// Scanner stores visual acuity as a DECIMAL (1.0=20/20, 0.5=20/40, ...). Engine A
+// expects a Snellen string, so map the decimal to the representative Snellen of its
+// Neurostatus grade band.
+function scDecimalToSnellen(v) {
+  if (v === null || v === undefined || v === "") return "";
+  const d = parseFloat(v);
+  if (isNaN(d)) return "";
+  if (d >= 1.0)  return "20/20";   // normal
+  if (d >  0.67) return "20/25";   // grade 1  (<1.0 but >0.67)
+  if (d >= 0.34) return "20/40";   // grade 2  (0.67-0.34)
+  if (d >= 0.21) return "20/60";   // grade 3  (0.33-0.21)
+  if (d >= 0.10) return "20/100";  // grade 4  (0.20-0.10)
+  return "20/400";                 // grade 5  (<0.10)
+}
+
+// Read the scanner sheet DOM and build a calculateFullEDSS() input object.
+function scSheetToEngineInputs() {
+  const inp = {};
+  const val = id => { const e = document.getElementById(id); return e ? e.value : ""; };
+  const setn = (key, id) => { const e = document.getElementById(id); if (!e) return;
+    const n = parseInt(e.value, 10); if (!isNaN(n)) inp[key] = n; };
+
+  // Visual (acuity is decimal on the sheet -> Snellen for the engine)
+  const od = val("v-acuity-od"), os = val("v-acuity-os");
+  if (od !== "") inp.v_va_od = scDecimalToSnellen(od);
+  if (os !== "") inp.v_va_os = scDecimalToSnellen(os);
+  setn("v_vf_od","v-fields-od");   setn("v_vf_os","v-fields-os");
+  setn("v_scotoma_R","v-scotoma-od"); setn("v_scotoma_L","v-scotoma-os");
+  setn("v_pallor_od","v-pallor-od"); setn("v_pallor_os","v-pallor-os");
+
+  // Brainstem
+  setn("b_eom","b-eom"); setn("b_nys","b-nystagmus"); setn("b_trig","b-trigeminal");
+  setn("b_face","b-facial"); setn("b_hear","b-hearing"); setn("b_dysarth","b-dysarthria");
+  setn("b_dysphag","b-dysphagia"); setn("b_othercn","b-other");
+
+  // Pyramidal strength  [engineKey, sheetSuffix]
+  const ps = [["deltoid","deltoids"],["biceps","biceps"],["triceps","triceps"],
+    ["wflex","wristflex"],["wext","wristext"],["hipflex","hipflex"],["kneeflex","kneeflex"],
+    ["kneeext","kneeext"],["ankplant","plantar"],["ankdorsi","dorsi"]];
+  for (const [k,id] of ps) { setn(`p_str_${k}_R`,`p-str-${id}-r`); setn(`p_str_${k}_L`,`p-str-${id}-l`); }
+  // Plantar + reflexes (feed pyramidal "signs only")
+  setn("p_plantar_R","p-ref-plantar-r"); setn("p_plantar_L","p-ref-plantar-l");
+  for (const [k,id] of [["biceps","biceps"],["triceps","triceps"],["brach","brach"],["knee","knee"],["ankle","ankle"]]) {
+    setn(`p_refl_${k}_R`,`p-ref-${id}-r`); setn(`p_refl_${k}_L`,`p-ref-${id}-l`);
+  }
+
+  // Cerebellar
+  setn("c_head","c-head-tremor"); setn("c_trunc","c-truncal-ataxia");
+  setn("c_tremor_ue_R","c-tremor-ue-r"); setn("c_tremor_ue_L","c-tremor-ue-l");
+  setn("c_tremor_le_R","c-tremor-le-r"); setn("c_tremor_le_L","c-tremor-le-l");
+  setn("c_rapid_ue_R","c-ram-ue-r"); setn("c_rapid_ue_L","c-ram-ue-l");
+  setn("c_rapid_le_R","c-ram-le-r"); setn("c_rapid_le_L","c-ram-le-l");
+  setn("c_tandem","c-tandem-walk"); setn("c_gait_ataxia","c-gait-ataxia"); setn("c_romberg","c-romberg");
+
+  // Sensory
+  for (const [k,id] of [["sup_ue","sup-ue"],["sup_trunk","sup-trunk"],["sup_le","sup-le"],
+    ["vib_ue","vib-ue"],["vib_le","vib-le"],["pos_ue","pos-ue"],["pos_le","pos-le"]]) {
+    setn(`s_${k}_R`,`s-${id}-r`); setn(`s_${k}_L`,`s-${id}-l`);
+  }
+
+  // Bowel/Bladder + Cerebral
+  setn("bb_hes","bb-hesitancy"); setn("bb_urg","bb-urgency");
+  setn("bb_cath","bb-catheter"); setn("bb_bowel","bb-bowel");
+  setn("m_ment","cb-mentation"); setn("m_fat","cb-fatigue");
+
+  // Ambulation: assistance text + meters -> engine assistance + distances (engine computes AS)
+  const at = (val("amb-assistance-text") || "").toLowerCase();
+  let assist = "none";
+  if (at.includes("bilateral") || at.includes("walker") || at.includes("two")) assist = "bilateral";
+  else if (at.includes("unilateral") || at.includes("cane") || at.includes("crutch")) assist = "unilateral";  // NB: do not match "one" — it is a substring of "none"
+  else if (at.includes("wheelchair") && at.includes("help")) assist = "wheelchair_help";
+  else if (at.includes("wheelchair")) assist = "wheelchair_indep";
+  else if (at.includes("bed") || at.includes("chair-bound") || at.includes("chair bound")) assist = "bedbound";
+  inp.amb_assistance = assist;
+  const dm = val("amb-meters-actual"), dr = val("amb-meters-reported");
+  if (dm !== "") inp.amb_distance_measured = parseFloat(dm);
+  if (dr !== "") inp.amb_distance_reported = parseFloat(dr);
+
+  return inp;
+}
+
 function calculateSectionScores() {
-  // 1. VISUAL
-  const odAcuity = parseAcidity(document.getElementById("v-acuity-od")?.value);
-  const osAcuity = parseAcidity(document.getElementById("v-acuity-os")?.value);
-  const worseAcuity = Math.min(odAcuity, osAcuity);
-  const odFields = parseVal("v-fields-od"), osFields = parseVal("v-fields-os");
-  const maxFields = Math.max(odFields, osFields);
-  let visualScore = 0;
-  if (worseAcuity < 0.1)      visualScore = (Math.max(odAcuity, osAcuity) < 0.1) ? 5 : 4;
-  else if (worseAcuity <= 0.2) visualScore = 3;
-  else if (worseAcuity <= 0.4) visualScore = 2;
-  else if (worseAcuity <= 0.7) visualScore = 1;
-  else if (maxFields > 0)      visualScore = maxFields;
-  if (!scUserOverrides["fs-visual-raw"]) {
-    const el = document.getElementById("fs-visual-raw");
-    if (el) el.value = visualScore;
+  const r = calculateFullEDSS(scSheetToEngineInputs());
+  window.__scLastResult = r;
+  const set = (id, v) => { const e = document.getElementById(id);
+    if (e && v !== undefined && v !== null) e.value = v; };
+  set("fs-visual-raw",  r.visual_fs);  set("fs-visual-conv",  r.visual_fs_conv);
+  set("fs-brainstem",   r.brainstem_fs);
+  set("fs-pyramidal",   r.pyramidal_fs);
+  set("fs-cerebellar",  r.cerebellar_fs);
+  set("fs-sensory",     r.sensory_fs);
+  set("fs-bowel-bladder-raw",  r.bb_fs);  set("fs-bowel-bladder-conv", r.bb_fs_conv);
+  set("fs-cerebral",    r.cerebral_fs);
+  const syn = { "syn-visual": r.visual_fs_conv, "syn-brainstem": r.brainstem_fs,
+    "syn-pyramidal": r.pyramidal_fs, "syn-cerebellar": r.cerebellar_fs,
+    "syn-sensory": r.sensory_fs, "syn-bowel-bladder": r.bb_fs_conv, "syn-cerebral": r.cerebral_fs };
+  for (const id in syn) set(id, syn[id]);
+  set("sc-amb-score-display", r.ambulation_score);
+  // EDSS step (respect an explicit manual override)
+  if (!scUserOverrides["edss-step-val"]) {
+    const e = document.getElementById("edss-step-val");
+    if (e && r.edss_step !== null && r.edss_step !== undefined) e.value = r.edss_step.toFixed(1);
   }
-
-  // 2. BRAINSTEM
-  const bIds = ["b-eom","b-nystagmus","b-trigeminal","b-facial","b-hearing","b-dysarthria","b-dysphagia","b-other"];
-  let brainstemScore = Math.max(...bIds.map(parseVal));
-  if (!scUserOverrides["fs-brainstem"]) {
-    const el = document.getElementById("fs-brainstem");
-    if (el) el.value = brainstemScore;
-  }
-
-  // 3. PYRAMIDAL
-  let maxWeakness = 0;
-  document.querySelectorAll(".sc-sheet-wrap .strength-val").forEach(el => {
-    if (el.value.trim() !== "") {
-      const w = 5 - parseInt(el.value, 10);
-      if (!isNaN(w) && w > maxWeakness) maxWeakness = w;
-    }
-  });
-  let maxSpas = 0;
-  document.querySelectorAll(".sc-sheet-wrap .spasticity-val").forEach(el => {
-    const v = parseVal(el.id);
-    if (v > maxSpas) maxSpas = v;
-  });
-  let pyramidalScore = 0;
-  if (maxWeakness === 0)      pyramidalScore = maxSpas > 0 ? 1 : 0;
-  else if (maxWeakness === 1) pyramidalScore = 2;
-  else if (maxWeakness === 2) pyramidalScore = 3;
-  else if (maxWeakness === 3) pyramidalScore = 4;
-  else if (maxWeakness >= 4)  pyramidalScore = 5;
-  if (!scUserOverrides["fs-pyramidal"]) {
-    const el = document.getElementById("fs-pyramidal");
-    if (el) el.value = pyramidalScore;
-  }
-
-  // 4. CEREBELLAR
-  const cIds = ["c-head-tremor","c-truncal-ataxia","c-tremor-ue-r","c-tremor-ue-l","c-tremor-le-r","c-tremor-le-l","c-ram-ue-r","c-ram-ue-l","c-ram-le-r","c-ram-le-l","c-tandem-walk","c-gait-ataxia","c-romberg","c-other-rebound"];
-  let cerebellarScore = Math.max(...cIds.map(parseVal));
-  if (!scUserOverrides["fs-cerebellar"]) {
-    const el = document.getElementById("fs-cerebellar");
-    if (el) el.value = cerebellarScore;
-  }
-
-  // 5. SENSORY
-  const sIds = ["s-sup-ue-r","s-sup-ue-l","s-sup-trunk-r","s-sup-trunk-l","s-sup-le-r","s-sup-le-l","s-vib-ue-r","s-vib-ue-l","s-vib-le-r","s-vib-le-l","s-pos-ue-r","s-pos-ue-l","s-pos-le-r","s-pos-le-l","s-lhermitte"];
-  let sensoryScore = Math.max(...sIds.map(parseVal));
-  if (!scUserOverrides["fs-sensory"]) {
-    const el = document.getElementById("fs-sensory");
-    if (el) el.value = sensoryScore;
-  }
-
-  // 6. BOWEL/BLADDER
-  const bbScore = Math.max(parseVal("bb-hesitancy"),parseVal("bb-urgency"),parseVal("bb-catheter"),parseVal("bb-bowel"));
-  if (!scUserOverrides["fs-bowel-bladder-raw"]) {
-    const el = document.getElementById("fs-bowel-bladder-raw");
-    if (el) el.value = bbScore;
-  }
-
-  // 7. CEREBRAL
-  const cbScore = Math.max(parseVal("cb-depression"),parseVal("cb-euphoria"),parseVal("cb-mentation"),parseVal("cb-fatigue"));
-  if (!scUserOverrides["fs-cerebral"]) {
-    const el = document.getElementById("fs-cerebral");
-    if (el) el.value = cbScore;
-  }
-
-  updateConvertedScores();
 }
 
 function updateConvertedScores() {
@@ -8574,82 +8946,15 @@ function updateConvertedScores() {
   const el1 = document.getElementById("fs-visual-conv");
   if (el1) el1.value = visualConvTable[rawVisual] || 0;
   const rawBB = parseVal("fs-bowel-bladder-raw");
-  const bbConvTable = [0,1,2,3,3,4,4];
+  const bbConvTable = [0,1,2,3,3,4,5]; // FIX (Neurostatus): raw6 converts to 5, not 4
   const el2 = document.getElementById("fs-bowel-bladder-conv");
   if (el2) el2.value = bbConvTable[rawBB] || 0;
   calculateEDSS();
 }
 
 function calculateEDSS() {
-  if (scUserOverrides["edss-step-val"]) return;
-  const visual      = parseVal("fs-visual-conv");
-  const brainstem   = parseVal("fs-brainstem");
-  const pyramidal   = parseVal("fs-pyramidal");
-  const cerebellar  = parseVal("fs-cerebellar");
-  const sensory     = parseVal("fs-sensory");
-  const bowelBladder= parseVal("fs-bowel-bladder-conv");
-  const cerebral    = parseVal("fs-cerebral");
-  // Update synopsis
-  ["syn-visual","syn-brainstem","syn-pyramidal","syn-cerebellar","syn-sensory","syn-bowel-bladder","syn-cerebral"]
-    .forEach((id,i) => {
-      const el = document.getElementById(id);
-      if (el) el.value = [visual,brainstem,pyramidal,cerebellar,sensory,bowelBladder,cerebral][i];
-    });
-  const fsScores = [visual,brainstem,pyramidal,cerebellar,sensory,bowelBladder,cerebral];
-  const maxFS = Math.max(...fsScores);
-  const countFS = g => fsScores.filter(s => s === g).length;
-  const countFSge = g => fsScores.filter(s => s >= g).length;
-
-  let dist = 500;
-  const actual = document.getElementById("amb-meters-actual")?.value.trim();
-  const reported = document.getElementById("amb-meters-reported")?.value.trim();
-  if (actual) dist = parseInt(actual,10);
-  else if (reported) dist = parseInt(reported,10);
-  else {
-    if (document.getElementById("amb-range-100-200")?.checked) dist = 150;
-    else if (document.getElementById("amb-range-200-300")?.checked) dist = 250;
-    else if (document.getElementById("amb-range-300-500")?.checked) dist = 400;
-    else if (document.getElementById("amb-range-500-unrestricted")?.checked) dist = 500;
-    else if (document.getElementById("amb-unrestricted")?.checked) dist = 1000;
-  }
-
-  const reqConst100  = document.getElementById("amb-constant-100m")?.checked;
-  const uniCane      = document.getElementById("amb-uni-cane")?.checked;
-  const uniOther     = document.getElementById("amb-uni-other")?.checked;
-  const hasUni       = uniCane || uniOther || parseVal("amb-unilateral-meters") > 0;
-  const biCanes      = document.getElementById("amb-bi-canes")?.checked;
-  const biOther      = document.getElementById("amb-bi-other")?.checked;
-  const hasBi        = biCanes || biOther || parseVal("amb-bilateral-meters") > 0;
-  const personM      = parseVal("amb-person-meters");
-  const hasPerson    = personM > 0;
-
-  let edss = 0.0;
-  if (hasPerson || dist < 5) {
-    edss = (dist < 5 && maxFS >= 4) ? 7.5 : 7.0;
-  } else if (hasBi) {
-    edss = 6.5;
-  } else if (hasUni || reqConst100) {
-    edss = 6.0;
-  } else if (dist < 200) {
-    edss = 5.5;
-  } else if (dist < 300) {
-    edss = 5.0;
-  } else if (dist < 500) {
-    edss = 4.5;
-  } else {
-    if (maxFS === 0) edss = 0.0;
-    else if (countFS(1) === 1 && countFSge(2) === 0) edss = 1.0;
-    else if (countFS(1) > 1  && countFSge(2) === 0) edss = 1.5;
-    else if (countFS(2) === 1 && countFSge(3) === 0) edss = 2.0;
-    else if (countFS(2) >= 2  && countFSge(3) === 0) edss = 2.5;
-    else if (countFS(3) === 1 && countFS(2) <= 2)   edss = 3.0;
-    else if (countFS(3) === 1 && (countFS(2) > 2 || countFS(3) === 2)) edss = 3.5;
-    else if (maxFS === 4) edss = 4.0;
-    else if (maxFS >= 5) edss = 4.5;
-  }
-  if (edss < maxFS && edss < 5.0) edss = maxFS;
-  const edssEl = document.getElementById("edss-step-val");
-  if (edssEl) edssEl.value = edss.toFixed(1);
+  // Unified: delegate to the single engine via calculateSectionScores().
+  if (typeof calculateSectionScores === "function") calculateSectionScores();
 }
 
 function selectRangeOnly(selected) {
