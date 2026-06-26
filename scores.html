@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="MSpectrum - MS Score Hub: stateless calculators and questionnaires for multiple sclerosis cognition, fatigue, mood, walking, quality-of-life and severity measures.">
+<title>MSpectrum · MS Score Hub</title>
+<style>
+:root{
+  --bg:#faf8f3; --paper:#fff; --ink:#1a1f2e; --ink-soft:#4a5060; --ink-faint:#8a8f9d;
+  --accent:#1e4a6e; --accent-ink:#0d2c47; --hl:#b85c1a; --hl-soft:#f5e8da;
+  --rule:#e6e2d6; --rule-strong:#c8c2b0; --radius:14px; --radius-sm:8px;
+  --good:#216e39; --good-bg:#e7f3ec; --warn:#9a6700; --warn-bg:#fff6df; --bad:#9b2c2c; --bad-bg:#fdeaea;
+  --serif:"Fraunces","Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;line-height:1.5}
+a{color:var(--accent)}
+.wrap{max-width:920px;margin:0 auto;padding:0 18px 80px}
+header.top{position:sticky;top:0;z-index:30;background:rgba(244,246,248,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);}
+.top-inner{max-width:920px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:12px 18px}
+.brand{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--accent-ink);display:flex;align-items:center}
+.logo{margin-right:8px;flex-shrink:0}
+.brand em{font-style:normal;color:var(--hl)}
+.top-inner .sub{font-size:12px;color:var(--ink-faint);letter-spacing:.08em;text-transform:uppercase}
+.back{margin-left:auto;font-size:13px;text-decoration:none;border:1px solid var(--accent);padding:6px 14px;border-radius:20px;color:#fff;background:var(--accent);font-weight:600}
+.back:hover{background:var(--accent-ink);border-color:var(--accent-ink)}
+.hero{padding:34px 0 10px}
+.hero h1{font-family:var(--serif);font-size:34px;margin:0 0 8px;letter-spacing:-.01em}
+.hero p{margin:0;color:var(--ink-soft);max-width:680px}
+.privacy{display:flex;gap:10px;align-items:flex-start;background:var(--hl-soft);border:1px solid #f0cba8;border-left:4px solid var(--hl);border-radius:var(--radius-sm);padding:12px 14px;margin:18px 0;font-size:13.5px;color:#5b3b1c}
+.privacy b{color:#7a4a1c}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-top:18px}
+.card{background:var(--paper);border:1px solid var(--rule);border-radius:var(--radius);padding:16px;cursor:pointer;transition:transform .12s,box-shadow .12s,border-color .12s;animation:rise .4s ease both}
+.card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(20,40,60,.10);border-color:var(--rule-strong)}
+.card .ic{font-size:22px}
+.card h3{margin:8px 0 4px;font-size:16px;font-family:var(--serif)}
+.card .tag{font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em}
+.card .desc{font-size:13px;color:var(--ink-soft);margin-top:6px}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.panel{display:none;background:var(--paper);border:1px solid var(--rule);border-radius:var(--radius);padding:22px;margin-top:18px;animation:rise .35s ease both}
+.panel.active{display:block}
+.panel h2{font-family:var(--serif);margin:0 0 2px;font-size:24px}
+.panel .lead{color:var(--ink-soft);font-size:14px;margin:0 0 16px}
+.panel .lead,.usenote,.card .desc,.report-cta-s,.interp{text-align:justify;text-justify:inter-word}
+.tool-back{font-size:13px;background:#fff;border:1px solid var(--rule-strong);border-radius:20px;color:var(--accent-ink);cursor:pointer;padding:6px 14px;margin-bottom:10px;font-weight:600}
+.tool-back:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0}
+.fld{flex:1;min-width:150px}
+.fld label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.fld .hint{font-size:11.5px;color:var(--ink-faint);font-weight:400}
+input[type=number],select{width:100%;padding:9px 10px;border:1px solid var(--rule-strong);border-radius:var(--radius-sm);font-size:15px;background:#fff;color:var(--ink)}
+input:focus,select:focus{outline:2px solid #bcd3e6;border-color:var(--accent)}
+input.oor{border-color:#c0392b!important;background:#fdeaea}
+.range-warn{color:#c0392b;font-size:11.5px;margin-top:3px;font-weight:600}
+select.blank,input.blank{border-color:#e0a030!important;background:#fff8e8!important}
+.howto{margin:2px 0 14px;font-size:13px}
+.howto>summary{cursor:pointer;color:#1e4a6e;font-weight:600;list-style:none;display:inline-flex;align-items:center;gap:6px;background:#eef4f8;border:1px solid #cfe0ec;border-radius:20px;padding:5px 13px}
+.howto>summary::-webkit-details-marker{display:none}
+.howto>summary::after{content:"\25BE";font-size:11px;transition:transform .15s}
+.howto[open]>summary::after{transform:rotate(180deg)}
+.howto>summary:hover{background:#e3eef5}
+.howto>div{margin-top:8px;color:var(--ink-soft);background:#f3f7f0;border:1px solid #d7e4cf;border-radius:8px;padding:8px 11px;line-height:1.5}
+.items{display:grid;grid-template-columns:1fr;gap:6px}
+.item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:7px 10px;border:1px solid var(--rule);border-radius:var(--radius-sm);background:#fbfcfd;font-size:13.5px}
+.item .qn{color:var(--ink-faint);font-weight:700;margin-right:6px}
+.item select{width:240px;min-width:240px;max-width:62%}
+.subhead{font-weight:700;color:var(--accent-ink);margin:16px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.btn.filled{background:var(--good-bg);border-color:var(--good);color:var(--good)}
+.tool-back{float:right}
+.gbtn{padding:2px 9px;font-size:11px;font-weight:600;border:1px solid var(--rule-strong);border-radius:6px;background:#fff;color:var(--accent-ink);cursor:pointer;margin-left:5px}
+.result{margin-top:18px;border-top:2px solid var(--rule);padding-top:16px}
+.scoreline{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end}
+.bigscore{font-size:38px;font-weight:800;font-family:var(--serif);line-height:1;color:var(--accent-ink)}
+.bigscore small{font-size:14px;color:var(--ink-faint);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{background:#eef2f6;border-radius:18px;padding:5px 12px;font-size:13px}
+.chip b{color:var(--accent-ink)}
+.chip small{color:var(--ink-faint)}
+.interp{margin-top:14px;padding:12px 14px;border-radius:var(--radius-sm);font-size:14px}
+.interp.good{background:var(--good-bg);color:var(--good)} .interp.warn{background:var(--warn-bg);color:var(--warn)} .interp.bad{background:var(--bad-bg);color:var(--bad)} .interp.neutral{background:#eef2f6;color:var(--ink-soft)}
+.note{font-size:12px;color:var(--ink-faint);margin-top:10px}
+.actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{padding:8px 14px;border-radius:var(--radius-sm);border:1px solid var(--rule-strong);background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:var(--accent-ink)}
+footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
+.refs-sec{margin-top:34px;background:var(--paper);border:1px solid var(--rule);border-radius:var(--radius);padding:18px 22px}
+.refs summary{cursor:pointer;font-family:var(--serif);font-size:20px;color:var(--accent-ink);font-weight:600;list-style:none}
+.refs summary::-webkit-details-marker{display:none}
+.refs summary::after{content:" \25B8";color:var(--hl)} .refs[open] summary::after{content:" \25BE"}
+.refs p{font-size:13px;color:var(--ink);margin:8px 0}
+.refs .ref-item{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:13px;align-items:baseline}
+.refs .ref-item:last-of-type{border-bottom:none}
+.refs .ref-name{font-weight:700;color:var(--accent-ink)}
+.refs .ref-cite{color:var(--ink-soft)}
+.refs .ref-cat{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--hl);font-weight:700;margin:16px 0 4px}
+.usenote{background:#eef4f8;border:1px solid #cfe0ec;border-radius:var(--radius-sm);padding:11px 14px;font-size:13px;color:#274b63;margin:14px 0 0}
+.report-cta{display:flex;justify-content:space-between;align-items:center;gap:16px;background:linear-gradient(120deg,#173a57,#2a9d8f);color:#fff;border-radius:var(--radius);padding:18px 22px;margin-bottom:20px;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.privacy-mini{font-size:12.5px;color:#5b3b1c;background:var(--hl-soft);border:1px solid #f0cba8;border-radius:var(--radius-sm);padding:8px 12px;margin:14px 0}
+.grid-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:24px 0 6px;border-bottom:2px solid var(--rule);padding-bottom:6px}
+.grid-head span{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink)}
+.grid-head small{font-size:12px;color:var(--ink-faint)}
+.grid-head:first-child{margin-top:0}
+.report-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(20,40,60,.18)}
+.report-cta-t{font-family:var(--serif);font-size:18px;font-weight:700}
+.report-cta-s{font-size:13px;opacity:.93;margin-top:4px;max-width:660px}
+.report-cta-go{font-weight:700;white-space:nowrap}
+.report-chk{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 4px}
+.rep-row{display:grid;grid-template-columns:210px 160px 1fr;gap:12px;padding:10px 12px;border-left:4px solid var(--rule-strong);background:#fbfcfd;border-radius:6px;margin:6px 0;font-size:13.5px;align-items:baseline}
+.rep-row.good{border-left-color:var(--good)} .rep-row.warn{border-left-color:var(--warn)} .rep-row.bad{border-left-color:var(--bad)}
+.rep-dom{font-weight:700;color:var(--accent-ink)} .rep-val{font-weight:700} .rep-mean{color:var(--ink-soft)}
+.clin-block{border-left:3px solid var(--rule-strong);padding:8px 12px;margin:8px 0;background:#fbfcfd;border-radius:6px}
+.clin-name{font-weight:700;color:var(--accent-ink);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.clin-body{font-size:13px}
+.rep-flags{margin:8px 0 0;padding-left:20px} .rep-flags li{margin:6px 0;font-size:13.5px}
+.rep-urgent{background:var(--bad-bg);color:var(--bad);border-radius:var(--radius-sm);padding:12px 14px;font-size:14px;margin:10px 0;font-weight:600}
+@media(max-width:560px){.rep-row{grid-template-columns:1fr}}
+.gnav{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;justify-content:center;gap:14px;background:#fff;border-top:1px solid var(--rule-strong);box-shadow:0 -4px 14px rgba(20,40,60,.10);padding:10px 16px}
+.gnav #gnav_step{font-size:13px;font-weight:600;color:var(--accent-ink);text-align:center}
+.gnav .btn{white-space:nowrap}
+@media(max-width:560px){.gnav{flex-wrap:wrap;gap:8px} .gnav #gnav_step{order:-1;width:100%}}
+@media(max-width:560px){
+ .hero h1{font-size:26px}
+ .panel{padding:16px}
+ .item{grid-template-columns:1fr;gap:5px;align-items:start}
+ .item select{max-width:100%;width:100%}
+ .scoreline{gap:14px}
+ .bigscore{font-size:30px}
+ .grid{grid-template-columns:1fr}
+ .tool-back{float:none;display:inline-block}
+}
+.pc-overlay{display:none;position:fixed;inset:0;background:rgba(20,30,40,.55);z-index:100;justify-content:center;overflow:auto;padding:30px 14px}
+.pc-overlay.show{display:flex}
+.pc-card{background:#fff;max-width:560px;width:100%;height:max-content;border-radius:14px;padding:26px}
+.pc-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-faint);border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:14px}
+.pc-brand{font-family:var(--serif);font-weight:700;color:var(--accent-ink);font-size:15px}
+.pc-card h3{font-family:var(--serif);margin:0 0 6px;font-size:21px}
+.pc-foot{font-size:11.5px;color:var(--ink-faint);margin-top:18px;border-top:1px solid var(--rule);padding-top:10px}
+.pc-actions{margin-top:18px;display:flex;gap:10px}
+@media print{ body *{visibility:hidden!important} #printcard,#printcard *{visibility:visible!important}
+ #printcard{position:absolute;inset:0;display:block!important;background:#fff;padding:0} #printcard .no-print{display:none!important}
+ .pc-card{max-width:100%;margin:0 auto;padding:0} }
+</style>
+</head>
+<body>
+<header class="top"><div class="top-inner">
+  <span class="brand"><svg width="26" height="26" viewBox="0 0 48 48" aria-hidden="true" class="logo"><defs><linearGradient id="msg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e4a6e"/><stop offset=".55" stop-color="#2a9d8f"/><stop offset="1" stop-color="#b85c1a"/></linearGradient></defs><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#cfd8dc" stroke-width="1.3"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="url(#msg)" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#23628a"/><circle cx="13" cy="41.2" r="0.95" fill="#23628a"/><circle cx="19.2" cy="40" r="0.95" fill="#23628a"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="url(#msg)"/><circle cx="34" cy="12" r="1.7" fill="#dff0ea"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff7a1a" stroke-width="0.8"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff7a1a"/></svg><em>MS</em>pectrum</span><span class="sub">MS Score Hub</span>
+  <a class="back" href="index.html">&larr; MSpectrum home</a>
+</div></header>
+
+<div class="wrap">
+  <div id="home">
+  <section class="hero">
+    <h1>MS Score Hub</h1>
+    <p>Stateless calculators and questionnaires for the measures used alongside the EDSS - cognition, fatigue, mood, walking, quality of life and disease severity. Pick a tool, enter the data, and get the result with its plain-language meaning.</p>
+    <div class="usenote"><b>Who can use each tool.</b> Self-report questionnaires (PDDS, MFIS, MSQOL-54, PROMIS-29, FSS, PHQ-9, GAD-7) can be filled by the <b>patient</b> directly - full question text and answer options are shown, and every result is explained in plain language with where the person sits versus others. Performance tests (SDMT, BVMT-R, CVLT-II, T25FW, 9-HPT) and the composites (BICAMS, MSFC) are <b>administered by a clinician</b> - you enter the raw results here.</div>
+    <div class="usenote" style="background:#eef4f8;border-color:#cfe0ec;color:#274b63"><b>Not a diagnosis.</b> MSpectrum computes scores from validated, published instruments and explains what they mean. Interpretation, diagnosis and treatment remain the decision of a qualified clinician.</div>
+    <div class="usenote" style="background:#f3f7f0;border-color:#d7e4cf;color:#34502f"><b>How it works.</b> Every result updates <b>automatically</b> as you fill the boxes - there is no Calculate button (except the composites BICAMS and MSFC, which pull from other tools). Once you start a questionnaire, any <b>unanswered items are highlighted in amber</b> so you can see exactly what is missing.</div>
+  </section>
+    <div class="grid" id="toolgrid"></div>
+    <div style="text-align:center;margin-top:20px"><button class="btn" onclick="openClin()" style="background:var(--accent);color:#fff;border-color:var(--accent);font-size:14px;padding:10px 18px">📋 Compile clinician summary (all entered tools)</button></div>
+  </div>
+
+  <section class="panel" id="p_sdmt">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>SDMT</h2><p class="lead">Symbol Digit Modalities Test - processing speed. Enter the number of correct substitutions in 90 seconds.</p>
+    <div class="row"><div class="fld"><label>Correct substitutions (90 s) <span class="hint">0&ndash;110</span></label><input type="number" id="sdmt_raw" min="0" max="120" oninput="calcSDMT()"></div></div>
+    <div class="subhead">Automatic norm (US)</div>
+    <div class="note" style="margin-top:2px"><b>What is a norm?</b> It compares this score with results from a large group of similar people - matched for age, sex and education (a process called <b>standardisation</b>). That turns the raw number into a <b>z-score</b>: about 0 = average for similar people, below 0 = below average, and z &le; -1.5 is the impaired range. Enter the details below so the comparison can be made.</div>
+    <div class="row">
+      <div class="fld"><label>Version</label><select id="sdmt_ver" oninput="calcSDMT()"><option value="oral">Oral</option><option value="written">Written</option></select></div>
+      <div class="fld"><label>Age (years) <span class="hint">18&ndash;74</span></label><input type="number" id="sdmt_age" min="18" max="90" oninput="calcSDMT()"></div>
+      <div class="fld"><label>Sex</label><select id="sdmt_sex" oninput="calcSDMT()"><option value="">- select -</option><option value="M">Male</option><option value="F">Female</option></select></div>
+      <div class="fld"><label>Education</label><select id="sdmt_edu" oninput="calcSDMT()"><option value="">- select -</option><option value="lo">Less than 16 years</option><option value="hi">16+ years</option></select></div>
+    </div>
+    <div class="note">Oral: z by age/sex/education (Strober 2020). Written: z by age, 18-64 (Smith 1982 manual). No reference numbers needed.</div>
+    <div class="result" id="sdmt_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('sdmt','SDMT')">📄 Patient summary</button><button class="btn" onclick="exportJSON('sdmt','SDMT')">Researcher: JSON</button><button class="btn" onclick="exportCSV('sdmt','SDMT')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_pdds">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>PDDS</h2><p class="lead">Patient Determined Disease Steps - the patient-reported analogue of the EDSS.</p>
+    <div class="row"><div class="fld"><label>Patient-selected step</label>
+      <select id="pdds_v" oninput="calcPDDS()">
+        <option value="">-</option>
+        <option value="0">0 - Normal</option><option value="1">1 - Mild disability</option>
+        <option value="2">2 - Moderate disability</option><option value="3">3 - Gait disability</option>
+        <option value="4">4 - Early cane</option><option value="5">5 - Late cane</option>
+        <option value="6">6 - Bilateral support</option><option value="7">7 - Wheelchair / scooter</option>
+        <option value="8">8 - Bedridden</option>
+      </select></div></div>
+    <details open style="margin:2px 0 8px"><summary style="cursor:pointer;font-size:13px;color:#1e4a6e;font-weight:600">What does each step mean? (tap to collapse)</summary><div class="items" style="margin-top:8px"><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">0</span><span><b>Normal.</b> I may have mild symptoms but they do not limit my activity; no walking limitation.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">1</span><span><b>Mild disability.</b> Mild symptoms; no limitation in my activity.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">2</span><span><b>Moderate disability.</b> Symptoms bother me but do not limit my activities.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">3</span><span><b>Gait disability.</b> MS interferes with my activities, especially walking, but I can still walk without any aid.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">4</span><span><b>Early cane.</b> I walk normally most days, but on bad days I need support (a cane, or holding the wall).</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">5</span><span><b>Late cane.</b> I need a cane or single support to walk about 25 feet; without it I cannot walk far.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">6</span><span><b>Bilateral support.</b> I need two canes, crutches, or a walker to walk about 25 feet.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">7</span><span><b>Wheelchair / scooter.</b> My main way of getting around is a wheelchair; I can take only a few steps.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">8</span><span><b>Bedridden.</b> I am mostly in bed and cannot use a wheelchair for long.</span></div></div></details>
+    <div class="result" id="pdds_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('pdds','PDDS')">📄 Patient summary</button><button class="btn" onclick="exportJSON('pdds','PDDS')">Researcher: JSON</button><button class="btn" onclick="exportCSV('pdds','PDDS')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_bvmt">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>BVMT-R</h2><p class="lead">Brief Visuospatial Memory Test&ndash;Revised - three immediate-recall trials (each 0&ndash;12).</p>
+    <div class="row">
+      <div class="fld"><label>Trial 1 <span class="hint">0&ndash;12</span></label><input type="number" id="bv1" min="0" max="12" oninput="calcBVMT()"></div>
+      <div class="fld"><label>Trial 2 <span class="hint">0&ndash;12</span></label><input type="number" id="bv2" min="0" max="12" oninput="calcBVMT()"></div>
+      <div class="fld"><label>Trial 3 <span class="hint">0&ndash;12</span></label><input type="number" id="bv3" min="0" max="12" oninput="calcBVMT()"></div>
+      <div class="fld"><label>Delayed Recall <span class="hint">0&ndash;12, optional</span></label><input type="number" id="bvmt_dr" min="0" max="12" oninput="calcBVMT()"></div>
+    </div>
+    <div class="subhead">Automatic norm (US MS regression, Marrie 2021)</div>
+    <div class="note" style="margin-top:2px"><b>What is a norm?</b> It compares this score with results from a large group of similar people - matched for age, sex and education (a process called <b>standardisation</b>). That turns the raw number into a <b>z-score</b>: about 0 = average for similar people, below 0 = below average, and z &le; -1.5 is the impaired range. Enter the details below so the comparison can be made.</div>
+    <div class="row">
+      <div class="fld"><label>Age (years) <span class="hint">18&ndash;74</span></label><input type="number" id="bvmt_age" min="18" max="90" oninput="calcBVMT()"></div>
+      <div class="fld"><label>Sex</label><select id="bvmt_sex" oninput="calcBVMT()"><option value="">- select -</option><option value="1">Male</option><option value="2">Female</option></select></div>
+      <div class="fld"><label>Education (years) <span class="hint">e.g. 12&ndash;18</span></label><input type="number" id="bvmt_edu" min="0" max="25" oninput="calcBVMT()"></div>
+      <div class="fld"><label>Race <span class="hint">optional, improves norm</span></label><select id="bvmt_race" oninput="calcBVMT()"><option value="">- not used -</option><option value="1">White</option><option value="0">Black</option><option value="0">Other</option></select></div>
+    </div>
+    <div class="note">Enter age, sex &amp; education for an automatic z-score (impaired at z &le; -1.5). Race is optional.</div>
+    <div class="result" id="bvmt_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('bvmt','BVMT-R')">📄 Patient summary</button><button class="btn" onclick="exportJSON('bvmt','BVMT-R')">Researcher: JSON</button><button class="btn" onclick="exportCSV('bvmt','BVMT-R')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_cvlt">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>CVLT-II</h2><p class="lead">California Verbal Learning Test&ndash;II - five immediate-recall trials of List A (each 0&ndash;16).</p>
+    <div class="row">
+      <div class="fld"><label>Trial 1 <span class="hint">0&ndash;16</span></label><input type="number" id="cv1" min="0" max="16" oninput="calcCVLT()"></div>
+      <div class="fld"><label>Trial 2 <span class="hint">0&ndash;16</span></label><input type="number" id="cv2" min="0" max="16" oninput="calcCVLT()"></div>
+      <div class="fld"><label>Trial 3 <span class="hint">0&ndash;16</span></label><input type="number" id="cv3" min="0" max="16" oninput="calcCVLT()"></div>
+      <div class="fld"><label>Trial 4 <span class="hint">0&ndash;16</span></label><input type="number" id="cv4" min="0" max="16" oninput="calcCVLT()"></div>
+      <div class="fld"><label>Trial 5 <span class="hint">0&ndash;16</span></label><input type="number" id="cv5" min="0" max="16" oninput="calcCVLT()"></div>
+    </div>
+    <div class="subhead">Automatic norm (US MS regression, Marrie 2021)</div>
+    <div class="note" style="margin-top:2px"><b>What is a norm?</b> It compares this score with results from a large group of similar people - matched for age, sex and education (a process called <b>standardisation</b>). That turns the raw number into a <b>z-score</b>: about 0 = average for similar people, below 0 = below average, and z &le; -1.5 is the impaired range. Enter the details below so the comparison can be made.</div>
+    <div class="row">
+      <div class="fld"><label>Age (years) <span class="hint">18&ndash;74</span></label><input type="number" id="cvlt_age" min="18" max="90" oninput="calcCVLT()"></div>
+      <div class="fld"><label>Sex</label><select id="cvlt_sex" oninput="calcCVLT()"><option value="">- select -</option><option value="1">Male</option><option value="2">Female</option></select></div>
+      <div class="fld"><label>Education (years) <span class="hint">e.g. 12&ndash;18</span></label><input type="number" id="cvlt_edu" min="0" max="25" oninput="calcCVLT()"></div>
+      <div class="fld"><label>Race <span class="hint">optional, improves norm</span></label><select id="cvlt_race" oninput="calcCVLT()"><option value="">- not used -</option><option value="1">White</option><option value="0">Black</option><option value="0">Other</option></select></div>
+    </div>
+    <div class="note">Enter age, sex &amp; education for an automatic z-score (impaired at z &le; -1.5). Race is optional.</div>
+    <div class="subhead">Optional - recognition &amp; delayed sub-scores (raw)</div><div class="note" style="margin:-4px 0 8px">Fill these if they were administered; leave blank if not. SDFR = Short-Delay Free Recall; LDFR = Long-Delay Free Recall.</div><div>
+    <div class="row">
+      <div class="fld"><label>Short-Delay Free Recall <span class="hint">0&ndash;16</span></label><input type="number" id="cvlt_sdfr" min="0" max="16" oninput="calcCVLT()"></div>
+      <div class="fld"><label>Long-Delay Free Recall <span class="hint">0&ndash;16</span></label><input type="number" id="cvlt_ldfr" min="0" max="16" oninput="calcCVLT()"></div>
+    </div>
+    <div class="row">
+      <div class="fld"><label>Recognition Hits <span class="hint">0&ndash;16</span></label><input type="number" id="cvlt_hits" min="0" max="16" oninput="calcCVLT()"></div>
+      <div class="fld"><label>False Positives <span class="hint">0&ndash;32</span></label><input type="number" id="cvlt_fp" min="0" max="32" oninput="calcCVLT()"></div>
+      <div class="fld"><label>Intrusions <span class="hint">total</span></label><input type="number" id="cvlt_intr" min="0" oninput="calcCVLT()"></div>
+    </div>
+    <div class="row">
+      <div class="fld"><label>Forced Choice <span class="hint">0&ndash;16, validity</span></label><input type="number" id="cvlt_fc" min="0" max="16" oninput="calcCVLT()"></div>
+    </div>
+    <div class="note">Raw + derived metrics (d&prime;, discriminability). Demographically-corrected T-scores use the Parmenter 2010 CVLT-II MS norms (LDFR).</div></div>
+    <div class="result" id="cvlt_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('cvlt','CVLT-II')">📄 Patient summary</button><button class="btn" onclick="exportJSON('cvlt','CVLT-II')">Researcher: JSON</button><button class="btn" onclick="exportCSV('cvlt','CVLT-II')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_mfis">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>MFIS</h2><p class="lead">Modified Fatigue Impact Scale - 21 items, "Because of my fatigue during the past 4 weeks&hellip;" (0 = never &hellip; 4 = almost always).</p>
+    <div class="actions"><button class="btn" onclick="fillMFIS(0)">All 0</button><button class="btn" onclick="fillMFIS(4)">All 4</button><button class="btn" onclick="clearMFIS()">Clear</button></div>
+    <div class="items" id="mfis_items"></div>
+    <div class="result" id="mfis_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('mfis','MFIS')">📄 Patient summary</button><button class="btn" onclick="exportJSON('mfis','MFIS')">Researcher: JSON</button><button class="btn" onclick="exportCSV('mfis','MFIS')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_msqol">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>MSQOL-54</h2><p class="lead">Multiple Sclerosis Quality of Life-54. Enter each item's raw response (the number circled on the form). Grouped by subscale; numbers are the MSQOL-54 item order. All scores 0&ndash;100 (higher = better). Subscales use the dynamic-denominator rule (averaged over answered items only).</p>
+    <div id="msqol_items"></div>
+    <div class="actions"><button class="btn" onclick="clearMSQOL()">Clear all</button></div>
+    <div class="note">Labels are short reminders - refer to the MSQOL-54 form (&copy; UCLA) for exact item wording. MSQOL-54 is free for clinical/research use.</div>
+    <div class="result" id="msqol_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('msqol','MSQOL-54')">📄 Patient summary</button><button class="btn" onclick="exportJSON('msqol','MSQOL-54')">Researcher: JSON</button><button class="btn" onclick="exportCSV('msqol','MSQOL-54')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_promis">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>PROMIS-29</h2><p class="lead">7 domains (4 items each, 1&ndash;5) + pain intensity (0&ndash;10). Shows raw domain sums and a severity band (where the patient sits vs the general population).</p>
+    <div id="promis_items"></div>
+    <div class="actions"><button class="btn" onclick="clearPROMIS()">Clear all</button></div>
+    <div class="result" id="promis_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('promis','PROMIS-29')">📄 Patient summary</button><button class="btn" onclick="exportJSON('promis','PROMIS-29')">Researcher: JSON</button><button class="btn" onclick="exportCSV('promis','PROMIS-29')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_fss">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>FSS</h2><p class="lead">Fatigue Severity Scale - 9 statements about the past week (1 = strongly disagree &hellip; 7 = strongly agree).</p>
+    <div class="actions"><button class="btn" onclick="fillFSS(1)">All 1</button><button class="btn" onclick="fillFSS(7)">All 7</button><button class="btn" onclick="clearFSS()">Clear</button></div>
+    <div class="items" id="fss_items"></div>
+    <div class="result" id="fss_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('fss','FSS')">📄 Patient summary</button><button class="btn" onclick="exportJSON('fss','FSS')">Researcher: JSON</button><button class="btn" onclick="exportCSV('fss','FSS')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_phq9">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>PHQ-9</h2><p class="lead">Patient Health Questionnaire-9 - depression screen. &ldquo;Over the last 2 weeks, how often have you been bothered by the following?&rdquo;</p>
+    <div class="actions"><button class="btn" onclick="fillPHQ(0)">All 0</button><button class="btn" onclick="fillPHQ(3)">All 3</button><button class="btn" onclick="clearPHQ()">Clear</button></div>
+    <div class="items" id="phq_items"></div>
+    <div class="result" id="phq9_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('phq9','PHQ-9')">📄 Patient summary</button><button class="btn" onclick="exportJSON('phq9','PHQ-9')">Researcher: JSON</button><button class="btn" onclick="exportCSV('phq9','PHQ-9')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_gad7">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>GAD-7</h2><p class="lead">Generalized Anxiety Disorder-7 - anxiety screen. &ldquo;Over the last 2 weeks, how often have you been bothered by the following?&rdquo;</p>
+    <div class="actions"><button class="btn" onclick="fillGAD(0)">All 0</button><button class="btn" onclick="fillGAD(3)">All 3</button><button class="btn" onclick="clearGAD()">Clear</button></div>
+    <div class="items" id="gad_items"></div>
+    <div class="result" id="gad7_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('gad7','GAD-7')">📄 Patient summary</button><button class="btn" onclick="exportJSON('gad7','GAD-7')">Researcher: JSON</button><button class="btn" onclick="exportCSV('gad7','GAD-7')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_msws">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>MSWS-12</h2><p class="lead">MS Walking Scale-12 - how MS has affected walking in the past 2 weeks (1 = not at all &hellip; 5 = extremely). Score 0&ndash;100, higher = greater walking limitation.</p>
+    <div class="actions"><button class="btn" onclick="fillMSWS(1)">All 1</button><button class="btn" onclick="fillMSWS(5)">All 5</button><button class="btn" onclick="clearMSWS()">Clear</button></div>
+    <div class="items" id="msws_items"></div>
+    <div class="note">Short functional labels shown; refer to the official MSWS-12 form for exact wording (&copy; Hobart/Thompson, licensed instrument).</div>
+    <div class="result" id="msws_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('msws','MSWS-12')">📄 Patient summary</button><button class="btn" onclick="exportJSON('msws','MSWS-12')">Researcher: JSON</button><button class="btn" onclick="exportCSV('msws','MSWS-12')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_msis">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>MSIS-29</h2><p class="lead">MS Impact Scale-29 (v1) - the impact of MS over the past 2 weeks. Physical (items 1&ndash;20) and Psychological (items 21&ndash;29) subscales, each transformed to 0&ndash;100 (higher = greater impact).</p>
+    <div class="actions"><button class="btn" onclick="fillMSIS(1)">All 1</button><button class="btn" onclick="fillMSIS(5)">All 5</button><button class="btn" onclick="clearMSIS()">Clear</button></div>
+    <div class="items" id="msis_items"></div>
+    <div class="note">Short functional labels shown; refer to the official MSIS-29 form for exact wording (&copy; Hobart/Thompson, licensed instrument).</div>
+    <div class="result" id="msis_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('msis','MSIS-29')">📄 Patient summary</button><button class="btn" onclick="exportJSON('msis','MSIS-29')">Researcher: JSON</button><button class="btn" onclick="exportCSV('msis','MSIS-29')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_edss">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>MS severity (ARMSS / MSSS)</h2>
+    <p class="lead">EDSS is your overall neurological disability level (0&ndash;9.5). Most people don&rsquo;t know it off-hand - that&rsquo;s normal. Tap below to answer the short <b>Quick Check</b>; it estimates your EDSS, then come back and pick that number here. Age and disease duration give your severity scores.</p>
+    <a class="btn" href="index.html#quickcheck" target="_blank" rel="noopener" style="display:block;text-align:center;background:var(--accent);color:#fff;border-color:var(--accent);font-size:15px;padding:12px;margin:6px 0 16px;text-decoration:none">🧠 Answer the Quick Check to find your EDSS &rarr; <span style="font-weight:400;font-size:12px;opacity:.85">(opens in a new tab - come back here to continue)</span></a>
+    <div class="row">
+      <div class="fld"><label>Your EDSS <span class="hint">from the Quick Check, or if you already know it</span></label><select id="edss_v" oninput="calcEDSSage()"><option value="">- select -</option><option value="0">0</option><option value="1">1</option><option value="1.5">1.5</option><option value="2">2</option><option value="2.5">2.5</option><option value="3">3</option><option value="3.5">3.5</option><option value="4">4</option><option value="4.5">4.5</option><option value="5">5</option><option value="5.5">5.5</option><option value="6">6</option><option value="6.5">6.5</option><option value="7">7</option><option value="7.5">7.5</option><option value="8">8</option><option value="8.5">8.5</option><option value="9">9</option><option value="9.5">9.5</option></select></div>
+      <div class="fld"><label>Age (years) <span class="hint">for ARMSS</span></label><input type="number" id="edss_age" min="10" max="100" oninput="calcEDSSage()"></div>
+      <div class="fld"><label>Disease duration (years) <span class="hint">for MSSS, optional</span></label><input type="number" id="edss_dur" min="0" max="40" oninput="calcEDSSage()"></div>
+    </div>
+    <div class="result" id="edss_out"></div>
+  </section>
+
+  <section class="panel" id="p_report">
+    <a class="tool-back" href="index.html" style="text-decoration:none;display:inline-block;background:var(--accent);color:#fff;border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600;margin-bottom:12px">&larr; MSpectrum home</a>
+    <h2>Check my MS</h2>
+    <p class="lead">Answer the questionnaires in order - press <b>Start</b> and you&rsquo;ll be guided from one to the next. At the end you get one plain-language summary.</p>
+    <div class="usenote"><b>Please note - this is not a complete assessment.</b> It covers only what you can report yourself. It does <b>not</b> include the cognitive tests (SDMT, BVMT-R, CVLT-II), which measure memory and thinking speed and must be done with a clinician - so thinking/memory is <b>not</b> checked here, and a normal report does not rule out cognitive changes. The full neurological <b>EDSS</b> also needs a clinician; you can estimate it with the Quick Check below. This is for understanding and discussion, <b>not a diagnosis</b>. Nothing is stored.</div>
+    <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent);font-size:14px;padding:10px 18px" onclick="startGuided()">▶ Start questionnaires</button></div>
+    <div id="report_checklist"></div>
+    <div class="actions"><button class="btn" onclick="buildReport()">Generate my report</button></div>
+    <div class="result" id="report_out"></div>
+    <div class="actions no-print" id="report_actions" style="display:none"><button class="btn" onclick="reportPDF()">📄 Save / print as PDF</button></div>
+  </section>
+
+  <section class="panel" id="p_t25fw">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>T25FW</h2><p class="lead">Timed 25-Foot Walk - the patient walks 25 feet (7.62 m) as fast as safely possible. Enter two trials; score = average time (seconds). Lower = faster = better. Clinician-timed.</p>
+    <div class="row">
+      <div class="fld"><label>Trial 1 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="t25fw_1" min="0" step="0.1" oninput="calcT25FW()"></div>
+      <div class="fld"><label>Trial 2 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="t25fw_2" min="0" step="0.1" oninput="calcT25FW()"></div>
+    </div>
+    <div class="result" id="t25fw_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="exportJSON('t25fw','T25FW')">Researcher: JSON</button><button class="btn" onclick="exportCSV('t25fw','T25FW')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_nhpt">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>9-HPT</h2><p class="lead">Nine-Hole Peg Test - place and remove 9 pegs as fast as possible; time each hand twice. Score = average time (seconds); lower = better dexterity. Clinician-timed.</p>
+    <div class="row">
+      <div class="fld"><label>Dominant - Trial 1 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="nhpt_d1" min="0" step="0.1" oninput="calcNHPT()"></div>
+      <div class="fld"><label>Dominant - Trial 2 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="nhpt_d2" min="0" step="0.1" oninput="calcNHPT()"></div>
+    </div>
+    <div class="row">
+      <div class="fld"><label>Non-dominant - Trial 1 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="nhpt_n1" min="0" step="0.1" oninput="calcNHPT()"></div>
+      <div class="fld"><label>Non-dominant - Trial 2 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="nhpt_n2" min="0" step="0.1" oninput="calcNHPT()"></div>
+    </div>
+    <div class="result" id="nhpt_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="exportJSON('nhpt','9-HPT')">Researcher: JSON</button><button class="btn" onclick="exportCSV('nhpt','9-HPT')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_bicams">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>BICAMS</h2><p class="lead">Brief International Cognitive Assessment for MS - SDMT (processing speed), CVLT-II (verbal memory) and BVMT-R (visual memory). Enter the patient demographics <b>once</b> below, fill each test (buttons), and z-scores + impairment (z &le; -1.5) compute automatically for all three.</p>
+    <div class="subhead">Patient demographics (used for all three z-scores)</div>
+    <div class="row">
+      <div class="fld"><label>Age (years) <span class="hint">18&ndash;74</span></label><input type="number" id="bic_age" min="18" max="90" oninput="calcBICAMS()"></div>
+      <div class="fld"><label>Sex</label><select id="bic_sex" oninput="calcBICAMS()"><option value="">- select -</option><option value="M">Male</option><option value="F">Female</option></select></div>
+      <div class="fld"><label>Education (years) <span class="hint">e.g. 12&ndash;18</span></label><input type="number" id="bic_edu" min="0" max="25" oninput="calcBICAMS()"></div>
+      <div class="fld"><label>Race <span class="hint">optional, improves norm</span></label><select id="bic_race" oninput="calcBICAMS()"><option value="">- not used -</option><option value="1">White</option><option value="0">Black</option><option value="0">Other</option></select></div>
+    </div>
+    <div class="report-chk"><button class="btn" id="bicbtn_sdmt" onclick="openSub('sdmt','bicams')">1. SDMT &rarr;</button><button class="btn" id="bicbtn_cvlt" onclick="openSub('cvlt','bicams')">2. CVLT-II &rarr;</button><button class="btn" id="bicbtn_bvmt" onclick="openSub('bvmt','bicams')">3. BVMT-R &rarr;</button></div>
+    <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="calcBICAMS()">Calculate BICAMS</button></div>
+    <div class="result" id="bicams_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="exportJSON('bicams','BICAMS')">Researcher: JSON</button><button class="btn" onclick="exportCSV('bicams','BICAMS')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_msfc">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>MSFC</h2><p class="lead">Multiple Sclerosis Functional Composite - the average of three z-scores: arm (9-HPT), leg (T25FW) and cognition (PASAT-3). Standardised <b>automatically</b> against the NMSS Task Force reference - no reference numbers needed. Enter T25FW, 9-HPT and PASAT-3 in their tools (buttons below).</p>
+    <div class="report-chk"><button class="btn" id="msfcbtn_t25fw" onclick="openSub('t25fw','msfc')">T25FW &rarr;</button><button class="btn" id="msfcbtn_nhpt" onclick="openSub('nhpt','msfc')">9-HPT &rarr;</button><button class="btn" id="msfcbtn_pasat" onclick="openSub('pasat','msfc')">PASAT-3 &rarr;</button></div>
+    <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="calcMSFC()">Calculate MSFC</button></div>
+    <div class="result" id="msfc_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="exportJSON('msfc','MSFC')">Researcher: JSON</button><button class="btn" onclick="exportCSV('msfc','MSFC')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_pasat">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>PASAT-3</h2><p class="lead">Paced Auditory Serial Addition Test (3-second version) - working memory &amp; processing speed. Enter the number of correct responses (0-60). Clinician-administered.</p>
+    <div class="row"><div class="fld"><label>Correct responses <span class="hint">0-60</span></label><input type="number" id="pasat_raw" min="0" max="60" oninput="calcPASAT()"></div></div>
+    <div class="result" id="pasat_out"></div>
+    <div class="actions no-print"><button class="btn" onclick="exportJSON('pasat','PASAT-3')">Researcher: JSON</button><button class="btn" onclick="exportCSV('pasat','PASAT-3')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_clinreport">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>Clinician summary</h2><p class="lead">A consolidated, printable summary of every tool you have filled in this session (raw scores + z/T + interpretation). For clinical records and research; not a diagnosis.</p>
+    <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="buildClinReport()">Compile / refresh</button></div>
+    <div class="result" id="clin_out"></div>
+    <div class="actions no-print" id="clin_actions" style="display:none"><button class="btn" onclick="clinReportPDF()">📄 Save / print as PDF</button></div>
+  </section>
+
+  <section class="refs-sec"><details class="refs">
+    <summary>References &amp; scoring sources</summary>
+    <div class="ref-cat">Cognition</div>
+    <div class="ref-item"><span class="ref-name">SDMT</span><span class="ref-cite">Smith A. Symbol Digit Modalities Test. Western Psychological Services, 1982. US norms: Strober LB, et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (oral); Smith A. SDMT Manual (WPS) 1982 (written).</span></div>
+    <div class="ref-item"><span class="ref-name">BVMT-R</span><span class="ref-cite">Benedict RHB. Brief Visuospatial Memory Test&ndash;Revised. PAR, 1997. US MS regression norms: Marrie RA, et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA, et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
+    <div class="ref-item"><span class="ref-name">CVLT-II</span><span class="ref-cite">Delis DC, Kramer JH, Kaplan E, Ober BA. California Verbal Learning Test&ndash;II. Pearson, 2000. US MS regression norms: Marrie RA, et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA, et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
+    <div class="ref-cat">Fatigue</div>
+    <div class="ref-item"><span class="ref-name">MFIS</span><span class="ref-cite">Modified from Fisk JD, et al. <em>Clin Infect Dis</em> 1994;18(Suppl 1):S79&ndash;83. 21-item MFIS: Multiple Sclerosis Council for Clinical Practice Guidelines, 1998 (National MS Society).</span></div>
+    <div class="ref-item"><span class="ref-name">FSS</span><span class="ref-cite">Krupp LB, LaRocca NG, Muir-Nash J, Steinberg AD. <em>Arch Neurol</em> 1989;46(10):1121&ndash;3.</span></div>
+    <div class="ref-cat">Mood</div>
+    <div class="ref-item"><span class="ref-name">PHQ-9</span><span class="ref-cite">Kroenke K, Spitzer RL, Williams JBW. <em>J Gen Intern Med</em> 2001;16(9):606&ndash;13. Public domain (Pfizer).</span></div>
+    <div class="ref-item"><span class="ref-name">GAD-7</span><span class="ref-cite">Spitzer RL, Kroenke K, Williams JBW, L&ouml;we B. <em>Arch Intern Med</em> 2006;166(10):1092&ndash;7. Public domain (Pfizer).</span></div>
+    <div class="ref-cat">Performance &amp; composites</div>
+    <div class="ref-item"><span class="ref-name">PASAT</span><span class="ref-cite">Gronwall DMA. <em>Percept Mot Skills</em> 1977;44:367&ndash;73. (MSFC cognitive component; Task Force reference.)</span></div>
+    <div class="ref-item"><span class="ref-name">MSFC / T25FW</span><span class="ref-cite">Fischer JS, Rudick RA, Cutter GR, Reingold SC. <em>Mult Scler</em> 1999;5(4):244-50.</span></div>
+    <div class="ref-item"><span class="ref-name">9-HPT</span><span class="ref-cite">Mathiowetz V, Weber K, Kashman N, Volland G. <em>Occup Ther J Res</em> 1985;5(1):24-38.</span></div>
+    <div class="ref-item"><span class="ref-name">BICAMS</span><span class="ref-cite">Langdon DW, Amato MP, Boringa J, et al. <em>Mult Scler J</em> 2012;18(6):891-8.</span></div>
+    <div class="ref-cat">Severity</div>
+    <div class="ref-item"><span class="ref-name">ARMSS</span><span class="ref-cite">Manouchehrinia A, Westerlind H, Kingwell E, et al. <em>Mult Scler</em> 2017;23(13):1938&ndash;46. Global ARMSS matrix via the ms.sev package.</span></div>
+    <div class="ref-item"><span class="ref-name">MSSS</span><span class="ref-cite">Roxburgh RH, Seaman SR, Masterman T, et al. <em>Neurology</em> 2005;64(7):1144&ndash;51.</span></div>
+    <div class="ref-cat">Disability &amp; quality of life</div>
+    <div class="ref-item"><span class="ref-name">MSWS-12</span><span class="ref-cite">Hobart JC, Riazi A, Lamping DL, Fitzpatrick R, Thompson AJ. <em>Neurology</em> 2003;60(1):31&ndash;6.</span></div>
+    <div class="ref-item"><span class="ref-name">MSIS-29</span><span class="ref-cite">Hobart J, Lamping D, Fitzpatrick R, Riazi A, Thompson A. <em>Brain</em> 2001;124(Pt 5):962&ndash;73.</span></div>
+    <div class="ref-item"><span class="ref-name">PDDS</span><span class="ref-cite">Hohol MJ, Orav EJ, Weiner HL. <em>Neurology</em> 1995; self-report validated by Learmonth YC, et al. <em>BMC Neurol</em> 2013.</span></div>
+    <div class="ref-item"><span class="ref-name">MSQOL-54</span><span class="ref-cite">Vickrey BG, Hays RD, Harooni R, Myers LW, Ellison GW. <em>Qual Life Res</em> 1995. &copy; UCLA (free for clinical/research use).</span></div>
+    <div class="ref-item"><span class="ref-name">PROMIS-29</span><span class="ref-cite">Cella D, et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. PROMIS-29 Profile v2.1; raw&rarr;T tables from the PROMIS Adult Profile Scoring Manual, HealthMeasures (Northwestern University).</span></div>
+    <p style="font-size:12px;color:var(--ink-faint);margin-top:12px">Proprietary instruments (BVMT-R, CVLT-II, SDMT) are scored from entered numeric results only; their stimuli and norm tables are not reproduced here.</p>
+  </details></section>
+
+  <div id="gnav" class="gnav" style="display:none">
+    <button class="btn" id="gnav_prev" onclick="guidedPrev()">&larr; Previous</button>
+    <span id="gnav_step"></span>
+    <button class="btn" id="gnav_next" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="guidedNext()">Next &rarr;</button>
+  </div>
+
+  <div id="printcard" class="pc-overlay" onclick="if(event.target===this)closePC()">
+    <div class="pc-card">
+      <div class="pc-head"><span class="pc-brand"><em style="font-style:normal;color:var(--hl)">MS</em>pectrum</span><span id="pc_date"></span></div>
+      <h3 id="pc_title"></h3>
+      <div id="pc_body"></div>
+      <p class="pc-foot">For information and to discuss with your clinician - this is not a diagnosis. Computed on your device; nothing is stored.</p>
+      <div class="pc-actions no-print"><button class="btn" onclick="window.print()">Print / Save as PDF</button><button class="btn" onclick="closePC()">Close</button></div>
+    </div>
+  </div>
+
+  <footer>MSpectrum reports scores from validated, published instruments and explains what the numbers mean. <b>It does not diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research / educational use; verify locally before clinical or trial use. All computation is local; nothing is stored.</footer>
+</div>
+
+<script>
+/* ENGINE_START */
+function _num(v){ if(v===""||v===null||v===undefined) return null; const n=Number(v); return isNaN(n)?null:n; }
+function scoreSDMT(raw){ return {raw: raw}; }
+function scoreBVMT(t1,t2,t3){ return { total:t1+t2+t3, learning: Math.max(t2,t3)-t1 }; }
+function scoreCVLT(ts){
+  const total=ts.reduce((a,b)=>a+b,0), best=Math.max(...ts);
+  const slopeSimple=ts[4]-ts[0], avgInc=(ts[4]-ts[0])/4;
+  const xs=[1,2,3,4,5], mx=3, my=total/5; let num=0,den=0;
+  for(let i=0;i<5;i++){num+=(xs[i]-mx)*(ts[i]-my); den+=(xs[i]-mx)**2;}
+  return { total, best, slopeSimple, avgInc, slopeReg: num/den };
+}
+const MFIS_PHYS=[4,6,7,10,13,14,17,20,21], MFIS_COG=[1,2,3,5,11,12,15,16,18,19], MFIS_PSY=[8,9];
+function scoreMFIS(items){
+  const g=i=>(items[i]==null?0:items[i]);
+  const phys=MFIS_PHYS.reduce((a,i)=>a+g(i),0), cog=MFIS_COG.reduce((a,i)=>a+g(i),0), psy=MFIS_PSY.reduce((a,i)=>a+g(i),0);
+  return { phys, cog, psy, total: phys+cog+psy };
+}
+const _d5={1:100,2:75,3:50,4:25,5:0}, _a5={1:0,2:25,3:50,4:75,5:100}, _s3={1:0,2:50,3:100}, _yn={1:0,2:100};
+const _p6={1:100,2:80,3:60,4:40,5:20,6:0}, _n6={1:0,2:20,3:40,4:60,5:80,6:100}, _sx4={1:100,2:66.7,3:33.3,4:0}, _l7={1:0,2:16.7,3:33.3,4:50,5:66.7,6:83.3,7:100};
+const MSQOL_RECODE={};
+[1,2,20,22,35,37,50,51,52].forEach(i=>MSQOL_RECODE[i]=_d5);
+[33,34,36].forEach(i=>MSQOL_RECODE[i]=_a5);
+for(let i=3;i<=12;i++) MSQOL_RECODE[i]=_s3;
+for(let i=13;i<=19;i++) MSQOL_RECODE[i]=_yn;
+MSQOL_RECODE[21]=_p6;
+[23,26,27,30,32].forEach(i=>MSQOL_RECODE[i]=_p6);
+[24,25,28,29,31,38,39,40,41,42,43,44,45].forEach(i=>MSQOL_RECODE[i]=_n6);
+[46,47,48,49].forEach(i=>MSQOL_RECODE[i]=_sx4);
+MSQOL_RECODE[54]=_l7;
+function _msqRec(i,v){ if(v==null||v==="") return null; if(i===53) return Number(v)*10; const m=MSQOL_RECODE[i]; return m?m[v]:null; }
+const MSQOL_SUBS={PF:[3,4,5,6,7,8,9,10,11,12],HP:[1,34,35,36,37],Energy:[23,27,29,31,32],RoleP:[13,14,15,16],Pain:[21,22,52],Sexual:[46,47,48,49],Social:[20,33,51],HealthDistress:[38,39,40,41],Emotional:[24,25,26,28,30],RoleE:[17,18,19],Cognitive:[42,43,44,45],OverallQoL:[53,54]};
+function _msqSub(items,keys){ let s=0,n=0; for(const i of keys){const r=_msqRec(i,items[i]); if(r!=null){s+=r;n++;}} return n===0?null:s/n; }
+function _msqComposite(parts){ if(parts.some(p=>p[1]==null)) return null; return parts.reduce((a,p)=>a+p[0]*p[1],0); }
+function scoreMSQOL(items){
+  const s={}; for(const k in MSQOL_SUBS) s[k]=_msqSub(items,MSQOL_SUBS[k]);
+  s.PHC=_msqComposite([[0.17,s.PF],[0.17,s.HP],[0.12,s.Energy],[0.12,s.RoleP],[0.11,s.Pain],[0.08,s.Sexual],[0.12,s.Social],[0.11,s.HealthDistress]]);
+  s.MHC=_msqComposite([[0.14,s.HealthDistress],[0.18,s.OverallQoL],[0.29,s.Emotional],[0.24,s.RoleE],[0.15,s.Cognitive]]);
+  s.ChangeHealth=_msqRec(2,items[2]); s.SatSexual=_msqRec(50,items[50]);
+  return s;
+}
+const PROMIS_DOMAINS=[["Physical Function","phys",[1,2,3,4],true],["Anxiety","anx",[5,6,7,8],false],["Depression","dep",[9,10,11,12],false],["Fatigue","fat",[13,14,15,16],false],["Sleep Disturbance","sleep",[17,18,19,20],false],["Social roles/activities","social",[21,22,23,24],true],["Pain Interference","painint",[25,26,27,28],false]];
+function scorePROMIS(resp, painIntensity){
+  const o={}; for(const d of PROMIS_DOMAINS){ const ids=d[2]; o[d[1]]= ids.every(i=>resp[i]!=null) ? ids.reduce((a,i)=>a+resp[i],0) : null; }
+  o.painIntensity = (painIntensity==null?null:painIntensity); return o;
+}
+function promisBand(key, v){
+  if(v==null) return null;
+  const B={phys:[16,7],social:[10,5],anx:[10,15],dep:[10,16],fat:[13,18],sleep:[15,19],painint:[11,18],painIntensity:[4,6]};
+  const b=B[key]; if(!b) return null; const higherBetter=(key==="phys"||key==="social");
+  if(higherBetter){ if(v>=b[0]) return ["good","Within normal limits"]; if(v>=b[1]) return ["warn","Moderate concern"]; return ["bad","Significant concern"]; }
+  if(v<=b[0]) return ["good","Within normal limits / mild"]; if(v<=b[1]) return ["warn","Moderate concern"]; return ["bad","Significant concern"];
+}
+function scoreFSS(items){ const v=Object.values(items).filter(x=>x!=null); if(!v.length) return {mean:null,answered:0,sum:0}; const sum=v.reduce((a,b)=>a+b,0); return {mean:sum/v.length, sum, answered:v.length}; }
+function scorePHQ(items){ let t=0; for(let i=1;i<=9;i++) t+=(items[i]==null?0:items[i]); return {total:t, item9:items[9]}; }
+function scoreGAD(items){ let t=0; for(let i=1;i<=7;i++) t+=(items[i]==null?0:items[i]); return {total:t}; }
+function scoreMSWS(items){ const v=[]; for(let i=1;i<=12;i++) if(items[i]!=null) v.push(items[i]);
+  if(v.length<12) return {raw:null, transformed:null, answered:v.length};
+  const sum=v.reduce((a,b)=>a+b,0); return {raw:sum, transformed:(sum-12)/48*100, answered:12}; }
+const MSIS_PHYS=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], MSIS_PSY=[21,22,23,24,25,26,27,28,29];
+function scoreMSIS(items){
+  const ph=MSIS_PHYS.map(i=>items[i]).filter(v=>v!=null), ps=MSIS_PSY.map(i=>items[i]).filter(v=>v!=null);
+  const phSum=ph.reduce((a,b)=>a+b,0), psSum=ps.reduce((a,b)=>a+b,0);
+  return { physT: ph.length===20?(phSum-20)/80*100:null, psyT: ps.length===9?(psSum-9)/36*100:null,
+           physRaw: ph.length===20?phSum:null, psyRaw: ps.length===9?psSum:null, physAns:ph.length, psyAns:ps.length }; }
+function scoreT25(t1,t2){ const v=[t1,t2].filter(x=>x!=null); return v.length?v.reduce((a,b)=>a+b,0)/v.length:null; }
+function scoreNHPT(d1,d2,n1,n2){ const D=[d1,d2].filter(x=>x!=null), N=[n1,n2].filter(x=>x!=null);
+  const dA=D.length?D.reduce((a,b)=>a+b,0)/D.length:null, nA=N.length?N.reduce((a,b)=>a+b,0)/N.length:null;
+  const all=[dA,nA].filter(x=>x!=null); return { dA, nA, mean: all.length?all.reduce((a,b)=>a+b,0)/all.length:null }; }
+function _z(v,m,sd,higher){ if(v==null||m==null||sd==null||sd<=0) return null; let z=(v-m)/sd; return higher?z:-z; }
+/* ENGINE_END */
+if (typeof module !== "undefined") { module.exports = { scoreSDMT, scoreBVMT, scoreCVLT, scoreMFIS, scoreMSQOL, scorePROMIS, promisBand, PROMIS_DOMAINS, MSQOL_RECODE, MSQOL_SUBS, scoreFSS, scorePHQ, scoreGAD, scoreMSWS, scoreMSIS, scoreT25, scoreNHPT, _z }; }
+
+const TOOLS=[
+  {id:"sdmt", ic:"⚡", name:"SDMT", tag:"Cognition · processing speed", desc:"Symbol Digit Modalities Test (raw count)."},
+  {id:"pdds", ic:"🚶", name:"PDDS", tag:"Patient-reported disability", desc:"Patient Determined Disease Steps (0–8)."},
+  {id:"bvmt", ic:"🧩", name:"BVMT-R", tag:"Cognition · visual memory", desc:"Brief Visuospatial Memory Test–Revised."},
+  {id:"cvlt", ic:"🗣️", name:"CVLT-II", tag:"Cognition · verbal memory", desc:"California Verbal Learning Test–II."},
+  {id:"mfis", ic:"🔋", name:"MFIS", tag:"Fatigue impact", desc:"Modified Fatigue Impact Scale (21 items)."},
+  {id:"msqol", ic:"💗", name:"MSQOL-54", tag:"Quality of life", desc:"MS Quality of Life-54: 12 subscales + 2 composites."},
+  {id:"promis", ic:"📊", name:"PROMIS-29", tag:"Symptoms · QoL profile", desc:"7 domains + pain intensity, with severity bands."},
+  {id:"fss", ic:"🪫", name:"FSS", tag:"Fatigue severity", desc:"Fatigue Severity Scale (9 items, mean 1–7)."},
+  {id:"phq9", ic:"🌧️", name:"PHQ-9", tag:"Depression screen", desc:"Patient Health Questionnaire-9 (0–27)."},
+  {id:"gad7", ic:"💭", name:"GAD-7", tag:"Anxiety screen", desc:"Generalized Anxiety Disorder-7 (0–21)."},
+  {id:"msws", ic:"🚶‍♂️", name:"MSWS-12", tag:"Walking impact", desc:"MS Walking Scale-12 (0–100, patient-reported)."},
+  {id:"msis", ic:"📋", name:"MSIS-29", tag:"Overall MS impact", desc:"MS Impact Scale-29: physical + psychological (0–100)."},
+  {id:"edss", ic:"📈", name:"MS severity (ARMSS/MSSS)", tag:"Disability vs peers", desc:"ARMSS by age and MSSS by disease duration, from EDSS."},
+  {id:"t25fw", ic:"⏱️", name:"T25FW", tag:"Walking speed", desc:"Timed 25-Foot Walk (clinician-timed)."},
+  {id:"nhpt", ic:"✋", name:"9-HPT", tag:"Hand dexterity", desc:"Nine-Hole Peg Test (clinician-timed)."},
+  {id:"bicams", ic:"🧠", name:"BICAMS", tag:"Cognition battery", desc:"SDMT + CVLT-II + BVMT-R: z-scores & impairment."},
+  {id:"msfc", ic:"🧮", name:"MSFC", tag:"Functional composite", desc:"Arm + leg + cognition into one z-score."},
+  {id:"pasat", ic:"🔢", name:"PASAT-3", tag:"Working memory / speed", desc:"Paced Auditory Serial Addition Test (z vs Task Force)."},
+];
+const MFIS_TEXT={
+1:"I have been less alert.",2:"I have had difficulty paying attention for long periods of time.",
+3:"I have been unable to think clearly.",4:"I have been clumsy and uncoordinated.",5:"I have been forgetful.",
+6:"I have had to pace myself in my physical activities.",7:"I have been less motivated to do anything that requires physical effort.",
+8:"I have been less motivated to participate in social activities.",9:"I have been limited in my ability to do things away from home.",
+10:"I have trouble maintaining physical effort for long periods.",11:"I have had difficulty making decisions.",
+12:"I have been less motivated to do anything that requires thinking.",13:"My muscles have felt weak.",
+14:"I have been physically uncomfortable.",15:"I have had trouble finishing tasks that require thinking.",
+16:"I have had difficulty organizing my thoughts when doing things at home or at work.",
+17:"I have been less able to complete tasks that require physical effort.",18:"My thinking has been slowed down.",
+19:"I have had trouble concentrating.",20:"I have limited my physical activities.",
+21:"I have needed to rest more often or for longer periods."};
+
+function el(id){return document.getElementById(id);}
+var RETURN_TO=null;
+function openSub(id,parent){ RETURN_TO=parent;
+  if(parent==="bicams"){ var age=el("bic_age").value, sx=el("bic_sex").value, edu=el("bic_edu").value, race=el("bic_race").value;
+    if(id==="sdmt"){ if(age)el("sdmt_age").value=age; if(sx)el("sdmt_sex").value=sx; if(edu!=="")el("sdmt_edu").value=(Number(edu)<16?"lo":"hi"); }
+    if(id==="cvlt"){ if(age)el("cvlt_age").value=age; if(sx)el("cvlt_sex").value=(sx==="M"?"1":"2"); if(edu!=="")el("cvlt_edu").value=edu; if(race!=="")el("cvlt_race").value=race; }
+    if(id==="bvmt"){ if(age)el("bvmt_age").value=age; if(sx)el("bvmt_sex").value=(sx==="M"?"1":"2"); if(edu!=="")el("bvmt_edu").value=edu; if(race!=="")el("bvmt_race").value=race; }
+  }
+  showTool(id);
+  var M={sdmt:calcSDMT,cvlt:calcCVLT,bvmt:calcBVMT,t25fw:calcT25FW,nhpt:calcNHPT,pasat:calcPASAT};
+  try{ if(M[id]) M[id](); }catch(e){}
+}
+function goBack(){ if(RETURN_TO){ var t=RETURN_TO; RETURN_TO=null; showTool(t); } else { showHome(); } }
+function showHome(){ GUIDED=false; RETURN_TO=null; var g=el("gnav"); if(g)g.style.display="none"; document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active")); el("home").style.display="block"; window.scrollTo({top:0,behavior:"smooth"}); }
+function showTool(id){ el("home").style.display="none"; document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active")); el("p_"+id).classList.add("active"); if(id!=="report"){var bk=document.querySelector("#p_"+id+" .tool-back"); if(bk){var nm={bicams:"BICAMS",msfc:"MSFC"}; bk.textContent=(RETURN_TO&&nm[RETURN_TO])?("\u2190 Back to "+nm[RETURN_TO]):"\u2190 Back to Score Hub";}} try{ if(id==="bicams")calcBICAMS(); else if(id==="msfc")calcMSFC(); }catch(e){} window.scrollTo({top:0,behavior:"smooth"}); }
+function interp(cls,txt){ return '<div class="interp '+cls+'">'+txt+'</div>'; }
+function _zPlain(z){ return z<=-1.5?"In plain terms: this is in the <b>impaired range</b> - clearly below what is typical for similar people; worth discussing with the clinician.":z<=-1?"In plain terms: a little <b>below average</b> (borderline) - not clearly impaired, but worth keeping an eye on.":z<-0.5?"In plain terms: <b>broadly average</b> - reassuring.":"In plain terms: <b>average or above</b> for similar people - reassuring."; }
+function _flagBlanks(p,a,b){ for(var i=a;i<=b;i++){var e=el(p+i); if(e){ if(e.value==="") e.classList.add("blank"); else e.classList.remove("blank"); }} }
+function _clearBlanks(p,a,b){ for(var i=a;i<=b;i++){var e=el(p+i); if(e) e.classList.remove("blank"); }}
+function _flagIds(ids,on){ ids.forEach(function(id){ var e=el(id); if(!e)return; if(on&&e.value==="") e.classList.add("blank"); else e.classList.remove("blank"); }); }
+
+const _card=(t,i)=>'<div class="card" style="animation-delay:'+(i*0.03)+'s" onclick="showTool(\''+t.id+'\')"><div class="ic">'+t.ic+'</div><h3>'+t.name+'</h3><div class="tag">'+t.tag+'</div><div class="desc">'+t.desc+'</div></div>';
+const _ghead=(title,sub)=>'<div class="grid-head" style="grid-column:1/-1"><span>'+title+'</span><small>'+sub+'</small></div>';
+const _TMAP=Object.fromEntries(TOOLS.map(t=>[t.id,t]));
+const GROUPS=[
+ {name:"Disability &amp; severity", sub:"Overall disability, and how it compares to others (ARMSS / MSSS).", ids:["edss","pdds"]},
+ {name:"Cognition - BICAMS battery", sub:"Clinician-administered. Processing speed + verbal &amp; visual memory; impaired at z &le; -1.5.", ids:["bicams","sdmt","cvlt","bvmt","pasat"]},
+ {name:"Fatigue", sub:"Self-report.", ids:["mfis","fss"]},
+ {name:"Mood", sub:"Self-report screens.", ids:["phq9","gad7"]},
+ {name:"Walking &amp; motor function", sub:"MSWS-12 is self-report; T25FW &amp; 9-HPT are clinician-timed.", ids:["msws","t25fw","nhpt"]},
+ {name:"Quality of life &amp; impact", sub:"Self-report.", ids:["msqol","promis","msis"]},
+ {name:"Composite - MSFC", sub:"Arm + leg + cognition combined into one z-score (needs reference values).", ids:["msfc"]}
+];
+let _ci=0;
+el("toolgrid").innerHTML = GROUPS.map(g=> _ghead(g.name,g.sub) + g.ids.map(id=>_TMAP[id]?_card(_TMAP[id],_ci++):"").join("")).join("");
+
+el("mfis_items").innerHTML = Array.from({length:21},(_,k)=>{const i=k+1;
+  const _ml={0:"0 - Never",1:"1",2:"2",3:"3",4:"4 - Almost always"};
+  const opts=[0,1,2,3,4].map(v=>'<option value="'+v+'">'+_ml[v]+'</option>').join("");
+  return '<div class="item"><div><span class="qn">'+i+'.</span>'+MFIS_TEXT[i]+'</div><select id="mf_'+i+'" oninput="calcMFIS()"><option value="">-</option>'+opts+'</select></div>';}).join("");
+
+function _normCDF(z){ const t=1/(1+0.2316419*Math.abs(z)); const d=0.3989423*Math.exp(-z*z/2);
+  let p=d*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274)))); return z>0?1-p:p; }
+function normBlock(prefix, raw, higherBetter){
+  const me=el(prefix+"_mean"), se=el(prefix+"_sd");
+  const mean=me?_num(me.value):null, sd=se?_num(se.value):null;
+  if(mean===null||sd===null||sd<=0||raw===null) return "";
+  let z=(raw-mean)/sd; if(!higherBetter) z=-z;
+  const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100)));
+  const cls=z<=-1.5?"bad":(z<=-1?"warn":"good");
+  const sev=z<=-1.5?"&ge;1.5 SD below the reference mean (impaired range)":(z<=-1?"about 1&ndash;1.5 SD below (borderline / low)":"within ~1 SD of the reference (typical range)");
+  return interp(cls, "Normalized: <b>z = "+z.toFixed(2)+"</b> &middot; ~"+pct+"th percentile vs the reference group - "+sev+".");
+}
+const SDMT_NORM={
+ lo:{ M:[[65.32,10.17],[61.33,8.93],[56.77,8.42],[55.42,6.63],[50.50,8.46],[47.85,5.76]],
+      F:[[64.78,8.85],[65.30,10.30],[63.33,10.51],[60.00,8.45],[55.85,8.64],[52.85,7.53]] },
+ hi:{ M:[[67.55,10.92],[62.65,6.11],[66.55,8.79],[58.62,9.92],[50.80,6.75],[49.18,4.67]],
+      F:[[65.30,9.54],[70.41,7.23],[65.38,9.99],[64.95,7.31],[56.17,4.90],[52.35,8.06]] } };
+function _ageBand(a){ return a<25?0:a<35?1:a<45?2:a<55?3:a<65?4:5; }
+const SMITH_WRITTEN=[[55.2,7.5],[53.6,6.6],[51.1,8.1],[46.8,8.4],[41.5,8.6]];
+function sdmtNorm(){ const raw=_num(el("sdmt_raw").value), age=_num(el("sdmt_age")?el("sdmt_age").value:null), sex=el("sdmt_sex")?el("sdmt_sex").value:"", edu=el("sdmt_edu")?el("sdmt_edu").value:"", ver=el("sdmt_ver")?el("sdmt_ver").value:"oral";
+ if(raw==null||age==null) return null;
+ if(ver==="written"){ if(age<18||age>64) return {oor:true,range:"18-64"}; const ms=SMITH_WRITTEN[_ageBand(age)]; const z=(raw-ms[0])/ms[1]; return {mean:ms[0],sd:ms[1],z:z,pct:Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))),src:"Smith A. SDMT Manual (WPS), 1982 - written, ages 18-64"}; }
+ if(!sex||!edu) return null;
+ if(age<18||age>74) return {oor:true,range:"18-74"};
+ const ms=SDMT_NORM[edu][sex][_ageBand(age)]; const z=(raw-ms[0])/ms[1];
+ return {mean:ms[0],sd:ms[1],z:z,pct:Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))),src:"Strober LB, et al. SDMT-Oral US norms, Mult Scler Relat Disord 2020;43:102154"}; }
+function calcSDMT(){ const r=_num(el("sdmt_raw").value);
+  if(r===null){el("sdmt_out").innerHTML="";return;}
+  let msg,cls;
+  if(r>=55){cls="good";msg="Within / above the typical adult range - no processing-speed concern suggested.";}
+  else if(r>=40){cls="neutral";msg="Borderline / low-average. Interpret against the age/sex/education norm below.";}
+  else {cls="warn";msg="Low - suggests reduced processing speed; compare to the norm below and to prior scores.";}
+  let out='<div class="scoreline"><div class="bigscore">'+r+'<small> correct</small></div></div>'+interp(cls,msg);
+  const nm=sdmtNorm();
+  _flagIds(["sdmt_age","sdmt_sex","sdmt_edu"], (r!==null && nm===null));
+  if(nm&&nm.oor){ out+='<div class="note">These US norms cover ages '+(nm.range||"18-74")+'; enter an age in range for an automatic z-score.</div>'; }
+  else if(nm){ const icls=nm.z<=-1.5?"bad":(nm.z<=-1?"warn":"good");
+    out+=interp(icls,"Norm-based: <b>z = "+nm.z.toFixed(2)+"</b> &middot; ~"+nm.pct+"th percentile vs the US normative reference"+(nm.z<=-1.5?" - impaired range":"")+".")
+       +'<div class="note">Norms: '+(nm.src||"Strober 2020")+'. '+_zPlain(nm.z)+'</div>'; }
+  else { out+='<div class="note">Higher is better. Enter age, sex &amp; education above for an automatic z-score &amp; percentile (US norms). A change of ~4 points between visits is often clinically meaningful.</div>'; }
+  el("sdmt_out").innerHTML=out;
+}
+function calcPDDS(){ const v=el("pdds_v").value;
+  if(v===""){el("pdds_out").innerHTML="";return;}
+  const lab=el("pdds_v").selectedOptions[0].text; const n=+v;
+  const cls=n<=1?"good":n<=3?"neutral":n<=6?"warn":"bad";
+  el("pdds_out").innerHTML='<div class="scoreline"><div class="bigscore">'+n+'<small> / 8</small></div></div>'+interp(cls, lab+". Steps run 0 (normal) to 8 (bedridden); higher = greater walking/mobility disability. This is the patient’s own rating of function.")+'<div class="note">Single patient-reported item; the self-report analogue of the EDSS (correlates strongly but does not replace the examined EDSS).</div>';
+}
+var _curCvltTotal=null,_curBvmtTotal=null;
+function cvltScaled(r){ if(r<30)return 2; if(r<=31)return 3; if(r<=38)return 4; if(r<=40)return 5; if(r<=43)return 6; if(r<=47)return 7; if(r<=49)return 8; if(r<=55)return 9; if(r<=57)return 10; if(r<=61)return 11; if(r<=63)return 12; if(r<=64)return 13; if(r<=68)return 14; if(r<=69)return 15; if(r<=70)return 16; return 17; }
+function bvmtScaled(r){ if(r<10)return 2; if(r<=11)return 3; if(r<=12)return 4; if(r<=14)return 5; if(r<=19)return 6; if(r<=22)return 7; if(r<=24)return 8; if(r<=26)return 9; if(r<=28)return 10; if(r<=30)return 11; if(r<=32)return 12; if(r<=33)return 13; if(r<=34)return 14; if(r<=35)return 15; return 16; }
+function cvltNorm(raw,age,sex,edu,race){ if(raw==null||age==null||!sex||edu==null) return null; const sc=cvltScaled(raw), cA=age-36.12; let exp,sd;
+  if(race==="1"||race==="0"){ const R=Number(race); exp=2.99+2.11*sex-0.019*cA+0.002*cA*cA+0.14*edu+1.09*R; sd=2.68; } else { exp=3.81+1.96*sex-0.024*cA+0.002*cA*cA+0.15*edu; sd=2.71; }
+  return {scaled:sc, z:(sc-exp)/sd}; }
+function bvmtNorm(raw,age,sex,edu,race){ if(raw==null||age==null||!sex||edu==null) return null; const sc=bvmtScaled(raw), cA=age-36.12; let exp,sd;
+  if(race==="1"||race==="0"){ const R=Number(race); exp=7.51+1.18*sex-0.078*cA+0.001*cA*cA-0.048*edu+1.24*R; sd=2.49; } else { exp=8.45+1.02*sex-0.084*cA+0.001*cA*cA-0.028*edu; sd=2.53; }
+  return {scaled:sc, z:(sc-exp)/sd}; }
+const BENEDICT_BVMT=[[20,3.63,1.67,10.79,1.37],[22,3.64,1.68,10.68,1.41],[24,3.64,1.68,10.57,1.45],[26,3.65,1.69,10.46,1.48],[28,3.66,1.70,10.35,1.52],[30,3.66,1.71,10.24,1.56],[32,3.67,1.71,10.13,1.60],[34,3.67,1.72,10.02,1.64],[36,3.68,1.73,9.91,1.67],[38,3.69,1.74,9.80,1.71],[40,3.69,1.74,9.69,1.75],[42,3.70,1.75,9.58,1.79],[44,3.70,1.76,9.47,1.83],[46,3.71,1.77,9.36,1.86],[48,3.71,1.77,9.25,1.90],[50,3.72,1.78,9.14,1.94],[52,3.73,1.79,9.03,1.98],[54,3.73,1.80,8.92,2.01],[56,3.74,1.80,8.81,2.05],[58,3.74,1.81,8.70,2.09],[60,3.75,1.82,8.59,2.13],[62,3.76,1.83,8.48,2.17],[64,3.76,1.83,8.37,2.20],[66,3.77,1.84,8.26,2.24],[68,3.77,1.85,8.15,2.28],[70,3.78,1.86,8.04,2.32],[72,3.78,1.86,7.93,2.36],[74,3.80,1.88,7.71,2.43]];
+function benedictBVMT(age){ if(age==null) return null; var a=age; if(a<20)a=20; if(a>74)a=74; var best=BENEDICT_BVMT[0]; for(var i=0;i<BENEDICT_BVMT.length;i++){ if(Math.abs(BENEDICT_BVMT[i][0]-a)<Math.abs(best[0]-a)) best=BENEDICT_BVMT[i]; } return {lrn:[best[1],best[2]], del:[best[3],best[4]]}; }
+function _Tsc(raw,ms){ return ((raw-ms[0])/ms[1])*10+50; }
+function calcBVMT(){ const a=_num(el("bv1").value),b=_num(el("bv2").value),c=_num(el("bv3").value);
+  var _be=[a,b,c].filter(x=>x!==null).length; _flagIds(["bv1","bv2","bv3"], _be>0&&_be<3);
+  if(a===null||b===null||c===null){el("bvmt_out").innerHTML="";return;}
+  const r=scoreBVMT(a,b,c); _curBvmtTotal=r.total;
+  const nm=bvmtNorm(r.total,_num(el("bvmt_age").value),_num(el("bvmt_sex").value),_num(el("bvmt_edu").value),el("bvmt_race")?el("bvmt_race").value:"");
+  _flagIds(["bvmt_age","bvmt_sex","bvmt_edu"], nm===null);
+  let zhtml = nm ? (interp(nm.z<=-1.5?"bad":(nm.z<=-1?"warn":"good"),"Norm-based: <b>z = "+nm.z.toFixed(2)+"</b> (scaled "+nm.scaled+")"+(nm.z<=-1.5?" - impaired range":"")+".")+'<div class="note">Norms: Marrie RA, et al. regression-based norms in MS, <em>Front Neurol</em> 2021;11:621010.</div>') : '<div class="note">Enter age, sex &amp; education above for an automatic z-score.</div>';
+  if(nm) zhtml += '<div class="note">'+_zPlain(nm.z)+' (&ldquo;Norm-based&rdquo; means we compare with published scores from people of similar age, sex and education; about 0 = average.)</div>';
+  const dr=_num(el("bvmt_dr").value), bage=_num(el("bvmt_age").value), bd=benedictBVMT(bage);
+  let sub='<div class="chips"><span class="chip">Learning Index <b>'+r.learning+'</b>'+(bd?' (T '+_Tsc(r.learning,bd.lrn).toFixed(0)+')':'')+'</span>'+(dr!=null?'<span class="chip">Delayed Recall <b>'+dr+'</b>/12'+(bd?' (T '+_Tsc(dr,bd.del).toFixed(0)+')':'')+'</span>':'')+'</div>';
+  let subnote = bd ? '<div class="note">Sub-score T-scores (Learning, Delayed Recall): Benedict 1997 US age norms (T = 50 &plusmn; 10; &le; 35 ~ impaired). Total Recall z uses Marrie 2021.</div>' : '';
+  el("bvmt_out").innerHTML='<div class="scoreline"><div class="bigscore">'+r.total+'<small> / 36 Total Recall</small></div></div>'+sub+interp("neutral","Total Recall = T1+T2+T3. Learning = max(T2,T3) - T1. Delayed Recall after ~25 min. Higher is better.")+zhtml+subnote;
+}
+function _probit(p){ if(p<=0)return -6; if(p>=1)return 6;
+  var a=[-39.69683028665376,220.9460984245205,-275.9285104469687,138.3577518672690,-30.66479806614716,2.506628277459239];
+  var b=[-54.47609879822406,161.5858368580409,-155.6989798598866,66.80131188771972,-13.28068155288572];
+  var c=[-0.007784894002430293,-0.3223964580411365,-2.400758277161838,-2.549732539343734,4.374664141464968,2.938163982698783];
+  var dd=[0.007784695709041462,0.3224671290700398,2.445134137142996,3.754408661907416];
+  var pl=0.02425, ph=1-pl, q, r;
+  if(p<pl){ q=Math.sqrt(-2*Math.log(p)); return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((dd[0]*q+dd[1])*q+dd[2])*q+dd[3])*q+1); }
+  if(p<=ph){ q=p-0.5; r=q*q; return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1); }
+  q=Math.sqrt(-2*Math.log(1-p)); return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((dd[0]*q+dd[1])*q+dd[2])*q+dd[3])*q+1); }
+function _rate(x,N){ var p=x/N; if(p>=1)p=1-1/(2*N); if(p<=0)p=1/(2*N); return p; }
+function calcCVLT(){ const ts=["cv1","cv2","cv3","cv4","cv5"].map(id=>_num(el(id).value));
+  var _ce=ts.filter(x=>x!==null).length; _flagIds(["cv1","cv2","cv3","cv4","cv5"], _ce>0&&_ce<5);
+  if(ts.some(x=>x===null)){el("cvlt_out").innerHTML="";return;}
+  const r=scoreCVLT(ts); _curCvltTotal=r.total;
+  const nm=cvltNorm(r.total,_num(el("cvlt_age").value),_num(el("cvlt_sex").value),_num(el("cvlt_edu").value),el("cvlt_race")?el("cvlt_race").value:"");
+  _flagIds(["cvlt_age","cvlt_sex","cvlt_edu"], nm===null);
+  let zhtml = nm ? (interp(nm.z<=-1.5?"bad":(nm.z<=-1?"warn":"good"),"Norm-based: <b>z = "+nm.z.toFixed(2)+"</b> (scaled "+nm.scaled+")"+(nm.z<=-1.5?" - impaired range":"")+".")+'<div class="note">Norms: Marrie RA, et al. regression-based norms in MS, <em>Front Neurol</em> 2021;11:621010.</div>') : '<div class="note">Enter age, sex &amp; education above for an automatic z-score.</div>';
+  if(nm) zhtml += '<div class="note">'+_zPlain(nm.z)+' (&ldquo;Norm-based&rdquo; means we compare with published scores from people of similar age, sex and education; about 0 = average.)</div>';
+  el("cvlt_out").innerHTML='<div class="scoreline"><div class="bigscore">'+r.total+'<small> / 80 Total (Trials 1-5)</small></div></div><div class="chips"><span class="chip">Best trial <b>'+r.best+'</b></span><span class="chip">Learning slope (T5-T1) <b>'+r.slopeSimple+'</b></span><span class="chip">Avg increase/trial <b>'+r.avgInc.toFixed(2)+'</b></span><span class="chip">Regression slope <b>'+r.slopeReg.toFixed(2)+'</b></span></div>'+interp("neutral","Total verbal learning across 5 trials (higher better).")+zhtml+_cvltSub();
+}
+function _cvltDIcut(age,edu){ if(age==null||edu==null)return null; var ec=edu<12?0:(edu<16?1:2); var ag=age<40?0:age<60?1:age<70?2:age<80?3:4; var T=[[89,84,73,84,84],[91,89,89,84,77],[93,91,89,84,84]]; return T[ec][ag]; }
+function _ldfrScaled(r){ if(r<6)return 3; if(r<=6)return 4; if(r<=8)return 5; if(r<=9)return 6; if(r<=10)return 7; if(r<=11)return 8; if(r<=12)return 9; if(r<=13)return 10; if(r<=14)return 12; if(r<=15)return 13; return 16; }
+function ldfrT(raw,age,sex,edu){ if(raw==null||age==null||!sex||edu==null) return null; var sc=_ldfrScaled(raw); var pred=1.648+0.245*age-0.003*age*age+1.661*sex+0.073*edu; var z=(sc-pred)/2.93344; return z*10+50; }
+function _cvltSub(){ var sdfr=_num(el("cvlt_sdfr").value),ldfr=_num(el("cvlt_ldfr").value),hits=_num(el("cvlt_hits").value),fp=_num(el("cvlt_fp").value),intr=_num(el("cvlt_intr").value),fc=_num(el("cvlt_fc").value);
+  var c=[];
+  if(sdfr!=null)c.push('<span class="chip">SDFR <b>'+sdfr+'</b>/16</span>');
+  if(ldfr!=null){ var _lt=ldfrT(ldfr,_num(el("cvlt_age").value),_num(el("cvlt_sex").value),_num(el("cvlt_edu").value)); c.push('<span class="chip">LDFR <b>'+ldfr+'</b>/16'+(_lt!=null?' (T '+_lt.toFixed(0)+')':'')+'</span>'); }
+  if(hits!=null&&fp!=null){ var dp=_probit(_rate(hits,16))-_probit(_rate(fp,16)); c.push('<span class="chip">d&prime; <b>'+dp.toFixed(2)+'</b></span>'); }
+  if(hits!=null&&fp!=null&&intr!=null){ var di=(1-(fp+intr)/(hits+fp+intr))*100; var cut=_cvltDIcut(_num(el("cvlt_age").value),_num(el("cvlt_edu").value)); var imp=(cut!=null&&di<cut); c.push('<span class="chip">Discrim. index <b>'+di.toFixed(0)+'%</b>'+(cut!=null?' <small style="color:'+(imp?"#9b2c2c":"#216e39")+'">(cut-off '+cut+'%, '+(imp?"impaired":"WNL")+')</small>':'')+'</span>'); }
+  var fcflag="";
+  if(fc!=null){ c.push('<span class="chip">Forced Choice <b>'+fc+'</b>/16</span>'); if(fc<15) fcflag=interp("warn","Forced Choice "+fc+"/16 - at/below the CVLT-II Manual validity cut-off (&le;14; Delis 2000). Consider performance validity (some use &le;15 or &le;13)."); }
+  if(!c.length) return "";
+  return '<div class="subhead">Recognition &amp; delayed sub-scores</div><div class="chips">'+c.join("")+'</div>'+fcflag+'<div class="note">Abbreviations - SDFR: Short-Delay Free Recall; LDFR: Long-Delay Free Recall; d&prime; (d-prime): how well true items are distinguished from false ones (recognition discriminability); Discrim. index: % of responses that are correct rather than false positives or intrusions. LDFR T-score: Parmenter 2010 (CVLT-II MS norms; T = 50 &plusmn; 10, &le; 35 ~ impaired); cut-offs vs Norman 2000. SDFR has no published MS T-norm (raw only).</div>'; }
+function readMFIS(){ const o={}; for(let i=1;i<=21;i++){o[i]=_num(el("mf_"+i).value);} return o; }
+function calcMFIS(){ const o=readMFIS(); const answered=Object.values(o).filter(v=>v!==null).length; const r=scoreMFIS(o); if(answered>0&&answered<21)_flagBlanks("mf_",1,21);else _clearBlanks("mf_",1,21);
+  let cls = r.total>=38?"warn":"good";
+  let msg = r.total>=38 ? "Total ≥ 38 - suggests clinically significant fatigue (commonly cited threshold)." : "Below the commonly cited ≈38 threshold for significant fatigue.";
+  if(answered<21) msg = "⚠ Only "+answered+"/21 items answered - blanks count as 0 and lower the total. "+msg;
+  el("mfis_out").innerHTML='<div class="scoreline"><div class="bigscore">'+r.total+'<small> / 84 Total</small></div></div><div class="chips"><span class="chip">Physical <b>'+r.phys+'</b><small> /36</small></span><span class="chip">Cognitive <b>'+r.cog+'</b><small> /40</small></span><span class="chip">Psychosocial <b>'+r.psy+'</b><small> /8</small></span></div>'+interp(cls,msg)+'<div class="note">Higher = greater impact of fatigue. Subscales are simple sums of their items (no recoding).</div>';
+}
+function fillMFIS(v){ for(let i=1;i<=21;i++) el("mf_"+i).value=v; calcMFIS(); }
+function clearMFIS(){ for(let i=1;i<=21;i++) el("mf_"+i).value=""; _clearBlanks("mf_",1,21); el("mfis_out").innerHTML=""; }
+
+const MSQOL_GROUPS=[
+ ["Physical function","PF",[3,4,5,6,7,8,9,10,11,12]],
+ ["Role limitations - physical","RoleP",[13,14,15,16]],
+ ["Role limitations - emotional","RoleE",[17,18,19]],
+ ["Pain","Pain",[21,22,52]],
+ ["Energy / fatigue","Energy",[23,27,29,31,32]],
+ ["Emotional well-being","Emotional",[24,25,26,28,30]],
+ ["Health perceptions","HP",[1,34,35,36,37]],
+ ["Social function","Social",[20,33,51]],
+ ["Cognitive function","Cognitive",[42,43,44,45]],
+ ["Health distress","HealthDistress",[38,39,40,41]],
+ ["Sexual function","Sexual",[46,47,48,49]],
+ ["Overall quality of life","OverallQoL",[53,54]],
+ ["Single items","single",[2,50]],
+];
+const MSQOL_LABEL={1:"General health",2:"Health vs 1 year ago",3:"Vigorous activities",4:"Moderate activities",5:"Lifting/carrying groceries",6:"Several flights of stairs",7:"One flight of stairs",8:"Bending, kneeling, stooping",9:"Walking >1 mile",10:"Walking several blocks",11:"Walking one block",12:"Bathing / dressing",13:"Cut down time (physical)",14:"Accomplished less (physical)",15:"Limited in kind of activity",16:"Difficulty performing activity",17:"Cut down time (emotional)",18:"Accomplished less (emotional)",19:"Did activity less carefully",20:"Social activities interfered",21:"Amount of pain",22:"Pain interfered with work",23:"Full of pep",24:"Very nervous",25:"Down in the dumps",26:"Calm and peaceful",27:"Energy",28:"Downhearted and blue",29:"Worn out",30:"Happy person",31:"Tired",32:"Rested on waking",33:"Health interfered w/ social",34:"Worry about health",35:"Health vs others",36:"Expect health to worsen",37:"Health is excellent",38:"Discouraged by health",39:"Frustrated about health",40:"Health a burden",41:"Distressed / worried by health",42:"Concentration difficulty",43:"Memory difficulty",44:"Keeping attention",45:"Thinking difficulty",46:"Sexual - interest",47:"Sexual - arousal",48:"Sexual - orgasm/function",49:"Sexual - satisfaction",50:"Satisfaction w/ sexual function",51:"Family / social activities",52:"Pain",53:"Overall QoL (0–10)",54:"Quality-of-life ladder"};
+function _grpBar(base, idx){
+  return '<span style="float:right;font-weight:400">'
+    +'<button class="gbtn" onclick="'+base+'Normal('+idx+')">Normal</button>'
+    +'<button class="gbtn" onclick="'+base+'Max('+idx+')">Max</button>'
+    +'<button class="gbtn" onclick="'+base+'Reset('+idx+')">Reset</button></span>';
+}
+function _msqNormResp(i){ if(i===53) return 10; const m=MSQOL_RECODE[i]; const mx=Math.max.apply(null,Object.values(m)); return +Object.keys(m).find(k=>m[k]===mx); }
+function _msqMaxResp(i){ if(i===53) return 0; const m=MSQOL_RECODE[i]; const mn=Math.min.apply(null,Object.values(m)); return +Object.keys(m).find(k=>m[k]===mn); }
+function msqApply(si,mode){ const ids=MSQOL_FORM[si][1]; for(const i of ids){ const e=el("mq_"+i); if(!e) continue; e.value = mode==="reset"?"":(mode==="normal"?_msqNormResp(i):_msqMaxResp(i)); } calcMSQOL(); }
+function msqNormal(gi){msqApply(gi,"normal");} function msqMax(gi){msqApply(gi,"max");} function msqReset(gi){msqApply(gi,"reset");}
+function prApply(di,mode){ const d=PROMIS_DOMAINS[di]; const hb=d[3]; const nV=hb?5:1, xV=hb?1:5;
+  for(const i of d[2]){ const e=el("pr_"+i); if(!e) continue; e.value = mode==="reset"?"":(mode==="normal"?nV:xV); } calcPROMIS(); }
+function prNormal(di){prApply(di,"normal");} function prMax(di){prApply(di,"max");} function prReset(di){prApply(di,"reset");}
+
+const _O={
+ health:["Excellent","Very good","Good","Fair","Poor"],
+ compared:["Much better than 1 year ago","Somewhat better","About the same","Somewhat worse","Much worse"],
+ limited:["Yes, limited a lot","Yes, limited a little","No, not limited at all"],
+ yn:["Yes","No"],
+ intSl:["Not at all","Slightly","Moderately","Quite a bit","Extremely"],
+ intLb:["Not at all","A little bit","Moderately","Quite a bit","Extremely"],
+ pain6:["None","Very mild","Mild","Moderate","Severe","Very severe"],
+ time6:["All of the time","Most of the time","A good bit of the time","Some of the time","A little of the time","None of the time"],
+ time5:["All of the time","Most of the time","Some of the time","A little of the time","None of the time"],
+ tf:["Definitely true","Mostly true","Not sure","Mostly false","Definitely false"],
+ sex4:["Not a problem","A little of a problem","Somewhat of a problem","Very much a problem"],
+ satisf:["Very satisfied","Somewhat satisfied","Neither satisfied nor dissatisfied","Somewhat dissatisfied","Very dissatisfied"],
+ ladder:["1 - Worst possible","2","3","4","5","6","7 - Best possible"]
+};
+const MSQOL_Q={
+1:"In general, would you say your health is:",
+2:"Compared to one year ago, how would you rate your health in general now?",
+3:"Does your health limit you: Vigorous activities (running, lifting heavy objects, strenuous sports)?",
+4:"Moderate activities (moving a table, vacuuming, bowling, golf)?",
+5:"Lifting or carrying groceries?",
+6:"Climbing several flights of stairs?",
+7:"Climbing one flight of stairs?",
+8:"Bending, kneeling, or stooping?",
+9:"Walking more than a mile?",
+10:"Walking several blocks?",
+11:"Walking one block?",
+12:"Bathing and dressing yourself?",
+13:"(Physical health) Cut down the amount of time spent on work or other activities",
+14:"(Physical health) Accomplished less than you would like",
+15:"(Physical health) Were limited in the kind of work or activities",
+16:"(Physical health) Had difficulty performing the work or activities (took extra effort)",
+17:"(Emotional) Cut down the amount of time spent on work or other activities",
+18:"(Emotional) Accomplished less than you would like",
+19:"(Emotional) Didn't do work or activities as carefully as usual",
+20:"To what extent has your physical health or emotional problems interfered with your normal social activities?",
+21:"How much bodily pain have you had during the past 4 weeks?",
+22:"During the past 4 weeks, how much did pain interfere with your normal work (incl. housework)?",
+23:"Did you feel full of pep?",
+24:"Have you been a very nervous person?",
+25:"Have you felt so down in the dumps that nothing could cheer you up?",
+26:"Have you felt calm and peaceful?",
+27:"Did you have a lot of energy?",
+28:"Have you felt downhearted and blue?",
+29:"Did you feel worn out?",
+30:"Have you been a happy person?",
+31:"Did you feel tired?",
+32:"Did you feel rested on waking in the morning?",
+33:"How much of the time has your physical/emotional health interfered with your social activities?",
+34:"I seem to get sick a little easier than other people",
+35:"I am as healthy as anybody I know",
+36:"I expect my health to get worse",
+37:"My health is excellent",
+38:"Were you discouraged by your health problems?",
+39:"Were you frustrated about your health?",
+40:"Was your health a worry in your life?",
+41:"Did you feel weighed down by your health problems?",
+42:"Have you had difficulty concentrating and thinking?",
+43:"Did you have trouble keeping your attention on an activity for long?",
+44:"Have you had trouble with your memory?",
+45:"Have others noticed that you have trouble with your memory or concentration?",
+46:"(Sexual function) Lack of sexual interest",
+47:"Difficulty getting/keeping an erection (or inadequate lubrication)",
+48:"Difficulty having orgasm",
+49:"Ability to satisfy sexual partner",
+50:"Overall, how satisfied were you with your sexual function during the past 4 weeks?",
+51:"To what extent have bowel/bladder problems interfered with your normal social activities?",
+52:"During the past 4 weeks, how much did pain interfere with your enjoyment of life?",
+53:"Overall, how would you rate your own quality of life? (0 = worst, 10 = best)",
+54:"Which best describes how you feel about your life as a whole? (1 = worst possible … 7 = best possible)"
+};
+const MSQOL_FORM=[
+ ["General health",[1,2]],
+ ["Physical limitations (does your health limit you?)",[3,4,5,6,7,8,9,10,11,12]],
+ ["Role limitations - physical health",[13,14,15,16]],
+ ["Role limitations - emotional problems",[17,18,19]],
+ ["Social activities & pain",[20,21,22]],
+ ["How you have felt (past 4 weeks)",[23,24,25,26,27,28,29,30,31,32]],
+ ["Social interference",[33]],
+ ["Health in general (true / false)",[34,35,36,37]],
+ ["Health distress",[38,39,40,41]],
+ ["Cognitive function",[42,43,44,45]],
+ ["Sexual function",[46,47,48,49]],
+ ["Sexual satisfaction, bowel/bladder, pain & overall QoL",[50,51,52,53,54]]
+];
+function _msqOpts(i){
+  const M={1:_O.health,2:_O.compared,20:_O.intSl,51:_O.intSl,52:_O.intSl,21:_O.pain6,22:_O.intLb,33:_O.time5,50:_O.satisf,54:_O.ladder};
+  if(M[i]) return M[i];
+  if(i>=3&&i<=12) return _O.limited;
+  if(i>=13&&i<=19) return _O.yn;
+  if((i>=23&&i<=32)||(i>=38&&i<=45)) return _O.time6;
+  if(i>=34&&i<=37) return _O.tf;
+  if(i>=46&&i<=49) return _O.sex4;
+  return null;
+}
+function buildMSQOL(){
+  let html="";
+  for(let si=0; si<MSQOL_FORM.length; si++){
+    const sec=MSQOL_FORM[si], title=sec[0], ids=sec[1];
+    html+='<div class="subhead">'+title+_grpBar("msq",si)+'</div><div class="items">';
+    for(const i of ids){
+      let ctrl;
+      if(i===53){ ctrl='<input type="number" id="mq_53" min="0" max="10" style="width:90px" oninput="calcMSQOL()">'; }
+      else { const labs=_msqOpts(i); let opts="";
+        for(let j=0;j<labs.length;j++) opts+='<option value="'+(j+1)+'">'+(j+1)+' - '+labs[j]+'</option>';
+        ctrl='<select id="mq_'+i+'" oninput="calcMSQOL()"><option value="">- select -</option>'+opts+'</select>'; }
+      html+='<div class="item"><div><span class="qn">'+i+'.</span>'+MSQOL_Q[i]+'</div>'+ctrl+'</div>';
+    }
+    html+='</div>';
+  }
+  el("msqol_items").innerHTML=html;
+}
+function readMSQOL(){ const o={}; for(let i=1;i<=54;i++){const e=el("mq_"+i); if(e) o[i]=_num(e.value);} return o; }
+function fmtV(v){ return v==null ? '<span style="color:#9b2c2c">NA</span>' : (Math.round(v*10)/10); }
+function calcMSQOL(){
+  const o=readMSQOL(); const answered=Object.values(o).filter(v=>v!=null).length;
+  if(answered>0&&answered<54)_flagBlanks("mq_",1,54);else _clearBlanks("mq_",1,54);
+  if(answered===0){ el("msqol_out").innerHTML=""; return; }
+  const s=scoreMSQOL(o);
+  const subRows=MSQOL_GROUPS.filter(g=>g[1]!=="single").map(g=>'<span class="chip">'+g[0]+' <b>'+fmtV(s[g[1]])+'</b></span>').join("");
+  el("msqol_out").innerHTML='<div class="scoreline"><div class="bigscore">'+fmtV(s.PHC)+'<small> Physical Health Composite</small></div><div class="bigscore">'+fmtV(s.MHC)+'<small> Mental Health Composite</small></div></div><div class="subhead">Subscales (0–100, higher better)</div><div class="chips">'+subRows+'</div><div class="chips" style="margin-top:8px"><span class="chip">Change in health (Q2) <b>'+fmtV(s.ChangeHealth)+'</b></span><span class="chip">Satisfaction w/ sexual function (Q50) <b>'+fmtV(s.SatSexual)+'</b></span></div>'+interp("neutral", answered<54 ? ("Scored on "+answered+"/54 answered items. Subscales average over answered items only; a subscale or composite shows NA if a required part is fully missing.") : "All 54 items answered. Composites are weighted sums of subscales; NA propagates if a constituent subscale is missing.")+'<div class="note">Higher = better quality of life. Reverse-keyed items and the 32/33/37 placement are handled per the UCLA scoring form.</div>';
+}
+function clearMSQOL(){ for(let i=1;i<=54;i++){const e=el("mq_"+i); if(e) e.value="";} _clearBlanks("mq_",1,54); el("msqol_out").innerHTML=""; }
+buildMSQOL();
+const PR_PF=[["Without any difficulty",5],["With a little difficulty",4],["With some difficulty",3],["With much difficulty",2],["Unable to do",1]];
+const PR_FREQ=[["Never",1],["Rarely",2],["Sometimes",3],["Often",4],["Always",5]];
+const PR_SEV=[["Not at all",1],["A little bit",2],["Somewhat",3],["Quite a bit",4],["Very much",5]];
+const PR_SOC=[["Never",5],["Rarely",4],["Sometimes",3],["Often",2],["Always",1]];
+const PR_SLQ=[["Very poor",5],["Poor",4],["Fair",3],["Good",2],["Very good",1]];
+const PR_SLR=[["Not at all",5],["A little bit",4],["Somewhat",3],["Quite a bit",2],["Very much",1]];
+const PROMIS_Q={
+1:"Are you able to do chores such as vacuuming or yard work?",
+2:"Are you able to go up and down stairs at a normal pace?",
+3:"Are you able to go for a walk for at least 15 minutes?",
+4:"Are you able to run errands and shop?",
+5:"I felt fearful…",6:"I found it hard to focus on anything other than my anxiety",
+7:"My worries overwhelmed me…",8:"I felt uneasy…",
+9:"I felt worthless…",10:"I felt helpless…",11:"I felt depressed…",12:"I felt hopeless…",
+13:"I feel fatigued…",14:"I have trouble starting things because I am tired",
+15:"How run-down did you feel on average?",16:"How fatigued were you on average?",
+17:"My sleep quality was…",18:"My sleep was refreshing…",19:"I had a problem with my sleep…",20:"I had difficulty falling asleep…",
+21:"I have trouble doing all of my regular leisure activities with others",
+22:"I have trouble doing all of the family activities that I want to do",
+23:"I have trouble doing all of my usual work (including work at home)",
+24:"I have trouble doing all of the activities with friends that I want to do",
+25:"How much did pain interfere with your day-to-day activities?",
+26:"How much did pain interfere with work around the home?",
+27:"How much did pain interfere with your ability to participate in social activities?",
+28:"How much did pain interfere with your household chores?"
+};
+function _prOpts(i){
+  if(i>=1&&i<=4) return PR_PF;
+  if(i>=5&&i<=12) return PR_FREQ;
+  if(i>=13&&i<=16) return PR_SEV;
+  if(i===17) return PR_SLQ;
+  if(i===18) return PR_SLR;
+  if(i===19||i===20) return PR_SEV;
+  if(i>=21&&i<=24) return PR_SOC;
+  if(i>=25&&i<=28) return PR_SEV;
+  return PR_SEV;
+}
+function buildPROMIS(){
+  let html='<div class="note" style="margin-bottom:10px">Recall period: the past 7 days. Pick the response for each item.</div>';
+  for(let di=0; di<PROMIS_DOMAINS.length; di++){ const d=PROMIS_DOMAINS[di];
+    html+='<div class="subhead">'+d[0]+_grpBar("pr",di)+'</div><div class="items">';
+    for(const i of d[2]){ const labs=_prOpts(i); let opts="";
+      for(let j=0;j<labs.length;j++) opts+='<option value="'+labs[j][1]+'">'+labs[j][1]+' - '+labs[j][0]+'</option>';
+      html+='<div class="item"><div><span class="qn">'+i+'.</span>'+PROMIS_Q[i]+'</div><select id="pr_'+i+'" oninput="calcPROMIS()"><option value="">- select -</option>'+opts+'</select></div>'; }
+    html+='</div>'; }
+  html+='<div class="subhead">Pain intensity</div><div class="items"><div class="item"><div><span class="qn">29.</span>In the past 7 days, how would you rate your pain on average? (0 = no pain, 10 = worst imaginable)</div><input type="number" id="pr_pi" min="0" max="10" oninput="calcPROMIS()" style="width:90px"></div></div>';
+  el("promis_items").innerHTML=html;
+}
+const PROMIS_T={
+ phys:[22.6,26.6,28.9,30.6,31.9,33.2,34.4,35.6,36.7,37.9,39.2,40.5,41.9,43.5,45.5,48.8,57.0],
+ anx:[40.3,48.0,51.2,53.7,55.8,57.7,59.6,61.4,63.4,65.8,67.9,69.9,71.2,73.3,75.4,77.9,81.6],
+ dep:[41.0,49.0,51.8,53.9,55.7,57.3,58.9,60.5,62.1,63.7,65.3,67.0,68.9,71.0,73.2,75.7,79.4],
+ fat:[33.7,39.7,43.1,46.0,48.6,51.0,53.1,55.0,57.0,58.8,60.7,62.7,64.6,66.7,68.9,71.6,75.8],
+ sleep:[32.0,37.6,41.1,43.8,46.2,48.4,50.6,52.4,54.3,56.1,57.8,59.8,61.7,63.8,66.0,68.8,73.8],
+ social:[27.6,31.8,34.0,35.7,37.3,38.8,40.6,42.0,44.2,46.1,48.1,50.0,51.9,53.7,55.8,58.8,64.2],
+ painint:[41.6,49.6,52.0,53.8,55.6,57.0,58.5,59.8,61.2,62.6,63.8,65.2,66.6,68.0,69.7,71.6,75.6]
+};
+function promisT(key,raw){ const a=PROMIS_T[key]; if(!a||raw==null||raw<4||raw>20) return null; return a[raw-4]; }
+function tBand(key,T){ if(T==null) return null;
+  if(key==="phys"||key==="social"){ if(T>=45)return["good","within normal limits"]; if(T>=40)return["warn","mild limitation"]; if(T>=30)return["warn","moderate limitation"]; return["bad","severe limitation"]; }
+  if(T<55)return["good","none to slight"]; if(T<60)return["warn","mild"]; if(T<70)return["warn","moderate"]; return["bad","severe"]; }
+function calcPROMIS(){
+  const resp={}; for(let i=1;i<=28;i++){const e=el("pr_"+i); if(e) resp[i]=_num(e.value);}
+  const pi=_num(el("pr_pi")?el("pr_pi").value:null);
+  const answered=Object.values(resp).filter(v=>v!=null).length + (pi!=null?1:0);
+  if(answered>0&&answered<29){_flagBlanks("pr_",1,28);var _pb=el("pr_pi");if(_pb){if(_pb.value==="")_pb.classList.add("blank");else _pb.classList.remove("blank");}}else{_clearBlanks("pr_",1,28);var _pb2=el("pr_pi");if(_pb2)_pb2.classList.remove("blank");}
+  if(answered===0){ el("promis_out").innerHTML=""; return; }
+  const o=scorePROMIS(resp,pi); const col=c=>c==="good"?"#216e39":c==="warn"?"#9a6700":"#9b2c2c"; let chips="";
+  for(const d of PROMIS_DOMAINS){ const v=o[d[1]]; const T=promisT(d[1],v); const band=tBand(d[1],T);
+    chips+='<span class="chip">'+d[0]+' <b>'+(v==null?'<span style="color:#9b2c2c">NA</span>':v)+'</b>'+(T!=null?' &rarr; T '+T.toFixed(1):'')+(band?' <small style="color:'+col(band[0])+'">('+band[1]+')</small>':'')+'</span>'; }
+  const pb=promisBand("painIntensity",o.painIntensity);
+  chips+='<span class="chip">Pain intensity <b>'+(o.painIntensity==null?'NA':o.painIntensity)+'</b>'+(pb?' <small style="color:'+col(pb[0])+'">('+pb[1]+')</small>':'')+'</span>';
+  el("promis_out").innerHTML='<div class="subhead">Domains: raw (4&ndash;20) &rarr; official T-score</div><div class="chips">'+chips+'</div>'
+    +interp("neutral", answered<29?("Answered "+answered+"/29 items. A domain needs all 4 items for a valid T-score (shows NA otherwise)."):"All items answered. T-scores are standardised to the US general population (mean 50, SD 10).")
+    +'<div class="note">T-scores: HealthMeasures PROMIS Adult Profile Scoring Manual (raw&rarr;T tables). Higher Physical-Function &amp; Social = better; higher symptom domains = worse. Pain intensity is a single 0-10 item (no T-score).</div>';
+}
+function clearPROMIS(){ for(let i=1;i<=28;i++){const e=el("pr_"+i); if(e) e.value="";} const p=el("pr_pi"); if(p){p.value="";p.classList.remove("blank");} _clearBlanks("pr_",1,28); el("promis_out").innerHTML=""; }
+buildPROMIS();
+var HOWTO={
+ sdmt:"Enter the number of correct answers, plus age, sex and education so the score can be compared with published norms. Everything updates automatically; required boxes left empty are highlighted in amber.",
+ pasat:"Enter the number of correct responses. The z-score versus the Task Force reference appears automatically.",
+ bvmt:"Enter the three immediate-recall trials (Delayed Recall is optional), plus age, sex and education for the norm. Results update automatically; required boxes still empty are highlighted in amber.",
+ cvlt:"Enter the five List A trials, plus age, sex and education for the norm. Optional recognition/delayed sub-scores can be added below. Results update automatically; missing required boxes are highlighted in amber.",
+ pdds:"Pick the step that best matches you - the list below explains each step in plain language. The result appears automatically.",
+ edss:"Pick your EDSS (or estimate it with the Quick Check), then enter your age (and, if you can, years since your MS began). Your severity scores appear automatically.",
+ t25fw:"Enter both timed trials in seconds. The average and standardised score appear automatically; a required trial left empty is highlighted in amber.",
+ nhpt:"Enter both trials for each hand in seconds. The averages and standardised score appear automatically; missing required trials are highlighted in amber.",
+ bicams:"Enter the demographics once, then open each test with the buttons, enter its values, and press Calculate BICAMS. All three z-scores are computed together.",
+ msfc:"Open T25FW, 9-HPT and PASAT-3 with the buttons and enter their values, then press Calculate MSFC. The three are combined into one z-score automatically.",
+ mfis:"Answer all 21 items (or use the All / Clear buttons). The total and subscales update automatically; any item left blank is highlighted in amber.",
+ fss:"Answer all 9 items (or use the All / Clear buttons). The mean updates automatically; blanks are highlighted in amber.",
+ phq9:"Answer all 9 items (or use the All / Clear buttons). The total and severity band update automatically; blanks are highlighted in amber.",
+ gad7:"Answer all 7 items (or use the All / Clear buttons). The total and severity band update automatically; blanks are highlighted in amber.",
+ msws:"Answer all 12 items (or use the All / Clear buttons). The 0-100 walking-impact score needs every item; any blank is highlighted in amber.",
+ msis:"Answer all 29 items (or use the All / Clear buttons). Each subscale needs its items for a 0-100 score; blanks are highlighted in amber.",
+ msqol:"Answer every item. Each section has Normal / Max / Reset buttons. Scores update automatically; any unanswered item is highlighted in amber so you can find what is missing.",
+ promis:"Answer all items in each domain plus the pain rating. T-scores update automatically; a domain needs all four of its items, and blanks are highlighted in amber."
+};
+document.querySelectorAll(".panel").forEach(function(p){ var id=(p.id||"").replace("p_",""); var t=HOWTO[id]; if(!t) return; var lead=p.querySelector(".lead"); var d=document.createElement("details"); d.className="howto"; d.innerHTML='<summary>\u2139\uFE0F How it works</summary><div>'+t+'</div>'; if(lead&&lead.parentNode){ lead.parentNode.insertBefore(d,lead.nextSibling);} else { p.insertBefore(d,p.firstChild);} });
+
+// ===== Export / print utilities =====
+var EXPORT_SRC={ bicams:["bicams","sdmt","cvlt","bvmt"], msfc:["msfc","t25fw","nhpt","pasat"] };
+function _collectInputs(toolId){ const ids=EXPORT_SRC[toolId]||[toolId]; const o={};
+  ids.forEach(function(tid){ const p=el("p_"+tid); if(!p) return; p.querySelectorAll("input,select").forEach(function(e){ if(e.id && e.value!=="") o[e.id]=(e.tagName==="SELECT"&&e.selectedOptions[0]?e.selectedOptions[0].text:e.value); }); });
+  return o; }
+function _resultText(toolId){ const r=el(toolId+"_out"); return r? r.textContent.replace(/\s+/g," ").trim() : ""; }
+function _download(fn,txt,mime){ const b=new Blob([txt],{type:mime}); const u=URL.createObjectURL(b);
+  const a=document.createElement("a"); a.href=u; a.download=fn; document.body.appendChild(a); a.click();
+  a.remove(); setTimeout(()=>URL.revokeObjectURL(u),1500); }
+function exportJSON(toolId,name){ const res=_resultText(toolId); if(!res){alert("Enter the scores and view the result first.");return;}
+  const data={tool:name, generated:new Date().toISOString(), inputs:_collectInputs(toolId), result:res};
+  _download(name.replace(/[^\w]+/g,"_")+".json", JSON.stringify(data,null,2), "application/json"); }
+function exportCSV(toolId,name){ const res=_resultText(toolId); const inp=_collectInputs(toolId);
+  if(!res && !Object.keys(inp).length){alert("Enter the scores and view the result first.");return;}
+  const esc=c=>'"'+String(c).replace(/"/g,'""')+'"';
+  const keys=Object.keys(inp); const headers=["Tool"].concat(keys).concat(["Result"]); const vals=[name].concat(keys.map(k=>inp[k])).concat([res]);
+  const csv=headers.map(esc).join(",")+"\r\n"+vals.map(esc).join(",");
+  _download(name.replace(/[^\w]+/g,"_")+".csv", csv, "text/csv"); }
+function patientSummary(toolId,name){ const r=el(toolId+"_out");
+  if(!r||!r.textContent.trim()){alert("Enter values first.");return;}
+  const clone=r.cloneNode(true); clone.querySelectorAll(".note").forEach(n=>n.remove());
+  el("pc_title").textContent=name+" \u2014 your result";
+  el("pc_date").textContent=new Date().toLocaleDateString();
+  el("pc_body").innerHTML=clone.innerHTML; el("printcard").classList.add("show"); }
+function closePC(){ el("printcard").classList.remove("show"); }
+
+// ===== FSS =====
+const FSS_TEXT={1:"My motivation is lower when I am fatigued.",2:"Exercise brings on my fatigue.",3:"I am easily fatigued.",4:"Fatigue interferes with my physical functioning.",5:"Fatigue causes frequent problems for me.",6:"My fatigue prevents sustained physical functioning.",7:"Fatigue interferes with carrying out certain duties and responsibilities.",8:"Fatigue is among my three most disabling symptoms.",9:"Fatigue interferes with my work, family, or social life."};
+el("fss_items").innerHTML=Array.from({length:9},(_,k)=>{const i=k+1;
+  const labs={1:"1 - Strongly disagree",2:"2",3:"3",4:"4 - Neutral",5:"5",6:"6",7:"7 - Strongly agree"};
+  let opts=""; for(let v=1;v<=7;v++) opts+='<option value="'+v+'">'+labs[v]+'</option>';
+  return '<div class="item"><div><span class="qn">'+i+'.</span>'+FSS_TEXT[i]+'</div><select id="fss_'+i+'" oninput="calcFSS()"><option value="">- select -</option>'+opts+'</select></div>';}).join("");
+function readFSS(){const o={};for(let i=1;i<=9;i++)o[i]=_num(el("fss_"+i).value);return o;}
+function calcFSS(){const o=readFSS();const r=scoreFSS(o); if(r.answered===0){el("fss_out").innerHTML="";return;} if(r.answered<9)_flagBlanks("fss_",1,9);else _clearBlanks("fss_",1,9);
+  const m=r.mean; const cls=m>=5?"bad":m>=4?"warn":"good";
+  const msg=m>=5?"Mean &ge; 5 - severe fatigue.":m>=4?"Mean &ge; 4 - clinically significant fatigue (common cut-off).":"Below the &asymp;4 cut-off for significant fatigue.";
+  const note=(r.answered<9?("&#9888; "+r.answered+"/9 answered - the mean uses answered items only. "):"")+"Score = average of the 9 items (1&ndash;7). Higher = more fatigue impact. Where the person sits: a mean &ge;4 indicates more fatigue than most people without a fatiguing condition.";
+  el("fss_out").innerHTML='<div class="scoreline"><div class="bigscore">'+m.toFixed(2)+'<small> mean (1–7)</small></div></div>'+interp(cls,msg)+'<div class="note">'+note+'</div>';}
+function fillFSS(v){for(let i=1;i<=9;i++)el("fss_"+i).value=v;calcFSS();}
+function clearFSS(){for(let i=1;i<=9;i++)el("fss_"+i).value="";_clearBlanks("fss_",1,9);el("fss_out").innerHTML="";}
+
+// ===== PHQ-9 / GAD-7 shared options =====
+const _DSM4=[["0 - Not at all",0],["1 - Several days",1],["2 - More than half the days",2],["3 - Nearly every day",3]];
+function _dsmSel(id){let opts="";for(const o of _DSM4)opts+='<option value="'+o[1]+'">'+o[0]+'</option>';return '<select id="'+id+'" oninput="'+(id.indexOf("phq")===0?"calcPHQ":"calcGAD")+'()"><option value="">- select -</option>'+opts+'</select>';}
+const PHQ_TEXT={1:"Little interest or pleasure in doing things",2:"Feeling down, depressed, or hopeless",3:"Trouble falling or staying asleep, or sleeping too much",4:"Feeling tired or having little energy",5:"Poor appetite or overeating",6:"Feeling bad about yourself - or that you are a failure or have let yourself or your family down",7:"Trouble concentrating on things, such as reading the newspaper or watching television",8:"Moving or speaking so slowly that other people could have noticed - or the opposite, being so fidgety or restless that you have been moving around a lot more than usual",9:"Thoughts that you would be better off dead, or of hurting yourself in some way"};
+el("phq_items").innerHTML=Array.from({length:9},(_,k)=>{const i=k+1;
+  return '<div class="item"><div><span class="qn">'+i+'.</span>'+PHQ_TEXT[i]+'</div>'+_dsmSel("phq_"+i)+'</div>';}).join("");
+function readPHQ(){const o={};for(let i=1;i<=9;i++)o[i]=_num(el("phq_"+i).value);return o;}
+function calcPHQ(){const o=readPHQ();const ans=Object.values(o).filter(v=>v!=null).length;if(ans===0){el("phq9_out").innerHTML="";return;} if(ans<9)_flagBlanks("phq_",1,9);else _clearBlanks("phq_",1,9);
+  const r=scorePHQ(o);const t=r.total;
+  const band=t<=4?["good","Minimal"]:t<=9?["neutral","Mild"]:t<=14?["warn","Moderate"]:t<=19?["warn","Moderately severe"]:["bad","Severe"];
+  let extra="";
+  if(o[9]!=null&&o[9]>0){extra=interp("bad","<b>Item 9 endorsed.</b> Thoughts of being better off dead or of self-harm were reported. Talk with the person directly and help connect them to appropriate support. If there is any immediate danger, contact local emergency services; in the US you can call or text <b>988</b> (Suicide &amp; Crisis Lifeline).");}
+  const note=(ans<9?("&#9888; "+ans+"/9 answered - blanks count as 0. "):"")+"PHQ-9 is a screen, not a diagnosis. Cut-points: 5 mild, 10 moderate, 15 moderately severe, 20 severe; &ge;10 has good sensitivity/specificity for major depression.";
+  el("phq9_out").innerHTML='<div class="scoreline"><div class="bigscore">'+t+'<small> / 27</small></div></div>'+interp(band[0],"Depression severity: <b>"+band[1]+"</b>.")+extra+'<div class="note">'+note+'</div>';}
+function fillPHQ(v){for(let i=1;i<=9;i++)el("phq_"+i).value=v;calcPHQ();}
+function clearPHQ(){for(let i=1;i<=9;i++)el("phq_"+i).value="";_clearBlanks("phq_",1,9);el("phq9_out").innerHTML="";}
+
+// ===== GAD-7 =====
+const GAD_TEXT={1:"Feeling nervous, anxious, or on edge",2:"Not being able to stop or control worrying",3:"Worrying too much about different things",4:"Trouble relaxing",5:"Being so restless that it is hard to sit still",6:"Becoming easily annoyed or irritable",7:"Feeling afraid, as if something awful might happen"};
+el("gad_items").innerHTML=Array.from({length:7},(_,k)=>{const i=k+1;
+  return '<div class="item"><div><span class="qn">'+i+'.</span>'+GAD_TEXT[i]+'</div>'+_dsmSel("gad_"+i)+'</div>';}).join("");
+function readGAD(){const o={};for(let i=1;i<=7;i++)o[i]=_num(el("gad_"+i).value);return o;}
+function calcGAD(){const o=readGAD();const ans=Object.values(o).filter(v=>v!=null).length;if(ans===0){el("gad7_out").innerHTML="";return;} if(ans<7)_flagBlanks("gad_",1,7);else _clearBlanks("gad_",1,7);
+  const r=scoreGAD(o);const t=r.total;
+  const band=t<=4?["good","Minimal"]:t<=9?["neutral","Mild"]:t<=14?["warn","Moderate"]:["bad","Severe"];
+  const note=(ans<7?("&#9888; "+ans+"/7 answered - blanks count as 0. "):"")+"GAD-7 is a screen, not a diagnosis. Cut-points: 5 mild, 10 moderate, 15 severe; &ge;10 is a reasonable threshold for further assessment of generalized anxiety.";
+  el("gad7_out").innerHTML='<div class="scoreline"><div class="bigscore">'+t+'<small> / 21</small></div></div>'+interp(band[0],"Anxiety severity: <b>"+band[1]+"</b>.")+'<div class="note">'+note+'</div>';}
+function fillGAD(v){for(let i=1;i<=7;i++)el("gad_"+i).value=v;calcGAD();}
+function clearGAD(){for(let i=1;i<=7;i++)el("gad_"+i).value="";_clearBlanks("gad_",1,7);el("gad7_out").innerHTML="";}
+
+// ===== MSWS-12 =====
+const MSWS_TEXT={1:"Limited your ability to walk",2:"Limited your ability to run",3:"Limited the distance you can walk",4:"Limited walking smoothness/steadiness",5:"Needed effort to walk",6:"Limited your balance when standing or walking",7:"Limited how long you can be on your feet",8:"Needed support indoors (walls, furniture)",9:"Needed a walking aid (cane, walker)",10:"Made walking slower",11:"Needed more concentration to walk",12:"Made you avoid activities that involve walking"};
+const _MSWS5=[["1 - Not at all",1],["2 - A little",2],["3 - Moderately",3],["4 - Quite a bit",4],["5 - Extremely",5]];
+function _sel5(id,fn){let o="";for(const x of _MSWS5)o+='<option value="'+x[1]+'">'+x[0]+'</option>';return '<select id="'+id+'" oninput="'+fn+'()"><option value="">- select -</option>'+o+'</select>';}
+el("msws_items").innerHTML='<div class="note" style="margin-bottom:8px">In the past 2 weeks, how much has your MS&hellip;</div>'+Array.from({length:12},(_,k)=>{const i=k+1;return '<div class="item"><div><span class="qn">'+i+'.</span>'+MSWS_TEXT[i]+'</div>'+_sel5("msws_"+i,"calcMSWS")+'</div>';}).join("");
+function readMSWS(){const o={};for(let i=1;i<=12;i++)o[i]=_num(el("msws_"+i).value);return o;}
+function calcMSWS(){const o=readMSWS();const ans=Object.values(o).filter(v=>v!=null).length;if(ans===0){el("msws_out").innerHTML="";return;} if(ans<12)_flagBlanks("msws_",1,12);else _clearBlanks("msws_",1,12);
+  const r=scoreMSWS(o);
+  if(r.transformed==null){el("msws_out").innerHTML=interp("neutral","Answered "+ans+"/12. MSWS-12 needs all 12 items for a valid 0–100 score.");return;}
+  const t=r.transformed; const cls=t>=70?"bad":t>=40?"warn":t>=1?"neutral":"good";
+  const msg=t<1?"No walking limitation reported.":"Walking-impact score "+t.toFixed(1)+"/100 - higher means MS limits walking more. Where the person sits: 0 = no impact, 100 = maximum impact reported.";
+  el("msws_out").innerHTML='<div class="scoreline"><div class="bigscore">'+t.toFixed(1)+'<small> / 100</small></div></div>'+interp(cls,msg)+'<div class="note">Raw sum '+r.raw+'/60 → transformed ((sum−12)/48)×100. Patient-reported; complements the examined EDSS.</div>';}
+function fillMSWS(v){for(let i=1;i<=12;i++)el("msws_"+i).value=v;calcMSWS();}
+function clearMSWS(){for(let i=1;i<=12;i++)el("msws_"+i).value="";_clearBlanks("msws_",1,12);el("msws_out").innerHTML="";}
+
+// ===== MSIS-29 =====
+const MSIS_TEXT={1:"Doing physically demanding tasks",2:"Gripping things tightly (e.g. turning taps)",3:"Carrying things",4:"Problems with your balance",5:"Difficulty moving about indoors",6:"Being clumsy",7:"Stiffness",8:"Heavy arms and/or legs",9:"Tremor of arms and/or legs",10:"Spasms in your limbs",11:"Your body not doing what you want it to",12:"Having to depend on others to do things",13:"Limitations in social/leisure activities at home",14:"Being stuck at home more than you would like",15:"Difficulty using your hands in everyday tasks",16:"Having to cut down time on work/daily activities",17:"Problems using transport (car, bus, train)",18:"Taking longer to do things",19:"Difficulty doing things spontaneously",20:"Needing to go to the toilet urgently",21:"Feeling unwell",22:"Problems sleeping",23:"Feeling mentally fatigued",24:"Worries related to your MS",25:"Feeling anxious or tense",26:"Feeling irritable/impatient/short-tempered",27:"Problems concentrating",28:"Lack of confidence",29:"Feeling depressed"};
+el("msis_items").innerHTML='<div class="subhead">Physical impact (items 1–20)</div><div class="items">'+
+  MSIS_PHYS.map(i=>'<div class="item"><div><span class="qn">'+i+'.</span>'+MSIS_TEXT[i]+'</div>'+_sel5("msis_"+i,"calcMSIS")+'</div>').join("")+
+  '</div><div class="subhead">Psychological impact (items 21–29)</div><div class="items">'+
+  MSIS_PSY.map(i=>'<div class="item"><div><span class="qn">'+i+'.</span>'+MSIS_TEXT[i]+'</div>'+_sel5("msis_"+i,"calcMSIS")+'</div>').join("")+'</div>';
+function readMSIS(){const o={};for(let i=1;i<=29;i++)o[i]=_num(el("msis_"+i).value);return o;}
+function calcMSIS(){const o=readMSIS();const ans=Object.values(o).filter(v=>v!=null).length;if(ans===0){el("msis_out").innerHTML="";return;} if(ans<29)_flagBlanks("msis_",1,29);else _clearBlanks("msis_",1,29);
+  const r=scoreMSIS(o); const f=v=>v==null?'<span style="color:#9b2c2c">NA</span>':v.toFixed(1);
+  const band=v=>v==null?"neutral":v>=70?"bad":v>=40?"warn":"good";
+  const note=(r.physAns<20||r.psyAns<9)?("⚠ A subscale needs all its items for a 0–100 score (Physical "+r.physAns+"/20, Psychological "+r.psyAns+"/9). "):"";
+  const worse = r.physT!=null&&r.psyT!=null ? (r.physT>=r.psyT?"physical":"psychological") : null;
+  const msg = worse ? ("Higher = greater impact of MS. The "+worse+" impact is currently the larger of the two.") : "Higher = greater impact of MS on this aspect of life.";
+  el("msis_out").innerHTML='<div class="scoreline"><div class="bigscore">'+f(r.physT)+'<small> Physical /100</small></div><div class="bigscore">'+f(r.psyT)+'<small> Psychological /100</small></div></div>'+interp(band(r.physT==null?r.psyT:Math.max(r.physT,r.psyT||0)),msg)+'<div class="note">'+note+'Each subscale: ((sum−min)/range)×100. Patient-reported overall impact of MS.</div>';}
+function fillMSIS(v){for(let i=1;i<=29;i++)el("msis_"+i).value=v;calcMSIS();}
+function clearMSIS(){for(let i=1;i<=29;i++)el("msis_"+i).value="";_clearBlanks("msis_",1,29);el("msis_out").innerHTML="";}
+
+// ===== Check my MS - guided report =====
+var GLOBAL_ARMSS={"0.0":{"18":1.5,"19":1.59,"20":1.44,"21":1.4,"22":1.33,"23":1.28,"24":1.14,"25":1.09,"26":1.01,"27":1.01,"28":0.96,"29":0.9,"30":0.88,"31":0.87,"32":0.82,"33":0.77,"34":0.72,"35":0.68,"36":0.61,"37":0.57,"38":0.56,"39":0.54,"40":0.5,"41":0.49,"42":0.43,"43":0.39,"44":0.37,"45":0.35,"46":0.33,"47":0.31,"48":0.29,"49":0.26,"50":0.23,"51":0.22,"52":0.2,"53":0.19,"54":0.17,"55":0.17,"56":0.14,"57":0.14,"58":0.12,"59":0.11,"60":0.1,"61":0.08,"62":0.08,"63":0.07,"64":0.06,"65":0.05,"66":0.06,"67":0.06,"68":0.05,"69":0.05,"70":0.05,"71":0.04,"72":0.04,"73":0.03,"74":0.03,"75":0.03},"1.0":{"18":4.24,"19":4.29,"20":3.85,"21":3.77,"22":3.62,"23":3.53,"24":3.28,"25":3.24,"26":3.07,"27":3.04,"28":2.94,"29":2.84,"30":2.76,"31":2.71,"32":2.62,"33":2.5,"34":2.36,"35":2.26,"36":2.08,"37":1.96,"38":1.87,"39":1.81,"40":1.69,"41":1.62,"42":1.49,"43":1.39,"44":1.31,"45":1.23,"46":1.16,"47":1.09,"48":1.03,"49":0.94,"50":0.87,"51":0.84,"52":0.78,"53":0.7,"54":0.68,"55":0.64,"56":0.59,"57":0.58,"58":0.53,"59":0.47,"60":0.44,"61":0.38,"62":0.36,"63":0.33,"64":0.3,"65":0.26,"66":0.27,"67":0.24,"68":0.22,"69":0.2,"70":0.19,"71":0.16,"72":0.13,"73":0.13,"74":0.12,"75":0.13},"1.5":{"18":5.79,"19":5.75,"20":5.25,"21":5.23,"22":5.12,"23":5.03,"24":4.82,"25":4.82,"26":4.67,"27":4.63,"28":4.53,"29":4.41,"30":4.28,"31":4.16,"32":4.04,"33":3.9,"34":3.73,"35":3.6,"36":3.39,"37":3.23,"38":3.09,"39":2.96,"40":2.79,"41":2.67,"42":2.49,"43":2.34,"44":2.24,"45":2.13,"46":2.02,"47":1.9,"48":1.8,"49":1.67,"50":1.56,"51":1.51,"52":1.41,"53":1.29,"54":1.27,"55":1.21,"56":1.13,"57":1.1,"58":1.0,"59":0.91,"60":0.84,"61":0.76,"62":0.71,"63":0.66,"64":0.59,"65":0.53,"66":0.49,"67":0.47,"68":0.42,"69":0.37,"70":0.36,"71":0.27,"72":0.26,"73":0.3,"74":0.3,"75":0.3},"2.0":{"18":6.71,"19":6.71,"20":6.31,"21":6.33,"22":6.31,"23":6.28,"24":6.12,"25":6.09,"26":5.98,"27":5.94,"28":5.84,"29":5.68,"30":5.53,"31":5.36,"32":5.21,"33":5.04,"34":4.88,"35":4.78,"36":4.57,"37":4.41,"38":4.27,"39":4.13,"40":3.89,"41":3.73,"42":3.52,"43":3.37,"44":3.22,"45":3.12,"46":3.01,"47":2.86,"48":2.67,"49":2.51,"50":2.36,"51":2.26,"52":2.13,"53":2.03,"54":1.96,"55":1.86,"56":1.75,"57":1.69,"58":1.53,"59":1.43,"60":1.33,"61":1.22,"62":1.13,"63":1.04,"64":0.94,"65":0.84,"66":0.77,"67":0.76,"68":0.71,"69":0.63,"70":0.63,"71":0.51,"72":0.48,"73":0.5,"74":0.43,"75":0.35},"2.5":{"18":7.62,"19":7.62,"20":7.25,"21":7.29,"22":7.34,"23":7.37,"24":7.26,"25":7.23,"26":7.13,"27":7.05,"28":6.96,"29":6.81,"30":6.66,"31":6.49,"32":6.33,"33":6.11,"34":5.93,"35":5.87,"36":5.69,"37":5.52,"38":5.4,"39":5.26,"40":4.96,"41":4.76,"42":4.55,"43":4.42,"44":4.24,"45":4.11,"46":4.01,"47":3.83,"48":3.61,"49":3.41,"50":3.27,"51":3.11,"52":2.93,"53":2.79,"54":2.7,"55":2.56,"56":2.41,"57":2.34,"58":2.16,"59":2.02,"60":1.9,"61":1.78,"62":1.62,"63":1.5,"64":1.38,"65":1.24,"66":1.14,"67":1.13,"68":1.06,"69":0.99,"70":0.98,"71":0.85,"72":0.76,"73":0.77,"74":0.65,"75":0.53},"3.0":{"18":8.18,"19":8.06,"20":7.87,"21":7.92,"22":8.02,"23":8.06,"24":7.98,"25":7.93,"26":7.84,"27":7.78,"28":7.69,"29":7.56,"30":7.4,"31":7.25,"32":7.06,"33":6.84,"34":6.68,"35":6.63,"36":6.48,"37":6.33,"38":6.22,"39":6.08,"40":5.78,"41":5.56,"42":5.37,"43":5.21,"44":5.05,"45":4.9,"46":4.8,"47":4.64,"48":4.44,"49":4.22,"50":4.1,"51":3.91,"52":3.71,"53":3.51,"54":3.42,"55":3.26,"56":3.1,"57":3.03,"58":2.87,"59":2.7,"60":2.57,"61":2.4,"62":2.21,"63":2.1,"64":1.99,"65":1.8,"66":1.71,"67":1.67,"68":1.52,"69":1.46,"70":1.47,"71":1.32,"72":1.22,"73":1.22,"74":1.06,"75":0.86},"3.5":{"18":8.53,"19":8.53,"20":8.5,"21":8.49,"22":8.57,"23":8.6,"24":8.52,"25":8.45,"26":8.38,"27":8.36,"28":8.27,"29":8.16,"30":7.99,"31":7.86,"32":7.66,"33":7.45,"34":7.31,"35":7.27,"36":7.15,"37":7.01,"38":6.92,"39":6.78,"40":6.51,"41":6.29,"42":6.1,"43":5.94,"44":5.78,"45":5.61,"46":5.53,"47":5.4,"48":5.22,"49":5.01,"50":4.9,"51":4.72,"52":4.49,"53":4.29,"54":4.18,"55":4.02,"56":3.85,"57":3.77,"58":3.62,"59":3.45,"60":3.31,"61":3.1,"62":2.9,"63":2.76,"64":2.61,"65":2.39,"66":2.33,"67":2.24,"68":2.05,"69":1.99,"70":2.0,"71":1.83,"72":1.66,"73":1.57,"74":1.41,"75":1.18},"4.0":{"18":8.89,"19":8.89,"20":8.88,"21":8.86,"22":8.93,"23":8.96,"24":8.86,"25":8.79,"26":8.76,"27":8.75,"28":8.66,"29":8.59,"30":8.42,"31":8.31,"32":8.12,"33":7.92,"34":7.78,"35":7.75,"36":7.63,"37":7.5,"38":7.4,"39":7.27,"40":7.03,"41":6.84,"42":6.67,"43":6.54,"44":6.39,"45":6.23,"46":6.13,"47":6.01,"48":5.85,"49":5.65,"50":5.54,"51":5.36,"52":5.14,"53":4.93,"54":4.85,"55":4.68,"56":4.51,"57":4.42,"58":4.29,"59":4.11,"60":3.94,"61":3.72,"62":3.5,"63":3.32,"64":3.1,"65":2.86,"66":2.76,"67":2.66,"68":2.46,"69":2.41,"70":2.44,"71":2.24,"72":2.07,"73":1.92,"74":1.81,"75":1.52},"4.5":{"18":9.01,"19":9.01,"20":9.01,"21":9.01,"22":9.11,"23":9.17,"24":9.04,"25":8.97,"26":8.98,"27":8.97,"28":8.87,"29":8.83,"30":8.69,"31":8.58,"32":8.41,"33":8.24,"34":8.09,"35":8.06,"36":7.94,"37":7.81,"38":7.7,"39":7.58,"40":7.36,"41":7.22,"42":7.08,"43":6.94,"44":6.82,"45":6.69,"46":6.56,"47":6.43,"48":6.28,"49":6.06,"50":5.92,"51":5.75,"52":5.54,"53":5.34,"54":5.29,"55":5.14,"56":4.96,"57":4.87,"58":4.75,"59":4.58,"60":4.39,"61":4.17,"62":3.93,"63":3.73,"64":3.49,"65":3.22,"66":3.08,"67":2.98,"68":2.77,"69":2.7,"70":2.77,"71":2.61,"72":2.43,"73":2.3,"74":2.16,"75":1.78},"5.0":{"18":9.13,"19":9.13,"20":9.23,"21":9.14,"22":9.25,"23":9.3,"24":9.17,"25":9.11,"26":9.12,"27":9.1,"28":9.0,"29":8.96,"30":8.83,"31":8.72,"32":8.58,"33":8.45,"34":8.31,"35":8.28,"36":8.16,"37":8.01,"38":7.92,"39":7.81,"40":7.6,"41":7.49,"42":7.36,"43":7.21,"44":7.08,"45":6.97,"46":6.84,"47":6.72,"48":6.59,"49":6.39,"50":6.25,"51":6.08,"52":5.88,"53":5.69,"54":5.64,"55":5.5,"56":5.32,"57":5.24,"58":5.1,"59":4.93,"60":4.74,"61":4.54,"62":4.28,"63":4.07,"64":3.82,"65":3.53,"66":3.37,"67":3.28,"68":3.06,"69":2.98,"70":3.05,"71":2.89,"72":2.7,"73":2.56,"74":2.42,"75":2.11},"5.5":{"18":9.33,"19":9.33,"20":9.4,"21":9.31,"22":9.4,"23":9.4,"24":9.28,"25":9.27,"26":9.26,"27":9.22,"28":9.14,"29":9.1,"30":8.95,"31":8.85,"32":8.75,"33":8.64,"34":8.53,"35":8.49,"36":8.38,"37":8.21,"38":8.14,"39":8.02,"40":7.85,"41":7.75,"42":7.63,"43":7.48,"44":7.37,"45":7.25,"46":7.12,"47":7.03,"48":6.92,"49":6.74,"50":6.62,"51":6.46,"52":6.27,"53":6.11,"54":6.04,"55":5.89,"56":5.72,"57":5.63,"58":5.47,"59":5.28,"60":5.1,"61":4.89,"62":4.6,"63":4.4,"64":4.17,"65":3.86,"66":3.71,"67":3.65,"68":3.43,"69":3.31,"70":3.39,"71":3.22,"72":3.0,"73":2.83,"74":2.65,"75":2.47},"6.0":{"18":9.52,"19":9.52,"20":9.57,"21":9.51,"22":9.58,"23":9.55,"24":9.5,"25":9.45,"26":9.47,"27":9.42,"28":9.35,"29":9.3,"30":9.2,"31":9.12,"32":9.05,"33":8.98,"34":8.87,"35":8.86,"36":8.76,"37":8.63,"38":8.57,"39":8.47,"40":8.33,"41":8.27,"42":8.19,"43":8.06,"44":7.99,"45":7.89,"46":7.76,"47":7.69,"48":7.57,"49":7.43,"50":7.33,"51":7.21,"52":7.08,"53":6.95,"54":6.86,"55":6.72,"56":6.55,"57":6.43,"58":6.29,"59":6.12,"60":5.97,"61":5.82,"62":5.52,"63":5.32,"64":5.15,"65":4.82,"66":4.69,"67":4.65,"68":4.53,"69":4.41,"70":4.48,"71":4.28,"72":4.1,"73":3.83,"74":3.69,"75":3.44},"6.5":{"18":9.62,"19":9.62,"20":9.66,"21":9.69,"22":9.71,"23":9.72,"24":9.73,"25":9.69,"26":9.7,"27":9.65,"28":9.61,"29":9.56,"30":9.51,"31":9.47,"32":9.41,"33":9.37,"34":9.29,"35":9.31,"36":9.24,"37":9.15,"38":9.13,"39":9.07,"40":8.95,"41":8.91,"42":8.9,"43":8.82,"44":8.79,"45":8.73,"46":8.61,"47":8.53,"48":8.43,"49":8.33,"50":8.28,"51":8.23,"52":8.18,"53":8.08,"54":8.0,"55":7.89,"56":7.74,"57":7.62,"58":7.54,"59":7.43,"60":7.32,"61":7.24,"62":6.97,"63":6.81,"64":6.65,"65":6.38,"66":6.25,"67":6.24,"68":6.21,"69":6.18,"70":6.32,"71":6.16,"72":6.03,"73":5.71,"74":5.59,"75":5.35},"7.0":{"18":9.74,"19":9.76,"20":9.78,"21":9.79,"22":9.8,"23":9.81,"24":9.82,"25":9.79,"26":9.81,"27":9.78,"28":9.76,"29":9.72,"30":9.69,"31":9.65,"32":9.61,"33":9.58,"34":9.54,"35":9.56,"36":9.52,"37":9.44,"38":9.43,"39":9.39,"40":9.29,"41":9.26,"42":9.28,"43":9.23,"44":9.21,"45":9.18,"46":9.09,"47":9.01,"48":8.96,"49":8.87,"50":8.85,"51":8.84,"52":8.83,"53":8.72,"54":8.69,"55":8.6,"56":8.46,"57":8.38,"58":8.33,"59":8.26,"60":8.19,"61":8.11,"62":7.94,"63":7.85,"64":7.71,"65":7.51,"66":7.45,"67":7.43,"68":7.4,"69":7.37,"70":7.58,"71":7.46,"72":7.35,"73":7.07,"74":7.0,"75":6.81},"7.5":{"18":9.85,"19":9.85,"20":9.85,"21":9.85,"22":9.86,"23":9.87,"24":9.87,"25":9.87,"26":9.87,"27":9.84,"28":9.82,"29":9.79,"30":9.78,"31":9.76,"32":9.72,"33":9.7,"34":9.68,"35":9.7,"36":9.66,"37":9.6,"38":9.59,"39":9.56,"40":9.48,"41":9.47,"42":9.49,"43":9.44,"44":9.42,"45":9.4,"46":9.35,"47":9.29,"48":9.27,"49":9.21,"50":9.18,"51":9.18,"52":9.15,"53":9.05,"54":9.04,"55":8.97,"56":8.84,"57":8.78,"58":8.78,"59":8.71,"60":8.64,"61":8.57,"62":8.48,"63":8.42,"64":8.33,"65":8.19,"66":8.21,"67":8.15,"68":8.12,"69":8.05,"70":8.24,"71":8.11,"72":8.05,"73":7.85,"74":7.86,"75":7.71},"8.0":{"18":9.92,"19":9.92,"20":9.93,"21":9.93,"22":9.94,"23":9.93,"24":9.93,"25":9.91,"26":9.91,"27":9.91,"28":9.9,"29":9.88,"30":9.87,"31":9.87,"32":9.84,"33":9.82,"34":9.82,"35":9.83,"36":9.81,"37":9.77,"38":9.76,"39":9.75,"40":9.7,"41":9.68,"42":9.7,"43":9.67,"44":9.65,"45":9.64,"46":9.62,"47":9.59,"48":9.58,"49":9.54,"50":9.52,"51":9.51,"52":9.49,"53":9.43,"54":9.42,"55":9.39,"56":9.32,"57":9.28,"58":9.29,"59":9.24,"60":9.18,"61":9.16,"62":9.12,"63":9.09,"64":9.04,"65":8.97,"66":8.96,"67":8.91,"68":8.88,"69":8.84,"70":8.94,"71":8.89,"72":8.85,"73":8.82,"74":8.85,"75":8.83},"8.5":{"18":9.95,"19":9.95,"20":9.95,"21":9.95,"22":9.95,"23":9.95,"24":9.95,"25":9.95,"26":9.95,"27":9.94,"28":9.94,"29":9.94,"30":9.93,"31":9.93,"32":9.92,"33":9.91,"34":9.91,"35":9.92,"36":9.91,"37":9.9,"38":9.9,"39":9.89,"40":9.87,"41":9.87,"42":9.88,"43":9.86,"44":9.85,"45":9.84,"46":9.82,"47":9.81,"48":9.8,"49":9.78,"50":9.79,"51":9.78,"52":9.77,"53":9.74,"54":9.74,"55":9.72,"56":9.69,"57":9.68,"58":9.68,"59":9.66,"60":9.64,"61":9.66,"62":9.65,"63":9.66,"64":9.64,"65":9.61,"66":9.56,"67":9.55,"68":9.53,"69":9.53,"70":9.58,"71":9.62,"72":9.59,"73":9.61,"74":9.58,"75":9.63},"9.0":{"18":9.97,"19":9.97,"20":9.97,"21":9.97,"22":9.97,"23":9.97,"24":9.97,"25":9.97,"26":9.97,"27":9.97,"28":9.96,"29":9.96,"30":9.95,"31":9.95,"32":9.94,"33":9.95,"34":9.95,"35":9.95,"36":9.95,"37":9.95,"38":9.95,"39":9.96,"40":9.95,"41":9.95,"42":9.96,"43":9.95,"44":9.94,"45":9.93,"46":9.92,"47":9.91,"48":9.92,"49":9.91,"50":9.91,"51":9.91,"52":9.91,"53":9.9,"54":9.9,"55":9.88,"56":9.87,"57":9.87,"58":9.87,"59":9.86,"60":9.85,"61":9.87,"62":9.87,"63":9.88,"64":9.87,"65":9.86,"66":9.85,"67":9.84,"68":9.85,"69":9.86,"70":9.89,"71":9.91,"72":9.9,"73":9.88,"74":9.86,"75":9.86},"9.5":{"18":9.97,"19":9.97,"20":9.97,"21":9.97,"22":9.98,"23":9.98,"24":9.98,"25":9.99,"26":9.99,"27":9.99,"28":9.98,"29":9.98,"30":9.98,"31":9.98,"32":9.98,"33":9.98,"34":9.98,"35":9.99,"36":9.99,"37":9.99,"38":9.99,"39":9.99,"40":9.99,"41":9.99,"42":9.99,"43":9.99,"44":9.99,"45":9.99,"46":9.98,"47":9.98,"48":9.98,"49":9.98,"50":9.99,"51":9.99,"52":9.99,"53":9.99,"54":9.99,"55":9.98,"56":9.98,"57":9.98,"58":9.98,"59":9.97,"60":9.98,"61":9.98,"62":9.99,"63":9.98,"64":9.98,"65":9.98,"66":9.99,"67":9.98,"68":9.98,"69":9.98,"70":9.98,"71":9.98,"72":9.98,"73":9.98,"74":9.97,"75":9.97}}; /* Global ARMSS matrix, Manouchehrinia 2017 (ms.sev). EDSS(col)x age 18-75 */
+function _armssLookup(edss,age){ if(!GLOBAL_ARMSS) return null; const k=Number(edss).toFixed(1); const row=GLOBAL_ARMSS[k]; if(!row) return null;
+  let a=Math.round(age); if(a<18)a=18; if(a>75)a=75; const v=row[String(a)]; return (v==null?null:v); }
+function computeARMSS(edss,age){ if(age==null||edss===null||edss==="") return null; return _armssLookup(edss,age); }
+var GLOBAL_MSSS_UPD={"0.0":{"1":0.91,"2":0.86,"3":0.8,"4":0.7,"5":0.64,"6":0.56,"7":0.49,"8":0.46,"9":0.43,"10":0.36,"11":0.33,"12":0.31,"13":0.27,"14":0.24,"15":0.23,"16":0.21,"17":0.19,"18":0.2,"19":0.18,"20":0.15,"21":0.14,"22":0.14,"23":0.12,"24":0.11,"25":0.09,"26":0.08,"27":0.07,"28":0.06,"29":0.06,"30":0.07},"1.0":{"1":2.83,"2":2.71,"3":2.55,"4":2.29,"5":2.09,"6":1.88,"7":1.67,"8":1.55,"9":1.44,"10":1.28,"11":1.18,"12":1.11,"13":1.02,"14":0.92,"15":0.85,"16":0.77,"17":0.72,"18":0.7,"19":0.66,"20":0.62,"21":0.57,"22":0.54,"23":0.49,"24":0.44,"25":0.38,"26":0.37,"27":0.35,"28":0.29,"29":0.28,"30":0.29},"1.5":{"1":4.31,"2":4.18,"3":3.98,"4":3.65,"5":3.36,"6":3.09,"7":2.8,"8":2.58,"9":2.41,"10":2.19,"11":2.05,"12":1.93,"13":1.83,"14":1.68,"15":1.54,"16":1.39,"17":1.3,"18":1.22,"19":1.18,"20":1.15,"21":1.05,"22":0.97,"23":0.89,"24":0.78,"25":0.72,"26":0.72,"27":0.69,"28":0.57,"29":0.56,"30":0.56},"2.0":{"1":5.58,"2":5.45,"3":5.23,"4":4.84,"5":4.51,"6":4.21,"7":3.9,"8":3.62,"9":3.41,"10":3.13,"11":2.97,"12":2.79,"13":2.66,"14":2.48,"15":2.3,"16":2.1,"17":1.95,"18":1.84,"19":1.77,"20":1.72,"21":1.61,"22":1.51,"23":1.41,"24":1.29,"25":1.21,"26":1.18,"27":1.13,"28":0.93,"29":0.91,"30":0.89},"2.5":{"1":6.79,"2":6.61,"3":6.37,"4":5.93,"5":5.57,"6":5.26,"7":4.93,"8":4.65,"9":4.43,"10":4.11,"11":3.92,"12":3.72,"13":3.54,"14":3.34,"15":3.13,"16":2.85,"17":2.66,"18":2.53,"19":2.41,"20":2.34,"21":2.25,"22":2.12,"23":1.99,"24":1.86,"25":1.79,"26":1.71,"27":1.64,"28":1.34,"29":1.3,"30":1.26},"3.0":{"1":7.58,"2":7.4,"3":7.16,"4":6.73,"5":6.35,"6":6.08,"7":5.75,"8":5.46,"9":5.23,"10":4.92,"11":4.72,"12":4.51,"13":4.35,"14":4.13,"15":3.91,"16":3.57,"17":3.39,"18":3.23,"19":3.1,"20":3.0,"21":2.91,"22":2.74,"23":2.58,"24":2.45,"25":2.37,"26":2.3,"27":2.21,"28":1.81,"29":1.76,"30":1.7},"3.5":{"1":8.22,"2":8.05,"3":7.85,"4":7.45,"5":7.06,"6":6.82,"7":6.51,"8":6.19,"9":5.96,"10":5.69,"11":5.46,"12":5.23,"13":5.07,"14":4.87,"15":4.64,"16":4.29,"17":4.14,"18":3.95,"19":3.8,"20":3.69,"21":3.59,"22":3.39,"23":3.24,"24":3.12,"25":3.04,"26":2.99,"27":2.86,"28":2.38,"29":2.3,"30":2.23},"4.0":{"1":8.64,"2":8.5,"3":8.32,"4":7.97,"5":7.59,"6":7.36,"7":7.07,"8":6.75,"9":6.53,"10":6.26,"11":6.06,"12":5.82,"13":5.67,"14":5.51,"15":5.29,"16":4.92,"17":4.79,"18":4.58,"19":4.36,"20":4.25,"21":4.15,"22":3.93,"23":3.84,"24":3.72,"25":3.65,"26":3.61,"27":3.45,"28":2.91,"29":2.82,"30":2.75},"4.5":{"1":8.88,"2":8.77,"3":8.61,"4":8.29,"5":7.95,"6":7.7,"7":7.4,"8":7.1,"9":6.89,"10":6.62,"11":6.46,"12":6.24,"13":6.09,"14":5.96,"15":5.79,"16":5.42,"17":5.26,"18":5.04,"19":4.79,"20":4.63,"21":4.53,"22":4.33,"23":4.25,"24":4.15,"25":4.07,"26":4.04,"27":3.86,"28":3.29,"29":3.2,"30":3.12},"5.0":{"1":9.03,"2":8.93,"3":8.77,"4":8.48,"5":8.17,"6":7.92,"7":7.65,"8":7.38,"9":7.17,"10":6.91,"11":6.78,"12":6.58,"13":6.42,"14":6.3,"15":6.16,"16":5.8,"17":5.62,"18":5.41,"19":5.16,"20":4.96,"21":4.85,"22":4.65,"23":4.55,"24":4.44,"25":4.37,"26":4.36,"27":4.21,"28":3.62,"29":3.53,"30":3.46},"5.5":{"1":9.17,"2":9.07,"3":8.93,"4":8.66,"5":8.41,"6":8.17,"7":7.92,"8":7.69,"9":7.48,"10":7.21,"11":7.09,"12":6.92,"13":6.74,"14":6.64,"15":6.51,"16":6.16,"17":5.97,"18":5.75,"19":5.52,"20":5.32,"21":5.2,"22":5.02,"23":4.89,"24":4.76,"25":4.66,"26":4.7,"27":4.59,"28":4.0,"29":3.91,"30":3.86},"6.0":{"1":9.46,"2":9.38,"3":9.27,"4":9.07,"5":8.87,"6":8.69,"7":8.48,"8":8.29,"9":8.08,"10":7.83,"11":7.71,"12":7.57,"13":7.41,"14":7.34,"15":7.23,"16":6.96,"17":6.79,"18":6.59,"19":6.37,"20":6.2,"21":6.04,"22":5.87,"23":5.78,"24":5.65,"25":5.54,"26":5.58,"27":5.45,"28":4.86,"29":4.77,"30":4.72},"6.5":{"1":9.78,"2":9.74,"3":9.67,"4":9.57,"5":9.43,"6":9.31,"7":9.17,"8":9.04,"9":8.87,"10":8.69,"11":8.6,"12":8.5,"13":8.35,"14":8.32,"15":8.25,"16":8.06,"17":7.95,"18":7.81,"19":7.61,"20":7.45,"21":7.3,"22":7.13,"23":7.07,"24":6.98,"25":6.9,"26":6.92,"27":6.79,"28":6.26,"29":6.19,"30":6.14},"7.0":{"1":9.9,"2":9.88,"3":9.84,"4":9.78,"5":9.7,"6":9.61,"7":9.53,"8":9.44,"9":9.33,"10":9.21,"11":9.15,"12":9.07,"13":8.96,"14":8.93,"15":8.89,"16":8.73,"17":8.63,"18":8.53,"19":8.37,"20":8.22,"21":8.1,"22":7.95,"23":7.89,"24":7.81,"25":7.76,"26":7.8,"27":7.71,"28":7.33,"29":7.28,"30":7.23},"7.5":{"1":9.93,"2":9.93,"3":9.91,"4":9.87,"5":9.81,"6":9.75,"7":9.7,"8":9.63,"9":9.56,"10":9.48,"11":9.43,"12":9.36,"13":9.29,"14":9.26,"15":9.22,"16":9.1,"17":9.02,"18":8.91,"19":8.79,"20":8.67,"21":8.53,"22":8.43,"23":8.36,"24":8.27,"25":8.25,"26":8.31,"27":8.24,"28":8.0,"29":7.97,"30":7.92},"8.0":{"1":9.97,"2":9.96,"3":9.95,"4":9.93,"5":9.9,"6":9.87,"7":9.85,"8":9.81,"9":9.77,"10":9.72,"11":9.69,"12":9.64,"13":9.61,"14":9.59,"15":9.55,"16":9.49,"17":9.44,"18":9.37,"19":9.3,"20":9.22,"21":9.13,"22":9.05,"23":9.0,"24":8.91,"25":8.92,"26":8.93,"27":8.89,"28":8.79,"29":8.78,"30":8.75},"8.5":{"1":9.99,"2":9.99,"3":9.98,"4":9.97,"5":9.97,"6":9.95,"7":9.94,"8":9.92,"9":9.9,"10":9.88,"11":9.88,"12":9.86,"13":9.85,"14":9.84,"15":9.81,"16":9.78,"17":9.77,"18":9.75,"19":9.72,"20":9.67,"21":9.64,"22":9.6,"23":9.56,"24":9.49,"25":9.51,"26":9.49,"27":9.49,"28":9.46,"29":9.47,"30":9.45},"9.0":{"1":9.99,"2":9.99,"3":9.99,"4":9.99,"5":9.99,"6":9.98,"7":9.97,"8":9.96,"9":9.95,"10":9.94,"11":9.95,"12":9.94,"13":9.94,"14":9.94,"15":9.93,"16":9.92,"17":9.91,"18":9.91,"19":9.89,"20":9.87,"21":9.85,"22":9.84,"23":9.81,"24":9.77,"25":9.79,"26":9.79,"27":9.78,"28":9.79,"29":9.8,"30":9.79},"9.5":{"1":10.0,"2":10.0,"3":10.0,"4":10.0,"5":10.0,"6":10.0,"7":9.99,"8":9.99,"9":9.99,"10":9.98,"11":9.98,"12":9.98,"13":9.99,"14":9.99,"15":9.99,"16":9.99,"17":9.99,"18":9.99,"19":9.98,"20":9.98,"21":9.97,"22":9.97,"23":9.96,"24":9.95,"25":9.95,"26":9.96,"27":9.96,"28":9.97,"29":9.97,"30":9.97}}; /* updated global MSSS, dd 1-30 */
+var GLOBAL_MSSS_ORIG={"0.0":{"0":0.823,"1":0.671,"2":0.528,"3":0.45,"4":0.345,"5":0.3,"6":0.254,"7":0.238,"8":0.209,"9":0.206,"10":0.188,"11":0.167,"12":0.155,"13":0.134,"14":0.11,"15":0.098,"16":0.086,"17":0.053,"18":0.043,"19":0.054,"20":0.049,"21":0.049,"22":0.035,"23":0.053,"24":0.045,"25":0.05,"26":0.047,"27":0.053,"28":0.036,"29":0.025,"30":0.01},"1.0":{"0":2.851,"1":2.436,"2":2.011,"3":1.768,"4":1.446,"5":1.282,"6":1.13,"7":1.039,"8":0.937,"9":0.881,"10":0.776,"11":0.704,"12":0.641,"13":0.564,"14":0.487,"15":0.453,"16":0.384,"17":0.318,"18":0.26,"19":0.277,"20":0.261,"21":0.301,"22":0.234,"23":0.274,"24":0.242,"25":0.233,"26":0.198,"27":0.224,"28":0.166,"29":0.177,"30":0.134},"1.5":{"0":4.741,"1":4.295,"2":3.693,"3":3.339,"4":2.871,"5":2.597,"6":2.327,"7":2.103,"8":1.922,"9":1.757,"10":1.532,"11":1.395,"12":1.279,"13":1.134,"14":1.029,"15":0.994,"16":0.854,"17":0.763,"18":0.657,"19":0.631,"20":0.587,"21":0.657,"22":0.544,"23":0.581,"24":0.522,"25":0.474,"26":0.452,"27":0.481,"28":0.404,"29":0.468,"30":0.445},"2.0":{"0":6.326,"1":5.866,"2":5.236,"3":4.825,"4":4.275,"5":3.897,"6":3.539,"7":3.17,"8":2.926,"9":2.649,"10":2.341,"11":2.128,"12":1.978,"13":1.795,"14":1.7,"15":1.642,"16":1.425,"17":1.277,"18":1.116,"19":1.004,"20":0.942,"21":1.024,"22":0.902,"23":0.908,"24":0.862,"25":0.765,"26":0.782,"27":0.78,"28":0.736,"29":0.797,"30":0.816},"2.5":{"0":7.47,"1":7.08,"2":6.464,"3":6.002,"4":5.418,"5":4.942,"6":4.546,"7":4.126,"8":3.808,"9":3.448,"10":3.099,"11":2.817,"12":2.635,"13":2.44,"14":2.332,"15":2.259,"16":1.993,"17":1.77,"18":1.566,"19":1.39,"20":1.292,"21":1.386,"22":1.276,"23":1.255,"24":1.248,"25":1.148,"26":1.168,"27":1.154,"28":1.164,"29":1.19,"30":1.187},"3.0":{"0":8.034,"1":7.929,"2":7.271,"3":6.821,"4":6.248,"5":5.79,"6":5.382,"7":4.966,"8":4.568,"9":4.163,"10":3.789,"11":3.456,"12":3.246,"13":3.048,"14":2.91,"15":2.824,"16":2.56,"17":2.304,"18":2.085,"19":1.889,"20":1.706,"21":1.774,"22":1.663,"23":1.642,"24":1.626,"25":1.556,"26":1.582,"27":1.56,"28":1.52,"29":1.506,"30":1.454},"3.5":{"0":8.582,"1":8.642,"2":7.983,"3":7.541,"4":6.986,"5":6.574,"6":6.138,"7":5.749,"8":5.357,"9":4.929,"10":4.544,"11":4.202,"12":3.935,"13":3.694,"14":3.548,"15":3.441,"16":3.175,"17":2.953,"18":2.695,"19":2.502,"20":2.293,"21":2.338,"22":2.196,"23":2.19,"24":2.148,"25":2.047,"26":2.081,"27":2.03,"28":1.876,"29":1.785,"30":1.691},"4.0":{"0":9.085,"1":9.092,"2":8.575,"3":8.138,"4":7.652,"5":7.259,"6":6.807,"7":6.463,"8":6.1,"9":5.64,"10":5.267,"11":4.93,"12":4.621,"13":4.375,"14":4.255,"15":4.135,"16":3.869,"17":3.654,"18":3.374,"19":3.197,"20":2.993,"21":2.968,"22":2.816,"23":2.784,"24":2.708,"25":2.529,"26":2.627,"27":2.564,"28":2.387,"29":2.266,"30":2.226},"4.5":{"0":9.405,"1":9.346,"2":8.946,"3":8.555,"4":8.119,"5":7.753,"6":7.325,"7":6.981,"8":6.605,"9":6.133,"10":5.762,"11":5.409,"12":5.115,"13":4.901,"14":4.806,"15":4.672,"16":4.414,"17":4.168,"18":3.897,"19":3.733,"20":3.521,"21":3.428,"22":3.285,"23":3.211,"24":3.094,"25":2.837,"26":2.994,"27":2.906,"28":2.755,"29":2.684,"30":2.745},"5.0":{"0":9.512,"1":9.499,"2":9.179,"3":8.831,"4":8.424,"5":8.078,"6":7.66,"7":7.324,"8":6.951,"9":6.501,"10":6.125,"11":5.803,"12":5.526,"13":5.311,"14":5.223,"15":5.087,"16":4.813,"17":4.555,"18":4.278,"19":4.133,"20":3.94,"21":3.828,"22":3.694,"23":3.685,"24":3.517,"25":3.211,"26":3.399,"27":3.291,"28":3.04,"29":3.013,"30":3.131},"5.5":{"0":9.604,"1":9.626,"2":9.378,"3":9.073,"4":8.707,"5":8.381,"6":7.981,"7":7.655,"8":7.321,"9":6.901,"10":6.567,"11":6.287,"12":6.014,"13":5.785,"14":5.687,"15":5.502,"16":5.187,"17":4.939,"18":4.628,"19":4.5,"20":4.31,"21":4.211,"22":4.093,"23":4.186,"24":4.009,"25":3.744,"26":3.945,"27":3.857,"28":3.456,"29":3.405,"30":3.501},"6.0":{"0":9.756,"1":9.737,"2":9.586,"3":9.349,"4":9.079,"5":8.827,"6":8.496,"7":8.243,"8":7.967,"9":7.652,"10":7.385,"11":7.168,"12":6.909,"13":6.722,"14":6.542,"15":6.325,"16":6.0,"17":5.742,"18":5.437,"19":5.354,"20":5.163,"21":5.093,"22":5.035,"23":5.16,"24":5.03,"25":4.875,"26":5.019,"27":4.925,"28":4.537,"29":4.354,"30":4.347},"6.5":{"0":9.839,"1":9.839,"2":9.786,"3":9.625,"4":9.47,"5":9.317,"6":9.08,"7":8.914,"8":8.708,"9":8.526,"10":8.303,"11":8.144,"12":7.92,"13":7.821,"14":7.574,"15":7.402,"16":7.138,"17":6.892,"18":6.626,"19":6.589,"20":6.435,"21":6.353,"22":6.352,"23":6.469,"24":6.362,"25":6.256,"26":6.394,"27":6.325,"28":5.986,"29":5.684,"30":5.608},"7.0":{"0":9.898,"1":9.898,"2":9.876,"3":9.773,"4":9.683,"5":9.595,"6":9.453,"7":9.328,"8":9.211,"9":9.093,"10":8.921,"11":8.785,"12":8.625,"13":8.546,"14":8.335,"15":8.169,"16":7.966,"17":7.765,"18":7.543,"19":7.507,"20":7.451,"21":7.333,"22":7.348,"23":7.457,"24":7.383,"25":7.238,"26":7.439,"27":7.382,"28":7.067,"29":6.759,"30":6.662},"7.5":{"0":9.909,"1":9.941,"2":9.931,"3":9.857,"4":9.802,"5":9.763,"6":9.681,"7":9.592,"8":9.549,"9":9.471,"10":9.335,"11":9.239,"12":9.13,"13":9.029,"14":8.858,"15":8.703,"16":8.541,"17":8.381,"18":8.227,"19":8.215,"20":8.225,"21":8.083,"22":8.103,"23":8.198,"24":8.147,"25":8.003,"26":8.211,"27":8.141,"28":7.898,"29":7.658,"30":7.537},"8.0":{"0":9.954,"1":9.966,"2":9.967,"3":9.921,"4":9.878,"5":9.862,"6":9.814,"7":9.758,"8":9.739,"9":9.701,"10":9.607,"11":9.523,"12":9.431,"13":9.337,"14":9.2,"15":9.107,"16":9.041,"17":8.993,"18":8.94,"19":8.978,"20":8.984,"21":8.866,"22":8.835,"23":8.865,"24":8.812,"25":8.727,"26":8.889,"27":8.91,"28":8.753,"29":8.62,"30":8.472},"8.5":{"0":9.984,"1":9.984,"2":9.988,"3":9.972,"4":9.95,"5":9.946,"6":9.925,"7":9.895,"8":9.887,"9":9.865,"10":9.83,"11":9.778,"12":9.712,"13":9.654,"14":9.574,"15":9.508,"16":9.485,"17":9.523,"18":9.511,"19":9.573,"20":9.581,"21":9.491,"22":9.42,"23":9.433,"24":9.387,"25":9.351,"26":9.482,"27":9.562,"28":9.454,"29":9.38,"30":9.273},"9.0":{"0":9.983,"1":9.983,"2":9.994,"3":9.983,"4":9.975,"5":9.975,"6":9.966,"7":9.954,"8":9.956,"9":9.945,"10":9.935,"11":9.918,"12":9.883,"13":9.855,"14":9.819,"15":9.78,"16":9.754,"17":9.788,"18":9.775,"19":9.814,"20":9.803,"21":9.77,"22":9.725,"23":9.753,"24":9.735,"25":9.75,"26":9.802,"27":9.85,"28":9.798,"29":9.747,"30":9.674},"9.5":{"0":9.998,"1":9.998,"2":9.995,"3":9.994,"4":9.992,"5":9.992,"6":9.992,"7":9.99,"8":9.99,"9":9.987,"10":9.986,"11":9.978,"12":9.965,"13":9.959,"14":9.952,"15":9.944,"16":9.94,"17":9.955,"18":9.957,"19":9.964,"20":9.951,"21":9.962,"22":9.947,"23":9.953,"24":9.955,"25":9.975,"26":9.962,"27":9.979,"28":9.976,"29":9.962,"30":9.911}}; /* original global MSSS, dd 0-30 */
+function _msssLookup(M,edss,dur){ if(!M||dur==null||edss===""||edss==null) return null; const k=Number(edss).toFixed(1); const row=M[k]; if(!row) return null;
+  let d=Math.round(dur); const keys=Object.keys(row).map(Number); const lo=Math.min.apply(null,keys), hi=Math.max.apply(null,keys);
+  if(d<lo)d=lo; if(d>hi)d=hi; const v=row[String(d)]; return v==null?null:v; }
+function computeMSSSupd(edss,dur){ return _msssLookup(GLOBAL_MSSS_UPD,edss,dur); }
+function computeMSSSorig(edss,dur){ return _msssLookup(GLOBAL_MSSS_ORIG,edss,dur); }
+function calcEDSSage(){ const e=el("edss_v").value, ag=_num(el("edss_age").value);
+  if(e===""){ el("edss_out").innerHTML=""; return; }
+  const ed=Number(e); const cls=ed<=2?"good":ed<=4.5?"warn":"bad";
+  const meaning=ed<=2?"Minimal or no disability":ed<=4?"Moderate disability, fully able to walk":ed<=5.5?"Walking limited without aid":ed<=6.5?"Needs a walking aid (cane/crutch)":ed<=7.5?"Mainly uses a wheelchair":"Restricted to bed";
+  const dur=_num(el("edss_dur")?el("edss_dur").value:null);
+  const sev=computeARMSS(ed,ag), mu=computeMSSSupd(ed,dur), mo=computeMSSSorig(ed,dur);
+  const sevCls=sev==null?"neutral":(sev>=7?"bad":sev>=4?"warn":"good");
+  const sevCol=sevCls==="bad"?"#9b2c2c":sevCls==="warn"?"#9a6700":"#216e39";
+  let sl='<div class="scoreline">';
+  if(sev!=null) sl+='<div class="bigscore" style="font-size:48px;color:'+sevCol+'">'+sev.toFixed(2)+'<small> ARMSS severity / 10</small></div>';
+  sl+='<div class="bigscore" style="font-size:'+(sev!=null?"26px":"48px")+'">'+ed.toFixed(1)+'<small> your EDSS</small></div></div>';
+  let html=sl+interp(cls,"EDSS "+ed.toFixed(1)+" - "+meaning+".");
+  if(sev!=null) html+=interp(sevCls,"<b>ARMSS (severity by age): "+sev.toFixed(2)+"/10.</b> Your disability is greater than about "+(sev*10).toFixed(0)+"% of people who have MS at your age - lower = milder than peers. This severity score is the main result of this tool.");
+  else if(ag==null) html+='<div class="note">Enter your age above to get the ARMSS severity score - it compares your EDSS with other people who have MS at the same age.</div>';
+  if(mu!=null||mo!=null){ let chips='<div class="chips" style="margin-top:10px">';
+    if(mu!=null) chips+='<span class="chip">MSSS by disease duration (updated) <b>'+mu.toFixed(2)+'</b>/10</span>';
+    if(mo!=null) chips+='<span class="chip">Original MSSS <b>'+mo.toFixed(2)+'</b>/10</span>';
+    chips+='</div>'; html+=chips; }
+  else if(dur==null && ag!=null) html+='<div class="note">Enter disease duration (years since first symptoms) to also get the MSSS - severity compared with people who have had MS for the same number of years.</div>';
+  el("edss_out").innerHTML=html; }
+let GUIDED=false, GSTEP=0;
+const GFLOW=[["edss","EDSS & age"],["pdds","Disability (PDDS)"],["msws","Walking (MSWS-12)"],["fss","Fatigue (FSS)"],["phq9","Mood - depression (PHQ-9)"],["gad7","Mood - anxiety (GAD-7)"],["msis","Overall impact (MSIS-29)"],["msqol","Quality of life (MSQOL-54)"]];
+function openReport(){ const g=el("gnav"); if(g)g.style.display="none"; GUIDED=false; showTool('report'); renderChecklist(); }
+function startGuided(){ GUIDED=true; GSTEP=0; _gstep(); }
+function _gstep(){ showTool(GFLOW[GSTEP][0]); const g=el("gnav"); g.style.display="flex";
+  el("gnav_step").textContent="Step "+(GSTEP+1)+" of "+GFLOW.length+" · "+GFLOW[GSTEP][1];
+  el("gnav_prev").textContent=GSTEP===0?"\u2190 Back to intro":"\u2190 Previous";
+  el("gnav_next").textContent=GSTEP===GFLOW.length-1?"Finish & see report":"Next \u2192"; }
+function guidedPrev(){ if(GSTEP>0){GSTEP--;_gstep();} else { GUIDED=false; el("gnav").style.display="none"; openReport(); } }
+function guidedNext(){ if(GSTEP<GFLOW.length-1){GSTEP++;_gstep();} else { GUIDED=false; el("gnav").style.display="none"; openReport(); buildReport(); } }
+function _cnt(reader){ try{return Object.values(reader()).filter(v=>v!=null).length;}catch(e){return 0;} }
+function renderChecklist(){
+  const items=[["edss","EDSS & age",()=>el('edss_v').value!==""],["pdds","PDDS - disability",()=>el('pdds_v').value!==""],["msws","MSWS-12 - walking",()=>_cnt(readMSWS)>0],
+   ["fss","FSS - fatigue",()=>_cnt(readFSS)>0],["mfis","MFIS - fatigue (alt)",()=>_cnt(readMFIS)>0],
+   ["phq9","PHQ-9 - mood",()=>_cnt(readPHQ)>0],["gad7","GAD-7 - anxiety",()=>_cnt(readGAD)>0],
+   ["msis","MSIS-29 - overall impact",()=>_cnt(readMSIS)>0],["msqol","MSQOL-54 - quality of life",()=>_cnt(readMSQOL)>0]];
+  el("report_checklist").innerHTML='<div class="subhead">Or jump to any questionnaire</div><div class="report-chk">'+
+    items.map((t,i)=>'<button class="btn" onclick="showTool(\''+t[0]+'\')">'+(i+1)+'. '+(t[2]()?"\u2713 ":"")+t[1]+'</button>').join("")+'</div>';
+}
+function buildReport(){
+  const rows=[], flags=[]; let urgent="";
+  // EDSS + severity
+  { const ev=el("edss_v")?el("edss_v").value:"", eage=_num(el("edss_age")?el("edss_age").value:null);
+    if(ev!==""){ const ed=Number(ev); rows.push(["Disability level (EDSS)", ed.toFixed(1)+"/9.5", ed<=2?"good":ed<=4.5?"warn":"bad", "Overall neurological disability (confirm with a clinician)."]);
+      const edur=_num(el("edss_dur")?el("edss_dur").value:null);
+      const sev=computeARMSS(ed,eage), mu=computeMSSSupd(ed,edur);
+      if(sev!=null){ rows.push(["Severity by age (ARMSS)", sev.toFixed(2)+"/10", sev>=7?"bad":sev>=4?"warn":"good", "Higher = more disability than most people with MS your age."]); }
+      if(mu!=null){ rows.push(["Severity by duration (MSSS)", mu.toFixed(2)+"/10", mu>=7?"bad":mu>=4?"warn":"good", "Higher = faster disability for your years since onset."]); } } }
+  // Disability - PDDS
+  const pv=el("pdds_v").value;
+  if(pv!==""){ const n=+pv, lab=el("pdds_v").selectedOptions[0].text.replace(/^[0-9]+\s*[-–—]\s*/,'');
+    rows.push(["Disability (PDDS)", n+"/8 - "+lab, n<=1?"good":n<=3?"warn":"bad", "Your own rating of how MS affects daily mobility."]);
+    if(n>=4) flags.push("Mobility/walking support - your PDDS suggests walking is affected. Ask about physiotherapy and aids."); }
+  // Walking - MSWS-12
+  const mw=scoreMSWS(readMSWS());
+  if(mw.transformed!=null){ const t=mw.transformed; rows.push(["Walking (MSWS-12)", t.toFixed(0)+"/100", t>=70?"bad":t>=40?"warn":"good", "Higher means MS limits walking more."]);
+    if(t>=40) flags.push("Walking difficulty (MSWS-12 "+t.toFixed(0)+"/100) - worth discussing physiotherapy / walking support."); }
+  // Fatigue - FSS preferred, else MFIS
+  const fss=scoreFSS(readFSS());
+  if(fss.answered>0){ const m=fss.mean; rows.push(["Fatigue (FSS)", m.toFixed(1)+"/7", m>=5?"bad":m>=4?"warn":"good", "Higher means more fatigue impact."]);
+    if(m>=4) flags.push("Significant fatigue (FSS "+m.toFixed(1)+") - ask about fatigue management, sleep, and possible causes."); }
+  else { const mfo=readMFIS(), mfAns=Object.values(mfo).filter(v=>v!=null).length;
+    if(mfAns>0){ const mf=scoreMFIS(mfo); rows.push(["Fatigue (MFIS)", mf.total+"/84", mf.total>=38?"warn":"good", "Higher means more fatigue impact."]);
+      if(mf.total>=38) flags.push("Significant fatigue (MFIS "+mf.total+") - ask about fatigue management."); } }
+  // Mood - PHQ-9
+  const pho=readPHQ(), phAns=Object.values(pho).filter(v=>v!=null).length;
+  if(phAns>0){ const t=scorePHQ(pho).total; const band=t<=4?"minimal":t<=9?"mild":t<=14?"moderate":t<=19?"moderately severe":"severe";
+    rows.push(["Mood - depression (PHQ-9)", t+"/27 ("+band+")", t<=4?"good":t<=9?"warn":"bad", "A screen for low mood - not a diagnosis."]);
+    if(t>=10) flags.push("Mood (PHQ-9 "+t+") suggests it is worth talking to your clinician about depression.");
+    if(pho[9]!=null&&pho[9]>0) urgent="You reported thoughts of being better off dead or of self-harm. Please reach out for support now - in the US you can call or text <b>988</b> (Suicide &amp; Crisis Lifeline). Tell your care team or someone you trust. If you are in immediate danger, contact emergency services."; }
+  // Mood - GAD-7
+  const go=readGAD(), gAns=Object.values(go).filter(v=>v!=null).length;
+  if(gAns>0){ const t=scoreGAD(go).total; const band=t<=4?"minimal":t<=9?"mild":t<=14?"moderate":"severe";
+    rows.push(["Mood - anxiety (GAD-7)", t+"/21 ("+band+")", t<=4?"good":t<=9?"warn":"bad", "A screen for anxiety - not a diagnosis."]);
+    if(t>=10) flags.push("Anxiety (GAD-7 "+t+") - worth discussing with your clinician."); }
+  // Overall impact - MSIS-29
+  const mi=scoreMSIS(readMSIS());
+  if(mi.physT!=null||mi.psyT!=null){ const v=Math.max(mi.physT||0, mi.psyT||0);
+    rows.push(["Overall MS impact (MSIS-29)", "Physical "+(mi.physT==null?"NA":mi.physT.toFixed(0))+" · Psychological "+(mi.psyT==null?"NA":mi.psyT.toFixed(0))+" /100", v>=70?"bad":v>=40?"warn":"good", "Higher means MS is having a greater impact."]); }
+  // QoL - MSQOL-54
+  const mq=readMSQOL(), mqAns=Object.values(mq).filter(v=>v!=null).length;
+  if(mqAns>0){ const sc=scoreMSQOL(mq), phc=sc.PHC, mhc=sc.MHC;
+    rows.push(["Quality of life (MSQOL-54)", "Physical "+(phc==null?"NA":phc.toFixed(0))+" · Mental "+(mhc==null?"NA":mhc.toFixed(0))+" /100", ((phc!=null&&phc<40)||(mhc!=null&&mhc<40))?"warn":"good", "Higher means better quality of life."]); }
+
+  if(rows.length===0 && !urgent){ el("report_out").innerHTML=interp("neutral","Fill at least one questionnaire (use the buttons above), then press Generate my report."); el("report_actions").style.display="none"; return; }
+  let html='<div class="subhead">Your self-report summary - '+new Date().toLocaleDateString()+'</div>';
+  if(urgent) html+='<div class="rep-urgent">\u26A0 '+urgent+'</div>';
+  html+=rows.map(r=>'<div class="rep-row '+r[2]+'"><div class="rep-dom">'+r[0]+'</div><div class="rep-val">'+r[1]+'</div><div class="rep-mean">'+r[3]+'</div></div>').join("");
+  if(flags.length){ html+='<div class="subhead">What to raise with your care team</div><ul class="rep-flags">'+flags.map(f=>'<li>'+f+'</li>').join("")+'</ul>'; }
+  else html+=interp("good","Nothing in what you entered was flagged for urgent attention. Keep up regular follow-up with your MS team.");
+  html+='<div class="note">This summary reflects only the questionnaires you completed and is not a diagnosis. Bring it to your neurologist / MS team to discuss.</div>';
+  el("report_out").innerHTML=html; el("report_actions").style.display="flex";
+  el("report_out").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function reportPDF(){ const r=el("report_out"); if(!r||!r.textContent.trim())return;
+  el("pc_title").textContent="My MS self-report summary";
+  el("pc_date").textContent=new Date().toLocaleDateString();
+  el("pc_body").innerHTML=r.cloneNode(true).innerHTML; el("printcard").classList.add("show"); }
+if(location.hash==="#report"){ setTimeout(openReport,60); }
+
+// ===== T25FW / 9-HPT =====
+const MSFC_REF={pegM:0.0439,pegSD:0.0101,walkM:9.5353,walkSD:11.4058,pasatM:45.0311,pasatSD:12.0771};
+function zWalk(avg){ return avg==null?null:-(avg-MSFC_REF.walkM)/MSFC_REF.walkSD; }
+function _armRecip(nh){ const r=x=>(x!=null&&x>0)?1/x:null; const v=[r(nh.dA),r(nh.nA)].filter(x=>x!=null); return v.length?v.reduce((a,b)=>a+b,0)/v.length:null; }
+function zPeg(nh){ const a=_armRecip(nh); return a==null?null:(a-MSFC_REF.pegM)/MSFC_REF.pegSD; }
+function zPasat(p){ return p==null?null:(p-MSFC_REF.pasatM)/MSFC_REF.pasatSD; }
+function calcT25FW(){ const _t1=_num(el("t25fw_1").value),_t2=_num(el("t25fw_2").value); const avg=scoreT25(_t1,_t2); _flagIds(["t25fw_1","t25fw_2"], ((_t1!==null||_t2!==null)&&(_t1===null||_t2===null)));
+  if(avg==null){el("t25fw_out").innerHTML="";return;}
+  const cls=avg<=6?"good":avg<=10?"warn":"bad";
+  const zw=zWalk(avg);
+  el("t25fw_out").innerHTML='<div class="scoreline"><div class="bigscore">'+avg.toFixed(1)+'<small> s (avg)</small></div></div>'+interp(cls,"Average walk time "+avg.toFixed(1)+" s. Lower = faster. A change of about 20% between visits is generally considered clinically meaningful.")+(zw!=null?interp(zw>=0?"good":"warn","Standardised: z = "+zw.toFixed(2)+" vs the NMSS Task Force reference (lower = slower than the reference)."):"")+'<div class="note">Clinician-timed walking speed; a component of the MSFC. z uses the Task Force reference (mean 9.54 s, SD 11.41).</div>'; }
+function calcNHPT(){ var _nv=["nhpt_d1","nhpt_d2","nhpt_n1","nhpt_n2"].map(function(id){return _num(el(id).value);}); var _ne=_nv.filter(function(x){return x!==null;}).length; _flagIds(["nhpt_d1","nhpt_d2","nhpt_n1","nhpt_n2"], _ne>0&&_ne<4); const o=scoreNHPT(_nv[0],_nv[1],_nv[2],_nv[3]);
+  if(o.mean==null){el("nhpt_out").innerHTML="";return;}
+  let chips='<div class="chips">'+(o.dA!=null?'<span class="chip">Dominant <b>'+o.dA.toFixed(1)+' s</b></span>':'')+(o.nA!=null?'<span class="chip">Non-dominant <b>'+o.nA.toFixed(1)+' s</b></span>':'')+'</div>';
+  const zp=zPeg(o);
+  el("nhpt_out").innerHTML='<div class="scoreline"><div class="bigscore">'+o.mean.toFixed(1)+'<small> s (mean)</small></div></div>'+chips+interp("neutral","Average peg time across hands. Lower = better manual dexterity; a change of about 20% is generally considered meaningful.")+(zp!=null?interp(zp>=0?"good":"warn","Standardised: z = "+zp.toFixed(2)+" vs the NMSS Task Force reference (uses 1/time; lower = slower)."):"")+'<div class="note">Clinician-timed hand function; a component of the MSFC. z uses the Task Force reference (1/time mean 0.0439, SD 0.0101).</div>'; }
+
+// ===== BICAMS (reads the three cognitive tools) =====
+function calcBICAMS(){
+  const sd=_num(el("sdmt_raw").value);
+  const bv=[_num(el("bv1").value),_num(el("bv2").value),_num(el("bv3").value)];
+  const cv=["cv1","cv2","cv3","cv4","cv5"].map(id=>_num(el(id).value));
+  const bvT=bv.every(x=>x!=null)?bv.reduce((a,b)=>a+b,0):null;
+  const cvT=cv.every(x=>x!=null)?cv.reduce((a,b)=>a+b,0):null;
+  const age=_num(el("bic_age").value), sx=el("bic_sex").value, edu=_num(el("bic_edu").value), race=el("bic_race")?el("bic_race").value:"";
+  const sexNum = sx==="M"?1:(sx==="F"?2:null);
+  let sdz=null; if(sd!=null&&age!=null&&sx&&edu!=null&&age>=18&&age<=74){ const ec=edu<16?"lo":"hi"; const ms=SDMT_NORM[ec][sx][_ageBand(age)]; sdz=(sd-ms[0])/ms[1]; }
+  const cn=cvltNorm(cvT,age,sexNum,edu,race); const cvz=cn?cn.z:null;
+  const bn=bvmtNorm(bvT,age,sexNum,edu,race); const bvz=bn?bn.z:null;
+  const tests=[{n:"SDMT (processing speed)",v:sd,z:sdz},{n:"CVLT-II (verbal memory)",v:cvT,z:cvz},{n:"BVMT-R (visual memory)",v:bvT,z:bvz}];
+  let rows="",imp=0,zc=0,have=0;
+  var _bm={sdmt:sd,cvlt:cvT,bvmt:bvT}; for(var k in _bm){ var btn=el("bicbtn_"+k); if(btn) btn.classList.toggle("filled", _bm[k]!=null); }
+  for(const t of tests){
+    if(t.v==null){ rows+='<div class="rep-row"><div class="rep-dom">'+t.n+'</div><div class="rep-val">-</div><div class="rep-mean">not entered (open its tool)</div></div>'; continue; }
+    have++; const z=t.z;
+    if(z==null){ rows+='<div class="rep-row"><div class="rep-dom">'+t.n+'</div><div class="rep-val">raw '+t.v+'</div><div class="rep-mean">enter age, sex &amp; education above for a z-score</div></div>'; }
+    else{ zc++; const im=z<=-1.5; if(im)imp++; rows+='<div class="rep-row '+(im?"bad":"good")+'"><div class="rep-dom">'+t.n+'</div><div class="rep-val">raw '+t.v+' &middot; z '+z.toFixed(2)+'</div><div class="rep-mean">'+(im?"Impaired (z &le; -1.5)":"Within normal range")+'</div></div>'; }
+  }
+  if(have===0){ el("bicams_out").innerHTML=interp("neutral","Open the SDMT, CVLT-II and BVMT-R tools and enter the raw scores, plus the demographics above, then it computes here."); return; }
+  const summary= zc>0 ? (imp+" of "+zc+" cognitive domain(s) impaired (z &le; -1.5).") : "Raw scores captured. Enter age, sex &amp; education above to get z-scores and impairment flags.";
+  el("bicams_out").innerHTML='<div class="subhead">BICAMS cognitive battery</div>'+rows+interp(imp>0?"warn":"good",summary)+'<div class="note">Norms: SDMT (Strober 2020); CVLT-II &amp; BVMT-R (Marrie 2021). Impaired at z &le; -1.5.</div>'; }
+
+// ===== MSFC (arm 1/9HPT + leg T25FW + cognition SDMT) =====
+function calcPASAT(){ const p=_num(el("pasat_raw").value); if(p==null){el("pasat_out").innerHTML="";return;}
+  const z=zPasat(p); const cls=z<=-1.5?"bad":(z<=-1?"warn":"good");
+  el("pasat_out").innerHTML='<div class="scoreline"><div class="bigscore">'+p+'<small> / 60 correct</small></div></div>'+interp(cls,"Standardised: z = "+z.toFixed(2)+" vs the NMSS Task Force reference (higher = better)."+(z<=-1.5?" Impaired range.":""))+'<div class="note">PASAT-3 (3-second). z uses the Task Force reference (mean 45.03, SD 12.08); a component of the MSFC.</div>'; }
+function calcMSFC(){
+  const t25=scoreT25(_num(el("t25fw_1").value),_num(el("t25fw_2").value));
+  const nh=scoreNHPT(_num(el("nhpt_d1").value),_num(el("nhpt_d2").value),_num(el("nhpt_n1").value),_num(el("nhpt_n2").value));
+  const pasat=_num(el("pasat_raw")?el("pasat_raw").value:null);
+  const zw=zWalk(t25), zp=zPeg(nh), zc=zPasat(pasat);
+  const parts=[["Arm - 9-HPT",zp,nh.mean!=null?nh.mean.toFixed(1)+" s":null],["Leg - T25FW",zw,t25!=null?t25.toFixed(1)+" s":null],["Cognition - PASAT-3",zc,pasat!=null?String(pasat):null]];
+  let rows=""; for(const p of parts){ rows+='<div class="rep-row"><div class="rep-dom">'+p[0]+'</div><div class="rep-val">'+(p[1]==null?'z -':'z '+p[1].toFixed(2))+'</div><div class="rep-mean">'+(p[2]==null?'enter in its tool':p[2])+'</div></div>'; }
+  var _mm={t25fw:t25,nhpt:nh.mean,pasat:pasat}; for(var k in _mm){ var btn=el("msfcbtn_"+k); if(btn) btn.classList.toggle("filled", _mm[k]!=null); }
+  let out='<div class="subhead">MSFC components (vs NMSS Task Force)</div>'+rows;
+  if(zw!=null&&zp!=null&&zc!=null){ const m=(zp+zw+zc)/3;
+    out='<div class="scoreline"><div class="bigscore">'+m.toFixed(3)+'<small> MSFC z-score</small></div></div>'+out+interp(m>=0?"good":"warn","MSFC = average of the three z-scores vs the Task Force reference. Higher (more positive) = better overall function."); }
+  else out+=interp("neutral","Enter T25FW and 9-HPT (in their tools) and the PASAT-3 score to get the composite.");
+  out+='<div class="note">Standardised against the NMSS Task Force dataset (Fischer et al., MSFC Administration &amp; Scoring Manual, 2001).</div>';
+  el("msfc_out").innerHTML=out; }
+document.addEventListener("input", function(e){ var t=e.target; if(!t||t.tagName!=="INPUT"||t.type!=="number") return;
+  if(t.value===""){ t.classList.remove("oor"); if(t._rw){t._rw.remove();t._rw=null;} return; }
+  var v=Number(t.value), mn=t.getAttribute("min"), mx=t.getAttribute("max"); mn=(mn===null||mn==="")?null:Number(mn); mx=(mx===null||mx==="")?null:Number(mx);
+  var bad=(mn!=null&&v<mn)||(mx!=null&&v>mx)||isNaN(v);
+  if(bad){ t.classList.add("oor"); if(!t._rw){ t._rw=document.createElement("div"); t._rw.className="range-warn"; if(t.parentNode) t.parentNode.appendChild(t._rw); }
+    t._rw.textContent="Please check - valid range is "+(mn!=null?mn:"?")+" to "+(mx!=null?mx:"?")+"."; }
+  else { t.classList.remove("oor"); if(t._rw){t._rw.remove();t._rw=null;} }
+});
+function openClin(){ showTool("clinreport"); buildClinReport(); }
+function buildClinReport(){
+  var tools=[["edss","MS severity / EDSS"],["pdds","PDDS"],["sdmt","SDMT"],["bvmt","BVMT-R"],["cvlt","CVLT-II"],["pasat","PASAT-3"],["bicams","BICAMS"],["t25fw","T25FW"],["nhpt","9-HPT"],["msfc","MSFC"],["mfis","MFIS"],["fss","FSS"],["phq9","PHQ-9"],["gad7","GAD-7"],["msws","MSWS-12"],["msis","MSIS-29"],["msqol","MSQOL-54"],["promis","PROMIS-29"]];
+  var blocks="",n=0;
+  for(var i=0;i<tools.length;i++){ var r=el(tools[i][0]+"_out"); if(r && r.textContent.trim()){ n++; blocks+='<div class="clin-block"><div class="clin-name">'+tools[i][1]+'</div><div class="clin-body">'+r.innerHTML+'</div></div>'; } }
+  if(n===0){ el("clin_out").innerHTML=interp("neutral","No tools have results yet. Open the tools you need, enter the scores, then come back and press Compile."); el("clin_actions").style.display="none"; return; }
+  el("clin_out").innerHTML='<div class="subhead">Compiled clinical summary - '+new Date().toLocaleDateString()+'</div>'+blocks+'<div class="note">'+n+' instrument(s) included. Scores are from validated, published instruments and explain the data; they are not a diagnosis.</div>';
+  el("clin_actions").style.display="flex";
+}
+function clinReportPDF(){ var r=el("clin_out"); if(!r||!r.textContent.trim())return; el("pc_title").textContent="MS clinical summary"; el("pc_date").textContent=new Date().toLocaleDateString(); el("pc_body").innerHTML=r.cloneNode(true).innerHTML; el("printcard").classList.add("show"); }
+</script>
+</body>
+</html>

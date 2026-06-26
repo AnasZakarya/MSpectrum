@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use MSpectrum in research, please cite it as below."
+type: software
+title: "MSpectrum: a free, offline toolkit for multiple sclerosis outcome measures (AutoEDSSguide and MS Score Hub)"
+authors:
+  - family-names: Nourelden
+    given-names: Anas
+    affiliation: "Wayne State University, Department of Neurology"
+    email: nour.anas@wayne.edu
+  - family-names: Memon
+    given-names: Anza
+    affiliation: "Wayne State University, Department of Neurology; John D. Dingell VA Medical Center"
+year: 2026
+version: "1.0"
+url: "https://github.com/AnasZakarya/AutoEDSSguide"
+# doi: "ADD_AFTER_ZENODO_RELEASE"
