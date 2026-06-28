@@ -57,6 +57,12 @@ input:focus,select:focus{outline:2px solid #bcd3e6;border-color:var(--accent)}
 input.oor{border-color:#c0392b!important;background:#fdeaea}
 .range-warn{color:#c0392b;font-size:11.5px;margin-top:3px;font-weight:600}
 select.blank,input.blank{border-color:#e0a030!important;background:#fff8e8!important}
+.scale{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.scale button{min-width:40px;padding:7px 11px;border:1px solid var(--rule-strong);border-radius:8px;background:#fff;color:var(--accent-ink);font-weight:700;cursor:pointer;font-size:14px}
+.scale button:hover{background:#eef4f8}
+.scale button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.scale.blank button{border-color:#e0a030}
+.scale-legend{font-size:12px;color:var(--ink-soft);margin:2px 0 10px;line-height:1.5}
 .howto{margin:2px 0 14px;font-size:13px}
 .howto>summary{cursor:pointer;color:#1e4a6e;font-weight:600;list-style:none;display:inline-flex;align-items:center;gap:6px;background:#eef4f8;border:1px solid #cfe0ec;border-radius:20px;padding:5px 13px}
 .howto>summary::-webkit-details-marker{display:none}
@@ -177,7 +183,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     </div>
     <div class="note">Oral: z by age/sex/education (Strober 2020). Written: z by age, 18-64 (Smith 1982 manual). No reference numbers needed.</div>
     <div class="result" id="sdmt_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('sdmt','SDMT')">📄 Patient summary</button><button class="btn" onclick="exportJSON('sdmt','SDMT')">Researcher: JSON</button><button class="btn" onclick="exportCSV('sdmt','SDMT')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('sdmt','SDMT')">📄 Patient summary</button><button class="btn" onclick="exportCSV('sdmt','SDMT')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_pdds">
@@ -194,7 +200,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
       </select></div></div>
     <details open style="margin:2px 0 8px"><summary style="cursor:pointer;font-size:13px;color:#1e4a6e;font-weight:600">What does each step mean? (tap to collapse)</summary><div class="items" style="margin-top:8px"><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">0</span><span><b>Normal.</b> I may have mild symptoms but they do not limit my activity; no walking limitation.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">1</span><span><b>Mild disability.</b> Mild symptoms; no limitation in my activity.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">2</span><span><b>Moderate disability.</b> Symptoms bother me but do not limit my activities.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">3</span><span><b>Gait disability.</b> MS interferes with my activities, especially walking, but I can still walk without any aid.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">4</span><span><b>Early cane.</b> I walk normally most days, but on bad days I need support (a cane, or holding the wall).</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">5</span><span><b>Late cane.</b> I need a cane or single support to walk about 25 feet; without it I cannot walk far.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">6</span><span><b>Bilateral support.</b> I need two canes, crutches, or a walker to walk about 25 feet.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">7</span><span><b>Wheelchair / scooter.</b> My main way of getting around is a wheelchair; I can take only a few steps.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">8</span><span><b>Bedridden.</b> I am mostly in bed and cannot use a wheelchair for long.</span></div></div></details>
     <div class="result" id="pdds_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('pdds','PDDS')">📄 Patient summary</button><button class="btn" onclick="exportJSON('pdds','PDDS')">Researcher: JSON</button><button class="btn" onclick="exportCSV('pdds','PDDS')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('pdds','PDDS')">📄 Patient summary</button><button class="btn" onclick="exportCSV('pdds','PDDS')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_bvmt">
@@ -216,7 +222,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     </div>
     <div class="note">Enter age, sex &amp; education for an automatic z-score (impaired at z &le; -1.5). Race is optional.</div>
     <div class="result" id="bvmt_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('bvmt','BVMT-R')">📄 Patient summary</button><button class="btn" onclick="exportJSON('bvmt','BVMT-R')">Researcher: JSON</button><button class="btn" onclick="exportCSV('bvmt','BVMT-R')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('bvmt','BVMT-R')">📄 Patient summary</button><button class="btn" onclick="exportCSV('bvmt','BVMT-R')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_cvlt">
@@ -253,7 +259,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     </div>
     <div class="note">Raw + derived metrics (d&prime;, discriminability). Demographically-corrected T-scores use the Parmenter 2010 CVLT-II MS norms (LDFR).</div></div>
     <div class="result" id="cvlt_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('cvlt','CVLT-II')">📄 Patient summary</button><button class="btn" onclick="exportJSON('cvlt','CVLT-II')">Researcher: JSON</button><button class="btn" onclick="exportCSV('cvlt','CVLT-II')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('cvlt','CVLT-II')">📄 Patient summary</button><button class="btn" onclick="exportCSV('cvlt','CVLT-II')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_mfis">
@@ -262,7 +268,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <div class="actions"><button class="btn" onclick="fillMFIS(0)">All 0</button><button class="btn" onclick="fillMFIS(4)">All 4</button><button class="btn" onclick="clearMFIS()">Clear</button></div>
     <div class="items" id="mfis_items"></div>
     <div class="result" id="mfis_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('mfis','MFIS')">📄 Patient summary</button><button class="btn" onclick="exportJSON('mfis','MFIS')">Researcher: JSON</button><button class="btn" onclick="exportCSV('mfis','MFIS')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('mfis','MFIS')">📄 Patient summary</button><button class="btn" onclick="exportCSV('mfis','MFIS')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_msqol">
@@ -272,7 +278,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <div class="actions"><button class="btn" onclick="clearMSQOL()">Clear all</button></div>
     <div class="note">Labels are short reminders - refer to the MSQOL-54 form (&copy; UCLA) for exact item wording. MSQOL-54 is free for clinical/research use.</div>
     <div class="result" id="msqol_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('msqol','MSQOL-54')">📄 Patient summary</button><button class="btn" onclick="exportJSON('msqol','MSQOL-54')">Researcher: JSON</button><button class="btn" onclick="exportCSV('msqol','MSQOL-54')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('msqol','MSQOL-54')">📄 Patient summary</button><button class="btn" onclick="exportCSV('msqol','MSQOL-54')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_promis">
@@ -281,7 +287,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <div id="promis_items"></div>
     <div class="actions"><button class="btn" onclick="clearPROMIS()">Clear all</button></div>
     <div class="result" id="promis_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('promis','PROMIS-29')">📄 Patient summary</button><button class="btn" onclick="exportJSON('promis','PROMIS-29')">Researcher: JSON</button><button class="btn" onclick="exportCSV('promis','PROMIS-29')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('promis','PROMIS-29')">📄 Patient summary</button><button class="btn" onclick="exportCSV('promis','PROMIS-29')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_fss">
@@ -290,7 +296,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <div class="actions"><button class="btn" onclick="fillFSS(1)">All 1</button><button class="btn" onclick="fillFSS(7)">All 7</button><button class="btn" onclick="clearFSS()">Clear</button></div>
     <div class="items" id="fss_items"></div>
     <div class="result" id="fss_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('fss','FSS')">📄 Patient summary</button><button class="btn" onclick="exportJSON('fss','FSS')">Researcher: JSON</button><button class="btn" onclick="exportCSV('fss','FSS')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('fss','FSS')">📄 Patient summary</button><button class="btn" onclick="exportCSV('fss','FSS')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_phq9">
@@ -299,7 +305,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <div class="actions"><button class="btn" onclick="fillPHQ(0)">All 0</button><button class="btn" onclick="fillPHQ(3)">All 3</button><button class="btn" onclick="clearPHQ()">Clear</button></div>
     <div class="items" id="phq_items"></div>
     <div class="result" id="phq9_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('phq9','PHQ-9')">📄 Patient summary</button><button class="btn" onclick="exportJSON('phq9','PHQ-9')">Researcher: JSON</button><button class="btn" onclick="exportCSV('phq9','PHQ-9')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('phq9','PHQ-9')">📄 Patient summary</button><button class="btn" onclick="exportCSV('phq9','PHQ-9')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_gad7">
@@ -308,7 +314,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <div class="actions"><button class="btn" onclick="fillGAD(0)">All 0</button><button class="btn" onclick="fillGAD(3)">All 3</button><button class="btn" onclick="clearGAD()">Clear</button></div>
     <div class="items" id="gad_items"></div>
     <div class="result" id="gad7_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('gad7','GAD-7')">📄 Patient summary</button><button class="btn" onclick="exportJSON('gad7','GAD-7')">Researcher: JSON</button><button class="btn" onclick="exportCSV('gad7','GAD-7')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('gad7','GAD-7')">📄 Patient summary</button><button class="btn" onclick="exportCSV('gad7','GAD-7')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_msws">
@@ -316,9 +322,9 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <h2>MSWS-12</h2><p class="lead">MS Walking Scale-12 - how MS has affected walking in the past 2 weeks (1 = not at all &hellip; 5 = extremely). Score 0&ndash;100, higher = greater walking limitation.</p>
     <div class="actions"><button class="btn" onclick="fillMSWS(1)">All 1</button><button class="btn" onclick="fillMSWS(5)">All 5</button><button class="btn" onclick="clearMSWS()">Clear</button></div>
     <div class="items" id="msws_items"></div>
-    <div class="note">Short functional labels shown; refer to the official MSWS-12 form for exact wording (&copy; Hobart/Thompson, licensed instrument).</div>
+    <div class="note">The descriptions below are our own plain-language wording (the official MSWS-12 item text is licensed, &copy; Hobart/Thompson). Answer each on the 1&ndash;5 scale; for formal/clinical use refer to the official MSWS-12 form.</div>
     <div class="result" id="msws_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('msws','MSWS-12')">📄 Patient summary</button><button class="btn" onclick="exportJSON('msws','MSWS-12')">Researcher: JSON</button><button class="btn" onclick="exportCSV('msws','MSWS-12')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('msws','MSWS-12')">📄 Patient summary</button><button class="btn" onclick="exportCSV('msws','MSWS-12')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_msis">
@@ -326,9 +332,9 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <h2>MSIS-29</h2><p class="lead">MS Impact Scale-29 (v1) - the impact of MS over the past 2 weeks. Physical (items 1&ndash;20) and Psychological (items 21&ndash;29) subscales, each transformed to 0&ndash;100 (higher = greater impact).</p>
     <div class="actions"><button class="btn" onclick="fillMSIS(1)">All 1</button><button class="btn" onclick="fillMSIS(5)">All 5</button><button class="btn" onclick="clearMSIS()">Clear</button></div>
     <div class="items" id="msis_items"></div>
-    <div class="note">Short functional labels shown; refer to the official MSIS-29 form for exact wording (&copy; Hobart/Thompson, licensed instrument).</div>
+    <div class="note">The descriptions below are our own plain-language wording (the official MSIS-29 item text is licensed, &copy; Hobart/Thompson). Answer each on the 1&ndash;5 scale; for formal/clinical use refer to the official MSIS-29 form.</div>
     <div class="result" id="msis_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('msis','MSIS-29')">📄 Patient summary</button><button class="btn" onclick="exportJSON('msis','MSIS-29')">Researcher: JSON</button><button class="btn" onclick="exportCSV('msis','MSIS-29')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('msis','MSIS-29')">📄 Patient summary</button><button class="btn" onclick="exportCSV('msis','MSIS-29')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_edss">
@@ -364,7 +370,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
       <div class="fld"><label>Trial 2 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="t25fw_2" min="0" step="0.1" oninput="calcT25FW()"></div>
     </div>
     <div class="result" id="t25fw_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="exportJSON('t25fw','T25FW')">Researcher: JSON</button><button class="btn" onclick="exportCSV('t25fw','T25FW')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="exportCSV('t25fw','T25FW')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_nhpt">
@@ -379,7 +385,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
       <div class="fld"><label>Non-dominant - Trial 2 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="nhpt_n2" min="0" step="0.1" oninput="calcNHPT()"></div>
     </div>
     <div class="result" id="nhpt_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="exportJSON('nhpt','9-HPT')">Researcher: JSON</button><button class="btn" onclick="exportCSV('nhpt','9-HPT')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="exportCSV('nhpt','9-HPT')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_bicams">
@@ -395,7 +401,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <div class="report-chk"><button class="btn" id="bicbtn_sdmt" onclick="openSub('sdmt','bicams')">1. SDMT &rarr;</button><button class="btn" id="bicbtn_cvlt" onclick="openSub('cvlt','bicams')">2. CVLT-II &rarr;</button><button class="btn" id="bicbtn_bvmt" onclick="openSub('bvmt','bicams')">3. BVMT-R &rarr;</button></div>
     <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="calcBICAMS()">Calculate BICAMS</button></div>
     <div class="result" id="bicams_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="exportJSON('bicams','BICAMS')">Researcher: JSON</button><button class="btn" onclick="exportCSV('bicams','BICAMS')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="exportCSV('bicams','BICAMS')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_msfc">
@@ -404,7 +410,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <div class="report-chk"><button class="btn" id="msfcbtn_t25fw" onclick="openSub('t25fw','msfc')">T25FW &rarr;</button><button class="btn" id="msfcbtn_nhpt" onclick="openSub('nhpt','msfc')">9-HPT &rarr;</button><button class="btn" id="msfcbtn_pasat" onclick="openSub('pasat','msfc')">PASAT-3 &rarr;</button></div>
     <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="calcMSFC()">Calculate MSFC</button></div>
     <div class="result" id="msfc_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="exportJSON('msfc','MSFC')">Researcher: JSON</button><button class="btn" onclick="exportCSV('msfc','MSFC')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="exportCSV('msfc','MSFC')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_pasat">
@@ -412,7 +418,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <h2>PASAT-3</h2><p class="lead">Paced Auditory Serial Addition Test (3-second version) - working memory &amp; processing speed. Enter the number of correct responses (0-60). Clinician-administered.</p>
     <div class="row"><div class="fld"><label>Correct responses <span class="hint">0-60</span></label><input type="number" id="pasat_raw" min="0" max="60" oninput="calcPASAT()"></div></div>
     <div class="result" id="pasat_out"></div>
-    <div class="actions no-print"><button class="btn" onclick="exportJSON('pasat','PASAT-3')">Researcher: JSON</button><button class="btn" onclick="exportCSV('pasat','PASAT-3')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="exportCSV('pasat','PASAT-3')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_clinreport">
@@ -464,7 +470,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
       <h3 id="pc_title"></h3>
       <div id="pc_body"></div>
       <p class="pc-foot">For information and to discuss with your clinician - this is not a diagnosis. Computed on your device; nothing is stored.</p>
-      <div class="pc-actions no-print"><button class="btn" onclick="window.print()">Print / Save as PDF</button><button class="btn" onclick="closePC()">Close</button></div>
+      <div class="pc-actions no-print"><button class="btn" onclick="pcDownloadPDF()" style="background:var(--accent);color:#fff;border-color:var(--accent)">💾 Download PDF</button><button class="btn" onclick="window.print()">Print</button><button class="btn" onclick="closePC()">Close</button></div>
     </div>
   </div>
 
@@ -597,6 +603,7 @@ function _zPlain(z){ return z<=-1.5?"In plain terms: this is in the <b>impaired 
 function _flagBlanks(p,a,b){ for(var i=a;i<=b;i++){var e=el(p+i); if(e){ if(e.value==="") e.classList.add("blank"); else e.classList.remove("blank"); }} }
 function _clearBlanks(p,a,b){ for(var i=a;i<=b;i++){var e=el(p+i); if(e) e.classList.remove("blank"); }}
 function _flagIds(ids,on){ ids.forEach(function(id){ var e=el(id); if(!e)return; if(on&&e.value==="") e.classList.add("blank"); else e.classList.remove("blank"); }); }
+function setScale(prefix,i,v,fn){ var inp=el(prefix+i); if(!inp)return; inp.value=v; var row=inp.parentNode; if(row)row.querySelectorAll("button").forEach(function(b){ b.classList.toggle("on", +b.getAttribute("data-v")===v); }); if(fn)fn(); }
 
 const _card=(t,i)=>'<div class="card" style="animation-delay:'+(i*0.03)+'s" onclick="showTool(\''+t.id+'\')"><div class="ic">'+t.ic+'</div><h3>'+t.name+'</h3><div class="tag">'+t.tag+'</div><div class="desc">'+t.desc+'</div></div>';
 const _ghead=(title,sub)=>'<div class="grid-head" style="grid-column:1/-1"><span>'+title+'</span><small>'+sub+'</small></div>';
@@ -614,7 +621,7 @@ let _ci=0;
 el("toolgrid").innerHTML = GROUPS.map(g=> _ghead(g.name,g.sub) + g.ids.map(id=>_TMAP[id]?_card(_TMAP[id],_ci++):"").join("")).join("");
 
 el("mfis_items").innerHTML = Array.from({length:21},(_,k)=>{const i=k+1;
-  const _ml={0:"0 - Never",1:"1",2:"2",3:"3",4:"4 - Almost always"};
+  const _ml={0:"0 - Never",1:"1 - Rarely",2:"2 - Sometimes",3:"3 - Often",4:"4 - Almost always"};
   const opts=[0,1,2,3,4].map(v=>'<option value="'+v+'">'+_ml[v]+'</option>').join("");
   return '<div class="item"><div><span class="qn">'+i+'.</span>'+MFIS_TEXT[i]+'</div><select id="mf_'+i+'" oninput="calcMFIS()"><option value="">-</option>'+opts+'</select></div>';}).join("");
 
@@ -1000,11 +1007,14 @@ function _download(fn,txt,mime){ const b=new Blob([txt],{type:mime}); const u=UR
 function exportJSON(toolId,name){ const res=_resultText(toolId); if(!res){alert("Enter the scores and view the result first.");return;}
   const data={tool:name, generated:new Date().toISOString(), inputs:_collectInputs(toolId), result:res};
   _download(name.replace(/[^\w]+/g,"_")+".json", JSON.stringify(data,null,2), "application/json"); }
+var _CSV_TEXTMAP={mq:MSQOL_Q,pr:PROMIS_Q,mf:MFIS_TEXT,fss:FSS_TEXT,phq:PHQ_TEXT,gad:GAD_TEXT,msws:MSWS_TEXT,msis:MSIS_TEXT};
+function _csvSan(v){ return String(v).replace(/\u2265/g,">=").replace(/\u2264/g,"<=").replace(/\u2212/g,"-").replace(/\u00b1/g,"+/-").replace(/\u2248/g,"~").replace(/\u2192/g,"->").replace(/\u00b7/g,"-").replace(/\u2013/g,"-").replace(/\u2014/g,"-").replace(/\u2032/g,"'").replace(/[\u2018\u2019]/g,"'").replace(/[\u201c\u201d]/g,'"').replace(/\u00d7/g,"x").replace(/\u2026/g,"..."); }
+function _csvHeader(id){ var mm=id.match(/^([a-z]+)_(\d+)$/); if(mm){ var t=_CSV_TEXTMAP[mm[1]]; if(t&&t[+mm[2]]){ var ss=String(t[+mm[2]]).replace(/<[^>]+>/g,"").replace(/&[a-z]+;/g," ").trim(); if(ss.length>50)ss=ss.slice(0,50)+"..."; return "Q"+mm[2]+" "+ss; } } return id; }
 function exportCSV(toolId,name){ const res=_resultText(toolId); const inp=_collectInputs(toolId);
   if(!res && !Object.keys(inp).length){alert("Enter the scores and view the result first.");return;}
-  const esc=c=>'"'+String(c).replace(/"/g,'""')+'"';
-  const keys=Object.keys(inp); const headers=["Tool"].concat(keys).concat(["Result"]); const vals=[name].concat(keys.map(k=>inp[k])).concat([res]);
-  const csv=headers.map(esc).join(",")+"\r\n"+vals.map(esc).join(",");
+  const esc=c=>'"'+_csvSan(c).replace(/"/g,'""')+'"';
+  const keys=Object.keys(inp); const headers=["Tool"].concat(keys.map(_csvHeader)).concat(["Result"]); const vals=[name].concat(keys.map(k=>inp[k])).concat([res]);
+  const csv="\ufeff"+headers.map(esc).join(",")+"\r\n"+vals.map(esc).join(",");
   _download(name.replace(/[^\w]+/g,"_")+".csv", csv, "text/csv"); }
 function patientSummary(toolId,name){ const r=el(toolId+"_out");
   if(!r||!r.textContent.trim()){alert("Enter values first.");return;}
@@ -1013,6 +1023,7 @@ function patientSummary(toolId,name){ const r=el(toolId+"_out");
   el("pc_date").textContent=new Date().toLocaleDateString();
   el("pc_body").innerHTML=clone.innerHTML; el("printcard").classList.add("show"); }
 function closePC(){ el("printcard").classList.remove("show"); }
+function pcDownloadPDF(){ var card=document.querySelector("#printcard .pc-card"); if(!card)return; var clone=card.cloneNode(true); clone.querySelectorAll(".no-print").forEach(function(x){x.remove();}); var fn=((el("pc_title")&&el("pc_title").textContent)||"MSpectrum_summary").replace(/[^\w]+/g,"_")+".pdf"; if(window.html2pdf){ html2pdf().set({margin:10,filename:fn,image:{type:"jpeg",quality:0.98},html2canvas:{scale:2},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}}).from(clone).save(); } else { alert("PDF generator still loading - using Print instead."); window.print(); } }
 
 // ===== FSS =====
 const FSS_TEXT={1:"My motivation is lower when I am fatigued.",2:"Exercise brings on my fatigue.",3:"I am easily fatigued.",4:"Fatigue interferes with my physical functioning.",5:"Fatigue causes frequent problems for me.",6:"My fatigue prevents sustained physical functioning.",7:"Fatigue interferes with carrying out certain duties and responsibilities.",8:"Fatigue is among my three most disabling symptoms.",9:"Fatigue interferes with my work, family, or social life."};
@@ -1033,18 +1044,19 @@ function clearFSS(){for(let i=1;i<=9;i++)el("fss_"+i).value="";_clearBlanks("fss
 const _DSM4=[["0 - Not at all",0],["1 - Several days",1],["2 - More than half the days",2],["3 - Nearly every day",3]];
 function _dsmSel(id){let opts="";for(const o of _DSM4)opts+='<option value="'+o[1]+'">'+o[0]+'</option>';return '<select id="'+id+'" oninput="'+(id.indexOf("phq")===0?"calcPHQ":"calcGAD")+'()"><option value="">- select -</option>'+opts+'</select>';}
 const PHQ_TEXT={1:"Little interest or pleasure in doing things",2:"Feeling down, depressed, or hopeless",3:"Trouble falling or staying asleep, or sleeping too much",4:"Feeling tired or having little energy",5:"Poor appetite or overeating",6:"Feeling bad about yourself - or that you are a failure or have let yourself or your family down",7:"Trouble concentrating on things, such as reading the newspaper or watching television",8:"Moving or speaking so slowly that other people could have noticed - or the opposite, being so fidgety or restless that you have been moving around a lot more than usual",9:"Thoughts that you would be better off dead, or of hurting yourself in some way"};
-el("phq_items").innerHTML=Array.from({length:9},(_,k)=>{const i=k+1;
-  return '<div class="item"><div><span class="qn">'+i+'.</span>'+PHQ_TEXT[i]+'</div>'+_dsmSel("phq_"+i)+'</div>';}).join("");
+el("phq_items").innerHTML='<div class="scale-legend">Tap a number for each item: <b>0</b> Not at all \u00b7 <b>1</b> Several days \u00b7 <b>2</b> More than half the days \u00b7 <b>3</b> Nearly every day</div>'+Array.from({length:9},(_,k)=>{const i=k+1;
+  var btns=[0,1,2,3].map(v=>'<button type="button" data-v="'+v+'" onclick="setScale(\'phq_\','+i+','+v+',calcPHQ)">'+v+'</button>').join("");
+  return '<div class="item"><div><span class="qn">'+i+'.</span>'+PHQ_TEXT[i]+'</div><div class="scale"><input type="hidden" id="phq_'+i+'">'+btns+'</div></div>';}).join("");
 function readPHQ(){const o={};for(let i=1;i<=9;i++)o[i]=_num(el("phq_"+i).value);return o;}
-function calcPHQ(){const o=readPHQ();const ans=Object.values(o).filter(v=>v!=null).length;if(ans===0){el("phq9_out").innerHTML="";return;} if(ans<9)_flagBlanks("phq_",1,9);else _clearBlanks("phq_",1,9);
+function calcPHQ(){const o=readPHQ();const ans=Object.values(o).filter(v=>v!=null).length;if(ans===0){el("phq9_out").innerHTML="";return;} for(var _pi=1;_pi<=9;_pi++){var _pr=el("phq_"+_pi); if(_pr&&_pr.parentNode)_pr.parentNode.classList.toggle("blank", ans<9 && _pr.value==="");}
   const r=scorePHQ(o);const t=r.total;
   const band=t<=4?["good","Minimal"]:t<=9?["neutral","Mild"]:t<=14?["warn","Moderate"]:t<=19?["warn","Moderately severe"]:["bad","Severe"];
   let extra="";
   if(o[9]!=null&&o[9]>0){extra=interp("bad","<b>Item 9 endorsed.</b> Thoughts of being better off dead or of self-harm were reported. Talk with the person directly and help connect them to appropriate support. If there is any immediate danger, contact local emergency services; in the US you can call or text <b>988</b> (Suicide &amp; Crisis Lifeline).");}
   const note=(ans<9?("&#9888; "+ans+"/9 answered - blanks count as 0. "):"")+"PHQ-9 is a screen, not a diagnosis. Cut-points: 5 mild, 10 moderate, 15 moderately severe, 20 severe; &ge;10 has good sensitivity/specificity for major depression.";
   el("phq9_out").innerHTML='<div class="scoreline"><div class="bigscore">'+t+'<small> / 27</small></div></div>'+interp(band[0],"Depression severity: <b>"+band[1]+"</b>.")+extra+'<div class="note">'+note+'</div>';}
-function fillPHQ(v){for(let i=1;i<=9;i++)el("phq_"+i).value=v;calcPHQ();}
-function clearPHQ(){for(let i=1;i<=9;i++)el("phq_"+i).value="";_clearBlanks("phq_",1,9);el("phq9_out").innerHTML="";}
+function fillPHQ(v){for(let i=1;i<=9;i++)setScale("phq_",i,v,null);calcPHQ();}
+function clearPHQ(){for(let i=1;i<=9;i++){var _e=el("phq_"+i); if(_e){_e.value="";if(_e.parentNode){_e.parentNode.classList.remove("blank");_e.parentNode.querySelectorAll("button").forEach(function(b){b.classList.remove("on");});}}}el("phq9_out").innerHTML="";}
 
 // ===== GAD-7 =====
 const GAD_TEXT={1:"Feeling nervous, anxious, or on edge",2:"Not being able to stop or control worrying",3:"Worrying too much about different things",4:"Trouble relaxing",5:"Being so restless that it is hard to sit still",6:"Becoming easily annoyed or irritable",7:"Feeling afraid, as if something awful might happen"};
@@ -1282,5 +1294,6 @@ function buildClinReport(){
 }
 function clinReportPDF(){ var r=el("clin_out"); if(!r||!r.textContent.trim())return; el("pc_title").textContent="MS clinical summary"; el("pc_date").textContent=new Date().toLocaleDateString(); el("pc_body").innerHTML=r.cloneNode(true).innerHTML; el("printcard").classList.add("show"); }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>

@@ -5076,12 +5076,12 @@ function setAllStrengthNormal() {
     const btn = document.createElement("button");
     btn.id = "toggle-prompts-btn";
     btn.className = "no-print";
-    btn.textContent = "Hide prompts";
+    btn.textContent = "Hide exam tips";
     btn.setAttribute("aria-label", "Hide or show bedside prompt questions");
     btn.style.cssText = "position:fixed;bottom:20px;left:20px;z-index:200;padding:8px 12px;border:1px solid #cbd5e1;border-radius:20px;background:#fff;color:#1e4a6e;font-weight:600;font-size:12px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18);";
     btn.onclick = () => {
       const hidden = document.body.classList.toggle("hide-prompts");
-      btn.textContent = hidden ? "Show prompts" : "Hide prompts";
+      btn.textContent = hidden ? "Show exam tips" : "Hide exam tips";
     };
     document.body.appendChild(btn);
   };
@@ -5364,6 +5364,7 @@ function buildView(viewName) {
 // State (persisted across view switches)
 // ============================================================
 let FORM_STATE = {};
+var PT_FLAGS = {};  // inputId -> "P"|"T" : findings not caused by MS, excluded from FS/EDSS
 
 function captureState() {
   const out = {};
@@ -5411,12 +5412,33 @@ function readForm() {
       out[k] = v;
     }
   }
+  if (typeof PT_FLAGS !== "undefined") { for (var _ptk in PT_FLAGS) { if (PT_FLAGS[_ptk]) delete out[_ptk]; } }
   return out;
 }
 
 // ============================================================
 // Live recalc
 // ============================================================
+function _ptLabel(id){ var map={p_str_:"Strength ",p_refl_:"Reflex ",p_:"Pyramidal ",v_:"Visual ",b_:"Brainstem ",c_:"Cerebellar ",s_:"Sensory ",bb_:"Bowel/Bladder ",m_:"Cerebral "}; for(var k in map){ if(id.indexOf(k)===0){ return map[k]+id.slice(k.length).replace(/_/g," "); } } return id; }
+function setPT(id,v){ if(v) PT_FLAGS[id]=v; else delete PT_FLAGS[id]; recalc(); }
+function renderPTPanel(){
+  var fr=document.getElementById("form-root"); if(!fr) return;
+  var host=document.getElementById("pt-panel");
+  if(!host){ host=document.createElement("div"); host.id="pt-panel"; fr.parentNode.insertBefore(host,fr); }
+  var FSP=["v_","b_","p_","c_","s_","bb_","m_"], st=(typeof FORM_STATE!=="undefined")?FORM_STATE:{}, rows=[];
+  Object.keys(st).forEach(function(id){
+    if(!id||id.indexOf("marker")>=0||id.indexOf("amb")===0||id.indexOf("pt_")===0) return;
+    if(!FSP.some(function(p){return id.indexOf(p)===0;})) return;
+    var v=st[id]; if(v===""||v==null||typeof v==="boolean") return;
+    if(String(v)===String(_examNormalVal(id))) return;
+    var f=PT_FLAGS[id]||"";
+    rows.push('<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:5px 0;border-top:1px solid #ece3cd"><span style="flex:1;min-width:150px;font-size:13px">'+_ptLabel(id)+' <b>'+v+'</b></span><select onchange="setPT(\''+id+'\',this.value)" style="font-size:12px;padding:3px 6px"><option value=""'+(f===""?" selected":"")+'>MS-related (counts)</option><option value="P"'+(f==="P"?" selected":"")+'>P \u2013 permanent, not MS</option><option value="T"'+(f==="T"?" selected":"")+'>T \u2013 temporary, not MS</option></select></div>');
+  });
+  Object.keys(PT_FLAGS).forEach(function(id){ var v=st[id]; if(v===undefined||String(v)===String(_examNormalVal(id))) delete PT_FLAGS[id]; });
+  if(!rows.length){ host.style.display="none"; host.innerHTML=""; return; }
+  host.style.cssText="display:block;margin:14px 0;padding:12px 14px;border:1px solid #d7c9a8;background:#fbf7ec;border-radius:10px";
+  host.innerHTML='<div style="font-weight:700;color:#6b5320;font-size:14px;margin-bottom:4px">Findings not caused by MS (P / T)</div><div style="font-size:12px;color:#6b6b6b;margin-bottom:6px">If a finding below is <b>not</b> due to MS, mark it <b>P</b> (permanent, e.g. old injury/amputation) or <b>T</b> (temporary, e.g. fracture). It stays documented but is <b>excluded</b> from the FS score and EDSS. When in doubt, assume MS-related.</div>'+rows.join("");
+}
 function fmtScore(v) { return (v === undefined || v === null || isNaN(v)) ? "-" : String(v); }
 
 function recalc() {
@@ -5446,6 +5468,7 @@ function recalc() {
 
   // Roadmap FS summary boxes
   updateRoadmapFSBoxes(r);
+  renderPTPanel();
 
   // Tab pills
   setPill("visual", r.visual_fs);
