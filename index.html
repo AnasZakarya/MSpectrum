@@ -3409,11 +3409,12 @@ input[type="checkbox"] {
                 <div style="font-size:8px;color:#334155;line-height:1.5;margin-bottom:6px;">
                   <span style="font-weight:700;">Notes</span><br>
                   * = optional &nbsp;&nbsp; <sup>1</sup> = converted FS Score<br>
-                  + Because depression, euphoria and fatigue are difficult to evaluate objectively, in some studies they do not contribute to the Cerebral FS score or EDSS step. Please adhere to the study&apos;s specific instructions.
+                  + Because depression, euphoria and fatigue are difficult to evaluate objectively, in some studies they do not contribute to the Cerebral FS score or EDSS step. Please adhere to the study&apos;s specific instructions.<br>
+                  <b>P</b> / <b>T</b> = a finding marked P (permanent) or T (temporary) is not due to MS: documented but not included in the FS score or EDSS step.
                 </div>
                 <div style="font-size:7.5px;color:#64748b;line-height:1.6;margin-bottom:6px;">
                   <span style="font-weight:700;">References</span><br>
-                  AutoEDSSguide - Zakarya A, et al. Wayne State University, Department of Neurology, 2025. Available at: https://github.com/AnasZakarya/AutoEDSSguide<br>
+                  MSpectrum (AutoEDSSguide + MS Score Hub) - Nourelden A, Memon A. Wayne State University, Department of Neurology; 2026. Available at: https://github.com/AnasZakarya/MSpectrum<br>
                   Standardised Neurological Examination and Assessment of Kurtzke&apos;s Functional Systems and EDSS. Slightly modified from J.F. Kurtzke, Neurology 1983;33:1444&ndash;52.<br>
                   &copy;2009 Ludwig Kappos, MD, University Hospital Basel; Version 09/08.
                 </div>
@@ -3713,21 +3714,24 @@ function calcPyramidalFS({ strength, overall_motor, plantar, reflexes } = {}) {
     const LE_R = limbMin(leMuscles, "R");
     const LE_L = limbMin(leMuscles, "L");
     const limbs = [UE_R, UE_L, LE_R, LE_L];
+    // A limb is plegic (BMRC 0-1) only when ALL its muscles are 0-1 (its strongest <=1).
+    const limbMax = (muscles, side) => { const vals = muscles.map(m => (strength[m] && strength[m][side] !== undefined) ? strength[m][side] : 5); return Math.max(...vals); };
+    const UE_Rp = limbMax(ueMuscles,"R") <= 1, UE_Lp = limbMax(ueMuscles,"L") <= 1, LE_Rp = limbMax(leMuscles,"R") <= 1, LE_Lp = limbMax(leMuscles,"L") <= 1;
+    const plegic = [UE_Rp, UE_Lp, LE_Rp, LE_Lp];
 
-    // Tetraplegia
-    if (limbs.every(x => x <= 1)) return 6;
-
-    // Paraplegia
-    if (LE_R <= 1 && LE_L <= 1) return 5;
-    // Marked tetraparesis: ≤2 in ≥3 limbs
+    // 6 Tetraplegia: all four limbs plegic (all muscles BMRC 0-1)
+    if (plegic.every(Boolean)) return 6;
+    // 5 Paraplegia: both legs plegic
+    if (LE_Rp && LE_Lp) return 5;
+    // 5 Hemiplegia: arm + leg of one side plegic
+    if ((UE_Rp && LE_Rp) || (UE_Lp && LE_Lp)) return 5;
+    // 5 Marked tetraparesis: BMRC ≤2 in ≥3 limbs
     if (limbs.filter(x => x <= 2).length >= 3) return 5;
-    // Hemiplegia
-    if ((UE_R <= 1 && LE_R <= 1) || (UE_L <= 1 && LE_L <= 1)) return 5;
-
-    // Marked: 2 limbs ≤2 OR monoplegia
+    // 4 Monoplegia: one limb plegic (all muscles 0-1)
+    if (plegic.some(Boolean)) return 4;
+    // 4 Marked para/hemiparesis: BMRC 2 in two limbs
     if (limbs.filter(x => x <= 2).length === 2) return 4;
-    if (limbs.some(x => x <= 1)) return 4;
-    // Moderate tetraparesis: 3 in ≥3 limbs
+    // 4 Moderate tetraparesis: BMRC 3 in ≥3 limbs
     if (limbs.filter(x => x <= 3).length >= 3) return 4;
 
     // Mild-to-moderate paraparesis or hemiparesis
@@ -3958,9 +3962,9 @@ function _fsOnlyStep(fs_list) {
     if (N === 1) return nN >= 2 ? 1.5 : 1.0;
 
     // ── N = 2 ─────────────────────────────────────────────────────────────────
-    // Special: ≥5 FS at grade 2 → 5.0 (Fouad exception)
+    // ≥5 FS at grade 2 (others 0/1) → 3.5 per Kurtzke ("fully ambulatory with five FS grade 2")
     if (N === 2) {
-        if (nN >= 5) return 5.0;
+        if (nN >= 5) return 3.5;
         // 1×N:  others 0 → 2.0;  others ≥1 → 2.5
         if (nN === 1) return anyGt0 ? 2.5 : 2.0;
         // 2×N:  others 0 or 1 → 2.5;  any other >1 → 3.0
@@ -4018,20 +4022,17 @@ function calcEDSSStep(fs, ambulation_score) {
     if (AS === 11) return 7.5;
     if (AS === 10) return 7.0;
     if (AS === 8 || AS === 9) return 6.5;
-    if (AS === 6 || AS === 7) return 6.0;
-    // AS=5 = unaided <100m → EDSS floor 5.5 (computed below with fs_step)
+    if (AS === 5 || AS === 6 || AS === 7) return 6.0;  // <100m unaided, or any assistance → EDSS 6.0 (Neurostatus AS table)
 
     const fs_step = _fsOnlyStep(fs_list);
 
-    // AS 0–5: FS-dominant range with ambulation floors (Neurostatus Kappos 2011)
+    // AS 0–4: FS-dominant range with ambulation floors (Neurostatus Kappos 2011)
     // AS=0 (unrestricted) → no floor (EDSS 0–1.5)
     // AS=1 (>500m restricted) → floor 2.0
-    // AS=2 (300–500m) → floor 4.5
+    // AS=2 (300–500m) → floor 4.5 (EDSS 4.5 or 5.0)
     // AS=3 (200–300m) → floor 5.0
-    // AS=4 (100–200m) → floor 5.0
-    // AS=5 (<100m) → floor 5.5
-    if (AS === 5) return Math.max(5.5, fs_step);
-    if (AS === 4) return Math.max(5.0, fs_step);
+    // AS=4 (100–200m) → 5.5 (Neurostatus AS table)
+    if (AS === 4) return Math.max(5.5, fs_step);
     if (AS === 3) return Math.max(5.0, fs_step);
     if (AS === 2) return Math.max(4.5, fs_step);
     if (AS === 1) return Math.max(2.0, fs_step);
@@ -5412,7 +5413,6 @@ function readForm() {
       out[k] = v;
     }
   }
-  if (typeof PT_FLAGS !== "undefined") { for (var _ptk in PT_FLAGS) { if (PT_FLAGS[_ptk]) delete out[_ptk]; } }
   return out;
 }
 
@@ -5423,29 +5423,42 @@ function _ptLabel(id){ var map={p_str_:"Strength ",p_refl_:"Reflex ",p_:"Pyramid
 function setPT(id,v){ if(v) PT_FLAGS[id]=v; else delete PT_FLAGS[id]; recalc(); }
 function renderPTPanel(){
   var fr=document.getElementById("form-root"); if(!fr) return;
-  var host=document.getElementById("pt-panel");
-  if(!host){ host=document.createElement("div"); host.id="pt-panel"; fr.parentNode.insertBefore(host,fr); }
-  var FSP=["v_","b_","p_","c_","s_","bb_","m_"], st=(typeof FORM_STATE!=="undefined")?FORM_STATE:{}, rows=[];
-  Object.keys(st).forEach(function(id){
-    if(!id||id.indexOf("marker")>=0||id.indexOf("amb")===0||id.indexOf("pt_")===0) return;
-    if(!FSP.some(function(p){return id.indexOf(p)===0;})) return;
-    var v=st[id]; if(v===""||v==null||typeof v==="boolean") return;
-    if(String(v)===String(_examNormalVal(id))) return;
-    var f=PT_FLAGS[id]||"";
-    rows.push('<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:5px 0;border-top:1px solid #ece3cd"><span style="flex:1;min-width:150px;font-size:13px">'+_ptLabel(id)+' <b>'+v+'</b></span><select onchange="setPT(\''+id+'\',this.value)" style="font-size:12px;padding:3px 6px"><option value=""'+(f===""?" selected":"")+'>MS-related (counts)</option><option value="P"'+(f==="P"?" selected":"")+'>P \u2013 permanent, not MS</option><option value="T"'+(f==="T"?" selected":"")+'>T \u2013 temporary, not MS</option></select></div>');
-  });
-  Object.keys(PT_FLAGS).forEach(function(id){ var v=st[id]; if(v===undefined||String(v)===String(_examNormalVal(id))) delete PT_FLAGS[id]; });
-  var _fw=document.querySelector(".final-sheet-wrap");
-  if(_fw){ var _sum=document.getElementById("pt-sheet"); var _fl=Object.keys(PT_FLAGS).filter(function(id){return PT_FLAGS[id];}); if(_fl.length){ if(!_sum){_sum=document.createElement("div");_sum.id="pt-sheet";_sum.style.cssText="margin-top:10px;padding:8px 12px;border:1px solid #d7c9a8;background:#fbf7ec;border-radius:8px;font-size:12px";_fw.appendChild(_sum);} _sum.innerHTML='<b>Findings not caused by MS (documented, excluded from FS & EDSS):</b> '+_fl.map(function(id){return _ptLabel(id)+" "+st[id]+" "+PT_FLAGS[id];}).join("; "); } else if(_sum){_sum.remove();} }
-  if(!rows.length){ host.style.display="none"; host.innerHTML=""; return; }
-  host.style.cssText="display:block;margin:14px 0;padding:12px 14px;border:1px solid #d7c9a8;background:#fbf7ec;border-radius:10px";
-  host.innerHTML='<div style="font-weight:700;color:#6b5320;font-size:14px;margin-bottom:4px">Findings not caused by MS (P / T)</div><div style="font-size:12px;color:#6b6b6b;margin-bottom:6px">If a finding below is <b>not</b> due to MS, mark it <b>P</b> (permanent, e.g. old injury/amputation) or <b>T</b> (temporary, e.g. fracture). It stays documented but is <b>excluded</b> from the FS score and EDSS. When in doubt, assume MS-related.</div>'+rows.join("");
+  var op=document.getElementById("pt-panel"); if(op) op.remove();
+  document.querySelectorAll(".pt-inline").forEach(function(x){x.remove();});
+  var st=(typeof FORM_STATE!=="undefined")?FORM_STATE:{};
+  var FSP=["v_","b_","p_","c_","s_","bb_","m_"];
+  function ok(id){ return id && FSP.some(function(p){return id.indexOf(p)===0;}) && id.indexOf("marker")<0 && id.indexOf("amb")<0 && id.indexOf("pt_")<0; }
+  var abn=[];
+  Object.keys(st).forEach(function(id){ if(!ok(id)) return; var v=st[id]; if(v===""||v==null||typeof v==="boolean") return; if(String(v)===String(_examNormalVal(id))) return; abn.push({id:id,v:v}); });
+  Object.keys(PT_FLAGS).forEach(function(id){ if(!abn.some(function(a){return a.id===id;})) delete PT_FLAGS[id]; });
+  var box=document.getElementById("pt-box");
+  if(!box){ box=document.createElement("div"); box.id="pt-box"; fr.parentNode.insertBefore(box, fr.nextSibling); }
+  var _act=document.querySelector(".tab-panel.active"); if(_act && _act.getAttribute("data-section")==="finalsheet"){ box.style.display="none"; box.innerHTML=""; return; }
+  if(!abn.length){ box.style.display="none"; box.innerHTML=""; }
+  else{
+    var avail=abn.filter(function(a){return !PT_FLAGS[a.id];});
+    var flagged=abn.filter(function(a){return PT_FLAGS[a.id];});
+    var opts='<option value="">- select a finding that is NOT due to MS -</option>'+avail.map(function(a){return '<option value="'+a.id+'">'+_ptLabel(a.id)+' ('+a.v+')</option>';}).join("");
+    var flist=flagged.length? '<div style="margin-top:8px">'+flagged.map(function(a){return '<div style="font-size:13px;padding:3px 0">• '+_ptLabel(a.id)+' <b>'+a.v+'</b> — <b>'+PT_FLAGS[a.id]+'</b> (excluded) <button type="button" data-ptrm="'+a.id+'" style="font-size:11px;margin-left:6px;cursor:pointer">remove</button></div>';}).join("")+'</div>' : '';
+    box.style.cssText="margin:16px 0;padding:12px 14px;border:1px solid #d7c9a8;background:#fbf7ec;border-radius:10px";
+    box.innerHTML='<div style="font-weight:700;color:#6b5320;font-size:14px;margin-bottom:4px">Anything not caused by MS? (optional)</div><div style="font-size:12px;color:#6b6b6b;margin-bottom:8px">If a finding is <b>not</b> due to MS, pick it and mark <b>P</b> (permanent, e.g. old injury) or <b>T</b> (temporary, e.g. fracture). It is documented but excluded from the FS score and EDSS. When in doubt, assume MS-related.</div><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><select id="pt-pick" style="font-size:13px;flex:1;min-width:200px;padding:4px">'+opts+'</select><button type="button" id="pt-add-P" style="font-size:12px;padding:4px 10px;cursor:pointer">Mark P</button><button type="button" id="pt-add-T" style="font-size:12px;padding:4px 10px;cursor:pointer">Mark T</button></div>'+flist;
+    var add=function(kind){ var sel=document.getElementById("pt-pick"); if(sel&&sel.value) setPT(sel.value,kind); };
+    var bP=document.getElementById("pt-add-P"), bT=document.getElementById("pt-add-T");
+    if(bP) bP.onclick=function(){add("P");}; if(bT) bT.onclick=function(){add("T");};
+    box.querySelectorAll("[data-ptrm]").forEach(function(b){ b.onclick=function(){ setPT(b.getAttribute("data-ptrm"),""); }; });
+  }
 }
+function _ptSheetSummary(){}
 function fmtScore(v) { return (v === undefined || v === null || isNaN(v)) ? "-" : String(v); }
 
 function recalc() {
   const inputs = readForm();
-  const r = calculateFullEDSS(inputs);
+  var _calcIn=inputs, _dispIn=inputs;
+  if(typeof PT_FLAGS!=="undefined" && Object.keys(PT_FLAGS).some(function(k){return PT_FLAGS[k];})){
+    _calcIn=Object.assign({},inputs); _dispIn=Object.assign({},inputs);
+    for(var _k in PT_FLAGS){ if(PT_FLAGS[_k]){ delete _calcIn[_k]; if(_dispIn[_k]!==undefined&&_dispIn[_k]!=="") _dispIn[_k]=String(_dispIn[_k])+PT_FLAGS[_k]; } }
+  }
+  const r = calculateFullEDSS(_calcIn);
   window.__lastResult = r;
 
   // Header EDSS readout
@@ -5492,10 +5505,10 @@ function recalc() {
   if (xBanner) xBanner.classList.toggle("active", r.cerebellar_x_suggested);
 
   // Final sheet sync
-  syncFinalSheet(inputs, r);
+  syncFinalSheet(_dispIn, r);
 
   // Inconsistency + bilateral checks
-  applyChecks(inputs, r);
+  applyChecks(_calcIn, r);
 }
 
 function renderASDisplay(r) {
@@ -6287,6 +6300,7 @@ document.addEventListener("click", (ev) => {
     document.querySelectorAll(".tab-panel").forEach(p => {
       p.classList.toggle("active", p.id === `tab-${target}`);
     });
+    if(typeof renderPTPanel==="function") renderPTPanel();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 });
