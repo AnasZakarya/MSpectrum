@@ -5435,6 +5435,8 @@ function renderPTPanel(){
     rows.push('<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:5px 0;border-top:1px solid #ece3cd"><span style="flex:1;min-width:150px;font-size:13px">'+_ptLabel(id)+' <b>'+v+'</b></span><select onchange="setPT(\''+id+'\',this.value)" style="font-size:12px;padding:3px 6px"><option value=""'+(f===""?" selected":"")+'>MS-related (counts)</option><option value="P"'+(f==="P"?" selected":"")+'>P \u2013 permanent, not MS</option><option value="T"'+(f==="T"?" selected":"")+'>T \u2013 temporary, not MS</option></select></div>');
   });
   Object.keys(PT_FLAGS).forEach(function(id){ var v=st[id]; if(v===undefined||String(v)===String(_examNormalVal(id))) delete PT_FLAGS[id]; });
+  var _fw=document.querySelector(".final-sheet-wrap");
+  if(_fw){ var _sum=document.getElementById("pt-sheet"); var _fl=Object.keys(PT_FLAGS).filter(function(id){return PT_FLAGS[id];}); if(_fl.length){ if(!_sum){_sum=document.createElement("div");_sum.id="pt-sheet";_sum.style.cssText="margin-top:10px;padding:8px 12px;border:1px solid #d7c9a8;background:#fbf7ec;border-radius:8px;font-size:12px";_fw.appendChild(_sum);} _sum.innerHTML='<b>Findings not caused by MS (documented, excluded from FS & EDSS):</b> '+_fl.map(function(id){return _ptLabel(id)+" "+st[id]+" "+PT_FLAGS[id];}).join("; "); } else if(_sum){_sum.remove();} }
   if(!rows.length){ host.style.display="none"; host.innerHTML=""; return; }
   host.style.cssText="display:block;margin:14px 0;padding:12px 14px;border:1px solid #d7c9a8;background:#fbf7ec;border-radius:10px";
   host.innerHTML='<div style="font-weight:700;color:#6b5320;font-size:14px;margin-bottom:4px">Findings not caused by MS (P / T)</div><div style="font-size:12px;color:#6b6b6b;margin-bottom:6px">If a finding below is <b>not</b> due to MS, mark it <b>P</b> (permanent, e.g. old injury/amputation) or <b>T</b> (temporary, e.g. fracture). It stays documented but is <b>excluded</b> from the FS score and EDSS. When in doubt, assume MS-related.</div>'+rows.join("");
@@ -9187,6 +9189,29 @@ function scStopCamera() {
   const video = document.getElementById("sc-video");
   if (video) { video.srcObject = null; video.classList.remove("active"); }
 }
+</script>
+<script>
+/* Within-system highlighting: once you start a system, empty fields in it turn amber */
+(function(){
+  var st=document.createElement("style");
+  st.textContent="#form-root input.miss,#form-root select.miss{border-color:#e0a030 !important;background:#fff8e8 !important}";
+  (document.head||document.documentElement).appendChild(st);
+  function handle(e){
+    var t=e.target; if(!t||!t.closest) return;
+    var fr=document.getElementById("form-root"); if(!fr||!fr.contains(t)) return;
+    var sec=t.closest("[data-section]");
+    if(sec){ var sid=sec.getAttribute("data-section"); if(sid==="patient"||sid==="finalsheet") return; }
+    var grp=t.closest(".system-group")||t.closest(".tab-panel"); if(!grp) return;
+    var rel=[].slice.call(grp.querySelectorAll("input,select")).filter(function(x){
+      return x.type!=="checkbox"&&x.type!=="radio"&&x.type!=="file"&&!(x.id&&x.id.indexOf("pt_")===0)&&!(x.id&&x.id.indexOf("a_score")===0);
+    });
+    var filled=rel.filter(function(x){return x.value!=="";}).length;
+    rel.forEach(function(x){ x.classList.remove("miss"); });
+    if(filled>0){ rel.forEach(function(x){ if(x.value==="") x.classList.add("miss"); }); }
+  }
+  document.addEventListener("input", handle);
+  document.addEventListener("change", handle);
+})();
 </script>
 </body>
 </html>
