@@ -3782,8 +3782,11 @@ function calcCerebellarFS({
     const gait = _safe(gait_ataxia, 0);
     const trunc = _safe(truncal_ataxia, 0);
 
-    if (n_limbs_severe >= 3 && (gait >= 3 || trunc >= 3)) return 4;
+    // FIX (Bug): grade 5 must be checked BEFORE grade 4; otherwise when all 4 limbs
+    // have tremor ≥3 (satisfying the grade-4 condition), the grade-4 branch fires first
+    // and grade 5 is never reachable.
     if (limb_overall >= 4 && gait >= 4 && trunc >= 4) return 5;
+    if (n_limbs_severe >= 3 && (gait >= 3 || trunc >= 3)) return 4;
     if (limb_overall >= 3 || gait >= 3 || trunc >= 3) return 3;
     if (limb_overall === 2 || _safe(romberg, 0) >= 2 || _safe(tandem, 0) >= 2 ||
         trunc === 2 || gait === 2) return 2;

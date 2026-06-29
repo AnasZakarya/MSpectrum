@@ -175,6 +175,12 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_sdmt">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>SDMT</h2><p class="lead">Symbol Digit Modalities Test - processing speed. Enter the number of correct substitutions in 90 seconds.</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Raw score:</b> Correct symbol-to-digit substitutions in 90 seconds (range 0&ndash;110). Higher = better processing speed.<br>
+<b>z-score (automatic norm):</b> Compares the raw score to matched healthy people (same age, sex, education). z = 0 is the population average; z &le; &minus;1.5 is the impairment cut-off used across MS cognitive research (Benedict et al. <em>Mult Scler</em> 2012).<br>
+<b>Clinically meaningful change:</b> &ge; 4-point change in raw score is considered reliable (exceeds measurement error; Benedict et al. 2012).<br>
+<b>Norms source:</b> Oral: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (US; age/sex/education regression). Written: Smith A. SDMT Manual (WPS) 1982 (US; age 18&ndash;64).
+</div></details>
     <div class="row"><div class="fld"><label>Correct substitutions (90 s) <span class="hint">0&ndash;110</span></label><input type="number" id="sdmt_raw" min="0" max="120" oninput="calcSDMT()"></div></div>
     <div class="subhead">Automatic norm (US)</div>
     <div class="note" style="margin-top:2px"><b>What is a norm?</b> It compares this score with results from a large group of similar people - matched for age, sex and education (a process called <b>standardisation</b>). That turns the raw number into a <b>z-score</b>: about 0 = average for similar people, below 0 = below average, and z &le; -1.5 is the impaired range. Enter the details below so the comparison can be made.</div>
@@ -192,6 +198,12 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_pdds">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>PDDS</h2><p class="lead">Patient Determined Disease Steps - the patient-reported analogue of the EDSS.</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Scoring:</b> Single ordinal item &mdash; patient selects one step (0 = Normal, 8 = Bedridden). The selected step is the score; no calculation needed.<br>
+<b>Relationship to EDSS:</b> Strong correlation with clinician-rated EDSS (r &asymp; 0.85; Learmonth YC et al. <em>BMC Neurol</em> 2013). Not interchangeable: PDDS captures lived walking experience; EDSS covers all neurological functions.<br>
+<b>Meaningful change:</b> A change of &ge; 1 step is clinically meaningful (Learmonth 2013).<br>
+<b>Reference:</b> Hohol MJ et al. <em>Neurology</em> 1995;45(8):1503&ndash;10. Learmonth YC et al. <em>BMC Neurol</em> 2013;13:11.
+</div></details>
     <div class="row"><div class="fld"><label>Patient-selected step</label>
       <select id="pdds_v" oninput="calcPDDS()">
         <option value="">-</option>
@@ -209,6 +221,13 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_bvmt">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>BVMT-R</h2><p class="lead">Brief Visuospatial Memory Test&ndash;Revised - three immediate-recall trials (each 0&ndash;12).</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Total score (T1+T2+T3):</b> 2 points per correctly reproduced figure in the correct location (6 figures &times; 3 trials = max 36). Higher = better visual memory.<br>
+<b>Learning score:</b> Trial 3 &minus; Trial 1; positive values indicate normal acquisition across trials.<br>
+<b>Delayed Recall (optional):</b> Score after a ~25-min delay (0&ndash;12). T-score derived from MS-specific norms (Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16:6&ndash;16).<br>
+<b>z-score (automatic norm):</b> Total T1+T2+T3 compared to US MS patients matched for age, sex, education by regression (Marrie RA et al. <em>Front Neurol</em> 2021;11:621010). z &le; &minus;1.5 = impaired domain.<br>
+<b>Reference:</b> Benedict RHB. BVMT-R manual. PAR, 1997.
+</div></details>
     <div class="row">
       <div class="fld"><label>Trial 1 <span class="hint">0&ndash;12</span></label><input type="number" id="bv1" min="0" max="12" oninput="calcBVMT()"></div>
       <div class="fld"><label>Trial 2 <span class="hint">0&ndash;12</span></label><input type="number" id="bv2" min="0" max="12" oninput="calcBVMT()"></div>
@@ -231,6 +250,15 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_cvlt">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>CVLT-II</h2><p class="lead">California Verbal Learning Test&ndash;II - five immediate-recall trials of List A (each 0&ndash;16).</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Total T1&ndash;T5:</b> Sum of 5 immediate-recall trials of a 16-word list (max 80). Higher = better verbal learning and memory.<br>
+<b>Learning slope:</b> Linear regression slope across the 5 trials; positive = normal acquisition curve; flat or negative = impaired learning.<br>
+<b>SDFR / LDFR:</b> Short-delay free recall (~2 min) and long-delay free recall (~20 min), each 0&ndash;16. LDFR T-score via MS-specific norms (Parmenter 2010).<br>
+<b>Recognition (d&prime;):</b> Signal-detection discriminability index = z(hit rate) &minus; z(false positive rate). Higher = better; values near 0 or negative indicate poor discrimination.<br>
+<b>Forced Choice validity:</b> &le; 14 / 16 correct raises concern for sub-optimal effort (CVLT-II manual, Pearson 2000).<br>
+<b>z-score (automatic norm):</b> Total T1&ndash;T5 vs US MS patients by regression (Marrie 2021). z &le; &minus;1.5 = impaired.<br>
+<b>Reference:</b> Delis DC et al. CVLT-II manual. Pearson, 2000. Marrie RA et al. <em>Front Neurol</em> 2021;11:621010. Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16:6&ndash;16.
+</div></details>
     <div class="row">
       <div class="fld"><label>Trial 1 <span class="hint">0&ndash;16</span></label><input type="number" id="cv1" min="0" max="16" oninput="calcCVLT()"></div>
       <div class="fld"><label>Trial 2 <span class="hint">0&ndash;16</span></label><input type="number" id="cv2" min="0" max="16" oninput="calcCVLT()"></div>
@@ -268,6 +296,12 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_mfis">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>MFIS</h2><p class="lead">Modified Fatigue Impact Scale - 21 items, "Because of my fatigue during the past 4 weeks&hellip;" (0 = never &hellip; 4 = almost always).</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Scoring:</b> 21 items &times; 0&ndash;4 &rarr; total 0&ndash;84 (higher = greater fatigue impact). Three subscales: Physical (9 items, 0&ndash;36), Cognitive (10 items, 0&ndash;40), Psychosocial (2 items, 0&ndash;8).<br>
+<b>Cut-off:</b> Total &ge; 38 = clinically significant fatigue impact on daily functioning (National MS Society Clinical Practice Guidelines, 1998). A score of &ge; 45 is used in some studies for severe impact (Flachenecker P et al. <em>J Neurol</em> 2002).<br>
+<b>Clinically meaningful change:</b> &asymp; 10-point change in total score across MS trials.<br>
+<b>Reference:</b> Fisk JD et al. <em>Clin Infect Dis</em> 1994;18(Suppl 1):S79&ndash;83. 21-item version: NMSS Clinical Practice Guidelines 1998.
+</div></details>
     <div class="actions"><button class="btn" onclick="fillMFIS(0)">All 0</button><button class="btn" onclick="fillMFIS(4)">All 4</button><button class="btn" onclick="clearMFIS()">Clear</button></div>
     <div class="items" id="mfis_items"></div>
     <div class="result" id="mfis_out"></div>
@@ -277,6 +311,13 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_msqol">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>MSQOL-54</h2><p class="lead">Multiple Sclerosis Quality of Life-54. Enter each item's raw response (the number circled on the form). Grouped by subscale; numbers are the MSQOL-54 item order. All scores 0&ndash;100 (higher = better). Subscales use the dynamic-denominator rule (averaged over answered items only).</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Scoring:</b> 54 items recoded to 0&ndash;100 (higher = better quality of life); subscale score = mean of answered items. Partial completion is allowed per subscale.<br>
+<b>Physical Health Composite (PHC):</b> Weighted average of 8 subscales: 0.17&times;PF + 0.17&times;HP + 0.12&times;Energy + 0.12&times;Role-P + 0.11&times;Pain + 0.08&times;Sexual + 0.12&times;Social + 0.11&times;HealthDistress. <em>All 8 subscales must be complete.</em><br>
+<b>Mental Health Composite (MHC):</b> 0.14&times;HealthDistress + 0.18&times;OverallQoL + 0.29&times;Emotional + 0.24&times;Role-E + 0.15&times;Cognitive. <em>All 5 subscales must be complete.</em><br>
+<b>No universal cut-off exists</b> for MSQOL-54; composites of &lt; 50 indicate below-average QoL in most MS cohorts.<br>
+<b>Reference:</b> Vickrey BG et al. <em>Qual Life Res</em> 1995;4(3):187&ndash;206. Composite weights: Ritvo PG et al. adapted from MOS SF-36, 1997.
+</div></details>
     <div id="msqol_items"></div>
     <div class="actions"><button class="btn" onclick="clearMSQOL()">Clear all</button></div>
     <div class="note">Labels are short reminders - refer to the MSQOL-54 form (&copy; UCLA) for exact item wording. MSQOL-54 is free for clinical/research use.</div>
@@ -287,6 +328,12 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_promis">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>PROMIS-29</h2><p class="lead">7 domains (4 items each, 1&ndash;5) + pain intensity (0&ndash;10). Shows raw domain sums and a severity band (where the patient sits vs the general population).</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Scoring:</b> 7 domains &times; 4 items rated 1&ndash;5 &rarr; raw domain sum (4&ndash;20) converted to a <b>T-score</b> via official HealthMeasures calibration tables. Pain intensity is a separate 0&ndash;10 NRS item.<br>
+<b>T-score:</b> Mean = 50, SD = 10 in the US general population. For <em>symptom</em> domains (Anxiety, Depression, Fatigue, Sleep, Pain Interference): T &gt; 50 = worse than average; T = 60 = 1 SD above average (more symptoms). For <em>function</em> domains (Physical Function, Social Roles): T &lt; 50 = worse than average; T = 40 = 1 SD below average ability.<br>
+<b>Severity bands</b> (HealthMeasures 2021): Mild / Moderate / Significant concern &mdash; thresholds differ by domain and are shown on each result line.<br>
+<b>Reference:</b> Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. T-score tables: PROMIS Adult Profile Scoring Manual v2.1 (HealthMeasures / Northwestern University, 2021).
+</div></details>
     <div id="promis_items"></div>
     <div class="actions"><button class="btn" onclick="clearPROMIS()">Clear all</button></div>
     <div class="result" id="promis_out"></div>
@@ -296,6 +343,12 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_fss">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>FSS</h2><p class="lead">Fatigue Severity Scale - 9 statements about the past week (1 = strongly disagree &hellip; 7 = strongly agree).</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Scoring:</b> 9 statements rated 1&ndash;7; score = mean of 9 items (range 1.0&ndash;7.0). Higher = more severe fatigue.<br>
+<b>Cut-off:</b> Mean &ge; 4.0 = clinically significant fatigue. Original validation: healthy controls scored &asymp; 2.3 vs MS patients &asymp; 4.7 (Krupp LB et al. <em>Arch Neurol</em> 1989).<br>
+<b>Clinically meaningful change:</b> A change of &ge; 0.45 points in the mean exceeds measurement error in MS (Debouverie M et al. <em>Mult Scler</em> 2007).<br>
+<b>Reference:</b> Krupp LB, LaRocca NG, Muir-Nash J, Steinberg AD. <em>Arch Neurol</em> 1989;46(10):1121&ndash;3.
+</div></details>
     <div class="actions"><button class="btn" onclick="fillFSS(1)">All 1</button><button class="btn" onclick="fillFSS(7)">All 7</button><button class="btn" onclick="clearFSS()">Clear</button></div>
     <div class="items" id="fss_items"></div>
     <div class="result" id="fss_out"></div>
@@ -305,6 +358,14 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_phq9">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>PHQ-9</h2><p class="lead">Patient Health Questionnaire-9 - depression screen. &ldquo;Over the last 2 weeks, how often have you been bothered by the following?&rdquo;</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Scoring:</b> 9 items rated 0 (not at all) to 3 (nearly every day); total 0&ndash;27. Higher = more depressive symptoms.<br>
+<b>Severity bands:</b> 0&ndash;4 = Minimal &nbsp;&bull;&nbsp; 5&ndash;9 = Mild &nbsp;&bull;&nbsp; 10&ndash;14 = Moderate &nbsp;&bull;&nbsp; 15&ndash;19 = Moderately severe &nbsp;&bull;&nbsp; 20&ndash;27 = Severe (Kroenke K et al. <em>J Gen Intern Med</em> 2001).<br>
+<b>Screening cut-off:</b> &ge; 10 = likely clinically significant depression (sensitivity 88%, specificity 88% for major depressive disorder; Kroenke 2001).<br>
+<b>Item 9 (thoughts of death / self-harm):</b> Any response &gt; 0 requires direct clinical assessment regardless of the total score.<br>
+<b>Note in MS:</b> Somatic item overlap (fatigue, sleep, concentration) may inflate scores; a cut-off of &ge; 11 is used in some MS-specific studies (Feinstein A et al. <em>Nat Rev Neurol</em> 2014).<br>
+<b>Reference:</b> Kroenke K, Spitzer RL, Williams JBW. <em>J Gen Intern Med</em> 2001;16(9):606&ndash;13. Public domain (Pfizer Inc.).
+</div></details>
     <div class="actions"><button class="btn" onclick="fillPHQ(0)">All 0</button><button class="btn" onclick="fillPHQ(3)">All 3</button><button class="btn" onclick="clearPHQ()">Clear</button></div>
     <div class="items" id="phq_items"></div>
     <div class="result" id="phq9_out"></div>
@@ -314,6 +375,13 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_gad7">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>GAD-7</h2><p class="lead">Generalized Anxiety Disorder-7 - anxiety screen. &ldquo;Over the last 2 weeks, how often have you been bothered by the following?&rdquo;</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Scoring:</b> 7 items rated 0 (not at all) to 3 (nearly every day); total 0&ndash;21. Higher = more anxiety symptoms.<br>
+<b>Severity bands:</b> 0&ndash;4 = Minimal &nbsp;&bull;&nbsp; 5&ndash;9 = Mild &nbsp;&bull;&nbsp; 10&ndash;14 = Moderate &nbsp;&bull;&nbsp; 15&ndash;21 = Severe (Spitzer RL et al. <em>Arch Intern Med</em> 2006).<br>
+<b>Screening cut-off:</b> &ge; 10 = likely clinically significant anxiety (sensitivity 89%, specificity 82% for generalised anxiety disorder; Spitzer 2006).<br>
+<b>Clinically meaningful change:</b> &asymp; 4-point change is a reliable clinical response (Rubin HC et al. <em>Gen Hosp Psychiatry</em> 2016).<br>
+<b>Reference:</b> Spitzer RL, Kroenke K, Williams JBW, L&ouml;we B. <em>Arch Intern Med</em> 2006;166(10):1092&ndash;7. Public domain (Pfizer Inc.).
+</div></details>
     <div class="actions"><button class="btn" onclick="fillGAD(0)">All 0</button><button class="btn" onclick="fillGAD(3)">All 3</button><button class="btn" onclick="clearGAD()">Clear</button></div>
     <div class="items" id="gad_items"></div>
     <div class="result" id="gad7_out"></div>
@@ -323,6 +391,12 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_msws">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>MSWS-12</h2><p class="lead">MS Walking Scale-12 - how MS has affected walking in the past 2 weeks (1 = not at all &hellip; 5 = extremely). Score 0&ndash;100, higher = greater walking limitation.</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Scoring:</b> 12 items rated 1&ndash;5 (all 12 required). Transformation: <b>(raw sum &minus; 12) &divide; 48 &times; 100</b> &rarr; 0&ndash;100. A score of 0 = no walking limitation; 100 = maximum limitation.<br>
+<b>Interpretation:</b> No universal cut-off. Scores in clinical MS cohorts typically range 20&ndash;60; stable MS patients often score 15&ndash;35.<br>
+<b>Minimal clinically important difference (MCID):</b> &ge; 10-point change (Hobart JC et al. <em>Neurology</em> 2003).<br>
+<b>Reference:</b> Hobart JC, Riazi A, Lamping DL, Fitzpatrick R, Thompson AJ. <em>Neurology</em> 2003;60(1):31&ndash;6. &copy; Hobart/Thompson (licensed; short functional labels used here).
+</div></details>
     <div class="actions"><button class="btn" onclick="fillMSWS(1)">All 1</button><button class="btn" onclick="fillMSWS(5)">All 5</button><button class="btn" onclick="clearMSWS()">Clear</button></div>
     <div class="items" id="msws_items"></div>
     <div class="note">The descriptions below are our own plain-language wording (the official MSWS-12 item text is licensed, &copy; Hobart/Thompson). Answer each on the 1&ndash;5 scale; for formal/clinical use refer to the official MSWS-12 form.</div>
@@ -333,6 +407,14 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_msis">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>MSIS-29</h2><p class="lead">MS Impact Scale-29 (v1) - the impact of MS over the past 2 weeks. Physical (items 1&ndash;20) and Psychological (items 21&ndash;29) subscales, each transformed to 0&ndash;100 (higher = greater impact).</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Physical subscale (items 1&ndash;20):</b> All 20 items required. <b>(raw sum &minus; 20) &divide; 80 &times; 100</b> &rarr; 0&ndash;100.<br>
+<b>Psychological subscale (items 21&ndash;29):</b> All 9 items required. <b>(raw sum &minus; 9) &divide; 36 &times; 100</b> &rarr; 0&ndash;100.<br>
+Higher score = greater MS impact on that domain. Items are rated 1 (not at all) to 5 (extremely).<br>
+<b>Interpretation:</b> No single universal cut-off. A score &gt; 50 on either subscale indicates a substantial impact in most clinical contexts.<br>
+<b>MCID:</b> &asymp; 8 points on the Physical subscale (Hobart J et al. <em>Brain</em> 2001).<br>
+<b>Reference:</b> Hobart J, Lamping D, Fitzpatrick R, Riazi A, Thompson A. <em>Brain</em> 2001;124(Pt 5):962&ndash;73. &copy; Hobart/Thompson (licensed; short functional labels used here).
+</div></details>
     <div class="actions"><button class="btn" onclick="fillMSIS(1)">All 1</button><button class="btn" onclick="fillMSIS(5)">All 5</button><button class="btn" onclick="clearMSIS()">Clear</button></div>
     <div class="items" id="msis_items"></div>
     <div class="note">The descriptions below are our own plain-language wording (the official MSIS-29 item text is licensed, &copy; Hobart/Thompson). Answer each on the 1&ndash;5 scale; for formal/clinical use refer to the official MSIS-29 form.</div>
@@ -343,7 +425,13 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_edss">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>MS severity (ARMSS / MSSS)</h2>
-    <p class="lead">EDSS is your overall neurological disability level (0&ndash;9.5). Most people don&rsquo;t know it off-hand - that&rsquo;s normal. Tap below to answer the short <b>Quick Check</b>; it estimates your EDSS, then come back and pick that number here. Age and disease duration give your severity scores.</p>
+    <p class="lead">
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>ARMSS (Age-Related MS Severity Score):</b> Compares your EDSS to MS patients worldwide of the same age using a global calibration matrix (Manouchehrinia A et al. <em>Mult Scler</em> 2017;23:1938&ndash;46). Score 0&ndash;10; 5.0 = median disability for your age. &gt; 5 = more disabled than the median patient at that age.<br>
+<b>Updated MSSS:</b> Compares EDSS to MS patients with the same disease duration (Roxburgh RH et al. <em>Neurology</em> 2005;64:1144&ndash;51, updated coefficients). Score 0&ndash;10; 5.0 = median at that disease duration.<br>
+<b>Original MSSS:</b> From the original Roxburgh 2005 lookup table (slightly different calibration).<br>
+<b>These are cross-sectional severity benchmarks, not prognostic tools</b> &mdash; they show where the patient stands relative to the MS population, not where they are headed.
+</div></details>EDSS is your overall neurological disability level (0&ndash;9.5). Most people don&rsquo;t know it off-hand - that&rsquo;s normal. Tap below to answer the short <b>Quick Check</b>; it estimates your EDSS, then come back and pick that number here. Age and disease duration give your severity scores.</p>
     <a class="btn" href="index.html#quickcheck" target="_blank" rel="noopener" style="display:block;text-align:center;background:var(--accent);color:#fff;border-color:var(--accent);font-size:15px;padding:12px;margin:6px 0 16px;text-decoration:none">🧠 Answer the Quick Check to find your EDSS &rarr; <span style="font-weight:400;font-size:12px;opacity:.85">(opens in a new tab - come back here to continue)</span></a>
     <div class="row">
       <div class="fld"><label>Your EDSS <span class="hint">from the Quick Check, or if you already know it</span></label><select id="edss_v" oninput="calcEDSSage()"><option value="">- select -</option><option value="0">0</option><option value="1">1</option><option value="1.5">1.5</option><option value="2">2</option><option value="2.5">2.5</option><option value="3">3</option><option value="3.5">3.5</option><option value="4">4</option><option value="4.5">4.5</option><option value="5">5</option><option value="5.5">5.5</option><option value="6">6</option><option value="6.5">6.5</option><option value="7">7</option><option value="7.5">7.5</option><option value="8">8</option><option value="8.5">8.5</option><option value="9">9</option><option value="9.5">9.5</option></select></div>
@@ -368,6 +456,12 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_t25fw">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>T25FW</h2><p class="lead">Timed 25-Foot Walk - the patient walks 25 feet (7.62 m) as fast as safely possible. Enter two trials; score = average time (seconds). Lower = faster = better. Clinician-timed.</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Scoring:</b> Average of two consecutive 25-foot (7.62 m) timed walks (seconds). Lower = faster = better walking speed.<br>
+<b>MSFC reference values (NMSS Task Force / Fischer 2001 MSFC Manual):</b> Mean = 9.54 sec, SD = 11.41 sec in the MS reference cohort. The z-score formula is: z = &minus;(time &minus; 9.54) / 11.41 (sign flipped so positive z = better than reference).<br>
+<b>Meaningful change:</b> A &ge; 20% increase in time (worsening) is the commonly used clinically meaningful threshold in MS trials (Kragt JJ et al. <em>Mult Scler</em> 2006;12:594&ndash;8).<br>
+<b>Reference:</b> Fischer JS, Rudick RA, Cutter GR, Reingold SC. <em>Mult Scler</em> 1999;5(4):244&ndash;50. NMSS Task Force MSFC Scoring Manual (Fischer JS et al., 2001).
+</div></details>
     <div class="row">
       <div class="fld"><label>Trial 1 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="t25fw_1" min="0" step="0.1" oninput="calcT25FW()"></div>
       <div class="fld"><label>Trial 2 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="t25fw_2" min="0" step="0.1" oninput="calcT25FW()"></div>
@@ -379,6 +473,13 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_nhpt">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>9-HPT</h2><p class="lead">Nine-Hole Peg Test - place and remove 9 pegs as fast as possible; time each hand twice. Score = average time (seconds); lower = better dexterity. Clinician-timed.</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Scoring:</b> Average of 2 trials per hand (place and remove 9 pegs). Lower time = better dexterity. Both hands averaged for the MSFC.<br>
+<b>MSFC z-score uses the reciprocal</b> (1/time, so faster = larger value): z = (mean 1/time &minus; 0.0439) / 0.0101, where the reference mean is 0.0439 s<sup>&minus;1</sup> (equivalent to ~22.8 sec average across both hands in the MS reference cohort) and SD = 0.0101 s<sup>&minus;1</sup> (NMSS Task Force / Fischer 2001 MSFC Manual).<br>
+<b>Normal range in healthy adults:</b> Dominant hand ~17&ndash;19 sec, non-dominant ~19&ndash;22 sec (Mathiowetz V et al. <em>Occup Ther J Res</em> 1985).<br>
+<b>Meaningful change:</b> &ge; 20% change in time (Kragt 2006).<br>
+<b>Reference:</b> Mathiowetz V et al. <em>Occup Ther J Res</em> 1985;5(1):24&ndash;38. Fischer JS et al. <em>Mult Scler</em> 1999;5(4):244&ndash;50.
+</div></details>
     <div class="row">
       <div class="fld"><label>Dominant - Trial 1 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="nhpt_d1" min="0" step="0.1" oninput="calcNHPT()"></div>
       <div class="fld"><label>Dominant - Trial 2 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="nhpt_d2" min="0" step="0.1" oninput="calcNHPT()"></div>
@@ -394,6 +495,13 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_bicams">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>BICAMS</h2><p class="lead">Brief International Cognitive Assessment for MS - SDMT (processing speed), CVLT-II (verbal memory) and BVMT-R (visual memory). Enter the patient demographics <b>once</b> below, fill each test (buttons), and z-scores + impairment (z &le; -1.5) compute automatically for all three.</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Three domains:</b> Processing speed (SDMT), verbal memory (CVLT-II T1&ndash;5 total), visual memory (BVMT-R T1+T2+T3 total).<br>
+<b>z-scores:</b> Each raw score compared to US MS patients matched for age, sex, education using regression norms (Marrie RA et al. <em>Front Neurol</em> 2021;11:621010). z = 0 is the MS-population average; z &le; &minus;1.5 = impaired for that domain.<br>
+<b>Cognitive impairment criterion:</b> &ge; 2 of 3 domains impaired (z &le; &minus;1.5) is the standard research threshold for MS-associated cognitive impairment (Langdon DW et al. <em>Mult Scler J</em> 2012;18:891&ndash;8).<br>
+<b>Validated in 97 countries, 45+ languages</b> (Langdon 2012).<br>
+<b>Reference:</b> Langdon DW et al. <em>Mult Scler J</em> 2012;18(6):891&ndash;8. Marrie RA et al. <em>Front Neurol</em> 2021;11:621010.
+</div></details>
     <div class="subhead">Patient demographics (used for all three z-scores)</div>
     <div class="row">
       <div class="fld"><label>Age (years) <span class="hint">18&ndash;74</span></label><input type="number" id="bic_age" min="18" max="90" oninput="calcBICAMS()"></div>
@@ -410,6 +518,14 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_msfc">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>MSFC</h2><p class="lead">Multiple Sclerosis Functional Composite - the average of three z-scores: arm (9-HPT), leg (T25FW) and cognition (PASAT-3). Standardised <b>automatically</b> against the NMSS Task Force reference - no reference numbers needed. Enter T25FW, 9-HPT and PASAT-3 in their tools (buttons below).</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Three z-scores averaged (NMSS Task Force / Fischer 2001 Manual):</b><br>
+&bull; <b>z<sub>arm</sub></b> (9-HPT) = (mean 1/time &minus; 0.0439) / 0.0101 &nbsp; [reciprocal; faster = positive]<br>
+&bull; <b>z<sub>leg</sub></b> (T25FW) = &minus;(time &minus; 9.54) / 11.41 &nbsp; [faster = positive]<br>
+&bull; <b>z<sub>cog</sub></b> (PASAT-3) = (score &minus; 45.03) / 12.08 &nbsp; [more correct = positive]<br>
+<b>MSFC = (z<sub>arm</sub> + z<sub>leg</sub> + z<sub>cog</sub>) / 3.</b> Score = 0 is reference-cohort average; negative = below reference. A change of &ge; 0.5 is considered clinically meaningful in MS trials (Cutter GR et al. <em>Neurology</em> 1999).<br>
+<b>Reference:</b> Fischer JS et al. <em>Mult Scler</em> 1999;5(4):244&ndash;50. NMSS Task Force MSFC Administration and Scoring Manual (Fischer JS et al., 2001).
+</div></details>
     <div class="report-chk"><button class="btn" id="msfcbtn_t25fw" onclick="openSub('t25fw','msfc')">T25FW &rarr;</button><button class="btn" id="msfcbtn_nhpt" onclick="openSub('nhpt','msfc')">9-HPT &rarr;</button><button class="btn" id="msfcbtn_pasat" onclick="openSub('pasat','msfc')">PASAT-3 &rarr;</button></div>
     <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="calcMSFC()">Calculate MSFC</button></div>
     <div class="result" id="msfc_out"></div>
@@ -419,6 +535,12 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
   <section class="panel" id="p_pasat">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>PASAT-3</h2><p class="lead">Paced Auditory Serial Addition Test (3-second version) - working memory &amp; processing speed. Enter the number of correct responses (0-60). Clinician-administered.</p>
+    <details class="howto"><summary>&#8505; How it works</summary><div>
+<b>Task:</b> 61 single digits presented 3 seconds apart; the patient says the sum of the current + immediately preceding digit. Correct responses: 0&ndash;60 (the first digit pair cannot be scored).<br>
+<b>z-score (MSFC reference):</b> z = (score &minus; 45.03) / 12.08 using NMSS Task Force reference values (Fischer 2001 MSFC Manual). z = 0 = MS reference cohort average; z &le; &minus;1.5 = below expected range.<br>
+<b>Practice effect:</b> PASAT scores improve substantially with repeated testing; baseline scores should be interpreted cautiously (Rao SM et al. 1991).<br>
+<b>Reference:</b> Gronwall DMA. <em>Percept Mot Skills</em> 1977;44:367&ndash;73. Fischer JS et al. <em>Mult Scler</em> 1999;5(4):244&ndash;50. NMSS Task Force MSFC Manual (2001).
+</div></details>
     <div class="row"><div class="fld"><label>Correct responses <span class="hint">0-60</span></label><input type="number" id="pasat_raw" min="0" max="60" oninput="calcPASAT()"></div></div>
     <div class="result" id="pasat_out"></div>
     <div class="actions no-print"><button class="btn" onclick="exportCSV('pasat','PASAT-3')">Researcher: CSV</button></div>
