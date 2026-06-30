@@ -37,8 +37,8 @@
   --shadow-md: 0 4px 12px rgba(20, 25, 40, 0.06), 0 2px 4px rgba(20, 25, 40, 0.04);
   --shadow-lg: 0 12px 32px rgba(20, 25, 40, 0.08), 0 4px 8px rgba(20, 25, 40, 0.04);
   --radius-sm: 4px;
-  --radius: 8px;
-  --radius-lg: 14px;
+  --radius: 14px;
+  --radius-lg: 18px;
   --serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
@@ -88,21 +88,22 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--paper);
+  background: rgba(244,246,248,.92);
+  backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--rule);
-  box-shadow: var(--shadow-sm);
-  padding: 14px 24px;
+  padding: 12px 24px;
 }
+#landing .app-header { padding:12px 18px; box-shadow:none; }
 
 .header-grid {
-  max-width: 1280px;
+  max-width: 1100px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 24px;
   align-items: center;
 }
-.header-grid.landing { grid-template-columns: auto 1fr auto; }
+.header-grid.landing { max-width:920px; grid-template-columns: auto 1fr auto; }
 
 .brand-link {
   text-decoration: none;
@@ -2754,11 +2755,24 @@ input[type="checkbox"] {
   .disclaimer-bar * { display: none !important; }
 }
 /* Way card for scanner on landing */
-.branch-head{font-family:var(--serif);font-size:21px;color:var(--accent-ink);margin:8px 0 4px;display:flex;align-items:center;gap:8px}
+.branch-head{font-family:var(--serif);font-size:32px;color:var(--accent-ink);margin:0 0 6px;display:flex;align-items:center;gap:8px;letter-spacing:-0.01em}
+.usenote{background:#eef4f8;border:1px solid #cfe0ec;border-radius:var(--radius-sm);padding:11px 14px;font-size:13px;color:#274b63;margin:14px 0 0;line-height:1.6}
+.usenote-green{background:#f3f7f0;border-color:#d7e4cf;color:#34502f}
+.refs-sec{margin-top:34px;background:var(--paper);border:1px solid var(--rule);border-radius:var(--radius);padding:18px 22px;text-align:left}
+.refs summary{cursor:pointer;font-family:var(--serif);font-size:20px;color:var(--accent-ink);font-weight:600;list-style:none;text-align:left}
+.refs summary::-webkit-details-marker{display:none}
+.refs summary::after{content:" \25B8";color:var(--hl)}
+.refs[open] summary::after{content:" \25BE"}
+.refs .ref-item{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:13px;align-items:baseline}
+.refs .ref-item:last-of-type{border-bottom:none}
+.refs .ref-name{font-weight:700;color:var(--accent-ink)}
+.refs .ref-cite{color:var(--ink-soft)}
 .about-toggle{border:1px solid var(--rule);border-radius:8px;padding:8px 14px;margin:10px 0;background:#fff}
 .about-toggle summary{cursor:pointer;font-weight:600;color:var(--accent-ink);font-size:15px}
 .about-toggle p{margin:10px 0 2px;color:var(--ink-soft)}
 .feature-card p,.about-toggle p,.about-block>p,.way-card p{text-align:justify;text-justify:inter-word}
+.sub{font-size:12px;color:var(--ink-faint);letter-spacing:.08em;text-transform:uppercase;padding-left:33px;display:none;}
+#landing.picking .sub{display:block;}
 .back-to-explore{background:#fff;border:1px solid var(--rule-strong);border-radius:20px;padding:6px 14px;font-size:13px;color:var(--accent-ink);cursor:pointer;margin-bottom:16px;font-weight:600}
 .back-to-explore:hover{background:var(--accent-ink);color:#fff;border-color:var(--accent-ink)}
 #landing.picking .hero-wrap,#landing.picking #features,#landing.picking #explore>h2,#landing.picking #explore>.section-rule,#landing.picking #explore-home,#landing.picking .about-block,#landing.picking .app-footer{display:none!important}
@@ -2766,7 +2780,7 @@ input[type="checkbox"] {
 #landing.picking #landing-start-btn{display:none!important}
 #landing.picking #landing-back-btn{display:inline-block!important}
 #landing.picking #back-to-explore{display:none!important}
-#landing.picking #explore{padding-top:24px}
+#landing.picking #explore{padding-top:28px;padding-left:48px;padding-right:48px;max-width:980px;}
 .ref-details summary.ref-summary{list-style:none;cursor:pointer;font-family:var(--serif);font-size:26px;color:var(--ink);font-weight:600;display:inline-block}
 .ref-details summary.ref-summary::-webkit-details-marker{display:none}
 .ref-details summary.ref-summary::after{content:" \25B8";color:var(--accent-ink);font-size:18px}
@@ -2803,10 +2817,10 @@ input[type="checkbox"] {
   <header class="app-header">
     <div class="header-grid landing">
       <a class="brand-link" href="#landing" id="landing-brand-link">
-        <div class="brand-mark" style="font-size:22px;display:flex;align-items:center;gap:8px;"><svg width="28" height="28" viewBox="0 0 48 48" aria-hidden="true" style="vertical-align:middle"><defs><linearGradient id="mslg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e4a6e"/><stop offset=".55" stop-color="#2a9d8f"/><stop offset="1" stop-color="#b85c1a"/></linearGradient></defs><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#cfd8dc" stroke-width="1.3"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="url(#mslg)" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#23628a"/><circle cx="13" cy="41.2" r="0.95" fill="#23628a"/><circle cx="19.2" cy="40" r="0.95" fill="#23628a"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="url(#mslg)"/><circle cx="34" cy="12" r="1.7" fill="#dff0ea"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff7a1a" stroke-width="0.8"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff7a1a"/></svg><span><em>MS</em>pectrum</span></div>
+        <div class="brand-mark" style="display:flex;flex-direction:column;gap:1px;line-height:1.15;"><div style="font-size:20px;display:flex;align-items:center;gap:8px;"><svg width="26" height="26" viewBox="0 0 48 48" aria-hidden="true" style="vertical-align:middle"><defs><linearGradient id="mslg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e4a6e"/><stop offset=".55" stop-color="#2a9d8f"/><stop offset="1" stop-color="#b85c1a"/></linearGradient></defs><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#cfd8dc" stroke-width="1.3"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="url(#mslg)" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#23628a"/><circle cx="13" cy="41.2" r="0.95" fill="#23628a"/><circle cx="19.2" cy="40" r="0.95" fill="#23628a"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="url(#mslg)"/><circle cx="34" cy="12" r="1.7" fill="#dff0ea"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff7a1a" stroke-width="0.8"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff7a1a"/></svg><span><em>MS</em>pectrum</span></div><span class="sub">AutoEDSS Guide</span></div>
       </a>
       <div></div>
-      <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn-cta" id="landing-start-btn" style="padding:10px 18px; font-size:13px; box-shadow:none;" aria-label="Get started">Get started</button><button class="btn-cta" id="landing-back-btn" style="padding:10px 18px; font-size:13px; box-shadow:none; display:none;" aria-label="Back to MSpectrum">← MSpectrum home</button></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn-cta" id="landing-start-btn" style="padding:10px 18px; font-size:13px; box-shadow:none;" aria-label="Get started">Get started</button><button class="btn-cta" id="landing-back-btn" style="padding:6px 14px; font-size:13px; box-shadow:none; border-radius:20px; display:none;" aria-label="Back to MSpectrum">← MSpectrum home</button></div>
     </div>
   </header>
 
@@ -2906,9 +2920,12 @@ input[type="checkbox"] {
     </div>
     <div id="edss-modes" style="display:none;">
     <button type="button" class="back-to-explore" id="back-to-explore">← Back to MSpectrum</button>
-    <h3 class="branch-head">🧠 AutoEDSSguide - choose a mode</h3>
-    <p style="color:var(--ink-soft);max-width:700px;margin:2px 0 16px;">AutoEDSSguide scores the EDSS in real time from a full Neurostatus exam, with a print-ready sheet, OCR scanner and inconsistency flags. Choose how you want to work below - a guided exam, the classic system layout, a paper-sheet scanner, a fast clinical mode, or a plain-language self-check for people with MS.</p>
-    <p class="ways-group-label" style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 10px;">Full Neurostatus - detailed assessment</p>
+    <h3 class="branch-head">🧠 AutoEDSSguide</h3>
+    <p style="color:var(--ink-soft);margin:2px 0 16px;">AutoEDSSguide scores the EDSS in real time from a full Neurostatus exam, with a print-ready sheet, OCR scanner and inconsistency flags. Choose how you want to work below - a guided exam, the classic system layout, a paper-sheet scanner, a fast clinical mode, or a plain-language self-check for people with MS.</p>
+    <div class="usenote"><b>Who can use each mode.</b> <b>Roadmap</b> and <b>System view</b> are for clinicians performing a full Neurostatus exam. <b>Sheet Scanner</b> processes a completed paper form automatically. <b>Clinical EDSS</b> is a fast 5–10 min version for routine follow-up. <b>Quick Check</b> is for <b>people with MS</b> — a plain-language self-check that estimates the EDSS without a clinical exam.</div>
+    <div class="usenote" style="background:#eef4f8;border-color:#cfe0ec;color:#274b63"><b>Not a diagnosis.</b> AutoEDSSguide automates EDSS scoring from the data you enter using validated algorithms. Results require verification by a qualified neurologist before any clinical or research use.</div>
+    <div class="usenote usenote-green" style="margin-bottom:24px;"><b>How it works.</b> Choose a mode below. Scores update <b>automatically</b> in real time as you enter exam findings — no Calculate button. The Roadmap guides you step-by-step; System view follows the classic Neurostatus layout. You can switch modes any time without losing your data.</div>
+    <p class="ways-group-label" style="font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);margin:20px 0 12px;border-bottom:2px solid var(--rule);padding-bottom:6px;display:block;">Full Neurostatus - detailed assessment</p>
     <div class="ways-grid ways-grid-3" style="margin-bottom:28px;">
       <button type="button" class="way-card recommended" data-enter-view="roadmap" aria-label="Start with Roadmap view">
         <span class="badge">Recommended</span>
@@ -2931,7 +2948,7 @@ input[type="checkbox"] {
         <span class="way-cta">Open Scanner →</span>
       </button>
     </div>
-    <p class="ways-group-label" style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 10px;">Quick &amp; tailored</p>
+    <p class="ways-group-label" style="font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);margin:20px 0 12px;border-bottom:2px solid var(--rule);padding-bottom:6px;display:block;">Quick &amp; tailored</p>
     <div class="ways-grid ways-grid-2">
       <button type="button" class="way-card clinical-waycard" id="clinical-way-btn" aria-label="Start Clinical EDSS">
         <span class="badge" style="background:#7b3fa0;color:white;">For neurologists</span>
@@ -2950,6 +2967,17 @@ input[type="checkbox"] {
     </div>
     <div class="cta-row">
       <p style="font-size:13px; color: var(--ink-faint); font-style: italic; font-family: var(--serif); margin: 0;">Tip: inside AutoEDSSguide you can switch views anytime. Use &ldquo;Back to MSpectrum&rdquo; to return here.</p>
+
+    <div class="refs-sec" style="margin-top:48px;">
+      <details class="refs">
+        <summary>References &amp; scoring sources</summary>
+        <div class="ref-item" style="margin-top:12px;"><span class="ref-name">EDSS / Neurostatus</span><span class="ref-cite">Kurtzke JF. <em>Neurology</em> 1983;33:1444&ndash;52. &middot; Kappos L., Neurostatus Scoring Definitions (v04/10.2), 2011.</span></div>
+        <div class="ref-item"><span class="ref-name">Combination algorithm</span><span class="ref-cite">Fouad S, et al. <em>Mult Scler J&ndash;ETC</em> 2023. DOI:10.1177/20552173231155055.</span></div>
+        <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE, et al. <em>Mult Scler J</em> 2017.</span></div>
+        <div class="ref-item"><span class="ref-name">Quick Check (ePR-EDSS)</span><span class="ref-cite">Romeo AR, et al. <em>Mult Scler</em> 2021;27(9):1432&ndash;41.</span></div>
+      </details>
+    </div>
+    <p style="margin-top:16px;color:var(--ink-faint);font-size:12px;text-align:center;">MSpectrum reports scores from validated, published instruments and explains what the numbers mean. <b style="color:var(--ink-soft)">It does not diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is stored.</p>
     </div>
     </div><!-- /edss-modes -->
   </div>
@@ -3013,7 +3041,7 @@ input[type="checkbox"] {
   <footer class="app-footer">
     <div class="app-footer-inner">
       <div class="footer-brand">
-        <div class="brand-mark" style="margin-right:8px;display:flex;align-items:center;gap:8px"><svg width="24" height="24" viewBox="0 0 48 48" aria-hidden="true" ><g stroke="#bcd6e8" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#3a6a8a" stroke-width="1.3"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#ffffff" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#bcd6e8" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#bcd6e8"/><circle cx="13" cy="41.2" r="0.95" fill="#bcd6e8"/><circle cx="19.2" cy="40" r="0.95" fill="#bcd6e8"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="#ffffff"/><circle cx="34" cy="12" r="1.7" fill="#1e4a6e"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff8a1f" stroke-width="0.9"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff8a1f"/></svg><span><em>MS</em>pectrum</span></div>
+        <div class="brand-mark" style="margin-right:8px;display:flex;align-items:center;gap:8px"><svg width="24" height="24" viewBox="0 0 48 48" aria-hidden="true" ><g stroke="#bcd6e8" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#3a6a8a" stroke-width="1.3"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#ffffff" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#bcd6e8" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#bcd6e8"/><circle cx="13" cy="41.2" r="0.95" fill="#bcd6e8"/><circle cx="19.2" cy="40" r="0.95" fill="#bcd6e8"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="#ffffff"/><circle cx="34" cy="12" r="1.7" fill="#1e4a6e"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff8a1f" stroke-width="0.9"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff8a1f"/></svg><span style="display:flex;flex-direction:column;gap:0;line-height:1.15"><span><em>MS</em>pectrum</span><span style="font-family:system-ui,sans-serif;font-size:10px;font-weight:500;color:var(--ink-soft,#777);letter-spacing:.06em;text-transform:uppercase">AutoEDSS Guide</span></span></div>
         <div style="width:1px;height:34px;background:rgba(255,255,255,0.2);flex-shrink:0;margin:0 8px"></div>
       </div>
       <div class="footer-credits">
