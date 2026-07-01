@@ -75,6 +75,7 @@ If you used MSpectrum in research, please cite it:
 - Baldassari LE, et al. *Streamlined EDSS (sEDSS).* Mult Scler J (2017) — Clinical EDSS mode
 - Romeo AR, et al. *Electronic patient-reported EDSS (ePR-EDSS).* Mult Scler (2021) — Quick Check mode
 - MS Score Hub instruments are cited in full inside the app (References & scoring sources).
+- Functional-System scoring follows the **Neurostatus v04/10.2 definitions** exactly, including the Cerebellar (severe-ataxia) and Bowel/Bladder (loss-of-function → FS 5/6) rules, and an optional toggle to exclude fatigue from the Cerebral FS per study protocol.
 
 ---
 

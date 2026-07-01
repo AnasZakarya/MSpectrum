@@ -1344,10 +1344,11 @@ input[type="checkbox"] {
   background: var(--paper-tint);
 }
 .score-option {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
   gap: 10px;
-  padding: 10px 14px;
+  padding: 9px 14px;
   cursor: pointer;
   border-bottom: 1px solid var(--rule);
   transition: background 0.1s;
@@ -1355,27 +1356,31 @@ input[type="checkbox"] {
 .score-option:last-child { border-bottom: none; }
 .score-option:hover { background: var(--accent-soft); }
 .score-option input[type="radio"] {
-  margin: 4px 0 0 0;
+  margin: 0;
   flex-shrink: 0;
   accent-color: var(--accent);
 }
 .score-option .score-num {
   font-family: var(--mono);
-  font-weight: 600;
-  font-size: 13px;
+  font-weight: 700;
+  font-size: 12px;
   color: var(--ink-soft);
+  background: #fff;
+  border: 1px solid var(--rule);
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
   flex-shrink: 0;
-  min-width: 14px;
-  text-align: right;
-  margin-top: 1px;
 }
 .score-option .score-text {
-  flex: 1;
   font-size: 13px;
   line-height: 1.4;
   color: var(--ink);
 }
-.score-option input[type="radio"]:checked ~ .score-num { color: var(--accent); }
+.score-option input[type="radio"]:checked ~ .score-num { color: #fff; background: var(--accent); border-color: var(--accent); }
 .score-option:has(input[type="radio"]:checked) {
   background: var(--accent-soft);
   border-left: 3px solid var(--accent);
@@ -2510,15 +2515,16 @@ input[type="checkbox"] {
 
 /* ── Smooth tip height transition ───────────────────── */
 .exam-tip {
-  margin: 8px 0 0; border-radius: 7px;
+  margin: 8px 0 18px; border-radius: 7px;
   border: 1px solid #b8d4f0; background: #f0f7ff; overflow: hidden;
 }
 .exam-tip-header {
-  display: flex; align-items: center; gap: 5px; padding: 6px 10px;
-  cursor: pointer; user-select: none;
-  font-size: 0.9rem; font-weight: 500; color: #1a4a7a;
+  display: flex; align-items: center; gap: 5px; padding: 8px 12px;
+  cursor: pointer; user-select: none; background: #e4f0fb;
+  font-size: 0.9rem; font-weight: 600; color: #1a4a7a;
 }
-.exam-tip-header:hover { background: #ddeeff; }
+.exam-tip-header:hover { background: #d6e9fb; }
+.exam-tip-header .tip-hint { font-weight: 500; font-size: 0.8rem; color: #5a86ad; opacity: .85; }
 .exam-tip-header .tip-chevron { font-size: 0.65rem; opacity:.7; transition: transform .2s; margin-right: 2px; }
 .exam-tip-header.open .tip-chevron { transform: rotate(90deg); }
 .exam-tip-body {
@@ -3076,6 +3082,7 @@ input[type="checkbox"] {
       </div>
     </div>
     <div style="text-align:center;font-size:11.5px;color:rgba(255,255,255,0.55);margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.12);line-height:1.5">MSpectrum reports scores from validated, published instruments and explains what the numbers mean &mdash; <b style="color:rgba(255,255,255,0.8)">it does not diagnose</b>. Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research / educational use; nothing is uploaded or stored.</div>
+     <div style="text-align:center;font-size:11px;color:rgba(255,255,255,0.5);margin-top:8px;line-height:1.6">&copy; 2026 Anas Z. Nourelden &amp; Dr. Anza B. Memon &middot; Wayne State University, Dept. of Neurology<br>Neurostatus &copy; L. Kappos &middot; all outcome-measure &amp; instrument copyrights belong to their respective owners</div>
   </footer>
 </section>
 
@@ -3579,6 +3586,7 @@ AutoEDSSguide provides automated scoring for guidance purposes only and does not
   <main class="app-main">
     <div id="form-root"></div>
   </main>
+  <div class="no-print" style="text-align:center;font-size:11px;color:var(--ink-faint);padding:18px 16px 26px;line-height:1.6;border-top:1px solid var(--rule);margin-top:24px">&copy; 2026 Anas Z. Nourelden &amp; Dr. Anza B. Memon &middot; Wayne State University, Dept. of Neurology<br>Neurostatus &copy; L. Kappos &middot; all outcome-measure &amp; instrument copyrights belong to their respective owners</div>
 </section>
 
 <!-- ========================================================== -->
@@ -3801,20 +3809,28 @@ function calcCerebellarFS({
     tandem, gait_ataxia, romberg,
 } = {}) {
     const limb_tremor = _safe(_maxOrNone(tremor_ue_R, tremor_ue_L, tremor_le_R, tremor_le_L), 0);
-    const n_limbs_severe = [tremor_ue_R, tremor_ue_L, tremor_le_R, tremor_le_L]
-        .filter(v => _safe(v, 0) >= 3).length;
-
     const limb_rapid = _safe(_maxOrNone(rapid_ue_R, rapid_ue_L, rapid_le_R, rapid_le_L), 0);
     const limb_overall = Math.max(limb_tremor, limb_rapid);
+
+    // Per-limb ataxia severity = worse of tremor/dysmetria and rapid-alternating for that limb.
+    const _perLimb = [
+        Math.max(_safe(tremor_ue_R, 0), _safe(rapid_ue_R, 0)),
+        Math.max(_safe(tremor_ue_L, 0), _safe(rapid_ue_L, 0)),
+        Math.max(_safe(tremor_le_R, 0), _safe(rapid_le_R, 0)),
+        Math.max(_safe(tremor_le_L, 0), _safe(rapid_le_L, 0)),
+    ];
+    const n_limbs_severe = _perLimb.filter(v => v >= 4).length;   // "severe" = grade 4
 
     const gait = _safe(gait_ataxia, 0);
     const trunc = _safe(truncal_ataxia, 0);
 
-    // FIX (Bug): grade 5 must be checked BEFORE grade 4; otherwise when all 4 limbs
-    // have tremor ≥3 (satisfying the grade-4 condition), the grade-4 branch fires first
-    // and grade 5 is never reachable.
-    if (limb_overall >= 4 && gait >= 4 && trunc >= 4) return 5;
-    if (n_limbs_severe >= 3 && (gait >= 3 || trunc >= 3)) return 4;
+    // RULE (Neurostatus v04/10.2 - Cerebellar FS):
+    //   5 = unable to perform coordinated movements (proxy: >=3 SEVERE limbs AND severe gait AND severe truncal)
+    //   4 = SEVERE gait/truncal ataxia AND SEVERE ataxia in three or four limbs
+    //   3 = moderate limb ataxia and/or moderate-or-severe gait/truncal ataxia
+    //       (severe gait/truncal ALONE, without severe ataxia in 3-4 limbs, = 3)
+    if (n_limbs_severe >= 3 && gait >= 4 && trunc >= 4) return 5;
+    if (n_limbs_severe >= 3 && (gait >= 4 || trunc >= 4)) return 4;
     if (limb_overall >= 3 || gait >= 3 || trunc >= 3) return 3;
     if (limb_overall === 2 || _safe(romberg, 0) >= 2 || _safe(tandem, 0) >= 2 ||
         trunc === 2 || gait === 2) return 2;
@@ -3882,12 +3898,20 @@ function calcBBFS({ hesitancy, urgency, catheterisation, bowel } = {}) {
     const c = _safe(catheterisation);
     const b = _safe(bowel);
 
-    // Per Neurostatus: catheterisation alone = FS 3 minimum
-    const base_max = Math.max(h, u, c > 0 ? 3 : 0, b);
-    const severe_count = [h, u, b].filter(x => x >= 4).length;
-    if (severe_count >= 2 && c >= 1) return 5;
-    if (u >= 4 && b >= 4) return 5;
-    return Math.min(base_max, 5);
+    // RULE (Neurostatus v04/10.2 - Bowel/Bladder FS):
+    //   loss of BLADDER function = hesitancy 4 (overflow) OR urgency 4 (loss of control)
+    //   loss of BOWEL   function = bowel 4 (complete loss)
+    //   6 = loss of BOTH · 5 = loss of EITHER · 4 = almost constant catheterisation (c=2)
+    //   3 = requires cath / frequent incontinence / enemata / intermittent self-cath · 2 = moderate · 1 = mild
+    const bladderLoss = (h >= 4 || u >= 4);
+    const bowelLoss = (b >= 4);
+    if (bladderLoss && bowelLoss) return 6;
+    if (bladderLoss || bowelLoss) return 5;
+    if (c >= 2) return 4;
+    if (h >= 3 || u >= 3 || b >= 3 || c >= 1) return 3;
+    if (h >= 2 || u >= 2 || b >= 2) return 2;
+    if (h >= 1 || u >= 1 || b >= 1) return 1;
+    return 0;
 }
 
 function bbFSConverted(bb_fs) {
@@ -3898,11 +3922,13 @@ function bbFSConverted(bb_fs) {
 // ============================================================
 // Cerebral FS
 // ============================================================
-function calcCerebralFS({ mentation, fatigue } = {}) {
+function calcCerebralFS({ mentation, fatigue, exclude_fatigue } = {}) {
     const m = _safe(mentation);
-    const f = _safe(fatigue);
-    if (m === 0 && f >= 1) return 1;
-    return m;
+    const f = exclude_fatigue ? 0 : _safe(fatigue);
+    // RULE (Neurostatus v04/10.2 - Cerebral FS): FS = worse of mentation and fatigue.
+    // mild fatigue -> 1; moderate/severe fatigue -> 2. Depression/euphoria never contribute.
+    // Some studies exclude fatigue; the "Exclude fatigue" toggle drops its contribution.
+    return Math.max(m, f >= 2 ? 2 : (f >= 1 ? 1 : 0));
 }
 
 // ============================================================
@@ -4139,6 +4165,7 @@ function calculateFullEDSS(inputs) {
 
     const cerebral_fs = calcCerebralFS({
         mentation: g("m_ment"), fatigue: g("m_fat"),
+        exclude_fatigue: g("m_fat_excl") === true || g("m_fat_excl") === "true" || g("m_fat_excl") === 1,
     });
 
     // Ambulation: prefer manual override; otherwise auto-calc from inputs
@@ -4315,13 +4342,14 @@ const CARDS = {
           $(4, "4 - Marked: not oriented in 1–2 spheres"),
           $(5, "5 - Dementia / confusion / complete disorientation"),
         ]},
-      { type: "list", id: "m_fat", label: "Fatigue (only contributes when mentation = 0)",
+      { type: "list", id: "m_fat", label: "Fatigue (contributes to FS: mild → 1, moderate/severe → 2)",
         options: [
           $(0, "0 - None"),
           $(1, "1 - Mild: does not interfere with daily activities"),
           $(2, "2 - Moderate: interferes (<50% reduction)"),
           $(3, "3 - Severe: significant limitation (>50% reduction)"),
         ]},
+      { type: "checkbox", id: "m_fat_excl", label: "Exclude fatigue from FS / EDSS (per study protocol)" },
       { type: "compact", id: "m_depress", label: "Depression (documented; does not contribute to FS)",
         options: [$(0,"None"), $(1,"Present")]},
       { type: "compact", id: "m_euph", label: "Euphoria (documented; does not contribute to FS)",
@@ -4334,7 +4362,7 @@ const CARDS = {
       <li><span class="cmd">"Do you know where you are, the date, and the people around you?"</span></li>
       <li><span class="cmd">"Do you feel unusually tired even after resting? How much does this affect daily activities?"</span></li>
       </ul>
-      <p><strong>Rule:</strong> Fatigue contributes only when mentation=0. Depression &amp; euphoria = documented only (° - no FS impact).</p>
+      <p><strong>Rule:</strong> Fatigue contributes only when mentation=0. Depression &amp; euphoria = documented only (* - no FS impact).</p>
       <p><strong>FS=1 exception:</strong> In Cerebral, FS=1 = signs noticed by examiner but not the patient (opposite of general rule).</p>
       <p><strong>Depression/Euphoria alone:</strong> Yields Cerebral FS=1 but does NOT affect the EDSS step.</p>`,
   },
@@ -4582,17 +4610,17 @@ const CARDS = {
     },
   },
   sensory_lhermitte: {
-    title: "Lhermitte's & paraesthesiae",
-    desc: "Documented only (°) - do not contribute to the Sensory FS score or EDSS.",
+    title: "Optional — Lhermitte's & paraesthesiae",
+    desc: "Documented only (*) - do not contribute to the Sensory FS score or EDSS.",
     fields: [
-      { type: "compact", id: "s_lhermitte", label: "Lhermitte's sign °",
+      { type: "compact", id: "s_lhermitte", label: "Lhermitte's sign *",
         options: [$(0,"Negative"),$(1,"Positive")]},
-      { type: "compact", id: "s_par_ue_R",    label: "Paraesthesiae UE - R °", options: [$(0,"None"),$(1,"Present")]},
-      { type: "compact", id: "s_par_ue_L",    label: "Paraesthesiae UE - L °", options: [$(0,"None"),$(1,"Present")]},
-      { type: "compact", id: "s_par_trunk_R", label: "Paraesthesiae trunk - R °", options: [$(0,"None"),$(1,"Present")]},
-      { type: "compact", id: "s_par_trunk_L", label: "Paraesthesiae trunk - L °", options: [$(0,"None"),$(1,"Present")]},
-      { type: "compact", id: "s_par_le_R",    label: "Paraesthesiae LE - R °", options: [$(0,"None"),$(1,"Present")]},
-      { type: "compact", id: "s_par_le_L",    label: "Paraesthesiae LE - L °", options: [$(0,"None"),$(1,"Present")]},
+      { type: "compact", id: "s_par_ue_R",    label: "Paraesthesiae UE - R *", options: [$(0,"None"),$(1,"Present")]},
+      { type: "compact", id: "s_par_ue_L",    label: "Paraesthesiae UE - L *", options: [$(0,"None"),$(1,"Present")]},
+      { type: "compact", id: "s_par_trunk_R", label: "Paraesthesiae trunk - R *", options: [$(0,"None"),$(1,"Present")]},
+      { type: "compact", id: "s_par_trunk_L", label: "Paraesthesiae trunk - L *", options: [$(0,"None"),$(1,"Present")]},
+      { type: "compact", id: "s_par_le_R",    label: "Paraesthesiae LE - R *", options: [$(0,"None"),$(1,"Present")]},
+      { type: "compact", id: "s_par_le_L",    label: "Paraesthesiae LE - L *", options: [$(0,"None"),$(1,"Present")]},
     ],
     layout: "split-2",
     tip: `<p><strong>Lhermitte's:</strong> <span class="cmd">"Do you feel an electric-shock or tingling running down your back or limbs when you bend your neck forward?"</span></p>
@@ -4703,19 +4731,19 @@ const CARDS = {
   },
 
   pyramidal_optional: {
-    title: "Optional & functional tests °",
+    title: "Optional & functional tests",
     desc: "Documented for completeness - do NOT contribute to the Pyramidal FS score. Highly recommended to refine BMRC grades 3–5.",
     fields: [
-      { type: "list-compact", id: "p_walk_heels",  label: "Walking on heels °",       options: [$(0,"Normal"),$(1,"Impaired"),$(2,"Not possible")]},
-      { type: "list-compact", id: "p_walk_toes",   label: "Walking on toes °",        options: [$(0,"Normal"),$(1,"Impaired"),$(2,"Not possible")]},
-      { type: "list-compact", id: "p_hop_R",       label: "Hopping - Right °",        options: [$(0,"Normal (≥6×)"),$(1,"6–10×"),$(2,"1–5×"),$(3,"Not possible")]},
-      { type: "list-compact", id: "p_hop_L",       label: "Hopping - Left °",         options: [$(0,"Normal (≥6×)"),$(1,"6–10×"),$(2,"1–5×"),$(3,"Not possible")]},
-      { type: "list-compact", id: "p_pronator_R",  label: "Pronator drift UE - R °",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
-      { type: "list-compact", id: "p_pronator_L",  label: "Pronator drift UE - L °",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
-      { type: "list-compact", id: "p_pos_test_R",  label: "Position test LE - R °",   options: [$(0,"None"),$(1,"Mild sinking"),$(2,"Evident"),$(3,"One leg only"),$(4,"Cannot lift")]},
-      { type: "list-compact", id: "p_pos_test_L",  label: "Position test LE - L °",   options: [$(0,"None"),$(1,"Mild sinking"),$(2,"Evident"),$(3,"One leg only"),$(4,"Cannot lift")]},
-      { type: "list-compact", id: "p_cutaneous",   label: "Cutaneous (abdominal) reflex °", options: [$(0,"Normal"),$(1,"Weak"),$(2,"Absent")]},
-      { type: "list-compact", id: "p_palmomental", label: "Palmomental reflex °",     options: [$(0,"Normal"),$(1,"Weak"),$(2,"Absent")]},
+      { type: "list-compact", id: "p_walk_heels",  label: "Walking on heels *",       options: [$(0,"Normal"),$(1,"Impaired"),$(2,"Not possible")]},
+      { type: "list-compact", id: "p_walk_toes",   label: "Walking on toes *",        options: [$(0,"Normal"),$(1,"Impaired"),$(2,"Not possible")]},
+      { type: "list-compact", id: "p_hop_R",       label: "Hopping - Right *",        options: [$(0,"Normal (≥6×)"),$(1,"6–10×"),$(2,"1–5×"),$(3,"Not possible")]},
+      { type: "list-compact", id: "p_hop_L",       label: "Hopping - Left *",         options: [$(0,"Normal (≥6×)"),$(1,"6–10×"),$(2,"1–5×"),$(3,"Not possible")]},
+      { type: "list-compact", id: "p_pronator_R",  label: "Pronator drift UE - R *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
+      { type: "list-compact", id: "p_pronator_L",  label: "Pronator drift UE - L *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
+      { type: "list-compact", id: "p_pos_test_R",  label: "Position test LE - R *",   options: [$(0,"None"),$(1,"Mild sinking"),$(2,"Evident"),$(3,"One leg only"),$(4,"Cannot lift")]},
+      { type: "list-compact", id: "p_pos_test_L",  label: "Position test LE - L *",   options: [$(0,"None"),$(1,"Mild sinking"),$(2,"Evident"),$(3,"One leg only"),$(4,"Cannot lift")]},
+      { type: "list-compact", id: "p_cutaneous",   label: "Cutaneous (abdominal) reflex *", options: [$(0,"Normal"),$(1,"Weak"),$(2,"Absent")]},
+      { type: "list-compact", id: "p_palmomental", label: "Palmomental reflex *",     options: [$(0,"Normal"),$(1,"Weak"),$(2,"Absent")]},
     ],
     layout: "split-2",
     tip: `<p><strong>While patient is standing/walking:</strong></p><ul>
@@ -4820,7 +4848,7 @@ const CARDS = {
   },
 
   cerebellar_rebound: {
-    title: "Rebound test °",
+    title: "Optional — Rebound test",
     desc: "Optional - documented only, does not contribute to Cerebellar FS.",
     bilateral: {
       rows: [
@@ -4840,7 +4868,7 @@ function renderTip(content, id) {
   return `<div class="exam-tip">
     <div class="exam-tip-header" onclick="toggleTip('${id}')">
       <span class="tip-chevron" id="tip-chev-${id}">▶</span>
-      <span>Exam technique</span>
+      <span>Exam technique <span class="tip-hint">— tap to show / hide</span></span>
     </div>
     <div class="exam-tip-body" id="tip-body-${id}">${content}</div>
   </div>`;
@@ -4942,7 +4970,7 @@ const ROADMAP_VIEW = [
       <li><strong>Pyramidal FS:</strong> Tetraplegia=6 · Paraplegia/hemiplegia/marked tetraparesis=5 · Monoplegia=4 · BMRC 4 in &gt;2 groups=3 · BMRC 4 in 1–2 groups=2 · Signs only=1.</li>
       <li><strong>Cerebellar FS:</strong> Severe gait+truncal ataxia alone (without 3–4 limb ataxia) → FS=3. Add X if weakness or proprioceptive loss confounds testing.</li>
       <li><strong>Sensory FS:</strong> Based on worst combination across superficial (touch/pain), vibration, and proprioception - all limbs and trunk.</li>
-      <li>Items marked ° = optional, documented only - do <strong>not</strong> contribute to FS score.</li>
+      <li>Items marked * = optional, documented only - do <strong>not</strong> contribute to FS score.</li>
       </ul>`,
     systemGroups: [
       { num: "5",  title: "Sensory",    cards: ["sensory_superficial","sensory_vibration", "sensory_position","sensory_lhermitte"],
@@ -5099,26 +5127,7 @@ function setAllStrengthNormal() {
   if (document.body) mk(); else document.addEventListener("DOMContentLoaded", mk);
 })();
 
-// FIX (Bug 7): floating toggle to hide/show the copper bedside-prompt questions
-// (they are guidance and do not affect the FS score).
-(function(){
-  if (typeof document === "undefined") return;
-  const mk = () => {
-    if (document.getElementById("toggle-prompts-btn")) return;
-    const btn = document.createElement("button");
-    btn.id = "toggle-prompts-btn";
-    btn.className = "no-print";
-    btn.textContent = "Hide exam tips";
-    btn.setAttribute("aria-label", "Hide or show bedside prompt questions");
-    btn.style.cssText = "position:fixed;bottom:20px;left:20px;z-index:200;padding:8px 12px;border:1px solid #cbd5e1;border-radius:20px;background:#fff;color:#1e4a6e;font-weight:600;font-size:12px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18);";
-    btn.onclick = () => {
-      const hidden = document.body.classList.toggle("hide-prompts");
-      btn.textContent = hidden ? "Show exam tips" : "Hide exam tips";
-    };
-    document.body.appendChild(btn);
-  };
-  if (document.body) mk(); else document.addEventListener("DOMContentLoaded", mk);
-})();
+// (floating exam-technique toggle button removed per request; per-card toggles remain)
 
 const BIG_CARDS = new Set(["pyramidal_strength", "pyramidal_reflexes"]);
 const GLOBAL_TOOLBAR = `<div class="exam-toolbar no-print" style="margin-bottom:14px;">`
@@ -5209,7 +5218,7 @@ function renderCard(cardId) {
         <div class="vp-row-label">Visual fields</div>
         <div class="vp-field">${renderField(f[3])}</div>
         <div class="vp-field">${renderField(f[4])}</div>
-        <div class="vp-row-label">Disc pallor °</div>
+        <div class="vp-row-label">Disc pallor *</div>
         <div class="vp-field">${renderField(f[5])}</div>
         <div class="vp-field">${renderField(f[6])}</div>
       </div>`;
@@ -5235,7 +5244,7 @@ function renderCard(cardId) {
     ${card.title ? `<h3 class="card-title">${card.title}</h3>` : ""}
     ${(card.desc && CURRENT_VIEW === "roadmap") ? `<p class="card-desc">${card.desc}</p>` : ""}
     ${(card.tip && CURRENT_VIEW === "roadmap") ? renderTip(card.tip, cardId.replace(/[^a-z0-9]/gi,'_')) : ""}
-    ${(card.question && CURRENT_VIEW === "roadmap") ? `<p class="card-question">"${card.question}"</p>` : ""}
+    ${(card.question && CURRENT_VIEW === "roadmap" && !card.tip) ? `<p class="card-question">"${card.question}"</p>` : ""}
     ${_bigCard ? _examToolbar(card.title) : ""}
     ${body}
     ${cardId === "amb_history" ? '<div id="amb-guidance-slot" style="margin-top:10px;"></div>' : ""}
@@ -5463,8 +5472,10 @@ function renderPTPanel(){
   Object.keys(st).forEach(function(id){ if(!ok(id)) return; var v=st[id]; if(v===""||v==null||typeof v==="boolean") return; if(String(v)===String(_examNormalVal(id))) return; abn.push({id:id,v:v}); });
   Object.keys(PT_FLAGS).forEach(function(id){ if(!abn.some(function(a){return a.id===id;})) delete PT_FLAGS[id]; });
   var box=document.getElementById("pt-box");
-  if(!box){ box=document.createElement("div"); box.id="pt-box"; fr.parentNode.insertBefore(box, fr.nextSibling); }
-  var _act=document.querySelector(".tab-panel.active"); if(_act && _act.getAttribute("data-section")==="finalsheet"){ box.style.display="none"; box.innerHTML=""; return; }
+  if(!box){ box=document.createElement("div"); box.id="pt-box"; }
+  var _act=document.querySelector(".tab-panel.active"); if(_act && _act.getAttribute("data-section")==="finalsheet"){ box.style.display="none"; box.innerHTML=""; if(box.parentNode)box.parentNode.removeChild(box); return; }
+  var _disc=_act?_act.querySelector(".disclaimer-bar"):null;
+  if(_disc&&_disc.parentNode){ _disc.parentNode.insertBefore(box,_disc); } else { fr.parentNode.insertBefore(box, fr.nextSibling); }
   if(!abn.length){ box.style.display="none"; box.innerHTML=""; }
   else{
     var avail=abn.filter(function(a){return !PT_FLAGS[a.id];});
@@ -9067,196 +9078,4 @@ function scSheetToEngineInputs() {
   setn("v_pallor_od","v-pallor-od"); setn("v_pallor_os","v-pallor-os");
 
   // Brainstem
-  setn("b_eom","b-eom"); setn("b_nys","b-nystagmus"); setn("b_trig","b-trigeminal");
-  setn("b_face","b-facial"); setn("b_hear","b-hearing"); setn("b_dysarth","b-dysarthria");
-  setn("b_dysphag","b-dysphagia"); setn("b_othercn","b-other");
-
-  // Pyramidal strength  [engineKey, sheetSuffix]
-  const ps = [["deltoid","deltoids"],["biceps","biceps"],["triceps","triceps"],
-    ["wflex","wristflex"],["wext","wristext"],["hipflex","hipflex"],["kneeflex","kneeflex"],
-    ["kneeext","kneeext"],["ankplant","plantar"],["ankdorsi","dorsi"]];
-  for (const [k,id] of ps) { setn(`p_str_${k}_R`,`p-str-${id}-r`); setn(`p_str_${k}_L`,`p-str-${id}-l`); }
-  // Plantar + reflexes (feed pyramidal "signs only")
-  setn("p_plantar_R","p-ref-plantar-r"); setn("p_plantar_L","p-ref-plantar-l");
-  for (const [k,id] of [["biceps","biceps"],["triceps","triceps"],["brach","brach"],["knee","knee"],["ankle","ankle"]]) {
-    setn(`p_refl_${k}_R`,`p-ref-${id}-r`); setn(`p_refl_${k}_L`,`p-ref-${id}-l`);
-  }
-
-  // Cerebellar
-  setn("c_head","c-head-tremor"); setn("c_trunc","c-truncal-ataxia");
-  setn("c_tremor_ue_R","c-tremor-ue-r"); setn("c_tremor_ue_L","c-tremor-ue-l");
-  setn("c_tremor_le_R","c-tremor-le-r"); setn("c_tremor_le_L","c-tremor-le-l");
-  setn("c_rapid_ue_R","c-ram-ue-r"); setn("c_rapid_ue_L","c-ram-ue-l");
-  setn("c_rapid_le_R","c-ram-le-r"); setn("c_rapid_le_L","c-ram-le-l");
-  setn("c_tandem","c-tandem-walk"); setn("c_gait_ataxia","c-gait-ataxia"); setn("c_romberg","c-romberg");
-
-  // Sensory
-  for (const [k,id] of [["sup_ue","sup-ue"],["sup_trunk","sup-trunk"],["sup_le","sup-le"],
-    ["vib_ue","vib-ue"],["vib_le","vib-le"],["pos_ue","pos-ue"],["pos_le","pos-le"]]) {
-    setn(`s_${k}_R`,`s-${id}-r`); setn(`s_${k}_L`,`s-${id}-l`);
-  }
-
-  // Bowel/Bladder + Cerebral
-  setn("bb_hes","bb-hesitancy"); setn("bb_urg","bb-urgency");
-  setn("bb_cath","bb-catheter"); setn("bb_bowel","bb-bowel");
-  setn("m_ment","cb-mentation"); setn("m_fat","cb-fatigue");
-
-  // Ambulation: assistance text + meters -> engine assistance + distances (engine computes AS)
-  const at = (val("amb-assistance-text") || "").toLowerCase();
-  let assist = "none";
-  if (at.includes("bilateral") || at.includes("walker") || at.includes("two")) assist = "bilateral";
-  else if (at.includes("unilateral") || at.includes("cane") || at.includes("crutch")) assist = "unilateral";  // NB: do not match "one" - it is a substring of "none"
-  else if (at.includes("wheelchair") && at.includes("help")) assist = "wheelchair_help";
-  else if (at.includes("wheelchair")) assist = "wheelchair_indep";
-  else if (at.includes("bed") || at.includes("chair-bound") || at.includes("chair bound")) assist = "bedbound";
-  inp.amb_assistance = assist;
-  const dm = val("amb-meters-actual"), dr = val("amb-meters-reported");
-  if (dm !== "") inp.amb_distance_measured = parseFloat(dm);
-  if (dr !== "") inp.amb_distance_reported = parseFloat(dr);
-
-  return inp;
-}
-
-function calculateSectionScores() {
-  const r = calculateFullEDSS(scSheetToEngineInputs());
-  window.__scLastResult = r;
-  const set = (id, v) => { const e = document.getElementById(id);
-    if (e && v !== undefined && v !== null) e.value = v; };
-  set("fs-visual-raw",  r.visual_fs);  set("fs-visual-conv",  r.visual_fs_conv);
-  set("fs-brainstem",   r.brainstem_fs);
-  set("fs-pyramidal",   r.pyramidal_fs);
-  set("fs-cerebellar",  r.cerebellar_fs);
-  set("fs-sensory",     r.sensory_fs);
-  set("fs-bowel-bladder-raw",  r.bb_fs);  set("fs-bowel-bladder-conv", r.bb_fs_conv);
-  set("fs-cerebral",    r.cerebral_fs);
-  const syn = { "syn-visual": r.visual_fs_conv, "syn-brainstem": r.brainstem_fs,
-    "syn-pyramidal": r.pyramidal_fs, "syn-cerebellar": r.cerebellar_fs,
-    "syn-sensory": r.sensory_fs, "syn-bowel-bladder": r.bb_fs_conv, "syn-cerebral": r.cerebral_fs };
-  for (const id in syn) set(id, syn[id]);
-  set("sc-amb-score-display", r.ambulation_score);
-  // EDSS step (respect an explicit manual override)
-  if (!scUserOverrides["edss-step-val"]) {
-    const e = document.getElementById("edss-step-val");
-    if (e && r.edss_step !== null && r.edss_step !== undefined) e.value = r.edss_step.toFixed(1);
-  }
-}
-
-function updateConvertedScores() {
-  const rawVisual = parseVal("fs-visual-raw");
-  const visualConvTable = [0,1,2,2,3,3,4];
-  const el1 = document.getElementById("fs-visual-conv");
-  if (el1) el1.value = visualConvTable[rawVisual] || 0;
-  const rawBB = parseVal("fs-bowel-bladder-raw");
-  const bbConvTable = [0,1,2,3,3,4,5]; // FIX (Neurostatus): raw6 converts to 5, not 4
-  const el2 = document.getElementById("fs-bowel-bladder-conv");
-  if (el2) el2.value = bbConvTable[rawBB] || 0;
-  calculateEDSS();
-}
-
-function calculateEDSS() {
-  // Unified: delegate to the single engine via calculateSectionScores().
-  if (typeof calculateSectionScores === "function") calculateSectionScores();
-}
-
-function selectRangeOnly(selected) {
-  if (selected.checked) {
-    document.getElementsByName("amb-range").forEach(cb => { if (cb !== selected) cb.checked = false; });
-    const m = document.getElementById("amb-meters-actual");
-    if (m && (!m.value || ["150","250","400","500"].includes(m.value))) {
-      if (selected.id === "amb-range-100-200") m.value = "150";
-      else if (selected.id === "amb-range-200-300") m.value = "250";
-      else if (selected.id === "amb-range-300-500") m.value = "400";
-      else if (selected.id === "amb-range-500-unrestricted") m.value = "500";
-    }
-  }
-  calculateEDSS();
-}
-
-function selectUniAssistOnly(selected) {
-  if (selected.checked) {
-    document.getElementsByName("uni-assist").forEach(cb => { if (cb !== selected) cb.checked = false; });
-    document.getElementsByName("bi-assist").forEach(cb => cb.checked = false);
-    const bm = document.getElementById("amb-bilateral-meters");
-    if (bm) bm.value = "";
-    const um = document.getElementById("amb-unilateral-meters");
-    if (um && !um.value) um.value = "100";
-  }
-  calculateEDSS();
-}
-
-function selectBiAssistOnly(selected) {
-  if (selected.checked) {
-    document.getElementsByName("bi-assist").forEach(cb => { if (cb !== selected) cb.checked = false; });
-    document.getElementsByName("uni-assist").forEach(cb => cb.checked = false);
-    const um = document.getElementById("amb-unilateral-meters");
-    if (um) um.value = "";
-    const bm = document.getElementById("amb-bilateral-meters");
-    if (bm && !bm.value) bm.value = "20";
-  }
-  calculateEDSS();
-}
-
-// Wire manual EDSS override and FS override detection on page load
-document.addEventListener("DOMContentLoaded", () => {
-  const edssInput = document.getElementById("edss-step-val");
-  if (edssInput) {
-    edssInput.addEventListener("input", () => {
-      scUserOverrides["edss-step-val"] = true;
-      edssInput.classList.add("manual-override");
-      const rst = document.getElementById("edss-reset");
-      if (rst) rst.style.display = "block";
-    });
-  }
-  document.querySelectorAll(".sc-sheet-wrap .fs-box").forEach(el => {
-    if (!el.readOnly) {
-      el.addEventListener("input", () => {
-        scUserOverrides[el.id] = true;
-        el.classList.add("manual-override");
-      });
-    }
-  });
-  // dblclick to verify OCR fields
-  document.querySelectorAll(".sc-sheet-wrap input[type='text']").forEach(el => {
-    el.addEventListener("dblclick", () => {
-      el.classList.remove("ocr-verify","ocr-high");
-      calculateEDSS();
-    });
-    el.addEventListener("input", () => {
-      if (el.classList.contains("ocr-verify") || el.classList.contains("ocr-high")) {
-        el.classList.remove("ocr-verify","ocr-high");
-      }
-    });
-  });
-});
-
-function scStopCamera() {
-  if (SC_CAM_STREAM) { SC_CAM_STREAM.getTracks().forEach(t => t.stop()); SC_CAM_STREAM = null; }
-  const video = document.getElementById("sc-video");
-  if (video) { video.srcObject = null; video.classList.remove("active"); }
-}
-</script>
-<script>
-/* Within-system highlighting: once you start a system, empty fields in it turn amber */
-(function(){
-  var st=document.createElement("style");
-  st.textContent="#form-root input.miss,#form-root select.miss{border-color:#e0a030 !important;background:#fff8e8 !important}";
-  (document.head||document.documentElement).appendChild(st);
-  function handle(e){
-    var t=e.target; if(!t||!t.closest) return;
-    var fr=document.getElementById("form-root"); if(!fr||!fr.contains(t)) return;
-    var sec=t.closest("[data-section]");
-    if(sec){ var sid=sec.getAttribute("data-section"); if(sid==="patient"||sid==="finalsheet") return; }
-    var grp=t.closest(".system-group")||t.closest(".tab-panel"); if(!grp) return;
-    var rel=[].slice.call(grp.querySelectorAll("input,select")).filter(function(x){
-      return x.type!=="checkbox"&&x.type!=="radio"&&x.type!=="file"&&!(x.id&&x.id.indexOf("pt_")===0)&&!(x.id&&x.id.indexOf("a_score")===0);
-    });
-    var filled=rel.filter(function(x){return x.value!=="";}).length;
-    rel.forEach(function(x){ x.classList.remove("miss"); });
-    if(filled>0){ rel.forEach(function(x){ if(x.value==="") x.classList.add("miss"); }); }
-  }
-  document.addEventListener("input", handle);
-  document.addEventListener("change", handle);
-})();
-</script>
-</body>
-</html>
+  setn("b_eom","b-eom"); setn("b_nys","b-nystagmus"); setn(
