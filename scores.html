@@ -161,6 +161,11 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 @media print{ body *{visibility:hidden!important} #printcard,#printcard *{visibility:visible!important}
  #printcard{position:absolute;inset:0;display:block!important;background:#fff;padding:0} #printcard .no-print{display:none!important}
  .pc-card{max-width:100%;margin:0 auto;padding:0} }
+/* ── UI Animations ── */
+@keyframes panelFadeOut{to{opacity:0;transform:translateY(-4px)}}
+.panel.panel-exit{animation:panelFadeOut .13s ease forwards;pointer-events:none}
+@keyframes resultPulse{0%{opacity:.3;transform:scale(.97)}60%{opacity:1;transform:scale(1.01)}100%{opacity:1;transform:scale(1)}}
+.result-flash{animation:resultPulse .3s ease}
 </style>
 </head>
 <body>
@@ -732,8 +737,8 @@ function openSub(id,parent){ RETURN_TO=parent;
   try{ if(M[id]) M[id](); }catch(e){}
 }
 function goBack(){ if(RETURN_TO){ var t=RETURN_TO; RETURN_TO=null; showTool(t); } else { showHome(); } }
-function showHome(){ GUIDED=false; RETURN_TO=null; var g=el("gnav"); if(g)g.style.display="none"; document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active")); el("home").style.display="block"; window.scrollTo({top:0,behavior:"smooth"}); }
-function showTool(id){ el("home").style.display="none"; document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active")); el("p_"+id).classList.add("active"); if(id!=="report"){var bk=document.querySelector("#p_"+id+" .tool-back"); if(bk){var nm={bicams:"BICAMS",msfc:"MSFC"}; bk.textContent=(RETURN_TO&&nm[RETURN_TO])?("\u2190 Back to "+nm[RETURN_TO]):"\u2190 Back to Score Hub";}} try{ if(id==="bicams")calcBICAMS(); else if(id==="msfc")calcMSFC(); }catch(e){} window.scrollTo({top:0,behavior:"smooth"}); }
+function showHome(){GUIDED=false;RETURN_TO=null;var g=el("gnav");if(g)g.style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("home").style.display="block";setTimeout(function(){window.scrollTo({top:window._hubSY||0,behavior:"smooth"});},20);}
+function showTool(id){if(el("home").style.display!=="none"){window._hubSY=window.scrollY;}var cur=document.querySelector(".panel.active");function _sw(){el("home").style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("p_"+id).classList.add("active");if(id!=="report"){var bk=document.querySelector("#p_"+id+" .tool-back");if(bk){var nm={bicams:"BICAMS",msfc:"MSFC"};bk.textContent=(RETURN_TO&&nm[RETURN_TO])?("← Back to "+nm[RETURN_TO]):"← Back to Score Hub";}}try{if(id==="bicams")calcBICAMS();else if(id==="msfc")calcMSFC();}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}if(cur){cur.classList.add("panel-exit");setTimeout(_sw,130);}else{_sw();}}
 function interp(cls,txt){ return '<div class="interp '+cls+'">'+txt+'</div>'; }
 function _zPlain(z){ return z<=-1.5?"In plain terms: this is in the <b>impaired range</b> - clearly below what is typical for similar people; worth discussing with the clinician.":z<=-1?"In plain terms: a little <b>below average</b> (borderline) - not clearly impaired, but worth keeping an eye on.":z<-0.5?"In plain terms: <b>broadly average</b> - reassuring.":"In plain terms: <b>average or above</b> for similar people - reassuring."; }
 function _flagBlanks(p,a,b){ for(var i=a;i<=b;i++){var e=el(p+i); if(e){ if(e.value==="") e.classList.add("blank"); else e.classList.remove("blank"); }} }
@@ -1343,59 +1348,176 @@ function renderChecklist(){
 }
 function buildReport(){
   const rows=[], flags=[]; let urgent="";
-  // EDSS + severity
+
+  // ── EDSS + severity ──────────────────────────────────────────────
   { const ev=el("edss_v")?el("edss_v").value:"", eage=_num(el("edss_age")?el("edss_age").value:null);
-    if(ev!==""){ const ed=Number(ev); rows.push(["Disability level (EDSS)", ed.toFixed(1)+"/9.5", ed<=2?"good":ed<=4.5?"warn":"bad", "Overall neurological disability (confirm with a clinician)."]);
+    if(ev!==""){
+      const ed=Number(ev);
+      const edssDesc = ed===0 ? "No signs of MS affecting your nervous system — normal exam." :
+        ed<=1.5 ? "MS is present but causing minimal or no real-world disability." :
+        ed<=3.5 ? "Mild to moderate disability in some functional areas; daily life is mostly unaffected." :
+        ed<=5.5 ? "Moderate disability — walking is limited but possible without a cane." :
+        ed<=6.5 ? "Significant disability — walking requires support such as a cane or similar aid." :
+        ed<=8   ? "Severe disability — mostly wheelchair or bed-based, with some function preserved." :
+                  "Very severe disability — almost fully dependent for basic daily care.";
+      rows.push(["Disability level (EDSS)", ed.toFixed(1)+" (0–10 scale)",
+        ed<=2?"good":ed<=4.5?"warn":"bad", edssDesc]);
+
       const edur=_num(el("edss_dur")?el("edss_dur").value:null);
       const sev=computeARMSS(ed,eage), mu=computeMSSSupd(ed,edur);
-      if(sev!=null){ rows.push(["Severity by age (ARMSS)", sev.toFixed(2)+"/10", sev>=7?"bad":sev>=4?"warn":"good", "Higher = more disability than most people with MS your age."]); }
-      if(mu!=null){ rows.push(["Severity by duration (MSSS)", mu.toFixed(2)+"/10", mu>=7?"bad":mu>=4?"warn":"good", "Higher = faster disability for your years since onset."]); } } }
-  // Disability - PDDS
-  const pv=el("pdds_v").value;
-  if(pv!==""){ const n=+pv, lab=el("pdds_v").selectedOptions[0].text.replace(/^[0-9]+\s*[-–—]\s*/,'');
-    rows.push(["Disability (PDDS)", n+"/8 - "+lab, n<=1?"good":n<=3?"warn":"bad", "Your own rating of how MS affects daily mobility."]);
-    if(n>=4) flags.push("Mobility/walking support - your PDDS suggests walking is affected. Ask about physiotherapy and aids."); }
-  // Walking - MSWS-12
-  const mw=scoreMSWS(readMSWS());
-  if(mw.transformed!=null){ const t=mw.transformed; rows.push(["Walking (MSWS-12)", t.toFixed(0)+"/100", t>=70?"bad":t>=40?"warn":"good", "Higher means MS limits walking more."]);
-    if(t>=40) flags.push("Walking difficulty (MSWS-12 "+t.toFixed(0)+"/100) - worth discussing physiotherapy / walking support."); }
-  // Fatigue - FSS preferred, else MFIS
-  const fss=scoreFSS(readFSS());
-  if(fss.answered>0){ const m=fss.mean; rows.push(["Fatigue (FSS)", m.toFixed(1)+"/7", m>=5?"bad":m>=4?"warn":"good", "Higher means more fatigue impact."]);
-    if(m>=4) flags.push("Significant fatigue (FSS "+m.toFixed(1)+") - ask about fatigue management, sleep, and possible causes."); }
-  else { const mfo=readMFIS(), mfAns=Object.values(mfo).filter(v=>v!=null).length;
-    if(mfAns>0){ const mf=scoreMFIS(mfo); rows.push(["Fatigue (MFIS)", mf.total+"/84", mf.total>=38?"warn":"good", "Higher means more fatigue impact."]);
-      if(mf.total>=38) flags.push("Significant fatigue (MFIS "+mf.total+") - ask about fatigue management."); } }
-  // Mood - PHQ-9
-  const pho=readPHQ(), phAns=Object.values(pho).filter(v=>v!=null).length;
-  if(phAns>0){ const t=scorePHQ(pho).total; const band=t<=4?"minimal":t<=9?"mild":t<=14?"moderate":t<=19?"moderately severe":"severe";
-    rows.push(["Mood - depression (PHQ-9)", t+"/27 ("+band+")", t<=4?"good":t<=9?"warn":"bad", "A screen for low mood - not a diagnosis."]);
-    if(t>=10) flags.push("Mood (PHQ-9 "+t+") suggests it is worth talking to your clinician about depression.");
-    if(pho[9]!=null&&pho[9]>0) urgent="You reported thoughts of being better off dead or of self-harm. Please reach out for support now - in the US you can call or text <b>988</b> (Suicide &amp; Crisis Lifeline). Tell your care team or someone you trust. If you are in immediate danger, contact emergency services."; }
-  // Mood - GAD-7
-  const go=readGAD(), gAns=Object.values(go).filter(v=>v!=null).length;
-  if(gAns>0){ const t=scoreGAD(go).total; const band=t<=4?"minimal":t<=9?"mild":t<=14?"moderate":"severe";
-    rows.push(["Mood - anxiety (GAD-7)", t+"/21 ("+band+")", t<=4?"good":t<=9?"warn":"bad", "A screen for anxiety - not a diagnosis."]);
-    if(t>=10) flags.push("Anxiety (GAD-7 "+t+") - worth discussing with your clinician."); }
-  // Overall impact - MSIS-29
-  const mi=scoreMSIS(readMSIS());
-  if(mi.physT!=null||mi.psyT!=null){ const v=Math.max(mi.physT||0, mi.psyT||0);
-    rows.push(["Overall MS impact (MSIS-29)", "Physical "+(mi.physT==null?"NA":mi.physT.toFixed(0))+" · Psychological "+(mi.psyT==null?"NA":mi.psyT.toFixed(0))+" /100", v>=70?"bad":v>=40?"warn":"good", "Higher means MS is having a greater impact."]); }
-  // QoL - MSQOL-54
-  const mq=readMSQOL(), mqAns=Object.values(mq).filter(v=>v!=null).length;
-  if(mqAns>0){ const sc=scoreMSQOL(mq), phc=sc.PHC, mhc=sc.MHC;
-    rows.push(["Quality of life (MSQOL-54)", "Physical "+(phc==null?"NA":phc.toFixed(0))+" · Mental "+(mhc==null?"NA":mhc.toFixed(0))+" /100", ((phc!=null&&phc<40)||(mhc!=null&&mhc<40))?"warn":"good", "Higher means better quality of life."]); }
+      if(sev!=null){
+        const d = sev<4 ? "Your disability is lower than most people with MS your age." :
+                  sev<7 ? "Your disability is around the average for people with MS your age." :
+                          "Your disability is higher than most people with MS your age.";
+        rows.push(["Severity vs. peers by age (ARMSS)", sev.toFixed(2)+"/10",
+          sev>=7?"bad":sev>=4?"warn":"good", d]);
+      }
+      if(mu!=null){
+        const d = mu<4 ? "Your MS has progressed more slowly than most people with a similar disease duration." :
+                  mu<7 ? "Your MS progression is around average for your years since onset." :
+                         "Your MS has progressed faster than most people with a similar disease duration.";
+        rows.push(["Severity vs. peers by duration (MSSS)", mu.toFixed(2)+"/10",
+          mu>=7?"bad":mu>=4?"warn":"good", d]);
+      }
+    }
+  }
 
-  if(rows.length===0 && !urgent){ el("report_out").innerHTML=interp("neutral","Fill at least one questionnaire (use the buttons above), then press Generate my report."); el("report_actions").style.display="none"; return; }
-  let html='<div class="subhead">Your self-report summary - '+new Date().toLocaleDateString()+'</div>';
-  if(urgent) html+='<div class="rep-urgent">\u26A0 '+urgent+'</div>';
+  // ── PDDS ─────────────────────────────────────────────────────────
+  const pv=el("pdds_v").value;
+  if(pv!==""){
+    const n=+pv, lab=el("pdds_v").selectedOptions[0].text.replace(/^[0-9]+\s*[-–—]\s*/,'');
+    const d = n<=1 ? "You rate your mobility as normal or near-normal." :
+              n<=3 ? "MS is causing noticeable difficulty in some daily activities, but daily independence is largely maintained." :
+              n<=5 ? "MS significantly affects walking and daily independence." :
+              n<=7 ? "MS requires the use of walking aids or assistance for most activities." :
+                     "MS severely limits mobility and independence.";
+    rows.push(["Disability self-rating (PDDS)", n+"/8 — "+lab,
+      n<=1?"good":n<=3?"warn":"bad", d]);
+    if(n>=4) flags.push("Disability self-rating (PDDS "+n+"/8 — "+lab+"): At this level, MS is significantly affecting mobility and daily independence.");
+  }
+
+  // ── MSWS-12 ──────────────────────────────────────────────────────
+  const mw=scoreMSWS(readMSWS());
+  if(mw.transformed!=null){
+    const t=mw.transformed;
+    const d = t<30 ? "MS has minimal impact on your walking ability." :
+              t<60 ? "MS is moderately affecting your ability to walk and your confidence on your feet." :
+              t<80 ? "MS is significantly limiting your walking — this affects many daily activities." :
+                     "MS is severely restricting your walking — it affects almost everything you do on foot.";
+    rows.push(["Walking ability (MSWS-12)", t.toFixed(0)+"/100",
+      t>=70?"bad":t>=40?"warn":"good", d]);
+    if(t>=40) flags.push("Walking ability (MSWS-12 "+t.toFixed(0)+"/100): A score at this level indicates MS is having a significant impact on mobility and walking endurance.");
+  }
+
+  // ── Fatigue + Cognition ───────────────────────────────────────────
+  let mfisScore=null;
+  const mfisObj=readMFIS(), mfAns=Object.values(mfisObj).filter(v=>v!=null).length;
+  if(mfAns>0) mfisScore=scoreMFIS(mfisObj);
+
+  const fss=scoreFSS(readFSS());
+  if(fss.answered>0){
+    const m=fss.mean;
+    const d = m<4 ? "Your fatigue is below the level that typically disrupts daily life." :
+              m<5 ? "Significant fatigue — this is one of the most common symptoms in MS and is affecting daily life." :
+              m<6 ? "Severe fatigue — daily activities and energy levels are substantially affected." :
+                    "Very severe fatigue ("+m.toFixed(1)+"/7) — fatigue at this level has a major impact on almost every aspect of daily life.";
+    rows.push(["Fatigue (FSS)", m.toFixed(1)+"/7", m>=5?"bad":m>=4?"warn":"good", d]);
+    if(m>=4) flags.push("Fatigue (FSS "+m.toFixed(1)+"/7): This score indicates fatigue is having a significant impact on daily activities. Fatigue is one of the most common and disabling symptoms of MS.");
+  } else if(mfisScore){
+    const tot=mfisScore.total;
+    const d = tot<22 ? "Your fatigue is in the lower range and may not be significantly disrupting daily life." :
+              tot<38 ? "Significant fatigue — MS-related fatigue is affecting daily activities." :
+                       "Severe fatigue ("+tot+"/84) — fatigue at this level has a major impact on almost every aspect of daily life.";
+    rows.push(["Fatigue (MFIS)", tot+"/84", tot>=38?"warn":"good", d]);
+    if(tot>=38) flags.push("Fatigue (MFIS "+tot+"/84): This score indicates severe fatigue that is substantially affecting daily life. Fatigue is one of the most common and disabling symptoms of MS.");
+  }
+
+  // Cognition — MFIS cognitive subscale (0–40; cut-off ≥ 22)
+  if(mfisScore && mfisScore.cog!=null){
+    const cog=mfisScore.cog;
+    const d = cog<15 ? "Cognitive fatigue is in the lower range — MS does not appear to be significantly affecting memory or concentration." :
+              cog<22 ? "Some cognitive effects are present — difficulty concentrating or remembering is common in MS." :
+                       "Significant cognitive fatigue ("+cog+"/40) — memory, attention, and mental stamina are noticeably affected.";
+    rows.push(["Cognitive fatigue (MFIS — cognitive)", cog+"/40",
+      cog>=22?"bad":cog>=15?"warn":"good", d]);
+    if(cog>=22) flags.push("Cognitive fatigue (MFIS cognitive subscale "+cog+"/40): A score at or above 22 indicates significant cognitive fatigue — memory, attention, and mental stamina are noticeably affected by MS.");
+  }
+
+  // ── PHQ-9 ────────────────────────────────────────────────────────
+  const pho=readPHQ(), phAns=Object.values(pho).filter(v=>v!=null).length;
+  if(phAns>0){
+    const t=scorePHQ(pho).total;
+    const band=t<=4?"minimal":t<=9?"mild":t<=14?"moderate":t<=19?"moderately severe":"severe";
+    const d = t<=4 ? "No significant signs of low mood at this time." :
+              t<=9 ? "Mild low mood is present." :
+              t<=14? "Moderate signs of depression — please speak with your clinician or a mental health professional about how you have been feeling." :
+              t<=19? "Moderately severe depression — please speak with your clinician or a mental health professional about how you have been feeling." :
+                     "Severe depression ("+t+"/27) — please speak with your clinician or a mental health professional about how you have been feeling.";
+    rows.push(["Mood — depression (PHQ-9)", t+"/27 ("+band+")",
+      t<=4?"good":t<=9?"warn":"bad", d]);
+    if(t>=10) flags.push("Low mood (PHQ-9 "+t+"/27, "+band+"): PHQ-9 scores at this level indicate depression that warrants attention. Please speak with your clinician or a mental health professional about how you have been feeling.");
+    if(pho[9]!=null&&pho[9]>0) urgent="You reported thoughts of being better off dead or of self-harm. Please reach out for support now — in the US you can call or text <b>988</b> (Suicide &amp; Crisis Lifeline). Tell your care team or someone you trust. If you are in immediate danger, contact emergency services.";
+  }
+
+  // ── GAD-7 ────────────────────────────────────────────────────────
+  const go=readGAD(), gAns=Object.values(go).filter(v=>v!=null).length;
+  if(gAns>0){
+    const t=scoreGAD(go).total;
+    const band=t<=4?"minimal":t<=9?"mild":t<=14?"moderate":"severe";
+    const d = t<=4 ? "No significant signs of anxiety at this time." :
+              t<=9 ? "Mild anxiety is present." :
+              t<=14? "Moderate anxiety — please speak with your clinician or a mental health professional about how you have been feeling." :
+                     "Severe anxiety ("+t+"/21) — please speak with your clinician or a mental health professional about how you have been feeling.";
+    rows.push(["Mood — anxiety (GAD-7)", t+"/21 ("+band+")",
+      t<=4?"good":t<=9?"warn":"bad", d]);
+    if(t>=10) flags.push("Anxiety (GAD-7 "+t+"/21, "+band+"): GAD-7 scores at this level indicate significant anxiety. Please speak with your clinician or a mental health professional about how you have been feeling.");
+  }
+
+  // ── MSIS-29 ──────────────────────────────────────────────────────
+  const mi=scoreMSIS(readMSIS());
+  if(mi.physT!=null||mi.psyT!=null){
+    const v=Math.max(mi.physT||0, mi.psyT||0);
+    const d = v<40 ? "MS is having a relatively limited impact on physical and psychological wellbeing." :
+              v<70 ? "MS is having a moderate impact on day-to-day physical and psychological functioning." :
+                     "MS is having a substantial impact on daily life ("+v.toFixed(0)+"/100) — both physical and psychological functioning are significantly affected.";
+    rows.push(["Overall MS impact (MSIS-29)",
+      "Physical "+(mi.physT==null?"NA":mi.physT.toFixed(0))+" · Psychological "+(mi.psyT==null?"NA":mi.psyT.toFixed(0))+" /100",
+      v>=70?"bad":v>=40?"warn":"good", d]);
+    if(v>=70) flags.push("Overall MS impact (MSIS-29 "+v.toFixed(0)+"/100): A score at this level indicates MS is having a substantial effect on day-to-day physical and psychological functioning.");
+  }
+
+  // ── MSQOL-54 ─────────────────────────────────────────────────────
+  const mq=readMSQOL(), mqAns=Object.values(mq).filter(v=>v!=null).length;
+  if(mqAns>0){
+    const sq=scoreMSQOL(mq), phc=sq.PHC, mhc=sq.MHC;
+    const minScore=Math.min(phc!=null?phc:100, mhc!=null?mhc:100);
+    const d = minScore>=60 ? "Quality of life scores are relatively preserved despite MS." :
+              minScore>=40 ? "Quality of life is moderately affected by MS." :
+                             "Quality of life scores indicate MS is significantly affecting physical and/or mental wellbeing ("+minScore.toFixed(0)+"/100).";
+    rows.push(["Quality of life (MSQOL-54)",
+      "Physical "+(phc==null?"NA":phc.toFixed(0))+" · Mental "+(mhc==null?"NA":mhc.toFixed(0))+" /100",
+      ((phc!=null&&phc<40)||(mhc!=null&&mhc<40))?"warn":"good", d]);
+    if(minScore<40) flags.push("Quality of life (MSQOL-54 "+minScore.toFixed(0)+"/100): A score at this level indicates MS is significantly affecting physical and/or mental wellbeing.");
+  }
+
+  // ── Render ───────────────────────────────────────────────────────
+  if(rows.length===0 && !urgent){
+    el("report_out").innerHTML=interp("neutral","Fill at least one questionnaire (use the buttons above), then press Generate my report.");
+    el("report_actions").style.display="none"; return;
+  }
+  let html='<div class="subhead">Your self-report summary — '+new Date().toLocaleDateString()+'</div>';
+  if(urgent) html+='<div class="rep-urgent">⚠ '+urgent+'</div>';
   html+=rows.map(r=>'<div class="rep-row '+r[2]+'"><div class="rep-dom">'+r[0]+'</div><div class="rep-val">'+r[1]+'</div><div class="rep-mean">'+r[3]+'</div></div>').join("");
-  if(flags.length){ html+='<div class="subhead">What to raise with your care team</div><ul class="rep-flags">'+flags.map(f=>'<li>'+f+'</li>').join("")+'</ul>'; }
-  else html+=interp("good","Nothing in what you entered was flagged for urgent attention. Keep up regular follow-up with your MS team.");
+  if(flags.length){
+    html+='<div class="subhead">Scores that need attention</div><ul class="rep-flags">'+flags.map(f=>'<li>'+f+'</li>').join("")+'</ul>';
+  } else {
+    html+=interp("good","Nothing in what you entered was flagged for attention. Keep up regular follow-up with your MS team.");
+  }
   html+='<div class="note">This summary reflects only the questionnaires you completed and is not a diagnosis. Bring it to your neurologist / MS team to discuss.</div>';
   el("report_out").innerHTML=html; el("report_actions").style.display="flex";
   el("report_out").scrollIntoView({behavior:"smooth",block:"nearest"});
 }
+
 function reportPDF(){ const r=el("report_out"); if(!r||!r.textContent.trim())return;
   el("pc_title").textContent="My MS self-report summary";
   el("pc_date").textContent=new Date().toLocaleDateString();
@@ -1483,5 +1605,30 @@ function clinReportPDF(){ var r=el("clin_out"); if(!r||!r.textContent.trim())ret
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+/* ── Animation observers ── */
+(function(){
+  // Score result flash
+  document.querySelectorAll("[id$='_out']").forEach(function(out){
+    new MutationObserver(function(){
+      out.classList.remove("result-flash"); void out.offsetWidth; out.classList.add("result-flash");
+    }).observe(out,{childList:true,subtree:true,characterData:true});
+  });
+
+  // Report rows stagger
+  var repOut=document.getElementById("report_out");
+  if(repOut){
+    new MutationObserver(function(){
+      repOut.querySelectorAll(".rep-row").forEach(function(row,i){
+        row.style.opacity="0"; row.style.transform="translateY(6px)"; row.style.transition="none";
+        setTimeout(function(){
+          row.style.transition="opacity .18s ease,transform .18s ease";
+          row.style.opacity="1"; row.style.transform="none";
+        },i*45+60);
+      });
+    }).observe(repOut,{childList:true});
+  }
+})();
+</script>
 </body>
 </html>
