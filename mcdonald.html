@@ -1,0 +1,2452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MS Criteria Checker (McDonald 2024) - an adaptive clinician decision-support tool for diagnosing Multiple Sclerosis based on the 2024 Lancet Neurology revisions.">
+  <title>MS Criteria Checker (McDonald 2024) - MSpectrum</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=IBM+Plex+Mono:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Design Tokens from MSpectrum */
+    :root {
+      --bg: #faf8f3;
+      --paper: #ffffff;
+      --paper-tint: #fdfbf6;
+      --ink: #1a1f2e;
+      --ink-soft: #4a5060;
+      --ink-faint: #8a8f9d;
+      --rule: #e6e2d6;
+      --rule-strong: #c8c2b0;
+      --accent: #1e4a6e;
+      --accent-soft: #e8eef4;
+      --accent-ink: #0d2c47;
+      --hl: #b85c1a;
+      --hl-soft: #f5e8da;
+      
+      --good: #216e39;
+      --good-bg: #e7f3ec;
+      --warn: #9a6700;
+      --warn-bg: #fff6df;
+      --bad: #9b2c2c;
+      --bad-bg: #fdeaea;
+      --neutral: #4a5060;
+      --neutral-bg: #f4f6f8;
+      
+      --radius-sm: 8px;
+      --radius: 14px;
+      --radius-lg: 18px;
+      
+      --serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+      
+      --shadow-sm: 0 1px 2px rgba(20, 25, 40, 0.04), 0 1px 1px rgba(20, 25, 40, 0.03);
+      --shadow-md: 0 4px 12px rgba(20, 25, 40, 0.06), 0 2px 4px rgba(20, 25, 40, 0.04);
+      --shadow-lg: 0 12px 32px rgba(20, 25, 40, 0.08), 0 4px 8px rgba(20, 25, 40, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 18px 40px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* Top Header matching scores.html with restored Neuron Logo and subtitle */
+    header.top {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(244,246,248,.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .top-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .brand-mark-group {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .brand-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--accent-ink);
+      letter-spacing: -0.02em;
+    }
+    .brand-title em {
+      font-style: normal;
+      color: var(--hl);
+    }
+    .brand-subtitle {
+      font-size: 11px;
+      color: var(--ink-soft);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .back {
+      margin-left: auto;
+      font-size: 13px;
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      padding: 6px 14px;
+      border-radius: 20px;
+      color: #fff;
+      background: var(--accent);
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+    .back:hover {
+      background: var(--accent-ink);
+      border-color: var(--accent-ink);
+    }
+
+    /* Landing screen & disclaimer */
+    .hero {
+      padding: 34px 0 10px;
+      animation: rise 0.4s ease both;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: 34px;
+      margin: 0 0 8px;
+      letter-spacing: -.01em;
+      color: var(--accent-ink);
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 15px;
+    }
+
+    .howto-read {
+      margin: 18px 0 14px;
+      font-size: 13.5px;
+      border: 1px solid #b8daea;
+      border-radius: var(--radius-sm);
+      background: #edf6fb;
+      overflow: hidden;
+    }
+    .howto-read > summary {
+      cursor: pointer;
+      color: #1a4060;
+      font-weight: 700;
+      list-style: none;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .howto-read > summary::-webkit-details-marker {
+      display: none;
+    }
+    .howto-read > summary::after {
+      content: "\25BE";
+      font-size: 11px;
+      margin-left: auto;
+      transition: transform .15s;
+    }
+    .howto-read[open] > summary {
+      border-bottom: 1px solid #b8daea;
+    }
+    .howto-read[open] > summary::after {
+      transform: rotate(180deg);
+    }
+    .howto-read > div {
+      padding: 12px 14px;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    .howto-read ul {
+      padding-left: 20px;
+      margin-top: 6px;
+    }
+    .howto-read li {
+      margin-bottom: 4px;
+    }
+
+    .usenote {
+      background: #eef4f8;
+      border: 1px solid #cfe0ec;
+      border-radius: var(--radius-sm);
+      padding: 11px 14px;
+      font-size: 13px;
+      color: #274b63;
+      margin: 14px 0 0;
+      line-height: 1.6;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .usenote-green {
+      background: #f3f7f0;
+      border-color: #d7e4cf;
+      color: #34502f;
+    }
+
+    /* Landing info boxes: two colours, both open */
+    /* Landing info cards: two colours, always visible, no disclosure marker */
+    .info-card { margin: 16px 0 0; font-size: 13.5px; border-radius: var(--radius-sm); border: 1px solid; padding: 12px 16px; }
+    .info-card .info-title { font-weight: 700; margin-bottom: 8px; }
+    .info-card ul, .info-card ol { margin: 0; padding-left: 18px; }
+    .info-card li { margin-bottom: 5px; line-height: 1.5; }
+    .box-how { background: #edf6fb; border-color: #b8daea; }
+    .box-how .info-title { color: #1a4060; }
+    .box-cover { background: #eef7f0; border-color: #cbe3d1; }
+    .box-cover .info-title { color: #2f5d3a; }
+    /* Landing abbreviations use the site-standard .refs collapsible */
+    .gloss-line { font-size: 12px; color: var(--ink-soft); padding: 3px 0; border-bottom: 1px solid var(--rule); }
+    .gloss-line:last-child { border-bottom: none; }
+    .gloss-line b { color: var(--accent-ink); }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: var(--radius);
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+      box-shadow: var(--shadow-md);
+      margin-top: 18px;
+    }
+    .btn-cta:hover {
+      background: var(--accent-ink);
+      border-color: var(--accent-ink);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Centered Wizard Card Layout */
+    .mcdonald-container {
+      max-width: 660px;
+      margin: 24px auto 0;
+      width: 100%;
+    }
+
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      animation: rise 0.35s ease both;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Wizard steps progress */
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--rule);
+      border-radius: 3px;
+      margin-left: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px;
+      width: 20%;
+      transition: width 0.3s ease;
+    }
+
+    /* Form Fields */
+    .fld {
+      margin-bottom: 20px;
+    }
+    .fld label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      margin-bottom: 6px;
+    }
+    .fld .hint {
+      font-size: 11.5px;
+      color: var(--ink-faint);
+      font-weight: 400;
+      margin-top: 2px;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    input[type=number], select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--rule-strong);
+      border-radius: var(--radius-sm);
+      font-size: 14.5px;
+      background: var(--paper-tint);
+      color: var(--ink);
+      font-family: var(--sans);
+      outline: none;
+      transition: all 0.15s ease;
+    }
+    input[type=number]:focus, select:focus {
+      outline: 2px solid #bcd3e6;
+      border-color: var(--accent);
+      background: #fff;
+    }
+    input.oor {
+      border-color: #c0392b!important;
+      background: #fdeaea!important;
+    }
+    select.blank, input.blank {
+      border-color: #e0a030!important;
+      background: #fff8e8!important;
+    }
+    .range-warn {
+      color: #c0392b;
+      font-size: 11.5px;
+      margin-top: 3px;
+      font-weight: 600;
+    }
+
+    /* Custom check row matching .x-checkbox-row */
+    .x-checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--paper-tint);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-sm);
+      margin-top: 10px;
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+    .x-checkbox-row:hover {
+      border-color: var(--rule-strong);
+      background: var(--paper);
+    }
+    .x-checkbox-row:has(input:checked) {
+      background: var(--hl-soft);
+      border-color: var(--hl);
+    }
+    .x-checkbox-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+    .x-checkbox-row label {
+      font-size: 13px;
+      color: var(--ink);
+      cursor: pointer;
+      flex: 1;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      cursor: pointer;
+      margin-top: 6px;
+    }
+    .check-item input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .subhead {
+      font-weight: 700;
+      color: var(--accent-ink);
+      margin: 18px 0 6px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    /* Wizard navigation */
+    .clinical-nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .clinical-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: 2px solid var(--rule);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--paper);
+      color: var(--ink);
+      transition: all 0.15s;
+      font-family: var(--sans);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .clinical-btn:hover:not(:disabled) {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .clinical-btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .clinical-btn.primary:hover:not(:disabled) {
+      background: var(--accent-ink);
+      border-color: var(--accent-ink);
+      color: #fff;
+    }
+    .clinical-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    /* Final Output Result View */
+    .result-badge {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+      border: 1px solid var(--rule);
+      transition: all 0.2s;
+    }
+    .result-badge.confirmed {
+      background: var(--good-bg);
+      color: var(--good);
+      border-color: #c3e6cb;
+    }
+    .result-badge.possible {
+      background: var(--warn-bg);
+      color: var(--warn);
+      border-color: #ffeeba;
+    }
+    .result-badge.unlikely {
+      background: var(--bad-bg);
+      color: var(--bad);
+      border-color: #f5c6cb;
+    }
+
+    .output-title {
+      font-weight: 700;
+      color: var(--accent-ink);
+      font-size: 12.5px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 6px;
+    }
+    .basis-list {
+      padding-left: 20px;
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin-bottom: 20px;
+    }
+    .basis-list li {
+      margin-bottom: 6px;
+      text-align: justify;
+    }
+
+    .alert-box {
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      border-left: 4px solid transparent;
+      display: none;
+    }
+    .alert-box.warn {
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 1px solid #ffeeba;
+      border-left: 4px solid var(--warn);
+    }
+    .alert-box.danger {
+      background: var(--bad-bg);
+      color: var(--bad);
+      border: 1px solid #f5c6cb;
+      border-left: 4px solid var(--bad);
+      font-weight: 600;
+    }
+
+    .next-steps-list {
+      padding-left: 20px;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+    .next-steps-list li {
+      margin-bottom: 4px;
+    }
+
+    /* CVS Helper Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 25, 40, 0.55);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-box {
+      background: var(--paper);
+      border-radius: var(--radius);
+      max-width: 440px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      animation: rise 0.2s ease;
+      border: 1px solid var(--rule);
+    }
+    .modal-hdr {
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 18px;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-body {
+      padding: 18px;
+    }
+    .modal-res {
+      margin-top: 14px;
+      padding: 10px 12px;
+      background: var(--neutral-bg);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      border: 1px dashed var(--rule-strong);
+    }
+    .modal-res.confirmed {
+      background: var(--good-bg);
+      color: var(--good);
+      border-color: #c3e6cb;
+    }
+    .modal-res.unlikely {
+      background: var(--bad-bg);
+      color: var(--bad);
+      border-color: #f5c6cb;
+    }
+    .modal-footer {
+      padding: 12px 18px;
+      background: var(--bg);
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .gbtn {
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      border: 1px solid var(--rule-strong);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--accent-ink);
+      cursor: pointer;
+      font-family: var(--sans);
+      transition: all 0.1s;
+    }
+    .gbtn:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    /* Tooltip */
+    .help-icon {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      line-height: 14px;
+      text-align: center;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 50%;
+      font-size: 9px;
+      font-weight: 700;
+      cursor: help;
+      margin-left: 4px;
+      position: relative;
+    }
+    .help-icon:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 18px;
+      top: -10px;
+      width: 220px;
+      background: var(--ink);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 1.4;
+      padding: 6px 10px;
+      border-radius: 6px;
+      z-index: 100;
+      text-align: left;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* References Styling matching scores.html */
+    .refs-sec {
+      margin-top: 34px;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+    }
+    .refs summary {
+      cursor: pointer;
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--accent-ink);
+      font-weight: 600;
+      list-style: none;
+    }
+    .refs summary::-webkit-details-marker {
+      display: none;
+    }
+    .refs summary::after {
+      content: " \25B8";
+      color: var(--hl);
+    }
+    .refs[open] summary::after {
+      content: " \25BE";
+    }
+    .refs p {
+      font-size: 13px;
+      color: var(--ink);
+      margin: 8px 0;
+    }
+    .refs .ref-item {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 13px;
+      align-items: baseline;
+    }
+    .refs .ref-item:last-of-type {
+      border-bottom: none;
+    }
+    .refs .ref-name {
+      font-weight: 700;
+      color: var(--accent-ink);
+    }
+    .refs .ref-cite {
+      color: var(--ink-soft);
+    }
+    .refs .ref-cat {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--hl);
+      font-weight: 700;
+      margin: 16px 0 4px;
+    }
+
+    footer {
+      margin-top: 40px;
+      color: var(--ink-faint);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* Print styling */
+    #print-summary {
+      display: none;
+    }
+    @media print {
+      body { background: #fff; color: #000; font-size: 11pt; }
+      header.top, .wrap, .modal-overlay, footer { display: none !important; }
+      #print-summary { display: block !important; }
+      .print-hdr { border-bottom: 2px solid #000; padding-bottom: 6px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-end; }
+      .print-hdr h2 { font-family: var(--serif); font-size: 22pt; }
+      .print-badge { border: 2px solid #000; padding: 12px; font-size: 15pt; font-weight: 700; text-align: center; text-transform: uppercase; margin-bottom: 16px; }
+      .print-section { margin-bottom: 16px; }
+      .print-section-title { font-family: var(--sans); font-size: 12pt; font-weight: 700; border-bottom: 1px solid #ccc; padding-bottom: 3px; margin-bottom: 8px; text-transform: uppercase; }
+      .print-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .print-grid-item { border: 1px solid #ccc; padding: 8px; border-radius: 4px; }
+      .print-grid-item h5 { font-size: 10pt; font-weight: 700; margin-bottom: 3px; }
+      .print-grid-item p { font-size: 9.5pt; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header matching scores.html with restored Neuron Logo and subtitle -->
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="index.html">
+        <!-- Beautiful Neuron SVG Logo -->
+        <svg class="logo" width="28" height="28" viewBox="0 0 48 48" aria-hidden="true" style="vertical-align:middle">
+          <defs>
+            <linearGradient id="mslg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#1e4a6e"/>
+              <stop offset=".55" stop-color="#2a9d8f"/>
+              <stop offset="1" stop-color="#b85c1a"/>
+            </linearGradient>
+          </defs>
+          <g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/>
+            <path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/>
+            <path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/>
+            <path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/>
+          </g>
+          <path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#cfd8dc" stroke-width="1.3"/>
+          <path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="url(#mslg)" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/>
+          <g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/>
+          </g>
+          <circle cx="10" cy="39" r="0.95" fill="#23628a"/>
+          <circle cx="13" cy="41.2" r="0.95" fill="#23628a"/>
+          <circle cx="19.2" cy="40" r="0.95" fill="#23628a"/>
+          <ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="url(#mslg)"/>
+          <circle cx="34" cy="12" r="1.7" fill="#dff0ea"/>
+          <circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff7a1a" stroke-width="0.8"/>
+          <circle cx="33.5" cy="30.4" r="1.15" fill="#ff7a1a"/>
+        </svg>
+        <div class="brand-mark-group">
+          <span class="brand-title">MS<em>pectrum</em></span>
+          <span class="brand-subtitle">MS Criteria Checker</span>
+        </div>
+      </a>
+      <div style="margin-left:auto; display:flex; align-items:center; gap:8px;">
+        <button class="back" id="btn-start-top" style="cursor:pointer; font-family:var(--sans);">Start assessment →</button>
+        <a class="back" href="index.html">← MSpectrum home</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Wrap -->
+  <main class="wrap">
+    
+    <!-- Hero / Landing View -->
+    <div id="landing-view">
+      <section class="hero">
+        <h1>🔎 MS Criteria Checker</h1>
+        <p>A questionnaire-driven calculator for the 2024 McDonald Criteria, covering onset course, MRI regions, CSF, and susceptibility biomarkers, with built-in mimic and older-onset checks.</p>
+      </section>
+
+      <!-- How to use -->
+      <div class="info-card box-how">
+        <div class="info-title">How to use this tool</div>
+        <ol>
+          <li>Enter the patient's age and clinical onset (relapsing, progressive, or RIS).</li>
+          <li>Tick which investigations were completed; the tool then asks only about those.</li>
+          <li>Enter each test's findings: lesion locations, dissemination in time, and biomarkers.</li>
+          <li>Review the result: the diagnosis, the criteria it rests on, and any safety cautions.</li>
+          <li>Save or print the result as a PDF for the record.</li>
+        </ol>
+      </div>
+
+      <!-- Features (collapsed) -->
+      <div class="refs-sec" style="margin-top:16px; padding:14px 18px;">
+        <details class="refs">
+          <summary style="font-size:14px; font-family:var(--sans); font-weight:700; color:var(--accent-ink);">Features</summary>
+          <div style="margin-top:8px; font-size:13px; color:var(--ink-soft); line-height:1.55;">
+            <ul style="margin:0; padding-left:18px;">
+              <li>Built on the latest 2024 McDonald criteria.</li>
+              <li>Checks every diagnostic route, so no scenario is missed.</li>
+              <li>Asks only the questions that fit the tests you have.</li>
+              <li>Gives a clear result: the diagnosis, the reasons behind it, cautions, and next steps.</li>
+              <li>Works fully offline and exports to PDF.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <!-- About / methodology -->
+      <div class="refs-sec" style="margin-top:16px; padding:14px 18px;">
+        <details class="refs">
+          <summary style="font-size:14px; font-family:var(--sans); font-weight:700; color:var(--accent-ink);">About &amp; methodology</summary>
+          <div style="margin-top:8px; font-size:13px; color:var(--ink-soft); line-height:1.55;">
+            This calculator implements the diagnostic logic published in Thompson AJ, Montalban X, Barkhof F, et al. <em>Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria.</em> Lancet Neurol 2025;24:850&ndash;865, together with its companion consensus papers on MRI, the visual system, and fluid biomarkers. Thresholds and pathways are taken from those sources; the full reference list appears on the results page. It is an independent educational aid, not affiliated with any commercial application.
+          </div>
+        </details>
+      </div>
+
+      <!-- Abbreviations — site-standard collapsible, one per line -->
+      <div class="refs-sec" style="margin-top:16px; padding:14px 18px;">
+        <details class="refs">
+          <summary style="font-size:14px; font-family:var(--sans); font-weight:700; color:var(--accent-ink);">Abbreviations</summary>
+          <div style="margin-top:8px;">
+          <div class="gloss-line"><b>DIS</b>: dissemination in space (lesions in &ge; 2 of 5 CNS regions)</div>
+          <div class="gloss-line"><b>DIT</b>: dissemination in time (activity separated in time)</div>
+          <div class="gloss-line"><b>CIS</b>: clinically isolated syndrome</div>
+          <div class="gloss-line"><b>RIS</b>: radiologically isolated syndrome</div>
+          <div class="gloss-line"><b>PPMS</b>: primary-progressive multiple sclerosis</div>
+          <div class="gloss-line"><b>OCB</b>: CSF-restricted oligoclonal bands</div>
+          <div class="gloss-line"><b>k-FLC</b>: kappa free light chain index</div>
+          <div class="gloss-line"><b>OCT</b>: optical coherence tomography</div>
+          <div class="gloss-line"><b>GCIPL / pRNFL</b>: retinal layers measured by OCT</div>
+          <div class="gloss-line"><b>VEP</b>: visual evoked potentials</div>
+          <div class="gloss-line"><b>CVS</b>: central vein sign</div>
+          <div class="gloss-line"><b>PRL</b>: paramagnetic rim lesion</div>
+          <div class="gloss-line"><b>SWI / QSM</b>: susceptibility MRI sequences</div>
+          <div class="gloss-line"><b>Gd+</b>: gadolinium-enhancing lesion</div>
+          <div class="gloss-line"><b>ADEM</b>: acute disseminated encephalomyelitis</div>
+          <div class="gloss-line"><b>MOGAD</b>: MOG antibody-associated disease</div>
+          <div class="gloss-line"><b>NMOSD</b>: neuromyelitis optica spectrum disorder</div>
+          <div class="gloss-line"><b>AQP4</b>: aquaporin-4 antibody</div>
+          <div class="gloss-line"><b>LETM</b>: longitudinally extensive transverse myelitis</div>
+          </div>
+        </details>
+      </div>
+
+      <!-- Clinical Disclaimer -->
+      <div class="usenote" style="background:var(--hl-soft); border-color:#f0cba8; border-left:4px solid var(--hl); color:#5b3b1c;">
+        <strong>Clinical disclaimer:</strong> This tool automates the 2024 McDonald calculations from the entries you provide. It supports, but does not replace, expert neurological judgement. Always exclude better explanations and mimics (MOGAD, NMOSD, vascular disease) before finalizing a diagnosis.
+      </div>
+
+      <button class="btn-cta" id="btn-start">Start assessment &rarr;</button>
+    </div>
+
+    <!-- Centered Wizard Card -->
+    <div class="mcdonald-container" id="assessment-view" style="display: none;">
+      
+      <!-- Wizard Questionnaire Screen -->
+      <div class="panel" id="wizard-panel">
+        
+        <!-- Progress Indicator -->
+        <div class="progress-wrap">
+          <span id="step-indicator">Step 1 of 5: Profile</span>
+          <div class="progress-bar">
+            <div class="progress-fill" id="step-progress-fill" style="width: 20%;"></div>
+          </div>
+        </div>
+
+        <!-- Wizard form wrapper -->
+        <form id="wizard-form" onsubmit="return false;">
+          
+          <!-- Step 1: Patient Profile -->
+          <div class="wizard-step" id="step-1">
+            <h3 style="font-family: var(--serif); font-size: 20px; margin-bottom: 12px; color: var(--accent-ink);">Step 1: Patient Profile</h3>
+            
+            <div class="fld">
+              <label for="age">Patient Age (years)</label>
+              <input type="number" id="age" min="1" max="110" placeholder="e.g. 34">
+              <span class="range-warn" id="age-warn" style="display: none;">Please enter a valid age between 1 and 110.</span>
+            </div>
+
+            <div class="fld">
+              <label for="course">Clinical Presentation / Onset Type</label>
+              <select id="course">
+                <option value="">-- Select Onset Course --</option>
+                <option value="relapsing">Relapsing-onset (CIS / typical relapsing course)</option>
+                <option value="progressive">Progressive from onset (PPMS)</option>
+                <option value="ris">Radiologically Isolated Syndrome (RIS - Incidental findings)</option>
+              </select>
+            </div>
+
+            <!-- Vascular Risk checklist -->
+            <div class="fld" id="vasc-risks-container" style="background:var(--paper-tint); border:1px solid var(--rule); border-radius:var(--radius-sm); padding:10px 12px; margin-top:14px;">
+              <div class="subhead" style="margin:0 0 2px;">Vascular Risk Factors <span class="help-icon" data-tooltip="Hypertension, diabetes, smoking, or hyperlipidaemia. These cause white-matter lesions that can mimic MS.">?</span></div>
+              <div class="hint" style="margin-bottom:8px;"><b>Why we ask:</b> these cause white-matter lesions that can look like MS. <b>Effect:</b> in patients aged &ge; 50, the tool advises confirming MS with a highly specific marker (spinal cord lesion, positive CSF, or select-6 CVS) rather than brain lesions alone.</div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 2px;">
+                <label class="check-item"><input type="checkbox" id="vasc_hypertension"> Hypertension</label>
+                <label class="check-item"><input type="checkbox" id="vasc_diabetes"> Diabetes</label>
+                <label class="check-item"><input type="checkbox" id="vasc_smoking"> Active Smoking</label>
+                <label class="check-item"><input type="checkbox" id="vasc_hyperlipidemia"> Hyperlipidemia</label>
+              </div>
+            </div>
+
+            <!-- Atypical Mimic Red Flags -->
+            <div class="fld" style="background:#fdf3f3; border:1px solid #f0d5d5; border-radius:var(--radius-sm); padding:10px 12px; margin-top:12px;">
+              <div class="subhead" style="margin:0 0 2px; color:var(--bad);">Atypical Features / Red Flags <span class="help-icon" data-tooltip="Features that are unusual for MS and point toward other diseases such as NMOSD or MOGAD.">?</span></div>
+              <div class="hint" style="margin-bottom:8px;"><b>Why we ask:</b> these are atypical for MS and suggest a mimic. <b>Effect:</b> if MS is otherwise met, the tool recommends testing AQP4-IgG (NMOSD) and MOG-IgG (MOGAD) before finalizing.</div>
+              <div style="display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 2px;">
+                <label class="check-item"><input type="checkbox" id="flag_letm"> Longitudinally extensive myelitis (&ge; 3 vertebral segments)</label>
+                <label class="check-item"><input type="checkbox" id="flag_bilateral_on"> Bilateral, simultaneous, or severe optic neuritis</label>
+                <label class="check-item"><input type="checkbox" id="flag_disc_edema"> Optic disc swelling or papillitis</label>
+                <label class="check-item"><input type="checkbox" id="flag_area_postrema"> Area postrema syndrome (intractable hiccups, nausea, vomiting)</label>
+                <label class="check-item"><input type="checkbox" id="flag_encephalopathy"> Encephalopathy or ADEM-like presentation</label>
+                <label class="check-item"><input type="checkbox" id="flag_atypical_csf"> Atypical CSF (pleocytosis &gt; 50 cells/&mu;L, neutrophils, or absent oligoclonal bands)</label>
+              </div>
+            </div>
+
+            <div class="fld" style="margin-top:12px;">
+              <label class="check-item" style="align-items:flex-start;">
+                <input type="checkbox" id="no_better_expl">
+                <span>Other diagnoses have been considered and there is <b>no better explanation</b> for the presentation (MS is a diagnosis of exclusion).</span>
+              </label>
+            </div>
+
+            <!-- Early older-onset caution (age >= 50); message filled by updateVascularNote() -->
+            <div class="alert-box warn" id="step1-vascular-note" style="display:none; margin-top:6px;"></div>
+          </div>
+
+          <!-- Step 2: Investigation Availability (Tailoring) -->
+          <div class="wizard-step" id="step-2" style="display: none;">
+            <h3 style="font-family: var(--serif); font-size: 20px; margin-bottom: 4px; color: var(--accent-ink);">Step 2: Completed Investigations</h3>
+            <p class="hint">Select all completed diagnostic tests. The wizard adapts by only displaying questions for your selections:</p>
+            
+            <div class="x-checkbox-row" style="background: var(--accent-soft); border-color: var(--accent); margin-bottom: 12px;">
+              <input type="checkbox" id="avail_all">
+              <label for="avail_all"><b>Select All (Check All Investigations)</b></label>
+            </div>
+
+            <div class="x-checkbox-row">
+              <input type="checkbox" id="avail_mri">
+              <label for="avail_mri">Brain &amp; spine MRI <span class="help-icon" data-tooltip="Standard T2/FLAIR (&plusmn; gadolinium) brain and, where relevant, spinal cord MRI.">?</span></label>
+            </div>
+
+            <div class="x-checkbox-row">
+              <input type="checkbox" id="avail_csf">
+              <label for="avail_csf">Lumbar puncture: CSF (OCB &amp; k-FLC) <span class="help-icon" data-tooltip="CSF oligoclonal bands and/or kappa free light chain index.">?</span></label>
+            </div>
+
+            <div class="x-checkbox-row">
+              <input type="checkbox" id="avail_visual">
+              <label for="avail_visual">Visual tests: OCT or VEP <span class="help-icon" data-tooltip="Optical coherence tomography (retinal thinning) or visual evoked potentials (delayed conduction) to assess the optic nerve.">?</span></label>
+            </div>
+
+            <div class="x-checkbox-row">
+              <input type="checkbox" id="avail_susc">
+              <label for="avail_susc">Susceptibility MRI (SWI / QSM): CVS &amp; PRL <span class="help-icon" data-tooltip="One susceptibility-weighted sequence shows both the central vein sign and paramagnetic rim lesions.">?</span></label>
+            </div>
+          </div>
+
+          <!-- Step 3: Clinical Findings -->
+          <div class="wizard-step" id="step-3" style="display: none;">
+            <h3 style="font-family: var(--serif); font-size: 20px; margin-bottom: 12px; color: var(--accent-ink);">Step 3: Clinical Presentation</h3>
+            
+            <!-- Relapsing inputs -->
+            <div id="clin-relapsing-inputs">
+              <div class="fld">
+                <label for="attacks">Number of Clinical Attacks (Relapses)</label>
+                <div class="hint">A relapse means new or worsening CNS symptoms from demyelination lasting at least 24 hours, with no fever or infection to account for them.</div>
+                <select id="attacks">
+                  <option value="">-- Select Attacks Count --</option>
+                  <option value="2">&ge; 2 clinical attacks</option>
+                  <option value="1">1 clinical attack (CIS)</option>
+                </select>
+              </div>
+              <div class="fld">
+                <label for="clinical_lesions">CNS sites with objective evidence on examination <span class="help-icon" data-tooltip="How many separate CNS sites show objective signs the examiner can confirm (e.g. an abnormal reflex, a visual-field defect, weakness, or a sensory level) — not symptoms the patient only reports.">?</span></label>
+                <div class="hint">How many separate CNS sites are backed by objective signs on the neurological exam (not symptoms alone)?</div>
+                <select id="clinical_lesions">
+                  <option value="">-- Select number of sites --</option>
+                  <option value="2">&ge; 2 sites (multifocal exam signs)</option>
+                  <option value="1">1 site (monofocal exam sign)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Progressive inputs -->
+            <div id="clin-progressive-inputs" style="display: none;">
+              <div class="fld">
+                <label for="prog_months">Objective Disease Progression Duration (months)</label>
+                <input type="number" id="prog_months" min="1" placeholder="e.g. 14">
+                <span class="range-warn" id="prog-months-warn" style="display: none;">PPMS requires at least 12 months of steady progression.</span>
+              </div>
+              <div class="fld">
+                <label for="prog_lesions">CNS sites with objective evidence on examination <span class="help-icon" data-tooltip="Number of separate CNS sites with objective signs on the neurological exam.">?</span></label>
+                <select id="prog_lesions">
+                  <option value="">-- Select Progressive Lesions --</option>
+                  <option value="2">&ge; 2 lesions</option>
+                  <option value="1">1 lesion</option>
+                  <option value="0">0 lesions</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- RIS inputs -->
+            <div id="clin-ris-inputs" style="display: none;">
+              <div class="usenote">
+                <strong>Radiologically Isolated Syndrome (RIS):</strong> the patient has never had an MS-type attack or steady progression, but a scan requested for another reason shows demyelinating-type lesions. Continue to enter those MRI findings.
+              </div>
+            </div>
+
+            <!-- Pediatric ADEM rules -->
+            <div id="pediatric-adem-container" style="display: none; margin-top: 18px;">
+              <div class="subhead">Pediatric ADEM Presentation</div>
+              <div class="x-checkbox-row">
+                <input type="checkbox" id="adem_check">
+                <label for="adem_check">Demyelinating onset presented as Acute Disseminated Encephalomyelitis.</label>
+              </div>
+              <div class="usenote" id="adem-confirm-box" style="display: none; margin-top: 8px;">
+                <label class="check-item">
+                  <input type="checkbox" id="adem_satisfied">
+                  <span>Patient had a second typical MS attack OR a new typical T2 lesion on MRI &gt; 90 days after ADEM onset.</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Clinical Shortcut Callout -->
+            <div id="clinical-shortcut-callout" style="display: none; background: var(--good-bg); border: 1px solid #c3e6cb; border-radius: var(--radius-sm); padding: 12px 14px; margin-top: 14px; font-size: 13px; color: var(--good); line-height: 1.5;">
+              <strong>💡 Clinical Confirmation:</strong> This patient meets the clinical criteria for confirmed MS (&ge; 2 attacks and &ge; 2 lesions). You can click the <strong>Quick Calculate</strong> button below to skip the remaining steps, or click <strong>Next Step</strong> to enter MRI/biomarker details.
+              <div style="margin-top: 8px;">
+                <button type="button" class="gbtn" id="btn-quick-calculate" style="background: var(--good); color: #fff; border-color: var(--good); padding: 6px 12px; font-size: 12px; cursor: pointer;">Quick Calculate ✔</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: MRI & Visual Findings (DIS / DIT) -->
+          <div class="wizard-step" id="step-4" style="display: none;">
+            <h3 style="font-family: var(--serif); font-size: 20px; margin-bottom: 4px; color: var(--accent-ink);">Step 4: MRI &amp; Visual Findings</h3>
+            
+            <div id="mri-dis-group">
+              <div class="subhead">Dissemination in Space (DIS) locations</div>
+              <p class="hint">Select the zones with typical demyelinating T2 lesions (symptomatic or asymptomatic):</p>
+              
+              <div class="x-checkbox-row">
+                <input type="checkbox" id="dis_pv">
+                <label for="dis_pv">Periventricular typical T2 lesion</label>
+              </div>
+
+              <div class="x-checkbox-row">
+                <input type="checkbox" id="dis_jc">
+                <label for="dis_jc">Juxtacortical or Cortical typical T2 lesion</label>
+              </div>
+
+              <div class="x-checkbox-row">
+                <input type="checkbox" id="dis_it">
+                <label for="dis_it">Infratentorial typical T2 lesion</label>
+              </div>
+
+              <div class="x-checkbox-row">
+                <input type="checkbox" id="dis_sc">
+                <label for="dis_sc">Spinal Cord typical T2 lesion</label>
+              </div>
+              <div class="usenote" id="sc-prog-subgroup" style="display: none; margin-top: 6px; padding: 8px 12px;">
+                <label class="check-item">
+                  <input type="checkbox" id="dis_sc_2plus"> <span>Patient has <b>&ge; 2 typical spinal cord lesions</b>.</span>
+                </label>
+              </div>
+
+              <!-- Optic nerve (visible if Visual Tests is selected in Step 2) -->
+              <div id="optic-nerve-mri-container" style="display: none;">
+                <div class="x-checkbox-row">
+                  <input type="checkbox" id="dis_on">
+                  <label for="dis_on">Optic nerve involvement <span class="help-icon" data-tooltip="Counts as a region only with objective evidence: a positive orbital MRI, OCT, or VEP.">?</span></label>
+                </div>
+                <div class="usenote" id="optic-nerve-tests-subgroup" style="display: none; margin-top: 6px; padding: 8px 12px;">
+                  <p style="font-size: 11.5px; font-weight: 700; margin-bottom: 6px;">Select positive supporting visual tests:</p>
+                  <label class="check-item" style="display:block; margin-bottom: 4px;"><input type="checkbox" id="on_mri"> Orbital MRI: typical intrinsic optic nerve lesion</label>
+                  <label class="check-item" style="display:block; margin-bottom: 4px;"><input type="checkbox" id="on_oct"> OCT: GCIPL diff &ge; 4 &mu;m OR pRNFL diff &ge; 6 &mu;m</label>
+                  <label class="check-item" style="display:block;"><input type="checkbox" id="on_vep"> VEP: delayed latency or interocular delay &ge; 2.5 SD</label>
+                  <div class="range-warn" id="on-evidence-warn" style="display:none; margin-top:4px;">Tick at least one positive test; otherwise the optic nerve is not counted as a region.</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="mri-dit-group" style="margin-top: 18px;">
+              <div class="subhead">Dissemination in Time (DIT)</div>
+              <p class="hint">Select indicators of demyelinating activity separated in time:</p>
+              <div class="usenote usenote-green" id="dit-clinical-note" style="display:none; padding:8px 12px; margin-bottom:8px;">&#10003; Dissemination in time is already met clinically (&ge; 2 attacks). The items below are optional.</div>
+              
+              <div class="x-checkbox-row">
+                <input type="checkbox" id="dit_new_t2">
+                <label for="dit_new_t2">A new T2 lesion on a follow-up scan compared to baseline</label>
+              </div>
+
+              <div class="x-checkbox-row">
+                <input type="checkbox" id="dit_gd_plus">
+                <label for="dit_gd_plus">One or more Gadolinium-enhancing (Gd+) lesions on any scan</label>
+              </div>
+
+              <div class="x-checkbox-row">
+                <input type="checkbox" id="dit_simul">
+                <label for="dit_simul">Enhancing and non-enhancing lesions together on the same scan</label>
+              </div>
+
+              <div class="x-checkbox-row">
+                <input type="checkbox" id="dit_historical">
+                <label for="dit_historical">A historical clinical relapse localized to a different CNS site</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5: Fluid & Susceptibility Biomarkers -->
+          <div class="wizard-step" id="step-5" style="display: none;">
+            <h3 style="font-family: var(--serif); font-size: 20px; margin-bottom: 12px; color: var(--accent-ink);">Step 5: Specific Biomarkers</h3>
+            
+            <!-- Fluid section (LP) -->
+            <div id="bio-fluid-group" style="display: none; margin-bottom: 18px;">
+              <div class="subhead">Fluid Biomarkers (CSF)</div>
+              <p class="hint">Fluid markers satisfy paraclinical criteria and are interchangeable in the 2024 revisions:</p>
+              
+              <div class="x-checkbox-row">
+                <input type="checkbox" id="bio_ocb">
+                <label for="bio_ocb">CSF-restricted Oligoclonal Bands (OCBs) positive (&ge; 2 bands)</label>
+              </div>
+              <div class="x-checkbox-row">
+                <input type="checkbox" id="bio_kflc">
+                <label for="bio_kflc">Elevated CSF kappa free light chain (k-FLC) index <span class="help-icon" data-tooltip="Index above your local laboratory cut-off (commonly &gt; 5.8&ndash;6.1). Interchangeable with OCB in the 2024 criteria.">?</span></label>
+              </div>
+            </div>
+
+            <!-- Susceptibility (CVS / PRL) -->
+            <div id="bio-susceptibility-group" style="display: none;">
+              <div class="subhead">Susceptibility MRI (SWI / QSM) markers</div>
+              <p class="hint">Both signs are read on the same susceptibility sequence. Note the required counts: CVS needs &ge; 6 lesions; PRL needs only &ge; 1.</p>
+              
+              <div id="cvs-row" style="display: none;">
+                <div class="x-checkbox-row">
+                  <input type="checkbox" id="bio_cvs">
+                  <label for="bio_cvs">Central vein sign (CVS) positive (<b>select-6</b>: &ge; 6 CVS+ lesions, or a majority if &lt; 10 total) <span class="help-icon" data-tooltip="Select-6 rule: positive when &ge; 6 white-matter lesions show a central vein; if fewer than 10 lesions total, CVS+ must be the majority. Use the helper below.">?</span></label>
+                </div>
+                <div style="margin-top: 6px; margin-bottom: 12px; padding-left: 12px;">
+                  <button type="button" class="gbtn" id="open-cvs-modal-btn">🧮 CVS Helper Calculator</button>
+                </div>
+              </div>
+
+              <div id="prl-row" style="display: none;">
+                <div class="x-checkbox-row">
+                  <input type="checkbox" id="bio_prl">
+                  <label for="bio_prl">Paramagnetic rim lesion (PRL) positive (<b>&ge; 1</b> rim lesion) <span class="help-icon" data-tooltip="One or more lesions with a paramagnetic iron rim on susceptibility MRI. Used to compensate for a missing DIS region.">?</span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- Wizard Navigation -->
+        <div class="clinical-nav">
+          <button type="button" class="clinical-btn" id="btn-prev" disabled>← Back</button>
+          <button type="button" class="clinical-btn primary" id="btn-next">Next Step →</button>
+        </div>
+
+      </div><!-- /wizard-panel -->
+
+      <!-- Dedicated Diagnostic Result Screen (Hidden during wizard input) -->
+      <div class="panel" id="result-screen" style="display: none; border: 2px solid var(--rule-strong);">
+        <h3 style="font-family: var(--serif); font-size: 24px; border-bottom: 2px solid var(--rule); padding-bottom: 8px; margin-bottom: 20px; color: var(--accent-ink); text-align: center;">🔍 Diagnostic Result</h3>
+        
+        <!-- Result Badge -->
+        <div class="result-badge neutral" id="result-cat-badge">Awaiting Clinical Input...</div>
+
+        <!-- Plain-language interpretation -->
+        <div id="result-interpretation" style="display:none; font-size:13.5px; color:var(--ink-soft); background:var(--neutral-bg); border:1px solid var(--rule); border-radius:var(--radius-sm); padding:10px 12px; margin-bottom:16px; line-height:1.55; text-align:justify;"></div>
+
+        <!-- Warning Banner -->
+        <div class="alert-box" id="result-alert"></div>
+        
+        <!-- Diagnostic Basis -->
+        <div class="output-title" style="font-size: 14px;">Diagnostic Basis</div>
+        <ul class="basis-list" id="result-basis">
+          <li>Please enter patient age and select clinical onset in Step 1 to begin calculation.</li>
+        </ul>
+        
+        <!-- Recommended Next Steps -->
+        <div id="result-next-steps-container" style="background: var(--bg); border: 1px solid var(--rule); border-radius: var(--radius-sm); padding: 14px; margin-top: 18px; margin-bottom: 24px;">
+          <div class="output-title" style="font-size: 13px; margin-bottom: 8px;">Recommended Next Steps / Missing Evidence</div>
+          <ul class="next-steps-list" id="result-next-steps">
+            <li>Complete Step 1.</li>
+          </ul>
+        </div>
+        
+        <!-- Action buttons -->
+        <div class="clinical-nav" style="gap: 10px;">
+          <button class="clinical-btn primary" id="btn-print" style="flex: 1.1;">🖨️ Save as PDF</button>
+          <button class="clinical-btn" id="btn-copy" style="flex: 0.9; background: #fff;">📋 Copy</button>
+          <button class="clinical-btn" id="btn-edit" style="flex: 0.9; background: #fff;">✏️ Edit</button>
+          <button class="clinical-btn" id="btn-reset" style="flex: 0.7; background: #fafafa;">↻ Reset</button>
+        </div>
+      </div><!-- /result-screen -->
+      
+    </div>
+
+    <!-- References — shown on the result page only -->
+    <div class="refs-sec" id="references-sec" style="display:none;">
+      <details class="refs">
+        <summary>References &amp; Guidelines</summary>
+        
+        <div class="ref-cat">Primary Revisions</div>
+        <div class="ref-item">
+          <span class="ref-name">Thompson 2025</span>
+          <span class="ref-cite">Thompson AJ, Montalban X, Barkhof F, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>The Lancet Neurology</em> 2025;24(10):850-865. doi:10.1016/S1474-4422(25)00270-4.</span>
+        </div>
+
+        <div class="ref-cat">Companion Papers</div>
+        <div class="ref-item">
+          <span class="ref-name">Lancet 2025a</span>
+          <span class="ref-cite">Consensus recommendations on visual system assessment (OCT and VEPs) in MS diagnosis. <em>The Lancet Neurology</em> 2025; companion paper.</span>
+        </div>
+        <div class="ref-item">
+          <span class="ref-name">Lancet 2025b</span>
+          <span class="ref-cite">Consensus recommendations for MRI in multiple sclerosis diagnosis. <em>The Lancet Neurology</em> 2025; companion paper.</span>
+        </div>
+        <div class="ref-item">
+          <span class="ref-name">Lancet 2025c</span>
+          <span class="ref-cite">Consensus recommendations on fluid and body biomarkers (k-FLC index, OCBs) in MS diagnosis. <em>The Lancet Neurology</em> 2025; companion paper.</span>
+        </div>
+
+        <div class="ref-cat">Differential Diagnosis &amp; Mimics</div>
+        <div class="ref-item">
+          <span class="ref-name">Solomon 2023</span>
+          <span class="ref-cite">Solomon AJ, Arrambide G, Brownlee WJ, et al. Differential diagnosis of suspected multiple sclerosis: an updated consensus approach. <em>The Lancet Neurology</em> 2023;22:750–68.</span>
+        </div>
+      </details>
+    </div>
+
+  </main>
+
+  <!-- CVS Calculator Modal -->
+  <div class="modal-overlay" id="cvs-modal">
+    <div class="modal-box">
+      <div class="modal-hdr">
+        <span>🧮 CVS Select 6 Calculator</span>
+        <button class="modal-close" id="close-cvs-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="fld">
+          <label for="cvs_total_lesions">Total T2 Brain White Matter Lesions</label>
+          <input type="number" id="cvs_total_lesions" min="1" placeholder="e.g. 8">
+        </div>
+        <div class="fld">
+          <label for="cvs_pos_lesions">CVS-Positive Lesions (with Central Vein)</label>
+          <input type="number" id="cvs_pos_lesions" min="0" placeholder="e.g. 5">
+          <div class="hint" style="margin-top: 4px;">Central Vein Sign requires a clear thin vein running centrally through the lesion on SWI/QSM.</div>
+        </div>
+        <div class="modal-res" id="cvs-calc-res">
+          CVS is Negative
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="clinical-btn" id="btn-cancel-cvs">Cancel</button>
+        <button type="button" class="clinical-btn primary" id="btn-apply-cvs" disabled>Apply positive result</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Print Summary Hidden Document -->
+  <div id="print-summary">
+    <div class="print-hdr">
+      <div style="display:flex; align-items:center; gap:9px;">
+        <svg width="28" height="28" viewBox="0 0 48 48" aria-hidden="true">
+          <defs><linearGradient id="mslgP" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#1e4a6e"/><stop offset=".55" stop-color="#2a9d8f"/><stop offset="1" stop-color="#b85c1a"/>
+          </linearGradient></defs>
+          <path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="url(#mslgP)" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/>
+          <ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="url(#mslgP)"/>
+          <circle cx="33.5" cy="30.4" r="1.15" fill="#ff7a1a"/>
+        </svg>
+        <div>
+          <h2 style="margin:0;"><span style="color:#0d2c47;">MS</span><span style="color:#b85c1a;">pectrum</span></h2>
+          <div style="font-size: 11pt; font-weight: 700; color: #4a5060; margin-top: 2px;">MS Criteria Checker (McDonald 2024) summary</div>
+        </div>
+      </div>
+      <div style="font-size: 9.5pt; text-align: right; line-height: 1.4;">
+        <p>Date: <span id="print-date"></span></p>
+      </div>
+    </div>
+
+    <div class="print-badge" id="print-result-badge">
+      Awaiting Clinical Input...
+    </div>
+    <p id="print-interp" style="font-size: 10pt; line-height: 1.5; margin: 0 0 14px; color: #333; display: none;"></p>
+
+    <div class="print-section">
+      <div class="print-section-title">Patient Profile</div>
+      <div class="print-grid">
+        <div class="print-grid-item">
+          <h5>Demographics</h5>
+          <p>Age: <span id="print-age">N/A</span></p>
+          <p>Older-onset (&ge; 50): <span id="print-vascular-cohort">No</span></p>
+        </div>
+        <div class="print-grid-item">
+          <h5>Presentation</h5>
+          <p>Clinical Onset Course: <span id="print-course">N/A</span></p>
+          <p>Clinical Relapses: <span id="print-attacks">N/A</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="print-section">
+      <div class="print-section-title">Paraclinical Investigations</div>
+      <div class="print-grid">
+        <div class="print-grid-item">
+          <h5>DIS Locations Affected</h5>
+          <ul style="padding-left: 16px; font-size: 9.5pt; margin-top: 4px;" id="print-dis-list">
+            <li>None</li>
+          </ul>
+        </div>
+        <div class="print-grid-item">
+          <h5>Biomarkers &amp; DIT</h5>
+          <p>DIT Status: <span id="print-dit">Negative</span></p>
+          <p>CSF OCB/k-FLC Index: <span id="print-csf">Negative</span></p>
+          <p>CVS Sign: <span id="print-cvs">Negative</span></p>
+          <p>PRL Lesions: <span id="print-prl">Negative</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="print-section">
+      <div class="print-section-title">Diagnostic Verification</div>
+      <ul style="padding-left: 18px; font-size: 10pt; line-height: 1.5;" id="print-basis-list">
+        <li>N/A</li>
+      </ul>
+      <div id="print-alert-box" style="margin-top: 12px; padding: 10px; border: 1.5px solid #ccc; font-weight: bold; font-size: 9.5pt; display: none;"></div>
+    </div>
+
+    <div class="print-section" id="print-next-steps-section" style="display: none;">
+      <div class="print-section-title">Recommended Next Steps</div>
+      <ul style="padding-left: 18px; font-size: 10pt; line-height: 1.5;" id="print-next-steps-list"></ul>
+    </div>
+
+    <div style="margin-top: 40px; border-top: 1px solid #000; padding-top: 8px; font-size: 9pt; color: #4a5060; text-align: justify;">
+      <p><b>Clinical Disclaimer:</b> MSpectrum outputs are clinical decision support aids. They automate the 2024 McDonald diagnostic criteria calculations based on raters' entries but do not replace expert clinical neurological judgment. Confirm other diagnostic possibilities and mimics (MOGAD, NMOSD, vascular events) are excluded before finalizing diagnosis.</p>
+    </div>
+  </div>
+
+  <!-- JavaScript Wizard & Diagnostic Logic -->
+  <script>
+    // Wizard Steps navigation state
+    let activeSteps = [1, 2, 3];
+    let currentStepIndex = 0;
+
+    // Transition from landing to assessment
+    document.getElementById('btn-start').addEventListener('click', () => {
+      document.getElementById('landing-view').style.display = 'none';
+      document.getElementById('assessment-view').style.display = 'block';
+      document.getElementById('wizard-panel').style.display = 'block';
+      document.getElementById('result-screen').style.display = 'none';
+      document.getElementById('references-sec').style.display = 'none';
+      document.getElementById('btn-start-top').style.display = 'none';
+      
+      activeSteps = getActiveSteps();
+      currentStepIndex = 0;
+      showStep(activeSteps[currentStepIndex]);
+    });
+
+    // Header "Start assessment" button mirrors the landing button
+    document.getElementById('btn-start-top').addEventListener('click', () => {
+      document.getElementById('btn-start').click();
+    });
+
+    // Inputs triggers
+    const inputIds = [
+      'age', 'course', 'attacks', 'clinical_lesions', 'prog_months', 'prog_lesions',
+      'vasc_hypertension', 'vasc_diabetes', 'vasc_smoking', 'vasc_hyperlipidemia',
+      'flag_letm', 'flag_bilateral_on', 'flag_disc_edema', 'flag_area_postrema', 'flag_encephalopathy', 'flag_atypical_csf',
+      'avail_mri', 'avail_csf', 'avail_visual', 'avail_susc',
+      'adem_check', 'adem_satisfied',
+      'dis_pv', 'dis_jc', 'dis_it', 'dis_sc', 'dis_sc_2plus', 'dis_on',
+      'on_mri', 'on_oct', 'on_vep',
+      'dit_new_t2', 'dit_gd_plus', 'dit_simul', 'dit_historical', 'no_better_expl',
+      'bio_ocb', 'bio_kflc', 'bio_cvs', 'bio_prl'
+    ];
+
+    inputIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('change', () => {
+          if (id.startsWith('avail_') || id === 'course' || id === 'age') {
+            activeSteps = getActiveSteps();
+            updateStepVisibilities();
+          }
+          if (id === 'attacks' || id === 'clinical_lesions' || id === 'course') {
+            checkClinicalShortcut();
+            updateDitNote();
+          }
+          if (id === 'age' || id.startsWith('vasc_')) {
+            updateVascularNote();
+          }
+          if (id === 'dis_on' || id === 'on_mri' || id === 'on_oct' || id === 'on_vep') {
+            updateOnWarn();
+          }
+        });
+      }
+    });
+
+    // Select All Investigations Control
+    const availAll = document.getElementById('avail_all');
+    const availCheckboxes = [
+      document.getElementById('avail_mri'),
+      document.getElementById('avail_csf'),
+      document.getElementById('avail_visual'),
+      document.getElementById('avail_susc')
+    ];
+
+    availAll.addEventListener('change', (e) => {
+      const isChecked = e.target.checked;
+      availCheckboxes.forEach(cb => {
+        cb.checked = isChecked;
+      });
+      activeSteps = getActiveSteps();
+      updateStepVisibilities();
+    });
+
+    availCheckboxes.forEach(cb => {
+      cb.addEventListener('change', () => {
+        const allChecked = availCheckboxes.every(c => c.checked);
+        const someChecked = availCheckboxes.some(c => c.checked);
+        availAll.checked = allChecked;
+        availAll.indeterminate = someChecked && !allChecked;
+        activeSteps = getActiveSteps();
+        updateStepVisibilities();
+      });
+    });
+
+    // Dynamic step routing based on Step 2 modalities & clinical presentation
+    function getActiveSteps() {
+      const ageVal = parseFloat(document.getElementById('age').value);
+      const isPediatric = !isNaN(ageVal) && ageVal < 18;
+      const course = document.getElementById('course').value;
+
+      const steps = [1, 2];
+
+      // Step 3 (Clinical presentation) can be skipped for adult RIS patients as they have 0 attacks/symptoms by definition
+      if (course === 'relapsing' || course === 'progressive' || isPediatric) {
+        steps.push(3);
+      }
+
+      if (document.getElementById('avail_mri').checked) {
+        steps.push(4);
+      }
+      if (document.getElementById('avail_csf').checked || 
+          document.getElementById('avail_susc').checked) {
+        steps.push(5);
+      }
+      return steps;
+    }
+
+    function updateStepVisibilities() {
+      const hasMri = document.getElementById('avail_mri').checked;
+      const hasCsf = document.getElementById('avail_csf').checked;
+      const hasVisual = document.getElementById('avail_visual').checked;
+      const hasSusc = document.getElementById('avail_susc').checked;
+      const hasCvs = hasSusc; // CVS & PRL are read on the same susceptibility sequence
+      const hasPrl = hasSusc;
+
+      // Clean up child states on uncheck (State Wiping)
+      if (!hasMri) {
+        document.getElementById('dis_pv').checked = false;
+        document.getElementById('dis_jc').checked = false;
+        document.getElementById('dis_it').checked = false;
+        document.getElementById('dis_sc').checked = false;
+        document.getElementById('dis_sc_2plus').checked = false;
+        document.getElementById('dit_new_t2').checked = false;
+        document.getElementById('dit_gd_plus').checked = false;
+        document.getElementById('dit_simul').checked = false;
+        document.getElementById('dit_historical').checked = false;
+      }
+      if (!hasVisual || !hasMri) {
+        document.getElementById('dis_on').checked = false;
+        document.getElementById('on_mri').checked = false;
+        document.getElementById('on_oct').checked = false;
+        document.getElementById('on_vep').checked = false;
+      }
+      if (!hasCsf) {
+        document.getElementById('bio_ocb').checked = false;
+        document.getElementById('bio_kflc').checked = false;
+      }
+      if (!hasCvs) {
+        document.getElementById('bio_cvs').checked = false;
+      }
+      if (!hasPrl) {
+        document.getElementById('bio_prl').checked = false;
+      }
+
+      // Step 4 subdivisions
+      document.getElementById('mri-dis-group').style.display = hasMri ? 'block' : 'none';
+      document.getElementById('mri-dit-group').style.display = hasMri ? 'block' : 'none';
+      document.getElementById('optic-nerve-mri-container').style.display = (hasMri && hasVisual) ? 'block' : 'none';
+
+      // Step 5 subdivisions
+      document.getElementById('bio-fluid-group').style.display = hasCsf ? 'block' : 'none';
+      document.getElementById('bio-susceptibility-group').style.display = hasSusc ? 'block' : 'none';
+      document.getElementById('cvs-row').style.display = hasSusc ? 'block' : 'none';
+      document.getElementById('prl-row').style.display = hasSusc ? 'block' : 'none';
+
+      // Pediatric ADEM section — only for patients under 18 (Panel 5). Previously this
+      // block never rendered because nothing ever set its display to 'block'.
+      const ageV = parseFloat(document.getElementById('age').value);
+      const isPed = !isNaN(ageV) && ageV < 18;
+      document.getElementById('pediatric-adem-container').style.display = isPed ? 'block' : 'none';
+      if (!isPed) {
+        document.getElementById('adem_check').checked = false;
+        document.getElementById('adem_satisfied').checked = false;
+        document.getElementById('adem-confirm-box').style.display = 'none';
+      }
+    }
+
+    // Clinical confirmation shortcut display
+    function checkClinicalShortcut() {
+      const course = document.getElementById('course').value;
+      const attacks = document.getElementById('attacks').value;
+      const lesions = document.getElementById('clinical_lesions').value;
+      const callout = document.getElementById('clinical-shortcut-callout');
+
+      if (course === 'relapsing' && attacks === '2' && lesions === '2') {
+        callout.style.display = 'block';
+      } else {
+        callout.style.display = 'none';
+      }
+    }
+
+    // Quick Calculate click
+    document.getElementById('btn-quick-calculate').addEventListener('click', () => {
+      calculateDiagnosis();
+      document.getElementById('wizard-panel').style.display = 'none';
+      document.getElementById('result-screen').style.display = 'block';
+      document.getElementById('references-sec').style.display = 'block';
+    });
+
+    // Step navigation actions
+    document.getElementById('btn-prev').addEventListener('click', () => {
+      if (currentStepIndex > 0) {
+        currentStepIndex--;
+        showStep(activeSteps[currentStepIndex]);
+      }
+    });
+
+    document.getElementById('btn-next').addEventListener('click', () => {
+      // Age and Course validation in Step 1
+      if (activeSteps[currentStepIndex] === 1) {
+        const ageVal = parseFloat(document.getElementById('age').value);
+        const courseVal = document.getElementById('course').value;
+        const ageWarn = document.getElementById('age-warn');
+        
+        let valid = true;
+        if (isNaN(ageVal) || ageVal < 1 || ageVal > 110) {
+          ageWarn.style.display = 'block';
+          document.getElementById('age').classList.add('oor');
+          valid = false;
+        } else {
+          ageWarn.style.display = 'none';
+          document.getElementById('age').classList.remove('oor');
+        }
+
+        if (!courseVal) {
+          document.getElementById('course').classList.add('blank');
+          valid = false;
+        } else {
+          document.getElementById('course').classList.remove('blank');
+        }
+
+        if (!valid) return;
+      }
+
+      // Step 3 clinical input validations
+      if (activeSteps[currentStepIndex] === 3) {
+        const courseVal = document.getElementById('course').value;
+        if (courseVal === 'relapsing') {
+          const attacksVal = document.getElementById('attacks').value;
+          const lesionsVal = document.getElementById('clinical_lesions').value;
+          let valid = true;
+          if (!attacksVal) {
+            document.getElementById('attacks').classList.add('blank');
+            valid = false;
+          } else {
+            document.getElementById('attacks').classList.remove('blank');
+          }
+          if (!lesionsVal) {
+            document.getElementById('clinical_lesions').classList.add('blank');
+            valid = false;
+          } else {
+            document.getElementById('clinical_lesions').classList.remove('blank');
+          }
+          if (!valid) return;
+        } 
+        else if (courseVal === 'progressive') {
+          const progMonths = parseFloat(document.getElementById('prog_months').value);
+          const progWarn = document.getElementById('prog-months-warn');
+          const lesionsVal = document.getElementById('prog_lesions').value;
+          let valid = true;
+
+          if (isNaN(progMonths) || progMonths < 1) {
+            progWarn.style.display = 'block';
+            document.getElementById('prog_months').classList.add('oor');
+            valid = false;
+          } else {
+            progWarn.style.display = 'none';
+            document.getElementById('prog_months').classList.remove('oor');
+          }
+
+          if (!lesionsVal) {
+            document.getElementById('prog_lesions').classList.add('blank');
+            valid = false;
+          } else {
+            document.getElementById('prog_lesions').classList.remove('blank');
+          }
+
+          if (!valid) return;
+        }
+      }
+
+      if (currentStepIndex < activeSteps.length - 1) {
+        currentStepIndex++;
+        showStep(activeSteps[currentStepIndex]);
+      } else {
+        // Final step: Calculate Diagnostic Result
+        calculateDiagnosis();
+        document.getElementById('wizard-panel').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'block';
+        document.getElementById('references-sec').style.display = 'block';
+      }
+    });
+
+    function showStep(stepNumber) {
+      const steps = document.querySelectorAll('.wizard-step');
+      steps.forEach(s => s.style.display = 'none');
+
+      document.getElementById(`step-${stepNumber}`).style.display = 'block';
+
+      const totalSteps = activeSteps.length;
+      let stepName = "Profile";
+      if (stepNumber === 2) stepName = "Investigations";
+      else if (stepNumber === 3) stepName = "Clinical Presentation";
+      else if (stepNumber === 4) stepName = "MRI & Visual Findings";
+      else if (stepNumber === 5) stepName = "Biomarkers";
+
+      document.getElementById('step-indicator').innerText = `Step ${currentStepIndex + 1} of ${totalSteps}: ${stepName}`;
+      document.getElementById('step-progress-fill').style.width = `${((currentStepIndex + 1) / totalSteps) * 100}%`;
+
+      document.getElementById('btn-prev').disabled = (currentStepIndex === 0);
+      
+      const nextBtn = document.getElementById('btn-next');
+      if (currentStepIndex === totalSteps - 1) {
+        nextBtn.innerText = 'Calculate Diagnostic Result ✔';
+        nextBtn.classList.add('primary');
+      } else {
+        nextBtn.innerText = 'Next Step →';
+        nextBtn.classList.add('primary');
+      }
+
+      // Keep contextual guidance notes in sync with the current inputs
+      updateVascularNote();
+      updateDitNote();
+      updateOnWarn();
+    }
+
+    // Contextual guidance helpers
+    function updateVascularNote() {
+      const ageVal = parseFloat(document.getElementById('age').value);
+      const isOlder = !isNaN(ageVal) && ageVal >= 50;
+      const hasVasc = ['vasc_hypertension','vasc_diabetes','vasc_smoking','vasc_hyperlipidemia']
+        .some(id => document.getElementById(id).checked);
+      const el = document.getElementById('step1-vascular-note');
+      if (!el) return;
+      // This caution is specific to the older-onset population (age >= 50), where
+      // small-vessel disease and migraine most often mimic MS. It is age-gated.
+      el.style.display = isOlder ? 'block' : 'none';
+      if (isOlder) {
+        el.innerHTML = '<b>Older-onset presentation (age &ge; 50).</b> At this age, white-matter lesions from small-vessel disease or migraine are common and can be taken for MS. ' +
+          (hasVasc ? 'Vascular risk factors are also present, adding to this concern. ' : '') +
+          'The 2024 criteria recommend confirming with at least one highly specific marker (a spinal cord lesion, positive CSF (OCB/k-FLC), or select-6 CVS) rather than brain T2 lesions alone.';
+      }
+    }
+    function updateDitNote() {
+      const course = document.getElementById('course').value;
+      const attacks = document.getElementById('attacks').value;
+      const el = document.getElementById('dit-clinical-note');
+      if (el) el.style.display = (course === 'relapsing' && attacks === '2') ? 'block' : 'none';
+    }
+    function updateOnWarn() {
+      const onChecked = document.getElementById('dis_on').checked;
+      const anyTest = document.getElementById('on_mri').checked ||
+                      document.getElementById('on_oct').checked ||
+                      document.getElementById('on_vep').checked;
+      const el = document.getElementById('on-evidence-warn');
+      if (el) el.style.display = (onChecked && !anyTest) ? 'block' : 'none';
+    }
+
+    // Dynamic sub-options reveals
+    document.getElementById('course').addEventListener('change', (e) => {
+      const course = e.target.value;
+      
+      document.getElementById('clin-relapsing-inputs').style.display = (course === 'relapsing') ? 'block' : 'none';
+      document.getElementById('clin-progressive-inputs').style.display = (course === 'progressive') ? 'block' : 'none';
+      document.getElementById('clin-ris-inputs').style.display = (course === 'ris') ? 'block' : 'none';
+      
+      // Clear inputs
+      document.getElementById('attacks').value = "";
+      document.getElementById('clinical_lesions').value = "";
+      document.getElementById('prog_months').value = "";
+      document.getElementById('prog_lesions').value = "";
+      document.getElementById('clinical-shortcut-callout').style.display = 'none';
+
+      // Clean up course-dependent subgroups so no stale state leaks into the engine
+      document.getElementById('dis_sc_2plus').checked = false;
+      document.getElementById('sc-prog-subgroup').style.display = 'none';
+    });
+
+    // Listeners to clean up subgroups in the DOM on uncheck
+    document.getElementById('adem_check').addEventListener('change', (e) => {
+      document.getElementById('adem-confirm-box').style.display = e.target.checked ? 'block' : 'none';
+      if (!e.target.checked) {
+        document.getElementById('adem_satisfied').checked = false;
+      }
+    });
+
+    document.getElementById('dis_sc').addEventListener('change', (e) => {
+      const course = document.getElementById('course').value;
+      document.getElementById('sc-prog-subgroup').style.display = (e.target.checked && course === 'progressive') ? 'block' : 'none';
+      if (!e.target.checked) {
+        document.getElementById('dis_sc_2plus').checked = false;
+      }
+    });
+
+    document.getElementById('dis_on').addEventListener('change', (e) => {
+      document.getElementById('optic-nerve-tests-subgroup').style.display = e.target.checked ? 'block' : 'none';
+      if (!e.target.checked) {
+        document.getElementById('on_mri').checked = false;
+        document.getElementById('on_oct').checked = false;
+        document.getElementById('on_vep').checked = false;
+      }
+    });
+
+    // CVS Helper Modal controls
+    const cvsModal = document.getElementById('cvs-modal');
+    document.getElementById('open-cvs-modal-btn').addEventListener('click', () => {
+      cvsModal.classList.add('active');
+    });
+
+    const closeCvsModal = () => {
+      cvsModal.classList.remove('active');
+      document.getElementById('cvs_total_lesions').value = '';
+      document.getElementById('cvs_pos_lesions').value = '';
+      document.getElementById('cvs-calc-res').innerText = 'CVS is Negative';
+      document.getElementById('cvs-calc-res').className = 'modal-res';
+      document.getElementById('btn-apply-cvs').disabled = true;
+    };
+
+    document.getElementById('close-cvs-modal').addEventListener('click', closeCvsModal);
+    document.getElementById('btn-cancel-cvs').addEventListener('click', closeCvsModal);
+
+    const recalcCVS = () => {
+      const total = parseInt(document.getElementById('cvs_total_lesions').value);
+      const pos = parseInt(document.getElementById('cvs_pos_lesions').value);
+      const ageVal = parseFloat(document.getElementById('age').value);
+      const isPed = !isNaN(ageVal) && ageVal < 18;
+
+      const resBox = document.getElementById('cvs-calc-res');
+      const applyBtn = document.getElementById('btn-apply-cvs');
+
+      if (isNaN(total) || isNaN(pos) || total <= 0 || pos < 0 || pos > total) {
+        resBox.innerText = 'Enter valid T2 and CVS-positive lesion counts.';
+        resBox.className = 'modal-res';
+        applyBtn.disabled = true;
+        return;
+      }
+
+      let isPositive = false;
+      if (isPed) {
+        isPositive = (pos / total) > 0.5;
+        resBox.innerText = `Pediatric rule (>50%): ${(pos/total*100).toFixed(1)}% positive -> ${isPositive ? 'POSITIVE' : 'NEGATIVE'}`;
+      } else {
+        isPositive = (pos >= 6) || (total < 10 && pos > (total - pos));
+        resBox.innerText = `Adult Select 6 rule: ${pos} of ${total} positive -> ${isPositive ? 'POSITIVE' : 'NEGATIVE'}`;
+      }
+
+      if (isPositive) {
+        resBox.className = 'modal-res confirmed';
+        applyBtn.disabled = false;
+      } else {
+        resBox.className = 'modal-res unlikely';
+        applyBtn.disabled = true;
+      }
+    };
+
+    document.getElementById('cvs_total_lesions').addEventListener('input', recalcCVS);
+    document.getElementById('cvs_pos_lesions').addEventListener('input', recalcCVS);
+
+    document.getElementById('btn-apply-cvs').addEventListener('click', () => {
+      document.getElementById('bio_cvs').checked = true;
+      closeCvsModal();
+    });
+
+    // Reset Form function
+    function resetForm() {
+      inputIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (el.type === 'checkbox') el.checked = false;
+          else if (el.type === 'number') el.value = '';
+          else el.selectedIndex = 0;
+        }
+      });
+      availAll.checked = false;
+      availAll.indeterminate = false;
+
+      // Reset subgroup display
+      document.getElementById('clin-relapsing-inputs').style.display = 'block';
+      document.getElementById('clin-progressive-inputs').style.display = 'none';
+      document.getElementById('clin-ris-inputs').style.display = 'none';
+      document.getElementById('pediatric-adem-container').style.display = 'none';
+      document.getElementById('adem-confirm-box').style.display = 'none';
+      document.getElementById('sc-prog-subgroup').style.display = 'none';
+      document.getElementById('optic-nerve-tests-subgroup').style.display = 'none';
+      document.getElementById('clinical-shortcut-callout').style.display = 'none';
+
+      activeSteps = getActiveSteps();
+      updateStepVisibilities();
+      currentStepIndex = 0;
+      showStep(activeSteps[currentStepIndex]);
+
+      document.getElementById('wizard-panel').style.display = 'block';
+      document.getElementById('result-screen').style.display = 'none';
+      document.getElementById('references-sec').style.display = 'none';
+    }
+
+    document.getElementById('btn-reset').addEventListener('click', resetForm);
+
+    // Save as PDF via the browser print dialog (fully offline). Stamp the date first.
+    document.getElementById('btn-print').addEventListener('click', () => {
+      const d = new Date();
+      document.getElementById('print-date').innerText = d.toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' });
+      window.print();
+    });
+
+    // Copy a plain-text summary to the clipboard for quick pasting into notes/EHR
+    document.getElementById('btn-copy').addEventListener('click', () => {
+      const badge = (document.getElementById('result-cat-badge').innerText || document.getElementById('result-cat-badge').textContent).trim();
+      const basis = [...document.querySelectorAll('#result-basis li')].map(li => '- ' + li.textContent.trim());
+      const alertEl = document.getElementById('result-alert');
+      const steps = [...document.querySelectorAll('#result-next-steps li')].map(li => '- ' + li.textContent.trim());
+      let out = 'McDonald 2024 Diagnostic Tool (MSpectrum) — decision support only\n';
+      out += 'Result: ' + badge + '\n\nDiagnostic basis:\n' + basis.join('\n');
+      if (alertEl.style.display !== 'none' && alertEl.innerText.trim()) {
+        out += '\n\nCaution: ' + (alertEl.innerText || alertEl.textContent).trim();
+      }
+      if (steps.length) out += '\n\nRecommended next steps:\n' + steps.join('\n');
+      const btn = document.getElementById('btn-copy');
+      const done = () => { btn.innerText = '✓ Copied'; setTimeout(() => btn.innerText = '📋 Copy', 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(out).then(done).catch(() => { fallbackCopy(out); done(); });
+      } else { fallbackCopy(out); done(); }
+    });
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    document.getElementById('btn-edit').addEventListener('click', () => {
+      document.getElementById('wizard-panel').style.display = 'block';
+      document.getElementById('result-screen').style.display = 'none';
+      document.getElementById('references-sec').style.display = 'none';
+      showStep(activeSteps[currentStepIndex]);
+    });
+
+    // -------------------------------------------------------------
+    // Core Diagnostic Calculation Engine
+    // -------------------------------------------------------------
+    function calculateDiagnosis() {
+      const ageVal = parseFloat(document.getElementById('age').value);
+      const course = document.getElementById('course').value;
+
+      const badge = document.getElementById('result-cat-badge');
+      const alertBox = document.getElementById('result-alert');
+      const basisUl = document.getElementById('result-basis');
+      const stepsContainer = document.getElementById('result-next-steps-container');
+      const stepsUl = document.getElementById('result-next-steps');
+
+      // Clear layout
+      basisUl.innerHTML = '';
+      stepsUl.innerHTML = '';
+      alertBox.style.display = 'none';
+      stepsContainer.style.display = 'none';
+
+      if (isNaN(ageVal) || !course) {
+        badge.innerText = "Awaiting Clinical Input...";
+        badge.className = "result-badge neutral";
+        basisUl.innerHTML = "<li>Required profile details are missing. Please restart and fill in Step 1.</li>";
+        updatePrintLayout("Awaiting Clinical Input...", ageVal, course, [], false, 0, false, false, false, false, [], "");
+        return;
+      }
+
+      const isPediatric = ageVal < 18;
+      const isOlderOnset = ageVal >= 50;
+
+      const hasVascularRisks = document.getElementById('vasc_hypertension').checked || 
+                               document.getElementById('vasc_diabetes').checked || 
+                               document.getElementById('vasc_smoking').checked || 
+                               document.getElementById('vasc_hyperlipidemia').checked;
+
+      // Atypical Red Flags list
+      const flags = [
+        { key: 'LETM', val: document.getElementById('flag_letm').checked },
+        { key: 'Bilateral/severe optic neuritis', val: document.getElementById('flag_bilateral_on').checked },
+        { key: 'Optic disc oedema/papillitis', val: document.getElementById('flag_disc_edema').checked },
+        { key: 'Area postrema syndrome', val: document.getElementById('flag_area_postrema').checked },
+        { key: 'Encephalopathy/ADEM-like', val: document.getElementById('flag_encephalopathy').checked },
+        { key: 'Atypical CSF', val: document.getElementById('flag_atypical_csf').checked }
+      ];
+      const activeFlags = flags.filter(f => f.val).map(f => f.key);
+      const hasRedFlags = activeFlags.length > 0;
+
+      // MRI Modality availability
+      const hasMri = document.getElementById('avail_mri').checked;
+      const hasCsf = document.getElementById('avail_csf').checked;
+      const hasVisual = document.getElementById('avail_visual').checked;
+      const hasSusc = document.getElementById('avail_susc').checked;
+      const hasCvs = hasSusc;
+      const hasPrl = hasSusc;
+
+      // Clinical details parsing
+      const attacks = (course === 'relapsing') ? parseInt(document.getElementById('attacks').value) : 0;
+      const clinicalLesions = (course === 'relapsing') ? parseInt(document.getElementById('clinical_lesions').value) : 0;
+      const progMonths = (course === 'progressive') ? parseFloat(document.getElementById('prog_months').value) : 0;
+      const progLesions = (course === 'progressive') ? parseInt(document.getElementById('prog_lesions').value) : 0;
+
+      // DIS locations (MRI must be available)
+      let pv = hasMri && document.getElementById('dis_pv').checked;
+      let jc = hasMri && document.getElementById('dis_jc').checked;
+      let it = hasMri && document.getElementById('dis_it').checked;
+      let sc = hasMri && document.getElementById('dis_sc').checked;
+      let sc2plus = sc && (course === 'progressive') && document.getElementById('dis_sc_2plus').checked;
+      
+      // Optic nerve (MRI + Visual Tests available). Per 2024 Panel 2 the optic nerve counts
+      // as a DIS location ONLY with objective supporting evidence (orbital MRI lesion, OCT
+      // inter-eye thinning, or delayed VEP). Ticking the box alone no longer adds a zone.
+      let onChecked = hasMri && hasVisual && document.getElementById('dis_on').checked;
+      let on_mri = onChecked && document.getElementById('on_mri').checked;
+      let on_oct = onChecked && document.getElementById('on_oct').checked;
+      let on_vep = onChecked && document.getElementById('on_vep').checked;
+      let on = onChecked && (on_mri || on_oct || on_vep);
+
+      let disCount = 0;
+      let disLocationsList = [];
+      if (pv) { disCount++; disLocationsList.push("Periventricular"); }
+      if (jc) { disCount++; disLocationsList.push("Juxtacortical/Cortical"); }
+      if (it) { disCount++; disLocationsList.push("Infratentorial"); }
+      if (sc) { disCount++; disLocationsList.push("Spinal Cord" + (sc2plus ? " (&ge; 2 lesions)" : "")); }
+      if (on) { 
+        disCount++; 
+        let visualMethods = [];
+        if (on_mri) visualMethods.push("MRI");
+        if (on_oct) visualMethods.push("OCT");
+        if (on_vep) visualMethods.push("VEP");
+        disLocationsList.push("Optic Nerve" + (visualMethods.length > 0 ? " (via " + visualMethods.join('/') + ")" : "")); 
+      }
+
+      // DIT Status. Radiological DIT requires MRI; >= 2 clinical attacks satisfy DIT clinically
+      // (a second attack at a different time is dissemination in time by definition).
+      const newT2 = hasMri && document.getElementById('dit_new_t2').checked;
+      const gdPlus = hasMri && document.getElementById('dit_gd_plus').checked;
+      const historical = hasMri && document.getElementById('dit_historical').checked;
+      const simulEnh = hasMri && document.getElementById('dit_simul').checked;
+      const clinicalDit = (course === 'relapsing') && attacks >= 2;
+      const isDitMet = newT2 || gdPlus || historical || simulEnh || clinicalDit;
+
+      // Fluid biomarkers (LP must be available)
+      const csfOcb = hasCsf && document.getElementById('bio_ocb').checked;
+      const csfKflc = hasCsf && document.getElementById('bio_kflc').checked;
+      const csfPositive = csfOcb || csfKflc;
+
+      // Chronactive markers
+      const cvs = hasCvs && document.getElementById('bio_cvs').checked;
+      const prl = hasPrl && document.getElementById('bio_prl').checked;
+
+      // -------------------------------------------------------------
+      // Calculation Logic Variables
+      // -------------------------------------------------------------
+      let status = "Possible Multiple Sclerosis";
+      let basis = [];
+      let nextSteps = [];
+      let alertMsg = "";
+      let alertType = "";
+
+      // 1. Pediatric ADEM Presentation Caveat
+      if (isPediatric && document.getElementById('adem_check').checked) {
+        const ademSatisfied = document.getElementById('adem_satisfied').checked;
+        if (!ademSatisfied) {
+          status = "Possible MS (ADEM Onset)";
+          basis.push("Patient presented with acute encephalopathy (ADEM).");
+          basis.push("McDonald Criteria cannot be finalized until follow-up reveals further disease activity.");
+          
+          alertMsg = "ADEM Presentation: Diagnosis of MS requires a second typical non-ADEM attack OR a new T2 MRI lesion &gt; 90 days after ADEM onset.";
+          alertType = "warn";
+          
+          nextSteps.push("Perform follow-up brain and spine MRI &gt; 90 days from onset to check for new T2 lesions.");
+          nextSteps.push("Monitor clinically for any secondary non-encephalopathic relapse.");
+          
+          updateUI(status, basis, alertMsg, alertType, nextSteps, disLocationsList, ageVal, course, isOlderOnset, attacks, csfPositive, isDitMet, cvs, prl);
+          return;
+        }
+      }
+
+      // 2. RIS Pathway
+      if (course === 'ris') {
+        if (!hasMri) {
+          status = "Incomplete — MRI Required";
+          basis.push("Radiologically Isolated Syndrome is defined by incidental MRI findings. Brain (&plusmn; spinal cord) MRI must be selected in Step 2 and lesion locations entered before RIS can be assessed.");
+          nextSteps.push("Select 'Brain & Spine MRI' in Step 2 and record the affected regions.");
+          updateUI(status, basis, alertMsg, alertType, nextSteps, disLocationsList, ageVal, course, isOlderOnset, attacks, csfPositive, isDitMet, cvs, prl);
+          return;
+        }
+        const hasDis = disCount >= 2;
+        const hasAdd = isDitMet || csfPositive || cvs;
+
+        if (hasDis && hasAdd) {
+          status = "Multiple Sclerosis Confirmed (RIS-onset)";
+          basis.push("Radiologically Isolated Syndrome (RIS - incidental findings only).");
+          basis.push(`Dissemination in Space (DIS) met with ${disCount} zones affected (${disLocationsList.join(', ')}).`);
+          if (isDitMet) basis.push("Dissemination in Time (DIT) verified on MRI.");
+          if (csfPositive) basis.push(`CSF fluid positivity verified (${csfOcb ? 'OCB' : ''}${csfOcb && csfKflc ? ' / ' : ''}${csfKflc ? 'k-FLC Index' : ''}).`);
+          if (cvs) basis.push("Central Vein Sign (CVS) positive.");
+        } else if (hasDis) {
+          status = "Radiologically Isolated Syndrome (RIS)";
+          basis.push(`Incidental findings meet DIS (${disCount} zones: ${disLocationsList.join(', ')}).`);
+          basis.push("Awaiting supporting evidence (DIT, positive CSF, or positive CVS) to confirm MS.");
+          
+          nextSteps.push("Obtain follow-up brain/spinal cord MRI to evaluate for DIT (new T2 or Gd+ lesions).");
+          nextSteps.push("Consider lumbar puncture for OCB or k-FLC Index to evaluate CSF state.");
+          nextSteps.push("Perform SWI brain MRI for CVS Select 6 rule verification.");
+        } else {
+          status = "Unlikely Multiple Sclerosis";
+          basis.push("Incidental brain T2 lesions do not meet DIS criteria (requires typical lesions in &ge; 2 of 5 zones).");
+          nextSteps.push("Investigate alternative etiologies (e.g. vascular white matter disease, migraine, infectious).");
+        }
+      }
+
+      // 3. Primary Progressive (PPMS) Pathway
+      else if (course === 'progressive') {
+        if (progMonths < 12) {
+          status = "Possible MS (Under Evaluation)";
+          basis.push("Progressive symptoms from onset, but progression duration is under 12 months.");
+          alertMsg = "PPMS requires at least 12 months of steady clinical progression to be confirmed.";
+          alertType = "warn";
+          
+          nextSteps.push("Monitor progression and re-evaluate once 12 months are complete.");
+          
+          updateUI(status, basis, alertMsg, alertType, nextSteps, disLocationsList, ageVal, course, isOlderOnset, attacks, csfPositive, isDitMet, cvs, prl);
+          return;
+        }
+
+        // 2024 Figure 3 (progressive arm). DIS in progressive disease is met by 2 of 5
+        // regions OR by >= 2 spinal cord lesions. Once DIS is met, ONE additional feature
+        // completes the diagnosis: positive CSF, select-6 CVS, DIT, or lesions in >= 4 of 5
+        // regions (knockout). A single-region progressive case follows branch B (dual markers).
+        const disMetProg = (disCount >= 2) || (sc && sc2plus);
+        const hasKnockout = (disCount >= 4);
+        const additional = csfPositive || cvs || isDitMet || hasKnockout;
+
+        if (disMetProg && additional) {
+          status = "Multiple Sclerosis Confirmed";
+          basis.push(`Primary Progressive MS: ${progMonths} months of steady clinical progression documented.`);
+          if (disCount >= 2) basis.push(`Dissemination in Space met with ${disCount} CNS region(s): ${disLocationsList.join(', ')}.`);
+          else if (sc && sc2plus) basis.push("Dissemination in Space met via &ge; 2 typical spinal cord lesions (progressive-disease rule).");
+          if (hasKnockout) basis.push(`Widespread distribution: typical lesions in ${disCount} of 5 regions (sufficient without further markers).`);
+          if (csfPositive) basis.push(`CSF positivity demonstrated (${csfOcb ? 'OCB' : ''}${csfOcb && csfKflc ? ' / ' : ''}${csfKflc ? 'k-FLC Index' : ''}).`);
+          if (cvs) basis.push("Central Vein Sign (select 6) positive.");
+          if (isDitMet) basis.push("Dissemination in Time demonstrated (new T2 or Gd+ lesion).");
+
+          // Older-onset / vascular-risk safety guard (Panel 6): PRL is NOT accepted here.
+          if (isOlderOnset) {
+            const hasSpecificConfirm = sc || csfPositive || cvs;
+            if (!hasSpecificConfirm) {
+              alertMsg = "CAUTION (older-onset, age &ge; 50): confirm with at least one highly specific marker (spinal cord lesion, positive CSF, or select-6 CVS) to exclude small-vessel mimics.";
+              alertType = "danger";
+              nextSteps.push("Obtain spinal cord MRI, lumbar puncture (OCB/k-FLC), or susceptibility MRI (CVS).");
+            }
+          }
+        }
+        else if (disCount === 1) {
+          // Single-region progressive presentation — dual-biomarker combinations (branch B)
+          const combCsfCvs = csfPositive && cvs;
+          const combCsfPrl = csfPositive && prl;
+          const combDitCvs = isDitMet && cvs;
+          const combDitPrl = isDitMet && prl;
+          if (combCsfCvs || combCsfPrl || combDitCvs || combDitPrl) {
+            status = "Multiple Sclerosis Confirmed";
+            basis.push(`Primary Progressive MS: ${progMonths} months of progression with a single-region lesion (${disLocationsList.join(', ')}).`);
+            if (combCsfCvs) basis.push("Confirmed via CSF positivity + select-6 CVS.");
+            if (combCsfPrl) basis.push("Confirmed via CSF positivity + &ge; 1 PRL.");
+            if (combDitCvs) basis.push("Confirmed via DIT + select-6 CVS.");
+            if (combDitPrl) basis.push("Confirmed via DIT + &ge; 1 PRL.");
+          } else {
+            status = "Possible Multiple Sclerosis";
+            basis.push(`Progressive course for ${progMonths} months, but dissemination in space is not yet met (single region).`);
+            if (!sc) nextSteps.push("Dedicated spinal cord MRI to look for &ge; 2 cord lesions (satisfies DIS in progressive disease).");
+            if (!hasCsf) nextSteps.push("Lumbar puncture for OCB or k-FLC Index.");
+            if (!hasCvs) nextSteps.push("Susceptibility brain MRI for select-6 CVS.");
+            if (!hasPrl) nextSteps.push("Susceptibility brain MRI for PRL.");
+          }
+        }
+        else {
+          status = "Possible Multiple Sclerosis";
+          basis.push(`Steady progression for ${progMonths} months, but DIS and supporting markers are insufficient (need 2 CNS regions or &ge; 2 cord lesions, plus CSF / CVS / DIT / &ge; 4 regions).`);
+          if (!sc) nextSteps.push("Obtain dedicated spinal cord MRI.");
+          if (!hasCsf) nextSteps.push("Lumbar puncture for OCB or k-FLC Index.");
+          if (!hasCvs) nextSteps.push("Susceptibility brain MRI for select-6 CVS.");
+        }
+      }
+
+      // 4. Relapsing Onset Pathway
+      else {
+        const disMet = (disCount >= 2);
+
+        if (attacks >= 2 && clinicalLesions >= 2) {
+          status = "Multiple Sclerosis Confirmed";
+          basis.push("Confirmed clinically: &ge; 2 clinical attacks (relapses) and &ge; 2 clinical lesions (multifocal exam signs).");
+        } 
+        else if (disMet) {
+          const hasDit = isDitMet;
+          const hasCsfPos = csfPositive;
+          const hasCvsPos = cvs;
+          const hasManySites = (disCount >= 4);
+
+          if (hasDit || hasCsfPos || hasCvsPos || hasManySites) {
+            status = "Multiple Sclerosis Confirmed";
+            basis.push(`Dissemination in Space (DIS) met with ${disCount} locations affected (${disLocationsList.join(', ')}).`);
+            if (hasDit) basis.push("Dissemination in Time (DIT) confirmed (new/Gd+ lesion or &ge; 2 clinical attacks).");
+            if (hasCsfPos) basis.push(`CSF fluid positivity demonstrated (${csfOcb ? 'OCBs' : ''}${csfOcb && csfKflc ? ' / ' : ''}${csfKflc ? 'k-FLC Index' : ''}).`);
+            if (hasCvsPos) basis.push("Central Vein Sign (CVS) positive.");
+            if (hasManySites) basis.push(`Widespread lesion distribution: typical lesions present in ${disCount} zones (satisfies 2024 revisions without DIT).`);
+            
+            // Older-onset / Vascular risk safety confirm rule
+            if (isOlderOnset) {
+              const hasSpecificConfirm = sc || csfPositive || cvs;
+              if (!hasSpecificConfirm) {
+                alertMsg = "CAUTION (older-onset, age &ge; 50): MS was confirmed on brain MRI lesions alone. In this age group the 2024 criteria strongly recommend confirming with at least one highly specific marker (a spinal cord lesion, positive CSF, or select-6 CVS) to exclude small-vessel mimics.";
+                alertType = "danger";
+                nextSteps.push("Schedule spinal cord MRI to search for specific spinal lesions.");
+                nextSteps.push("Perform lumbar puncture for fluid OCB/k-FLC Index.");
+                nextSteps.push("Perform susceptibility brain MRI for CVS Select 6 rule.");
+              }
+            }
+          } else {
+            status = "Possible Multiple Sclerosis";
+            basis.push(`DIS met with ${disCount} locations (${disLocationsList.join(', ')}), but additional supportive criteria are lacking (requires DIT, CSF+, CVS+, or &ge; 4 zones).`);
+            
+            if (!hasCsf) nextSteps.push("Lumbar puncture for CSF OCBs or k-FLC Index is recommended.");
+            if (!hasCvs) nextSteps.push("SWI brain MRI for Central Vein Sign (CVS) is recommended.");
+            nextSteps.push("Schedule follow-up brain/spinal cord MRI to evaluate for DIT (new T2 or Gd+ lesions).");
+          }
+        } 
+        else if (disCount === 1) {
+          // Single Location presentations - combinations of 2 biomarkers confirm MS
+          // Figure 3 (branch B): a single-region lesion is confirmed by a TIME marker
+          // (CSF positivity or DIT) PLUS a specificity marker (select-6 CVS or >= 1 PRL).
+          // The four valid pairs are exactly CSF+CVS, CSF+PRL, DIT+CVS, DIT+PRL.
+          // CVS+PRL alone (no CSF, no DIT) is NOT sanctioned by the 2024 criteria and was
+          // removed to prevent over-diagnosis.
+          const combCsfCvs = csfPositive && cvs;
+          const combCsfPrl = csfPositive && prl;
+          const combDitCvs = isDitMet && cvs;
+          const combDitPrl = isDitMet && prl;
+
+          if (combCsfCvs || combCsfPrl || combDitCvs || combDitPrl) {
+            status = "Multiple Sclerosis Confirmed";
+            basis.push(`Single typical demyelinating lesion presentation (1 zone: ${disLocationsList.join(', ')}).`);
+            if (combCsfCvs) basis.push("Confirmed via dual biomarkers: CSF positive AND select-6 CVS positive.");
+            if (combCsfPrl) basis.push("Confirmed via dual biomarkers: CSF positive AND PRL positive.");
+            if (combDitCvs) basis.push("Confirmed via dual biomarkers: DIT positive AND select-6 CVS positive.");
+            if (combDitPrl) basis.push("Confirmed via dual biomarkers: DIT positive AND PRL positive.");
+            
+            if (isOlderOnset) {
+              const hasSpecificConfirm = sc || csfPositive || cvs;
+              if (!hasSpecificConfirm) {
+                alertMsg = "CAUTION (older-onset, age &ge; 50): a spinal cord lesion, positive CSF, or select-6 CVS is preferred here; confirmation using DIT + PRL is less specific for this age group.";
+                alertType = "danger";
+                nextSteps.push("Lumbar puncture (CSF index) or susceptibility MRI (CVS) is recommended.");
+              }
+            }
+          } else {
+            status = "Possible Multiple Sclerosis (Single Location)";
+            basis.push(`Typical lesions present in only 1 CNS location (${disLocationsList.join(', ')}).`);
+            
+            // Tailored recommendations for single zone:
+            let missingBiomarkers = [];
+            if (!hasCsf) missingBiomarkers.push("Lumbar puncture (CSF Index)");
+            if (!hasCvs) missingBiomarkers.push("Susceptibility brain MRI (CVS)");
+            if (!hasPrl) missingBiomarkers.push("Susceptibility brain MRI (PRL)");
+            
+            nextSteps.push(`To confirm MS in a single region, a TIME marker (positive CSF or DIT) PLUS a specificity marker (select-6 CVS or &ge; 1 PRL) is required. Consider: ${missingBiomarkers.join(' and ')}.`);
+            nextSteps.push("Note: select-6 CVS + PRL without CSF or DIT is NOT sufficient under the 2024 criteria.");
+            nextSteps.push("Positive VEP/OCT would add the optic nerve as a second region, satisfying DIS.");
+          }
+        } 
+        else {
+          status = "Unlikely Multiple Sclerosis";
+          basis.push("No typical demyelinating lesions found in the 5 CNS zones.");
+          nextSteps.push("Investigate alternative neurological diagnoses (e.g. psychiatric, structural, vascular).");
+        }
+      }
+
+      // 5. Atypical Red Flags warning
+      if (hasRedFlags && status.includes("Confirmed")) {
+        alertMsg = `CAUTION: Mimic Red Flags detected (${activeFlags.join(', ')}). A cell-based assay for AQP4-IgG and MOG-IgG antibodies is strongly recommended to rule out NMOSD and MOGAD. The McDonald criteria assume a typical MS presentation, so atypical features warrant extra caution.`;
+        alertType = "warn";
+        nextSteps.unshift("Order cell-based assay testing for AQP4-IgG and MOG-IgG antibodies.");
+      }
+
+      // 6. Pediatric MOGAD testing guidelines
+      if (isPediatric && status.includes("Confirmed")) {
+        if (ageVal < 12) {
+          nextSteps.push("Pediatric Guideline: MOG-IgG cell-based assay testing is strongly recommended in all children < 12 years with incident demyelination.");
+        } else {
+          nextSteps.push("Pediatric Guideline: MOG-IgG cell-based assay testing is recommended in adolescents &ge; 12 years with symptoms not typical of MS.");
+        }
+      }
+
+      // Core principle: MS is a diagnosis of exclusion — remind if not acknowledged
+      const noBetterExpl = document.getElementById('no_better_expl').checked;
+      if (status.indexOf("Confirmed") !== -1 && !noBetterExpl) {
+        nextSteps.unshift("Confirm that no better explanation accounts for the findings (MS is a diagnosis of exclusion) before finalizing.");
+      }
+
+      // Update output elements
+      updateUI(status, basis, alertMsg, alertType, nextSteps, disLocationsList, ageVal, course, isOlderOnset, attacks, csfPositive, isDitMet, cvs, prl);
+    }
+
+    function updateUI(status, basis, alertMsg, alertType, nextSteps, disLocationsList, ageVal, course, isVascCohort, attacks, csf, dit, cvs, prl) {
+      const badge = document.getElementById('result-cat-badge');
+      const alertBox = document.getElementById('result-alert');
+      const basisUl = document.getElementById('result-basis');
+      const stepsContainer = document.getElementById('result-next-steps-container');
+      const stepsUl = document.getElementById('result-next-steps');
+
+      // Result Badge style
+      badge.innerText = status;
+      badge.className = "result-badge";
+      if (status.includes("Confirmed")) {
+        badge.classList.add("confirmed");
+      } else if (status.includes("Unlikely")) {
+        badge.classList.add("unlikely");
+      } else if (status.includes("Possible")) {
+        badge.classList.add("possible");
+      } else {
+        badge.classList.add("neutral");
+      }
+
+      // Plain-language interpretation of the result category
+      const interp = document.getElementById('result-interpretation');
+      let itext = "";
+      if (status.indexOf("Confirmed") !== -1) {
+        itext = "The 2024 McDonald criteria for MS are met. Confirm there is no better explanation and exclude mimics (MOGAD, NMOSD, vascular disease) before finalizing.";
+      } else if (status === "Radiologically Isolated Syndrome (RIS)") {
+        itext = "Incidental MS-like lesions meeting dissemination in space only, not MS yet. In cohort studies about 35% of people with RIS have a first clinical event by 5 years and about 51% by 10 years; risk is higher with positive CSF, spinal cord or infratentorial lesions, or age under 37 (Lebrun-Fr&eacute;nay et al., Ann Neurol 2020).";
+      } else if (status.indexOf("ADEM") !== -1) {
+        itext = "In a child with an ADEM presentation, MS cannot be diagnosed until a new non-ADEM attack or new MRI lesions appear more than 90 days after onset.";
+      } else if (status.indexOf("Unlikely") !== -1) {
+        itext = "Findings do not support MS. Pursue alternative diagnoses.";
+      } else if (status.indexOf("Incomplete") !== -1) {
+        itext = "More information is needed before a category can be assigned; see the recommended next steps.";
+      } else if (status.indexOf("Possible") !== -1) {
+        itext = "Some criteria are met, but MS is not yet established. Completing the recommended tests may confirm or exclude it. The McDonald criteria are categorical, so no numeric probability of MS is assigned.";
+      }
+      if (interp) { interp.innerHTML = itext; interp.style.display = itext ? 'block' : 'none'; }
+
+      // Basis items
+      basis.forEach(b => {
+        const li = document.createElement('li');
+        li.innerHTML = b;
+        basisUl.appendChild(li);
+      });
+
+      // Warning alert box
+      if (alertMsg) {
+        alertBox.innerText = alertMsg;
+        alertBox.className = "alert-box " + alertType;
+        alertBox.style.display = "block";
+      } else {
+        alertBox.style.display = "none";
+      }
+
+      // Next Steps
+      if (nextSteps.length > 0) {
+        nextSteps.forEach(ns => {
+          const li = document.createElement('li');
+          li.innerHTML = ns;
+          stepsUl.appendChild(li);
+        });
+        stepsContainer.style.display = "block";
+      } else {
+        stepsContainer.style.display = "none";
+      }
+
+      // Update Print elements
+      updatePrintLayout(status, ageVal, course, disLocationsList, isVascCohort, attacks, csf, dit, cvs, prl, basis, alertMsg, alertType, itext, nextSteps);
+    }
+
+    function updatePrintLayout(status, ageVal, course, disLocationsList, isVascCohort, attacks, csf, dit, cvs, prl, basis, alertMsg, alertType, interpText, nextSteps) {
+      document.getElementById('print-result-badge').innerText = status;
+      const printBadge = document.getElementById('print-result-badge');
+      if (status.includes("Confirmed")) {
+        printBadge.style.borderColor = "#216e39";
+        printBadge.style.background = "#e7f3ec";
+        printBadge.style.color = "#216e39";
+      } else if (status.includes("Unlikely")) {
+        printBadge.style.borderColor = "#9b2c2c";
+        printBadge.style.background = "#fdeaea";
+        printBadge.style.color = "#9b2c2c";
+      } else if (status.includes("Possible")) {
+        printBadge.style.borderColor = "#9a6700";
+        printBadge.style.background = "#fff6df";
+        printBadge.style.color = "#9a6700";
+      } else {
+        printBadge.style.borderColor = "#ccc";
+        printBadge.style.background = "#f4f6f8";
+        printBadge.style.color = "#4a5060";
+      }
+
+      document.getElementById('print-age').innerText = isNaN(ageVal) ? 'N/A' : `${ageVal} years`;
+      document.getElementById('print-vascular-cohort').innerText = isVascCohort ? 'Yes (older-onset safety rule applied)' : 'No';
+      
+      let courseText = "N/A";
+      if (course === 'relapsing') courseText = "Relapsing-onset";
+      else if (course === 'progressive') courseText = "Progressive-onset (PPMS)";
+      else if (course === 'ris') courseText = "RIS (incidental)";
+      document.getElementById('print-course').innerText = courseText;
+
+      document.getElementById('print-attacks').innerText = (course === 'relapsing') ? `${attacks} attacks` : 'N/A';
+
+      // DIS list print
+      const disUl = document.getElementById('print-dis-list');
+      disUl.innerHTML = '';
+      if (disLocationsList && disLocationsList.length > 0) {
+        disLocationsList.forEach(loc => {
+          const li = document.createElement('li');
+          li.innerHTML = loc;
+          disUl.appendChild(li);
+        });
+      } else {
+        disUl.innerHTML = "<li>None selected</li>";
+      }
+
+      document.getElementById('print-dit').innerText = dit ? 'Positive' : 'Negative';
+      document.getElementById('print-csf').innerText = csf ? 'Positive' : 'Negative';
+      document.getElementById('print-cvs').innerText = cvs ? 'Positive' : 'Negative';
+      document.getElementById('print-prl').innerText = prl ? 'Positive' : 'Negative';
+
+      // Basis print
+      const basisUl = document.getElementById('print-basis-list');
+      basisUl.innerHTML = '';
+      if (basis && basis.length > 0) {
+        basis.forEach(b => {
+          const li = document.createElement('li');
+          li.innerHTML = b;
+          basisUl.appendChild(li);
+        });
+      } else {
+        basisUl.innerHTML = "<li>Awaiting clinical findings.</li>";
+      }
+
+      // Print alert box
+      const printAlert = document.getElementById('print-alert-box');
+      if (alertMsg) {
+        printAlert.innerText = alertMsg;
+        printAlert.style.display = "block";
+        if (alertType === 'danger') {
+          printAlert.style.borderColor = "#9b2c2c";
+          printAlert.style.color = "#9b2c2c";
+          printAlert.style.background = "#fdeaea";
+        } else {
+          printAlert.style.borderColor = "#9a6700";
+          printAlert.style.color = "#9a6700";
+          printAlert.style.background = "#fff6df";
+        }
+      } else {
+        printAlert.style.display = "none";
+      }
+
+      // Interpretation line
+      const printInterp = document.getElementById('print-interp');
+      if (printInterp) {
+        if (interpText) { printInterp.innerHTML = interpText; printInterp.style.display = "block"; }
+        else { printInterp.style.display = "none"; }
+      }
+
+      // Recommended next steps
+      const nsSection = document.getElementById('print-next-steps-section');
+      const nsList = document.getElementById('print-next-steps-list');
+      if (nsList) {
+        nsList.innerHTML = '';
+        if (nextSteps && nextSteps.length) {
+          nextSteps.forEach(ns => { const li = document.createElement('li'); li.innerHTML = ns; nsList.appendChild(li); });
+          nsSection.style.display = "block";
+        } else {
+          nsSection.style.display = "none";
+        }
+      }
+    }
+  </script>
+</body>
+</html>

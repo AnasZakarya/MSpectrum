@@ -1,9 +1,10 @@
 # MSpectrum
 
-**MSpectrum** is a free, offline, privacy-first hub for the outcome measures used in multiple sclerosis. Everything is computed in your browser — nothing is uploaded or stored. It has two parts:
+**MSpectrum** is a free, offline, privacy-first hub for the outcome measures used in multiple sclerosis. Everything is computed in your browser — nothing is uploaded or stored. It has three parts:
 
 - **AutoEDSSguide** (`index.html`) — the full Neurostatus EDSS (Kappos 2011) with the algorithmic combination rules of Fouad et al. 2023, plus streamlined (Baldassari 2017) and patient-reported (Romeo 2021) fast modes, a print-ready Neurostatus sheet, and an OCR sheet scanner.
 - **MS Score Hub** (`scores.html`) — stateless calculators and full questionnaires for the cognition, fatigue, mood, walking, quality-of-life and disease-severity measures used alongside the EDSS, each with automatic published norms (z / T / percentile) and a plain-language interpretation.
+- **MS Criteria Checker** (`mcdonald.html`) — an adaptive wizard that applies the 2024 revisions of the McDonald criteria (Thompson et al., Lancet Neurol 2025) to reach an MS diagnosis across relapsing, progressive and RIS onset — covering the five DIS regions (incl. optic nerve), DIT, CSF (OCB / k-FLC) and susceptibility markers (CVS, PRL), with older-onset and mimic safeguards and a printable summary.
 
 Developed at Wayne State University, Department of Neurology.
 
@@ -48,7 +49,7 @@ Stateless calculators and full questionnaires. Every result shows the raw score 
 
 Extras: demographics entered once drive the cognitive z-scores; CVLT-II recognition sub-scores (SDFR, LDFR, d′, discriminability, Forced-Choice validity); a guided **Check my MS** patient pathway with a plain-language report; a **Clinician summary** that compiles all entered tools; out-of-range input flagging; unanswered-item highlighting; an **"ℹ How it works"** helper on every tool; **Export JSON / CSV** per tool. Self-report questionnaires can be filled by the patient; performance tests and composites are clinician-administered.
 
-> **Not a diagnosis.** MSpectrum reports scores from validated, published instruments and explains what they mean. Interpretation, diagnosis and treatment remain the decision of a qualified clinician. See the in-app **Disclaimer & terms of use** for the full medico-legal notice.
+> **Decision support, not a diagnosis.** MSpectrum computes outcome-measure scores and applies published diagnostic criteria, and explains what the results mean. It supports clinical judgement but does not itself diagnose; interpretation, diagnosis and treatment remain the decision of a qualified clinician. See the in-app **Disclaimer & terms of use** for the full medico-legal notice.
 
 ---
 
@@ -58,11 +59,21 @@ Works fully offline once loaded (open `index.html` directly). No account, no tra
 
 ---
 
+## MS Criteria Checker — diagnosis by the 2024 McDonald criteria
+
+An adaptive, single-page wizard (`mcdonald.html`) that implements the **2024 revisions of the McDonald criteria** (Thompson et al., Lancet Neurol 2025) and their companion consensus papers. It adapts to patient age and onset course (relapsing, primary-progressive, RIS), asks only about the investigations you have, and reports the diagnosis, the criteria it rests on, safety cautions and recommended next steps — with a print / PDF summary.
+
+- **All 2024 pathways:** DIS across five regions (incl. optic nerve), the 4-region shortcut, DIT, CSF (OCB / k-FLC), and susceptibility markers (select-6 CVS, ≥ 1 PRL).
+- **Safeguards:** older-onset (≥ 50) vascular caution, pediatric ADEM / MOG-IgG guidance, atypical red-flag prompts for NMOSD / MOGAD, and a "no better explanation" acknowledgment.
+- Independent educational aid; not affiliated with any commercial application.
+
+---
+
 ## Cite us
 
 If you used MSpectrum in research, please cite it:
 
-> Nourelden A, Memon A. *MSpectrum: a free, offline toolkit for multiple sclerosis outcome measures (AutoEDSSguide and MS Score Hub).* Wayne State University, Department of Neurology; 2026. Available from: https://github.com/AnasZakarya/MSpectrum
+> Nourelden A, Memon A. *MSpectrum: a free, offline toolkit for multiple sclerosis outcome measures and diagnosis (AutoEDSSguide, MS Score Hub and MS Criteria Checker).* Wayne State University, Department of Neurology; 2026. Available from: https://github.com/AnasZakarya/MSpectrum
 
 (GitHub also offers ready APA/BibTeX via the "Cite this repository" button, generated from `CITATION.cff`.)
 
@@ -75,6 +86,7 @@ If you used MSpectrum in research, please cite it:
 - Baldassari LE, et al. *Streamlined EDSS (sEDSS).* Mult Scler J (2017) — Clinical EDSS mode
 - Romeo AR, et al. *Electronic patient-reported EDSS (ePR-EDSS).* Mult Scler (2021) — Quick Check mode
 - MS Score Hub instruments are cited in full inside the app (References & scoring sources).
+- Thompson AJ, Montalban X, Barkhof F, et al. *Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria.* Lancet Neurol (2025);24:850–865 — MS Criteria Checker; with companion consensus papers (MRI; OCT/VEP; kFLC/OCB) and Solomon AJ, et al. Lancet Neurol 2023;22:750–68 (differential diagnosis).
 - Functional-System scoring follows the **Neurostatus v04/10.2 definitions** exactly, including the Cerebellar (severe-ataxia) and Bowel/Bladder (loss-of-function → FS 5/6) rules, and an optional toggle to exclude fatigue from the Cerebral FS per study protocol.
 
 ---

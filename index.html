@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="MSpectrum - a free, offline hub for multiple sclerosis outcome measures: the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, with a guided patient report.">
-<title>MSpectrum - Comprehensive MS scoring (EDSS & beyond)</title>
+<meta name="description" content="MSpectrum - a free, offline hub for multiple sclerosis outcome measures and diagnosis: the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a 2024 McDonald-criteria diagnostic checker.">
+<title>MSpectrum - Comprehensive MS scoring & diagnosis (EDSS & beyond)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -2803,6 +2803,10 @@ input[type="checkbox"] {
 .way-card.hub-card { border-color: #2a9d8f; }
 .way-card.hub-card:hover { border-color: #1f7d72; box-shadow: 0 4px 14px rgba(42,157,143,0.14); }
 .way-card.hub-card .way-cta { color: #2a9d8f; }
+.way-card.checker-card { border-color: #7b3fa0; background: linear-gradient(180deg, #ffffff 0%, #faf6fc 100%); }
+.way-card.checker-card:hover { border-color: #5f2f80; box-shadow: 0 4px 14px rgba(123, 63, 160, 0.14); }
+.way-card.checker-card .way-cta { color: #7b3fa0; }
+.way-card.checker-card:hover .way-cta { color: #4a2464; }
 .way-card.scanner-card { border-color: #4a9a4a; }
 .way-card.scanner-card:hover { border-color: var(--green,#2a6e2a); }
 .way-card.system-card { border-color: #1e6fa3; }
@@ -2823,7 +2827,7 @@ input[type="checkbox"] {
   <header class="app-header">
     <div class="header-grid landing">
       <a class="brand-link" href="#landing" id="landing-brand-link">
-        <div class="brand-mark" style="display:flex;flex-direction:column;gap:1px;line-height:1.15;"><div style="font-size:20px;display:flex;align-items:center;gap:8px;"><svg width="26" height="26" viewBox="0 0 48 48" aria-hidden="true" style="vertical-align:middle"><defs><linearGradient id="mslg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e4a6e"/><stop offset=".55" stop-color="#2a9d8f"/><stop offset="1" stop-color="#b85c1a"/></linearGradient></defs><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#cfd8dc" stroke-width="1.3"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="url(#mslg)" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#23628a"/><circle cx="13" cy="41.2" r="0.95" fill="#23628a"/><circle cx="19.2" cy="40" r="0.95" fill="#23628a"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="url(#mslg)"/><circle cx="34" cy="12" r="1.7" fill="#dff0ea"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff7a1a" stroke-width="0.8"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff7a1a"/></svg><span><em>MS</em>pectrum</span></div><span class="sub">AutoEDSS Guide</span></div>
+        <div class="brand-mark" style="display:flex;flex-direction:column;gap:1px;line-height:1.15;"><div style="font-size:20px;display:flex;align-items:center;gap:8px;"><svg width="26" height="26" viewBox="0 0 48 48" aria-hidden="true" style="vertical-align:middle"><defs><linearGradient id="mslg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e4a6e"/><stop offset=".55" stop-color="#2a9d8f"/><stop offset="1" stop-color="#b85c1a"/></linearGradient></defs><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#cfd8dc" stroke-width="1.3"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="url(#mslg)" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#23628a"/><circle cx="13" cy="41.2" r="0.95" fill="#23628a"/><circle cx="19.2" cy="40" r="0.95" fill="#23628a"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="url(#mslg)"/><circle cx="34" cy="12" r="1.7" fill="#dff0ea"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff7a1a" stroke-width="0.8"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff7a1a"/></svg><span><em>MS</em>pectrum</span></div></div>
       </a>
       <div></div>
       <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn-cta" id="landing-start-btn" style="padding:10px 18px; font-size:13px; box-shadow:none;" aria-label="Get started">Get started</button><button class="btn-cta" id="landing-back-btn" style="padding:6px 14px; font-size:13px; box-shadow:none; border-radius:20px; display:none;" aria-label="Back to MSpectrum">← MSpectrum home</button></div>
@@ -2834,7 +2838,7 @@ input[type="checkbox"] {
   <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.22;z-index:0"></canvas>
   <div class="hero" style="position:relative;z-index:1">
     <h1><span class="hl" id="hero-edss-hl">MS</span>pectrum</h1>
-    <p class="tagline">A free, offline hub for the outcome measures used in multiple sclerosis - the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, and a guided patient report. Private, no login, nothing stored.</p>
+    <p class="tagline">A free, offline hub for the outcome measures used in multiple sclerosis - the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a diagnostic checker for the 2024 McDonald criteria. Private, no login, nothing stored.</p>
     <div class="hero-cta">
       <button class="btn-cta" id="hero-start-btn" aria-label="Get started">Get started ↓</button>
       <a class="btn-cta secondary" href="#features" aria-label="Learn More">Learn More ↓</a>
@@ -2878,9 +2882,9 @@ input[type="checkbox"] {
         <p>A guided <strong>Check my MS</strong> pathway turns a patient’s answers into one plain-language report - flagging what to discuss with their team - to print or save as PDF, alongside a print-ready Neurostatus EDSS sheet.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🚩</div>
-        <h3>Validation &amp; missing-data handling</h3>
-        <p>EDSS bilateral mismatches and cross-system conflicts are flagged; missing questionnaire items are handled transparently (dynamic denominators, NA propagation).</p>
+        <div class="feature-icon">🔎</div>
+        <h3>Diagnosis by the 2024 criteria</h3>
+        <p>The MS Criteria Checker applies the 2024 McDonald criteria step by step - across relapsing, progressive and RIS onset - covering the five DIS regions, DIT, CSF and susceptibility biomarkers (CVS, PRL), with built-in mimic and older-onset safeguards.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🔒</div>
@@ -2889,8 +2893,8 @@ input[type="checkbox"] {
       </div>
       <div class="feature-card">
         <div class="feature-icon">📊</div>
-        <h3>Norm-based &amp; cited</h3>
-        <p>Where published norms exist, raw scores are standardised automatically into z-scores, T-scores and percentiles (Strober, Marrie, Benedict, Parmenter, HealthMeasures, ARMSS/MSSS) - with every source cited - so you see how a result compares with similar people.</p>
+        <h3>Validated, normed &amp; flagged</h3>
+        <p>Every score implements a published rule, standardised into z-scores, T-scores and percentiles where norms exist (Strober, Marrie, Benedict, Parmenter, HealthMeasures, ARMSS/MSSS) with each source cited. EDSS mismatches and cross-system conflicts are flagged, and missing items handled transparently.</p>
       </div>
     </div>
   </div>
@@ -2900,7 +2904,7 @@ input[type="checkbox"] {
     <div class="section-rule"></div>
     <div id="explore-home">
       <p style="color:var(--ink-soft);margin:0 0 16px;">Pick what you need.</p>
-      <div class="ways-grid ways-grid-3">
+      <div class="ways-grid ways-grid-2">
         <button type="button" class="way-card recommended" id="open-edss-hub" aria-label="Open AutoEDSSguide">
           <span class="badge">EDSS</span>
           <h3>🧠 AutoEDSSguide</h3>
@@ -2914,6 +2918,13 @@ input[type="checkbox"] {
           <div class="way-sub">SDMT · BVMT-R · CVLT-II · PDDS · MFIS · FSS · PHQ-9 · GAD-7 · MSWS-12 · MSIS-29 · MSQOL-54 · PROMIS-29 · T25FW · 9-HPT · PASAT-3 · BICAMS · MSFC · MS severity</div>
           <p>Stateless calculators &amp; questionnaires for cognition, fatigue, mood and quality of life - each with plain-language interpretation and optional normalization.</p>
           <span class="way-cta">Open Score Hub →</span>
+        </a>
+        <a class="way-card checker-card" href="mcdonald.html" style="text-decoration:none;" aria-label="Open MS Criteria Checker">
+          <span class="badge" style="background:#7b3fa0;color:white;">McDonald 2024</span>
+          <h3>🔎 MS Criteria Checker</h3>
+          <div class="way-sub">MS diagnosis · relapsing · progressive · RIS</div>
+          <p>Applies the 2024 McDonald criteria step by step - DIS across five regions, DIT, CSF (OCB / k-FLC) and susceptibility markers (CVS, PRL) - with older-onset and mimic safeguards, and a printable summary.</p>
+          <span class="way-cta">Open Criteria Checker →</span>
         </a>
         <a class="way-card patient-card" href="scores.html#report" style="text-decoration:none;" aria-label="Open Check my MS">
           <span class="badge badge-patient">For patients</span>
@@ -2983,7 +2994,7 @@ input[type="checkbox"] {
         <div class="ref-item"><span class="ref-name">Quick Check (ePR-EDSS)</span><span class="ref-cite">Romeo AR, et al. <em>Mult Scler</em> 2021;27(9):1432&ndash;41.</span></div>
       </details>
     </div>
-    <p style="margin-top:16px;color:var(--ink-faint);font-size:12px;text-align:center;">MSpectrum reports scores from validated, published instruments and explains what the numbers mean. <b style="color:var(--ink-soft)">It does not diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is stored.</p>
+    <p style="margin-top:16px;color:var(--ink-faint);font-size:12px;text-align:center;">MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b style="color:var(--ink-soft)">It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is stored.</p>
     </div>
     </div><!-- /edss-modes -->
   </div>
@@ -2991,7 +3002,7 @@ input[type="checkbox"] {
   <div class="section-block about-block">
     <h2>About MSpectrum</h2>
     <div class="section-rule"></div>
-    <p>MSpectrum is a free, offline, privacy-first hub for the outcome measures used in multiple sclerosis - the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, with a guided patient report. Everything is computed in your browser; nothing is uploaded or stored. Built for research (reproducible, granular scoring for trials and registries) and useful for routine clinical and educational use.</p>
+    <p>MSpectrum is a free, offline, privacy-first hub for the outcome measures used in multiple sclerosis - the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a diagnostic checker for the 2024 McDonald criteria. Everything is computed in your browser; nothing is uploaded or stored. Built for research (reproducible, granular scoring for trials and registries) and useful for routine clinical and educational use.</p>
     <details class="about-toggle"><summary>🧠 AutoEDSSguide - EDSS assessment</summary>
       <p>Full Neurostatus EDSS with real-time scoring across the 7 Functional Systems + ambulation, a print-ready Neurostatus sheet, an OCR sheet scanner, inconsistency flags, and REDCap/CSV export. Includes a fast <strong>Clinical</strong> mode (streamlined sEDSS, for neurologists) and a plain-language <strong>Quick Check</strong> for people with MS. One shared, Neurostatus/Fouad-exact engine drives every view.</p>
     </details>
@@ -2999,7 +3010,7 @@ input[type="checkbox"] {
       <p>Stateless calculators / questionnaires for SDMT, BVMT-R, CVLT-II, PDDS, MFIS, FSS, PHQ-9, GAD-7, MSWS-12, MSIS-29, MSQOL-54 and PROMIS-29, plus the timed motor tests T25FW and 9-HPT, PASAT-3, the BICAMS cognitive battery, the MSFC composite, and MS severity (ARMSS by age, MSSS by duration) - each with clinical interpretation, severity bands, and optional normalization (z-score &amp; percentile). Self-report questionnaires can be filled by the patient; performance tests and composites are entered by a clinician. Nothing is stored.</p>
     </details>
     <details class="about-toggle"><summary>⚖️ Disclaimer &amp; terms of use</summary>
-      <p><b>Not a diagnosis or medical advice.</b> MSpectrum computes scores from validated, published instruments and explains what they mean. It does not diagnose any condition, does not recommend, start, stop or change any treatment, and is not a substitute for examination, testing, or the judgment of a qualified clinician. Using it creates no doctor-patient relationship.</p>
+      <p><b>Not a diagnosis or medical advice.</b> MSpectrum computes outcome-measure scores and applies published diagnostic criteria, and explains what they mean. It supports clinical judgement but does not itself establish a diagnosis, does not recommend, start, stop or change any treatment, and is not a substitute for examination, testing, or the judgment of a qualified clinician. Using it creates no doctor-patient relationship.</p>
       <p><b>What it is for.</b> It is intended for research, education, and to support - not replace - decisions made by patients and their care teams. Diagnosis, interpretation and treatment remain the responsibility of a qualified clinician who knows the individual.</p>
       <p><b>Scores and estimates are approximations.</b> Self-report tools (including the Quick Check EDSS estimate, PDDS and the patient questionnaires) reflect what a person reports and are not the same as a clinician-examined EDSS or a formal assessment. Norm-based results (z-scores, T-scores, percentiles) are population-level comparisons; they describe how a score relates to a reference group and do not, on their own, establish impairment in an individual.</p>
       <p><b>Accuracy &amp; verification.</b> Scoring rules are implemented faithfully from the cited primary sources, but no guarantee is made that every result is error-free or current. Verify any score locally against the original instrument before clinical or trial use. The cognitive tests (SDMT, BVMT-R, CVLT-II) must be administered and interpreted by a trained professional.</p>
@@ -3034,20 +3045,24 @@ input[type="checkbox"] {
       <div class="ref-item"><span class="ref-name">MSFC / T25FW</span><span class="ref-cite">Fischer JS, Rudick RA, Cutter GR, Reingold SC. <em>Mult Scler</em> 1999;5(4):244&ndash;50.</span></div>
       <div class="ref-item"><span class="ref-name">9-HPT</span><span class="ref-cite">Mathiowetz V, Weber K, Kashman N, Volland G. <em>Occup Ther J Res</em> 1985;5(1):24&ndash;38.</span></div>
       <div class="ref-item"><span class="ref-name">BICAMS</span><span class="ref-cite">Langdon DW, Amato MP, Boringa J, et al. <em>Mult Scler J</em> 2012;18(6):891&ndash;8.</span></div>
+      <div class="ref-cat">MS Criteria Checker - McDonald 2024</div>
+      <div class="ref-item"><span class="ref-name">McDonald 2024</span><span class="ref-cite">Thompson AJ, Montalban X, Barkhof F, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em> 2025;24(10):850&ndash;865. DOI:10.1016/S1474-4422(25)00270-4.</span></div>
+      <div class="ref-item"><span class="ref-name">Companion papers</span><span class="ref-cite">Consensus recommendations on MRI, the visual system (OCT/VEP) and fluid biomarkers (kappa free light chains, oligoclonal bands) in MS diagnosis. <em>Lancet Neurol</em> 2025 (companion papers).</span></div>
+      <div class="ref-item"><span class="ref-name">Differential diagnosis</span><span class="ref-cite">Solomon AJ, Arrambide G, Brownlee WJ, et al. Differential diagnosis of suspected multiple sclerosis: an updated consensus approach. <em>Lancet Neurol</em> 2023;22:750&ndash;68.</span></div>
+      <div class="ref-item"><span class="ref-name">RIS conversion</span><span class="ref-cite">Lebrun-Fr&eacute;nay C, Kantarci O, Siva A, et al. Radiologically isolated syndrome: 10-year risk estimate of a clinical event. <em>Ann Neurol</em> 2020;88(2):407&ndash;17.</span></div>
     </div>
     <p style="font-size:12px;color:var(--ink-faint);margin-top:8px">Proprietary instruments (BVMT-R, CVLT-II, SDMT) are scored from entered numeric results only; their stimuli and norm tables are not reproduced here.</p>
     </details>
     <details class="about-toggle"><summary>📌 Cite us</summary>
       <p>If you are a researcher and used MSpectrum for research purposes, please cite it:</p>
-      <p style="background:#f3f7f0;border:1px solid #d7e4cf;border-radius:8px;padding:10px 12px;font-size:13px">Nourelden A, Memon A. <em>MSpectrum: a free, offline toolkit for multiple sclerosis outcome measures (AutoEDSSguide and MS Score Hub)</em>. Wayne State University, Department of Neurology; 2026. Available from: https://github.com/AnasZakarya/AutoEDSSguide.</p>
+      <p style="background:#f3f7f0;border:1px solid #d7e4cf;border-radius:8px;padding:10px 12px;font-size:13px">Nourelden A, Memon A. <em>MSpectrum: a free, offline toolkit for multiple sclerosis outcome measures and diagnosis (AutoEDSSguide, MS Score Hub and MS Criteria Checker)</em>. Wayne State University, Department of Neurology; 2026. Available from: https://github.com/AnasZakarya/MSpectrum.</p>
     </details>
-    <p style="font-size:13px;color:var(--ink-faint);font-style:italic;margin-top:16px">For research and clinical-educational use. Final scoring remains the responsibility of the examining clinician; validate locally before any trial or registry use.</p>
   </div>
 
   <footer class="app-footer">
     <div class="app-footer-inner">
       <div class="footer-brand">
-        <div class="brand-mark" style="margin-right:8px;display:flex;align-items:center;gap:8px"><svg width="24" height="24" viewBox="0 0 48 48" aria-hidden="true" ><g stroke="#bcd6e8" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#3a6a8a" stroke-width="1.3"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#ffffff" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#bcd6e8" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#bcd6e8"/><circle cx="13" cy="41.2" r="0.95" fill="#bcd6e8"/><circle cx="19.2" cy="40" r="0.95" fill="#bcd6e8"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="#ffffff"/><circle cx="34" cy="12" r="1.7" fill="#1e4a6e"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff8a1f" stroke-width="0.9"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff8a1f"/></svg><span style="display:flex;flex-direction:column;gap:0;line-height:1.15"><span><em>MS</em>pectrum</span><span style="font-family:system-ui,sans-serif;font-size:10px;font-weight:500;color:var(--ink-soft,#777);letter-spacing:.06em;text-transform:uppercase">AutoEDSS Guide</span></span></div>
+        <div class="brand-mark" style="margin-right:8px;display:flex;align-items:center;gap:8px"><svg width="24" height="24" viewBox="0 0 48 48" aria-hidden="true" ><g stroke="#bcd6e8" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#3a6a8a" stroke-width="1.3"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#ffffff" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#bcd6e8" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#bcd6e8"/><circle cx="13" cy="41.2" r="0.95" fill="#bcd6e8"/><circle cx="19.2" cy="40" r="0.95" fill="#bcd6e8"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="#ffffff"/><circle cx="34" cy="12" r="1.7" fill="#1e4a6e"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff8a1f" stroke-width="0.9"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff8a1f"/></svg><span style="display:flex;flex-direction:column;gap:0;line-height:1.15"><span><em>MS</em>pectrum</span></span></div>
         <div style="width:1px;height:34px;background:rgba(255,255,255,0.2);flex-shrink:0;margin:0 8px"></div>
       </div>
       <div class="footer-credits">
@@ -3081,7 +3096,7 @@ input[type="checkbox"] {
         </svg>
       </div>
     </div>
-    <div style="text-align:center;font-size:11.5px;color:rgba(255,255,255,0.55);margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.12);line-height:1.5">MSpectrum reports scores from validated, published instruments and explains what the numbers mean &mdash; <b style="color:rgba(255,255,255,0.8)">it does not diagnose</b>. Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research / educational use; nothing is uploaded or stored.</div>
+    <div style="text-align:center;font-size:11.5px;color:rgba(255,255,255,0.55);margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.12);line-height:1.5">MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean; <b style="color:rgba(255,255,255,0.8)">it supports clinical judgement but does not itself diagnose</b>. Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research / educational use; nothing is uploaded or stored.</div>
      <div style="text-align:center;font-size:11px;color:rgba(255,255,255,0.5);margin-top:8px;line-height:1.6">&copy; 2026 Anas Z. Nourelden &amp; Dr. Anza B. Memon &middot; Wayne State University, Dept. of Neurology<br>Neurostatus &copy; L. Kappos &middot; all outcome-measure &amp; instrument copyrights belong to their respective owners</div>
   </footer>
 </section>
@@ -3449,7 +3464,7 @@ input[type="checkbox"] {
                 </div>
                 <div style="font-size:7.5px;color:#64748b;line-height:1.6;margin-bottom:6px;">
                   <span style="font-weight:700;">References</span><br>
-                  MSpectrum (AutoEDSSguide + MS Score Hub) - Nourelden A, Memon A. Wayne State University, Department of Neurology; 2026. Available at: https://github.com/AnasZakarya/MSpectrum<br>
+                  MSpectrum (AutoEDSSguide, MS Score Hub + MS Criteria Checker) - Nourelden A, Memon A. Wayne State University, Department of Neurology; 2026. Available at: https://github.com/AnasZakarya/MSpectrum<br>
                   Standardised Neurological Examination and Assessment of Kurtzke&apos;s Functional Systems and EDSS. Slightly modified from J.F. Kurtzke, Neurology 1983;33:1444&ndash;52.<br>
                   &copy;2009 Ludwig Kappos, MD, University Hospital Basel; Version 09/08.
                 </div>
