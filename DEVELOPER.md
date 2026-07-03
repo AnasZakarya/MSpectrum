@@ -6,9 +6,9 @@ Internal reference for deployment, updates, and architecture.
 
 ## Repository
 
-https://github.com/AnasZakarya/AutoEDSSguide
+https://github.com/AnasZakarya/MSpectrum
 
-Live site: https://anaszakarya.github.io/AutoEDSSguide/
+Live site: https://anaszakarya.github.io/MSpectrum/
 
 ---
 
@@ -28,7 +28,7 @@ Wayne_State_Warriors_primary_logo.svg
 ## Updating the app
 
 1. Edit `index.html` locally
-2. Go to https://github.com/AnasZakarya/AutoEDSSguide
+2. Go to https://github.com/AnasZakarya/MSpectrum
 3. Click `index.html` → Edit (pencil icon) → or use Upload to replace the file
 4. Commit directly to `main`
 5. GitHub Pages redeploys automatically in ~30 seconds
@@ -40,7 +40,7 @@ Wayne_State_Warriors_primary_logo.svg
 Already configured:
 - Branch: `main`
 - Folder: `/ (root)`
-- URL: `https://anaszakarya.github.io/AutoEDSSguide/`
+- URL: `https://anaszakarya.github.io/MSpectrum/`
 
 To change: Settings → Pages
 
