@@ -365,12 +365,14 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
 }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .feature-card {
   background: var(--paper);
   border: 1px solid var(--rule);
   border-radius: var(--radius);
   padding: 24px;
   transition: all 0.2s;
+  animation: rise 0.45s ease both;
 }
 .feature-card:hover {
   transform: translateY(-2px);
@@ -435,6 +437,7 @@ body {
   font-family: var(--sans);
   cursor: pointer;
   transition: all 0.2s;
+  animation: rise 0.45s ease both;
   display: flex;
   flex-direction: column;
 }
@@ -8645,53 +8648,102 @@ async function scHandleFile(file) {
 
 async function scExtractAllZones() {
   const PDF_W = 595.276, PDF_H = 841.89;
+  const bar = document.getElementById("sc-progress-bar");
+  const lbl = document.getElementById("sc-progress-label");
+
+  // Real in-browser OCR (Tesseract.js) - replaces the old ink-density guess.
+  // Runs fully on-device, so the "offline / nothing uploaded" promise holds.
+  try { if (lbl) lbl.textContent = "Loading OCR engine\u2026"; await scLoadTesseract(); }
+  catch (e) { if (lbl) lbl.textContent = "OCR library failed to load (needs internet on first use)."; }
+
+  let worker = null;
+  if (window.Tesseract) {
+    if (lbl) lbl.textContent = "Starting OCR\u2026";
+    worker = await Tesseract.createWorker("eng");
+    // Neurostatus cells hold a single score digit (0-6 / 0-5) or 'X' (weakness-excluded ataxia)
+    await worker.setParameters({ tessedit_char_whitelist: "0123456789X", tessedit_pageseg_mode: "7" });
+  }
+
+  const total = ZONES.length; let done = 0;
   for (const z of ZONES) {
+    done++;
     const cvs = SC_PDF_CANVASES[z.page];
-    if (!cvs) continue;
+    const targetId = z.gid || ("sc-" + z.id);
+    const el = document.getElementById(targetId);
+    if (!cvs || !el) continue;
+
     const scaleX = cvs.width / PDF_W, scaleY = cvs.height / PDF_H;
     const px = Math.round(z.x * scaleX), py = Math.round(z.y * scaleY);
     const pw = Math.round(z.w * scaleX), ph = Math.round(z.h * scaleY);
-    const ctx = cvs.getContext("2d");
-    const imgData = ctx.getImageData(px, py, pw, ph);
-    const val = scAnalyzePixels(imgData);
-    // Populate Gemini field (gid), falling back to legacy sc- id
-    const targetId = z.gid || ("sc-" + z.id);
-    const el = document.getElementById(targetId);
-    if (el) {
-      el.value = val.text;
-      // Use Gemini OCR color classes
-      el.classList.remove("ocr-verify","ocr-high","ocr-confident","ocr-filled","ocr-empty");
-      if (val.confidence === "high") el.classList.add("ocr-high");
-      else if (val.confidence === "mid") el.classList.add("ocr-verify");
+    if (px < 0 || py < 0 || pw <= 0 || ph <= 0) continue;
+
+    const prep = scPrepCrop(cvs, px, py, pw, ph);
+    let text = "", confidence = "low";
+    // Skip clearly-blank cells so OCR never invents a digit on an empty box
+    if (prep.inkRatio >= 0.02 && worker) {
+      try {
+        const { data } = await worker.recognize(prep.canvas);
+        text = (data.text || "").replace(/[^0-9Xx]/g, "").toUpperCase().slice(0, 2);
+        const c = data.confidence || 0;
+        confidence = text ? (c >= 75 ? "high" : c >= 50 ? "mid" : "low") : "low";
+      } catch (e) { text = ""; confidence = "low"; }
+    }
+
+    el.value = text;
+    // Same confidence colour classes as before (green = high, amber = verify)
+    el.classList.remove("ocr-verify","ocr-high","ocr-confident","ocr-filled","ocr-empty");
+    if (confidence === "high") el.classList.add("ocr-high");
+    else if (confidence === "mid") el.classList.add("ocr-verify");
+
+    if (bar && (done % 3 === 0 || done === total)) {
+      bar.style.width = (70 + Math.round((done / total) * 25)) + "%";
+      if (lbl) lbl.textContent = "Reading fields\u2026 " + done + "/" + total;
     }
   }
-  // After extraction auto-calculate
-  calculateSectionScores();
+
+  if (worker) { try { await worker.terminate(); } catch (e) {} }
+
+  // Feed the SAME shared engine + inconsistency flagging every other view uses.
+  if (typeof scCalculate === "function") scCalculate();
+  else calculateSectionScores();
 }
 
-function scAnalyzePixels(imgData) {
-  const { data, width, height } = imgData;
-  let dark = 0, total = width * height;
-  for (let i = 0; i < data.length; i += 4) {
-    const r = data[i], g = data[i+1], b = data[i+2];
-    // Use stricter luminance threshold - only near-black counts as ink
-    if ((0.299*r + 0.587*g + 0.114*b) < 60) dark++;
+// Lazily load Tesseract.js from CDN (needs internet on first load, then cached).
+function scLoadTesseract() {
+  if (window.Tesseract) return Promise.resolve();
+  return new Promise((res, rej) => {
+    const s = document.createElement("script");
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.1.1/tesseract.min.js";
+    s.onload = res; s.onerror = rej;
+    document.head.appendChild(s);
+  });
+}
+
+// Crop one template cell, upscale x4 + binarize for cleaner recognition.
+// Returns { canvas, inkRatio }; inkRatio is used to detect blank cells.
+function scPrepCrop(cvs, px, py, pw, ph) {
+  const ctx = cvs.getContext("2d");
+  const src = ctx.getImageData(px, py, pw, ph);
+  let dark = 0; const d = src.data;
+  for (let i = 0; i < d.length; i += 4) {
+    if ((0.299*d[i] + 0.587*d[i+1] + 0.114*d[i+2]) < 110) dark++;
   }
-  const ratio = dark / total;
-  // Raise noise floor: background artifacts/JPEG noise rarely exceed 5%
-  // A printed digit in a 26×16 box at 3× scale typically has 8–30% dark pixels
-  if (ratio < 0.05) return { text: "", confidence: "low" };
-  if (ratio < 0.35) {
-    let guess = "", conf = "mid";
-    if      (ratio < 0.09) { guess = "0"; }
-    else if (ratio < 0.13) { guess = "1"; conf = "high"; }
-    else if (ratio < 0.18) { guess = "2"; }
-    else if (ratio < 0.24) { guess = "3"; }
-    else if (ratio < 0.30) { guess = "4"; }
-    else                   { guess = ""; }
-    return { text: guess, confidence: guess ? conf : "low" };
+  const inkRatio = dark / (pw * ph);
+  const S = 4;
+  const out = document.createElement("canvas");
+  out.width = pw * S; out.height = ph * S;
+  const octx = out.getContext("2d");
+  octx.fillStyle = "#fff"; octx.fillRect(0, 0, out.width, out.height);
+  octx.imageSmoothingEnabled = true;
+  octx.drawImage(cvs, px, py, pw, ph, 0, 0, out.width, out.height);
+  const im = octx.getImageData(0, 0, out.width, out.height); const p = im.data;
+  for (let i = 0; i < p.length; i += 4) {
+    const lum = 0.299*p[i] + 0.587*p[i+1] + 0.114*p[i+2];
+    const v = lum < 128 ? 0 : 255;
+    p[i] = p[i+1] = p[i+2] = v; p[i+3] = 255;
   }
-  return { text: "", confidence: "low" };
+  octx.putImageData(im, 0, 0);
+  return { canvas: out, inkRatio };
 }
 
 function scAmbCheck(el) {
