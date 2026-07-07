@@ -8,6 +8,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <meta name="description" content="MSpectrum - MS Score Hub: stateless calculators and questionnaires for multiple sclerosis cognition, fatigue, mood, walking, quality-of-life and severity measures.">
 <title>MSpectrum · MS Score Hub</title>
+<meta name="keywords" content="multiple sclerosis, MS, EDSS, EDSS calculator, Neurostatus, MS outcome measures, MS scores, SDMT, BICAMS, MSFC, PDDS, MSSS, ARMSS, MFIS, FSS, MSWS-12, PROMIS-29, MSQOL-54, McDonald criteria 2024, MS diagnosis">
+<meta name="author" content="Anas Nourelden, Anza Memon - Wayne State University, Department of Neurology">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1e4a6e">
+<link rel="canonical" href="https://anaszakarya.github.io/MSpectrum/scores.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MSpectrum">
+<meta property="og:title" content="MSpectrum - MS Score Hub (EDSS, SDMT, BICAMS, MSFC & more)">
+<meta property="og:description" content="Free, offline calculators and questionnaires for multiple sclerosis outcome measures: cognition (SDMT, BICAMS), fatigue (MFIS, FSS), mood, walking, quality of life and disease severity - with published norms and plain-language interpretation.">
+<meta property="og:url" content="https://anaszakarya.github.io/MSpectrum/scores.html">
+<meta property="og:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MSpectrum - MS Score Hub (EDSS, SDMT, BICAMS, MSFC & more)">
+<meta name="twitter:description" content="Free, offline calculators and questionnaires for multiple sclerosis outcome measures: cognition (SDMT, BICAMS), fatigue (MFIS, FSS), mood, walking, quality of life and disease severity - with published norms and plain-language interpretation.">
+<meta name="twitter:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MSpectrum - MS Score Hub (EDSS, SDMT, BICAMS, MSFC & more)","url":"https://anaszakarya.github.io/MSpectrum/scores.html","description":"Free, offline calculators and questionnaires for multiple sclerosis outcome measures: cognition (SDMT, BICAMS), fatigue (MFIS, FSS), mood, walking, quality of life and disease severity - with published norms and plain-language interpretation.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"},{"@type":"Person","name":"Anza Memon"}],"publisher":{"@type":"Organization","name":"Wayne State University, Department of Neurology"}}</script>
 <style>
 :root{
   --bg:#faf8f3; --paper:#fff; --ink:#1a1f2e; --ink-soft:#4a5060; --ink-faint:#8a8f9d;
@@ -17,11 +34,11 @@
   --serif:"Fraunces","Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;line-height:1.5}
+body{margin:0;background:var(--bg);background-image:radial-gradient(circle at 50% -5%, rgba(30,74,110,0.07), transparent 55%), radial-gradient(rgba(30,74,110,0.09) 1px, transparent 1px);background-size:100% 100%, 22px 22px;background-attachment:fixed;color:var(--ink);font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;line-height:1.5}
 a{color:var(--accent)}
 .wrap{max-width:920px;margin:0 auto;padding:0 18px 80px}
-header.top{position:sticky;top:0;z-index:30;background:rgba(244,246,248,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);}
-.top-inner{max-width:920px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:12px 18px}
+header.top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:2px solid var(--accent);}
+.top-inner{max-width:920px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:14px 18px}
 .brand{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--accent-ink);display:flex;align-items:center;font-variation-settings:"opsz" 60;letter-spacing:-0.02em}
 .logo{margin-right:8px;flex-shrink:0}
 .brand em{font-style:normal;color:var(--hl)}
@@ -166,11 +183,22 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 .panel.panel-exit{animation:panelFadeOut .13s ease forwards;pointer-events:none}
 @keyframes resultPulse{0%{opacity:.3;transform:scale(.97)}60%{opacity:1;transform:scale(1.01)}100%{opacity:1;transform:scale(1)}}
 .result-flash{animation:resultPulse .3s ease}
+    /* Logo animation: neural signal flow along the S + synapse pulse (honours reduced-motion) */
+    @keyframes msFlow { to { stroke-dashoffset: -60; } }
+    @keyframes msPulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+    @keyframes msDraw { 0% { stroke-dashoffset: 100; } 40% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
+    @keyframes msPop { 0%,68%,100% { transform: scale(1); } 76% { transform: scale(1.25); } 84% { transform: scale(.92); } 91% { transform: scale(1.05); } }
+    @media (prefers-reduced-motion: no-preference) {
+      svg path[stroke^="url(#msg"], svg path[stroke^="url(#mslg"] { animation: msFlow 4s linear infinite; }
+      svg path[stroke="#cfd8dc"] { stroke-dasharray: 100; animation: msDraw 7s ease-in-out infinite; }
+      .logo { transform-origin: center; animation: msPop 4.5s ease-in-out infinite; }
+      svg circle[fill="#ff7a1a"] { animation: msPulse 2.6s ease-in-out infinite; }
+    }
 </style>
 </head>
 <body>
 <header class="top"><div class="top-inner">
-  <div style="display:flex;flex-direction:column;gap:1px;line-height:1.15"><span class="brand"><svg width="26" height="26" viewBox="0 0 48 48" aria-hidden="true" class="logo"><defs><linearGradient id="msg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e4a6e"/><stop offset=".55" stop-color="#2a9d8f"/><stop offset="1" stop-color="#b85c1a"/></linearGradient></defs><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#cfd8dc" stroke-width="1.3"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="url(#msg)" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#23628a"/><circle cx="13" cy="41.2" r="0.95" fill="#23628a"/><circle cx="19.2" cy="40" r="0.95" fill="#23628a"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="url(#msg)"/><circle cx="34" cy="12" r="1.7" fill="#dff0ea"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff7a1a" stroke-width="0.8"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff7a1a"/></svg><em>MS</em>pectrum</span><span class="sub" style="padding-left:33px;">MS Score Hub</span></div>
+  <div style="display:flex;align-items:center;gap:10px"><svg width="34" height="34" viewBox="0 0 48 48" aria-hidden="true" class="logo" style="margin-right:0"><defs><linearGradient id="msg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e4a6e"/><stop offset=".55" stop-color="#2a9d8f"/><stop offset="1" stop-color="#b85c1a"/></linearGradient></defs><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#cfd8dc" stroke-width="1.3" pathLength="100"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="url(#msg)" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#23628a"/><circle cx="13" cy="41.2" r="0.95" fill="#23628a"/><circle cx="19.2" cy="40" r="0.95" fill="#23628a"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="url(#msg)"/><circle cx="34" cy="12" r="1.7" fill="#dff0ea"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff7a1a" stroke-width="0.8"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff7a1a"/></svg><div style="display:flex;flex-direction:column;gap:1px;line-height:1.15"><span class="brand"><em>MS</em>pectrum</span><span class="sub" id="brandSub">MS Score Hub</span></div></div>
   <a class="back" href="index.html">&larr; MSpectrum home</a>
 </div></header>
 
@@ -456,16 +484,71 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 </div></details>
   </section>
 
-  <section class="panel" id="p_report">
-    <a class="tool-back" href="index.html" style="text-decoration:none;display:inline-block;background:var(--accent);color:#fff;border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600;margin-bottom:12px">&larr; MSpectrum home</a>
-    <h2>Check my MS</h2>
-    <p class="lead">Answer the questionnaires in order - press <b>Start</b> and you&rsquo;ll be guided from one to the next. At the end you get one plain-language summary.</p>
-    <div class="usenote"><b>Please note - this is not a complete assessment.</b> It covers only what you can report yourself. It does <b>not</b> include the cognitive tests (SDMT, BVMT-R, CVLT-II), which measure memory and thinking speed and must be done with a clinician - so thinking/memory is <b>not</b> checked here, and a normal report does not rule out cognitive changes. The full neurological <b>EDSS</b> also needs a clinician; you can estimate it with the Quick Check below. This is for understanding and discussion, <b>not a diagnosis</b>. Nothing is stored.</div>
+  <section class="panel" id="p_smscreen">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>SymptoMScreen</h2><p class="lead">A 12-domain self-report of how much MS symptoms have affected you over the past week (0 = not affected at all &hellip; 6 = totally affected). Total 0&ndash;72; higher = greater symptom burden.</p>
+    <div class="actions"><button class="btn" onclick="fillSMS(0)">All 0</button><button class="btn" onclick="fillSMS(6)">All 6</button><button class="btn" onclick="clearSMS()">Clear</button></div>
+    <div class="items" id="sms_items"></div>
+    <div class="result" id="smscreen_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+<b>Scoring:</b> 12 symptom domains, each 0&ndash;6; total = sum (range 0&ndash;72). Higher = worse overall symptom burden; the individual domains are also useful to track.<br>
+<b>Use:</b> A brief, validated global measure of MS symptom severity, good for tracking change over time. There is no fixed "abnormal" cut-off &mdash; read the total together with the individual domains.<br>
+<b>Reference:</b> Green R, Kalina J, Ford R, et al. SymptoMScreen. <em>Int J MS Care</em> 2017;19(1):1&ndash;8.
+</div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('smscreen','SymptoMScreen')">📄 Patient summary</button><button class="btn" onclick="exportCSV('smscreen','SymptoMScreen')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_sixmwt">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>6MWT</h2><p class="lead">Six-Minute Walk Test &ndash; total distance walked in 6 minutes (metres). Higher = better walking endurance. Optionally add age, sex, height and weight for an estimated % of predicted.</p>
+    <div class="row"><div class="fld"><label>Distance walked (metres) <span class="hint">&gt; 0</span></label><input type="number" id="sixmwt_dist" min="0" step="1" oninput="calc6MWT()"></div></div>
+    <div class="row">
+      <div class="fld"><label>Age (years) <span class="hint">optional</span></label><input type="number" id="sixmwt_age" min="0" step="1" oninput="calc6MWT()"></div>
+      <div class="fld"><label>Sex <span class="hint">optional</span></label><select id="sixmwt_sex" oninput="calc6MWT()"><option value="">- select -</option><option value="M">Male</option><option value="F">Female</option></select></div>
+    </div>
+    <div class="row">
+      <div class="fld"><label>Height (cm) <span class="hint">optional</span></label><input type="number" id="sixmwt_ht" min="0" step="0.1" oninput="calc6MWT()"></div>
+      <div class="fld"><label>Weight (kg) <span class="hint">optional</span></label><input type="number" id="sixmwt_wt" min="0" step="0.1" oninput="calc6MWT()"></div>
+    </div>
+    <div class="result" id="sixmwt_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+<b>Scoring:</b> Distance in metres walked in 6 minutes. Higher = better endurance; in MS it captures walking fatigability better than the short T25FW.<br>
+<b>% predicted (optional):</b> Enright &amp; Sherrill reference equations for healthy adults &mdash; Men: 7.57&times;ht(cm) &minus; 5.02&times;age &minus; 1.76&times;wt(kg) &minus; 309; Women: 2.11&times;ht(cm) &minus; 2.29&times;wt(kg) &minus; 5.78&times;age + 667. General (non-MS) norms, shown only as context.<br>
+<b>Reference:</b> Enright PL, Sherrill DL. <em>Am J Respir Crit Care Med</em> 1998;158:1384&ndash;7; Goldman MD, et al. <em>Mult Scler</em> 2008 (6MWT in MS).
+</div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('sixmwt','6MWT')">📄 Patient summary</button><button class="btn" onclick="exportCSV('sixmwt','6MWT')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_fsmc">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>FSMC</h2><p class="lead">Fatigue Scale for Motor and Cognitive Functions &ndash; 20 items rated 1 (does not apply at all) to 5 (applies completely); gives a Motor score, a Cognitive score and a total.</p>
+    <div class="usenote" style="background:#fff6df;border:1px solid #ffe2a8;border-left:4px solid #d99a00;color:#7a5300">
+      <b>Scoring aid only.</b> This tool does not reproduce the FSMC questionnaire (a licensed instrument). Use the official FSMC form for the item wording, then enter each item's response (1&ndash;5) below &ndash; it computes the Motor, Cognitive and total scores.
+    </div>
+    <div class="actions"><button class="btn" onclick="fillFSMC(1)">All 1</button><button class="btn" onclick="fillFSMC(5)">All 5</button><button class="btn" onclick="clearFSMC()">Clear</button></div>
+    <div class="items" id="fsmc_items"></div>
+    <div class="result" id="fsmc_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+<b>Scoring:</b> 20 items &times; 1&ndash;5; total 20&ndash;100. Cognitive subscale = items 1, 4, 7, 8, 11, 13, 15, 17, 18, 20; Motor subscale = items 2, 3, 5, 6, 9, 10, 12, 14, 16, 19 (each 10&ndash;50). Higher = more fatigue.<br>
+<b>Total cut-offs (Penner 2009):</b> &lt; 43 no fatigue &middot; &ge; 43 mild &middot; &ge; 53 moderate &middot; &ge; 63 severe.<br>
+<b>Reference:</b> Penner IK, Raselli C, St&ouml;cklin M, Opwis K, Kappos L, Calabrese P. <em>Mult Scler</em> 2009;15(12):1509&ndash;17.
+</div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('fsmc','FSMC')">📄 Patient summary</button><button class="btn" onclick="exportCSV('fsmc','FSMC')">Researcher: CSV</button></div>
+  </section>
+
+  <section class="panel" id="p_report" style="background:transparent;border:none;padding:16px 0 0;box-shadow:none">
+    <h2 style="font-family:var(--serif);font-size:34px;letter-spacing:-.01em;margin:0 0 8px">🩺 Check my MS</h2>
+    <p class="lead" style="font-size:15.5px">A plain-language read on how MS is affecting you, built from published questionnaires and your own answers. Work through them and you get one summary to understand your situation and discuss it with your care team.</p>
+    <div class="usenote" style="background:#f3f7f0;border-color:#d7e4cf;color:#34502f"><b>How it works.</b> Answer the questionnaires in order - press <b>Start</b> and you&rsquo;ll be guided from one to the next; at the end you get a single plain-language summary. Everything runs in your browser and <b>nothing is stored</b>.</div>
+    <div class="usenote"><b>What this covers.</b> It uses only what <b>you</b> can report yourself (PDDS, MSWS-12, FSS, MFIS, PHQ-9, GAD-7, MSIS-29, MSQOL-54, SymptoMScreen). It does <b>not</b> include the clinician cognitive tests (SDMT, BVMT-R, CVLT-II) or the full neurological <b>EDSS</b> - so a normal report does not rule out cognitive change. You can estimate the EDSS yourself with the Quick Check.</div>
+    <div class="usenote" style="background:#fbf3ea;border-color:#ecdcc6;color:#6b4b2a"><b>Not a diagnosis.</b> MSpectrum computes scores from validated, published instruments and explains what they mean. Interpretation, diagnosis and treatment remain the decision of a qualified clinician.</div>
+    <div class="report-flow" style="background:#eef5fb;border:1px solid #cfe0ec;border-radius:14px;padding:16px 16px 8px;margin-top:14px">
     <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent);font-size:14px;padding:10px 18px" onclick="startGuided()">▶ Start questionnaires</button></div>
     <div id="report_checklist"></div>
     <div class="actions"><button class="btn" onclick="buildReport()">Generate my report</button></div>
     <div class="result" id="report_out"></div>
     <div class="actions no-print" id="report_actions" style="display:none"><button class="btn" onclick="reportPDF()">📄 Save / print as PDF</button></div>
+    </div>
   </section>
 
   <section class="panel" id="p_t25fw">
@@ -578,6 +661,8 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="ref-cat">Fatigue</div>
     <div class="ref-item"><span class="ref-name">MFIS</span><span class="ref-cite">Modified from Fisk JD, et al. <em>Clin Infect Dis</em> 1994;18(Suppl 1):S79&ndash;83. 21-item MFIS: Multiple Sclerosis Council for Clinical Practice Guidelines, 1998 (National MS Society).</span></div>
     <div class="ref-item"><span class="ref-name">FSS</span><span class="ref-cite">Krupp LB, LaRocca NG, Muir-Nash J, Steinberg AD. <em>Arch Neurol</em> 1989;46(10):1121&ndash;3.</span></div>
+    <div class="ref-item"><span class="ref-name">SymptoMScreen</span><span class="ref-cite">Green R, Kalina J, Ford R, et al. SymptoMScreen. <em>Int J MS Care</em> 2017;19(1):1&ndash;8.</span></div>
+    <div class="ref-item"><span class="ref-name">FSMC</span><span class="ref-cite">Penner IK, Raselli C, St&ouml;cklin M, Opwis K, Kappos L, Calabrese P. <em>Mult Scler</em> 2009;15(12):1509&ndash;17.</span></div>
     <div class="ref-cat">Mood</div>
     <div class="ref-item"><span class="ref-name">PHQ-9</span><span class="ref-cite">Kroenke K, Spitzer RL, Williams JBW. <em>J Gen Intern Med</em> 2001;16(9):606&ndash;13. Public domain (Pfizer).</span></div>
     <div class="ref-item"><span class="ref-name">GAD-7</span><span class="ref-cite">Spitzer RL, Kroenke K, Williams JBW, L&ouml;we B. <em>Arch Intern Med</em> 2006;166(10):1092&ndash;7. Public domain (Pfizer).</span></div>
@@ -591,6 +676,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="ref-item"><span class="ref-name">MSSS</span><span class="ref-cite">Roxburgh RH, Seaman SR, Masterman T, et al. <em>Neurology</em> 2005;64(7):1144&ndash;51.</span></div>
     <div class="ref-cat">Disability &amp; quality of life</div>
     <div class="ref-item"><span class="ref-name">MSWS-12</span><span class="ref-cite">Hobart JC, Riazi A, Lamping DL, Fitzpatrick R, Thompson AJ. <em>Neurology</em> 2003;60(1):31&ndash;6.</span></div>
+    <div class="ref-item"><span class="ref-name">6MWT</span><span class="ref-cite">Enright PL, Sherrill DL. <em>Am J Respir Crit Care Med</em> 1998;158:1384&ndash;7; Goldman MD, et al. <em>Mult Scler</em> 2008.</span></div>
     <div class="ref-item"><span class="ref-name">MSIS-29</span><span class="ref-cite">Hobart J, Lamping D, Fitzpatrick R, Riazi A, Thompson A. <em>Brain</em> 2001;124(Pt 5):962&ndash;73.</span></div>
     <div class="ref-item"><span class="ref-name">PDDS</span><span class="ref-cite">Hohol MJ, Orav EJ, Weiner HL. <em>Neurology</em> 1995; self-report validated by Learmonth YC, et al. <em>BMC Neurol</em> 2013.</span></div>
     <div class="ref-item"><span class="ref-name">MSQOL-54</span><span class="ref-cite">Vickrey BG, Hays RD, Harooni R, Myers LW, Ellison GW. <em>Qual Life Res</em> 1995. &copy; UCLA (free for clinical/research use).</span></div>
@@ -615,7 +701,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     </div>
   </div>
 
-  <footer>MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research / educational use; verify locally before clinical or trial use. All computation is local; nothing is stored.<span style="display:block;margin-top:10px;color:var(--ink-faint)">&copy; 2026 Anas Z. Nourelden &amp; Dr. Anza B. Memon &middot; Wayne State University, Dept. of Neurology<br>Neurostatus &copy; L. Kappos &middot; all outcome-measure &amp; instrument copyrights belong to their respective owners</span></footer>
+  <footer>MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research / educational use; verify locally before clinical or trial use. All computation is local; nothing is stored.</footer>
 </div>
 
 <script>
@@ -689,7 +775,7 @@ function scoreNHPT(d1,d2,n1,n2){ const D=[d1,d2].filter(x=>x!=null), N=[n1,n2].f
   const all=[dA,nA].filter(x=>x!=null); return { dA, nA, mean: all.length?all.reduce((a,b)=>a+b,0)/all.length:null }; }
 function _z(v,m,sd,higher){ if(v==null||m==null||sd==null||sd<=0) return null; let z=(v-m)/sd; return higher?z:-z; }
 /* ENGINE_END */
-if (typeof module !== "undefined") { module.exports = { scoreSDMT, scoreBVMT, scoreCVLT, scoreMFIS, scoreMSQOL, scorePROMIS, promisBand, PROMIS_DOMAINS, MSQOL_RECODE, MSQOL_SUBS, scoreFSS, scorePHQ, scoreGAD, scoreMSWS, scoreMSIS, scoreT25, scoreNHPT, _z }; }
+if (typeof module !== "undefined") { module.exports = { scoreSDMT, scoreBVMT, scoreCVLT, scoreMFIS, scoreMSQOL, scorePROMIS, promisBand, PROMIS_DOMAINS, MSQOL_RECODE, MSQOL_SUBS, scoreFSS, scorePHQ, scoreGAD, scoreMSWS, scoreMSIS, scoreT25, scoreNHPT, scoreSymptoMScreen, score6MWT, scoreFSMC, _z }; }
 
 const TOOLS=[
   {id:"sdmt", ic:"⚡", name:"SDMT", tag:"Cognition · processing speed", desc:"Symbol Digit Modalities Test (raw count)."},
@@ -710,6 +796,9 @@ const TOOLS=[
   {id:"bicams", ic:"🧠", name:"BICAMS", tag:"Cognition battery", desc:"SDMT + CVLT-II + BVMT-R: z-scores & impairment."},
   {id:"msfc", ic:"🧮", name:"MSFC", tag:"Functional composite", desc:"Arm + leg + cognition into one z-score."},
   {id:"pasat", ic:"🔢", name:"PASAT-3", tag:"Working memory / speed", desc:"Paced Auditory Serial Addition Test (z vs Task Force)."},
+  {id:"smscreen", ic:"🩹", name:"SymptoMScreen", tag:"Symptom burden", desc:"12-domain MS symptom self-report (0–72)."},
+  {id:"sixmwt", ic:"🏃", name:"6MWT", tag:"Walking endurance", desc:"Six-Minute Walk Test (distance ± % predicted)."},
+  {id:"fsmc", ic:"💤", name:"FSMC", tag:"Fatigue · motor + cognitive", desc:"Fatigue Scale for Motor & Cognitive Functions (scoring aid)."},
 ];
 const MFIS_TEXT={
 1:"I have been less alert.",2:"I have had difficulty paying attention for long periods of time.",
@@ -737,8 +826,9 @@ function openSub(id,parent){ RETURN_TO=parent;
   try{ if(M[id]) M[id](); }catch(e){}
 }
 function goBack(){ if(RETURN_TO){ var t=RETURN_TO; RETURN_TO=null; showTool(t); } else { showHome(); } }
-function showHome(){GUIDED=false;RETURN_TO=null;var g=el("gnav");if(g)g.style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("home").style.display="block";setTimeout(function(){window.scrollTo({top:window._hubSY||0,behavior:"smooth"});},20);}
-function showTool(id){if(el("home").style.display!=="none"){window._hubSY=window.scrollY;}var cur=document.querySelector(".panel.active");function _sw(){el("home").style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("p_"+id).classList.add("active");if(id!=="report"){var bk=document.querySelector("#p_"+id+" .tool-back");if(bk){var nm={bicams:"BICAMS",msfc:"MSFC"};bk.textContent=(RETURN_TO&&nm[RETURN_TO])?("← Back to "+nm[RETURN_TO]):"← Back to Score Hub";}}try{if(id==="bicams")calcBICAMS();else if(id==="msfc")calcMSFC();}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}if(cur){cur.classList.add("panel-exit");setTimeout(_sw,130);}else{_sw();}}
+function showHome(){GUIDED=false;RETURN_TO=null;var g=el("gnav");if(g)g.style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("home").style.display="block";var _bs=document.getElementById('brandSub');if(_bs)_bs.textContent='MS Score Hub';setTimeout(function(){window.scrollTo({top:window._hubSY||0,behavior:"smooth"});},20);}
+function showTool(id){if(el("home").style.display!=="none"){window._hubSY=window.scrollY;}var cur=document.querySelector(".panel.active");function _sw(){el("home").style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("p_"+id).classList.add("active");var _bs=document.getElementById('brandSub');if(_bs)_bs.textContent=(id==='report'?'Check my MS':((_TMAP[id]&&_TMAP[id].name)||'MS Score Hub'));if(id!=="report"){var bk=document.querySelector("#p_"+id+" .tool-back");if(bk){var nm={bicams:"BICAMS",msfc:"MSFC"};bk.textContent=(RETURN_TO&&nm[RETURN_TO])?("← Back to "+nm[RETURN_TO]):"← Back to Score Hub";}}try{if(id==="bicams")calcBICAMS();else if(id==="msfc")calcMSFC();}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}if(cur){cur.classList.add("panel-exit");setTimeout(_sw,130);}else{_sw();}}
+(function(){if(typeof document==="undefined")return;var mk=function(){if(document.getElementById("scroll-top-btn"))return;var btn=document.createElement("button");btn.id="scroll-top-btn";btn.className="no-print";btn.textContent="\u2191 Top";btn.setAttribute("aria-label","Scroll to top");btn.style.cssText="position:fixed;bottom:20px;right:20px;z-index:200;display:none;padding:10px 14px;border:none;border-radius:24px;background:#1e4a6e;color:#fff;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);";btn.onclick=function(){window.scrollTo({top:0,behavior:"smooth"});};document.body.appendChild(btn);window.addEventListener("scroll",function(){btn.style.display=window.scrollY>300?"block":"none";},{passive:true});};if(document.body)mk();else document.addEventListener("DOMContentLoaded",mk);})();
 function interp(cls,txt){ return '<div class="interp '+cls+'">'+txt+'</div>'; }
 function _zPlain(z){ return z<=-1.5?"In plain terms: this is in the <b>impaired range</b> - clearly below what is typical for similar people; worth discussing with the clinician.":z<=-1?"In plain terms: a little <b>below average</b> (borderline) - not clearly impaired, but worth keeping an eye on.":z<-0.5?"In plain terms: <b>broadly average</b> - reassuring.":"In plain terms: <b>average or above</b> for similar people - reassuring."; }
 function _flagBlanks(p,a,b){ for(var i=a;i<=b;i++){var e=el(p+i); if(e){ if(e.value==="") e.classList.add("blank"); else e.classList.remove("blank"); }} }
@@ -756,9 +846,10 @@ const _TMAP=Object.fromEntries(TOOLS.map(t=>[t.id,t]));
 const GROUPS=[
  {name:"Disability &amp; severity", sub:"Overall disability, and how it compares to others (ARMSS / MSSS).", ids:["edss","pdds"]},
  {name:"Cognition - BICAMS battery", sub:"Clinician-administered. Processing speed + verbal &amp; visual memory; impaired at z &le; -1.5.", ids:["bicams","sdmt","cvlt","bvmt","pasat"]},
- {name:"Fatigue", sub:"Self-report.", ids:["mfis","fss"]},
+ {name:"Fatigue", sub:"Self-report.", ids:["mfis","fss","fsmc"]},
  {name:"Mood", sub:"Self-report screens.", ids:["phq9","gad7"]},
- {name:"Walking &amp; motor function", sub:"MSWS-12 is self-report; T25FW &amp; 9-HPT are clinician-timed.", ids:["msws","t25fw","nhpt"]},
+ {name:"Symptom burden", sub:"Global self-report of MS symptom severity.", ids:["smscreen"]},
+ {name:"Walking &amp; motor function", sub:"MSWS-12 is self-report; T25FW, 9-HPT &amp; 6MWT are clinician-administered.", ids:["msws","t25fw","nhpt","sixmwt"]},
  {name:"Quality of life &amp; impact", sub:"Self-report.", ids:["msqol","promis","msis"]},
  {name:"Composite - MSFC", sub:"Arm + leg + cognition combined into one z-score (needs reference values).", ids:["msfc"]}
 ];
@@ -1231,6 +1322,59 @@ function calcFSS(){const o=readFSS();const r=scoreFSS(o); if(r.answered===0){el(
 function fillFSS(v){for(let i=1;i<=9;i++)el("fss_"+i).value=v;calcFSS();}
 function clearFSS(){for(let i=1;i<=9;i++)el("fss_"+i).value="";_clearBlanks("fss_",1,9);el("fss_out").innerHTML="";}
 
+// ===== SymptoMScreen (Green 2017) =====
+const SMS_TEXT={1:"Walking / mobility",2:"Hand function / dexterity",3:"Spasticity / stiffness",4:"Body pain",5:"Sensory symptoms (numbness / tingling)",6:"Bladder control",7:"Fatigue",8:"Vision",9:"Dizziness / vertigo",10:"Thinking / memory",11:"Depressed mood",12:"Anxiety"};
+el("sms_items").innerHTML='<div class="note" style="margin-bottom:8px">Over the past week, how much have you been affected by&hellip; (0 = not at all, 6 = totally)</div>'+Array.from({length:12},(_,k)=>{const i=k+1;let opts="";for(let v=0;v<=6;v++){const lab=v===0?"0 - Not at all":v===6?"6 - Totally":String(v);opts+='<option value="'+v+'">'+lab+'</option>';}return '<div class="item"><div><span class="qn">'+i+'.</span>'+SMS_TEXT[i]+'</div><select id="sms_'+i+'" oninput="calcSMS()"><option value="">- select -</option>'+opts+'</select></div>';}).join("");
+function readSMS(){const o={};for(let i=1;i<=12;i++){const v=el("sms_"+i).value;o[i]=v===""?null:_num(v);}return o;}
+function scoreSymptoMScreen(o){let answered=0,total=0,worst=[];for(let i=1;i<=12;i++){const v=o[i];if(v!=null&&!isNaN(v)){answered++;total+=v;if(v>=4)worst.push(i);}}return{answered,total,worst};}
+function calcSMS(){const o=readSMS();const r=scoreSymptoMScreen(o);if(r.answered===0){el("smscreen_out").innerHTML="";return;}
+  for(let i=1;i<=12;i++){const e=el("sms_"+i);if(e)e.classList.toggle("blank",e.value==="");}
+  const cls=r.total>=48?"bad":r.total>=24?"warn":"good";
+  const msg=r.total>=48?"High overall symptom burden.":r.total>=24?"Moderate overall symptom burden.":"Lower overall symptom burden.";
+  const wl=r.worst.length?(" Most-affected domains: "+r.worst.map(i=>SMS_TEXT[i]).join(", ")+"."):"";
+  const note=(r.answered<12?("&#9888; "+r.answered+"/12 answered - total uses answered items only. "):"")+"Total = sum of 12 domains (0&ndash;72). Higher = greater symptom burden; track it over time and look at the individual domains."+wl;
+  el("smscreen_out").innerHTML='<div class="scoreline"><div class="bigscore">'+r.total+'<small> / 72</small></div></div>'+interp(cls,msg)+'<div class="note">'+note+'</div>';}
+function fillSMS(v){for(let i=1;i<=12;i++)el("sms_"+i).value=v;calcSMS();}
+function clearSMS(){for(let i=1;i<=12;i++){el("sms_"+i).value="";const e=el("sms_"+i);if(e)e.classList.remove("blank");}el("smscreen_out").innerHTML="";}
+
+// ===== 6MWT (Enright & Sherrill 1998 % predicted) =====
+function score6MWT(dist,d){
+  if(dist==null||isNaN(dist)||!(dist>0)) return {dist:null};
+  let pred=null;
+  if(d&&(d.sex==="M"||d.sex==="F")&&d.age>0&&d.ht>0&&d.wt>0){
+    pred = d.sex==="M" ? (7.57*d.ht - 5.02*d.age - 1.76*d.wt - 309)
+                       : (2.11*d.ht - 2.29*d.wt - 5.78*d.age + 667);
+    if(!(pred>0)) pred=null;
+  }
+  return {dist, pred, pct: pred? (dist/pred*100) : null};
+}
+function calc6MWT(){
+  const dist=_num(el("sixmwt_dist").value);
+  const d={sex:el("sixmwt_sex").value, age:_num(el("sixmwt_age").value), ht:_num(el("sixmwt_ht").value), wt:_num(el("sixmwt_wt").value)};
+  const r=score6MWT(dist,d);
+  if(r.dist==null){el("sixmwt_out").innerHTML="";return;}
+  let extra="", body="";
+  if(r.pct!=null){const cls=r.pct>=80?"good":r.pct>=60?"warn":"bad";extra=" &middot; "+Math.round(r.pct)+"% predicted";
+    body=interp(cls, r.pct>=80?"Within roughly the normal range for a healthy adult.":r.pct>=60?"Mildly reduced vs healthy adults.":"Notably reduced vs healthy adults.");}
+  const note="Distance walked in 6 minutes (m). Higher = better endurance."+(r.pred!=null?(" Predicted for a healthy adult of this age/sex/size &asymp; "+Math.round(r.pred)+" m (Enright 1998, general norm)."):" Add age, sex, height and weight for an optional % predicted.");
+  el("sixmwt_out").innerHTML='<div class="scoreline"><div class="bigscore">'+Math.round(r.dist)+'<small> m'+extra+'</small></div></div>'+body+'<div class="note">'+note+'</div>';}
+function clear6MWT(){["dist","age","sex","ht","wt"].forEach(k=>{const e=el("sixmwt_"+k);if(e)e.value="";});el("sixmwt_out").innerHTML="";}
+
+// ===== FSMC (Penner 2009) - scoring aid; item wording NOT reproduced (licensed) =====
+const FSMC_MOTOR=[2,3,5,6,9,10,12,14,16,19];
+el("fsmc_items").innerHTML='<div class="note" style="margin-bottom:8px">Enter each item from the official FSMC form (1 = does not apply at all &hellip; 5 = applies completely).</div>'+Array.from({length:20},(_,k)=>{const i=k+1;const sub=FSMC_MOTOR.indexOf(i)>=0?"Motor":"Cognitive";let opts="";for(let v=1;v<=5;v++){const lab=v===1?"1 - Does not apply at all":v===5?"5 - Applies completely":String(v);opts+='<option value="'+v+'">'+lab+'</option>';}return '<div class="item"><div><span class="qn">'+i+'.</span> Item '+i+' <span style="color:var(--ink-faint);font-size:11px">('+sub+')</span></div><select id="fsmc_'+i+'" oninput="calcFSMC()"><option value="">- select -</option>'+opts+'</select></div>';}).join("");
+function readFSMC(){const o={};for(let i=1;i<=20;i++){const v=el("fsmc_"+i).value;o[i]=v===""?null:_num(v);}return o;}
+function scoreFSMC(o){let ans=0,total=0,motor=0,cog=0;for(let i=1;i<=20;i++){const v=o[i];if(v!=null&&!isNaN(v)){ans++;total+=v;if(FSMC_MOTOR.indexOf(i)>=0)motor+=v;else cog+=v;}}return{answered:ans,total,motor,cognitive:cog};}
+function calcFSMC(){const o=readFSMC();const r=scoreFSMC(o);if(r.answered===0){el("fsmc_out").innerHTML="";return;}
+  for(let i=1;i<=20;i++){const e=el("fsmc_"+i);if(e)e.classList.toggle("blank",e.value==="");}
+  const cls=r.total>=63?"bad":r.total>=43?"warn":"good";
+  const band=r.total>=63?"severe fatigue":r.total>=53?"moderate fatigue":r.total>=43?"mild fatigue":"no fatigue";
+  const msg="Total "+r.total+"/100 - "+band+" (Penner 2009: &ge; 43 mild, &ge; 53 moderate, &ge; 63 severe).";
+  const note=(r.answered<20?("&#9888; "+r.answered+"/20 answered - scores use answered items only. "):"")+"Motor "+r.motor+"/50 &middot; Cognitive "+r.cognitive+"/50. Higher = more fatigue.";
+  el("fsmc_out").innerHTML='<div class="scoreline"><div class="bigscore">'+r.total+'<small> / 100</small></div></div>'+interp(cls,msg)+'<div class="note">'+note+'</div>';}
+function fillFSMC(v){for(let i=1;i<=20;i++)el("fsmc_"+i).value=v;calcFSMC();}
+function clearFSMC(){for(let i=1;i<=20;i++){el("fsmc_"+i).value="";const e=el("fsmc_"+i);if(e)e.classList.remove("blank");}el("fsmc_out").innerHTML="";}
+
 // ===== PHQ-9 / GAD-7 shared options =====
 const _DSM4=[["0 - Not at all",0],["1 - Several days",1],["2 - More than half the days",2],["3 - Nearly every day",3]];
 function _dsmSel(id){let opts="";for(const o of _DSM4)opts+='<option value="'+o[1]+'">'+o[0]+'</option>';return '<select id="'+id+'" oninput="'+(id.indexOf("phq")===0?"calcPHQ":"calcGAD")+'()"><option value="">- select -</option>'+opts+'</select>';}
@@ -1407,6 +1551,19 @@ function buildReport(){
     rows.push(["Walking ability (MSWS-12)", t.toFixed(0)+"/100",
       t>=70?"bad":t>=40?"warn":"good", d]);
     if(t>=40) flags.push("Walking ability (MSWS-12 "+t.toFixed(0)+"/100): A score at this level indicates MS is having a significant impact on mobility and walking endurance.");
+  }
+
+  // ── SymptoMScreen (overall symptom burden) ────────────────────────
+  { const sm=scoreSymptoMScreen(readSMS());
+    if(sm.answered>0){
+      const t=sm.total;
+      const d = t<24 ? "Overall, MS symptoms are having a low impact on you right now." :
+                t<48 ? "MS symptoms are having a moderate overall impact across several areas." :
+                       "MS symptoms are having a high overall impact across many areas of daily life.";
+      rows.push(["Overall symptom burden (SymptoMScreen)", t+"/72",
+        t>=48?"bad":t>=24?"warn":"good", d]);
+      if(sm.worst.length) flags.push("Symptom burden (SymptoMScreen "+t+"/72): "+sm.worst.length+" symptom area(s) rated 4 or higher — worth raising with your MS team.");
+    }
   }
 
   // ── Fatigue + Cognition ───────────────────────────────────────────
@@ -1594,7 +1751,7 @@ document.addEventListener("input", function(e){ var t=e.target; if(!t||t.tagName
 });
 function openClin(){ showTool("clinreport"); buildClinReport(); }
 function buildClinReport(){
-  var tools=[["edss","MS severity / EDSS"],["pdds","PDDS"],["sdmt","SDMT"],["bvmt","BVMT-R"],["cvlt","CVLT-II"],["pasat","PASAT-3"],["bicams","BICAMS"],["t25fw","T25FW"],["nhpt","9-HPT"],["msfc","MSFC"],["mfis","MFIS"],["fss","FSS"],["phq9","PHQ-9"],["gad7","GAD-7"],["msws","MSWS-12"],["msis","MSIS-29"],["msqol","MSQOL-54"],["promis","PROMIS-29"]];
+  var tools=[["edss","MS severity / EDSS"],["pdds","PDDS"],["sdmt","SDMT"],["bvmt","BVMT-R"],["cvlt","CVLT-II"],["pasat","PASAT-3"],["bicams","BICAMS"],["t25fw","T25FW"],["nhpt","9-HPT"],["msfc","MSFC"],["mfis","MFIS"],["fss","FSS"],["phq9","PHQ-9"],["gad7","GAD-7"],["msws","MSWS-12"],["msis","MSIS-29"],["msqol","MSQOL-54"],["promis","PROMIS-29"],["smscreen","SymptoMScreen"],["sixmwt","6MWT"],["fsmc","FSMC"]];
   var blocks="",n=0;
   for(var i=0;i<tools.length;i++){ var r=el(tools[i][0]+"_out"); if(r && r.textContent.trim()){ n++; blocks+='<div class="clin-block"><div class="clin-name">'+tools[i][1]+'</div><div class="clin-body">'+r.innerHTML+'</div></div>'; } }
   if(n===0){ el("clin_out").innerHTML=interp("neutral","No tools have results yet. Open the tools you need, enter the scores, then come back and press Compile."); el("clin_actions").style.display="none"; return; }

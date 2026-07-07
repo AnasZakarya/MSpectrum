@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="MSpectrum - a free, offline hub for multiple sclerosis outcome measures and diagnosis: the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a 2024 McDonald-criteria diagnostic checker.">
 <title>MSpectrum - Comprehensive MS scoring & diagnosis (EDSS & beyond)</title>
+<meta name="keywords" content="multiple sclerosis, MS, EDSS, EDSS calculator, Neurostatus, MS outcome measures, MS scores, SDMT, BICAMS, MSFC, PDDS, MSSS, ARMSS, MFIS, FSS, MSWS-12, PROMIS-29, MSQOL-54, McDonald criteria 2024, MS diagnosis">
+<meta name="author" content="Anas Nourelden, Anza Memon - Wayne State University, Department of Neurology">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1e4a6e">
+<link rel="canonical" href="https://anaszakarya.github.io/MSpectrum/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MSpectrum">
+<meta property="og:title" content="MSpectrum - MS scoring & diagnosis (EDSS & beyond)">
+<meta property="og:description" content="A free, offline, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.">
+<meta property="og:url" content="https://anaszakarya.github.io/MSpectrum/">
+<meta property="og:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MSpectrum - MS scoring & diagnosis (EDSS & beyond)">
+<meta name="twitter:description" content="A free, offline, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.">
+<meta name="twitter:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MSpectrum - MS scoring & diagnosis (EDSS & beyond)","url":"https://anaszakarya.github.io/MSpectrum/","description":"A free, offline, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"},{"@type":"Person","name":"Anza Memon"}],"publisher":{"@type":"Organization","name":"Wayne State University, Department of Neurology"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -54,6 +71,9 @@ html, body {
   line-height: 1.5;
   color: var(--ink);
   background: var(--bg);
+  background-image: radial-gradient(circle at 50% -5%, rgba(30,74,110,0.07), transparent 55%), radial-gradient(rgba(30,74,110,0.09) 1px, transparent 1px);
+  background-size: 100% 100%, 22px 22px;
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -88,12 +108,12 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(244,246,248,.92);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--rule);
-  padding: 12px 24px;
+  background: rgba(255,255,255,.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--accent);
+  padding: 14px 24px;
 }
-#landing .app-header { padding:12px 18px; box-shadow:none; }
+#landing .app-header { padding:14px 18px; box-shadow:none; }
 
 .header-grid {
   max-width: 1100px;
@@ -2782,6 +2802,11 @@ input[type="checkbox"] {
 .feature-card p,.about-toggle p,.about-block>p,.way-card p{text-align:justify;text-justify:inter-word}
 .sub{font-size:12px;color:var(--ink-faint);letter-spacing:.08em;text-transform:uppercase;padding-left:33px;display:none;}
 #landing.picking .sub{display:block;}
+#landing .brand-mark .sub{display:none;font-size:12px;letter-spacing:.01em;color:var(--ink-faint);font-weight:600;text-transform:none;padding-left:0}
+#landing.picking .brand-mark .sub{display:block}
+#landing.picking .ms-brand-name{font-size:20px!important}
+#landing.picking .ms-brand-logo{width:34px;height:34px}
+#landing.picking .brand-mark{padding-left:26px}
 .back-to-explore{background:#fff;border:1px solid var(--rule-strong);border-radius:20px;padding:6px 14px;font-size:13px;color:var(--accent-ink);cursor:pointer;margin-bottom:16px;font-weight:600}
 .back-to-explore:hover{background:var(--accent-ink);color:#fff;border-color:var(--accent-ink)}
 #landing.picking .hero-wrap,#landing.picking #features,#landing.picking #explore>h2,#landing.picking #explore>.section-rule,#landing.picking #explore-home,#landing.picking .about-block,#landing.picking .app-footer{display:none!important}
@@ -2819,6 +2844,17 @@ input[type="checkbox"] {
 .way-card.clinical-waycard:hover { border-color: #5a2a7a; box-shadow: 0 4px 14px rgba(123,63,160,0.12); }
 .way-card.clinical-waycard .way-cta { color: #7b3fa0; }
 
+    /* Logo animation: neural signal flow along the S + synapse pulse (honours reduced-motion) */
+    @keyframes msFlow { to { stroke-dashoffset: -60; } }
+    @keyframes msPulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+    @keyframes msDraw { 0% { stroke-dashoffset: 100; } 40% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
+    @keyframes msPop { 0%,68%,100% { transform: scale(1); } 76% { transform: scale(1.25); } 84% { transform: scale(.92); } 91% { transform: scale(1.05); } }
+    @media (prefers-reduced-motion: no-preference) {
+      svg path[stroke^="url(#mslg"] { animation: msFlow 4s linear infinite; }
+      svg path[stroke="#cfd8dc"] { stroke-dasharray: 100; animation: msDraw 7s ease-in-out infinite; }
+      .ms-logo { transform-origin: center; animation: msPop 4.5s ease-in-out infinite; }
+      svg circle[fill="#ff7a1a"] { animation: msPulse 2.6s ease-in-out infinite; }
+    }
 </style>
 </head>
 <body>
@@ -2830,10 +2866,10 @@ input[type="checkbox"] {
   <header class="app-header">
     <div class="header-grid landing">
       <a class="brand-link" href="#landing" id="landing-brand-link">
-        <div class="brand-mark" style="display:flex;flex-direction:column;gap:1px;line-height:1.15;"><div style="font-size:20px;display:flex;align-items:center;gap:8px;"><svg width="26" height="26" viewBox="0 0 48 48" aria-hidden="true" style="vertical-align:middle"><defs><linearGradient id="mslg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e4a6e"/><stop offset=".55" stop-color="#2a9d8f"/><stop offset="1" stop-color="#b85c1a"/></linearGradient></defs><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#cfd8dc" stroke-width="1.3"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="url(#mslg)" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#23628a"/><circle cx="13" cy="41.2" r="0.95" fill="#23628a"/><circle cx="19.2" cy="40" r="0.95" fill="#23628a"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="url(#mslg)"/><circle cx="34" cy="12" r="1.7" fill="#dff0ea"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff7a1a" stroke-width="0.8"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff7a1a"/></svg><span><em>MS</em>pectrum</span></div></div>
+        <div class="brand-mark" style="display:flex;flex-direction:row;align-items:center;gap:10px;"><svg class="ms-logo ms-brand-logo" width="32" height="32" viewBox="0 0 48 48" aria-hidden="true" style="vertical-align:middle"><defs><linearGradient id="mslg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e4a6e"/><stop offset=".55" stop-color="#2a9d8f"/><stop offset="1" stop-color="#b85c1a"/></linearGradient></defs><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#cfd8dc" stroke-width="1.3" pathLength="100"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="url(#mslg)" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#23628a"/><circle cx="13" cy="41.2" r="0.95" fill="#23628a"/><circle cx="19.2" cy="40" r="0.95" fill="#23628a"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="url(#mslg)"/><circle cx="34" cy="12" r="1.7" fill="#dff0ea"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff7a1a" stroke-width="0.8"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff7a1a"/></svg><div style="display:flex;flex-direction:column;gap:1px;line-height:1.15;"><span class="ms-brand-name" style="font-size:26px"><em>MS</em>pectrum</span><span class="sub">AutoEDSSguide</span></div></div>
       </a>
       <div></div>
-      <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn-cta" id="landing-start-btn" style="padding:10px 18px; font-size:13px; box-shadow:none;" aria-label="Get started">Get started</button><button class="btn-cta" id="landing-back-btn" style="padding:6px 14px; font-size:13px; box-shadow:none; border-radius:20px; display:none;" aria-label="Back to MSpectrum">← MSpectrum home</button></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn-cta" id="landing-start-btn" style="padding:12px 24px; font-size:15px; box-shadow:none;" aria-label="Get started">Get started</button><button class="btn-cta" id="landing-back-btn" style="padding:6px 14px; font-size:13px; box-shadow:none; border-radius:20px; display:none;" aria-label="Back to MSpectrum">← MSpectrum home</button></div>
     </div>
   </header>
 
@@ -2841,7 +2877,7 @@ input[type="checkbox"] {
   <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.22;z-index:0"></canvas>
   <div class="hero" style="position:relative;z-index:1">
     <h1><span class="hl" id="hero-edss-hl">MS</span>pectrum</h1>
-    <p class="tagline">A free, offline hub for the outcome measures used in multiple sclerosis - the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a diagnostic checker for the 2024 McDonald criteria. Private, no login, nothing stored.</p>
+    <p class="tagline">MSpectrum is a free, offline suite covering the spectrum of multiple sclerosis measures - the full EDSS alongside scores for cognition, fatigue, mood, walking, quality of life and disease severity, a guided patient report, and a diagnostic checker for the 2024 McDonald criteria.</p>
     <div class="hero-cta">
       <button class="btn-cta" id="hero-start-btn" aria-label="Get started">Get started ↓</button>
       <a class="btn-cta secondary" href="#features" aria-label="Learn More">Learn More ↓</a>
@@ -2916,9 +2952,9 @@ input[type="checkbox"] {
           <span class="way-cta">Open AutoEDSSguide →</span>
         </button>
         <a class="way-card hub-card" href="scores.html" style="text-decoration:none;" aria-label="Open MS Score Hub">
-          <span class="badge" style="background:#2a9d8f;color:white;">18 tools</span>
+          <span class="badge" style="background:#2a9d8f;color:white;">21 tools</span>
           <h3>📊 MS Score Hub</h3>
-          <div class="way-sub">SDMT · BVMT-R · CVLT-II · PDDS · MFIS · FSS · PHQ-9 · GAD-7 · MSWS-12 · MSIS-29 · MSQOL-54 · PROMIS-29 · T25FW · 9-HPT · PASAT-3 · BICAMS · MSFC · MS severity</div>
+          <div class="way-sub">SDMT · BVMT-R · CVLT-II · PDDS · MFIS · FSS · PHQ-9 · GAD-7 · MSWS-12 · MSIS-29 · MSQOL-54 · PROMIS-29 · T25FW · 9-HPT · PASAT-3 · BICAMS · MSFC · SymptoMScreen · 6MWT · FSMC · MS severity</div>
           <p>Stateless calculators &amp; questionnaires for cognition, fatigue, mood and quality of life - each with plain-language interpretation and optional normalization.</p>
           <span class="way-cta">Open Score Hub →</span>
         </a>
@@ -2934,7 +2970,7 @@ input[type="checkbox"] {
           <h3>📝 Check my MS</h3>
           <div class="way-sub">Guided self-report → one report</div>
           <p>Answer a few short questionnaires (disability, walking, fatigue, mood, quality of life) and get one plain-language summary of how MS affects you - with what to discuss with your care team.</p>
-          <span class="way-cta">Start Check my MS →</span>
+          <span class="way-cta">Open Check my MS →</span>
         </a>
       </div>
     </div>
@@ -2986,7 +3022,6 @@ input[type="checkbox"] {
       </button>
     </div>
     <div class="cta-row">
-      <p style="font-size:13px; color: var(--ink-faint); font-style: italic; font-family: var(--serif); margin: 0;">Tip: inside AutoEDSSguide you can switch views anytime. Use &ldquo;Back to MSpectrum&rdquo; to return here.</p>
 
     <div class="refs-sec" style="margin-top:48px;">
       <details class="refs">
@@ -3049,8 +3084,8 @@ input[type="checkbox"] {
       <div class="ref-item"><span class="ref-name">9-HPT</span><span class="ref-cite">Mathiowetz V, Weber K, Kashman N, Volland G. <em>Occup Ther J Res</em> 1985;5(1):24&ndash;38.</span></div>
       <div class="ref-item"><span class="ref-name">BICAMS</span><span class="ref-cite">Langdon DW, Amato MP, Boringa J, et al. <em>Mult Scler J</em> 2012;18(6):891&ndash;8.</span></div>
       <div class="ref-cat">MS Criteria Checker - McDonald 2024</div>
-      <div class="ref-item"><span class="ref-name">McDonald 2024</span><span class="ref-cite">Thompson AJ, Montalban X, Barkhof F, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em> 2025;24(10):850&ndash;865. DOI:10.1016/S1474-4422(25)00270-4.</span></div>
-      <div class="ref-item"><span class="ref-name">Companion papers</span><span class="ref-cite">Consensus recommendations on MRI, the visual system (OCT/VEP) and fluid biomarkers (kappa free light chains, oligoclonal bands) in MS diagnosis. <em>Lancet Neurol</em> 2025 (companion papers).</span></div>
+      <div class="ref-item"><span class="ref-name">McDonald 2024</span><span class="ref-cite">Montalban X, Lebrun-Fr&eacute;nay C, Oh J, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em> 2025;24(10):850&ndash;865. DOI:10.1016/S1474-4422(25)00270-4.</span></div>
+      <div class="ref-item"><span class="ref-name">MRI consensus</span><span class="ref-cite">2024 MAGNIMS&ndash;CMSC&ndash;NAIMS consensus recommendations on the use of MRI for the diagnosis of multiple sclerosis. <em>Lancet Neurol</em> 2025. DOI:10.1016/S1474-4422(25)00304-7.</span></div>
       <div class="ref-item"><span class="ref-name">Differential diagnosis</span><span class="ref-cite">Solomon AJ, Arrambide G, Brownlee WJ, et al. Differential diagnosis of suspected multiple sclerosis: an updated consensus approach. <em>Lancet Neurol</em> 2023;22:750&ndash;68.</span></div>
       <div class="ref-item"><span class="ref-name">RIS conversion</span><span class="ref-cite">Lebrun-Fr&eacute;nay C, Kantarci O, Siva A, et al. Radiologically isolated syndrome: 10-year risk estimate of a clinical event. <em>Ann Neurol</em> 2020;88(2):407&ndash;17.</span></div>
     </div>
@@ -3113,8 +3148,7 @@ input[type="checkbox"] {
     <div class="header-grid landing">
       <button class="home-btn" id="sc-home-btn" aria-label="Back to home">← Home</button>
       <div style="display:flex;align-items:center;gap:10px">
-        <div class="brand-mark" style="font-size:18px;">Auto<em>EDSS</em>guide</div>
-        <span style="font-size:13px;color:rgba(255,255,255,0.7);font-weight:600;">· Sheet Scanner</span>
+        <div class="brand-mark" style="font-size:18px;">Auto<em>EDSS</em>guide · Sheet Scanner</div>
       </div>
       <div></div>
     </div>
@@ -3574,7 +3608,14 @@ AutoEDSSguide provides automated scoring for guidance purposes only and does not
 <section class="app-view" id="app">
   <header class="app-header">
     <div class="header-grid">
-      <button class="home-btn" id="home-btn" aria-label="Back to home">← Home</button>
+      <div style="display:flex;align-items:center;gap:12px;min-width:0">
+        <button class="home-btn" id="home-btn" aria-label="Back to home">← Home</button>
+        <div style="display:flex;align-items:center;gap:10px;min-width:0"><svg class="ms-logo" width="34" height="34" viewBox="0 0 48 48" aria-hidden="true" style="vertical-align:middle"><defs><linearGradient id="mslg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e4a6e"/><stop offset=".55" stop-color="#2a9d8f"/><stop offset="1" stop-color="#b85c1a"/></linearGradient></defs><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 8 L33 3.5 M33 3.5 L31 1 M33 3.5 L35 1"/><path d="M37.5 9.5 L41 6 M41 6 L40 2.5 M41 6 L44 4.8"/><path d="M30.5 9 L27 5.5 M27 5.5 L25 3 M27 5.5 L28.5 2.5"/><path d="M38 12 L43 11 M43 11 L45.5 11.8 M43 11 L45 9.3"/></g><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="#cfd8dc" stroke-width="1.3" pathLength="100"/><path d="M33 14 C 31 8 20 6 16 12 C 12 18 20 21 24 24 C 28 27 36 30 32 36 C 28 42 17 41 15 35" fill="none" stroke="url(#mslg2)" stroke-width="4.2" stroke-linecap="round" stroke-dasharray="8.5 3.4"/><g stroke="#23628a" stroke-width="1.0" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 35 L10 39 M15 35 L13 41 M15 35 L19 40"/></g><circle cx="10" cy="39" r="0.95" fill="#23628a"/><circle cx="13" cy="41.2" r="0.95" fill="#23628a"/><circle cx="19.2" cy="40" r="0.95" fill="#23628a"/><ellipse cx="34" cy="12" rx="4.7" ry="4.3" fill="url(#mslg2)"/><circle cx="34" cy="12" r="1.7" fill="#dff0ea"/><circle cx="33.5" cy="30.4" r="2" fill="none" stroke="#ff7a1a" stroke-width="0.8"/><circle cx="33.5" cy="30.4" r="1.15" fill="#ff7a1a"/></svg><div style="display:flex;flex-direction:column;gap:1px;line-height:1.15;">
+            <div class="brand-mark" style="font-size:20px;font-variation-settings:'opsz' 60;letter-spacing:-0.02em;white-space:nowrap;"><span><em>MS</em>pectrum</span></div>
+            <span style="font-size:12px;letter-spacing:.01em;color:var(--ink-faint);font-weight:600;">AutoEDSSguide</span>
+          </div>
+        </div>
+      </div>
       <div class="patient-quickref">
         <div class="qr-item"><span class="qr-label">Patient</span><span class="qr-value" id="qr-patient">-</span></div>
         <div class="qr-item"><span class="qr-label">Exam</span><span class="qr-value" id="qr-date">-</span></div>
@@ -5016,7 +5057,7 @@ const ROADMAP_VIEW = [
 
 // System view: classic Neurostatus order (7 FS + ambulation)
 const SYSTEM_VIEW = [
-  { id: "patient", num: "i", title: "Patient", subtitle: "Identifying info", cards: ["patient_id"] },
+  { id: "patient", num: "i", title: "Patient & Study", subtitle: "Identifying info", cards: ["patient_id"] },
   { id: "ambulation", num: "A", title: "Ambulation", subtitle: "Walking history & score",
     cards: ["amb_history", "amb_observed", "amb_score"], fsKey: "ambulation_score" },
   { id: "visual", num: "1", title: "Visual", subtitle: "Optic functions",
@@ -6411,6 +6452,19 @@ function showLanding() {
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 
+// Return to the AutoEDSSguide mode picker (EDSS hub), NOT the MSpectrum home.
+function backToEdssModes() {
+  try { FORM_STATE = { ...FORM_STATE, ...captureState() }; } catch (e) {}
+  try { scStopCamera(); } catch (e) {}
+  ["app","scanner","clinical","quickcheck"].forEach(id => {
+    const el = document.getElementById(id); if (el) el.classList.remove("active");
+  });
+  const L = document.getElementById("landing");
+  L.classList.add("active");
+  L.classList.add("picking");
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
 // ── Hero neural-network animation ──────────────────────────
 // ── Split EDSS hero letters for staggered animation
 (function splitHeroLetters() {
@@ -6600,7 +6654,7 @@ document.addEventListener("click", function(e) {
 ["landing-start-btn", "hero-start-btn", "ways-start-btn"].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener("click", () => {
-    document.getElementById("explore").scrollIntoView({ behavior: "smooth", block: "start" });
+    { const _ex=document.getElementById("explore"); if(_ex) _ex.scrollIntoView({ behavior: "smooth", block: "center" }); }
   });
 });
 // AutoEDSSguide hub: open mode picker / back to branches
@@ -6638,7 +6692,7 @@ document.querySelectorAll("[data-enter-view]").forEach(btn => {
 document.getElementById("landing-brand-link")?.addEventListener("click", (e) => {
   e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" });
 });
-document.getElementById("home-btn")?.addEventListener("click", showLanding);
+document.getElementById("home-btn")?.addEventListener("click", backToEdssModes);
 
 // ============================================================
 // Form input listeners (delegated)
@@ -7567,11 +7621,7 @@ function showQuickCheck() {
   qcRender();
   window.scrollTo({ top: 0, behavior: "instant" });
 }
-document.getElementById("qc-home-btn")?.addEventListener("click", () => {
-  document.getElementById("quickcheck").classList.remove("active");
-  document.getElementById("landing").classList.add("active");
-  window.scrollTo({ top: 0, behavior: "instant" });
-});
+document.getElementById("qc-home-btn")?.addEventListener("click", backToEdssModes);
 
 
 // ============================================================
@@ -8224,11 +8274,7 @@ function clinRestart() {
   clinRender();
 }
 
-function clinGoHome() {
-  document.getElementById("clinical").classList.remove("active");
-  document.getElementById("landing").classList.add("active");
-  window.scrollTo({ top: 0, behavior: "instant" });
-}
+function clinGoHome() { backToEdssModes(); }
 
 function showClinical() {
   document.getElementById("landing").classList.remove("active");
@@ -8567,7 +8613,7 @@ function scInitUI() {
   drop.ondragleave = () => drop.classList.remove("dragover");
   drop.ondrop = e => { e.preventDefault(); drop.classList.remove("dragover"); const f = e.dataTransfer.files[0]; if(f) scHandleFile(f); };
   fileIn.onchange = () => { if(fileIn.files[0]) scHandleFile(fileIn.files[0]); };
-  document.getElementById("sc-home-btn").onclick = showLandingFromScanner;
+  document.getElementById("sc-home-btn").onclick = backToEdssModes;
   document.getElementById("sc-btn-cam-start").onclick = scStartCamera;
   document.getElementById("sc-btn-cam-snap").onclick = () => scSnapCamera(SC_CAM_PAGE);
   // Build synopsis grid
@@ -8659,10 +8705,14 @@ async function scExtractAllZones() {
   let worker = null;
   if (window.Tesseract) {
     if (lbl) lbl.textContent = "Starting OCR\u2026";
-    worker = await Tesseract.createWorker("eng");
-    // Neurostatus cells hold a single score digit (0-6 / 0-5) or 'X' (weakness-excluded ataxia)
-    await worker.setParameters({ tessedit_char_whitelist: "0123456789X", tessedit_pageseg_mode: "7" });
+    try {
+      worker = await Tesseract.createWorker("eng");
+      // Neurostatus cells hold a single score digit (0-6 / 0-5) or 'X' (weakness-excluded ataxia)
+      await worker.setParameters({ tessedit_char_whitelist: "0123456789X", tessedit_pageseg_mode: "7" });
+    } catch (e) { worker = null; }
   }
+  const ocrOK = !!worker;
+  if (!ocrOK && lbl) lbl.textContent = "OCR engine unavailable - open the sheet below and enter values manually.";
 
   const total = ZONES.length; let done = 0;
   for (const z of ZONES) {
@@ -8697,7 +8747,7 @@ async function scExtractAllZones() {
 
     if (bar && (done % 3 === 0 || done === total)) {
       bar.style.width = (70 + Math.round((done / total) * 25)) + "%";
-      if (lbl) lbl.textContent = "Reading fields\u2026 " + done + "/" + total;
+      if (lbl && ocrOK) lbl.textContent = "Reading fields\u2026 " + done + "/" + total;
     }
   }
 
@@ -8708,15 +8758,26 @@ async function scExtractAllZones() {
   else calculateSectionScores();
 }
 
-// Lazily load Tesseract.js from CDN (needs internet on first load, then cached).
-function scLoadTesseract() {
-  if (window.Tesseract) return Promise.resolve();
+// Lazily load Tesseract.js (needs internet on first load, then cached).
+// Tries several CDNs so one bad version/CDN can't silently break OCR.
+function scLoadOneScript(src) {
   return new Promise((res, rej) => {
     const s = document.createElement("script");
-    s.src = "https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.1.1/tesseract.min.js";
-    s.onload = res; s.onerror = rej;
+    s.src = src; s.onload = res; s.onerror = () => rej(new Error("load fail"));
     document.head.appendChild(s);
   });
+}
+async function scLoadTesseract() {
+  if (window.Tesseract) return;
+  const urls = [
+    "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js",
+    "https://unpkg.com/tesseract.js@5/dist/tesseract.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.1.0/tesseract.min.js"
+  ];
+  for (const u of urls) {
+    try { await scLoadOneScript(u); if (window.Tesseract) return; } catch (e) {}
+  }
+  throw new Error("Tesseract failed to load from all CDNs");
 }
 
 // Crop one template cell, upscale x4 + binarize for cleaner recognition.
@@ -9145,4 +9206,71 @@ function scSheetToEngineInputs() {
   setn("v_pallor_od","v-pallor-od"); setn("v_pallor_os","v-pallor-os");
 
   // Brainstem
-  setn("b_eom","b-eom"); setn("b_nys","b-nystagmus"); setn(
+  setn("b_eom","b-eom"); setn("b_nys","b-nystagmus"); setn("b_trig","b-trigeminal");
+  setn("b_face","b-facial"); setn("b_hear","b-hearing"); setn("b_dysarth","b-dysarthria");
+  setn("b_dysphag","b-dysphagia"); setn("b_othercn","b-other");
+
+  // Pyramidal - strength (MRC 0-5) + spasticity
+  setn("p_str_deltoid_R","p-str-deltoids-r");  setn("p_str_deltoid_L","p-str-deltoids-l");
+  setn("p_str_biceps_R","p-str-biceps-r");     setn("p_str_biceps_L","p-str-biceps-l");
+  setn("p_str_triceps_R","p-str-triceps-r");   setn("p_str_triceps_L","p-str-triceps-l");
+  setn("p_str_wflex_R","p-str-wristflex-r");   setn("p_str_wflex_L","p-str-wristflex-l");
+  setn("p_str_wext_R","p-str-wristext-r");     setn("p_str_wext_L","p-str-wristext-l");
+  setn("p_str_hipflex_R","p-str-hipflex-r");   setn("p_str_hipflex_L","p-str-hipflex-l");
+  setn("p_str_kneeflex_R","p-str-kneeflex-r"); setn("p_str_kneeflex_L","p-str-kneeflex-l");
+  setn("p_str_kneeext_R","p-str-kneeext-r");   setn("p_str_kneeext_L","p-str-kneeext-l");
+  setn("p_str_ankdorsi_R","p-str-dorsi-r");    setn("p_str_ankdorsi_L","p-str-dorsi-l");
+  setn("p_str_ankplant_R","p-str-plantar-r");  setn("p_str_ankplant_L","p-str-plantar-l");
+  setn("p_spast_arms_R","p-spas-arms-r");      setn("p_spast_arms_L","p-spas-arms-l");
+  setn("p_spast_legs_R","p-spas-legs-r");      setn("p_spast_legs_L","p-spas-legs-l");
+
+  // Cerebellar
+  setn("c_head","c-head-tremor");  setn("c_trunc","c-truncal-ataxia");
+  setn("c_tremor_ue_R","c-tremor-ue-r"); setn("c_tremor_ue_L","c-tremor-ue-l");
+  setn("c_tremor_le_R","c-tremor-le-r"); setn("c_tremor_le_L","c-tremor-le-l");
+  setn("c_rapid_ue_R","c-ram-ue-r");     setn("c_rapid_ue_L","c-ram-ue-l");
+  setn("c_rapid_le_R","c-ram-le-r");     setn("c_rapid_le_L","c-ram-le-l");
+  setn("c_tandem","c-tandem-walk"); setn("c_gait_ataxia","c-gait-ataxia"); setn("c_romberg","c-romberg");
+
+  // Sensory
+  setn("s_sup_ue_R","s-sup-ue-r");     setn("s_sup_ue_L","s-sup-ue-l");
+  setn("s_sup_trunk_R","s-sup-trunk-r"); setn("s_sup_trunk_L","s-sup-trunk-l");
+  setn("s_sup_le_R","s-sup-le-r");     setn("s_sup_le_L","s-sup-le-l");
+  setn("s_vib_ue_R","s-vib-ue-r");     setn("s_vib_ue_L","s-vib-ue-l");
+  setn("s_vib_le_R","s-vib-le-r");     setn("s_vib_le_L","s-vib-le-l");
+  setn("s_pos_ue_R","s-pos-ue-r");     setn("s_pos_ue_L","s-pos-ue-l");
+  setn("s_pos_le_R","s-pos-le-r");     setn("s_pos_le_L","s-pos-le-l");
+  setn("s_lhermitte","s-lhermitte");
+
+  // Bowel / Bladder
+  setn("bb_hes","bb-hesitancy"); setn("bb_urg","bb-urgency"); setn("bb_cath","bb-catheter"); setn("bb_bowel","bb-bowel");
+
+  // Cerebral
+  setn("m_ment","cb-mentation"); setn("m_fat","cb-fatigue"); setn("m_depress","cb-depression"); setn("m_euph","cb-euphoria");
+
+  return inp;
+}
+
+// Unified scanner scoring: read the sheet -> engine A (calculateFullEDSS) ->
+// populate the Functional-System + EDSS fields (never overwriting a manual edit).
+function calculateSectionScores() {
+  let r;
+  try { r = calculateFullEDSS(scSheetToEngineInputs()); } catch (e) { return; }
+  const setv = (id, v) => { const e = document.getElementById(id); if (e && !e.classList.contains("manual-override")) e.value = (v == null ? "" : v); };
+  setv("fs-visual-raw", r.visual_fs);
+  setv("fs-visual-conv", r.visual_fs_conv);
+  setv("fs-brainstem", r.brainstem_fs);
+  setv("fs-pyramidal", r.pyramidal_fs);
+  setv("fs-cerebellar", r.cerebellar_fs);
+  setv("fs-sensory", r.sensory_fs);
+  setv("fs-bowel-bladder-raw", r.bb_fs);
+  setv("fs-bowel-bladder-conv", r.bb_fs_conv);
+  setv("fs-cerebral", r.cerebral_fs);
+  const ed = document.getElementById("edss-step-val");
+  if (ed && !ed.classList.contains("manual-override")) ed.value = (r.edss_step != null ? r.edss_step.toFixed(1) : "");
+}
+function calculateEDSS() { calculateSectionScores(); }
+function scStopCamera() { try { if (SC_CAM_STREAM) { SC_CAM_STREAM.getTracks().forEach(t => t.stop()); SC_CAM_STREAM = null; } } catch (e) {} }
+</script>
+</body>
+</html>
