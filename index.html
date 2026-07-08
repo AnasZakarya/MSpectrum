@@ -1203,6 +1203,10 @@ body {
   min-width: 32px;
   text-align: center;
 }
+.section-fs-display .value .fschip{ display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;border-radius:8px;background:var(--accent);color:#fff;font-family:var(--sans);font-size:16px;font-weight:700;line-height:1;font-feature-settings:"tnum" 1; }
+.section-fs-display .value .fschip.conv{ background:var(--hl); }
+.section-fs-display .value .fschip .xmk{ font-size:10px;margin-left:2px;opacity:.9; }
+.section-fs-display .value .fs-arrow{ margin:0 6px;color:var(--ink-faint);font-size:14px;font-weight:700;vertical-align:middle; }
 
 /* Phase header (Roadmap view) */
 .phase-banner {
@@ -2370,17 +2374,16 @@ input[type="checkbox"] {
   min-width: 120px;
 }
 .rm-fs-value {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #ccc;
-  min-width: 2rem;
-  transition: color 0.4s ease;
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:34px; height:32px; padding:0 9px;
+  border-radius:8px; background:#cbd3dc; color:#fff;
+  font-size:18px; font-weight:800; line-height:1;
+  font-feature-settings:"tnum" 1;
+  transition: background-color 0.4s ease;
 }
-.rm-fs-conv {
-  font-size: 0.85rem;
-  color: #666;
-  font-style: italic;
-}
+.rm-fs-conv { display:inline-flex; align-items:center; gap:6px; font-size:0.85rem; color:#666; font-style:normal; }
+.rm-fs-conv .rm-fs-arrow { color:#9aa3ad; font-weight:700; }
+.rm-fs-conv .rm-fs-cchip { display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:28px;padding:0 8px;border-radius:8px;background:var(--hl);color:#fff;font-size:16px;font-weight:800;line-height:1; }
 .rm-fs-interp {
   font-size: 0.8rem;
   color: #444;
@@ -4942,6 +4945,34 @@ function toggleTip(id) {
   if(c) c.textContent=o?'▼':'▶';
   c?.closest('.exam-tip-header')?.classList.toggle('open',o);
 }
+function toggleAllTips(){
+  const bodies=document.querySelectorAll('.exam-tip-body');
+  if(!bodies.length) return;
+  const open=[...bodies].some(b=>!b.classList.contains('open'));
+  bodies.forEach(b=>{
+    b.classList.toggle('open',open);
+    const hdr=b.closest('.exam-tip')?.querySelector('.exam-tip-header');
+    const chev=hdr?.querySelector('.tip-chevron');
+    if(chev) chev.textContent=open?'\u25BC':'\u25B6';
+    hdr?.classList.toggle('open',open);
+  });
+  const btn=document.getElementById('tips-fab');
+  if(btn) btn.textContent=(open?'\u2139 Hide all exam techniques':'\u2139 Show all exam techniques');
+}
+function refreshTipsFab(){ var f=document.getElementById("tips-fab"); if(!f) return; var a=document.getElementById("app"); f.style.display=(a&&a.classList.contains("active")&&CURRENT_VIEW==="roadmap")?"block":"none"; }
+(function(){
+  if(typeof document==="undefined")return;
+  function mk(){
+    if(document.getElementById("tips-fab"))return;
+    var b=document.createElement("button");
+    b.id="tips-fab"; b.type="button"; b.className="no-print";
+    b.textContent="\u2139 Show all exam techniques";
+    b.style.cssText="position:fixed;bottom:20px;left:20px;z-index:200;display:none;padding:10px 14px;border:none;border-radius:24px;background:#1e4a6e;color:#fff;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);";
+    b.onclick=function(){ toggleAllTips(); };
+    document.body.appendChild(b);
+  }
+  if(document.body)mk(); else document.addEventListener("DOMContentLoaded",mk);
+})();
 function renderClinicalNotes(content, id) {
   return `<div class="clinical-notes">
     <div class="clinical-notes-header" onclick="toggleNotes('${id}')">
@@ -5444,6 +5475,8 @@ function buildView(viewName) {
 
   // Form panels
   document.getElementById("form-root").innerHTML = view.map(renderSection).join("");
+  refreshTipsFab();
+  { var _fab=document.getElementById("tips-fab"); if(_fab && CURRENT_VIEW==="roadmap") _fab.textContent="\u2139 Show all exam techniques"; }
 
   // Activate first tab
   document.querySelector(`.tab-btn[data-tab="${view[0].id}"]`)?.classList.add("active");
@@ -5528,7 +5561,7 @@ function renderPTPanel(){
   var fr=document.getElementById("form-root"); if(!fr) return;
   var op=document.getElementById("pt-panel"); if(op) op.remove();
   document.querySelectorAll(".pt-inline").forEach(function(x){x.remove();});
-  var st=(typeof FORM_STATE!=="undefined")?FORM_STATE:{};
+  var st; try{ st=readForm(); }catch(e){ st=(typeof FORM_STATE!=="undefined")?FORM_STATE:{}; }
   var FSP=["v_","b_","p_","c_","s_","bb_","m_"];
   function ok(id){ return id && FSP.some(function(p){return id.indexOf(p)===0;}) && id.indexOf("marker")<0 && id.indexOf("amb")<0 && id.indexOf("pt_")<0; }
   var abn=[];
@@ -5544,9 +5577,9 @@ function renderPTPanel(){
     var avail=abn.filter(function(a){return !PT_FLAGS[a.id];});
     var flagged=abn.filter(function(a){return PT_FLAGS[a.id];});
     var opts='<option value="">- select a finding that is NOT due to MS -</option>'+avail.map(function(a){return '<option value="'+a.id+'">'+_ptLabel(a.id)+' ('+a.v+')</option>';}).join("");
-    var flist=flagged.length? '<div style="margin-top:8px">'+flagged.map(function(a){return '<div style="font-size:13px;padding:3px 0">• '+_ptLabel(a.id)+' <b>'+a.v+'</b> — <b>'+PT_FLAGS[a.id]+'</b> (excluded) <button type="button" data-ptrm="'+a.id+'" style="font-size:11px;margin-left:6px;cursor:pointer">remove</button></div>';}).join("")+'</div>' : '';
+    var flist=flagged.length? '<div style="margin-top:8px">'+flagged.map(function(a){return '<div style="font-size:13px;padding:3px 0">- '+_ptLabel(a.id)+' <b>'+a.v+'</b> ('+PT_FLAGS[a.id]+', excluded) <button type="button" data-ptrm="'+a.id+'" style="font-size:11px;margin-left:6px;cursor:pointer">remove</button></div>';}).join("")+'</div>' : '';
     box.style.cssText="margin:16px 0;padding:12px 14px;border:1px solid #d7c9a8;background:#fbf7ec;border-radius:10px";
-    box.innerHTML='<div style="font-weight:700;color:#6b5320;font-size:14px;margin-bottom:4px">Anything not caused by MS? (optional)</div><div style="font-size:12px;color:#6b6b6b;margin-bottom:8px">If a finding is <b>not</b> due to MS, pick it and mark <b>P</b> (permanent, e.g. old injury) or <b>T</b> (temporary, e.g. fracture). It is documented but excluded from the FS score and EDSS. When in doubt, assume MS-related.</div><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><select id="pt-pick" style="font-size:13px;flex:1;min-width:200px;padding:4px">'+opts+'</select><button type="button" id="pt-add-P" style="font-size:12px;padding:4px 10px;cursor:pointer">Mark P</button><button type="button" id="pt-add-T" style="font-size:12px;padding:4px 10px;cursor:pointer">Mark T</button></div>'+flist;
+    box.innerHTML='<div style="font-weight:700;color:#6b5320;font-size:14px;margin-bottom:4px">Anything not caused by MS? (optional)</div><div style="font-size:12px;color:#6b6b6b;margin-bottom:8px">If a finding is <b>not</b> due to MS, pick it and mark <b>P</b> (permanent) or <b>T</b> (temporary). It is documented but <b>excluded</b> from the FS score and EDSS.</div><div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><select id="pt-pick" onchange="event.stopPropagation()" oninput="event.stopPropagation()" style="font-size:13px;flex:1;min-width:200px;padding:5px;border:1px solid #cbb98c;border-radius:6px">'+opts+'</select><button type="button" id="pt-add-P" style="font-size:12px;padding:5px 12px;cursor:pointer;border:1px solid #cbb98c;border-radius:6px;background:#fff;font-weight:600">Mark P</button><button type="button" id="pt-add-T" style="font-size:12px;padding:5px 12px;cursor:pointer;border:1px solid #cbb98c;border-radius:6px;background:#fff;font-weight:600">Mark T</button></div>'+flist;
     var add=function(kind){ var sel=document.getElementById("pt-pick"); if(sel&&sel.value) setPT(sel.value,kind); };
     var bP=document.getElementById("pt-add-P"), bT=document.getElementById("pt-add-T");
     if(bP) bP.onclick=function(){add("P");}; if(bT) bT.onclick=function(){add("T");};
@@ -5577,14 +5610,14 @@ function recalc() {
   setText("qr-date", examDate);
 
   // Section FS displays
-  setText("fs-visual", `${fmtScore(r.visual_fs)} → ${fmtScore(r.visual_fs_conv)}`);
-  setText("fs-brainstem", fmtScore(r.brainstem_fs));
-  setText("fs-pyramidal", fmtScore(r.pyramidal_fs));
-  setText("fs-cerebellar", `${fmtScore(r.cerebellar_fs)}${r.cerebellar_x ? "X" : ""}`);
-  setText("fs-sensory", fmtScore(r.sensory_fs));
-  setText("fs-bowelbladder", `${fmtScore(r.bb_fs)} → ${fmtScore(r.bb_fs_conv)}`);
-  setText("fs-cerebral", fmtScore(r.cerebral_fs));
-  setText("fs-ambulation", fmtScore(r.ambulation_score));
+  setHTML("fs-visual", _fsChip(r.visual_fs, r.visual_fs_conv));
+  setHTML("fs-brainstem", _fsChip(r.brainstem_fs));
+  setHTML("fs-pyramidal", _fsChip(r.pyramidal_fs));
+  setHTML("fs-cerebellar", _fsChip(r.cerebellar_fs, null, r.cerebellar_x));
+  setHTML("fs-sensory", _fsChip(r.sensory_fs));
+  setHTML("fs-bowelbladder", _fsChip(r.bb_fs, r.bb_fs_conv));
+  setHTML("fs-cerebral", _fsChip(r.cerebral_fs));
+  setHTML("fs-ambulation", _fsChip(r.ambulation_score));
 
   // Roadmap FS summary boxes
   updateRoadmapFSBoxes(r);
@@ -5660,6 +5693,12 @@ function _ambGuidanceNote() {
 function setText(id, val) {
   const el = document.getElementById(id);
   if (el) el.textContent = val;
+}
+function setHTML(id, v){ const el = document.getElementById(id); if (el) el.innerHTML = v; }
+function _fsChip(raw, conv, x){
+  var m = '<span class="fschip">' + fmtScore(raw) + (x ? '<span class="xmk">X</span>' : '') + '</span>';
+  if (conv != null && fmtScore(conv) !== "-") m += '<span class="fs-arrow">→</span><span class="fschip conv">' + fmtScore(conv) + '</span>';
+  return m;
 }
 
 
@@ -5793,19 +5832,19 @@ function updateRoadmapFSBoxes(r) {
     if (!valEl) continue;
     const v = data.val;
     if (v == null) {
-      valEl.textContent = "-";
+      valEl.textContent = "-"; valEl.style.backgroundColor = "#cbd3dc"; valEl.style.color = "#fff";
       if (interpEl) interpEl.textContent = "";
       if (boxEl) boxEl.style.borderLeftColor = "#ccc";
     } else {
       const xStr = data.xmark ? "X" : "";
       valEl.textContent = v + xStr;
-      if (convEl && data.conv != null) convEl.textContent = `→ ${data.conv}`;
+      if (convEl && data.conv != null) convEl.innerHTML = '<span class="rm-fs-arrow">→</span><span class="rm-fs-cchip">' + data.conv + '</span>';
       const interps = FS_INTERP[key] || [];
       const idx = Math.min(v, interps.length - 1);
       if (interpEl) interpEl.textContent = interps[idx] || "";
       const color = FS_COLORS[Math.min(v, FS_COLORS.length - 1)] || "#b71c1c";
       if (boxEl) boxEl.style.borderLeftColor = color;
-      valEl.style.color = color;
+      valEl.style.backgroundColor = color; valEl.style.color = "#fff";
     }
   }
 }
@@ -6442,6 +6481,7 @@ function showApp(forceView) {
     buildView(CURRENT_VIEW);
   }
   window.scrollTo({ top: 0, behavior: "instant" });
+  refreshTipsFab();
 }
 function getActiveBuiltView() {
   // Crude check: which set of tabs is currently rendered
@@ -6450,7 +6490,7 @@ function getActiveBuiltView() {
 function showLanding() {
   // Save state before leaving
   FORM_STATE = { ...FORM_STATE, ...captureState() };
-  document.getElementById("app").classList.remove("active");
+  document.getElementById("app").classList.remove("active"); refreshTipsFab();
   document.getElementById("landing").classList.add("active");
   document.getElementById("landing").classList.remove("picking");
   window.scrollTo({ top: 0, behavior: "instant" });
@@ -6458,6 +6498,7 @@ function showLanding() {
 
 // Return to the AutoEDSSguide mode picker (EDSS hub), NOT the MSpectrum home.
 function backToEdssModes() {
+  var _fab=document.getElementById("tips-fab"); if(_fab) _fab.style.display="none";
   try { FORM_STATE = { ...FORM_STATE, ...captureState() }; } catch (e) {}
   try { scStopCamera(); } catch (e) {}
   ["app","scanner","clinical","quickcheck"].forEach(id => {
@@ -7619,7 +7660,7 @@ function drawSpacedText(ctx, text, x, y, spacing, align = "center") {
 // ---- Quick Check entry/exit ----
 function showQuickCheck() {
   document.getElementById("landing").classList.remove("active");
-  document.getElementById("app").classList.remove("active");
+  document.getElementById("app").classList.remove("active"); refreshTipsFab();
   document.getElementById("quickcheck").classList.add("active");
   QC_ANSWERS = {}; QC_INDEX = 0; QC_EARLY_EXIT = null;
   qcRender();
@@ -8282,7 +8323,7 @@ function clinGoHome() { backToEdssModes(); }
 
 function showClinical() {
   document.getElementById("landing").classList.remove("active");
-  document.getElementById("app").classList.remove("active");
+  document.getElementById("app").classList.remove("active"); refreshTipsFab();
   document.getElementById("quickcheck").classList.remove("active");
   document.getElementById("scanner").classList.remove("active");
   document.getElementById("clinical").classList.add("active");
