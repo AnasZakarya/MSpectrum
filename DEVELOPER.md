@@ -1,4 +1,4 @@
-# AutoEDSSguide — Developer Notes
+# AutoEDSSguide: Developer Notes
 
 Internal reference for deployment, updates, and architecture.
 
@@ -60,7 +60,7 @@ To change: Settings → Pages
 
 ## Architecture
 
-- Pure frontend — no server, no build step, no dependencies
+- Pure frontend: no server, no build step, no dependencies
 - All logic in vanilla JavaScript inside `index.html`
 - Data stored in `localStorage` (browser only, never sent anywhere)
 - Scoring engine: `calculateFullEDSS()` → reads `FORM_STATE` → returns EDSS step
