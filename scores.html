@@ -168,6 +168,9 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 }
 .pc-overlay{display:none;position:fixed;inset:0;background:rgba(20,30,40,.55);z-index:100;justify-content:center;overflow:auto;padding:30px 14px}
 .pc-overlay.show{display:flex}
+.chk-done{background:#e4f3e8!important;border-color:#2f8f4e!important;color:#256b3b!important;font-weight:700}
+.chk-todo{opacity:.9}
+.pdds-opt:hover{background:#f3f7fb}.pdds-opt.sel{background:#e8eef4;outline:2px solid #1e4a6e}
 .pc-card{background:#fff;max-width:560px;width:100%;height:max-content;border-radius:14px;padding:26px}
 .pc-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-faint);border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:14px}
 .pc-brand{font-family:var(--serif);font-weight:700;color:var(--accent-ink);font-size:15px}
@@ -176,8 +179,16 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 .pc-foot{font-size:11.5px;color:var(--ink-faint);margin-top:18px;border-top:1px solid var(--rule);padding-top:10px}
 .pc-actions{margin-top:18px;display:flex;gap:10px}
 @media print{ body *{visibility:hidden!important} #printcard,#printcard *{visibility:visible!important}
- #printcard{position:absolute;inset:0;display:block!important;background:#fff;padding:0} #printcard .no-print{display:none!important}
- .pc-card{max-width:100%;margin:0 auto;padding:0} }
+ #printcard{position:absolute!important;left:0;top:0;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:block!important;background:#fff!important;padding:0!important}
+ #printcard .no-print{display:none!important}
+ #printcard .pc-card{max-width:100%!important;width:auto!important;margin:0!important;padding:0!important;box-shadow:none!important;border-radius:0!important;height:auto!important;max-height:none!important;overflow:visible!important} }
+@page{ margin:12mm }
+@media print{
+  body.printing > *:not(#printcard){ display:none !important; }
+  body.printing #printcard{ position:static !important; left:auto !important; top:auto !important; display:block !important; width:100% !important; height:auto !important; min-height:0 !important; max-height:none !important; overflow:visible !important; background:#fff !important; padding:0 !important; }
+  body.printing #printcard .no-print{ display:none !important; }
+  body.printing #printcard .pc-card{ max-width:100% !important; width:auto !important; margin:0 !important; padding:0 !important; box-shadow:none !important; border-radius:0 !important; height:auto !important; max-height:none !important; overflow:visible !important; }
+}
 /* ── UI Animations ── */
 @keyframes panelFadeOut{to{opacity:0;transform:translateY(-4px)}}
 .panel.panel-exit{animation:panelFadeOut .13s ease forwards;pointer-events:none}
@@ -200,7 +211,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 </head>
 <body>
 <header class="top"><div class="top-inner">
-  <div style="display:flex;align-items:center;gap:10px"><svg class="ms-ribbon" width="25" height="36" viewBox="641 208 549 782" aria-hidden="true" style="flex-shrink:0"><circle cx="754.9" cy="487.3" r="32.2" fill="#30A49D" style="animation-delay:0.51s"/><circle cx="873.6" cy="669.7" r="29.7" fill="#60A879" style="animation-delay:0.84s"/><circle cx="793.4" cy="551.7" r="29.8" fill="#38A798" style="animation-delay:0.66s"/><circle cx="693.0" cy="728.6" r="31.0" fill="#28A29D" style="animation-delay:0.95s"/><circle cx="740.8" cy="312.3" r="29.6" fill="#085890" style="animation-delay:0.17s"/><circle cx="888.7" cy="319.2" r="27.6" fill="#07466F" style="animation-delay:0.19s"/><circle cx="719.3" cy="669.1" r="26.5" fill="#68B49E" style="animation-delay:0.83s"/><circle cx="778.2" cy="642.8" r="26.1" fill="#077381" style="animation-delay:0.81s"/><circle cx="868.0" cy="472.7" r="25.9" fill="#30A49D" style="animation-delay:0.49s"/><circle cx="795.6" cy="255.6" r="26.3" fill="#07466F" style="animation-delay:0.04s"/><circle cx="715.2" cy="365.9" r="25.3" fill="#076DA5" style="animation-delay:0.29s"/><circle cx="846.9" cy="274.8" r="26.0" fill="#07466F" style="animation-delay:0.07s"/><circle cx="819.2" cy="604.0" r="24.6" fill="#4AAB93" style="animation-delay:0.73s"/><circle cx="967.0" cy="790.9" r="23.8" fill="#DF8623" style="animation-delay:1.06s"/><circle cx="848.7" cy="528.1" r="21.7" fill="#4AAB93" style="animation-delay:0.62s"/><circle cx="710.3" cy="455.4" r="21.4" fill="#0B8995" style="animation-delay:0.48s"/><circle cx="717.3" cy="781.3" r="22.0" fill="#0B8995" style="animation-delay:1.04s"/><circle cx="674.3" cy="797.0" r="21.2" fill="#0B8995" style="animation-delay:1.07s"/><circle cx="893.4" cy="726.9" r="21.5" fill="#7BA265" style="animation-delay:0.94s"/><circle cx="975.3" cy="837.7" r="23.4" fill="#DF8623" style="animation-delay:1.18s"/><circle cx="1014.2" cy="868.5" r="20.6" fill="#D46116" style="animation-delay:1.26s"/><circle cx="899.2" cy="371.1" r="20.2" fill="#38A798" style="animation-delay:0.30s"/><circle cx="744.6" cy="717.3" r="19.1" fill="#0B8995" style="animation-delay:0.93s"/><circle cx="919.6" cy="770.1" r="19.1" fill="#8F9B50" style="animation-delay:1.02s"/><circle cx="693.1" cy="412.5" r="19.2" fill="#076DA5" style="animation-delay:0.37s"/><circle cx="910.3" cy="453.0" r="18.1" fill="#38A798" style="animation-delay:0.47s"/><circle cx="887.6" cy="416.2" r="16.8" fill="#28A29D" style="animation-delay:0.38s"/><circle cx="702.4" cy="834.1" r="17.0" fill="#68B49E" style="animation-delay:1.16s"/><circle cx="733.3" cy="410.5" r="15.3" fill="#085890" style="animation-delay:0.36s"/><circle cx="936.8" cy="732.0" r="15.8" fill="#8F9B50" style="animation-delay:0.96s"/><circle cx="788.5" cy="300.8" r="15.1" fill="#07466F" style="animation-delay:0.15s"/><circle cx="744.0" cy="540.9" r="14.6" fill="#28A29D" style="animation-delay:0.65s"/><circle cx="1055.7" cy="883.7" r="14.6" fill="#D46116" style="animation-delay:1.31s"/><circle cx="1022.6" cy="825.3" r="14.0" fill="#D46116" style="animation-delay:1.15s"/><circle cx="749.5" cy="267.3" r="13.0" fill="#07466F" style="animation-delay:0.06s"/><circle cx="839.4" cy="567.6" r="13.4" fill="#38A798" style="animation-delay:0.68s"/><circle cx="760.5" cy="684.9" r="12.8" fill="#68B49E" style="animation-delay:0.87s"/><circle cx="738.5" cy="623.6" r="12.4" fill="#68B49E" style="animation-delay:0.76s"/><circle cx="931.9" cy="390.0" r="12.1" fill="#077381" style="animation-delay:0.33s"/><circle cx="927.1" cy="340.6" r="11.2" fill="#07466F" style="animation-delay:0.23s"/><circle cx="771.4" cy="597.7" r="11.4" fill="#4AAB93" style="animation-delay:0.70s"/><circle cx="748.5" cy="442.8" r="10.8" fill="#07466F" style="animation-delay:0.46s"/><circle cx="1087.4" cy="929.9" r="10.7" fill="#D46116" style="animation-delay:1.41s"/><circle cx="888.6" cy="511.3" r="11.5" fill="#4AAB93" style="animation-delay:0.57s"/><circle cx="1023.4" cy="914.8" r="11.1" fill="#D46116" style="animation-delay:1.37s"/><circle cx="826.3" cy="651.1" r="10.4" fill="#68B49E" style="animation-delay:0.82s"/><circle cx="915.6" cy="695.9" r="10.6" fill="#DF8623" style="animation-delay:0.89s"/><circle cx="859.8" cy="611.5" r="11.0" fill="#60A879" style="animation-delay:0.74s"/><circle cx="829.0" cy="231.7" r="10.6" fill="#07466F" style="animation-delay:0.01s"/><circle cx="694.4" cy="320.6" r="10.0" fill="#085890" style="animation-delay:0.20s"/><circle cx="703.7" cy="878.4" r="10.0" fill="#30A49D" style="animation-delay:1.28s"/><circle cx="846.5" cy="635.1" r="10.4" fill="#68B49E" style="animation-delay:0.79s"/><circle cx="833.8" cy="494.9" r="9.8" fill="#0B8995" style="animation-delay:0.53s"/><circle cx="859.7" cy="715.4" r="9.8" fill="#60A879" style="animation-delay:0.91s"/><circle cx="678.4" cy="377.4" r="9.2" fill="#085890" style="animation-delay:0.31s"/><circle cx="739.1" cy="753.2" r="9.6" fill="#38A798" style="animation-delay:0.98s"/><circle cx="1090.7" cy="894.6" r="9.6" fill="#D46116" style="animation-delay:1.32s"/><circle cx="1058.1" cy="844.0" r="9.7" fill="#D46116" style="animation-delay:1.19s"/><circle cx="885.9" cy="764.2" r="9.6" fill="#60A879" style="animation-delay:1.01s"/><circle cx="663.4" cy="762.9" r="8.7" fill="#0F6884" style="animation-delay:1.00s"/><circle cx="906.6" cy="486.6" r="9.3" fill="#4AAB93" style="animation-delay:0.50s"/><circle cx="680.4" cy="858.2" r="8.8" fill="#28A29D" style="animation-delay:1.22s"/><circle cx="906.6" cy="281.7" r="9.0" fill="#07466F" style="animation-delay:0.11s"/><circle cx="819.2" cy="298.9" r="8.4" fill="#07466F" style="animation-delay:0.14s"/><circle cx="1004.7" cy="797.2" r="9.0" fill="#D46116" style="animation-delay:1.09s"/><circle cx="720.6" cy="512.9" r="8.6" fill="#28A29D" style="animation-delay:0.59s"/><circle cx="926.3" cy="802.3" r="8.5" fill="#8F9B50" style="animation-delay:1.11s"/><circle cx="971.8" cy="877.8" r="8.1" fill="#D46116" style="animation-delay:1.27s"/><circle cx="962.9" cy="754.1" r="7.8" fill="#DF8623" style="animation-delay:0.99s"/><circle cx="1122.3" cy="914.5" r="8.0" fill="#D46116" style="animation-delay:1.36s"/><circle cx="831.5" cy="676.0" r="8.3" fill="#4AAB93" style="animation-delay:0.85s"/><circle cx="709.3" cy="489.2" r="7.9" fill="#28A29D" style="animation-delay:0.52s"/><circle cx="847.8" cy="312.9" r="7.7" fill="#0F6884" style="animation-delay:0.18s"/><circle cx="749.7" cy="352.0" r="7.9" fill="#085890" style="animation-delay:0.26s"/><circle cx="792.4" cy="508.4" r="7.4" fill="#30A49D" style="animation-delay:0.55s"/><circle cx="1091.9" cy="863.5" r="8.1" fill="#D46116" style="animation-delay:1.24s"/><circle cx="885.8" cy="259.1" r="7.3" fill="#07466F" style="animation-delay:0.05s"/><circle cx="670.1" cy="834.7" r="7.9" fill="#0F6884" style="animation-delay:1.17s"/><circle cx="752.2" cy="569.1" r="7.5" fill="#38A798" style="animation-delay:0.69s"/><circle cx="817.5" cy="516.1" r="6.7" fill="#38A798" style="animation-delay:0.60s"/><circle cx="925.1" cy="824.9" r="7.3" fill="#DF8623" style="animation-delay:1.14s"/><circle cx="685.1" cy="686.7" r="7.8" fill="#68B49E" style="animation-delay:0.88s"/><circle cx="932.3" cy="417.2" r="7.2" fill="#0B8995" style="animation-delay:0.40s"/><circle cx="994.7" cy="899.0" r="7.0" fill="#D46116" style="animation-delay:1.34s"/><circle cx="746.3" cy="599.0" r="7.2" fill="#38A798" style="animation-delay:0.71s"/><circle cx="923.4" cy="417.1" r="7.6" fill="#68B49E" style="animation-delay:0.39s"/><circle cx="716.6" cy="278.4" r="6.9" fill="#085890" style="animation-delay:0.09s"/><circle cx="703.9" cy="296.3" r="7.0" fill="#085890" style="animation-delay:0.13s"/><circle cx="945.1" cy="822.7" r="6.9" fill="#8F9B50" style="animation-delay:1.13s"/><circle cx="706.1" cy="904.5" r="6.7" fill="#0B8995" style="animation-delay:1.35s"/><circle cx="924.7" cy="309.7" r="6.4" fill="#07466F" style="animation-delay:0.16s"/><circle cx="867.4" cy="436.1" r="6.6" fill="#28A29D" style="animation-delay:0.44s"/><circle cx="685.2" cy="347.4" r="6.5" fill="#085890" style="animation-delay:0.24s"/><circle cx="942.4" cy="845.6" r="6.7" fill="#DF8623" style="animation-delay:1.20s"/><circle cx="1057.0" cy="916.0" r="6.7" fill="#D46116" style="animation-delay:1.38s"/><circle cx="1045.7" cy="936.9" r="6.4" fill="#D46116" style="animation-delay:1.44s"/><circle cx="863.5" cy="558.7" r="5.5" fill="#4AAB93" style="animation-delay:0.67s"/><circle cx="879.1" cy="535.2" r="6.1" fill="#4AAB93" style="animation-delay:0.64s"/><circle cx="860.8" cy="238.7" r="5.9" fill="#07466F" style="animation-delay:0.02s"/><circle cx="782.6" cy="678.7" r="5.6" fill="#0F6884" style="animation-delay:0.86s"/><circle cx="872.1" cy="354.4" r="5.1" fill="#0B8995" style="animation-delay:0.27s"/><circle cx="760.2" cy="241.8" r="5.8" fill="#085890" style="animation-delay:0.03s"/><circle cx="876.2" cy="630.7" r="5.9" fill="#68B49E" style="animation-delay:0.77s"/><circle cx="717.9" cy="632.2" r="5.6" fill="#0B8995" style="animation-delay:0.78s"/><circle cx="910.3" cy="802.2" r="6.4" fill="#7BA265" style="animation-delay:1.10s"/><circle cx="1122.4" cy="880.7" r="5.5" fill="#D46116" style="animation-delay:1.29s"/><circle cx="764.1" cy="527.5" r="4.8" fill="#0B8995" style="animation-delay:0.61s"/><circle cx="910.3" cy="405.1" r="5.6" fill="#0B8995" style="animation-delay:0.35s"/><circle cx="869.2" cy="510.4" r="5.2" fill="#28A29D" style="animation-delay:0.56s"/><circle cx="842.8" cy="698.0" r="5.1" fill="#68B49E" style="animation-delay:0.90s"/><circle cx="772.2" cy="322.8" r="4.6" fill="#085890" style="animation-delay:0.21s"/><circle cx="936.2" cy="364.1" r="4.7" fill="#0B8995" style="animation-delay:0.28s"/><circle cx="723.8" cy="817.4" r="5.1" fill="#28A29D" style="animation-delay:1.12s"/><circle cx="865.1" cy="740.7" r="5.2" fill="#68B49E" style="animation-delay:0.97s"/><circle cx="743.8" cy="382.7" r="5.0" fill="#085890" style="animation-delay:0.32s"/><circle cx="1122.4" cy="946.6" r="4.8" fill="#D46116" style="animation-delay:1.45s"/><circle cx="726.6" cy="435.9" r="5.0" fill="#0F6884" style="animation-delay:0.43s"/><circle cx="790.7" cy="603.7" r="4.6" fill="#0B8995" style="animation-delay:0.72s"/><circle cx="1098.7" cy="962.2" r="4.7" fill="#D46116" style="animation-delay:1.48s"/><circle cx="1153.9" cy="897.9" r="4.8" fill="#D46116" style="animation-delay:1.33s"/><circle cx="685.0" cy="882.6" r="4.6" fill="#0F6884" style="animation-delay:1.30s"/><circle cx="882.3" cy="281.1" r="4.4" fill="#07466F" style="animation-delay:0.10s"/><circle cx="1151.1" cy="926.8" r="4.2" fill="#D46116" style="animation-delay:1.39s"/><circle cx="684.6" cy="439.7" r="4.8" fill="#28A29D" style="animation-delay:0.45s"/><circle cx="1071.5" cy="952.0" r="4.4" fill="#D46116" style="animation-delay:1.46s"/><circle cx="876.0" cy="391.4" r="4.4" fill="#0B8995" style="animation-delay:0.34s"/><circle cx="715.8" cy="294.8" r="4.6" fill="#28A29D" style="animation-delay:0.12s"/><circle cx="724.0" cy="531.5" r="4.9" fill="#0F6884" style="animation-delay:0.63s"/><circle cx="1132.8" cy="973.3" r="4.4" fill="#D46116" style="animation-delay:1.50s"/><circle cx="813.5" cy="636.3" r="4.0" fill="#38A798" style="animation-delay:0.80s"/><circle cx="801.6" cy="224.4" r="3.9" fill="#07466F" style="animation-delay:0.00s"/><circle cx="710.9" cy="505.1" r="4.1" fill="#0B8995" style="animation-delay:0.54s"/><circle cx="716.8" cy="926.8" r="3.7" fill="#0F6884" style="animation-delay:1.40s"/><circle cx="1171.3" cy="965.1" r="3.4" fill="#D46116" style="animation-delay:1.49s"/><circle cx="912.4" cy="426.1" r="4.0" fill="#0B8995" style="animation-delay:0.41s"/><circle cx="897.6" cy="790.5" r="3.9" fill="#7BA265" style="animation-delay:1.05s"/><circle cx="716.8" cy="858.8" r="3.6" fill="#28A29D" style="animation-delay:1.23s"/><circle cx="855.9" cy="329.0" r="3.1" fill="#07466F" style="animation-delay:0.22s"/><circle cx="1149.1" cy="952.8" r="2.6" fill="#D46116" style="animation-delay:1.47s"/><circle cx="1042.3" cy="857.2" r="2.8" fill="#FEAB2C" style="animation-delay:1.21s"/><circle cx="992.3" cy="777.3" r="2.7" fill="#FEAB2C" style="animation-delay:1.03s"/><circle cx="1175.1" cy="934.9" r="2.7" fill="#DF8623" style="animation-delay:1.43s"/></svg><div style="display:flex;flex-direction:column;gap:1px;line-height:1.15"><span class="brand"><em>MS</em>pectrum</span><span class="sub" id="brandSub">MS Score Hub</span></div></div>
+  <div style="display:flex;align-items:center;gap:10px"><img src="mspectrum-logo.svg" alt="MSpectrum logo" width="44" height="46" style="flex-shrink:0;object-fit:contain"><div style="display:flex;flex-direction:column;gap:1px;line-height:1.15"><span class="brand"><em>MS</em>pectrum</span><span class="sub" id="brandSub">MS Score Hub</span></div></div>
   <a class="back" href="index.html">&larr; MSpectrum home</a>
 </div></header>
 
@@ -237,22 +248,15 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 <b>Clinically meaningful change:</b> &ge; 4-point change in raw score is considered reliable (exceeds measurement error; Benedict et al. 2012).<br>
 <b>Norms source:</b> Oral: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (US; age/sex/education regression). Written: Smith A. SDMT Manual (WPS) 1982 (US; age 18&ndash;64).
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('sdmt','SDMT')">📄 Patient summary</button><button class="btn" onclick="exportCSV('sdmt','SDMT')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('sdmt','SDMT')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('sdmt','SDMT')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_pdds">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>PDDS</h2><p class="lead">Patient Determined Disease Steps - the patient-reported analogue of the EDSS.</p>
-    <div class="row"><div class="fld"><label>Patient-selected step</label>
-      <select id="pdds_v" oninput="calcPDDS()">
-        <option value="">-</option>
-        <option value="0">0 - Normal</option><option value="1">1 - Mild disability</option>
-        <option value="2">2 - Moderate disability</option><option value="3">3 - Gait disability</option>
-        <option value="4">4 - Early cane</option><option value="5">5 - Late cane</option>
-        <option value="6">6 - Bilateral support</option><option value="7">7 - Wheelchair / scooter</option>
-        <option value="8">8 - Bedridden</option>
-      </select></div></div>
-    <details open style="margin:2px 0 8px"><summary style="cursor:pointer;font-size:13px;color:#1e4a6e;font-weight:600">What does each step mean? (tap to collapse)</summary><div class="items" style="margin-top:8px"><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">0</span><span><b>Normal.</b> I may have mild symptoms but they do not limit my activity; no walking limitation.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">1</span><span><b>Mild disability.</b> Mild symptoms; no limitation in my activity.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">2</span><span><b>Moderate disability.</b> Symptoms bother me but do not limit my activities.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">3</span><span><b>Gait disability.</b> MS interferes with my activities, especially walking, but I can still walk without any aid.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">4</span><span><b>Early cane.</b> I walk normally most days, but on bad days I need support (a cane, or holding the wall).</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">5</span><span><b>Late cane.</b> I need a cane or single support to walk about 25 feet; without it I cannot walk far.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">6</span><span><b>Bilateral support.</b> I need two canes, crutches, or a walker to walk about 25 feet.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">7</span><span><b>Wheelchair / scooter.</b> My main way of getting around is a wheelchair; I can take only a few steps.</span></div><div class="item" style="grid-template-columns:auto 1fr"><span class="qn">8</span><span><b>Bedridden.</b> I am mostly in bed and cannot use a wheelchair for long.</span></div></div></details>
+    <input type="hidden" id="pdds_v">
+    <div class="usenote" style="margin:4px 0 8px">Tap the step that best describes you:</div>
+    <details open style="margin:2px 0 8px"><summary style="cursor:pointer;font-size:13px;color:#1e4a6e;font-weight:600">Steps 0–8 (tap one to select)</summary><div class="items" style="margin-top:8px"><div class="item pdds-opt" data-v="0" onclick="setPdds(0)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">0</span><span><b>Normal.</b> I may have mild symptoms but they do not limit my activity; no walking limitation.</span></div><div class="item pdds-opt" data-v="1" onclick="setPdds(1)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">1</span><span><b>Mild disability.</b> Mild symptoms; no limitation in my activity.</span></div><div class="item pdds-opt" data-v="2" onclick="setPdds(2)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">2</span><span><b>Moderate disability.</b> Symptoms bother me but do not limit my activities.</span></div><div class="item pdds-opt" data-v="3" onclick="setPdds(3)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">3</span><span><b>Gait disability.</b> MS interferes with my activities, especially walking, but I can still walk without any aid.</span></div><div class="item pdds-opt" data-v="4" onclick="setPdds(4)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">4</span><span><b>Early cane.</b> I walk normally most days, but on bad days I need support (a cane, or holding the wall).</span></div><div class="item pdds-opt" data-v="5" onclick="setPdds(5)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">5</span><span><b>Late cane.</b> I need a cane or single support to walk about 25 feet; without it I cannot walk far.</span></div><div class="item pdds-opt" data-v="6" onclick="setPdds(6)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">6</span><span><b>Bilateral support.</b> I need two canes, crutches, or a walker to walk about 25 feet.</span></div><div class="item pdds-opt" data-v="7" onclick="setPdds(7)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">7</span><span><b>Wheelchair / scooter.</b> My main way of getting around is a wheelchair; I can take only a few steps.</span></div><div class="item pdds-opt" data-v="8" onclick="setPdds(8)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">8</span><span><b>Bedridden.</b> I am mostly in bed and cannot use a wheelchair for long.</span></div></div></details>
     <div class="result" id="pdds_out"></div>
     <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
 <b>Scoring:</b> Single ordinal item &mdash; patient selects one step (0 = Normal, 8 = Bedridden). The selected step is the score; no calculation needed.<br>
@@ -260,7 +264,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 <b>Meaningful change:</b> A change of &ge; 1 step is clinically meaningful (Learmonth 2013).<br>
 <b>Reference:</b> Hohol MJ et al. <em>Neurology</em> 1995;45(8):1503&ndash;10. Learmonth YC et al. <em>BMC Neurol</em> 2013;13:11.
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('pdds','PDDS')">📄 Patient summary</button><button class="btn" onclick="exportCSV('pdds','PDDS')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('pdds','PDDS')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('pdds','PDDS')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_bvmt">
@@ -289,7 +293,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 <b>z-score (automatic norm):</b> Total T1+T2+T3 compared to US MS patients matched for age, sex, education by regression (Marrie RA et al. <em>Front Neurol</em> 2021;11:621010). z &le; &minus;1.5 = impaired domain.<br>
 <b>Reference:</b> Benedict RHB. BVMT-R manual. PAR, 1997.
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('bvmt','BVMT-R')">📄 Patient summary</button><button class="btn" onclick="exportCSV('bvmt','BVMT-R')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('bvmt','BVMT-R')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('bvmt','BVMT-R')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_cvlt">
@@ -335,7 +339,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 <b>z-score (automatic norm):</b> Total T1&ndash;T5 vs US MS patients by regression (Marrie 2021). z &le; &minus;1.5 = impaired.<br>
 <b>Reference:</b> Delis DC et al. CVLT-II manual. Pearson, 2000. Marrie RA et al. <em>Front Neurol</em> 2021;11:621010. Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16:6&ndash;16.
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('cvlt','CVLT-II')">📄 Patient summary</button><button class="btn" onclick="exportCSV('cvlt','CVLT-II')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('cvlt','CVLT-II')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('cvlt','CVLT-II')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_mfis">
@@ -350,7 +354,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 <b>Clinically meaningful change:</b> &asymp; 10-point change in total score across MS trials.<br>
 <b>Reference:</b> Fisk JD et al. <em>Clin Infect Dis</em> 1994;18(Suppl 1):S79&ndash;83. 21-item version: NMSS Clinical Practice Guidelines 1998.
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('mfis','MFIS')">📄 Patient summary</button><button class="btn" onclick="exportCSV('mfis','MFIS')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('mfis','MFIS')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('mfis','MFIS')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_msqol">
@@ -367,7 +371,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 <b>No universal cut-off exists</b> for MSQOL-54; composites of &lt; 50 indicate below-average QoL in most MS cohorts.<br>
 <b>Reference:</b> Vickrey BG et al. <em>Qual Life Res</em> 1995;4(3):187&ndash;206. Composite weights: Ritvo PG et al. adapted from MOS SF-36, 1997.
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('msqol','MSQOL-54')">📄 Patient summary</button><button class="btn" onclick="exportCSV('msqol','MSQOL-54')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('msqol','MSQOL-54')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('msqol','MSQOL-54')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_promis">
@@ -382,7 +386,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 <b>Severity bands</b> (HealthMeasures 2021): Mild / Moderate / Significant concern &mdash; thresholds differ by domain and are shown on each result line.<br>
 <b>Reference:</b> Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. T-score tables: PROMIS Adult Profile Scoring Manual v2.1 (HealthMeasures / Northwestern University, 2021).
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('promis','PROMIS-29')">📄 Patient summary</button><button class="btn" onclick="exportCSV('promis','PROMIS-29')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('promis','PROMIS-29')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('promis','PROMIS-29')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_fss">
@@ -397,7 +401,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 <b>Clinically meaningful change:</b> A change of &ge; 0.45 points in the mean exceeds measurement error in MS (Learmonth YC et al. <em>Mult Scler Relat Disord</em> 2019).<br>
 <b>Reference:</b> Krupp LB, LaRocca NG, Muir-Nash J, Steinberg AD. <em>Arch Neurol</em> 1989;46(10):1121&ndash;3.
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('fss','FSS')">📄 Patient summary</button><button class="btn" onclick="exportCSV('fss','FSS')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('fss','FSS')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('fss','FSS')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_phq9">
@@ -414,7 +418,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 <b>Note in MS:</b> Somatic item overlap (fatigue, sleep, concentration) may inflate scores; a cut-off of &ge; 11 is used in some MS-specific studies (Feinstein A et al. <em>Nat Rev Neurol</em> 2014).<br>
 <b>Reference:</b> Kroenke K, Spitzer RL, Williams JBW. <em>J Gen Intern Med</em> 2001;16(9):606&ndash;13. Public domain (Pfizer Inc.).
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('phq9','PHQ-9')">📄 Patient summary</button><button class="btn" onclick="exportCSV('phq9','PHQ-9')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('phq9','PHQ-9')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('phq9','PHQ-9')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_gad7">
@@ -430,7 +434,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 <b>Clinically meaningful change:</b> &asymp; 4-point change is a reliable clinical response (Rubin HC et al. <em>Gen Hosp Psychiatry</em> 2016).<br>
 <b>Reference:</b> Spitzer RL, Kroenke K, Williams JBW, L&ouml;we B. <em>Arch Intern Med</em> 2006;166(10):1092&ndash;7. Public domain (Pfizer Inc.).
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('gad7','GAD-7')">📄 Patient summary</button><button class="btn" onclick="exportCSV('gad7','GAD-7')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('gad7','GAD-7')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('gad7','GAD-7')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_msws">
@@ -446,7 +450,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
 <b>Minimal clinically important difference (MCID):</b> &ge; 10-point change (Hobart JC et al. <em>Neurology</em> 2003).<br>
 <b>Reference:</b> Hobart JC, Riazi A, Lamping DL, Fitzpatrick R, Thompson AJ. <em>Neurology</em> 2003;60(1):31&ndash;6. &copy; Hobart/Thompson (licensed; short functional labels used here).
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('msws','MSWS-12')">📄 Patient summary</button><button class="btn" onclick="exportCSV('msws','MSWS-12')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('msws','MSWS-12')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('msws','MSWS-12')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_msis">
@@ -464,7 +468,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 <b>MCID:</b> &asymp; 8 points on the Physical subscale (Hobart J et al. <em>Brain</em> 2001).<br>
 <b>Reference:</b> Hobart J, Lamping D, Fitzpatrick R, Riazi A, Thompson A. <em>Brain</em> 2001;124(Pt 5):962&ndash;73. &copy; Hobart/Thompson (licensed; short functional labels used here).
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('msis','MSIS-29')">📄 Patient summary</button><button class="btn" onclick="exportCSV('msis','MSIS-29')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('msis','MSIS-29')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('msis','MSIS-29')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_edss">
@@ -497,7 +501,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 <b>Use:</b> A brief, validated global measure of MS symptom severity, good for tracking change over time. There is no fixed "abnormal" cut-off &mdash; read the total together with the individual domains.<br>
 <b>Reference:</b> Green R, Kalina J, Ford R, et al. SymptoMScreen. <em>Int J MS Care</em> 2017;19(1):1&ndash;8.
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('smscreen','SymptoMScreen')">📄 Patient summary</button><button class="btn" onclick="exportCSV('smscreen','SymptoMScreen')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('smscreen','SymptoMScreen')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('smscreen','SymptoMScreen')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_sixmwt">
@@ -518,7 +522,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 <b>% predicted (optional):</b> Enright &amp; Sherrill reference equations for healthy adults &mdash; Men: 7.57&times;ht(cm) &minus; 5.02&times;age &minus; 1.76&times;wt(kg) &minus; 309; Women: 2.11&times;ht(cm) &minus; 2.29&times;wt(kg) &minus; 5.78&times;age + 667. General (non-MS) norms, shown only as context.<br>
 <b>Reference:</b> Enright PL, Sherrill DL. <em>Am J Respir Crit Care Med</em> 1998;158:1384&ndash;7; Goldman MD, et al. <em>Mult Scler</em> 2008 (6MWT in MS).
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('sixmwt','6MWT')">📄 Patient summary</button><button class="btn" onclick="exportCSV('sixmwt','6MWT')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('sixmwt','6MWT')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('sixmwt','6MWT')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_fsmc">
@@ -535,7 +539,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 <b>Total cut-offs (Penner 2009):</b> &lt; 43 no fatigue &middot; &ge; 43 mild &middot; &ge; 53 moderate &middot; &ge; 63 severe.<br>
 <b>Reference:</b> Penner IK, Raselli C, St&ouml;cklin M, Opwis K, Kappos L, Calabrese P. <em>Mult Scler</em> 2009;15(12):1509&ndash;17.
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('fsmc','FSMC')">📄 Patient summary</button><button class="btn" onclick="exportCSV('fsmc','FSMC')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('fsmc','FSMC')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('fsmc','FSMC')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_report" style="background:transparent;border:none;padding:16px 0 0;box-shadow:none">
@@ -547,9 +551,9 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="report-flow" style="background:#eef5fb;border:1px solid #cfe0ec;border-radius:14px;padding:16px 16px 8px;margin-top:14px">
     <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent);font-size:14px;padding:10px 18px" onclick="startGuided()">▶ Start questionnaires</button></div>
     <div id="report_checklist"></div>
-    <div class="actions"><button class="btn" onclick="buildReport()">Generate my report</button></div>
+    <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent);font-size:15px;font-weight:700;padding:12px 22px" onclick="buildReport()">📋 Generate my report</button></div>
     <div class="result" id="report_out"></div>
-    <div class="actions no-print" id="report_actions" style="display:none"><button class="btn" onclick="reportPDF()">📄 Save / print as PDF</button></div>
+    <div class="actions no-print" id="report_actions" style="display:none"><button class="btn" onclick="reportPDF()">📄 Save my report</button></div>
     </div>
   </section>
 
@@ -567,7 +571,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 <b>Meaningful change:</b> A &ge; 20% increase in time (worsening) is the commonly used clinically meaningful threshold in MS trials (Kragt JJ et al. <em>Mult Scler</em> 2006;12:594&ndash;8).<br>
 <b>Reference:</b> Fischer JS, Rudick RA, Cutter GR, Reingold SC. <em>Mult Scler</em> 1999;5(4):244&ndash;50. NMSS Task Force MSFC Scoring Manual (Fischer JS et al., 2001).
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('t25fw','T25FW')">📄 Patient summary</button><button class="btn" onclick="exportCSV('t25fw','T25FW')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('t25fw','T25FW')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('t25fw','T25FW')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_nhpt">
@@ -589,7 +593,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 <b>Meaningful change:</b> &ge; 20% change in time (Kragt 2006).<br>
 <b>Reference:</b> Mathiowetz V et al. <em>Occup Ther J Res</em> 1985;5(1):24&ndash;38. Fischer JS et al. <em>Mult Scler</em> 1999;5(4):244&ndash;50.
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('nhpt','9-HPT')">📄 Patient summary</button><button class="btn" onclick="exportCSV('nhpt','9-HPT')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('nhpt','9-HPT')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('nhpt','9-HPT')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_bicams">
@@ -612,7 +616,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 <b>Validated in 97 countries, 45+ languages</b> (Langdon 2012).<br>
 <b>Reference:</b> Langdon DW et al. <em>Mult Scler J</em> 2012;18(6):891&ndash;8. Marrie RA et al. <em>Front Neurol</em> 2021;11:621010.
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('bicams','BICAMS')">📄 Patient summary</button><button class="btn" onclick="exportCSV('bicams','BICAMS')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('bicams','BICAMS')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('bicams','BICAMS')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_msfc">
@@ -629,7 +633,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 <b>MSFC = (z<sub>arm</sub> + z<sub>leg</sub> + z<sub>cog</sub>) / 3.</b> Score = 0 is reference-cohort average; negative = below reference. A change of &ge; 0.5 is considered clinically meaningful in MS trials (Cutter GR et al. <em>Neurology</em> 1999).<br>
 <b>Reference:</b> Fischer JS et al. <em>Mult Scler</em> 1999;5(4):244&ndash;50. NMSS Task Force MSFC Administration and Scoring Manual (Fischer JS et al., 2001).
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('msfc','MSFC')">📄 Patient summary</button><button class="btn" onclick="exportCSV('msfc','MSFC')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('msfc','MSFC')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('msfc','MSFC')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_pasat">
@@ -643,7 +647,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 <b>Practice effect:</b> PASAT scores improve substantially with repeated testing; baseline scores should be interpreted cautiously (Rao SM et al. 1991).<br>
 <b>Reference:</b> Gronwall DMA. <em>Percept Mot Skills</em> 1977;44:367&ndash;73. Fischer JS et al. <em>Mult Scler</em> 1999;5(4):244&ndash;50. NMSS Task Force MSFC Manual (2001).
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('pasat','PASAT-3')">📄 Patient summary</button><button class="btn" onclick="exportCSV('pasat','PASAT-3')">Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('pasat','PASAT-3')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('pasat','PASAT-3')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_clinreport">
@@ -652,6 +656,201 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="buildClinReport()">Compile / refresh</button></div>
     <div class="result" id="clin_out"></div>
     <div class="actions no-print" id="clin_actions" style="display:none"><button class="btn" onclick="clinReportPDF()">📄 Save / print as PDF</button></div>
+  </section>
+
+  <div id="gnav" class="gnav" style="display:none">
+    <button class="btn" id="gnav_prev" onclick="guidedPrev()">&larr; Previous</button>
+    <span id="gnav_step"></span>
+    <button class="btn" id="gnav_next" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="guidedNext()">Next &rarr;</button>
+  </div>
+
+  <div id="printcard" class="pc-overlay" onclick="if(event.target===this)closePC()">
+    <div class="pc-card">
+      <div class="pc-head"><span class="pc-brand"><em style="font-style:normal;color:var(--hl)">MS</em>pectrum</span><span id="pc_date"></span></div>
+      <h3 id="pc_title"></h3>
+      <p id="pc_subtitle" class="pc-subtitle"></p>
+      <div id="pc_body"></div>
+      <p class="pc-foot">Scores computed from your responses using validated, published algorithms. For discussion with your clinician only — not a diagnosis. Computed on your device; nothing is stored.</p>
+      <div class="pc-actions no-print"><button class="btn" onclick="pcSaveImage()" style="background:var(--accent);color:#fff;border-color:var(--accent)">📸 Save as image</button><button class="btn" onclick="_printCard()">💾 Save PDF / print</button><button class="btn" onclick="closePC()">Close</button></div>
+    </div>
+  </div>
+
+
+<!-- ===== Supplementary measures (panels) ===== -->
+<section class="panel" id="p_promiscog">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>PROMIS Cognitive Abilities (4a)</h2>
+    <p class="lead">PROMIS Short Form v2.0 - Cognitive Function - Abilities 4a. Answer the 4 statements reflecting the past 7 days.</p>
+    <div class="actions">
+      <button class="btn" onclick="fillPromisCog(5)">All 5 (Very much)</button>
+      <button class="btn" onclick="fillPromisCog(1)">All 1 (Not at all)</button>
+      <button class="btn" onclick="clearPromisCog()">Clear</button>
+    </div>
+    <div class="items" id="promiscog_items"></div>
+    <div class="result" id="promiscog_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+      <b>Scoring:</b> 4 positive-framed cognitive statements rated 1 (Not at all) to 5 (Very much). Raw sum ranges from 4 to 20. Higher = better perceived cognitive functioning.<br>
+      <b>T-Score:</b> Standardised to the U.S. general population (mean = 50, SD = 10). Derived from the official HealthMeasures Adult Profile Scoring lookup values.<br>
+      <b>Clinical Impairment Thresholds:</b> 
+      <ul>
+        <li>T-score &ge; 45: Within normal limits.</li>
+        <li>T-score 40 &ndash; 44: Mild concern (below average).</li>
+        <li>T-score &lt; 40: Significant cognitive difficulties (more than 1.0 standard deviation below the mean).</li>
+      </ul>
+      <b>Reference:</b> HealthMeasures, Northwestern University. Cella D, et al. <em>J Clin Epidemiol</em> 2010.
+    </div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('promiscog','PROMIS Cog 4a')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('promiscog','PROMIS Cog 4a')">📊 Researcher: CSV</button></div>
+  </section>
+
+  <!-- PANEL: PROMIS Pain Intensity -->
+  <section class="panel" id="p_promispain">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>PROMIS Pain Intensity (Global07)</h2>
+    <p class="lead">PROMIS Pain Intensity 1a / Global Health Item 7. Rate your average pain over the past 7 days.</p>
+    <div class="items">
+      <div class="item">
+        <div><span class="qn">1.</span>In the past 7 days, how would you rate your pain on average?</div>
+        <select id="promispain_1" oninput="calcPromisPain()">
+          <option value="">- select -</option>
+          <option value="0">0 - No pain</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10 - Worst imaginable pain</option>
+        </select>
+      </div>
+    </div>
+    <div class="result" id="promispain_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+      <b>Scoring:</b> Single numeric scale item rating from 0 (No pain) to 10 (Worst pain imaginable).<br>
+      <b>Clinical Severity Categories:</b>
+      <ul>
+        <li>Score 0 &ndash; 4: Mild pain (within acceptable bounds / low interference).</li>
+        <li>Score 5 &ndash; 6: Moderate pain concern.</li>
+        <li>Score 7 &ndash; 10: Severe pain, strongly warrants clinical review and management.</li>
+      </ul>
+      <b>Reference:</b> HealthMeasures PROMIS Adult Profile Scoring Manual; Cella D, et al. 2010.
+    </div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('promispain','PROMIS Pain')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('promispain','PROMIS Pain')">📊 Researcher: CSV</button></div>
+  </section>
+
+  <!-- PANEL: ABC Scale -->
+  <section class="panel" id="p_abc">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>Activities-specific Balance Confidence (ABC) Scale</h2>
+    <p class="lead">16-item self-report questionnaire assessing confidence in maintaining balance during common daily activities.</p>
+    <div class="actions">
+      <button class="btn" onclick="fillABC(100)">All 100%</button>
+      <button class="btn" onclick="fillABC(50)">All 50%</button>
+      <button class="btn" onclick="clearABC()">Clear</button>
+    </div>
+    <div class="items" id="abc_items"></div>
+    <div class="result" id="abc_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+      <b>Scoring:</b> 16 items rated from 0% (no confidence) to 100% (complete confidence). Overall score is the mean percentage (0&ndash;100%). At least 12 of 16 items must be completed for a valid score.<br>
+      <b>Interpretation Bands:</b>
+      <ul>
+        <li><b>&gt; 80%:</b> High level of physical functioning.</li>
+        <li><b>50% &ndash; 80%:</b> Moderate level of physical functioning.</li>
+        <li><b>&lt; 50%:</b> Low level of physical functioning.</li>
+      </ul>
+      <b>Fall Risk Threshold:</b> Scores **&lt; 67%** in older adults or patients with neurological diseases (such as MS) indicate a significant increase in the clinical risk of falls.<br>
+      <b>Reference:</b> Powell LE, Myers AM. <em>J Gerontol A Biol Sci Med Sci</em> 1995;50A(1):M28-34.
+    </div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('abc','ABC Scale')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('abc','ABC Scale')">📊 Researcher: CSV</button></div>
+  </section>
+
+  <!-- PANEL: FES-I -->
+  <section class="panel" id="p_fesi">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>Falls Efficacy Scale-International (FES-I)</h2>
+    <p class="lead">16-item scale measuring level of concern about falling during everyday social and physical activities.</p>
+    <div class="actions">
+      <button class="btn" onclick="fillFesi(1)">All 1 (Not at all concerned)</button>
+      <button class="btn" onclick="fillFesi(4)">All 4 (Very concerned)</button>
+      <button class="btn" onclick="clearFesi()">Clear</button>
+    </div>
+    <div class="items" id="fesi_items"></div>
+    <div class="result" id="fesi_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+      <b>Scoring:</b> 16 items rated 1 (Not at all concerned) to 4 (Very concerned). Total score is the sum of all 16 items (range 16&ndash;64). Higher scores indicate greater concern about falling.<br>
+      <b>Concern Levels:</b>
+      <ul>
+        <li><b>16 &ndash; 19:</b> Low concern of falling.</li>
+        <li><b>20 &ndash; 27:</b> Moderate concern of falling.</li>
+        <li><b>28 &ndash; 64:</b> High concern of falling.</li>
+      </ul>
+      <b>Reference:</b> Yardley L, Beyer N, Hauer K, Kempen G, Piot-Ziegler C, Todd C. <em>Age Ageing</em> 2005;34(6):614-9.
+    </div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('fesi','FES-I')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('fesi','FES-I')">📊 Researcher: CSV</button></div>
+  </section>
+
+  <!-- PANEL: Low-Contrast Visual Acuity (LCVA) -->
+  <section class="panel" id="p_lcva">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>Low-Contrast Visual Acuity (LCVA)</h2>
+    <p class="lead">Measures low-contrast letter vision using Sloan letter charts at 2.5% and 1.25% contrast levels (0-60 letters correct per eye).</p>
+    <div class="row">
+      <div class="fld">
+        <label for="lcva_od_25">Right Eye (OD) - 2.5% Contrast</label>
+        <input type="number" id="lcva_od_25" min="0" max="60" placeholder="0-60 letters" oninput="calcLCVA()">
+      </div>
+      <div class="fld">
+        <label for="lcva_os_25">Left Eye (OS) - 2.5% Contrast</label>
+        <input type="number" id="lcva_os_25" min="0" max="60" placeholder="0-60 letters" oninput="calcLCVA()">
+      </div>
+    </div>
+    <div class="row">
+      <div class="fld">
+        <label for="lcva_od_125">Right Eye (OD) - 1.25% Contrast</label>
+        <input type="number" id="lcva_od_125" min="0" max="60" placeholder="0-60 letters" oninput="calcLCVA()">
+      </div>
+      <div class="fld">
+        <label for="lcva_os_125">Left Eye (OS) - 1.25% Contrast</label>
+        <input type="number" id="lcva_os_125" min="0" max="60" placeholder="0-60 letters" oninput="calcLCVA()">
+      </div>
+    </div>
+    <div class="result" id="lcva_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+      <b>Scoring:</b> Record the number of letters read correctly (0 to 60) for each eye at both contrast levels. Sloan charts have 5 letters per line, 12 lines total.<br>
+      <b>Clinical Norms:</b>
+      <ul>
+        <li><b>2.5% Contrast:</b> Typically 35 &ndash; 50 letters for healthy individuals.</li>
+        <li><b>1.25% Contrast:</b> Typically 20 &ndash; 40 letters for healthy individuals.</li>
+      </ul>
+      <b>Clinical Significance in MS:</b> A decrease of <b>&ge; 5 letters</b> (equivalent to 1 full line on the chart) from baseline indicates a clinically significant worsening of visual pathway function (often representing subclinical optic nerve demyelination or axonal loss).
+      <br><b>Reference:</b> Sloan LL, et al. <em>J Opt Soc Am</em> 1952; Balcer LJ, et al. <em>Neurology</em> 2003;61(10):1433-5.
+    </div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('lcva','LCVA')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('lcva','LCVA')">📊 Researcher: CSV</button></div>
+  </section>
+
+  <!-- PANEL: HADS -->
+  <section class="panel" id="p_hads">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>Hospital Anxiety and Depression Scale (HADS)</h2>
+    <p class="lead">14 items assessing anxiety and depression symptoms over the past week, excluding physical symptoms to avoid somatic overlap in MS.</p>
+    <div class="actions">
+      <button class="btn" onclick="clearHads()">Clear</button>
+    </div>
+    <div class="items" id="hads_items"></div>
+    <div class="result" id="hads_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+      <b>Scoring:</b> 14 items total (7 for Anxiety: HADS-A; 7 for Depression: HADS-D). Each item is rated 0 to 3. Scores for each subscale range from 0 to 21.<br>
+      <b>Severity Bands for each subscale (Anxiety &amp; Depression):</b>
+      <ul>
+        <li><b>0 &ndash; 7:</b> Normal (no clinical concern).</li>
+        <li><b>8 &ndash; 10:</b> Borderline abnormal (mild symptoms).</li>
+        <li><b>11 &ndash; 21:</b> Abnormal (indicates significant clinical symptoms).</li>
+      </ul>
+      <b>Reference:</b> Zigmond AS, Snaith RP. <em>Acta Psychiatr Scand</em> 1983;67(6):361-70.
+    </div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('hads','HADS')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('hads','HADS')">📊 Researcher: CSV</button></div>
   </section>
 
   <section class="refs-sec"><details class="refs">
@@ -668,6 +867,13 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="ref-cat">Mood</div>
     <div class="ref-item"><span class="ref-name">PHQ-9</span><span class="ref-cite">Kroenke K, Spitzer RL, Williams JBW. <em>J Gen Intern Med</em> 2001;16(9):606&ndash;13. Public domain (Pfizer).</span></div>
     <div class="ref-item"><span class="ref-name">GAD-7</span><span class="ref-cite">Spitzer RL, Kroenke K, Williams JBW, L&ouml;we B. <em>Arch Intern Med</em> 2006;166(10):1092&ndash;7. Public domain (Pfizer).</span></div>
+    <div class="ref-cat">Supplementary measures (balance, falls, vision, pain, cognition &amp; mood)</div>
+    <div class="ref-item"><span class="ref-name">PROMIS Cog 4a</span><span class="ref-cite">Cella D, et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. HealthMeasures, PROMIS scoring manual (Northwestern Univ.).</span></div>
+    <div class="ref-item"><span class="ref-name">PROMIS Pain Intensity</span><span class="ref-cite">Amtmann D, et al. <em>Pain</em> 2010;150(1):173&ndash;82 (Global07 / NRS-11).</span></div>
+    <div class="ref-item"><span class="ref-name">ABC Scale</span><span class="ref-cite">Powell LE, Myers AM. <em>J Gerontol A Biol Sci Med Sci</em> 1995;50A(1):M28&ndash;34.</span></div>
+    <div class="ref-item"><span class="ref-name">FES-I</span><span class="ref-cite">Yardley L, Beyer N, Hauer K, Kempen G, Piot-Ziegler C, Todd C. <em>Age Ageing</em> 2005;34(6):614&ndash;9.</span></div>
+    <div class="ref-item"><span class="ref-name">LCVA (Sloan)</span><span class="ref-cite">Sloan LL, Habel V. <em>J Opt Soc Am</em> 1952;42:548&ndash;52. Balcer LJ, et al. <em>Neurology</em> 2003;61(10):1433&ndash;5.</span></div>
+    <div class="ref-item"><span class="ref-name">HADS</span><span class="ref-cite">Zigmond AS, Snaith RP. <em>Acta Psychiatr Scand</em> 1983;67(6):361&ndash;70.</span></div>
     <div class="ref-cat">Performance &amp; composites</div>
     <div class="ref-item"><span class="ref-name">PASAT</span><span class="ref-cite">Gronwall DMA. <em>Percept Mot Skills</em> 1977;44:367&ndash;73. (MSFC cognitive component; Task Force reference.)</span></div>
     <div class="ref-item"><span class="ref-name">MSFC / T25FW</span><span class="ref-cite">Fischer JS, Rudick RA, Cutter GR, Reingold SC. <em>Mult Scler</em> 1999;5(4):244-50.</span></div>
@@ -686,22 +892,8 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <p style="font-size:12px;color:var(--ink-faint);margin-top:12px">Proprietary instruments (BVMT-R, CVLT-II, SDMT) are scored from entered numeric results only; their stimuli and norm tables are not reproduced here.</p>
   </details></section>
 
-  <div id="gnav" class="gnav" style="display:none">
-    <button class="btn" id="gnav_prev" onclick="guidedPrev()">&larr; Previous</button>
-    <span id="gnav_step"></span>
-    <button class="btn" id="gnav_next" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="guidedNext()">Next &rarr;</button>
-  </div>
-
-  <div id="printcard" class="pc-overlay" onclick="if(event.target===this)closePC()">
-    <div class="pc-card">
-      <div class="pc-head"><span class="pc-brand"><em style="font-style:normal;color:var(--hl)">MS</em>pectrum</span><span id="pc_date"></span></div>
-      <h3 id="pc_title"></h3>
-      <p id="pc_subtitle" class="pc-subtitle"></p>
-      <div id="pc_body"></div>
-      <p class="pc-foot">Scores computed from your responses using validated, published algorithms. For discussion with your clinician only — not a diagnosis. Computed on your device; nothing is stored.</p>
-      <div class="pc-actions no-print"><button class="btn" onclick="pcDownloadPDF()" style="background:var(--accent);color:#fff;border-color:var(--accent)">📸 Save Image</button><button class="btn" onclick="window.print()">Print</button><button class="btn" onclick="closePC()">Close</button></div>
-    </div>
-  </div>
+  <footer>MSpectrum computes outcome-measure scores and explains what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b></footer>
+</div>
 
   <footer>MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research / educational use; verify locally before clinical or trial use. All computation is local; nothing is stored.</footer>
 </div>
@@ -801,6 +993,12 @@ const TOOLS=[
   {id:"smscreen", ic:"🩹", name:"SymptoMScreen", tag:"Symptom burden", desc:"12-domain MS symptom self-report (0–72)."},
   {id:"sixmwt", ic:"🏃", name:"6MWT", tag:"Walking endurance", desc:"Six-Minute Walk Test (distance ± % predicted)."},
   {id:"fsmc", ic:"💤", name:"FSMC", tag:"Fatigue · motor + cognitive", desc:"Fatigue Scale for Motor & Cognitive Functions (scoring aid)."},
+  {id:"promiscog", ic:"🧠", name:"PROMIS Cog Abilities 4a", tag:"Subjective Cognition", desc:"PROMIS-4a: mental sharpness, memory, attention, thinking speed."},
+  {id:"promispain", ic:"⚡", name:"PROMIS Pain Intensity", tag:"Pain Severity", desc:"PROMIS Global07 single-item 0-10 pain intensity scale."},
+  {id:"abc", ic:"⚖️", name:"ABC Scale", tag:"Balance Confidence", desc:"Activities-specific Balance Confidence Scale (16 items, 0-100%)."},
+  {id:"fesi", ic:"🚶", name:"FES-I", tag:"Fear of Falls", desc:"Falls Efficacy Scale-International: concern of falling (16-64)."},
+  {id:"lcva", ic:"👁️", name:"LCVA Sloan Letters", tag:"Visual Function", desc:"Low-Contrast Visual Acuity (0-60 letters correct for Sloan 2.5% and 1.25%)."},
+  {id:"hads", ic:"🎭", name:"HADS Scale", tag:"Anxiety & Depression", desc:"Hospital Anxiety & Depression Scale: 14 items (0-21 score range)."}
 ];
 const MFIS_TEXT={
 1:"I have been less alert.",2:"I have had difficulty paying attention for long periods of time.",
@@ -827,9 +1025,10 @@ function openSub(id,parent){ RETURN_TO=parent;
   var M={sdmt:calcSDMT,cvlt:calcCVLT,bvmt:calcBVMT,t25fw:calcT25FW,nhpt:calcNHPT,pasat:calcPASAT};
   try{ if(M[id]) M[id](); }catch(e){}
 }
-function goBack(){ if(RETURN_TO){ var t=RETURN_TO; RETURN_TO=null; showTool(t); } else { showHome(); } }
+function _openChk(id){ RETURN_TO="report"; showTool(id); }
+function goBack(){ if(RETURN_TO){ var t=RETURN_TO; RETURN_TO=null; showTool(t); if(t==="report"&&typeof renderChecklist==="function") renderChecklist(); } else { showHome(); } }
 function showHome(){GUIDED=false;RETURN_TO=null;var g=el("gnav");if(g)g.style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("home").style.display="block";var _bs=document.getElementById('brandSub');if(_bs)_bs.textContent='MS Score Hub';setTimeout(function(){window.scrollTo({top:window._hubSY||0,behavior:"smooth"});},20);}
-function showTool(id){if(el("home").style.display!=="none"){window._hubSY=window.scrollY;}var cur=document.querySelector(".panel.active");function _sw(){el("home").style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("p_"+id).classList.add("active");var _bs=document.getElementById('brandSub');if(_bs)_bs.textContent=(id==='report'?'Check my MS':((_TMAP[id]&&_TMAP[id].name)||'MS Score Hub'));if(id!=="report"){var bk=document.querySelector("#p_"+id+" .tool-back");if(bk){var nm={bicams:"BICAMS",msfc:"MSFC"};bk.textContent=(RETURN_TO&&nm[RETURN_TO])?("← Back to "+nm[RETURN_TO]):"← Back to Score Hub";}}try{if(id==="bicams")calcBICAMS();else if(id==="msfc")calcMSFC();}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}if(cur){cur.classList.add("panel-exit");setTimeout(_sw,130);}else{_sw();}}
+function showTool(id){if(el("home").style.display!=="none"){window._hubSY=window.scrollY;}var cur=document.querySelector(".panel.active");function _sw(){el("home").style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("p_"+id).classList.add("active");var _bs=document.getElementById('brandSub');if(_bs)_bs.textContent=(id==='report'?'Check my MS':((_TMAP[id]&&_TMAP[id].name)||'MS Score Hub'));if(id!=="report"){var bk=document.querySelector("#p_"+id+" .tool-back");if(bk){var nm={bicams:"BICAMS",msfc:"MSFC",report:"Check my MS"};bk.textContent=(RETURN_TO&&nm[RETURN_TO])?("← Back to "+nm[RETURN_TO]):"← Back to Score Hub";}}try{if(id==="bicams")calcBICAMS();else if(id==="msfc")calcMSFC();}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}if(cur){cur.classList.add("panel-exit");setTimeout(_sw,130);}else{_sw();}}
 (function(){if(typeof document==="undefined")return;var mk=function(){if(document.getElementById("scroll-top-btn"))return;var btn=document.createElement("button");btn.id="scroll-top-btn";btn.className="no-print";btn.textContent="\u2191 Top";btn.setAttribute("aria-label","Scroll to top");btn.style.cssText="position:fixed;bottom:20px;right:20px;z-index:200;display:none;padding:10px 14px;border:none;border-radius:24px;background:#1e4a6e;color:#fff;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);";btn.onclick=function(){window.scrollTo({top:0,behavior:"smooth"});};document.body.appendChild(btn);window.addEventListener("scroll",function(){btn.style.display=window.scrollY>300?"block":"none";},{passive:true});};if(document.body)mk();else document.addEventListener("DOMContentLoaded",mk);})();
 function interp(cls,txt){ return '<div class="interp '+cls+'">'+txt+'</div>'; }
 function _zPlain(z){ return z<=-1.5?"In plain terms: this is in the <b>impaired range</b> - clearly below what is typical for similar people; worth discussing with the clinician.":z<=-1?"In plain terms: a little <b>below average</b> (borderline) - not clearly impaired, but worth keeping an eye on.":z<-0.5?"In plain terms: <b>broadly average</b> - reassuring.":"In plain terms: <b>average or above</b> for similar people - reassuring."; }
@@ -847,12 +1046,12 @@ const _ghead=(title,sub)=>'<div class="grid-head" style="grid-column:1/-1"><span
 const _TMAP=Object.fromEntries(TOOLS.map(t=>[t.id,t]));
 const GROUPS=[
  {name:"Disability &amp; severity", sub:"Overall disability, and how it compares to others (ARMSS / MSSS).", ids:["edss","pdds"]},
- {name:"Cognition - BICAMS battery", sub:"Clinician-administered. Processing speed + verbal &amp; visual memory; impaired at z &le; -1.5.", ids:["bicams","sdmt","cvlt","bvmt","pasat"]},
+ {name:"Cognition - BICAMS battery", sub:"Clinician-administered. Processing speed + verbal &amp; visual memory; impaired at z &le; -1.5.", ids:["bicams","sdmt","cvlt","bvmt","pasat","promiscog"]},
  {name:"Fatigue", sub:"Self-report.", ids:["mfis","fss","fsmc"]},
- {name:"Mood", sub:"Self-report screens.", ids:["phq9","gad7"]},
+ {name:"Mood", sub:"Self-report screens.", ids:["phq9","gad7","hads"]},
  {name:"Symptom burden", sub:"Global self-report of MS symptom severity.", ids:["smscreen"]},
- {name:"Walking &amp; motor function", sub:"MSWS-12 is self-report; T25FW, 9-HPT &amp; 6MWT are clinician-administered.", ids:["msws","t25fw","nhpt","sixmwt"]},
- {name:"Quality of life &amp; impact", sub:"Self-report.", ids:["msqol","promis","msis"]},
+ {name:"Walking &amp; motor function", sub:"MSWS-12 is self-report; T25FW, 9-HPT &amp; 6MWT are clinician-administered.", ids:["msws","t25fw","nhpt","sixmwt","abc","fesi","lcva"]},
+ {name:"Quality of life &amp; impact", sub:"Self-report.", ids:["msqol","promis","msis","promispain"]},
  {name:"Composite - MSFC", sub:"Arm + leg + cognition combined into one z-score (needs reference values).", ids:["msfc"]}
 ];
 let _ci=0;
@@ -903,9 +1102,11 @@ function calcSDMT(){ const r=_num(el("sdmt_raw").value);
   else { out+='<div class="note">Higher is better. Enter age, sex &amp; education above for an automatic z-score &amp; percentile (US norms). A change of ~4 points between visits is often clinically meaningful.</div>'; }
   el("sdmt_out").innerHTML=out;
 }
+const PDDS_LABELS={0:"Normal",1:"Mild disability",2:"Moderate disability",3:"Gait disability",4:"Early cane",5:"Late cane",6:"Bilateral support",7:"Wheelchair / scooter",8:"Bedridden"};
+function setPdds(n){ el("pdds_v").value=n; document.querySelectorAll(".pdds-opt").forEach(function(x){x.classList.toggle("sel",+x.getAttribute("data-v")===n);}); calcPDDS(); }
 function calcPDDS(){ const v=el("pdds_v").value;
   if(v===""){el("pdds_out").innerHTML="";return;}
-  const lab=el("pdds_v").selectedOptions[0].text; const n=+v;
+  const n=+v; const lab=n+" - "+(PDDS_LABELS[n]||"");
   const cls=n<=1?"good":n<=3?"neutral":n<=6?"warn":"bad";
   el("pdds_out").innerHTML='<div class="scoreline"><div class="bigscore">'+n+'<small> / 8</small></div></div>'+interp(cls, lab+". Steps run 0 (normal) to 8 (bedridden); higher = greater walking/mobility disability. This is the patient’s own rating of function.")+'<div class="note">Single patient-reported item; the self-report analogue of the EDSS (correlates strongly but does not replace the examined EDSS).</div>';
 }
@@ -1273,7 +1474,7 @@ const TOOL_INFO={
 function patientSummary(toolId,name){ const r=el(toolId+"_out");
   if(!r||!r.textContent.trim()){alert("Enter values first.");return;}
   const clone=r.cloneNode(true); clone.querySelectorAll(".note").forEach(n=>n.remove());
-  el("pc_title").textContent=name+" \u2014 your result";
+  el("pc_title").textContent=name+" \u2014 your result"; window._pcName=name;
   var subtEl=el("pc_subtitle"); if(subtEl){subtEl.textContent=TOOL_INFO[toolId]||"";}
   el("pc_date").textContent=new Date().toLocaleDateString();
   el("pc_body").innerHTML=clone.innerHTML;
@@ -1284,30 +1485,42 @@ function patientSummary(toolId,name){ const r=el(toolId+"_out");
       el("pc_body").appendChild(hw);}}
   el("printcard").classList.add("show"); }
 function closePC(){ el("printcard").classList.remove("show"); }
+function pcSaveImage(){
+  var card=document.querySelector("#printcard .pc-card"); if(!card||!card.textContent.trim())return;
+  var fn=(window._pcName||(el("pc_title")&&el("pc_title").textContent)||"MSpectrum_result").replace(/[^\w]+/g,"_");
+  if(!window.html2canvas){ alert("Image export needs internet the first time to load the renderer. Use 'Save PDF / print' instead."); return; }
+  var tmp=card.cloneNode(true); tmp.querySelectorAll(".no-print").forEach(function(e){e.remove();});
+  var holder=document.createElement("div"); holder.style.cssText="position:fixed;left:-10000px;top:0;width:720px;background:#fff;padding:24px;color:#1a1f2e";
+  holder.appendChild(tmp); document.body.appendChild(holder);
+  html2canvas(holder,{scale:2,useCORS:true,backgroundColor:"#ffffff",logging:false}).then(function(canvas){
+    holder.remove(); var a=document.createElement("a"); a.download=fn+".png"; a.href=canvas.toDataURL("image/png"); a.click();
+  }).catch(function(){ holder.remove(); alert("Could not render image. Use 'Save PDF / print' instead."); });
+}
+function _printCard(){
+  var pc=document.getElementById("printcard");
+  if(!pc){ window.print(); return; }
+  // Hoist the card to be a direct child of <body> so the print CSS can hide the tall
+  // hub/panels entirely (display:none, not visibility:hidden) -> no trailing blank pages.
+  var parent=pc.parentNode, next=pc.nextSibling, done=false;
+  document.body.appendChild(pc);
+  document.body.classList.add("printing");
+  // Filename: browsers default the "Save as PDF" name to document.title.
+  var nm=(window._pcName||(el("pc_title")&&el("pc_title").textContent)||"MSpectrum_result");
+  nm=String(nm).replace(/[\/:*?"<>|]+/g,"").replace(/\s+/g," ").trim()||"MSpectrum_result";
+  var oldTitle=document.title;
+  var restore=function(){ if(done)return; done=true;
+    document.body.classList.remove("printing"); document.title=oldTitle;
+    if(next&&next.parentNode===parent) parent.insertBefore(pc,next); else parent.appendChild(pc);
+    window.removeEventListener("afterprint",restore); };
+  window.addEventListener("afterprint",restore);
+  document.title=nm;
+  window.print();
+  setTimeout(restore,1200);
+}
 function pcDownloadPDF(){
   var bodyEl=el("pc_body");
   if(!bodyEl||!bodyEl.textContent.trim())return;
-  var titleEl=el("pc_title");
-  var fn=((titleEl&&titleEl.textContent)||"MSpectrum_result").replace(/[^\w]+/g,"_");
-  var card=document.querySelector("#printcard .pc-card");
-  if(!card)return;
-  if(window.html2canvas){
-    var noprint=card.querySelectorAll(".no-print");
-    noprint.forEach(function(e){e.style.visibility="hidden";});
-    html2canvas(card,{scale:2,useCORS:true,backgroundColor:"#ffffff",
-      logging:false}).then(function(canvas){
-      noprint.forEach(function(e){e.style.visibility="";});
-      var a=document.createElement("a");
-      a.download=fn+".png";
-      a.href=canvas.toDataURL("image/png");
-      a.click();
-    }).catch(function(){
-      noprint.forEach(function(e){e.style.visibility="";});
-      window.print();
-    });
-  } else {
-    window.print();
-  }
+  _printCard();
 }
 // ===== FSS =====
 const FSS_TEXT={1:"My motivation is lower when I am fatigued.",2:"Exercise brings on my fatigue.",3:"I am easily fatigued.",4:"Fatigue interferes with my physical functioning.",5:"Fatigue causes frequent problems for me.",6:"My fatigue prevents sustained physical functioning.",7:"Fatigue interferes with carrying out certain duties and responsibilities.",8:"Fatigue is among my three most disabling symptoms.",9:"Fatigue interferes with my work, family, or social life."};
@@ -1474,7 +1687,7 @@ function calcEDSSage(){ const e=el("edss_v").value, ag=_num(el("edss_age").value
   else if(dur==null && ag!=null) html+='<div class="note">Enter disease duration (years since first symptoms) to also get the MSSS - severity compared with people who have had MS for the same number of years.</div>';
   el("edss_out").innerHTML=html; }
 let GUIDED=false, GSTEP=0;
-const GFLOW=[["edss","EDSS & age"],["pdds","Disability (PDDS)"],["msws","Walking (MSWS-12)"],["fss","Fatigue (FSS)"],["phq9","Mood - depression (PHQ-9)"],["gad7","Mood - anxiety (GAD-7)"],["msis","Overall impact (MSIS-29)"],["msqol","Quality of life (MSQOL-54)"]];
+const GFLOW=[["edss","EDSS & age"],["pdds","Disability (PDDS)"],["msws","Walking (MSWS-12)"],["fesi","Falls concern (FES-I)"],["mfis","Fatigue (MFIS)"],["promiscog","Thinking & memory (PROMIS Cog)"],["phq9","Mood - depression (PHQ-9)"],["gad7","Mood - anxiety (GAD-7)"],["promispain","Pain (PROMIS)"],["msis","Overall impact (MSIS-29)"],["msqol","Quality of life (MSQOL-54)"]];
 function openReport(){ const g=el("gnav"); if(g)g.style.display="none"; GUIDED=false; showTool('report'); renderChecklist(); }
 function startGuided(){ GUIDED=true; GSTEP=0; _gstep(); }
 function _gstep(){ showTool(GFLOW[GSTEP][0]); const g=el("gnav"); g.style.display="flex";
@@ -1486,11 +1699,16 @@ function guidedNext(){ if(GSTEP<GFLOW.length-1){GSTEP++;_gstep();} else { GUIDED
 function _cnt(reader){ try{return Object.values(reader()).filter(v=>v!=null).length;}catch(e){return 0;} }
 function renderChecklist(){
   const items=[["edss","EDSS & age",()=>el('edss_v').value!==""],["pdds","PDDS - disability",()=>el('pdds_v').value!==""],["msws","MSWS-12 - walking",()=>_cnt(readMSWS)>0],
-   ["fss","FSS - fatigue",()=>_cnt(readFSS)>0],["mfis","MFIS - fatigue (alt)",()=>_cnt(readMFIS)>0],
+   ["fesi","FES-I - falls concern",()=>_cnt(readFesi)>0],
+   ["mfis","MFIS - fatigue",()=>_cnt(readMFIS)>0],
+   ["promiscog","PROMIS Cog - thinking & memory",()=>_cnt(readPromisCog)>0],
    ["phq9","PHQ-9 - mood",()=>_cnt(readPHQ)>0],["gad7","GAD-7 - anxiety",()=>_cnt(readGAD)>0],
+   ["promispain","PROMIS Pain intensity",()=>(el('promispain_1')&&el('promispain_1').value!=="")],
    ["msis","MSIS-29 - overall impact",()=>_cnt(readMSIS)>0],["msqol","MSQOL-54 - quality of life",()=>_cnt(readMSQOL)>0]];
-  el("report_checklist").innerHTML='<div class="subhead">Or jump to any questionnaire</div><div class="report-chk">'+
-    items.map((t,i)=>'<button class="btn" onclick="showTool(\''+t[0]+'\')">'+(i+1)+'. '+(t[2]()?"\u2713 ":"")+t[1]+'</button>').join("")+'</div>';
+  const _ok=f=>{ try{ return !!f(); }catch(e){ return false; } };  // one missing element must not blank the whole checklist
+  const _host=el("report_checklist"); if(!_host) return;
+  _host.innerHTML='<div class="subhead">Or jump to any questionnaire</div><div class="report-chk">'+
+    items.map((t,i)=>'<button class="btn '+(_ok(t[2])?"chk-done":"chk-todo")+'" onclick="_openChk(\''+t[0]+'\')">'+(i+1)+'. '+(_ok(t[2])?"\u2713 ":"")+t[1]+'</button>').join("")+'</div>';
 }
 function buildReport(){
   const rows=[], flags=[]; let urgent="";
@@ -1531,7 +1749,7 @@ function buildReport(){
   // ── PDDS ─────────────────────────────────────────────────────────
   const pv=el("pdds_v").value;
   if(pv!==""){
-    const n=+pv, lab=el("pdds_v").selectedOptions[0].text.replace(/^[0-9]+\s*[-–—]\s*/,'');
+    const n=+pv, lab=(PDDS_LABELS[+pv]||'');
     const d = n<=1 ? "You rate your mobility as normal or near-normal." :
               n<=3 ? "MS is causing noticeable difficulty in some daily activities, but daily independence is largely maintained." :
               n<=5 ? "MS significantly affects walking and daily independence." :
@@ -1603,6 +1821,20 @@ function buildReport(){
   }
 
   // ── PHQ-9 ────────────────────────────────────────────────────────
+   try{ const cg=readPromisCog(), cAns=Object.values(cg).filter(v=>v!=null).length;
+     if(cAns===4){ const raw=Object.values(cg).reduce((a,b)=>a+(b||0),0); const T=PROMIS_COG_T[raw-4];
+       const d = T>=45 ? "Your self-reported thinking and memory are within the normal range." : T>=40 ? "Mild self-reported cognitive concern - slightly below average." : "Notable self-reported difficulty with thinking/memory - worth discussing with your team.";
+       rows.push(["Thinking & memory (PROMIS Cog 4a)", T.toFixed(1)+" T-score", T>=45?"good":T>=40?"warn":"bad", d]);
+       if(T<40) flags.push("Subjective cognition (PROMIS Cog T "+T.toFixed(1)+"): self-reported thinking/memory is meaningfully below average - consider objective testing (SDMT/BICAMS)."); } }catch(e){}
+   try{ const fo=readFesi(), fAns=Object.values(fo).filter(v=>v!=null).length;
+     if(fAns===16){ const s=Object.values(fo).reduce((a,b)=>a+(b||0),0);
+       const d = s<=19 ? "Low concern about falling." : s<=27 ? "Moderate concern about falling - take care with balance-demanding activities." : "High concern about falling - this raises fall risk; discuss balance work / physiotherapy with your team.";
+       rows.push(["Concern about falling (FES-I)", s+"/64", s>=28?"bad":s>=20?"warn":"good", d]);
+       if(s>=28) flags.push("Fear of falling (FES-I "+s+"/64): high concern about falling, associated with increased fall risk in MS."); } }catch(e){}
+   try{ const pv=_num(el("promispain_1")?el("promispain_1").value:null);
+     if(pv!=null){ const d = pv>=7 ? "Severe pain - warrants clinical attention." : pv>=5 ? "Moderate pain." : "Mild pain / low interference.";
+       rows.push(["Pain intensity (PROMIS)", pv+"/10", pv>=7?"bad":pv>=5?"warn":"good", d]);
+       if(pv>=7) flags.push("Pain intensity (PROMIS "+pv+"/10): severe pain reported - warrants clinical attention."); } }catch(e){}
   const pho=readPHQ(), phAns=Object.values(pho).filter(v=>v!=null).length;
   if(phAns>0){
     const t=scorePHQ(pho).total;
@@ -1788,6 +2020,494 @@ function clinReportPDF(){ var r=el("clin_out"); if(!r||!r.textContent.trim())ret
     }).observe(repOut,{childList:true});
   }
 })();
+</script>
+
+<script>
+/* ===== Supplementary measures logic (isolated); functions global (hoisted) ===== */
+// ===== PROMIS Cognitive Abilities (4a) =====
+const COG_TEXT = {
+  1: "My mind has been as sharp as usual.",
+  2: "My memory has been as good as usual.",
+  3: "I have been able to keep track of what I was doing.",
+  4: "I have been able to think as fast as usual."
+};
+const COG_OPTS = [[1,"Not at all"],[2,"A little"],[3,"Somewhat"],[4,"Quite a bit"],[5,"Very much"]];
+
+el("promiscog_items").innerHTML = Array.from({length:4}, (_, k) => {
+  const i = k + 1;
+  return _scaleRow("pcog_", i, COG_TEXT[i], COG_OPTS, "calcPromisCog");
+}).join("");
+
+const PROMIS_COG_T = [23.5, 27.2, 30.1, 33.4, 36.2, 39.1, 42.0, 45.0, 47.9, 50.8, 53.7, 56.7, 59.9, 63.3, 67.2, 72.0, 78.0];
+
+function readPromisCog() {
+  const o = {};
+  for (let i = 1; i <= 4; i++) o[i] = _num(el("pcog_" + i).value);
+  return o;
+}
+
+function calcPromisCog() {
+  const o = readPromisCog();
+  const ans = Object.values(o).filter(v => v != null).length;
+  if (ans === 0) { el("promiscog_out").innerHTML = ""; return; }
+  _flagScale("pcog_", 1, 4, ans < 4);
+  
+  if (ans < 4) {
+    el("promiscog_out").innerHTML = interp("neutral", "Answered " + ans + "/4. Please answer all 4 items for a T-score.");
+    return;
+  }
+  
+  const rawSum = Object.values(o).reduce((a, b) => a + b, 0);
+  const tScore = PROMIS_COG_T[rawSum - 4];
+  
+  let cls = "good", desc = "Within normal limits.";
+  if (tScore < 40) {
+    cls = "bad";
+    desc = "Significant cognitive difficulties reported.";
+  } else if (tScore < 45) {
+    cls = "warn";
+    desc = "Mild concern (below population average).";
+  }
+  
+  el("promiscog_out").innerHTML = `
+    <div class="scoreline">
+      <div class="bigscore">${rawSum}<small> raw sum</small></div>
+      <div class="bigscore" style="color:var(--accent)">T ${tScore.toFixed(1)}<small> T-score</small></div>
+    </div>
+    ${interp(cls, `Perceived cognitive ability is <b>${desc}</b>`)}
+    <div class="note">T-scores are standardized to the U.S. general population (mean 50, SD 10). Higher T-scores = better cognitive function.</div>
+  `;
+}
+
+function fillPromisCog(v) {
+  for (let i = 1; i <= 4; i++) setScale("pcog_", i, v, null);
+  calcPromisCog();
+}
+
+function clearPromisCog() {
+  for (let i = 1; i <= 4; i++) {
+    const e = el("pcog_" + i);
+    if (e) {
+      e.value = "";
+      if (e.parentNode) {
+        e.parentNode.classList.remove("blank");
+        e.parentNode.querySelectorAll("button").forEach(x => x.classList.remove("on"));
+      }
+    }
+  }
+  el("promiscog_out").innerHTML = "";
+}
+
+
+// ===== PROMIS Pain Intensity =====
+function calcPromisPain() {
+  const val = _num(el("promispain_1").value);
+  if (val == null) { el("promispain_out").innerHTML = ""; return; }
+  
+  let cls = "good", desc = "Mild pain / low interference.";
+  if (val >= 7) {
+    cls = "bad";
+    desc = "Severe pain. Warrants clinical attention.";
+  } else if (val >= 5) {
+    cls = "warn";
+    desc = "Moderate pain concern.";
+  }
+  
+  el("promispain_out").innerHTML = `
+    <div class="scoreline">
+      <div class="bigscore">${val}<small> / 10</small></div>
+    </div>
+    ${interp(cls, `Pain severity level: <b>${desc}</b>`)}
+    <div class="note">Pain intensity is measured on an 11-point numeric scale (0 = no pain, 10 = worst pain imaginable).</div>
+  `;
+}
+
+
+// ===== ABC Scale =====
+const ABC_TEXT = {
+  1: "...walk around the house?",
+  2: "...walk up or down stairs?",
+  3: "...bend over and pick up a slipper from the front of a closet floor?",
+  4: "...reach for a small can off a shelf at eye level?",
+  5: "...stand on your tip toes and reach for something above your head?",
+  6: "...stand on a chair and reach for something?",
+  7: "...sweep the floor?",
+  8: "...walk outside the house to a car parked in the driveway?",
+  9: "...get into or out of a car?",
+  10: "...walk across a parking lot to the mall?",
+  11: "...walk up or down a ramp?",
+  12: "...walk in a crowded mall where people rapidly walk past you?",
+  13: "...are bumped into by people as you walk through the mall?",
+  14: "...step onto or off of an escalator while you are holding onto a railing?",
+  15: "...step onto or off an escalator while holding onto parcels such that you cannot hold onto the railing?",
+  16: "...walk outside on icy sidewalks?"
+};
+
+let abcHtml = '<div class="note" style="margin-bottom:8px">How confident are you that you will not lose your balance or become unsteady when you...</div>';
+for (let i = 1; i <= 16; i++) {
+  let opts = '<option value="">- select -</option>';
+  for (let c = 100; c >= 0; c -= 10) {
+    opts += `<option value="${c}">${c}%</option>`;
+  }
+  abcHtml += `
+    <div class="item" id="abc_item_row_${i}">
+      <div><span class="qn">${i}.</span>${ABC_TEXT[i]}</div>
+      <select id="abc_${i}" oninput="calcABC()">${opts}</select>
+    </div>
+  `;
+}
+el("abc_items").innerHTML = abcHtml;
+
+function readABC() {
+  const o = {};
+  for (let i = 1; i <= 16; i++) o[i] = _num(el("abc_" + i).value);
+  return o;
+}
+
+function calcABC() {
+  const o = readABC();
+  const answered = Object.values(o).filter(v => v != null).length;
+  if (answered === 0) { el("abc_out").innerHTML = ""; return; }
+  
+  // Flag incomplete
+  for (let i = 1; i <= 16; i++) {
+    const row = el("abc_item_row_" + i);
+    const val = el("abc_" + i).value;
+    if (row) row.classList.toggle("blank", answered < 16 && val === "");
+  }
+  
+  if (answered < 12) {
+    el("abc_out").innerHTML = interp("neutral", `Answered ${answered}/16. The ABC Scale requires at least 12 items to be completed for a valid score.`);
+    return;
+  }
+  
+  const sum = Object.values(o).filter(v => v != null).reduce((a, b) => a + b, 0);
+  const score = sum / answered;
+  
+  let cls = "good", desc = "High physical functioning / low fall risk.";
+  if (score < 50) {
+    cls = "bad";
+    desc = "Low level of physical functioning / high fall risk.";
+  } else if (score <= 80) {
+    cls = "warn";
+    desc = "Moderate level of physical functioning / moderate fall risk.";
+  }
+  
+  // Specific MS/Older adult cutoff
+  let extra = "";
+  if (score < 67) {
+    extra = "<br><b>⚠️ Fall Risk Warning:</b> A score below 67% indicates a significantly increased clinical risk of falling.";
+    if (cls === "good") cls = "warn";
+  }
+  
+  el("abc_out").innerHTML = `
+    <div class="scoreline">
+      <div class="bigscore">${score.toFixed(1)}%<small> average confidence</small></div>
+    </div>
+    ${interp(cls, `Balance confidence: <b>${desc}</b>${extra}`)}
+    <div class="note">Score = sum of answered items divided by the number of items (answered: ${answered}/16). Min 12 completed required.</div>
+  `;
+}
+
+function fillABC(v) {
+  for (let i = 1; i <= 16; i++) el("abc_" + i).value = v;
+  calcABC();
+}
+
+function clearABC() {
+  for (let i = 1; i <= 16; i++) {
+    el("abc_" + i).value = "";
+    const row = el("abc_item_row_" + i);
+    if (row) row.classList.remove("blank");
+  }
+  el("abc_out").innerHTML = "";
+}
+
+
+// ===== FES-I =====
+const FESI_TEXT = {
+  1: "Cleaning the house (e.g., dusting, vacuuming)",
+  2: "Getting dressed or undressed",
+  3: "Preparing simple meals",
+  4: "Taking a bath or shower",
+  5: "Going to the shop",
+  6: "Getting in or out of a chair",
+  7: "Going up or down stairs",
+  8: "Reaching for something above your head or down on the ground",
+  9: "Going out to social events (e.g., family gatherings, club meetings)",
+  10: "Moving around the house",
+  11: "Walking on an uneven surface",
+  12: "Walking down a slope",
+  13: "Going out on slippery surfaces (e.g., wet or icy)",
+  14: "Visiting friends or relatives",
+  15: "Going to a place with crowds",
+  16: "Walking in a place with crowds"
+};
+const FESI_OPTS = [[1,"Not at all concerned"],[2,"Somewhat concerned"],[3,"Fairly concerned"],[4,"Very concerned"]];
+
+el("fesi_items").innerHTML = Array.from({length:16}, (_, k) => {
+  const i = k + 1;
+  return _scaleRow("fesi_", i, FESI_TEXT[i], FESI_OPTS, "calcFesi");
+}).join("");
+
+function readFesi() {
+  const o = {};
+  for (let i = 1; i <= 16; i++) o[i] = _num(el("fesi_" + i).value);
+  return o;
+}
+
+function calcFesi() {
+  const o = readFesi();
+  const answered = Object.values(o).filter(v => v != null).length;
+  if (answered === 0) { el("fesi_out").innerHTML = ""; return; }
+  _flagScale("fesi_", 1, 16, answered < 16);
+  
+  if (answered < 16) {
+    el("fesi_out").innerHTML = interp("neutral", `Answered ${answered}/16. The FES-I scale requires all 16 items to be answered.`);
+    return;
+  }
+  
+  const sum = Object.values(o).reduce((a, b) => a + b, 0);
+  
+  let cls = "good", desc = "Low concern of falling.";
+  if (sum >= 28) {
+    cls = "bad";
+    desc = "High concern of falling.";
+  } else if (sum >= 20) {
+    cls = "warn";
+    desc = "Moderate concern of falling.";
+  }
+  
+  el("fesi_out").innerHTML = `
+    <div class="scoreline">
+      <div class="bigscore">${sum}<small> / 64</small></div>
+    </div>
+    ${interp(cls, `Concern about falling: <b>${desc}</b>`)}
+    <div class="note">FES-I total ranges from 16 to 64. Higher sum = more concern about falling during daily physical and social activities.</div>
+  `;
+}
+
+function fillFesi(v) {
+  for (let i = 1; i <= 16; i++) setScale("fesi_", i, v, null);
+  calcFesi();
+}
+
+function clearFesi() {
+  for (let i = 1; i <= 16; i++) {
+    const e = el("fesi_" + i);
+    if (e) {
+      e.value = "";
+      if (e.parentNode) {
+        e.parentNode.classList.remove("blank");
+        e.parentNode.querySelectorAll("button").forEach(x => x.classList.remove("on"));
+      }
+    }
+  }
+  el("fesi_out").innerHTML = "";
+}
+
+
+// ===== Low-Contrast Visual Acuity (LCVA) =====
+function calcLCVA() {
+  const od25 = _num(el("lcva_od_25").value);
+  const os25 = _num(el("lcva_os_25").value);
+  const od125 = _num(el("lcva_od_125").value);
+  const os125 = _num(el("lcva_os_125").value);
+  
+  const entries = [od25, os25, od125, os125];
+  const ansCount = entries.filter(v => v != null).length;
+  if (ansCount === 0) { el("lcva_out").innerHTML = ""; return; }
+  
+  // Validation check (range 0 to 60)
+  let invalid = false;
+  const inputs = ["lcva_od_25", "lcva_os_25", "lcva_od_125", "lcva_os_125"];
+  inputs.forEach(id => {
+    const val = _num(el(id).value);
+    if (val != null && (val < 0 || val > 60)) {
+      el(id).classList.add("blank");
+      invalid = true;
+    } else {
+      el(id).classList.remove("blank");
+    }
+  });
+  
+  if (invalid) {
+    el("lcva_out").innerHTML = interp("bad", "⚠️ Out of range: Sloan Chart letter scores must be between 0 and 60.");
+    return;
+  }
+  
+  // Compare to norms
+  const compare = (val, contrast) => {
+    if (val == null) return "NA";
+    const refMin = contrast === 2.5 ? 35 : 20;
+    const refMax = contrast === 2.5 ? 50 : 40;
+    if (val >= refMin) return `<span style="color:var(--good);font-weight:600">Typical (${val})</span>`;
+    return `<span style="color:var(--bad);font-weight:600">Below Reference (${val})</span>`;
+  };
+  
+  let tableHtml = `
+    <table style="width:100%; border-collapse:collapse; margin-top:10px; font-size:13.5px">
+      <thead>
+        <tr style="border-bottom:2px solid var(--rule); text-align:left; color:var(--accent-ink)">
+          <th style="padding:6px">Eye</th>
+          <th style="padding:6px">Contrast</th>
+          <th style="padding:6px">Score (0-60)</th>
+          <th style="padding:6px">Interpretation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--rule)">
+          <td style="padding:6px">Right (OD)</td>
+          <td style="padding:6px">2.5%</td>
+          <td style="padding:6px">${od25 !== null ? od25 : "NA"}</td>
+          <td style="padding:6px">${compare(od25, 2.5)}</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--rule)">
+          <td style="padding:6px">Left (OS)</td>
+          <td style="padding:6px">2.5%</td>
+          <td style="padding:6px">${os25 !== null ? os25 : "NA"}</td>
+          <td style="padding:6px">${compare(os25, 2.5)}</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--rule)">
+          <td style="padding:6px">Right (OD)</td>
+          <td style="padding:6px">1.25%</td>
+          <td style="padding:6px">${od125 !== null ? od125 : "NA"}</td>
+          <td style="padding:6px">${compare(od125, 1.25)}</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--rule)">
+          <td style="padding:6px">Left (OS)</td>
+          <td style="padding:6px">1.25%</td>
+          <td style="padding:6px">${os125 !== null ? os125 : "NA"}</td>
+          <td style="padding:6px">${compare(os125, 1.25)}</td>
+        </tr>
+      </tbody>
+    </table>
+  `;
+  
+  // Inter-ocular difference check
+  let warningHtml = "";
+  if (od25 != null && os25 != null) {
+    const diff25 = Math.abs(od25 - os25);
+    if (diff25 >= 5) {
+      warningHtml += `<div style="color:var(--bad); font-weight:600; margin-top:10px">⚠️ Clinically significant asymmetry of ${diff25} letters between eyes at 2.5% contrast (threshold &ge; 5 letters). This suggests unilateral visual pathway damage (e.g. history of optic neuritis).</div>`;
+    }
+  }
+  if (od125 != null && os125 != null) {
+    const diff125 = Math.abs(od125 - os125);
+    if (diff125 >= 5) {
+      warningHtml += `<div style="color:var(--bad); font-weight:600; margin-top:10px">⚠️ Clinically significant asymmetry of ${diff125} letters between eyes at 1.25% contrast (threshold &ge; 5 letters).</div>`;
+    }
+  }
+  
+  el("lcva_out").innerHTML = `
+    <div class="subhead">Visual Acuity Profile:</div>
+    ${tableHtml}
+    ${warningHtml}
+    <div class="note" style="margin-top:10px">Comparison uses healthy reference ranges: 2.5% contrast typically 35-50 letters; 1.25% contrast typically 20-40 letters. An asymmetry of &ge; 5 letters suggests unilateral optic pathway dysfunction.</div>
+  `;
+}
+
+
+// ===== HADS (Hospital Anxiety and Depression Scale) =====
+const HADS_TEXT = {
+  1: {t: "I feel tense or 'wound up'", s: "A", o: [[3,"Most of the time"],[2,"A lot of the time"],[1,"From time to time, occasionally"],[0,"Not at all"]]},
+  2: {t: "I still enjoy the things I used to enjoy", s: "D", o: [[0,"Definitely as much"],[1,"Not quite so much"],[2,"Only a little"],[3,"Hardly at all"]]},
+  3: {t: "I get a sort of frightened feeling as if something awful is about to happen", s: "A", o: [[3,"Very definitely and quite badly"],[2,"Yes, but not too badly"],[1,"A little, but it doesn't worry me"],[0,"Not at all"]]},
+  4: {t: "I can laugh and see the funny side of things", s: "D", o: [[0,"As much as I always could"],[1,"Not quite so much now"],[2,"Definitely not so much now"],[3,"Not at all"]]},
+  5: {t: "Worrying thoughts go through my mind", s: "A", o: [[3,"A great deal of the time"],[2,"A lot of the time"],[1,"From time to time, but not too often"],[0,"Only occasionally"]]},
+  6: {t: "I feel cheerful", s: "D", o: [[3,"Not at all"],[2,"Not often"],[1,"Sometimes"],[0,"Most of the time"]]},
+  7: {t: "I can sit at ease and feel relaxed", s: "A", o: [[0,"Definitely"],[1,"Usually"],[2,"Not often"],[3,"Not at all"]]},
+  8: {t: "I feel as if I am slowed down", s: "D", o: [[3,"Nearly all the time"],[2,"Very often"],[1,"Sometimes"],[0,"Not at all"]]},
+  9: {t: "I get a sort of frightened feeling like 'butterflies' in the stomach", s: "A", o: [[0,"Not at all"],[1,"Occasionally"],[2,"Quite often"],[3,"Very often"]]},
+  10: {t: "I have lost interest in my appearance", s: "D", o: [[3,"Definitely"],[2,"I don't take as much care as I should"],[1,"I may not take quite as much care"],[0,"I take just as much care as ever"]]},
+  11: {t: "I feel restless as I have to be on the move", s: "A", o: [[3,"Very much indeed"],[2,"Quite a lot"],[1,"Not very much"],[0,"Not at all"]]},
+  12: {t: "I look forward with enjoyment to things", s: "D", o: [[0,"As much as I ever did"],[1,"Rather less than I used to"],[2,"Definitely less than I used to"],[3,"Hardly at all"]]},
+  13: {t: "I get sudden feelings of panic", s: "A", o: [[3,"Very often indeed"],[2,"Quite often"],[1,"Not very often"],[0,"Not at all"]]},
+  14: {t: "I can enjoy a good book or radio or TV program", s: "D", o: [[0,"As much as I ever did"],[1,"Not quite so much"],[2,"Not very often"],[3,"Hardly at all"]]}
+};
+
+el("hads_items").innerHTML = Array.from({length:14}, (_, k) => {
+  const i = k + 1;
+  const item = HADS_TEXT[i];
+  let opts = "";
+  item.o.forEach(o => {
+    opts += `<option value="${o[0]}">${o[1]}</option>`;
+  });
+  return `<div class="item" id="hads_item_row_${i}"><div><span class="qn">${i}.</span>[${item.s}] ${item.t}</div><select id="hads_${i}" oninput="calcHads()"><option value="">- select -</option>${opts}</select></div>`;
+}).join("");
+
+function readHads() {
+  const o = {};
+  for (let i = 1; i <= 14; i++) o[i] = _num(el("hads_" + i).value);
+  return o;
+}
+
+function calcHads() {
+  const o = readHads();
+  const answered = Object.values(o).filter(v => v != null).length;
+  if (answered === 0) { el("hads_out").innerHTML = ""; return; }
+  
+  // Flag incomplete
+  for (let i = 1; i <= 14; i++) {
+    const row = el("hads_item_row_" + i);
+    const val = el("hads_" + i).value;
+    if (row) row.classList.toggle("blank", answered < 14 && val === "");
+  }
+  
+  if (answered < 14) {
+    el("hads_out").innerHTML = interp("neutral", `Answered ${answered}/14. Please complete all 14 items to calculate Anxiety & Depression subscales.`);
+    return;
+  }
+  
+  let anx = 0, dep = 0;
+  for (let i = 1; i <= 14; i++) {
+    if (HADS_TEXT[i].s === "A") anx += o[i];
+    else dep += o[i];
+  }
+  
+  const band = s => s >= 11 ? ["bad", "Abnormal / Clinical concern"] : s >= 8 ? ["warn", "Borderline abnormal"] : ["good", "Normal / No concern"];
+  const bA = band(anx), bD = band(dep);
+  const col = c => c === "good" ? "#216e39" : c === "warn" ? "#9a6700" : "#9b2c2c";
+  
+  el("hads_out").innerHTML = `
+    <div class="scoreline">
+      <div class="bigscore" style="color:var(--accent)">${anx}<small> Anxiety (HADS-A)</small></div>
+      <div class="bigscore" style="color:var(--hl)">${dep}<small> Depression (HADS-D)</small></div>
+    </div>
+    <div class="chips" style="margin-top:12px">
+      <span class="chip">Anxiety: <b style="color:${col(bA[0])}">${bA[1]}</b></span>
+      <span class="chip">Depression: <b style="color:${col(bD[0])}">${bD[1]}</b></span>
+    </div>
+    <div class="note" style="margin-top:10px">Subscales range from 0 to 21. Thresholds: &le; 7 Normal, 8-10 Borderline, &ge; 11 Clinical Concern.</div>
+  `;
+}
+
+function fillHads(v) {
+  // If v is 0 or 3, we set all selects to that point value if it exists in the options
+  for (let i = 1; i <= 14; i++) {
+    const sel = el("hads_" + i);
+    if (!sel) continue;
+    
+    // Find the option that matches the value v (which could be the first or last depending on reverse-coding)
+    const options = Array.from(sel.options);
+    const match = options.find(opt => opt.value === String(v));
+    if (match) {
+      sel.value = match.value;
+    }
+  }
+  calcHads();
+}
+
+function clearHads() {
+  for (let i = 1; i <= 14; i++) {
+    const e = el("hads_" + i);
+    if (e) e.value = "";
+    const row = el("hads_item_row_" + i);
+    if (row) row.classList.remove("blank");
+  }
+  el("hads_out").innerHTML = "";
+}
+
 </script>
 </body>
 </html>
