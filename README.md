@@ -82,10 +82,24 @@ If you used MSpectrum in research, please cite it:
 
 ## Algorithm & scoring sources
 
-- Included in the website below each score. 
+- Kappos L. *Neurostatus scoring definitions* (v04/10.2), 2011.
+- Fouad S, et al. *An algorithmic approach to the EDSS.* Mult Scler J–ETC (2023). DOI: [10.1177/20552173231155055](https://doi.org/10.1177/20552173231155055).
+- Baldassari LE, et al. *Streamlined EDSS (sEDSS).* Mult Scler J (2017) (Clinical EDSS mode).
+- Romeo AR, et al. *Electronic patient-reported EDSS (ePR-EDSS).* Mult Scler (2021) (Quick Check mode).
+- MS Score Hub instruments are cited in full inside the app (References & scoring sources).
+- Montalban X, Lebrun-Frénay C, Oh J, et al. *Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria.* Lancet Neurol (2025);24(10):850–865 (MS Criteria Checker), with companion consensus papers (2024 MAGNIMS–CMSC–NAIMS MRI recommendations; visual system; kFLC / OCB) and Solomon AJ, et al. Lancet Neurol 2023;22:750–68 (differential diagnosis).
+- Functional-System scoring follows the **Neurostatus v04/10.2 definitions** exactly, including the Cerebellar (severe-ataxia) and Bowel/Bladder (loss-of-function to FS 5/6) rules, and an optional toggle to exclude fatigue from the Cerebral FS per study protocol.
+
+---
+
+## License
+
+© 2026 Anas Z. Nourelden and Anza B. Memon. Licensed under the **GNU Affero General Public License v3.0** (AGPL-3.0) — see the [LICENSE](LICENSE) file for the full text.
+
+In short: you are free to use, study, share and modify MSpectrum, but any distributed or network-served modified version must also be released as open source under the same licence (AGPL Section 13, network-use clause). This keeps the tool free and open for the MS community while protecting the authors' work. For a different (e.g. commercial or closed) arrangement, contact the authors for separate licensing.
 
 ---
 
 ## Disclaimer
 
-For clinical, research and educational use. Not a diagnosis and not a substitute for a clinician. The final scores remains the responsibility of the examining clinician; validate locally before any trial or registry use. Implements the Neurostatus scoring system © Ludwig Kappos; not affiliated with or endorsed by the Neurostatus group. Proprietary/licensed instruments (e.g. SDMT, BVMT-R, CVLT-II, MSWS-12, MSIS-29) are scored from entered values only; their full content and norm tables are not reproduced, and users must hold any required licence and use the official forms.
+For clinical, research and educational use. Not a diagnosis and not a substitute for a clinician. The final EDSS step remains the responsibility of the examining clinician; validate locally before any trial or registry use. Implements the Neurostatus scoring system © Ludwig Kappos; not affiliated with or endorsed by the Neurostatus group. Proprietary/licensed instruments (e.g. SDMT, BVMT-R, CVLT-II, MSWS-12, MSIS-29) are scored from entered values only; their full content and norm tables are not reproduced, and users must hold any required licence and use the official forms.

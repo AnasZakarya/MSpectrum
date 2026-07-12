@@ -1,6 +1,7 @@
 cff-version: 1.2.0
 message: "If you use MSpectrum in research, please cite it as below."
 type: software
+license: AGPL-3.0-or-later
 title: "MSpectrum: a free, offline toolkit for multiple sclerosis outcome measures and diagnosis (AutoEDSSguide, MS Score Hub and MS Criteria Checker)"
 authors:
   - family-names: Nourelden
