@@ -830,6 +830,59 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="actions no-print"><button class="btn" onclick="patientSummary('lcva','LCVA')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('lcva','LCVA')">📊 Researcher: CSV</button></div>
   </section>
 
+  <!-- PANEL: ARR -->
+  <section class="panel" id="p_arr">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>Annualized Relapse Rate (ARR)</h2>
+    <p class="lead">The average number of MS relapses per year over an observation period &mdash; a core efficacy measure in every MS disease-modifying therapy trial.</p>
+    <div class="row">
+      <div class="fld"><label>Number of relapses</label><input type="number" id="arr_n" min="0" step="1" oninput="calcARR()"></div>
+      <div class="fld"><label>Observation period</label><input type="number" id="arr_dur" min="0" step="0.1" oninput="calcARR()"></div>
+      <div class="fld"><label>Period unit</label><select id="arr_unit" oninput="calcARR()"><option value="years">Years</option><option value="months">Months</option></select></div>
+    </div>
+    <div class="result" id="arr_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+      <b>ARR = number of relapses &divide; years observed.</b> Example: 2 relapses over 18 months = 2 &divide; 1.5 = 1.33/year.<br>
+      Untreated relapsing-remitting MS commonly runs ~0.4&ndash;1.2 relapses/year; a central goal of treatment is to lower ARR toward zero. Descriptive rate for context, not a treatment decision.
+    </div></details>
+  </section>
+
+  <!-- PANEL: CDP -->
+  <section class="panel" id="p_cdp">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>Confirmed Disability Progression (CDP)</h2>
+    <p class="lead">Whether the change between a baseline and a follow-up EDSS meets the standard trial threshold for disability progression, and whether it was confirmed over time.</p>
+    <div class="row">
+      <div class="fld"><label>Baseline EDSS</label><select id="cdp_base" oninput="calcCDP()"><option value="">- select -</option><option value="0">0</option><option value="1">1</option><option value="1.5">1.5</option><option value="2">2</option><option value="2.5">2.5</option><option value="3">3</option><option value="3.5">3.5</option><option value="4">4</option><option value="4.5">4.5</option><option value="5">5</option><option value="5.5">5.5</option><option value="6">6</option><option value="6.5">6.5</option><option value="7">7</option><option value="7.5">7.5</option><option value="8">8</option><option value="8.5">8.5</option><option value="9">9</option><option value="9.5">9.5</option></select></div>
+      <div class="fld"><label>Follow-up EDSS</label><select id="cdp_fu" oninput="calcCDP()"><option value="">- select -</option><option value="0">0</option><option value="1">1</option><option value="1.5">1.5</option><option value="2">2</option><option value="2.5">2.5</option><option value="3">3</option><option value="3.5">3.5</option><option value="4">4</option><option value="4.5">4.5</option><option value="5">5</option><option value="5.5">5.5</option><option value="6">6</option><option value="6.5">6.5</option><option value="7">7</option><option value="7.5">7.5</option><option value="8">8</option><option value="8.5">8.5</option><option value="9">9</option><option value="9.5">9.5</option></select></div>
+      <div class="fld"><label>Confirmation interval</label><select id="cdp_conf" oninput="calcCDP()"><option value="">Not confirmed / single visit</option><option value="12">Confirmed at 12 weeks</option><option value="24">Confirmed at 24 weeks</option></select></div>
+    </div>
+    <div class="result" id="cdp_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+      <b>Progression threshold (increase from baseline EDSS):</b> baseline 0 &rarr; &ge; 1.5; baseline 1.0&ndash;5.5 &rarr; &ge; 1.0; baseline &gt; 5.5 &rarr; &ge; 0.5.<br>
+      <b>Confirmed</b> means the higher EDSS is sustained at a repeat assessment (commonly 12 or 24 weeks); a single-visit increase is only <em>possible</em> progression. Cut-offs vary slightly between studies. Reference definition, not a diagnosis.
+    </div></details>
+  </section>
+
+  <!-- PANEL: NEDA -->
+  <section class="panel" id="p_neda">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>NEDA-3 / NEDA-4</h2>
+    <p class="lead">No Evidence of Disease Activity &mdash; a composite target combining relapses, MRI activity and disability progression (NEDA-3), optionally plus brain volume loss (NEDA-4), over a defined period (usually 1&ndash;2 years).</p>
+    <div class="row">
+      <div class="fld"><label>Any relapse in the period?</label><select id="neda_rel" oninput="calcNEDA()"><option value="">- select -</option><option value="no">No</option><option value="yes">Yes</option></select></div>
+      <div class="fld"><label>MRI activity (new/enlarging T2 or Gd+)?</label><select id="neda_mri" oninput="calcNEDA()"><option value="">- select -</option><option value="no">No</option><option value="yes">Yes</option></select></div>
+      <div class="fld"><label>Confirmed EDSS progression?</label><select id="neda_edss" oninput="calcNEDA()"><option value="">- select -</option><option value="no">No</option><option value="yes">Yes</option></select></div>
+      <div class="fld"><label>Brain volume loss &gt; 0.4%/yr? <span class="hint">NEDA-4 only, optional</span></label><select id="neda_bvl" oninput="calcNEDA()"><option value="">Skip (NEDA-3 only)</option><option value="no">No (&le; 0.4%)</option><option value="yes">Yes (&gt; 0.4%)</option></select></div>
+    </div>
+    <div class="result" id="neda_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+      <b>NEDA-3</b> = none of: (1) relapses, (2) MRI activity (new/enlarging T2 or gadolinium-enhancing lesions), (3) confirmed EDSS progression &mdash; over the period.<br>
+      <b>NEDA-4</b> adds a fourth criterion: annualized brain volume loss &le; 0.4%.<br>
+      Any single item present = evidence of disease activity, and NEDA is not met. A snapshot status, not a diagnosis.
+    </div></details>
+  </section>
+
   <section class="refs-sec"><details class="refs">
     <summary>References &amp; scoring sources</summary>
     <div class="ref-cat">Cognition</div>
@@ -850,6 +903,10 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="ref-item"><span class="ref-name">ABC Scale</span><span class="ref-cite">Powell LE, Myers AM. <em>J Gerontol A Biol Sci Med Sci</em> 1995;50A(1):M28&ndash;34.</span></div>
     <div class="ref-item"><span class="ref-name">FES-I</span><span class="ref-cite">Yardley L, Beyer N, Hauer K, Kempen G, Piot-Ziegler C, Todd C. <em>Age Ageing</em> 2005;34(6):614&ndash;9.</span></div>
     <div class="ref-item"><span class="ref-name">LCVA (Sloan)</span><span class="ref-cite">Sloan LL, Habel V. <em>J Opt Soc Am</em> 1952;42:548&ndash;52. Balcer LJ, et al. <em>Neurology</em> 2003;61(10):1433&ndash;5.</span></div>
+    <div class="ref-cat">Disease activity &amp; progression</div>
+    <div class="ref-item"><span class="ref-name">ARR</span><span class="ref-cite">Annualized relapse rate = relapses &divide; patient-years of follow-up; standard efficacy endpoint across MS disease-modifying therapy trials.</span></div>
+    <div class="ref-item"><span class="ref-name">CDP</span><span class="ref-cite">Confirmed disability progression: EDSS increase (&ge; 1.5 / 1.0 / 0.5 by baseline) sustained at 12&ndash;24 weeks, as used in pivotal MS trials; thresholds vary slightly by study.</span></div>
+    <div class="ref-item"><span class="ref-name">NEDA-3 / NEDA-4</span><span class="ref-cite">NEDA-3 (disease-activity-free): Havrdov&aacute; E, et al. <em>Lancet Neurol</em> 2010. NEDA-4 (adds brain volume loss &le; 0.4%/yr): Kappos L, et al. <em>Mult Scler</em> 2016;22(10):1297&ndash;1305.</span></div>
     <div class="ref-cat">Performance &amp; composites</div>
     <div class="ref-item"><span class="ref-name">PASAT</span><span class="ref-cite">Gronwall DMA. <em>Percept Mot Skills</em> 1977;44:367&ndash;73. (MSFC cognitive component; Task Force reference.)</span></div>
     <div class="ref-item"><span class="ref-name">MSFC / T25FW</span><span class="ref-cite">Fischer JS, Rudick RA, Cutter GR, Reingold SC. <em>Mult Scler</em> 1999;5(4):244-50.</span></div>
@@ -973,7 +1030,10 @@ const TOOLS=[
   {id:"promispain", ic:"⚡", name:"PROMIS Pain Intensity", tag:"Pain Severity", desc:"PROMIS Global07 single-item 0-10 pain intensity scale."},
   {id:"abc", ic:"⚖️", name:"ABC Scale", tag:"Balance Confidence", desc:"Activities-specific Balance Confidence Scale (16 items, 0-100%)."},
   {id:"fesi", ic:"🚶", name:"FES-I", tag:"Fear of Falls", desc:"Falls Efficacy Scale-International: concern of falling (16-64)."},
-  {id:"lcva", ic:"👁️", name:"LCVA Sloan Letters", tag:"Visual Function", desc:"Low-Contrast Visual Acuity (0-60 letters correct for Sloan 2.5% and 1.25%)."}
+  {id:"lcva", ic:"👁️", name:"LCVA Sloan Letters", tag:"Visual Function", desc:"Low-Contrast Visual Acuity (0-60 letters correct for Sloan 2.5% and 1.25%)."},
+  {id:"arr", ic:"🔁", name:"ARR", tag:"Relapse rate", desc:"Annualized Relapse Rate (relapses per year)."},
+  {id:"cdp", ic:"📈", name:"CDP", tag:"EDSS progression", desc:"Confirmed Disability Progression from baseline & follow-up EDSS."},
+  {id:"neda", ic:"🎯", name:"NEDA-3 / NEDA-4", tag:"Disease activity", desc:"No Evidence of Disease Activity status."}
 ];
 const MFIS_TEXT={
 1:"I have been less alert.",2:"I have had difficulty paying attention for long periods of time.",
@@ -1021,6 +1081,7 @@ const _ghead=(title,sub)=>'<div class="grid-head" style="grid-column:1/-1"><span
 const _TMAP=Object.fromEntries(TOOLS.map(t=>[t.id,t]));
 const GROUPS=[
  {name:"Disability &amp; severity", sub:"Overall disability, and how it compares to others (ARMSS / MSSS).", ids:["edss","pdds"]},
+ {name:"Disease activity &amp; progression", sub:"Relapse rate, confirmed EDSS progression and NEDA status - computed, no questionnaire.", ids:["arr","cdp","neda"]},
  {name:"Cognition - BICAMS battery", sub:"Clinician-administered. Processing speed + verbal &amp; visual memory; impaired at z &le; -1.5.", ids:["bicams","sdmt","cvlt","bvmt","pasat","promiscog"]},
  {name:"Fatigue", sub:"Self-report.", ids:["mfis","fss","fsmc"]},
  {name:"Mood", sub:"Self-report screens.", ids:["phq9","gad7"]},
@@ -1596,8 +1657,8 @@ function fillGAD(v){_fillScale("gad_",1,7,v);calcGAD();}
 function clearGAD(){_clearScale("gad_",1,7);el("gad7_out").innerHTML="";}
 
 // ===== MSWS-12 =====
-const MSWS_TEXT={1:"Limited your ability to walk?",2:"Limited your ability to run?",3:"Limited your ability to climb up and down stairs?",4:"Made standing when doing things more difficult?",5:"Limited your balance when standing or walking?",6:"Limited how far you are able to walk?",7:"Increased the effort needed for you to walk?",8:"Made it necessary for you to use support when walking indoors (e.g. holding on to furniture, using a stick, etc.)?",9:"Made it necessary for you to use support when walking outdoors (e.g. using a stick, frame, etc.)?",10:"Slowed down your walking?",11:"Affected how smoothly you walk?",12:"Made you concentrate on your walking?"};
-el("msws_items").innerHTML='<div class="note" style="margin-bottom:8px">In the past 2 weeks, how much has your MS&hellip;</div>'+Array.from({length:12},(_,k)=>{const i=k+1;return _scaleRow("msws_",i,MSWS_TEXT[i],[[1,"Not at all"],[2,"A little"],[3,"Moderately"],[4,"Quite a bit"],[5,"Extremely"]],"calcMSWS");}).join("");
+const MSWS_TEXT={1:"Limited your ability to walk?",2:"Limited your ability to run?",3:"Limited your ability to climb up and down stairs?",4:"Made standing when doing things more difficult?",5:"Limited your balance when standing or walking?",6:"Limited how far you are able to walk?",7:"Increased the effort needed for you to walk?",8:"Made it necessary for you to use support when walking indoors (eg holding on to furniture, using a stick, etc.)?",9:"Made it necessary for you to use support when walking outdoors (eg using a stick, a frame, etc.)?",10:"Slowed down your walking?",11:"Affected how smoothly you walk?",12:"Made you concentrate on your walking?"};
+el("msws_items").innerHTML='<div class="note" style="margin-bottom:8px">In the past two weeks, how much has your MS&hellip;</div>'+Array.from({length:12},(_,k)=>{const i=k+1;return _scaleRow("msws_",i,MSWS_TEXT[i],[[1,"Not at all"],[2,"A little"],[3,"Moderately"],[4,"Quite a lot"],[5,"Extremely"]],"calcMSWS");}).join("");
 function readMSWS(){const o={};for(let i=1;i<=12;i++)o[i]=_num(el("msws_"+i).value);return o;}
 function calcMSWS(){const o=readMSWS();const ans=Object.values(o).filter(v=>v!=null).length;if(ans===0){el("msws_out").innerHTML="";return;} _flagScale("msws_",1,12,ans<12);
   const r=scoreMSWS(o);
@@ -1609,8 +1670,8 @@ function fillMSWS(v){_fillScale("msws_",1,12,v);calcMSWS();}
 function clearMSWS(){_clearScale("msws_",1,12);el("msws_out").innerHTML="";}
 
 // ===== MSIS-29 =====
-const MSIS_TEXT={1:"Doing physically demanding tasks",2:"Gripping things tightly (e.g. turning on taps)",3:"Carrying things",4:"Problems with your balance",5:"Difficulties moving about indoors",6:"Being clumsy",7:"Stiffness",8:"Heavy arms and/or legs",9:"Tremor of your arms or legs",10:"Spasms in your limbs",11:"Your body not doing what you want it to do",12:"Having to depend on others to do things for you",13:"Limitations in your social and leisure activities at home",14:"Being stuck at home more than you would like to be",15:"Difficulties using your hands in everyday tasks",16:"Having to cut down the amount of time you spent on work or other daily activities",17:"Problems using transport (e.g. car, bus, train, taxi, etc.)",18:"Taking longer to do things",19:"Difficulty doing things spontaneously (e.g. going out on the spur of the moment)",20:"Needing to go to the toilet urgently",21:"Feeling unwell",22:"Problems sleeping",23:"Feeling mentally fatigued",24:"Worries related to your MS",25:"Feeling anxious or tense",26:"Feeling irritable, impatient or short tempered",27:"Problems concentrating",28:"Lack of confidence",29:"Feeling depressed"};
-el("msis_items").innerHTML='<div class="note" style="margin-bottom:8px">In the past two weeks, how much have you been bothered by&hellip;</div><div class="subhead">Physical impact (items 1–20)</div><div class="items">'+
+const MSIS_TEXT={1:"Do physically demanding tasks?",2:"Grip things tightly (e.g. turning on taps)?",3:"Carry things?",4:"Problems with your balance?",5:"Difficulties moving about indoors?",6:"Being clumsy?",7:"Stiffness?",8:"Heavy arms and/or legs?",9:"Tremor of your arms or legs?",10:"Spasms in your limbs?",11:"Your body not doing what you want it to do?",12:"Having to depend on others to do things for you?",13:"Limitations in your social and leisure activities at home?",14:"Being stuck at home more than you would like to be?",15:"Difficulties using your hands in everyday tasks?",16:"Having to cut down the amount of time you spent on work or other daily activities?",17:"Problems using transport (e.g. car, bus, train, taxi, etc.)?",18:"Taking longer to do things?",19:"Difficulty doing things spontaneously (e.g. going out on the spur of the moment)?",20:"Needing to go to the toilet urgently?",21:"Feeling unwell?",22:"Problems sleeping?",23:"Feeling mentally fatigued?",24:"Worries related to your MS?",25:"Feeling anxious or tense?",26:"Feeling irritable, impatient, or short tempered?",27:"Problems concentrating?",28:"Lack of confidence?",29:"Feeling depressed?"};
+el("msis_items").innerHTML='<div class="note" style="margin-bottom:8px">In the past two weeks &mdash; items 1&ndash;3: how much has your MS <b>limited your ability to</b>&hellip;; items 4&ndash;29: how much have you been <b>bothered by</b>&hellip;</div><div class="subhead">Physical impact (items 1–20)</div><div class="items">'+
   MSIS_PHYS.map(i=>_scaleRow("msis_",i,MSIS_TEXT[i],[[1,"Not at all"],[2,"A little"],[3,"Moderately"],[4,"Quite a bit"],[5,"Extremely"]],"calcMSIS")).join("")+
   '</div><div class="subhead">Psychological impact (items 21–29)</div><div class="items">'+
   MSIS_PSY.map(i=>_scaleRow("msis_",i,MSIS_TEXT[i],[[1,"Not at all"],[2,"A little"],[3,"Moderately"],[4,"Quite a bit"],[5,"Extremely"]],"calcMSIS")).join("")+'</div>';
@@ -2378,6 +2439,33 @@ function calcLCVA() {
   `;
 }
 
+
+
+function calcARR(){ var n=_num(el("arr_n").value), d=_num(el("arr_dur").value), u=el("arr_unit").value;
+  if(n==null||d==null||d<=0){el("arr_out").innerHTML="";return;}
+  var yrs=(u==="months")?d/12:d; if(yrs<=0){el("arr_out").innerHTML="";return;}
+  var arr=n/yrs; var cls=arr===0?"good":arr<0.5?"neutral":arr<1?"warn":"bad";
+  el("arr_out").innerHTML=interp(cls,"Annualized relapse rate: <b>"+arr.toFixed(2)+"</b> relapses/year (from "+n+" relapse(s) over "+yrs.toFixed(2)+" year(s)).")+'<div class="note">ARR = relapses \u00f7 years observed. Untreated relapsing MS commonly ~0.4&ndash;1.2/yr; a key treatment goal is to reduce ARR toward zero. Context only.</div>'; }
+
+function calcCDP(){ var b=_num(el("cdp_base").value), f=_num(el("cdp_fu").value), conf=el("cdp_conf").value;
+  if(b==null||f==null){el("cdp_out").innerHTML="";return;}
+  var thr=(b===0)?1.5:(b<=5.5?1.0:0.5); var delta=+(f-b).toFixed(1); var met=delta>=thr; var confirmed=(conf==="12"||conf==="24");
+  var cls, head;
+  if(delta<0){ cls="good"; head="EDSS improved by "+Math.abs(delta).toFixed(1)+" point(s) &mdash; no progression."; }
+  else if(!met){ cls="good"; head="Change of +"+delta.toFixed(1)+" does not reach the threshold (&ge; "+thr.toFixed(1)+" for baseline "+b+")."; }
+  else if(confirmed){ cls="bad"; head="<b>Confirmed disability progression</b> at "+conf+" weeks: +"+delta.toFixed(1)+" (threshold &ge; "+thr.toFixed(1)+")."; }
+  else { cls="warn"; head="Meets the progression threshold (+"+delta.toFixed(1)+" &ge; "+thr.toFixed(1)+") at this visit &mdash; needs confirmation at a later assessment to count as CDP."; }
+  el("cdp_out").innerHTML=interp(cls,head)+'<div class="note">Threshold for baseline EDSS '+b+' = &ge; '+thr.toFixed(1)+' point increase; confirmation = sustained at a repeat visit (12/24 weeks).</div>'; }
+
+function calcNEDA(){ var r=el("neda_rel").value, m=el("neda_mri").value, pr=el("neda_edss").value, b=el("neda_bvl").value;
+  if(!r||!m||!pr){el("neda_out").innerHTML="";return;}
+  var active=[]; if(r==="yes")active.push("relapse"); if(m==="yes")active.push("MRI activity"); if(pr==="yes")active.push("EDSS progression");
+  var neda3=active.length===0; var cls, head;
+  if(neda3){ cls="good"; head="<b>NEDA-3 achieved</b> &mdash; no relapses, no MRI activity, no confirmed EDSS progression."; }
+  else { cls="bad"; head="<b>NEDA-3 not met</b> &mdash; evidence of disease activity: "+active.join(", ")+"."; }
+  var extra="";
+  if(b){ if(neda3){ if(b==="no"){ head=head.replace("NEDA-3 achieved","NEDA-3 &amp; NEDA-4 achieved"); extra=" Brain volume loss &le; 0.4%/yr."; } else { cls="warn"; extra=" But NEDA-4 not met (brain volume loss &gt; 0.4%/yr)."; } } else { extra=" (NEDA-4 also not met.)"; } }
+  el("neda_out").innerHTML=interp(cls,head+extra)+'<div class="note">NEDA-3 = none of relapse, MRI activity, or confirmed EDSS progression over the period. NEDA-4 adds annualized brain volume loss &le; 0.4%.</div>'; }
 
 </script>
 </body>
