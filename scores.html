@@ -256,7 +256,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <h2>PDDS</h2><p class="lead">Patient Determined Disease Steps - the patient-reported analogue of the EDSS.</p>
     <input type="hidden" id="pdds_v">
     <div class="usenote" style="margin:4px 0 8px">Tap the step that best describes you:</div>
-    <details open style="margin:2px 0 8px"><summary style="cursor:pointer;font-size:13px;color:#1e4a6e;font-weight:600">Steps 0–8 (tap one to select)</summary><div class="items" style="margin-top:8px"><div class="item pdds-opt" data-v="0" onclick="setPdds(0)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">0</span><span><b>Normal.</b> I may have mild symptoms but they do not limit my activity; no walking limitation.</span></div><div class="item pdds-opt" data-v="1" onclick="setPdds(1)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">1</span><span><b>Mild disability.</b> Mild symptoms; no limitation in my activity.</span></div><div class="item pdds-opt" data-v="2" onclick="setPdds(2)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">2</span><span><b>Moderate disability.</b> Symptoms bother me but do not limit my activities.</span></div><div class="item pdds-opt" data-v="3" onclick="setPdds(3)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">3</span><span><b>Gait disability.</b> MS interferes with my activities, especially walking, but I can still walk without any aid.</span></div><div class="item pdds-opt" data-v="4" onclick="setPdds(4)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">4</span><span><b>Early cane.</b> I walk normally most days, but on bad days I need support (a cane, or holding the wall).</span></div><div class="item pdds-opt" data-v="5" onclick="setPdds(5)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">5</span><span><b>Late cane.</b> I need a cane or single support to walk about 25 feet; without it I cannot walk far.</span></div><div class="item pdds-opt" data-v="6" onclick="setPdds(6)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">6</span><span><b>Bilateral support.</b> I need two canes, crutches, or a walker to walk about 25 feet.</span></div><div class="item pdds-opt" data-v="7" onclick="setPdds(7)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">7</span><span><b>Wheelchair / scooter.</b> My main way of getting around is a wheelchair; I can take only a few steps.</span></div><div class="item pdds-opt" data-v="8" onclick="setPdds(8)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">8</span><span><b>Bedridden.</b> I am mostly in bed and cannot use a wheelchair for long.</span></div></div></details>
+    <details open style="margin:2px 0 8px"><summary style="cursor:pointer;font-size:13px;color:#1e4a6e;font-weight:600">Steps 0–8 (tap one to select)</summary><div class="items" style="margin-top:8px"><div class="item pdds-opt" data-v="0" onclick="setPdds(0)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">0</span><span><b>Normal:</b> I may have some mild symptoms, mostly sensory due to MS but they do not limit my activity. If I do have an attack, I return to normal when the attack has passed.</span></div><div class="item pdds-opt" data-v="1" onclick="setPdds(1)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">1</span><span><b>Mild Disability:</b> I have some noticeable symptoms from my MS but they are minor and have only a small effect on my lifestyle.</span></div><div class="item pdds-opt" data-v="2" onclick="setPdds(2)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">2</span><span><b>Moderate Disability:</b> I don't have any limitations in my walking ability. However, I do have significant problems due to MS that limit daily activities in other ways.</span></div><div class="item pdds-opt" data-v="3" onclick="setPdds(3)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">3</span><span><b>Gait Disability:</b> MS does interfere with my activities, especially my walking. I can work a full day, but athletic or physically demanding activities are more difficult than they used to be. I usually don't need a cane or other assistance to walk, but I might need some assistance during an attack.</span></div><div class="item pdds-opt" data-v="4" onclick="setPdds(4)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">4</span><span><b>Early Cane:</b> I use a cane or a single crutch or some other form of support (such as touching a wall or leaning on someone's arm) for walking all the time or part of the time, especially when walking outside. I think I can walk 25 feet in 20 seconds without a cane or crutch. I always need some assistance (cane or crutch) if I want to walk as far as 3 blocks.</span></div><div class="item pdds-opt" data-v="5" onclick="setPdds(5)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">5</span><span><b>Late Cane:</b> To be able to walk 25 feet, I have to have a cane, crutch or someone to hold onto. I can get around the house or other buildings by holding onto furniture or touching the walls for support. I may use a scooter or wheelchair if I want to go greater distances.</span></div><div class="item pdds-opt" data-v="6" onclick="setPdds(6)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">6</span><span><b>Bilateral Support:</b> To be able to walk as far as 25 feet I must have 2 canes or crutches or a walker. I may use a scooter or wheelchair for longer distances.</span></div><div class="item pdds-opt" data-v="7" onclick="setPdds(7)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">7</span><span><b>Wheelchair/Scooter:</b> My main form of mobility is a wheelchair. I may be able to stand and/or take one or two steps, but I can't walk 25 feet, even with crutches or a walker.</span></div><div class="item pdds-opt" data-v="8" onclick="setPdds(8)" style="grid-template-columns:auto 1fr;cursor:pointer;border-radius:8px;padding:6px 8px"><span class="qn">8</span><span><b>Bedridden:</b> Unable to sit in a wheelchair for more than one hour.</span></div></div></details>
     <div class="result" id="pdds_out"></div>
     <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
 <b>Scoring:</b> Single ordinal item &mdash; patient selects one step (0 = Normal, 8 = Bedridden). The selected step is the score; no calculation needed.<br>
@@ -383,7 +383,7 @@ footer{margin-top:40px;color:var(--ink-faint);font-size:12px;text-align:center}
     <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
 <b>Scoring:</b> 7 domains &times; 4 items rated 1&ndash;5 &rarr; raw domain sum (4&ndash;20) converted to a <b>T-score</b> via official HealthMeasures calibration tables. Pain intensity is a separate 0&ndash;10 NRS item.<br>
 <b>T-score:</b> Mean = 50, SD = 10 in the US general population. For <em>symptom</em> domains (Anxiety, Depression, Fatigue, Sleep, Pain Interference): T &gt; 50 = worse than average; T = 60 = 1 SD above average (more symptoms). For <em>function</em> domains (Physical Function, Social Roles): T &lt; 50 = worse than average; T = 40 = 1 SD below average ability.<br>
-<b>Severity bands</b> (HealthMeasures 2021): Mild / Moderate / Significant concern &mdash; thresholds differ by domain and are shown on each result line.<br>
+<b>Severity bands</b> (standard PROMIS T-score cut-points): <b>Normal / Mild / Moderate / Severe</b>, shown on each result line. Symptom domains (Anxiety, Depression, Fatigue, Sleep, Pain Interference): T &lt; 55 Normal &bull; 55&ndash;59.9 Mild &bull; 60&ndash;69.9 Moderate &bull; &ge; 70 Severe. Function domains (Physical Function, Social Roles) mirror this below the mean: T &ge; 45 Normal &bull; 40&ndash;44.9 Mild &bull; 30&ndash;39.9 Moderate &bull; &lt; 30 Severe.<br>
 <b>Reference:</b> Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. T-score tables: PROMIS Adult Profile Scoring Manual v2.1 (HealthMeasures / Northwestern University, 2021).
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('promis','PROMIS-29')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('promis','PROMIS-29')">Researcher: CSV</button></div>
@@ -830,29 +830,6 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="actions no-print"><button class="btn" onclick="patientSummary('lcva','LCVA')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('lcva','LCVA')">📊 Researcher: CSV</button></div>
   </section>
 
-  <!-- PANEL: HADS -->
-  <section class="panel" id="p_hads">
-    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
-    <h2>Hospital Anxiety and Depression Scale (HADS)</h2>
-    <p class="lead">14 items assessing anxiety and depression symptoms over the past week, excluding physical symptoms to avoid somatic overlap in MS.</p>
-    <div class="actions">
-      <button class="btn" onclick="clearHads()">Clear</button>
-    </div>
-    <div class="items" id="hads_items"></div>
-    <div class="result" id="hads_out"></div>
-    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
-      <b>Scoring:</b> 14 items total (7 for Anxiety: HADS-A; 7 for Depression: HADS-D). Each item is rated 0 to 3. Scores for each subscale range from 0 to 21.<br>
-      <b>Severity Bands for each subscale (Anxiety &amp; Depression):</b>
-      <ul>
-        <li><b>0 &ndash; 7:</b> Normal (no clinical concern).</li>
-        <li><b>8 &ndash; 10:</b> Borderline abnormal (mild symptoms).</li>
-        <li><b>11 &ndash; 21:</b> Abnormal (indicates significant clinical symptoms).</li>
-      </ul>
-      <b>Reference:</b> Zigmond AS, Snaith RP. <em>Acta Psychiatr Scand</em> 1983;67(6):361-70.
-    </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('hads','HADS')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('hads','HADS')">📊 Researcher: CSV</button></div>
-  </section>
-
   <section class="refs-sec"><details class="refs">
     <summary>References &amp; scoring sources</summary>
     <div class="ref-cat">Cognition</div>
@@ -873,7 +850,6 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="ref-item"><span class="ref-name">ABC Scale</span><span class="ref-cite">Powell LE, Myers AM. <em>J Gerontol A Biol Sci Med Sci</em> 1995;50A(1):M28&ndash;34.</span></div>
     <div class="ref-item"><span class="ref-name">FES-I</span><span class="ref-cite">Yardley L, Beyer N, Hauer K, Kempen G, Piot-Ziegler C, Todd C. <em>Age Ageing</em> 2005;34(6):614&ndash;9.</span></div>
     <div class="ref-item"><span class="ref-name">LCVA (Sloan)</span><span class="ref-cite">Sloan LL, Habel V. <em>J Opt Soc Am</em> 1952;42:548&ndash;52. Balcer LJ, et al. <em>Neurology</em> 2003;61(10):1433&ndash;5.</span></div>
-    <div class="ref-item"><span class="ref-name">HADS</span><span class="ref-cite">Zigmond AS, Snaith RP. <em>Acta Psychiatr Scand</em> 1983;67(6):361&ndash;70.</span></div>
     <div class="ref-cat">Performance &amp; composites</div>
     <div class="ref-item"><span class="ref-name">PASAT</span><span class="ref-cite">Gronwall DMA. <em>Percept Mot Skills</em> 1977;44:367&ndash;73. (MSFC cognitive component; Task Force reference.)</span></div>
     <div class="ref-item"><span class="ref-name">MSFC / T25FW</span><span class="ref-cite">Fischer JS, Rudick RA, Cutter GR, Reingold SC. <em>Mult Scler</em> 1999;5(4):244-50.</span></div>
@@ -997,8 +973,7 @@ const TOOLS=[
   {id:"promispain", ic:"⚡", name:"PROMIS Pain Intensity", tag:"Pain Severity", desc:"PROMIS Global07 single-item 0-10 pain intensity scale."},
   {id:"abc", ic:"⚖️", name:"ABC Scale", tag:"Balance Confidence", desc:"Activities-specific Balance Confidence Scale (16 items, 0-100%)."},
   {id:"fesi", ic:"🚶", name:"FES-I", tag:"Fear of Falls", desc:"Falls Efficacy Scale-International: concern of falling (16-64)."},
-  {id:"lcva", ic:"👁️", name:"LCVA Sloan Letters", tag:"Visual Function", desc:"Low-Contrast Visual Acuity (0-60 letters correct for Sloan 2.5% and 1.25%)."},
-  {id:"hads", ic:"🎭", name:"HADS Scale", tag:"Anxiety & Depression", desc:"Hospital Anxiety & Depression Scale: 14 items (0-21 score range)."}
+  {id:"lcva", ic:"👁️", name:"LCVA Sloan Letters", tag:"Visual Function", desc:"Low-Contrast Visual Acuity (0-60 letters correct for Sloan 2.5% and 1.25%)."}
 ];
 const MFIS_TEXT={
 1:"I have been less alert.",2:"I have had difficulty paying attention for long periods of time.",
@@ -1048,7 +1023,7 @@ const GROUPS=[
  {name:"Disability &amp; severity", sub:"Overall disability, and how it compares to others (ARMSS / MSSS).", ids:["edss","pdds"]},
  {name:"Cognition - BICAMS battery", sub:"Clinician-administered. Processing speed + verbal &amp; visual memory; impaired at z &le; -1.5.", ids:["bicams","sdmt","cvlt","bvmt","pasat","promiscog"]},
  {name:"Fatigue", sub:"Self-report.", ids:["mfis","fss","fsmc"]},
- {name:"Mood", sub:"Self-report screens.", ids:["phq9","gad7","hads"]},
+ {name:"Mood", sub:"Self-report screens.", ids:["phq9","gad7"]},
  {name:"Symptom burden", sub:"Global self-report of MS symptom severity.", ids:["smscreen"]},
  {name:"Walking &amp; motor function", sub:"MSWS-12 is self-report; T25FW, 9-HPT &amp; 6MWT are clinician-administered.", ids:["msws","t25fw","nhpt","sixmwt","abc","fesi","lcva"]},
  {name:"Quality of life &amp; impact", sub:"Self-report.", ids:["msqol","promis","msis","promispain"]},
@@ -1341,7 +1316,7 @@ const PR_SLR=[["Not at all",5],["A little bit",4],["Somewhat",3],["Quite a bit",
 const PROMIS_Q={
 1:"Are you able to do chores such as vacuuming or yard work?",
 2:"Are you able to go up and down stairs at a normal pace?",
-3:"Are you able to go for a walk for at least 15 minutes?",
+3:"Are you able to go for a walk of at least 15 minutes?",
 4:"Are you able to run errands and shop?",
 5:"I felt fearful…",6:"I found it hard to focus on anything other than my anxiety",
 7:"My worries overwhelmed me…",8:"I felt uneasy…",
@@ -1391,8 +1366,8 @@ const PROMIS_T={
 };
 function promisT(key,raw){ const a=PROMIS_T[key]; if(!a||raw==null||raw<4||raw>20) return null; return a[raw-4]; }
 function tBand(key,T){ if(T==null) return null;
-  if(key==="phys"||key==="social"){ if(T>=45)return["good","within normal limits"]; if(T>=40)return["warn","mild limitation"]; if(T>=30)return["warn","moderate limitation"]; return["bad","severe limitation"]; }
-  if(T<55)return["good","none to slight"]; if(T<60)return["warn","mild"]; if(T<70)return["warn","moderate"]; return["bad","severe"]; }
+  if(key==="phys"||key==="social"){ if(T>=45)return["good","Normal"]; if(T>=40)return["warn","Mild"]; if(T>=30)return["warn","Moderate"]; return["bad","Severe"]; }
+  if(T<55)return["good","Normal"]; if(T<60)return["warn","Mild"]; if(T<70)return["warn","Moderate"]; return["bad","Severe"]; }
 function calcPROMIS(){
   const resp={}; for(let i=1;i<=28;i++){const e=el("pr_"+i); if(e) resp[i]=_num(e.value);}
   const pi=_num(el("pr_pi")?el("pr_pi").value:null);
@@ -1591,8 +1566,6 @@ function fillFSMC(v){for(let i=1;i<=20;i++)el("fsmc_"+i).value=v;calcFSMC();}
 function clearFSMC(){for(let i=1;i<=20;i++){el("fsmc_"+i).value="";const e=el("fsmc_"+i);if(e)e.classList.remove("blank");}el("fsmc_out").innerHTML="";}
 
 // ===== PHQ-9 / GAD-7 shared options =====
-const _DSM4=[["0 - Not at all",0],["1 - Several days",1],["2 - More than half the days",2],["3 - Nearly every day",3]];
-function _dsmSel(id){let opts="";for(const o of _DSM4)opts+='<option value="'+o[1]+'">'+o[0]+'</option>';return '<select id="'+id+'" oninput="'+(id.indexOf("phq")===0?"calcPHQ":"calcGAD")+'()"><option value="">- select -</option>'+opts+'</select>';}
 const PHQ_TEXT={1:"Little interest or pleasure in doing things",2:"Feeling down, depressed, or hopeless",3:"Trouble falling or staying asleep, or sleeping too much",4:"Feeling tired or having little energy",5:"Poor appetite or overeating",6:"Feeling bad about yourself - or that you are a failure or have let yourself or your family down",7:"Trouble concentrating on things, such as reading the newspaper or watching television",8:"Moving or speaking so slowly that other people could have noticed - or the opposite, being so fidgety or restless that you have been moving around a lot more than usual",9:"Thoughts that you would be better off dead, or of hurting yourself in some way"};
 var _PHQL={0:"Not at all",1:"Several days",2:"More than half the days",3:"Nearly every day"};
 el("phq_items").innerHTML=Array.from({length:9},(_,k)=>{const i=k+1;
@@ -1623,9 +1596,7 @@ function fillGAD(v){_fillScale("gad_",1,7,v);calcGAD();}
 function clearGAD(){_clearScale("gad_",1,7);el("gad7_out").innerHTML="";}
 
 // ===== MSWS-12 =====
-const MSWS_TEXT={1:"Limited your ability to walk",2:"Limited your ability to run",3:"Limited the distance you can walk",4:"Limited walking smoothness/steadiness",5:"Needed effort to walk",6:"Limited your balance when standing or walking",7:"Limited how long you can be on your feet",8:"Needed support indoors (walls, furniture)",9:"Needed a walking aid (cane, walker)",10:"Made walking slower",11:"Needed more concentration to walk",12:"Made you avoid activities that involve walking"};
-const _MSWS5=[["1 - Not at all",1],["2 - A little",2],["3 - Moderately",3],["4 - Quite a bit",4],["5 - Extremely",5]];
-function _sel5(id,fn){let o="";for(const x of _MSWS5)o+='<option value="'+x[1]+'">'+x[0]+'</option>';return '<select id="'+id+'" oninput="'+fn+'()"><option value="">- select -</option>'+o+'</select>';}
+const MSWS_TEXT={1:"Limited your ability to walk?",2:"Limited your ability to run?",3:"Limited your ability to climb up and down stairs?",4:"Made standing when doing things more difficult?",5:"Limited your balance when standing or walking?",6:"Limited how far you are able to walk?",7:"Increased the effort needed for you to walk?",8:"Made it necessary for you to use support when walking indoors (e.g. holding on to furniture, using a stick, etc.)?",9:"Made it necessary for you to use support when walking outdoors (e.g. using a stick, frame, etc.)?",10:"Slowed down your walking?",11:"Affected how smoothly you walk?",12:"Made you concentrate on your walking?"};
 el("msws_items").innerHTML='<div class="note" style="margin-bottom:8px">In the past 2 weeks, how much has your MS&hellip;</div>'+Array.from({length:12},(_,k)=>{const i=k+1;return _scaleRow("msws_",i,MSWS_TEXT[i],[[1,"Not at all"],[2,"A little"],[3,"Moderately"],[4,"Quite a bit"],[5,"Extremely"]],"calcMSWS");}).join("");
 function readMSWS(){const o={};for(let i=1;i<=12;i++)o[i]=_num(el("msws_"+i).value);return o;}
 function calcMSWS(){const o=readMSWS();const ans=Object.values(o).filter(v=>v!=null).length;if(ans===0){el("msws_out").innerHTML="";return;} _flagScale("msws_",1,12,ans<12);
@@ -1638,8 +1609,8 @@ function fillMSWS(v){_fillScale("msws_",1,12,v);calcMSWS();}
 function clearMSWS(){_clearScale("msws_",1,12);el("msws_out").innerHTML="";}
 
 // ===== MSIS-29 =====
-const MSIS_TEXT={1:"Doing physically demanding tasks",2:"Gripping things tightly (e.g. turning taps)",3:"Carrying things",4:"Problems with your balance",5:"Difficulty moving about indoors",6:"Being clumsy",7:"Stiffness",8:"Heavy arms and/or legs",9:"Tremor of arms and/or legs",10:"Spasms in your limbs",11:"Your body not doing what you want it to",12:"Having to depend on others to do things",13:"Limitations in social/leisure activities at home",14:"Being stuck at home more than you would like",15:"Difficulty using your hands in everyday tasks",16:"Having to cut down time on work/daily activities",17:"Problems using transport (car, bus, train)",18:"Taking longer to do things",19:"Difficulty doing things spontaneously",20:"Needing to go to the toilet urgently",21:"Feeling unwell",22:"Problems sleeping",23:"Feeling mentally fatigued",24:"Worries related to your MS",25:"Feeling anxious or tense",26:"Feeling irritable/impatient/short-tempered",27:"Problems concentrating",28:"Lack of confidence",29:"Feeling depressed"};
-el("msis_items").innerHTML='<div class="subhead">Physical impact (items 1–20)</div><div class="items">'+
+const MSIS_TEXT={1:"Doing physically demanding tasks",2:"Gripping things tightly (e.g. turning on taps)",3:"Carrying things",4:"Problems with your balance",5:"Difficulties moving about indoors",6:"Being clumsy",7:"Stiffness",8:"Heavy arms and/or legs",9:"Tremor of your arms or legs",10:"Spasms in your limbs",11:"Your body not doing what you want it to do",12:"Having to depend on others to do things for you",13:"Limitations in your social and leisure activities at home",14:"Being stuck at home more than you would like to be",15:"Difficulties using your hands in everyday tasks",16:"Having to cut down the amount of time you spent on work or other daily activities",17:"Problems using transport (e.g. car, bus, train, taxi, etc.)",18:"Taking longer to do things",19:"Difficulty doing things spontaneously (e.g. going out on the spur of the moment)",20:"Needing to go to the toilet urgently",21:"Feeling unwell",22:"Problems sleeping",23:"Feeling mentally fatigued",24:"Worries related to your MS",25:"Feeling anxious or tense",26:"Feeling irritable, impatient or short tempered",27:"Problems concentrating",28:"Lack of confidence",29:"Feeling depressed"};
+el("msis_items").innerHTML='<div class="note" style="margin-bottom:8px">In the past two weeks, how much have you been bothered by&hellip;</div><div class="subhead">Physical impact (items 1–20)</div><div class="items">'+
   MSIS_PHYS.map(i=>_scaleRow("msis_",i,MSIS_TEXT[i],[[1,"Not at all"],[2,"A little"],[3,"Moderately"],[4,"Quite a bit"],[5,"Extremely"]],"calcMSIS")).join("")+
   '</div><div class="subhead">Psychological impact (items 21–29)</div><div class="items">'+
   MSIS_PSY.map(i=>_scaleRow("msis_",i,MSIS_TEXT[i],[[1,"Not at all"],[2,"A little"],[3,"Moderately"],[4,"Quite a bit"],[5,"Extremely"]],"calcMSIS")).join("")+'</div>';
@@ -2407,106 +2378,6 @@ function calcLCVA() {
   `;
 }
 
-
-// ===== HADS (Hospital Anxiety and Depression Scale) =====
-const HADS_TEXT = {
-  1: {t: "I feel tense or 'wound up'", s: "A", o: [[3,"Most of the time"],[2,"A lot of the time"],[1,"From time to time, occasionally"],[0,"Not at all"]]},
-  2: {t: "I still enjoy the things I used to enjoy", s: "D", o: [[0,"Definitely as much"],[1,"Not quite so much"],[2,"Only a little"],[3,"Hardly at all"]]},
-  3: {t: "I get a sort of frightened feeling as if something awful is about to happen", s: "A", o: [[3,"Very definitely and quite badly"],[2,"Yes, but not too badly"],[1,"A little, but it doesn't worry me"],[0,"Not at all"]]},
-  4: {t: "I can laugh and see the funny side of things", s: "D", o: [[0,"As much as I always could"],[1,"Not quite so much now"],[2,"Definitely not so much now"],[3,"Not at all"]]},
-  5: {t: "Worrying thoughts go through my mind", s: "A", o: [[3,"A great deal of the time"],[2,"A lot of the time"],[1,"From time to time, but not too often"],[0,"Only occasionally"]]},
-  6: {t: "I feel cheerful", s: "D", o: [[3,"Not at all"],[2,"Not often"],[1,"Sometimes"],[0,"Most of the time"]]},
-  7: {t: "I can sit at ease and feel relaxed", s: "A", o: [[0,"Definitely"],[1,"Usually"],[2,"Not often"],[3,"Not at all"]]},
-  8: {t: "I feel as if I am slowed down", s: "D", o: [[3,"Nearly all the time"],[2,"Very often"],[1,"Sometimes"],[0,"Not at all"]]},
-  9: {t: "I get a sort of frightened feeling like 'butterflies' in the stomach", s: "A", o: [[0,"Not at all"],[1,"Occasionally"],[2,"Quite often"],[3,"Very often"]]},
-  10: {t: "I have lost interest in my appearance", s: "D", o: [[3,"Definitely"],[2,"I don't take as much care as I should"],[1,"I may not take quite as much care"],[0,"I take just as much care as ever"]]},
-  11: {t: "I feel restless as I have to be on the move", s: "A", o: [[3,"Very much indeed"],[2,"Quite a lot"],[1,"Not very much"],[0,"Not at all"]]},
-  12: {t: "I look forward with enjoyment to things", s: "D", o: [[0,"As much as I ever did"],[1,"Rather less than I used to"],[2,"Definitely less than I used to"],[3,"Hardly at all"]]},
-  13: {t: "I get sudden feelings of panic", s: "A", o: [[3,"Very often indeed"],[2,"Quite often"],[1,"Not very often"],[0,"Not at all"]]},
-  14: {t: "I can enjoy a good book or radio or TV program", s: "D", o: [[0,"As much as I ever did"],[1,"Not quite so much"],[2,"Not very often"],[3,"Hardly at all"]]}
-};
-
-el("hads_items").innerHTML = Array.from({length:14}, (_, k) => {
-  const i = k + 1;
-  const item = HADS_TEXT[i];
-  let opts = "";
-  item.o.forEach(o => {
-    opts += `<option value="${o[0]}">${o[1]}</option>`;
-  });
-  return `<div class="item" id="hads_item_row_${i}"><div><span class="qn">${i}.</span>[${item.s}] ${item.t}</div><select id="hads_${i}" oninput="calcHads()"><option value="">- select -</option>${opts}</select></div>`;
-}).join("");
-
-function readHads() {
-  const o = {};
-  for (let i = 1; i <= 14; i++) o[i] = _num(el("hads_" + i).value);
-  return o;
-}
-
-function calcHads() {
-  const o = readHads();
-  const answered = Object.values(o).filter(v => v != null).length;
-  if (answered === 0) { el("hads_out").innerHTML = ""; return; }
-  
-  // Flag incomplete
-  for (let i = 1; i <= 14; i++) {
-    const row = el("hads_item_row_" + i);
-    const val = el("hads_" + i).value;
-    if (row) row.classList.toggle("blank", answered < 14 && val === "");
-  }
-  
-  if (answered < 14) {
-    el("hads_out").innerHTML = interp("neutral", `Answered ${answered}/14. Please complete all 14 items to calculate Anxiety & Depression subscales.`);
-    return;
-  }
-  
-  let anx = 0, dep = 0;
-  for (let i = 1; i <= 14; i++) {
-    if (HADS_TEXT[i].s === "A") anx += o[i];
-    else dep += o[i];
-  }
-  
-  const band = s => s >= 11 ? ["bad", "Abnormal / Clinical concern"] : s >= 8 ? ["warn", "Borderline abnormal"] : ["good", "Normal / No concern"];
-  const bA = band(anx), bD = band(dep);
-  const col = c => c === "good" ? "#216e39" : c === "warn" ? "#9a6700" : "#9b2c2c";
-  
-  el("hads_out").innerHTML = `
-    <div class="scoreline">
-      <div class="bigscore" style="color:var(--accent)">${anx}<small> Anxiety (HADS-A)</small></div>
-      <div class="bigscore" style="color:var(--hl)">${dep}<small> Depression (HADS-D)</small></div>
-    </div>
-    <div class="chips" style="margin-top:12px">
-      <span class="chip">Anxiety: <b style="color:${col(bA[0])}">${bA[1]}</b></span>
-      <span class="chip">Depression: <b style="color:${col(bD[0])}">${bD[1]}</b></span>
-    </div>
-    <div class="note" style="margin-top:10px">Subscales range from 0 to 21. Thresholds: &le; 7 Normal, 8-10 Borderline, &ge; 11 Clinical Concern.</div>
-  `;
-}
-
-function fillHads(v) {
-  // If v is 0 or 3, we set all selects to that point value if it exists in the options
-  for (let i = 1; i <= 14; i++) {
-    const sel = el("hads_" + i);
-    if (!sel) continue;
-    
-    // Find the option that matches the value v (which could be the first or last depending on reverse-coding)
-    const options = Array.from(sel.options);
-    const match = options.find(opt => opt.value === String(v));
-    if (match) {
-      sel.value = match.value;
-    }
-  }
-  calcHads();
-}
-
-function clearHads() {
-  for (let i = 1; i <= 14; i++) {
-    const e = el("hads_" + i);
-    if (e) e.value = "";
-    const row = el("hads_item_row_" + i);
-    if (row) row.classList.remove("blank");
-  }
-  el("hads_out").innerHTML = "";
-}
 
 </script>
 </body>
