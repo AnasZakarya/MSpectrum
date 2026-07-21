@@ -46,9 +46,13 @@ Stateless calculators and full questionnaires. Every result shows the raw score 
 | Fatigue | MFIS (≈38), FSS (≥4) | clinical cut-offs |
 | Mood | PHQ-9, GAD-7 | validated severity bands (+ PHQ-9 item-9 safety prompt) |
 | Walking | MSWS-12 | 0–100 transform |
-| Quality of life / impact | MSQOL-54, PROMIS-29 v2.1, MSIS-29 | MSQOL composites; PROMIS official raw-to-T tables (HealthMeasures); 0–100 transforms |
+| Quality of life / impact | MSQOL-54, PROMIS-29 v2.1, MSIS-29 | MSQOL composites; PROMIS official raw-to-T **plus Standard Error (SE)** tables (HealthMeasures); 0–100 transforms |
 
 Extras: demographics entered once drive the cognitive z-scores; CVLT-II recognition sub-scores (SDFR, LDFR, d′, discriminability, Forced-Choice validity); a guided **Check my MS** patient pathway with a plain-language report; a **Clinician summary** that compiles all entered tools; out-of-range input flagging; unanswered-item highlighting; an **"ℹ How it works"** helper on every tool; **Export JSON / CSV** per tool. Self-report questionnaires can be filled by the patient; performance tests and composites are clinician-administered.
+
+### Batch scoring for researchers
+
+A **Batch scorer (CSV)** tool scores a whole dataset at once: upload or paste a CSV of raw item responses — one row per patient — and get every patient's scores back, downloadable as a results CSV. It covers PROMIS-29 (with T **and SE**), MFIS, PHQ-9, GAD-7, MSWS-12, MSIS-29 and FSS. This complements data platforms such as **REDCap**: export the raw responses, run them through the batch scorer, and get the official PROMIS T-scores (and SE) that such platforms do not compute natively. A downloadable **PROMIS raw→T→SE lookup CSV** is also provided. Everything runs in the browser; nothing is uploaded.
 
 > **Decision support, not a diagnosis.** MSpectrum computes outcome-measure scores and applies published diagnostic criteria, and explains what the results mean. It supports clinical judgement but does not itself diagnose; interpretation, diagnosis and treatment remain the decision of a qualified clinician. See the in-app **Disclaimer & terms of use** for the full medico-legal notice.
 
@@ -83,11 +87,11 @@ If you used MSpectrum in research, please cite it:
 ## Algorithm & scoring sources
 
 - Kappos L. *Neurostatus scoring definitions* (v04/10.2), 2011.
-- Fouad S, et al. *An algorithmic approach to the EDSS.* Mult Scler J–ETC (2023). DOI: [10.1177/20552173231155055](https://doi.org/10.1177/20552173231155055).
-- Baldassari LE, et al. *Streamlined EDSS (sEDSS).* Mult Scler J (2017) (Clinical EDSS mode).
-- Romeo AR, et al. *Electronic patient-reported EDSS (ePR-EDSS).* Mult Scler (2021) (Quick Check mode).
+- Fouad S et al. *An algorithmic approach to the EDSS.* Mult Scler J–ETC (2023). DOI: [10.1177/20552173231155055](https://doi.org/10.1177/20552173231155055).
+- Baldassari LE et al. *Streamlined EDSS (sEDSS).* Mult Scler J (2017) (Clinical EDSS mode).
+- Romeo AR et al. *Electronic patient-reported EDSS (ePR-EDSS).* Mult Scler (2021) (Quick Check mode).
 - MS Score Hub instruments are cited in full inside the app (References & scoring sources).
-- Montalban X, Lebrun-Frénay C, Oh J, et al. *Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria.* Lancet Neurol (2025);24(10):850–865 (MS Criteria Checker), with companion consensus papers (2024 MAGNIMS–CMSC–NAIMS MRI recommendations; visual system; kFLC / OCB) and Solomon AJ, et al. Lancet Neurol 2023;22:750–68 (differential diagnosis).
+- Montalban X, Lebrun-Frénay C, Oh J et al. *Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria.* Lancet Neurol (2025);24(10):850–865 (MS Criteria Checker), with companion consensus papers (2024 MAGNIMS–CMSC–NAIMS MRI recommendations; visual system; kFLC / OCB) and Solomon AJ et al. Lancet Neurol 2023;22:750–68 (differential diagnosis).
 - Functional-System scoring follows the **Neurostatus v04/10.2 definitions** exactly, including the Cerebellar (severe-ataxia) and Bowel/Bladder (loss-of-function to FS 5/6) rules, and an optional toggle to exclude fatigue from the Cerebral FS per study protocol.
 
 ---
@@ -97,6 +101,16 @@ If you used MSpectrum in research, please cite it:
 © 2026 Anas Z. Nourelden and Anza B. Memon. Licensed under the **GNU Affero General Public License v3.0** (AGPL-3.0) — see the [LICENSE](LICENSE) file for the full text.
 
 In short: you are free to use, study, share and modify MSpectrum, but any distributed or network-served modified version must also be released as open source under the same licence (AGPL Section 13, network-use clause). This keeps the tool free and open for the MS community while protecting the authors' work. For a different (e.g. commercial or closed) arrangement, contact the authors for separate licensing.
+
+### Instrument use & attribution
+
+The AGPL-3.0 licence covers MSpectrum's own code, algorithms and interface — **not** the third-party clinical instruments it scores. Each instrument remains the property of its authors/publishers and is used here for research and educational purposes:
+
+- **Free / open instruments** are reproduced verbatim with citation: PROMIS (29, Cognitive, Pain), PHQ-9, GAD-7, PDDS, MFIS, MSQOL-54, FSS, ABC, FES-I, SymptoMScreen.
+- **Reproduced under non-commercial academic use** (would require a paid licence if MSpectrum is ever commercialised): MSWS-12 and MSIS-29 (Transform MS CIC / Mapi-ePROVIDE), and FSS (Krupp — free for non-profit use).
+- **Licensed instruments are number-entry only** — item text is never reproduced: SDMT, BVMT-R, CVLT-II, LCVA/Sloan (performance tests) and FSMC (shown as "Item N").
+
+Normative conversion tables (e.g. the PROMIS raw→T→SE lookups) are taken verbatim from the official HealthMeasures scoring manuals and cited in-app. If you reuse MSpectrum, you are responsible for complying with each instrument's own terms.
 
 ---
 

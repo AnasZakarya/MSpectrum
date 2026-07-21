@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com; object-src 'none'; base-uri 'self'">
 <meta name="description" content="MSpectrum - a free, offline hub for multiple sclerosis outcome measures and diagnosis: the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a 2024 McDonald-criteria diagnostic checker.">
 <title>MSpectrum - Comprehensive MS scoring & diagnosis (EDSS & beyond)</title>
 <meta name="keywords" content="multiple sclerosis, MS, EDSS, EDSS calculator, Neurostatus, MS outcome measures, MS scores, SDMT, BICAMS, MSFC, PDDS, MSSS, ARMSS, MFIS, FSS, MSWS-12, PROMIS-29, MSQOL-54, McDonald criteria 2024, MS diagnosis">
@@ -3085,10 +3087,10 @@ input[type="checkbox"] {
     <div class="refs-sec" style="margin-top:48px;">
       <details class="refs">
         <summary>References &amp; scoring sources</summary>
-        <div class="ref-item" style="margin-top:12px;"><span class="ref-name">EDSS / Neurostatus</span><span class="ref-cite">Kurtzke JF. <em>Neurology</em> 1983;33:1444&ndash;52. &middot; Kappos L., Neurostatus Scoring Definitions (v04/10.2), 2011.</span></div>
-        <div class="ref-item"><span class="ref-name">Combination algorithm</span><span class="ref-cite">Fouad S, et al. <em>Mult Scler J&ndash;ETC</em> 2023. DOI:10.1177/20552173231155055.</span></div>
-        <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE, et al. <em>Mult Scler J</em> 2017.</span></div>
-        <div class="ref-item"><span class="ref-name">Quick Check (ePR-EDSS)</span><span class="ref-cite">Romeo AR, et al. <em>Mult Scler</em> 2021;27(9):1432&ndash;41.</span></div>
+        <div class="ref-item" style="margin-top:12px;"><span class="ref-name">EDSS / Neurostatus</span><span class="ref-cite">Kurtzke JF. <em>Neurology</em> 1983;33:1444&ndash;52. &middot; Kappos L. Neurostatus Scoring Definitions (v04/10.2), 2011.</span></div>
+        <div class="ref-item"><span class="ref-name">Combination algorithm</span><span class="ref-cite">Fouad S et al. <em>Mult Scler J&ndash;ETC</em> 2023. DOI:10.1177/20552173231155055.</span></div>
+        <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE et al. <em>Mult Scler J</em> 2017.</span></div>
+        <div class="ref-item"><span class="ref-name">Quick Check (ePR-EDSS)</span><span class="ref-cite">Romeo AR et al. <em>Mult Scler</em> 2021;27(9):1432&ndash;41.</span></div>
       </details>
     </div>
     <p style="margin-top:16px;color:var(--ink-faint);font-size:12px;text-align:center;">MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b style="color:var(--ink-soft)">It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is stored.</p>
@@ -3120,33 +3122,33 @@ input[type="checkbox"] {
     <p style="color:var(--ink-soft);font-size:13.5px;margin:8px 0 8px">Every score implements a published, peer-reviewed scoring rule. Primary sources, grouped by branch:</p>
     <div class="ref-list">
       <div class="ref-cat">EDSS - AutoEDSSguide</div>
-      <div class="ref-item"><span class="ref-name">EDSS / Neurostatus</span><span class="ref-cite">Kurtzke JF. <em>Neurology</em> 1983;33:1444&ndash;52. &middot; Kappos L., Neurostatus Scoring Definitions (v04/10.2), 2011.</span></div>
-      <div class="ref-item"><span class="ref-name">Combination algorithm</span><span class="ref-cite">Fouad S, et al. <em>Mult Scler J&ndash;ETC</em> 2023. DOI:10.1177/20552173231155055.</span></div>
-      <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE, et al. <em>Mult Scler J</em> 2017.</span></div>
-      <div class="ref-item"><span class="ref-name">Quick Check (ePR-EDSS)</span><span class="ref-cite">Romeo AR, et al. <em>Mult Scler</em> 2021;27(9):1432&ndash;41.</span></div>
+      <div class="ref-item"><span class="ref-name">EDSS / Neurostatus</span><span class="ref-cite">Kurtzke JF. <em>Neurology</em> 1983;33:1444&ndash;52. &middot; Kappos L. Neurostatus Scoring Definitions (v04/10.2), 2011.</span></div>
+      <div class="ref-item"><span class="ref-name">Combination algorithm</span><span class="ref-cite">Fouad S et al. <em>Mult Scler J&ndash;ETC</em> 2023. DOI:10.1177/20552173231155055.</span></div>
+      <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE et al. <em>Mult Scler J</em> 2017.</span></div>
+      <div class="ref-item"><span class="ref-name">Quick Check (ePR-EDSS)</span><span class="ref-cite">Romeo AR et al. <em>Mult Scler</em> 2021;27(9):1432&ndash;41.</span></div>
       <div class="ref-cat">MS Score Hub</div>
-      <div class="ref-item"><span class="ref-name">SDMT</span><span class="ref-cite">Smith A. Symbol Digit Modalities Test. Western Psychological Services, 1982. US norms: Strober LB, et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (oral); Smith A. SDMT Manual (WPS) 1982 (written).</span></div>
-      <div class="ref-item"><span class="ref-name">BVMT-R</span><span class="ref-cite">Benedict RHB. Brief Visuospatial Memory Test&ndash;Revised. PAR, 1997. US MS regression norms: Marrie RA, et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA, et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
-      <div class="ref-item"><span class="ref-name">CVLT-II</span><span class="ref-cite">Delis DC, Kramer JH, Kaplan E, Ober BA. California Verbal Learning Test&ndash;II. Pearson, 2000. US MS regression norms: Marrie RA, et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA, et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
-      <div class="ref-item"><span class="ref-name">PDDS</span><span class="ref-cite">Hohol MJ, Orav EJ, Weiner HL. <em>Neurology</em> 1995; validated by Learmonth YC, et al. <em>BMC Neurol</em> 2013.</span></div>
+      <div class="ref-item"><span class="ref-name">SDMT</span><span class="ref-cite">Smith A. Symbol Digit Modalities Test. Western Psychological Services, 1982. US norms: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (oral); Smith A. SDMT Manual (WPS) 1982 (written).</span></div>
+      <div class="ref-item"><span class="ref-name">BVMT-R</span><span class="ref-cite">Benedict RHB. Brief Visuospatial Memory Test&ndash;Revised. PAR, 1997. US MS regression norms: Marrie RA et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
+      <div class="ref-item"><span class="ref-name">CVLT-II</span><span class="ref-cite">Delis DC, Kramer JH, Kaplan E, Ober BA. California Verbal Learning Test&ndash;II. Pearson, 2000. US MS regression norms: Marrie RA et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
+      <div class="ref-item"><span class="ref-name">PDDS</span><span class="ref-cite">Hohol MJ, Orav EJ, Weiner HL. <em>Neurology</em> 1995; validated by Learmonth YC et al. <em>BMC Neurol</em> 2013.</span></div>
       <div class="ref-item"><span class="ref-name">MSWS-12</span><span class="ref-cite">Hobart JC, Riazi A, Lamping DL, Fitzpatrick R, Thompson AJ. <em>Neurology</em> 2003;60(1):31&ndash;6.</span></div>
       <div class="ref-item"><span class="ref-name">MSIS-29</span><span class="ref-cite">Hobart J, Lamping D, Fitzpatrick R, Riazi A, Thompson A. <em>Brain</em> 2001;124(Pt 5):962&ndash;73.</span></div>
-      <div class="ref-item"><span class="ref-name">MFIS</span><span class="ref-cite">Modified from Fisk JD, et al. <em>Clin Infect Dis</em> 1994;18(Suppl 1):S79&ndash;83. 21-item MFIS: MS Council for Clinical Practice Guidelines, 1998 (National MS Society).</span></div>
+      <div class="ref-item"><span class="ref-name">MFIS</span><span class="ref-cite">Modified from Fisk JD et al. <em>Clin Infect Dis</em> 1994;18(Suppl 1):S79&ndash;83. 21-item MFIS: MS Council for Clinical Practice Guidelines, 1998 (National MS Society).</span></div>
       <div class="ref-item"><span class="ref-name">FSS</span><span class="ref-cite">Krupp LB, LaRocca NG, Muir-Nash J, Steinberg AD. <em>Arch Neurol</em> 1989;46(10):1121&ndash;3.</span></div>
       <div class="ref-item"><span class="ref-name">MSQOL-54</span><span class="ref-cite">Vickrey BG, Hays RD, Harooni R, Myers LW, Ellison GW. <em>Qual Life Res</em> 1995. &copy; UCLA.</span></div>
-      <div class="ref-item"><span class="ref-name">PROMIS-29</span><span class="ref-cite">Cella D, et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. Profile v2.1, HealthMeasures (Northwestern).</span></div>
+      <div class="ref-item"><span class="ref-name">PROMIS-29</span><span class="ref-cite">Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. Profile v2.1, HealthMeasures (Northwestern).</span></div>
       <div class="ref-item"><span class="ref-name">PHQ-9</span><span class="ref-cite">Kroenke K, Spitzer RL, Williams JBW. <em>J Gen Intern Med</em> 2001;16(9):606&ndash;13. Public domain (Pfizer).</span></div>
       <div class="ref-item"><span class="ref-name">GAD-7</span><span class="ref-cite">Spitzer RL, Kroenke K, Williams JBW, L&ouml;we B. <em>Arch Intern Med</em> 2006;166(10):1092&ndash;7. Public domain (Pfizer).</span></div>
-      <div class="ref-item"><span class="ref-name">MS severity (ARMSS/MSSS)</span><span class="ref-cite">Manouchehrinia A, Westerlind H, Kingwell E, et al. <em>Mult Scler</em> 2017;23(13):1938&ndash;46 (ARMSS). Roxburgh RH, et al. <em>Neurology</em> 2005;64(7):1144&ndash;51 (MSSS). Matrices via the ms.sev package.</span></div>
+      <div class="ref-item"><span class="ref-name">MS severity (ARMSS/MSSS)</span><span class="ref-cite">Manouchehrinia A, Westerlind H, Kingwell E et al. <em>Mult Scler</em> 2017;23(13):1938&ndash;46 (ARMSS). Roxburgh RH et al. <em>Neurology</em> 2005;64(7):1144&ndash;51 (MSSS). Matrices via the ms.sev package.</span></div>
       <div class="ref-item"><span class="ref-name">PASAT</span><span class="ref-cite">Gronwall DMA. <em>Percept Mot Skills</em> 1977;44:367&ndash;73 (MSFC cognitive component).</span></div>
       <div class="ref-item"><span class="ref-name">MSFC / T25FW</span><span class="ref-cite">Fischer JS, Rudick RA, Cutter GR, Reingold SC. <em>Mult Scler</em> 1999;5(4):244&ndash;50.</span></div>
       <div class="ref-item"><span class="ref-name">9-HPT</span><span class="ref-cite">Mathiowetz V, Weber K, Kashman N, Volland G. <em>Occup Ther J Res</em> 1985;5(1):24&ndash;38.</span></div>
-      <div class="ref-item"><span class="ref-name">BICAMS</span><span class="ref-cite">Langdon DW, Amato MP, Boringa J, et al. <em>Mult Scler J</em> 2012;18(6):891&ndash;8.</span></div>
+      <div class="ref-item"><span class="ref-name">BICAMS</span><span class="ref-cite">Langdon DW, Amato MP, Boringa J et al. <em>Mult Scler J</em> 2012;18(6):891&ndash;8.</span></div>
       <div class="ref-cat">MS Criteria Checker - McDonald 2024</div>
-      <div class="ref-item"><span class="ref-name">McDonald 2024</span><span class="ref-cite">Montalban X, Lebrun-Fr&eacute;nay C, Oh J, et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em> 2025;24(10):850&ndash;865. DOI:10.1016/S1474-4422(25)00270-4.</span></div>
+      <div class="ref-item"><span class="ref-name">McDonald 2024</span><span class="ref-cite">Montalban X, Lebrun-Fr&eacute;nay C, Oh J et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em> 2025;24(10):850&ndash;865. DOI:10.1016/S1474-4422(25)00270-4.</span></div>
       <div class="ref-item"><span class="ref-name">MRI consensus</span><span class="ref-cite">2024 MAGNIMS&ndash;CMSC&ndash;NAIMS consensus recommendations on the use of MRI for the diagnosis of multiple sclerosis. <em>Lancet Neurol</em> 2025. DOI:10.1016/S1474-4422(25)00304-7.</span></div>
-      <div class="ref-item"><span class="ref-name">Differential diagnosis</span><span class="ref-cite">Solomon AJ, Arrambide G, Brownlee WJ, et al. Differential diagnosis of suspected multiple sclerosis: an updated consensus approach. <em>Lancet Neurol</em> 2023;22:750&ndash;68.</span></div>
-      <div class="ref-item"><span class="ref-name">RIS conversion</span><span class="ref-cite">Lebrun-Fr&eacute;nay C, Kantarci O, Siva A, et al. Radiologically isolated syndrome: 10-year risk estimate of a clinical event. <em>Ann Neurol</em> 2020;88(2):407&ndash;17.</span></div>
+      <div class="ref-item"><span class="ref-name">Differential diagnosis</span><span class="ref-cite">Solomon AJ, Arrambide G, Brownlee WJ et al. Differential diagnosis of suspected multiple sclerosis: an updated consensus approach. <em>Lancet Neurol</em> 2023;22:750&ndash;68.</span></div>
+      <div class="ref-item"><span class="ref-name">RIS conversion</span><span class="ref-cite">Lebrun-Fr&eacute;nay C, Kantarci O, Siva A et al. Radiologically isolated syndrome: 10-year risk estimate of a clinical event. <em>Ann Neurol</em> 2020;88(2):407&ndash;17.</span></div>
     </div>
     <p style="font-size:12px;color:var(--ink-faint);margin-top:8px">Proprietary instruments (BVMT-R, CVLT-II, SDMT) are scored from entered numeric results only; their stimuli and norm tables are not reproduced here.</p>
     </details>
@@ -3815,7 +3817,7 @@ AutoEDSSguide provides automated scoring for guidance purposes only and does not
 <script>
 /* AutoEDSSguide - EDSS Calculation Engine (JavaScript port)
  * 1:1 translation of edss_calc.py (Python)
- * Algorithm source: Kappos L., Neurostatus Scoring Definitions (2011)
+ * Algorithm source: Kappos L. Neurostatus Scoring Definitions (2011)
  */
 
 // ============================================================
@@ -7091,7 +7093,7 @@ function explainRule(r) {
 
 /* ============================================================
    QUICK CHECK - patient-facing 14-question flow
-   Methodology adapted from Romeo AR, Bove RM, et al.
+   Methodology adapted from Romeo AR, Bove RM et al.
    Mult Scler. 2021;27(9):1432–1441.
 ============================================================ */
 
