@@ -897,7 +897,7 @@
         </details>
       </div>
 
-      <!-- Abbreviations — site-standard collapsible, one per line -->
+      <!-- Abbreviations - site-standard collapsible, one per line -->
       <div class="refs-sec" style="margin-top:16px; padding:14px 18px; background:#eef4f8; border-color:#cfe0ec;">
         <details class="refs">
           <summary style="font-size:14px; font-family:var(--sans); font-weight:700; color:var(--accent-ink);">Abbreviations</summary>
@@ -1054,7 +1054,7 @@
                 </select>
               </div>
               <div class="fld">
-                <label for="clinical_lesions">CNS sites with objective evidence on examination <span class="help-icon" data-tooltip="How many separate CNS sites show objective signs the examiner can confirm (e.g. an abnormal reflex, a visual-field defect, weakness, or a sensory level) — not symptoms the patient only reports.">?</span></label>
+                <label for="clinical_lesions">CNS sites with objective evidence on examination <span class="help-icon" data-tooltip="How many separate CNS sites show objective signs the examiner can confirm (e.g. an abnormal reflex, a visual-field defect, weakness, or a sensory level) - not symptoms the patient only reports.">?</span></label>
                 <div class="hint">How many separate CNS sites are backed by objective signs on the neurological exam (not symptoms alone)?</div>
                 <select id="clinical_lesions">
                   <option value="">-- Select number of sites --</option>
@@ -1280,7 +1280,7 @@
       
     </div>
 
-    <!-- References — shown on the result page only -->
+    <!-- References - shown on the result page only -->
     <div class="refs-sec" id="references-sec" style="display:block;">
       <details class="refs">
         <summary>References &amp; Guidelines</summary>
@@ -1583,7 +1583,7 @@
       document.getElementById('cvs-row').style.display = hasSusc ? 'block' : 'none';
       document.getElementById('prl-row').style.display = hasSusc ? 'block' : 'none';
 
-      // Pediatric ADEM section — only for patients under 18 (Panel 5). Previously this
+      // Pediatric ADEM section - only for patients under 18 (Panel 5). Previously this
       // block never rendered because nothing ever set its display to 'block'.
       const ageV = parseFloat(document.getElementById('age').value);
       const isPed = !isNaN(ageV) && ageV < 18;
@@ -1929,7 +1929,7 @@
       const basis = [...document.querySelectorAll('#result-basis li')].map(li => '- ' + li.textContent.trim());
       const alertEl = document.getElementById('result-alert');
       const steps = [...document.querySelectorAll('#result-next-steps li')].map(li => '- ' + li.textContent.trim());
-      let out = 'McDonald 2024 Diagnostic Tool (MSpectrum) — decision support only\n';
+      let out = 'McDonald 2024 Diagnostic Tool (MSpectrum) - decision support only\n';
       out += 'Result: ' + badge + '\n\nDiagnostic basis:\n' + basis.join('\n');
       if (alertEl.style.display !== 'none' && alertEl.innerText.trim()) {
         out += '\n\nCaution: ' + (alertEl.innerText || alertEl.textContent).trim();
@@ -2096,7 +2096,7 @@
       // 2. RIS Pathway
       if (course === 'ris') {
         if (!hasMri) {
-          status = "Incomplete — MRI Required";
+          status = "Incomplete - MRI Required";
           basis.push("Radiologically Isolated Syndrome is defined by incidental MRI findings. Brain (&plusmn; spinal cord) MRI must be selected in Step 2 and lesion locations entered before RIS can be assessed.");
           nextSteps.push("Select 'Brain & Spine MRI' in Step 2 and record the affected regions.");
           updateUI(status, basis, alertMsg, alertType, nextSteps, disLocationsList, ageVal, course, isOlderOnset, attacks, csfPositive, isDitMet, cvs, prl);
@@ -2170,7 +2170,7 @@
           }
         }
         else if (disCount === 1) {
-          // Single-region progressive presentation — dual-biomarker combinations (branch B)
+          // Single-region progressive presentation - dual-biomarker combinations (branch B)
           const combCsfCvs = csfPositive && cvs;
           const combCsfPrl = csfPositive && prl;
           const combDitCvs = isDitMet && cvs;
@@ -2308,7 +2308,7 @@
         }
       }
 
-      // Core principle: MS is a diagnosis of exclusion — remind if not acknowledged
+      // Core principle: MS is a diagnosis of exclusion - remind if not acknowledged
       const noBetterExpl = document.getElementById('no_better_expl').checked;
       if (status.indexOf("Confirmed") !== -1 && !noBetterExpl) {
         nextSteps.unshift("Confirm that no better explanation accounts for the findings (MS is a diagnosis of exclusion) before finalizing.");
