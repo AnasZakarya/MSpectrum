@@ -887,16 +887,19 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 
   <section class="panel" id="p_batch">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
-    <h2>Batch scorer (CSV)</h2>
-    <p class="lead">Score a whole spreadsheet of patients at once. Useful whenever you already have the <b>raw item responses</b> in a table &mdash; a REDCap export, an Excel sheet, or data you entered by hand &mdash; and you want every patient's scores (including the official PROMIS T-scores &amp; SE that most databases don't compute). Everything runs in your browser; nothing is uploaded or stored.</p>
-    <details class="howto-read" open><summary>&#8505; How it works</summary><div>
-      <ol style="margin:2px 0 0 18px">
-        <li><b>Collect</b> the raw item answers however you like (REDCap, Excel, paper &rarr; spreadsheet).</li>
-        <li><b>Arrange</b> them as a table: <b>one row per patient</b>, one column per item, plus an <code>id</code> column. Save as <b>CSV</b> (in Excel: File &rarr; Save As &rarr; CSV).</li>
-        <li><b>Upload or paste</b> that CSV below.</li>
-        <li>Get a table of <b>everyone's scores</b> and press <b>Download results CSV</b>.</li>
-      </ol>
-      <div style="margin-top:8px"><b>Column names</b> (include all items of an instrument to score it):</div>
+    <h2>Score &amp; norm converter (CSV)</h2>
+    <p class="lead">Got the <b>raw questionnaire answers</b> for lots of patients in a spreadsheet? Paste them here and get every patient's <b>finished scores</b> back at once &mdash; no re-typing. It works out totals, subscales and the official PROMIS T-scores (with SE) that databases like REDCap store the answers for but don't calculate. Everything runs in your browser; nothing is uploaded.</p>
+    <details class="howto-read" open><summary>&#8505; Show me an example</summary><div>
+      Say you have <b>PHQ-9</b> answers (9 items, each 0&ndash;3) for two patients. Make a CSV: an <code>id</code> column, then one column per item (<code>phq_1</code> &hellip; <code>phq_9</code>):
+      <pre style="background:#f4f6f8;border:1px solid var(--rule);border-radius:6px;padding:8px;font-size:12px;overflow:auto;margin:6px 0">id,phq_1,phq_2,phq_3,phq_4,phq_5,phq_6,phq_7,phq_8,phq_9
+A001,2,1,3,2,0,1,2,1,0
+A002,3,3,2,3,2,3,3,2,1</pre>
+      Paste it below and press <b>Score all</b> &mdash; you get back:
+      <pre style="background:#f4f6f8;border:1px solid var(--rule);border-radius:6px;padding:8px;font-size:12px;overflow:auto;margin:6px 0">ID     PHQ9_total   PHQ9_band
+A001   12           Moderate
+A002   22           Severe</pre>
+      <b>The idea:</b> raw answers go in &rarr; finished scores come out, for the whole list at once, downloadable as a CSV. Add columns for other instruments in the same file and they get scored too.
+      <div style="margin-top:8px"><b>Which column names to use</b> (put in <u>all</u> items of an instrument to score it):</div>
       <ul style="margin:6px 0 0 18px">
         <li><b>PROMIS-29</b>: <code>pr_1</code>&hellip;<code>pr_28</code> (each 1&ndash;5), optional <code>pr_pi</code> (pain 0&ndash;10)</li>
         <li><b>MFIS</b>: <code>mf_1</code>&hellip;<code>mf_21</code> &middot; <b>PHQ-9</b>: <code>phq_1</code>&hellip;<code>phq_9</code> &middot; <b>GAD-7</b>: <code>gad_1</code>&hellip;<code>gad_7</code></li>
@@ -1061,7 +1064,7 @@ const TOOLS=[
   {id:"arr", ic:"🔁", name:"ARR", tag:"Relapse rate", desc:"Annualized Relapse Rate (relapses per year)."},
   {id:"cdp", ic:"📈", name:"CDP", tag:"EDSS progression", desc:"Confirmed Disability Progression from baseline & follow-up EDSS."},
   {id:"neda", ic:"🎯", name:"NEDA-3 / NEDA-4", tag:"Disease activity", desc:"No Evidence of Disease Activity status."},
-  {id:"batch", ic:"📥", name:"Batch scorer (CSV)", tag:"Many patients at once", desc:"Score a whole spreadsheet of raw questionnaire responses at once — from REDCap, Excel or manual entry."}
+  {id:"batch", ic:"📥", name:"Score &amp; norm converter (CSV)", tag:"Raw answers → scores, in bulk", desc:"Convert a spreadsheet of raw questionnaire answers into finished scores — totals, subscales and norm-based PROMIS T-scores (with SE) — for every patient at once."}
 ];
 const MFIS_TEXT={
 1:"I have been less alert.",2:"I have had difficulty paying attention for long periods of time.",
@@ -1117,7 +1120,7 @@ const GROUPS=[
  {name:"Walking &amp; motor function", sub:"MSWS-12 is self-report; T25FW, 9-HPT &amp; 6MWT are clinician-administered.", ids:["msws","t25fw","nhpt","sixmwt","abc","fesi","lcva"]},
  {name:"Quality of life &amp; impact", sub:"Self-report.", ids:["msqol","promis","msis","promispain"]},
  {name:"Composite - MSFC", sub:"Arm + leg + cognition combined into one z-score (needs reference values).", ids:["msfc"]},
- {name:"Batch &amp; utilities", sub:"Score many patients at once from one spreadsheet - useful for any dataset of raw responses (REDCap export, Excel, or manual entry).", ids:["batch"]}
+ {name:"Conversion &amp; bulk tools", sub:"Convert a whole spreadsheet of raw answers into finished scores at once - totals, subscales and norm-based PROMIS T-scores. Works with any dataset (REDCap export, Excel, or manual entry).", ids:["batch"]}
 ];
 let _ci=0;
 el("toolgrid").innerHTML = GROUPS.map(g=> _ghead(g.name,g.sub) + g.ids.map(id=>_TMAP[id]?_card(_TMAP[id],_ci++):"").join("")).join("");
