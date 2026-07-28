@@ -10428,14 +10428,12 @@ window.scExtractAllZones = async function(){
   setL("Offline OCR - loading vision engine… (first run downloads ~10 MB)");
   await _ocr2EnsureLib("https://docs.opencv.org/4.x/opencv.js", ()=>window.cv&&window.cv.Mat);
   await _ocr2EnsureLib("https://cdn.jsdelivr.net/npm/onnxruntime-web@1.19.2/dist/ort.min.js", ()=>window.ort);
+  // Note whether libs failed to load, but do NOT abort - cvReady() below still waits for
+  // the WASM runtime, and the per-cell loop is already guarded. Aborting here would read 0 cells.
   if(!(window.cv && window.cv.Mat) || !window.ort){
-    setL("Vision engine couldn't load on this device. It needs a stable connection and can fail on some tablets/phones. Enter values manually, or try a desktop browser.");
-    console.error("[ocr2] vision engine libs missing: cv="+!!(window.cv&&window.cv.Mat)+" ort="+!!window.ort);
-    if(bar) bar.style.width="100%";
-    return;
+    console.warn("[ocr2] vision engine not fully ready yet: cv="+!!(window.cv&&window.cv.Mat)+" ort="+!!window.ort+" - continuing, cvReady() will wait.");
   }
-  // Guard cvReady with a timeout so a stalled WASM init never hangs the tool.
-  try{ await Promise.race([cvReady(), new Promise((_,rj)=>setTimeout(()=>rj(new Error("cvReady timeout")),20000))]); }catch(e){ console.warn("[ocr2] cvReady",e); }
+  try{ await cvReady(); }catch(e){ console.warn("[ocr2] cvReady",e); }
   try{ if(typeof scLoadTesseract==="function"){ setL("Loading text reader…"); await scLoadTesseract(); } }catch(e){ console.warn("tesseract load",e); }
   try{ await session(); }catch(e){ console.error("model load",e); setL("Model unavailable - enter values manually."); }
   const RAWP = (typeof SC_RAW_PAGES!=="undefined" && SC_RAW_PAGES) || (window.SC_RAW_PAGES) || [null,null];
