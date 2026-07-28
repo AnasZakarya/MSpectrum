@@ -3251,19 +3251,6 @@ input[type="checkbox"] {
           <div class="sc-sub">Neurostatus form &middot; PDF or image</div>
           <input type="file" id="sc-file-input" accept=".pdf,image/*" style="display:none">
         </div>
-        <div class="sc-camera-zone">
-          <h4>&#128247; Camera Capture</h4>
-          <p>Photograph each page directly</p>
-          <video class="sc-cam-preview" id="sc-video" autoplay playsinline></video>
-          <canvas class="sc-cam-canvas" id="sc-cam-canvas"></canvas>
-          <img class="sc-cam-snap" id="sc-cam-snap" alt="Captured page">
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="sc-btn sc-btn-secondary" id="sc-btn-cam-start" style="flex:1">Start Camera</button>
-            <button class="sc-btn sc-btn-primary" id="sc-btn-cam-snap" style="flex:1;display:none">&#128248; Capture Page 1</button>
-            <button class="sc-btn sc-btn-secondary" id="sc-btn-cam-p2" style="flex:1;display:none">Capture Page 2</button>
-          </div>
-          <div id="sc-cam-status" style="font-size:11px;color:#888"></div>
-        </div>
       </div>
 
       <div class="sc-process-row" id="sc-process-row" style="display:none;">
@@ -3382,6 +3369,7 @@ input[type="checkbox"] {
                       <div class="sc-syn-row"><span class="sc-syn-label">5. Sensory</span><input type="text" class="sc-box-input syn-box" id="syn-sensory" readonly></div>
                       <div class="sc-syn-row"><span class="sc-syn-label">6. Bowel/Bladder <sup>1</sup></span><input type="text" class="sc-box-input syn-box" id="syn-bowel-bladder" readonly></div>
                       <div class="sc-syn-row"><span class="sc-syn-label">7. Cerebral</span><input type="text" class="sc-box-input syn-box" id="syn-cerebral" readonly></div>
+                      <div class="sc-syn-row"><span class="sc-syn-label">Ambulation Score</span><input type="text" class="sc-box-input syn-box" id="syn-ambulation" readonly></div>
                       <div class="sc-syn-sub"><sup>1</sup> = converted FS Score</div>
                     </div>
                   </div>
@@ -4582,6 +4570,13 @@ const CARDS = {
           $(3, "3 - Severe: needs enemata / manual measures"),
           $(4, "4 - Complete loss of function"),
         ]},
+      { type: "list-compact", id: "bb_sexual", label: "Sexual dysfunction * (documented only, not scored)",
+        options: [
+          $(0, "0 - None"),
+          $(1, "1 - Mild"),
+          $(2, "2 - Moderate"),
+          $(3, "3 - Severe / loss"),
+        ]},
     ],
     layout: "split-2",
     tip: `<p><strong>Ask:</strong></p><ul>
@@ -4793,7 +4788,7 @@ const CARDS = {
     title: "Optional - Lhermitte's & paraesthesiae",
     desc: "Documented only (*) - do not contribute to the Sensory FS score or EDSS.",
     fields: [
-      { type: "compact", id: "s_lhermitte", label: "Lhermitte's sign *",
+      { type: "compact", id: "s_lhermitte", full: true, label: "Lhermitte's sign *",
         options: [$(0,"Negative"),$(1,"Positive")]},
       { type: "compact", id: "s_par_ue_R",    label: "Paraesthesiae UE - R *", options: [$(0,"None"),$(1,"Present")]},
       { type: "compact", id: "s_par_ue_L",    label: "Paraesthesiae UE - L *", options: [$(0,"None"),$(1,"Present")]},
@@ -4920,10 +4915,12 @@ const CARDS = {
       { type: "list-compact", id: "p_walk_toes",   label: "Walking on toes *",        options: [$(0,"Normal"),$(1,"Impaired"),$(2,"Not possible")]},
       { type: "list-compact", id: "p_hop_R",       label: "Hopping - Right *",        options: [$(0,"Normal"),$(1,"6–10×"),$(2,"1–5×"),$(3,"Not possible")]},
       { type: "list-compact", id: "p_hop_L",       label: "Hopping - Left *",         options: [$(0,"Normal"),$(1,"6–10×"),$(2,"1–5×"),$(3,"Not possible")]},
-      { type: "list-compact", id: "p_pronator_R",  label: "Pronator drift UE - R *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
-      { type: "list-compact", id: "p_pronator_L",  label: "Pronator drift UE - L *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
-      { type: "list-compact", id: "p_pos_test_R",  label: "Position test LE - R *",   options: [$(0,"None"),$(1,"Mild sinking"),$(2,"Evident"),$(3,"One leg only"),$(4,"Cannot lift")]},
-      { type: "list-compact", id: "p_pos_test_L",  label: "Position test LE - L *",   options: [$(0,"None"),$(1,"Mild sinking"),$(2,"Evident"),$(3,"One leg only"),$(4,"Cannot lift")]},
+      { type: "list-compact", id: "p_pronator_R",  label: "Position test UE, pronation - R *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
+      { type: "list-compact", id: "p_pronator_L",  label: "Position test UE, pronation - L *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
+      { type: "list-compact", id: "p_drift_R",     label: "Position test UE, downward drift - R *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
+      { type: "list-compact", id: "p_drift_L",     label: "Position test UE, downward drift - L *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
+      { type: "list-compact", id: "p_pos_test_R",  label: "Position test LE, sinking - R *",   options: [$(0,"None"),$(1,"Mild sinking"),$(2,"Evident"),$(3,"One leg only"),$(4,"Cannot lift")]},
+      { type: "list-compact", id: "p_pos_test_L",  label: "Position test LE, sinking - L *",   options: [$(0,"None"),$(1,"Mild sinking"),$(2,"Evident"),$(3,"One leg only"),$(4,"Cannot lift")]},
       { type: "list-compact", id: "p_palmomental", label: "Palmomental reflex *",     options: [$(0,"Normal"),$(1,"Weak"),$(2,"Absent")]},
     ],
     layout: "split-2",
@@ -5221,7 +5218,7 @@ const SYSTEM_VIEW = [
     fsKey: "pyramidal_fs",
     callout: "Pyramidal FS uses BMRC distribution: tetraplegia → 6, paraplegia/hemiplegia/marked tetraparesis → 5, monoplegia → 4." },
   { id: "cerebellar", num: "4", title: "Cerebellar", subtitle: "Coordination",
-    cards: ["cerebellar_truncal", "cerebellar_tremor", "cerebellar_rapid", "cerebellar_gait", "cerebellar_x"],
+    cards: ["cerebellar_truncal", "cerebellar_tremor", "cerebellar_rapid", "cerebellar_gait", "cerebellar_rebound", "cerebellar_x"],
     fsKey: "cerebellar_fs",
     callout: "Severe limb ataxia in ≥3 limbs + severe gait/truncal → 4. The X marker indicates pyramidal weakness or sensory deficits interfere with testing." },
   { id: "sensory", num: "5", title: "Sensory", subtitle: "Touch · vibration · proprioception",
@@ -5275,7 +5272,8 @@ function renderField(f) {
       <label class="score-compact-opt">
         <input type="radio" name="${id}" value="${o.v}"><span>${o.t}</span>
       </label>`).join("");
-    return `<div><label class="field-label">${label}</label><div class="score-compact">${opts}</div>${hint}</div>`;
+    const ws = f.full ? ' style="grid-column:1/-1"' : "";
+    return `<div${ws}><label class="field-label">${label}</label><div class="score-compact">${opts}</div>${hint}</div>`;
   }
   return "";
 }
@@ -6175,6 +6173,73 @@ function runConsistencyCheck(inp, r) {
       msg: `Ambulation Score = 6 (unilateral aid, ≥50 m) → EDSS should be 6.0, but shows ${edss.toFixed(1)}. This may indicate a manual override - verify the final EDSS is 6.0.` });
   }
 
+  // ── 9. Ambulation distance ↔ Ambulation Score ───────────────
+  // Recorded walking distance is an input independent of the AS grade, so it can
+  // fire even in the automatic calculation (unlike the FS↔EDSS checks above).
+  const ambD = (() => { const m = num(inp.amb_distance_measured); const rp = num(inp.amb_distance_reported); return m !== null ? m : rp; })();
+  if (ambD !== null && AS !== null) {
+    if (ambD >= 500 && AS >= 5) {
+      issues.push({ sev: "warning", tab: "ambulation",
+        msg: `Walking distance ~${ambD} m recorded but Ambulation Score = ${AS}. That distance suggests a milder ambulation restriction - verify AS or the recorded distance.` });
+    } else if (ambD > 0 && ambD < 100 && AS <= 1) {
+      issues.push({ sev: "warning", tab: "ambulation",
+        msg: `Walking distance ~${ambD} m (limited) but Ambulation Score = ${AS} (minimal). Verify AS or the recorded distance.` });
+    }
+  }
+
+  // ── 10. Recorded ambulation aid ↔ EDSS floor ────────────────
+  const _assist = inp.amb_assistance;
+  const _assistFloor = { unilateral: 6.0, bilateral: 6.5, wheelchair_indep: 7.0, wheelchair_help: 7.0, bedbound: 8.0 };
+  if (_assist && _assistFloor[_assist] !== undefined && edss !== null && edss < _assistFloor[_assist]) {
+    const _lbl = { unilateral: "unilateral aid", bilateral: "bilateral aid", wheelchair_indep: "wheelchair (independent)", wheelchair_help: "wheelchair (with help)", bedbound: "bedbound / chair-bound" }[_assist];
+    issues.push({ sev: "warning", tab: "ambulation",
+      msg: `Recorded ambulation aid = ${_lbl} but EDSS = ${edss.toFixed(1)} (<${_assistFloor[_assist].toFixed(1)}). This aid level typically corresponds to EDSS ≥ ${_assistFloor[_assist].toFixed(1)} - check for an AS/EDSS override conflict.` });
+  }
+
+  // ── 11. Reverse X marker: X set with no confounder present ───
+  const _anyPropLoss = [inp.s_pos_ue_R, inp.s_pos_ue_L, inp.s_pos_le_R, inp.s_pos_le_L]
+    .some(v => !isMissing(v) && num(v) !== null && num(v) >= 1);
+  if (r.cerebellar_x && !_anyPropLoss && (pyrFS === 0 || pyrFS === null) && !anyLLWeak) {
+    issues.push({ sev: "info", tab: "cerebellar",
+      msg: "X marker is set but no pyramidal weakness or proprioceptive loss is recorded. X is intended for when weakness or sensory loss confounds ataxia testing - it may be unnecessary here." });
+  }
+
+  // ── 12. Brainstem sign present but Brainstem FS = 0 ──────────
+  const _bsSigns = [inp.b_eom, inp.b_nys, inp.b_trig, inp.b_face, inp.b_hear, inp.b_dysarth, inp.b_dysphag, inp.b_othercn];
+  const _anyBsSign = _bsSigns.some(v => !isMissing(v) && num(v) !== null && num(v) >= 1);
+  if (_anyBsSign && bsFS === 0) {
+    issues.push({ sev: "warning", tab: "brainstem",
+      msg: "A cranial-nerve/brainstem sign is recorded but Brainstem FS = 0. BS FS is the max of the subscores, so it should be ≥ 1 - verify the entries or the FS." });
+  }
+  const _dysph = num(inp.b_dysphag);
+  if (_dysph !== null && _dysph >= 2 && bsFS !== null && bsFS <= 1) {
+    issues.push({ sev: "warning", tab: "brainstem",
+      msg: `Dysphagia grade ${_dysph} recorded but Brainstem FS = ${bsFS}. Moderate-severe dysphagia typically contributes to BS FS ≥ 2 - review the entries.` });
+  }
+
+  // ── 13. Cerebral mentation abnormal but Cerebral FS = 0 ─────
+  const _ment = num(inp.m_ment);
+  if (_ment !== null && _ment >= 1 && cerFS === 0) {
+    issues.push({ sev: "info", tab: "cerebral",
+      msg: `Mentation impairment grade ${_ment} recorded but Cerebral FS = 0. Mentation drives the Cerebral FS - verify the entry or the FS.` });
+  }
+
+  // ── 14. Range / validity guard (catches OCR misreads & typos) ─
+  // Only fields with universal, tight ranges are checked, to avoid false errors.
+  const _RANGES = [
+    { re: /^p_str_/, min: 0, max: 5, what: "strength (BMRC 0-5)" },
+    { re: /^c_(head|trunc|tremor|rapid|gait|tandem|romberg)/, min: 0, max: 4, what: "cerebellar grade (0-4)" },
+  ];
+  for (const _k in inp) {
+    const _rule = _RANGES.find(rr => rr.re.test(_k));
+    if (!_rule) continue;
+    const _v = num(inp[_k]);
+    if (_v !== null && (_v < _rule.min || _v > _rule.max)) {
+      issues.push({ sev: "error", tab: null,
+        msg: `${_ptLabel(_k)} = ${inp[_k]} is outside the valid range for ${_rule.what}. Check the entry (possible typo or OCR misread).` });
+    }
+  }
+
   return issues;
 }
 
@@ -6413,7 +6478,7 @@ function syncFinalSheet(inp, r) {
   // cutaneous + palmomental are single form values mirrored into both R/L sheet boxes.
   setVal("p-overall-motor", inp.p_overall);
   setVal("p-opt-pron-r",  inp.p_pronator_R);   setVal("p-opt-pron-l",  inp.p_pronator_L);
-  setVal("p-opt-drift-r", inp.p_pronator_R);   setVal("p-opt-drift-l", inp.p_pronator_L);
+  setVal("p-opt-drift-r", inp.p_drift_R);      setVal("p-opt-drift-l", inp.p_drift_L);
   setVal("p-opt-sink-r",  inp.p_pos_test_R);   setVal("p-opt-sink-l",  inp.p_pos_test_L);
   setVal("p-ref-cut-r",   inp.p_cutaneous);    setVal("p-ref-cut-l",   inp.p_cutaneous);
   setVal("p-ref-palmo-r", inp.p_palmomental);  setVal("p-ref-palmo-l", inp.p_palmomental);
@@ -6506,6 +6571,7 @@ function syncFinalSheet(inp, r) {
     "syn-pyramidal": r.pyramidal_fs, "syn-cerebellar": r.cerebellar_fs,
     "syn-sensory": r.sensory_fs, "syn-bowel-bladder": r.bb_fs_conv,
     "syn-cerebral": r.cerebral_fs,
+    "syn-ambulation": r.ambulation_score,
   };
   for (const id in _syn) _setSheet(id, _syn[id]);
   // EDSS step: respect an explicit manual override on the sheet; otherwise engine A wins.
@@ -8843,8 +8909,8 @@ function scInitUI() {
   if (pbtn) pbtn.onclick = scProcessPages;
 
   document.getElementById("sc-home-btn").onclick = backToEdssModes;
-  document.getElementById("sc-btn-cam-start").onclick = scStartCamera;
-  document.getElementById("sc-btn-cam-snap").onclick = () => scSnapCamera(SC_CAM_PAGE);
+  { const _cs=document.getElementById("sc-btn-cam-start"); if(_cs) _cs.onclick = scStartCamera; }
+  { const _cn=document.getElementById("sc-btn-cam-snap"); if(_cn) _cn.onclick = () => scSnapCamera(SC_CAM_PAGE); }
 
   // Alignment overlay buttons + draggable corners
   const ab=(id,fn)=>{ const e=document.getElementById(id); if(e) e.onclick=fn; };
@@ -9523,8 +9589,8 @@ function scExportSheet(){
   clone.querySelectorAll("select").forEach(function(sel){ var s=document.createElement("span"); s.textContent=(sel.value||""); s.style.cssText="font-weight:600"; if(sel.parentNode) sel.parentNode.replaceChild(s,sel); });
   var css=Array.prototype.map.call(document.querySelectorAll("style"),function(s){return s.outerHTML;}).join("");
   var w=window.open("","_blank","width=920,height=1040"); if(!w){ alert("Allow pop-ups to export the sheet."); return; }
-  var fix="<style>@media print{@page{margin:8mm}html,body{margin:0!important;padding:0!important}.sc-sheet-card{padding:0!important;box-shadow:none!important;border:none!important}.sc-pages-container{gap:0!important;padding:0!important}.sc-page{page-break-before:avoid}.sc-page+.sc-page{page-break-before:always}}</style>";
-  w.document.write("<!DOCTYPE html><html><head><meta charset=utf-8><title>Neurostatus sheet</title>"+css+fix+"</head><body style=\"padding:16px;background:#fff\">"+clone.outerHTML+"<scr"+"ipt>window.onload=function(){setTimeout(function(){window.print();},250);}<\/scr"+"ipt></body></html>");
+  var fix="<style>@media print{@page{margin:8mm}html,body{margin:0!important;padding:0!important}.sc-sheet-card{padding:0!important;box-shadow:none!important;border:none!important}.sc-pages-container{gap:0!important;padding:0!important;margin:0!important}.sc-sheet-wrap{gap:0!important;margin:0!important;padding:0!important}.sc-page{page-break-before:avoid;page-break-inside:avoid;break-inside:avoid;margin:0!important}.sc-page+.sc-page{page-break-before:always;break-before:page}.sc-page:last-child{page-break-after:avoid;break-after:avoid}}</style>";
+  w.document.write("<!DOCTYPE html><html><head><meta charset=utf-8><title>Neurostatus sheet</title>"+css+fix+"</head><body style=\"padding:0;background:#fff\">"+clone.outerHTML+"<scr"+"ipt>window.onload=function(){setTimeout(function(){window.print();},250);}<\/scr"+"ipt></body></html>");
   w.document.close();
 }
 function scExportTableImage() {
@@ -10352,17 +10418,24 @@ window.SC_OCR2_READY=true; try{console.log("[ocr2] loaded - offline OCR engine a
 try{ var _o2mark=function(){ var b=document.getElementById("sc-process-btn"); if(b && b.textContent.indexOf("Align & read")<0){ b.textContent="Align & read sheet \u2192"; } };
  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",_o2mark); else _o2mark();
  document.addEventListener("click", function(){ setTimeout(_o2mark,300); }); }catch(e){}
-function _ocr2LoadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=()=>rej(new Error("load "+src)); document.head.appendChild(s); }); }
+function _ocr2LoadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.src=src; let done=false; const to=setTimeout(()=>{ if(!done){ done=true; rej(new Error("timeout "+src)); } }, 30000); s.onload=()=>{ if(!done){ done=true; clearTimeout(to); res(); } }; s.onerror=()=>{ if(!done){ done=true; clearTimeout(to); rej(new Error("load "+src)); } }; document.head.appendChild(s); }); }
 async function _ocr2EnsureLib(src,test){ if(test()) return; try{ await _ocr2LoadScript(src); }catch(e){ console.warn(e); } for(let i=0;i<200 && !test();i++){ await new Promise(r=>setTimeout(r,50)); } }
 window.scExtractAllZones = async function(){
   const bar=document.getElementById("sc-progress-bar"), lbl=document.getElementById("sc-progress-label");
   const setL=t=>{ if(lbl) lbl.textContent=t; };
   try{console.log("[ocr2] scExtractAllZones running (offline engine)");}catch(e){}
   try{ if(!window.__ocr2ran){ window.__ocr2ran=true; console.log("[ocr2] first run may download the vision engine (~10 MB)"); } }catch(e){}
-  setL("Offline OCR - loading vision engine…");
+  setL("Offline OCR - loading vision engine… (first run downloads ~10 MB)");
   await _ocr2EnsureLib("https://docs.opencv.org/4.x/opencv.js", ()=>window.cv&&window.cv.Mat);
   await _ocr2EnsureLib("https://cdn.jsdelivr.net/npm/onnxruntime-web@1.19.2/dist/ort.min.js", ()=>window.ort);
-  try{ await cvReady(); }catch(e){}
+  if(!(window.cv && window.cv.Mat) || !window.ort){
+    setL("Vision engine couldn't load on this device. It needs a stable connection and can fail on some tablets/phones. Enter values manually, or try a desktop browser.");
+    console.error("[ocr2] vision engine libs missing: cv="+!!(window.cv&&window.cv.Mat)+" ort="+!!window.ort);
+    if(bar) bar.style.width="100%";
+    return;
+  }
+  // Guard cvReady with a timeout so a stalled WASM init never hangs the tool.
+  try{ await Promise.race([cvReady(), new Promise((_,rj)=>setTimeout(()=>rj(new Error("cvReady timeout")),20000))]); }catch(e){ console.warn("[ocr2] cvReady",e); }
   try{ if(typeof scLoadTesseract==="function"){ setL("Loading text reader…"); await scLoadTesseract(); } }catch(e){ console.warn("tesseract load",e); }
   try{ await session(); }catch(e){ console.error("model load",e); setL("Model unavailable - enter values manually."); }
   const RAWP = (typeof SC_RAW_PAGES!=="undefined" && SC_RAW_PAGES) || (window.SC_RAW_PAGES) || [null,null];
