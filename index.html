@@ -3223,6 +3223,14 @@ input[type="checkbox"] {
       <h2>Scan a Neurostatus Scoring Sheet</h2>
       <p>Add page 1 and page 2 (photo or scan), or drop a 2-page PDF. You line up the sheet corners once, then every value box is read and pre-filled for your review.</p>
 
+      <ol class="sc-steps-upfront" style="margin:10px 0 14px;padding:12px 16px 12px 34px;background:#f3f7fb;border:1px solid #dbe6f0;border-left:5px solid #1e4a6e;border-radius:8px;font-size:13px;line-height:1.6;color:#274156;">
+        <li><b>Add both pages</b> (photo or scan), or drop a 2-page PDF, then press <b>Align &amp; read sheet</b>.</li>
+        <li><b>Line up the sheet corners</b> once when asked - this lets the reader find every value box.</li>
+        <li><b>Review the pre-filled values:</b> boxes in <span style="color:#b75300;font-weight:700">orange</span> were uncertain - check each against your sheet. Green = high confidence.</li>
+        <li>The FS scores, EDSS and any <b>inconsistency flags</b> update automatically below. When it looks right, download the <b>Full Neurostatus sheet</b> or <b>Summary table</b>.</li>
+      </ol>
+      <div style="margin:0 0 16px;font-size:12px;color:#8a5a00;background:#fff6e6;border:1px solid #f0e2c0;border-radius:6px;padding:7px 11px;"><b>Always enter manually:</b> visual acuity (e.g. 20/40) and ambulation <b>assistance</b> - the reader can't read these.</div>
+
       <div class="sc-slots">
         <div class="sc-slot" id="sc-slot-0">
           <input type="file" id="sc-file-0" accept="image/*" style="display:none">
@@ -10418,22 +10426,17 @@ window.SC_OCR2_READY=true; try{console.log("[ocr2] loaded - offline OCR engine a
 try{ var _o2mark=function(){ var b=document.getElementById("sc-process-btn"); if(b && b.textContent.indexOf("Align & read")<0){ b.textContent="Align & read sheet \u2192"; } };
  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",_o2mark); else _o2mark();
  document.addEventListener("click", function(){ setTimeout(_o2mark,300); }); }catch(e){}
-function _ocr2LoadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.src=src; let done=false; const to=setTimeout(()=>{ if(!done){ done=true; rej(new Error("timeout "+src)); } }, 30000); s.onload=()=>{ if(!done){ done=true; clearTimeout(to); res(); } }; s.onerror=()=>{ if(!done){ done=true; clearTimeout(to); rej(new Error("load "+src)); } }; document.head.appendChild(s); }); }
+function _ocr2LoadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=()=>rej(new Error("load "+src)); document.head.appendChild(s); }); }
 async function _ocr2EnsureLib(src,test){ if(test()) return; try{ await _ocr2LoadScript(src); }catch(e){ console.warn(e); } for(let i=0;i<200 && !test();i++){ await new Promise(r=>setTimeout(r,50)); } }
 window.scExtractAllZones = async function(){
   const bar=document.getElementById("sc-progress-bar"), lbl=document.getElementById("sc-progress-label");
   const setL=t=>{ if(lbl) lbl.textContent=t; };
   try{console.log("[ocr2] scExtractAllZones running (offline engine)");}catch(e){}
   try{ if(!window.__ocr2ran){ window.__ocr2ran=true; console.log("[ocr2] first run may download the vision engine (~10 MB)"); } }catch(e){}
-  setL("Offline OCR - loading vision engine… (first run downloads ~10 MB)");
+  setL("Offline OCR - loading vision engine…");
   await _ocr2EnsureLib("https://docs.opencv.org/4.x/opencv.js", ()=>window.cv&&window.cv.Mat);
   await _ocr2EnsureLib("https://cdn.jsdelivr.net/npm/onnxruntime-web@1.19.2/dist/ort.min.js", ()=>window.ort);
-  // Note whether libs failed to load, but do NOT abort - cvReady() below still waits for
-  // the WASM runtime, and the per-cell loop is already guarded. Aborting here would read 0 cells.
-  if(!(window.cv && window.cv.Mat) || !window.ort){
-    console.warn("[ocr2] vision engine not fully ready yet: cv="+!!(window.cv&&window.cv.Mat)+" ort="+!!window.ort+" - continuing, cvReady() will wait.");
-  }
-  try{ await cvReady(); }catch(e){ console.warn("[ocr2] cvReady",e); }
+  try{ await cvReady(); }catch(e){}
   try{ if(typeof scLoadTesseract==="function"){ setL("Loading text reader…"); await scLoadTesseract(); } }catch(e){ console.warn("tesseract load",e); }
   try{ await session(); }catch(e){ console.error("model load",e); setL("Model unavailable - enter values manually."); }
   const RAWP = (typeof SC_RAW_PAGES!=="undefined" && SC_RAW_PAGES) || (window.SC_RAW_PAGES) || [null,null];
