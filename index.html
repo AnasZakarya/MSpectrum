@@ -2639,21 +2639,6 @@ input[type="checkbox"] {
 .sc-drop-zone .sc-label { font-size: 13px; color: var(--green,#2a6e2a); font-weight: 600; }
 .sc-drop-zone .sc-sub   { font-size: 11px; color: #888; margin-top: 4px; }
 
-.sc-camera-zone {
-  flex: 1; min-width: 200px;
-  border: 2px solid #c8e6c8;
-  border-radius: 8px;
-  background: white;
-  padding: 20px;
-  display: flex; flex-direction: column; gap: 10px;
-}
-.sc-camera-zone h4 { font-size: 13px; font-weight: 700; color: var(--green,#2a6e2a); margin: 0; }
-.sc-camera-zone p  { font-size: 12px; color: #888; margin: 0; }
-.sc-cam-preview { width: 100%; border-radius: 6px; background: #111; display: none; aspect-ratio: 4/3; object-fit: cover; }
-.sc-cam-preview.active { display: block; }
-.sc-cam-canvas  { display: none; }
-.sc-cam-snap    { width: 100%; border-radius: 6px; background: #222; display: none; aspect-ratio: 4/3; object-fit: contain; }
-.sc-cam-snap.active { display: block; }
 
 /* Processing bar */
 .sc-progress { display: none; background: white; border-radius: 8px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
@@ -2916,6 +2901,66 @@ input[type="checkbox"] {
       .ms-ribbon circle { transform-box: fill-box; transform-origin: center; animation: ribShim 3.4s ease-in-out infinite; }
       svg circle[fill="#ff7a1a"] { animation: msPulse 2.6s ease-in-out infinite; }
     }
+    /* Accessibility: honour reduced-motion, and a consistent keyboard focus ring. */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+    :focus-visible {
+      outline: 3px solid var(--accent, #1e4a6e);
+      outline-offset: 2px;
+      border-radius: 3px;
+    }
+    /* ---- Batch 3: tasteful motion (all neutralised by the reduced-motion block above) ---- */
+    @keyframes ocrReveal { from { opacity: .15; transform: translateY(2px) scale(.96); } to { opacity: 1; transform: none; } }
+    @keyframes ocrPulseOrange { 0%, 100% { box-shadow: 0 0 0 0 rgba(245,124,0,0); } 50% { box-shadow: 0 0 0 3px rgba(245,124,0,.35); } }
+    @keyframes barShimmer { 0% { background-position: -180px 0; } 100% { background-position: 180px 0; } }
+    @keyframes valFlash { 0% { background-color: rgba(30,74,110,.20); } 100% { background-color: transparent; } }
+    @keyframes flagIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+    @keyframes checkDraw { to { stroke-dashoffset: 0; } }
+    /* OCR cells reveal as they fill in; orange (review) cells give two soft attention pulses */
+    .sc-sheet-wrap .sc-box-input.ocr-high { animation: ocrReveal .32s ease-out both; }
+    .sc-sheet-wrap .sc-box-input.ocr-verify { animation: ocrReveal .32s ease-out both, ocrPulseOrange 1.1s ease-in-out .3s 2; }
+    /* progress bar: moving sheen so it never looks frozen */
+    .sc-progress-bar { background-image: linear-gradient(100deg, transparent 20%, rgba(255,255,255,.55) 45%, transparent 70%); background-size: 180px 100%; background-repeat: no-repeat; animation: barShimmer 1.1s linear infinite; }
+    /* score boxes flash when their value changes */
+    .val-flash { animation: valFlash .9s ease-out; }
+    /* inconsistency items slide in */
+    .incon-list li, .incon-item { animation: flagIn .28s ease-out both; }
+    /* button micro-interactions */
+    .sc-btn { transition: transform .12s ease, box-shadow .12s ease, background-color .15s ease; }
+    .sc-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md, 0 4px 12px rgba(20,25,40,.1)); }
+    .sc-btn:active { transform: translateY(0) scale(.98); }
+    /* section crossfade on tab switch */
+    .app-view .tab-panel.active { animation: fadeIn .25s ease-out; }
+    /* OCR review legend */
+    .sc-ocr-legend { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin: 0 0 12px; font-size: 12px; color: var(--ink-soft, #4a5060); }
+    .sc-ocr-legend .lg { display: inline-flex; align-items: center; gap: 6px; }
+    .sc-ocr-legend .sw { width: 14px; height: 14px; border-radius: 3px; border: 2px solid; }
+    .sc-ocr-legend .sw.green { border-color: var(--ocr-high-border, #2e7d32); background: var(--ocr-high-bg, #e8f5e9); }
+    .sc-ocr-legend .sw.orange { border-color: var(--ocr-verify-border, #f57c00); background: var(--ocr-verify-bg, #fffde7); }
+    .sc-done-check { display: inline-block; vertical-align: -2px; margin-right: 4px; }
+    .sc-done-check path { stroke-dasharray: 20; stroke-dashoffset: 20; animation: checkDraw .5s ease-out .1s forwards; }
+    /* ---- Batch 4: visual polish ---- */
+    /* #13 aligned, even-width figures for all scores/numbers */
+    .edss-readout-value, #edss-live, #sc-res-edss, #qc-result-number,
+    .sc-sheet-wrap .sc-box-input, .rm-fs-box, .score-num,
+    .sc-edss-value-input, .syn-box, .fs-box { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+    /* #14 depth + a faint paper feel on the clinical sheet */
+    .sc-sheet-card { background-image: linear-gradient(180deg, #ffffff 0%, var(--paper-tint, #fdfbf6) 100%); box-shadow: var(--shadow-lg, 0 12px 32px rgba(20,25,40,.08)); }
+    body { background-image: radial-gradient(1100px 460px at 50% -8%, rgba(30,74,110,.045), transparent 62%); }
+    /* #17 larger, comfortable tap targets on phones/tablets */
+    @media (max-width: 700px) {
+      .sc-btn { min-height: 44px; padding-top: 11px; padding-bottom: 11px; }
+      .sc-sheet-wrap .sc-box-input { min-height: 26px; }
+    }
+    /* #15 alignment corner handles gently pulse when the overlay opens, inviting a drag */
+    @keyframes cornerPulse { 0%, 100% { box-shadow: 0 0 0 2px #fff, 0 2px 6px rgba(0,0,0,.35), 0 0 0 2px rgba(255,122,0,0); } 50% { box-shadow: 0 0 0 2px #fff, 0 2px 6px rgba(0,0,0,.35), 0 0 0 9px rgba(255,122,0,.28); } }
+    .sc-align-overlay.active .sc-corner { animation: cornerPulse 1.6s ease-in-out 3; }
 </style>
 </head>
 <body>
@@ -3262,7 +3307,7 @@ input[type="checkbox"] {
       </div>
 
       <div class="sc-process-row" id="sc-process-row" style="display:none;">
-        <button class="sc-btn sc-btn-primary" id="sc-process-btn">Align &amp; read sheet &rarr;</button>
+        <button class="sc-btn sc-btn-primary" id="sc-process-btn" aria-label="Align and read the scanned sheet">Align &amp; read sheet &rarr;</button>
         <span class="sc-process-hint" id="sc-process-hint"></span>
       </div>
     </div>
@@ -3289,7 +3334,7 @@ input[type="checkbox"] {
     </div>
 
     <!-- Progress -->
-    <div class="sc-progress" id="sc-progress">
+    <div class="sc-progress" id="sc-progress" role="status" aria-live="polite">
       <div style="font-weight:600;font-size:14px">Extracting fields…</div>
       <div class="sc-progress-bar-wrap"><div class="sc-progress-bar" id="sc-progress-bar"></div></div>
       <div class="sc-progress-label" id="sc-progress-label">Rendering PDF…</div>
@@ -3298,6 +3343,7 @@ input[type="checkbox"] {
     <!-- Review sheet - Gemini Neurostatus component -->
     <div class="sc-review" id="sc-review">
       <div class="sc-review-banner" id="sc-review-banner" style="display:none;"></div>
+      <div class="sc-ocr-legend no-print"><span class="lg"><span class="sw green"></span> read with high confidence</span><span class="lg"><span class="sw orange"></span> needs your review</span></div>
       <div class="sc-sheet-wrap">
         <div class="sc-sheet-card">
           <div class="sc-pages-container">
@@ -5734,7 +5780,10 @@ function recalc() {
 
   // Header EDSS readout
   const edssEl = document.getElementById("edss-live");
-  if (edssEl) edssEl.textContent = (r.edss_step != null) ? r.edss_step.toFixed(1) : "-";
+  if (edssEl) {
+    const nv = (r.edss_step != null) ? r.edss_step.toFixed(1) : "-";
+    if (edssEl.textContent !== nv) { edssEl.textContent = nv; edssEl.classList.remove("val-flash"); void edssEl.offsetWidth; edssEl.classList.add("val-flash"); }
+  }
 
   // Quick patient ref
   const ptId = inputs.pt_id || "-";
@@ -6563,7 +6612,11 @@ function syncFinalSheet(inp, r) {
   // cloning, so the printed sheet always matches the header.
   const _setSheet = (id, v) => {
     const e = document.getElementById(id);
-    if (e && v !== undefined && v !== null) e.value = v;
+    if (e && v !== undefined && v !== null) {
+      const changed = String(e.value) !== String(v);
+      e.value = v;
+      if (changed) { e.classList.remove("val-flash"); void e.offsetWidth; e.classList.add("val-flash"); }
+    }
   };
   _setSheet("fs-visual-raw",         r.visual_fs);
   _setSheet("fs-visual-conv",        r.visual_fs_conv);
@@ -8917,8 +8970,7 @@ function scInitUI() {
   if (pbtn) pbtn.onclick = scProcessPages;
 
   document.getElementById("sc-home-btn").onclick = backToEdssModes;
-  { const _cs=document.getElementById("sc-btn-cam-start"); if(_cs) _cs.onclick = scStartCamera; }
-  { const _cn=document.getElementById("sc-btn-cam-snap"); if(_cn) _cn.onclick = () => scSnapCamera(SC_CAM_PAGE); }
+  // Camera capture UI was removed; upload / PDF / drag-drop only.
 
   // Alignment overlay buttons + draggable corners
   const ab=(id,fn)=>{ const e=document.getElementById(id); if(e) e.onclick=fn; };
@@ -9299,7 +9351,7 @@ function scUpdateReviewBanner(nReview,nFilled){
       +'<div style="margin-top:6px;font-size:12px;color:#8a5a00;background:#fff6e6;border-radius:5px;padding:6px 10px"><b>Always enter manually:</b> visual acuity (e.g. 20/40) and ambulation <b>assistance</b> - the reader can\'t read these, so they stay orange until you fill them.</div>'
       +'<div style="margin-top:6px;font-size:12px;color:#555">Tip: open <b>OCR debug</b> to see exactly what each box was read as.</div>';
   } else { b.classList.add("clean");
-    b.innerHTML='\u2713 <b>'+nFilled+'</b> field'+(nFilled===1?'':'s')+' read, none low-confidence. Still confirm the values against your sheet, then download the Full sheet or Summary table below.';
+    b.innerHTML='<svg class="sc-done-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg><b>'+nFilled+'</b> field'+(nFilled===1?'':'s')+' read, none low-confidence. Still confirm the values against your sheet, then download the Full sheet or Summary table below.';
   }
 }
 function scRecountReview(){
@@ -9678,49 +9730,7 @@ function scReset() {
   }
 }
 
-// Camera
-async function scStartCamera() {
-  try {
-    SC_CAM_STREAM = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width:{ideal:1920}, height:{ideal:1080} } });
-    const video = document.getElementById("sc-video");
-    video.srcObject = SC_CAM_STREAM;
-    video.classList.add("active");
-    document.getElementById("sc-btn-cam-start").style.display = "none";
-    document.getElementById("sc-btn-cam-snap").style.display = "";
-    document.getElementById("sc-cam-status").textContent = "Camera ready. Point at Page 1 and capture.";
-    SC_CAM_PAGE = 0;
-    document.getElementById("sc-btn-cam-snap").textContent = "📸 Capture Page 1";
-  } catch(e) {
-    document.getElementById("sc-cam-status").textContent = "Camera access denied or unavailable.";
-  }
-}
-
-function scSnapCamera(pageIdx) {
-  const video = document.getElementById("sc-video");
-  const canvas = document.getElementById("sc-cam-canvas");
-  canvas.width = video.videoWidth; canvas.height = video.videoHeight;
-  canvas.getContext("2d").drawImage(video, 0, 0);
-  const cap = document.createElement("canvas");
-  cap.width = canvas.width; cap.height = canvas.height;
-  cap.getContext("2d").drawImage(canvas, 0, 0);
-  SC_RAW_PAGES[pageIdx] = cap;              // camera photos need alignment too
-  const snap = document.getElementById("sc-cam-snap");
-  snap.src = canvas.toDataURL("image/jpeg", 0.92);
-  snap.classList.add("active");
-  if (pageIdx === 0) {
-    document.getElementById("sc-btn-cam-snap").style.display = "none";
-    document.getElementById("sc-btn-cam-p2").style.display = "";
-    document.getElementById("sc-btn-cam-p2").onclick = () => scSnapCamera(1);
-    document.getElementById("sc-cam-status").textContent = "Page 1 captured. Capture Page 2, or press \u201cAlign & read\u201d for page 1 only.";
-    const prow=document.getElementById("sc-process-row"); if(prow) prow.style.display="flex";
-    const hint=document.getElementById("sc-process-hint"); if(hint) hint.textContent="Page 1 ready.";
-  } else {
-    document.getElementById("sc-btn-cam-p2").style.display = "none";
-    document.getElementById("sc-cam-status").textContent = "Both pages captured.";
-    scStopCamera();
-    scProcessPages();
-  }
-}
+// Camera capture was removed from the scanner UI; scStartCamera / scSnapCamera deleted.
 
 // ============================================================
 // GEMINI CALCULATION ENGINE (wrapped for scanner)
@@ -10281,6 +10291,7 @@ function ttaVariants(vec){
   return out;
 }
 const TEMP=1.4; // temperature scaling (soften over-confident softmax; tune with real data)
+const MARGIN_MIN=0.15; // if top-1 minus top-2 (over the whitelist) is below this, flag the cell for review
 async function predictProbs(vec){
   const s=await session();
   const norm=new Float32Array(784);
@@ -10297,9 +10308,13 @@ async function predictTTA(vec, wl){
   const variants=ttaVariants(vec); const agg=new Float32Array(12);
   for(const v of variants){ const p=await predictProbs(v); for(let i=0;i<12;i++) agg[i]+=p[i]; }
   for(let i=0;i<12;i++) agg[i]/=variants.length;
-  let best='',bp=-1,sum=0;
-  for(let i=0;i<12;i++){ if(wl.indexOf(CLASSES[i])>=0){ sum+=agg[i]; if(agg[i]>bp){bp=agg[i];best=CLASSES[i];} } }
-  return {char:best, conf: sum>0?bp/sum:0, probs:agg};
+  let best='',bp=-1,second=-1,sum=0;
+  for(let i=0;i<12;i++){ if(wl.indexOf(CLASSES[i])>=0){ sum+=agg[i]; if(agg[i]>bp){ second=bp; bp=agg[i]; best=CLASSES[i]; } else if(agg[i]>second){ second=agg[i]; } } }
+  const conf = sum>0?bp/sum:0;
+  const p2   = (sum>0 && second>0)? second/sum : 0;
+  // margin = gap between the top two candidates (normalised over the whitelist). A small margin
+  // means the model is torn between two digits -> we flag it for review even if conf is high.
+  return {char:best, conf, p2, margin: conf - p2, probs:agg};
 }
 // segment a (multi-digit) region into per-glyph vectors by vertical projection
 function segmentVecs(cvs,px,py,pw,ph){
@@ -10357,8 +10372,8 @@ async function recognizeCell(cvs,rect, emptyGate){
     const ex=Math.round(pw*0.18), mx=Math.max(0,px-ex), mw=pw+2*ex;
     const c=cellInk(cvs,mx,py,mw,ph); if(c.frac<emptyGate) return {text:'',conf:0,empty:true};
     const vecs=segmentVecs(cvs,mx,py,mw,ph); if(!vecs.length) return {text:'',conf:0,empty:false,flag:true};
-    let s='',mn=1,last=null; for(const v of vecs){const r=await predictTTA(v,'0123456789'); if(!r.char)continue; s+=r.char; if(r.conf<mn)mn=r.conf; last=v;}
-    return {text:s, conf:Math.round(mn*100), empty:false, flag: mn<0.6, crop:last?vecToCropDataURL(last):null};
+    let s='',mn=1,mgn=1,last=null; for(const v of vecs){const r=await predictTTA(v,'0123456789'); if(!r.char)continue; s+=r.char; if(r.conf<mn)mn=r.conf; if(r.margin!==undefined&&r.margin<mgn)mgn=r.margin; last=v;}
+    return {text:s, conf:Math.round(mn*100), empty:false, flag: mn<0.6 || mgn<MARGIN_MIN, crop:last?vecToCropDataURL(last):null};
   }
   const c=cellInk(cvs,px,py,pw,ph);
   if(c.frac<emptyGate || c.maxx<0) return {text:'',conf:0,empty:true};
@@ -10366,7 +10381,9 @@ async function recognizeCell(cvs,rect, emptyGate){
   if(gh<c.h*0.30) return {text:'',conf:0,empty:true};   // short mark / print noise (real digits fill the box) -> empty
   const vec=inkToVec(c.ink,c.w,c.h,c.minx,c.miny,gw,gh);
   const r=await predictTTA(vec,rule.wl);
-  return {text:r.char, conf:Math.round(r.conf*100), empty:false, crop:vecToCropDataURL(vec), vec};
+  // Flag for review when the top two candidates are too close, even if the top confidence is high.
+  const lowMargin = (r.margin!==undefined && r.margin < MARGIN_MIN);
+  return {text:r.char, conf:Math.round(r.conf*100), empty:false, flag:lowMargin, crop:vecToCropDataURL(vec), vec};
 }
 
 /* ============================================================================
