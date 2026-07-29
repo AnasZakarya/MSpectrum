@@ -10258,8 +10258,17 @@ async function zoneRects(pageIdx){
     const cur=await ocrAnchors(cvs); const ref=ANCHOR_REF[String(pageIdx)]||ANCHOR_REF[pageIdx]||{};
     const src=[],dst=[]; for(const k in cur){ if(ref[k]){ src.push([ref[k][0]*sx, ref[k][1]*sx]); dst.push(cur[k]); } }
     nAnch=src.length;
-    if(src.length>=4){ const cand=fitSim2(src,dst);
+    if(src.length>=4){ let cand=fitSim2(src,dst);
       if(cand){ // validate: reprojection inliers + sane scale
+        // ROBUST FIT: a single mis-located anchor skews the whole map (and drifts empty
+        // sections that have no boxes to self-correct). So identify the inliers of the first
+        // fit, then REFIT using only them - the outlier no longer pulls the transform.
+        const inlIdx=[]; for(let i=0;i<src.length;i++){ const p=applyAff(cand,src[i][0],src[i][1]);
+          if(Math.hypot(p[0]-dst[i][0],p[1]-dst[i][1])<=45*sx) inlIdx.push(i); }
+        if(inlIdx.length>=4 && inlIdx.length<src.length){
+          const s2=inlIdx.map(i=>src[i]), d2=inlIdx.map(i=>dst[i]);
+          const refit=fitSim2(s2,d2); if(refit) cand=refit;
+        }
         const sc=Math.hypot(cand[0][0],cand[0][1]);
         let inl=0; for(let i=0;i<src.length;i++){ const p=applyAff(cand,src[i][0],src[i][1]);
           if(Math.hypot(p[0]-dst[i][0],p[1]-dst[i][1])<=45*sx) inl++; }
