@@ -2961,6 +2961,14 @@ input[type="checkbox"] {
     /* #15 alignment corner handles gently pulse when the overlay opens, inviting a drag */
     @keyframes cornerPulse { 0%, 100% { box-shadow: 0 0 0 2px #fff, 0 2px 6px rgba(0,0,0,.35), 0 0 0 2px rgba(255,122,0,0); } 50% { box-shadow: 0 0 0 2px #fff, 0 2px 6px rgba(0,0,0,.35), 0 0 0 9px rgba(255,122,0,.28); } }
     .sc-align-overlay.active .sc-corner { animation: cornerPulse 1.6s ease-in-out 3; }
+    /* Fit the review sheet to phone width (the fixed 760px page was overflowing). Desktop untouched.
+       The 2-page PDF/print path uses its own @media print rules and is not affected by this. */
+    @media screen and (max-width: 680px) {
+      #sc-review .sc-sheet-card { zoom: 1 !important; padding: 6px !important; }
+      #sc-review .sc-sheet-wrap .sc-page { width: 100% !important; min-width: 0 !important; max-width: 100% !important; padding: 12px 10px !important; }
+      #sc-review #sc-img-preview-0, #sc-review #sc-img-preview-1 { width: 100% !important; }
+      #sc-review .sc-sheet-wrap .sc-box-input { width: 30px !important; }
+    }
 </style>
 </head>
 <body>
@@ -3671,7 +3679,7 @@ input[type="checkbox"] {
 
       <!-- Actions -->
       <div class="sc-actions" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-        <button class="sc-btn" onclick="verifyAllOCR()" style="background:#2f8f4e;color:#fff;border:1px solid #2f8f4e;font-weight:600;padding:8px 16px;border-radius:8px;">&#10003; Verify all fields</button>
+        <button class="sc-btn" id="sc-verify-btn" onclick="verifyAllOCR()" style="background:#2f8f4e;color:#fff;border:1px solid #2f8f4e;font-weight:600;padding:8px 16px;border-radius:8px;">&#10003; Verify all fields</button>
         <button class="sc-btn" onclick="scShowDebug()" style="background:#fff;color:#1e4a6e;border:1px solid #1e4a6e;font-weight:600;padding:8px 16px;border-radius:8px;">&#128269; OCR debug</button>
         <button class="sc-btn" onclick="scReset()" style="background:#fff;color:#b4453a;border:1px solid #d9a7a2;font-weight:600;padding:8px 16px;border-radius:8px;">&#8635; Reset / new scan</button>
       </div>
@@ -6460,6 +6468,10 @@ function syncPatientHeader(inp) {
 }
 
 function syncFinalSheet(inp, r) {
+  // The OCR scanner and the guided sheet share the same box IDs. While the scanner review
+  // is active it owns those boxes (computed from the scanned sheet), so the guided-form
+  // path must NOT overwrite them here - that was making the synopsis/table show wrong numbers.
+  if (document.getElementById("sc-review")?.classList.contains("active")) return;
   // Connect patient identifiers + dates from the input form to the printed sheet header.
   syncPatientHeader(inp);
   // Populate Gemini sheet IDs with FORM_STATE values
@@ -9359,6 +9371,9 @@ function scRecountReview(){
   const n=scope.querySelectorAll(".ocr-verify").length;
   const filled=scope.querySelectorAll(".ocr-verify,.ocr-high").length;
   scUpdateReviewBanner(n, filled);
+  // If new uncertain fields appear after a "Verified" click, revert the button so it is not misleading.
+  const b=document.getElementById("sc-verify-btn");
+  if(b && n>0 && b.classList.contains("is-verified")){ b.innerHTML="&#10003; Verify all fields"; b.style.background="#2f8f4e"; b.style.borderColor="#2f8f4e"; b.classList.remove("is-verified"); }
 }
 
 // Lazily load Tesseract.js (needs internet on first load, then cached).
@@ -9751,6 +9766,9 @@ function verifyAllOCR() {
     cb.classList.remove("ocr-verify","ocr-high");
   });
   calculateEDSS();
+  // Give clear feedback that the sheet has been marked reviewed.
+  const b = document.getElementById("sc-verify-btn");
+  if (b) { b.innerHTML = "&#10003; Verified"; b.style.background = "#1e4a6e"; b.style.borderColor = "#1e4a6e"; b.classList.add("is-verified"); }
 }
 
 function clearForm() {
@@ -9929,6 +9947,26 @@ function calculateSectionScores() {
   setv("fs-bowel-bladder-raw", r.bb_fs);
   setv("fs-bowel-bladder-conv", r.bb_fs_conv);
   setv("fs-cerebral", r.cerebral_fs);
+  // SINGLE SOURCE OF TRUTH: the sheet synopsis, the summary table and the EDSS readout
+  // are all driven from THIS same result, so the three never diverge (previously the
+  // synopsis/table kept stale values from the guided-form path after an edit).
+  const setsyn = (id, v) => { const e = document.getElementById(id); if (e) e.value = (v == null ? "" : v); };
+  setsyn("syn-visual", r.visual_fs_conv);
+  setsyn("syn-brainstem", r.brainstem_fs);
+  setsyn("syn-pyramidal", r.pyramidal_fs);
+  setsyn("syn-cerebellar", r.cerebellar_fs);
+  setsyn("syn-sensory", r.sensory_fs);
+  setsyn("syn-bowel-bladder", r.bb_fs_conv);
+  setsyn("syn-cerebral", r.cerebral_fs);
+  setsyn("syn-ambulation", r.ambulation_score);
+  const settbl = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = (v == null || v === "" ? "-" : String(v)); };
+  settbl("sc-tbl-vis-raw", r.visual_fs);   settbl("sc-tbl-vis-conv", r.visual_fs_conv);
+  settbl("sc-tbl-bs", r.brainstem_fs);     settbl("sc-tbl-pyr", r.pyramidal_fs);
+  settbl("sc-tbl-crb", r.cerebellar_fs);   settbl("sc-tbl-sens", r.sensory_fs);
+  settbl("sc-tbl-bb-raw", r.bb_fs);        settbl("sc-tbl-bb-conv", r.bb_fs_conv);
+  settbl("sc-tbl-cer", r.cerebral_fs);     settbl("sc-tbl-as", r.ambulation_score);
+  const _res = document.getElementById("sc-res-edss");
+  if (_res) _res.textContent = (r.edss_step != null ? r.edss_step.toFixed(1) : "-");
   const ed = document.getElementById("edss-step-val");
   if (ed && !ed.classList.contains("manual-override")) ed.value = (r.edss_step != null ? r.edss_step.toFixed(1) : "");
 }
