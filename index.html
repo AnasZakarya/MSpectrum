@@ -10258,17 +10258,8 @@ async function zoneRects(pageIdx){
     const cur=await ocrAnchors(cvs); const ref=ANCHOR_REF[String(pageIdx)]||ANCHOR_REF[pageIdx]||{};
     const src=[],dst=[]; for(const k in cur){ if(ref[k]){ src.push([ref[k][0]*sx, ref[k][1]*sx]); dst.push(cur[k]); } }
     nAnch=src.length;
-    if(src.length>=4){ let cand=fitSim2(src,dst);
+    if(src.length>=4){ const cand=fitSim2(src,dst);
       if(cand){ // validate: reprojection inliers + sane scale
-        // ROBUST FIT: a single mis-located anchor skews the whole map (and drifts empty
-        // sections that have no boxes to self-correct). So identify the inliers of the first
-        // fit, then REFIT using only them - the outlier no longer pulls the transform.
-        const inlIdx=[]; for(let i=0;i<src.length;i++){ const p=applyAff(cand,src[i][0],src[i][1]);
-          if(Math.hypot(p[0]-dst[i][0],p[1]-dst[i][1])<=45*sx) inlIdx.push(i); }
-        if(inlIdx.length>=4 && inlIdx.length<src.length){
-          const s2=inlIdx.map(i=>src[i]), d2=inlIdx.map(i=>dst[i]);
-          const refit=fitSim2(s2,d2); if(refit) cand=refit;
-        }
         const sc=Math.hypot(cand[0][0],cand[0][1]);
         let inl=0; for(let i=0;i<src.length;i++){ const p=applyAff(cand,src[i][0],src[i][1]);
           if(Math.hypot(p[0]-dst[i][0],p[1]-dst[i][1])<=45*sx) inl++; }
@@ -10285,13 +10276,21 @@ async function zoneRects(pageIdx){
   const prior={}; for(const z of pz){ prior[z.id]=applyAff(A,(z.x+z.w/2)*SCALE*sx,(z.y+z.h/2)*SCALE*sx); }
   const groups={};
   for(const z of pz){ const gk=secKey(z.id)+(prior[z.id][0]<midX?'L':'R'); (groups[gk]=groups[gk]||[]).push(z); }
+  // Page-global offset: median residual between every zone's prior and its nearest printed box.
+  // Sparse/empty sections fall back to this so they follow the overall drift, not the raw prior.
+  const _gdx=[],_gdy=[];
+  for(const z of pz){ const p=prior[z.id];
+    let bj=-1,bd=42*sx; for(let j=0;j<det.length;j++){const dd=Math.hypot(det[j].cx-p[0],det[j].cy-p[1]); if(dd<bd){bd=dd;bj=j;}}
+    if(bj>=0){ _gdx.push(det[bj].cx-p[0]); _gdy.push(det[bj].cy-p[1]); } }
+  let gox=0,goy=0;
+  if(_gdx.length){ _gdx.sort((a,b)=>a-b); _gdy.sort((a,b)=>a-b); gox=_gdx[Math.floor(_gdx.length/2)]; goy=_gdy[Math.floor(_gdy.length/2)]; }
   const placed={};
-  for(const gk in groups){ const zl=groups[gk]; let ox=0,oy=0;
+  for(const gk in groups){ const zl=groups[gk]; let ox=gox,oy=goy;
     for(let it=0; it<3; it++){ const dx=[],dy=[];
       for(const z of zl){ const p=prior[z.id];
         let bj=-1,bd=42*sx; for(let j=0;j<det.length;j++){const dd=Math.hypot(det[j].cx-(p[0]+ox),det[j].cy-(p[1]+oy)); if(dd<bd){bd=dd;bj=j;}}
         if(bj>=0){ dx.push(det[bj].cx-p[0]); dy.push(det[bj].cy-p[1]); } }
-      if(dx.length){ dx.sort((a,b)=>a-b); dy.sort((a,b)=>a-b); ox=dx[Math.floor(dx.length/2)]; oy=dy[Math.floor(dy.length/2)]; } }
+      if(dx.length>=2){ dx.sort((a,b)=>a-b); dy.sort((a,b)=>a-b); ox=dx[Math.floor(dx.length/2)]; oy=dy[Math.floor(dy.length/2)]; } }
     for(const z of zl) placed[z.id]=[prior[z.id][0]+ox, prior[z.id][1]+oy];
   }
   const rects=[]; let pairsN=0;
