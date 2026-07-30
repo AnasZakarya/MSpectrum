@@ -2979,6 +2979,9 @@ input[type="checkbox"] {
     /* The clinical Neurostatus sheet stays light "paper" in dark mode (readability + print fidelity). */
     html[data-theme="dark"] .sc-sheet-wrap, html[data-theme="dark"] .sc-sheet-card, html[data-theme="dark"] .sc-page { color: #000; }
     html[data-theme="dark"] .sc-sheet-card { background-image: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%); }
+    /* Darken the hardcoded light surfaces (page headers, info callouts) so dark mode is consistent. */
+    html[data-theme="dark"] .top, html[data-theme="dark"] .app-header, html[data-theme="dark"] header:not(.sc-page-header) { background: rgba(26,33,48,.96) !important; border-color: var(--rule) !important; }
+    html[data-theme="dark"] .usenote, html[data-theme="dark"] .usenote-green, html[data-theme="dark"] .callout { background: #1e2636 !important; border-color: var(--rule) !important; color: var(--ink-soft) !important; }
     #theme-toggle { transition: transform .12s ease, box-shadow .12s ease; }
     #theme-toggle:hover { transform: translateY(-1px); }
     /* Fit the fixed-width Neurostatus sheet to the screen by SCALING it down (zoom), the same

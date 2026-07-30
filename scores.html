@@ -2581,7 +2581,7 @@ function calcNEDA(){ var r=el("neda_rel").value, m=el("neda_mri").value, pr=el("
   var css='html[data-theme="dark"]{--bg:#0f1420;--paper:#1a2130;--paper-tint:#1e2636;--ink:#e7eaf1;--ink-soft:#aab2c2;--ink-faint:#7b8496;--rule:#2a3446;--rule-strong:#3a4658;--accent:#6aa6dd;--accent-soft:#1e2c3e;--accent-ink:#bcd6f0;--hl:#e0904a;--hl-soft:#3a2a1c;--shadow-sm:0 1px 2px rgba(0,0,0,.35);--shadow-md:0 4px 12px rgba(0,0,0,.45);--shadow-lg:0 12px 32px rgba(0,0,0,.55);}'
     +'html[data-theme="dark"] body{background:var(--bg);}'
     +'#theme-toggle{transition:transform .12s ease, box-shadow .12s ease;}#theme-toggle:hover{transform:translateY(-1px);}'
-    +'@media print{#theme-toggle{display:none !important;}}';
+    +'html[data-theme="dark"] .top,html[data-theme="dark"] .app-header,html[data-theme="dark"] header:not(.sc-page-header){background:rgba(26,33,48,.96) !important;border-color:var(--rule) !important;}html[data-theme="dark"] .usenote,html[data-theme="dark"] .usenote-green,html[data-theme="dark"] .callout{background:#1e2636 !important;border-color:var(--rule) !important;color:var(--ink-soft) !important;}'+'@media print{#theme-toggle{display:none !important;}}';
   var st=document.createElement("style"); st.textContent=css; document.head.appendChild(st);
   var KEY="mspectrum-theme";
   function apply(t){ document.documentElement.setAttribute("data-theme",t); }
