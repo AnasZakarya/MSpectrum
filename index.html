@@ -2950,9 +2950,9 @@ input[type="checkbox"] {
     .edss-readout-value, #edss-live, #sc-res-edss, #qc-result-number,
     .sc-sheet-wrap .sc-box-input, .rm-fs-box, .score-num,
     .sc-edss-value-input, .syn-box, .fs-box { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
-    /* #14 depth + a faint paper feel on the clinical sheet */
+    /* #14 depth + a faint paper feel on the clinical sheet (the body keeps its original
+       dotted-pattern background from the base :root styles - do NOT override it here). */
     .sc-sheet-card { background-image: linear-gradient(180deg, #ffffff 0%, var(--paper-tint, #fdfbf6) 100%); box-shadow: var(--shadow-lg, 0 12px 32px rgba(20,25,40,.08)); }
-    body { background-image: radial-gradient(1100px 460px at 50% -8%, rgba(30,74,110,.045), transparent 62%); }
     /* #17 larger, comfortable tap targets on phones/tablets */
     @media (max-width: 700px) {
       .sc-btn { min-height: 44px; padding-top: 11px; padding-bottom: 11px; }
@@ -2961,13 +2961,18 @@ input[type="checkbox"] {
     /* #15 alignment corner handles gently pulse when the overlay opens, inviting a drag */
     @keyframes cornerPulse { 0%, 100% { box-shadow: 0 0 0 2px #fff, 0 2px 6px rgba(0,0,0,.35), 0 0 0 2px rgba(255,122,0,0); } 50% { box-shadow: 0 0 0 2px #fff, 0 2px 6px rgba(0,0,0,.35), 0 0 0 9px rgba(255,122,0,.28); } }
     .sc-align-overlay.active .sc-corner { animation: cornerPulse 1.6s ease-in-out 3; }
-    /* ---- Dark mode (opt-in via the toggle; default stays light so nothing changes unless chosen) ---- */
+    /* =====================================================================
+       DARK MODE  (opt-in via the toggle; default stays light)
+       Strategy: flip the design tokens, then explicitly darken every hardcoded
+       LIGHT SURFACE so the (now light) text stays readable on it. Small coloured
+       chips/badges set their own text colour, so they are left untouched.
+       ===================================================================== */
     html[data-theme="dark"] {
       --bg: #0f1420; --paper: #1a2130; --paper-tint: #1e2636;
-      --ink: #e7eaf1; --ink-soft: #aab2c2; --ink-faint: #7b8496;
+      --ink: #f1f3f8; --ink-soft: #c2cad8; --ink-faint: #8b94a6;
       --rule: #2a3446; --rule-strong: #3a4658;
       --accent: #6aa6dd; --accent-soft: #1e2c3e; --accent-ink: #bcd6f0;
-      --hl: #e0904a; --hl-soft: #3a2a1c;
+      --hl: #e6975a; --hl-soft: #3a2a1c;
       --shadow-sm: 0 1px 2px rgba(0,0,0,.35);
       --shadow-md: 0 4px 12px rgba(0,0,0,.45);
       --shadow-lg: 0 12px 32px rgba(0,0,0,.55);
@@ -2975,15 +2980,31 @@ input[type="checkbox"] {
     html[data-theme="dark"] body {
       background: var(--bg);
       background-image: radial-gradient(circle at 50% -5%, rgba(106,166,221,0.08), transparent 55%), radial-gradient(rgba(106,166,221,0.05) 1px, transparent 1px);
+      background-size: 100% 100%, 22px 22px;
     }
     /* The clinical Neurostatus sheet stays light "paper" in dark mode (readability + print fidelity). */
     html[data-theme="dark"] .sc-sheet-wrap, html[data-theme="dark"] .sc-sheet-card, html[data-theme="dark"] .sc-page { color: #000; }
     html[data-theme="dark"] .sc-sheet-card { background-image: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%); }
-    /* Darken the hardcoded light surfaces (page headers, info callouts) so dark mode is consistent. */
-    html[data-theme="dark"] .top, html[data-theme="dark"] .app-header, html[data-theme="dark"] header:not(.sc-page-header) { background: rgba(26,33,48,.96) !important; border-color: var(--rule) !important; }
+    /* --- Darken hardcoded light surfaces so light text stays visible --- */
+    html[data-theme="dark"] .top, html[data-theme="dark"] .app-header, html[data-theme="dark"] header:not(.sc-page-header) { background: rgba(20,27,40,.96) !important; border-color: var(--rule) !important; }
+    html[data-theme="dark"] .app-footer { background: #131a27 !important; border-top-color: var(--rule) !important; }
     html[data-theme="dark"] .usenote, html[data-theme="dark"] .usenote-green, html[data-theme="dark"] .callout { background: #1e2636 !important; border-color: var(--rule) !important; color: var(--ink-soft) !important; }
+    html[data-theme="dark"] .way-card.patient-card { background: linear-gradient(180deg, #1c2432 0%, #171e2b 100%) !important; border-color: var(--rule-strong) !important; }
+    html[data-theme="dark"] details, html[data-theme="dark"] summary { background: #1e2636 !important; border-color: var(--rule) !important; color: var(--ink) !important; }
+    /* form controls go dark (light text needs a dark field) - but the printable Neurostatus sheet stays light paper */
+    html[data-theme="dark"] input:not([type=checkbox]):not([type=radio]), html[data-theme="dark"] select, html[data-theme="dark"] textarea { background: #141b28 !important; color: var(--ink) !important; border-color: var(--rule-strong) !important; }
+    html[data-theme="dark"] input::placeholder, html[data-theme="dark"] textarea::placeholder { color: var(--ink-faint) !important; }
+    html[data-theme="dark"] .sc-sheet-wrap input, html[data-theme="dark"] .sc-sheet-wrap select, html[data-theme="dark"] .sc-sheet-wrap textarea { background: #ffffff !important; color: #000 !important; border-color: #cbd5e1 !important; }
+    /* remaining light container surfaces */
+    html[data-theme="dark"] .clinical-fs-item, html[data-theme="dark"] .clinical-disclaimer, html[data-theme="dark"] .qc-ee-result-note,
+    html[data-theme="dark"] .about-toggle, html[data-theme="dark"] .back-to-explore, html[data-theme="dark"] .report-link-banner,
+    html[data-theme="dark"] .scanner-view, html[data-theme="dark"] .card, html[data-theme="dark"] .panel, html[data-theme="dark"] .box,
+    html[data-theme="dark"] .refs-sec, html[data-theme="dark"] .info-box, html[data-theme="dark"] .note-box { background: #1e2636 !important; border-color: var(--rule) !important; color: var(--ink) !important; }
     #theme-toggle { transition: transform .12s ease, box-shadow .12s ease; }
     #theme-toggle:hover { transform: translateY(-1px); }
+    /* ---- Landing: reveal sections/cards as they scroll into view ---- */
+    .reveal-on-scroll { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal-on-scroll.in { opacity: 1; transform: none; }
     /* Fit the fixed-width Neurostatus sheet to the screen by SCALING it down (zoom), the same
        idea the desktop two-column view uses. Progressive so it fills each device without overflow.
        The 2-page PDF/print path uses its own @media print rules and is not affected. */
@@ -4020,6 +4041,14 @@ function calcPyramidalFS({ strength, overall_motor, plantar, reflexes, spasticit
         if (plegic.some(Boolean)) return 4;                         // monoplegia
         if (limbs.filter(x => x <= 2).length === 2) return 4;       // marked para/hemiparesis
         if (limbs.filter(x => x <= 3).length >= 3) return 4;        // moderate tetraparesis
+        // Severe monoparesis exceeding the FS-3 limit: FS 3 "severe monoparesis" is officially
+        // "BMRC <=2 in ONE muscle group". A single limb with BMRC <=2 in >=2 groups (but not a
+        // full monoplegia, already caught above) exceeds that limit -> per the Neurostatus
+        // "exceed one level, take the next" rule -> FS 4.
+        const _leq2InLimb = (muscles, side) => muscles.reduce((n, m) =>
+            n + ((((strength[m] && strength[m][side] !== undefined) ? strength[m][side] : 5) <= 2) ? 1 : 0), 0);
+        if (_leq2InLimb(ueMuscles, "R") >= 2 || _leq2InLimb(ueMuscles, "L") >= 2 ||
+            _leq2InLimb(leMuscles, "R") >= 2 || _leq2InLimb(leMuscles, "L") >= 2) return 4;
         const muscleVals = Object.values(muscle_min);
         if (muscleVals.filter(v => v <= 3).length >= 1) return 3;   // BMRC<=3 in >=1 group
         if (muscleVals.filter(v => v === 4).length > 2) return 3;   // BMRC4 in >2 groups
@@ -6122,6 +6151,23 @@ function runConsistencyCheck(inp, r) {
   // Helper: parse numeric, null if missing/unparseable
   const num = (v) => { const n = parseFloat(v); return isNaN(n) ? null : n; };
   const isMissing = (v) => v === undefined || v === null || v === "" || v === "0" || v === 0;
+
+  // ── 0. Transparency note - fires ONLY when the "exceed one level" rule escalated a severe
+  //      monoparesis from FS 3 to FS 4 (BMRC ≤2 in >1 muscle group of a single limb, not a
+  //      full monoplegia). Explains WHY the score is one level higher than the raw grade. ──
+  (function () {
+    const g = id => { const n = parseFloat(inp[id]); return isNaN(n) ? 5 : n; };
+    const grp = (muscles, side) => muscles.map(m => g("p_str_" + m + "_" + side));
+    const UE = ["deltoid", "biceps", "triceps", "wflex", "wext"];
+    const LE = ["hipflex", "kneeflex", "kneeext", "ankdorsi", "ankplant"];
+    const limbs = [grp(UE, "R"), grp(UE, "L"), grp(LE, "R"), grp(LE, "L")];
+    const weakLimbs = limbs.filter(a => Math.min(...a) <= 2).length;
+    const severeMono = limbs.some(a => a.filter(v => v <= 2).length >= 2 && Math.max(...a) > 1);
+    if (severeMono && weakLimbs === 1 && pyrFS === 4) {
+      issues.push({ sev: "info", tab: "pyramidal",
+        msg: "Pyramidal FS = 4: a severe monoparesis (BMRC ≤2 in more than one muscle group of a single limb) exceeds the FS 3 definition (\"≤2 in one muscle group\"), so it is scored one level up per the Neurostatus \"if you exceed one level, take the next\" rule." });
+    }
+  })();
 
   // ── 1. CROSS-SYSTEM: Pyramidal ↔ Ambulation ─────────────────
   // Paraplegia (both lower limb strength ≤1 / p_overall ≥4) → AS must be ≥ 9
@@ -10353,9 +10399,14 @@ function inkToVec(ink,w,h, bx,by,bw,bh){
   return vec;
 }
 // jittered variants for TTA (small rotate/shift on the 28x28 grid)
+// Test-time augmentation. On phones/tablets we use fewer variants (skip the costly rotations)
+// so the ~97-cell x 2-page read stays fast; desktops keep the full set for best accuracy.
+const _OCR_MOBILE = (typeof navigator !== "undefined") &&
+  (((navigator.maxTouchPoints || 0) > 1) || /Android|iP(hone|ad|od)/i.test(navigator.userAgent || ""));
 function ttaVariants(vec){
   const out=[vec];
-  const rots=[-8,8];
+  const rots = _OCR_MOBILE ? [] : [-8,8];
+  const shifts = _OCR_MOBILE ? [[1,0],[0,1]] : [[1,0],[-1,0],[0,1]];
   for(const deg of rots){
     const r=deg*Math.PI/180, c=Math.cos(r), s=Math.sin(r), v2=new Float32Array(784);
     for(let y=0;y<28;y++)for(let x=0;x<28;x++){ const dx=x-14,dy=y-14;
@@ -10363,7 +10414,7 @@ function ttaVariants(vec){
       if(sxp>=0&&sxp<28&&syp>=0&&syp<28) v2[y*28+x]=vec[syp*28+sxp]; }
     out.push(v2);
   }
-  for(const off of [[1,0],[-1,0],[0,1]]){ const ox=off[0],oy=off[1]; const v2=new Float32Array(784);
+  for(const off of shifts){ const ox=off[0],oy=off[1]; const v2=new Float32Array(784);
     for(let y=0;y<28;y++)for(let x=0;x<28;x++){const tx=x+ox,ty=y+oy; if(tx>=0&&tx<28&&ty>=0&&ty<28) v2[ty*28+tx]=vec[y*28+x];}
     out.push(v2); }
   return out;
@@ -10597,11 +10648,31 @@ window.scExtractAllZones = async function(){
     b.id="theme-toggle"; b.type="button"; b.className="no-print";
     b.setAttribute("aria-label","Toggle dark mode");
     b.setAttribute("onclick","toggleTheme()");
-    b.style.cssText="position:fixed;left:14px;bottom:14px;z-index:9999;display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:20px;border:1px solid var(--rule-strong);background:var(--paper);color:var(--ink);font-size:12px;font-weight:600;box-shadow:var(--shadow-md);cursor:pointer;";
+    b.style.cssText="position:fixed;left:14px;bottom:72px;z-index:9999;display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:20px;border:1px solid var(--rule-strong);background:var(--paper);color:var(--ink);font-size:12px;font-weight:600;box-shadow:var(--shadow-md);cursor:pointer;";
     b.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span id="theme-toggle-lbl">'+(saved==="dark"?"Light":"Dark")+'</span>';
     document.body.appendChild(b);
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",mk); else mk();
+})();
+</script>
+<script>
+/* Landing scroll-reveal: cards fade/slide in as they scroll into view. Degrades safely:
+   if IntersectionObserver is missing the cards just show; under reduced-motion the reveal is
+   instant (the global reduce-motion rule zeroes the transition) so nothing ever stays hidden. */
+(function(){
+  function init(){
+    var els = Array.prototype.slice.call(document.querySelectorAll("#landing .hero, .section-title, .feature-card, .landing-page .way-card, #edss-modes .way-card, #explore .way-card"));
+    if(!els.length) return;
+    if(!("IntersectionObserver" in window)){ els.forEach(function(el){ el.classList.add("in"); }); return; }
+    els.forEach(function(el,i){ el.classList.add("reveal-on-scroll"); el.style.transitionDelay = Math.min((i%3)*70, 210) + "ms"; });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    els.forEach(function(el){ io.observe(el); });
+    // Safety: if anything is still hidden after 2.5s (observer quirks), reveal it.
+    setTimeout(function(){ els.forEach(function(el){ el.classList.add("in"); }); }, 2500);
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", init); else init();
 })();
 </script>
 </body>
