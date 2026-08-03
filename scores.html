@@ -29,7 +29,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MSpectrum - MS Score Hub (EDSS, SDMT, BICAMS, MSFC & more)","url":"https://anaszakarya.github.io/MSpectrum/scores.html","description":"Free, offline calculators and questionnaires for multiple sclerosis outcome measures: cognition (SDMT, BICAMS), fatigue (MFIS, FSS), mood, walking, quality of life and disease severity - with published norms and plain-language interpretation.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"},{"@type":"Person","name":"Anza Memon"}],"publisher":{"@type":"Organization","name":"Wayne State University, Department of Neurology"}}</script>
 <style>
 :root{
-  --bg:#faf8f3; --paper:#fff; --ink:#1a1f2e; --ink-soft:#4a5060; --ink-faint:#8a8f9d;
+  --bg:#faf8f3; --paper:#ffffff; --ink:#1a1f2e; --ink-soft:#4a5060; --ink-faint:#8a8f9d;
   --accent:#1e4a6e; --accent-ink:#0d2c47; --hl:#b85c1a; --hl-soft:#f5e8da;
   --rule:#e6e2d6; --rule-strong:#c8c2b0; --radius:14px; --radius-sm:8px;
   --good:#216e39; --good-bg:#e7f3ec; --warn:#9a6700; --warn-bg:#fff6df; --bad:#9b2c2c; --bad-bg:#fdeaea;
@@ -45,7 +45,7 @@ header.top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);bac
 .logo{margin-right:8px;flex-shrink:0}
 .brand em{font-style:normal;color:var(--hl)}
 .top-inner .sub{font-size:12px;color:var(--ink-faint);letter-spacing:.08em;text-transform:uppercase}
-.back{margin-left:auto;font-size:13px;text-decoration:none;border:1px solid var(--accent);padding:6px 14px;border-radius:20px;color:#fff;background:var(--accent);font-weight:600}
+.back{margin-left:auto;font-size:13px;text-decoration:none;border:1px solid var(--accent);padding:6px 14px;border-radius:20px;color:#ffffff;background:var(--accent);font-weight:600}
 .back:hover{background:var(--accent-ink);border-color:var(--accent-ink)}
 .hero{padding:34px 0 10px}
 .hero h1{font-family:var(--serif);font-size:34px;margin:0 0 8px;letter-spacing:-.01em}
@@ -65,24 +65,24 @@ header.top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);bac
 .panel h2{font-family:var(--serif);margin:0 0 2px;font-size:24px}
 .panel .lead{color:var(--ink-soft);font-size:14px;margin:0 0 16px}
 .panel .lead,.usenote,.card .desc,.report-cta-s,.interp{text-align:justify;text-justify:inter-word}
-.tool-back{font-size:13px;background:#fff;border:1px solid var(--rule-strong);border-radius:20px;color:var(--accent-ink);cursor:pointer;padding:6px 14px;margin-bottom:10px;font-weight:600}
-.tool-back:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tool-back{font-size:13px;background:#ffffff;border:1px solid var(--rule-strong);border-radius:20px;color:var(--accent-ink);cursor:pointer;padding:6px 14px;margin-bottom:10px;font-weight:600}
+.tool-back:hover{background:var(--accent);color:#ffffff;border-color:var(--accent)}
 .row{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0}
 .fld{flex:1;min-width:150px}
 .fld label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
 .fld .hint{font-size:11.5px;color:var(--ink-faint);font-weight:400}
-input[type=number],select{width:100%;padding:9px 10px;border:1px solid var(--rule-strong);border-radius:var(--radius-sm);font-size:15px;background:#fff;color:var(--ink)}
+input[type=number],select{width:100%;padding:9px 10px;border:1px solid var(--rule-strong);border-radius:var(--radius-sm);font-size:15px;background:#ffffff;color:var(--ink)}
 input:focus,select:focus{outline:2px solid #bcd3e6;border-color:var(--accent)}
 input.oor{border-color:#c0392b!important;background:#fdeaea}
 .range-warn{color:#c0392b;font-size:11.5px;margin-top:3px;font-weight:600}
 select.blank,input.blank{border-color:#e0a030!important;background:#fff8e8!important}
 .scale{display:flex;gap:4px;flex-wrap:wrap;align-items:stretch}
-.scale button{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-width:42px;max-width:88px;padding:3px 4px;border:1px solid var(--rule-strong);border-radius:6px;background:#fff;color:var(--accent-ink);cursor:pointer}
+.scale button{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-width:42px;max-width:88px;padding:3px 4px;border:1px solid var(--rule-strong);border-radius:6px;background:#ffffff;color:var(--accent-ink);cursor:pointer}
 .scale .sc-n{font-size:12.5px;font-weight:800;line-height:1}
 .scale .sc-t{font-size:7.5px;color:var(--ink-soft);line-height:1.05;margin-top:2px;text-align:center}
 .scale button.on .sc-t{color:#eaf2f8}
 .scale button:hover{background:#eef4f8}
-.scale button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.scale button.on{background:var(--accent);color:#ffffff;border-color:var(--accent)}
 .scale.blank button{border-color:#e0a030}
 .scale-legend{font-size:12px;color:var(--ink-soft);margin:2px 0 10px;line-height:1.5}
 .howto{margin:2px 0 14px;font-size:13px}
@@ -99,7 +99,7 @@ select.blank,input.blank{border-color:#e0a030!important;background:#fff8e8!impor
 .howto-read[open]>summary{border-bottom:1px solid #b8daea}
 .howto-read[open]>summary::after{transform:rotate(180deg)}
 .howto-read>div{padding:9px 13px;line-height:1.6;color:var(--ink)}
-.pc-howread{margin-top:14px;padding:10px 12px;background:#edf6fb;border:1px solid #b8daea;border-radius:8px;font-size:12px;line-height:1.6;color:#333}
+.pc-howread{margin-top:14px;padding:10px 12px;background:#edf6fb;border:1px solid #b8daea;border-radius:8px;font-size:12px;line-height:1.6;color:#333333}
 .pc-howread b{color:#1a4060;display:block;margin-bottom:4px}
 .items{display:grid;grid-template-columns:1fr;gap:6px}
 .item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:7px 10px;border:1px solid var(--rule);border-radius:var(--radius-sm);background:#fbfcfd;font-size:13.5px}
@@ -108,7 +108,7 @@ select.blank,input.blank{border-color:#e0a030!important;background:#fff8e8!impor
 .subhead{font-weight:700;color:var(--accent-ink);margin:16px 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
 .btn.filled{background:var(--good-bg);border-color:var(--good);color:var(--good)}
 .tool-back{float:right}
-.gbtn{padding:2px 9px;font-size:11px;font-weight:600;border:1px solid var(--rule-strong);border-radius:6px;background:#fff;color:var(--accent-ink);cursor:pointer;margin-left:5px}
+.gbtn{padding:2px 9px;font-size:11px;font-weight:600;border:1px solid var(--rule-strong);border-radius:6px;background:#ffffff;color:var(--accent-ink);cursor:pointer;margin-left:5px}
 .result{margin-top:18px;border-top:2px solid var(--rule);padding-top:16px}
 .scoreline{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end}
 .bigscore{font-size:38px;font-weight:800;font-family:var(--serif);line-height:1;color:var(--accent-ink)}
@@ -121,7 +121,7 @@ select.blank,input.blank{border-color:#e0a030!important;background:#fff8e8!impor
 .interp.good{background:var(--good-bg);color:var(--good)} .interp.warn{background:var(--warn-bg);color:var(--warn)} .interp.bad{background:var(--bad-bg);color:var(--bad)} .interp.neutral{background:#eef2f6;color:var(--ink-soft)}
 .note{font-size:12px;color:var(--ink-faint);margin-top:10px}
 .actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
-.btn{padding:8px 14px;border-radius:var(--radius-sm);border:1px solid var(--rule-strong);background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:var(--accent-ink)}
+.btn{padding:8px 14px;border-radius:var(--radius-sm);border:1px solid var(--rule-strong);background:#ffffff;cursor:pointer;font-size:13px;font-weight:600;color:var(--accent-ink)}
 footer{max-width:860px;margin:32px auto 0;padding:16px 22px 8px;border-top:1px solid var(--rule);color:var(--ink-faint);font-size:12px;line-height:1.65;text-align:center}
 .refs-sec{margin-top:34px;background:var(--paper);border:1px solid var(--rule);border-radius:var(--radius);padding:18px 22px}
 .refs summary{cursor:pointer;font-family:var(--serif);font-size:20px;color:var(--accent-ink);font-weight:600;list-style:none}
@@ -134,7 +134,7 @@ footer{max-width:860px;margin:32px auto 0;padding:16px 22px 8px;border-top:1px s
 .refs .ref-cite{color:var(--ink-soft)}
 .refs .ref-cat{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--hl);font-weight:700;margin:16px 0 4px}
 .usenote{background:#eef4f8;border:1px solid #cfe0ec;border-radius:var(--radius-sm);padding:11px 14px;font-size:13px;color:#274b63;margin:14px 0 0}
-.report-cta{display:flex;justify-content:space-between;align-items:center;gap:16px;background:linear-gradient(120deg,#173a57,#2a9d8f);color:#fff;border-radius:var(--radius);padding:18px 22px;margin-bottom:20px;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.report-cta{display:flex;justify-content:space-between;align-items:center;gap:16px;background:linear-gradient(120deg,#173a57,#2a9d8f);color:#ffffff;border-radius:var(--radius);padding:18px 22px;margin-bottom:20px;cursor:pointer;transition:transform .12s,box-shadow .12s}
 .privacy-mini{font-size:12.5px;color:#5b3b1c;background:var(--hl-soft);border:1px solid #f0cba8;border-radius:var(--radius-sm);padding:8px 12px;margin:14px 0}
 .grid-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:24px 0 6px;border-bottom:2px solid var(--rule);padding-bottom:6px}
 .grid-head span{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-ink)}
@@ -154,7 +154,7 @@ footer{max-width:860px;margin:32px auto 0;padding:16px 22px 8px;border-top:1px s
 .rep-flags{margin:8px 0 0;padding-left:20px} .rep-flags li{margin:6px 0;font-size:13.5px}
 .rep-urgent{background:var(--bad-bg);color:var(--bad);border-radius:var(--radius-sm);padding:12px 14px;font-size:14px;margin:10px 0;font-weight:600}
 @media(max-width:560px){.rep-row{grid-template-columns:1fr}}
-.gnav{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;justify-content:center;gap:14px;background:#fff;border-top:1px solid var(--rule-strong);box-shadow:0 -4px 14px rgba(20,40,60,.10);padding:10px 16px}
+.gnav{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;justify-content:center;gap:14px;background:#ffffff;border-top:1px solid var(--rule-strong);box-shadow:0 -4px 14px rgba(20,40,60,.10);padding:10px 16px}
 .gnav #gnav_step{font-size:13px;font-weight:600;color:var(--accent-ink);text-align:center}
 .gnav .btn{white-space:nowrap}
 @media(max-width:560px){.gnav{flex-wrap:wrap;gap:8px} .gnav #gnav_step{order:-1;width:100%}}
@@ -173,7 +173,7 @@ footer{max-width:860px;margin:32px auto 0;padding:16px 22px 8px;border-top:1px s
 .chk-done{background:#e4f3e8!important;border-color:#2f8f4e!important;color:#256b3b!important;font-weight:700}
 .chk-todo{opacity:.9}
 .pdds-opt:hover{background:#f3f7fb}.pdds-opt.sel{background:#e8eef4;outline:2px solid #1e4a6e}
-.pc-card{background:#fff;max-width:560px;width:100%;height:max-content;border-radius:14px;padding:26px}
+.pc-card{background:#ffffff;max-width:560px;width:100%;height:max-content;border-radius:14px;padding:26px}
 .pc-head{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-faint);border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:14px}
 .pc-brand{font-family:var(--serif);font-weight:700;color:var(--accent-ink);font-size:15px}
 .pc-card h3{font-family:var(--serif);margin:0 0 6px;font-size:21px}
@@ -181,13 +181,13 @@ footer{max-width:860px;margin:32px auto 0;padding:16px 22px 8px;border-top:1px s
 .pc-foot{font-size:11.5px;color:var(--ink-faint);margin-top:18px;border-top:1px solid var(--rule);padding-top:10px}
 .pc-actions{margin-top:18px;display:flex;gap:10px}
 @media print{ body *{visibility:hidden!important} #printcard,#printcard *{visibility:visible!important}
- #printcard{position:absolute!important;left:0;top:0;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:block!important;background:#fff!important;padding:0!important}
+ #printcard{position:absolute!important;left:0;top:0;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:block!important;background:#ffffff!important;padding:0!important}
  #printcard .no-print{display:none!important}
  #printcard .pc-card{max-width:100%!important;width:auto!important;margin:0!important;padding:0!important;box-shadow:none!important;border-radius:0!important;height:auto!important;max-height:none!important;overflow:visible!important} }
 @page{ margin:12mm }
 @media print{
   body.printing > *:not(#printcard){ display:none !important; }
-  body.printing #printcard{ position:static !important; left:auto !important; top:auto !important; display:block !important; width:100% !important; height:auto !important; min-height:0 !important; max-height:none !important; overflow:visible !important; background:#fff !important; padding:0 !important; }
+  body.printing #printcard{ position:static !important; left:auto !important; top:auto !important; display:block !important; width:100% !important; height:auto !important; min-height:0 !important; max-height:none !important; overflow:visible !important; background:#ffffff !important; padding:0 !important; }
   body.printing #printcard .no-print{ display:none !important; }
   body.printing #printcard .pc-card{ max-width:100% !important; width:auto !important; margin:0 !important; padding:0 !important; box-shadow:none !important; border-radius:0 !important; height:auto !important; max-height:none !important; overflow:visible !important; }
 }
@@ -209,6 +209,19 @@ footer{max-width:860px;margin:32px auto 0;padding:16px 22px 8px;border-top:1px s
     }
     @keyframes ribShim { 0%,100% { transform: scale(1); } 6% { transform: scale(1.5); } 14% { transform: scale(1); } }
     @media (prefers-reduced-motion: no-preference) { .ms-ribbon circle { transform-box: fill-box; transform-origin: center; animation: ribShim 3.4s ease-in-out infinite; } }
+/* ---- interaction polish (buttons + cards) ---- */
+.btn,.gbtn,.tool-back{transition:transform .16s ease, box-shadow .16s ease, background-color .16s ease, border-color .16s ease}
+.btn:hover,.gbtn:hover,.tool-back:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.btn:active,.gbtn:active,.tool-back:active{transform:translateY(0)}
+.tool-card,.pc-card,.item{transition:box-shadow .2s ease, transform .2s ease, border-color .2s ease}
+#home #toolgrid > *{animation:none !important}
+.reveal-on-scroll{opacity:0;transform:translateY(22px) scale(.99);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
+.reveal-on-scroll.in{opacity:1;transform:none}
+/* Mobile: keep theme toggle clear of the header CTA and any bottom bar; icon-only circle. */
+@media (max-width: 600px){
+  #theme-toggle{ top:auto !important; bottom:74px !important; right:14px !important; padding:10px !important; border-radius:50% !important; gap:0 !important; box-shadow:0 3px 10px rgba(0,0,0,.28) !important; }
+  #theme-toggle #theme-toggle-lbl{ display:none !important; }
+}
 </style>
 </head>
 <body>
@@ -227,7 +240,7 @@ footer{max-width:860px;margin:32px auto 0;padding:16px 22px 8px;border-top:1px s
     <div class="usenote" style="background:#f3f7f0;border-color:#d7e4cf;color:#34502f"><b>How it works.</b> Every result updates <b>automatically</b> as you fill the boxes - there is no Calculate button (except the composites BICAMS and MSFC, which pull from other tools). Once you start a questionnaire, any <b>unanswered items are highlighted in amber</b> so you can see exactly what is missing.</div>
   </section>
     <div class="grid" id="toolgrid"></div>
-    <div style="text-align:center;margin-top:20px"><button class="btn" onclick="openClin()" style="background:var(--accent);color:#fff;border-color:var(--accent);font-size:14px;padding:10px 18px">📋 Compile clinician summary (all entered tools)</button></div>
+    <div style="text-align:center;margin-top:20px"><button class="btn" onclick="openClin()" style="background:var(--accent);color:#ffffff;border-color:var(--accent);font-size:14px;padding:10px 18px">📋 Compile clinician summary (all entered tools)</button></div>
   </div>
 
   <section class="panel" id="p_sdmt">
@@ -477,7 +490,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>MS severity (ARMSS / MSSS)</h2>
     <p class="lead">EDSS is your overall neurological disability level (0&ndash;9.5). Most people don&rsquo;t know it off-hand - that&rsquo;s normal. Tap below to answer the short <b>Quick Check</b>; it estimates your EDSS, then come back and pick that number here. Age and disease duration give your severity scores.</p>
-    <a class="btn" href="index.html#quickcheck" target="_blank" rel="noopener" style="display:block;text-align:center;background:var(--accent);color:#fff;border-color:var(--accent);font-size:15px;padding:12px;margin:6px 0 16px;text-decoration:none">🧠 Answer the Quick Check to find your EDSS &rarr; <span style="font-weight:400;font-size:12px;opacity:.85">(opens in a new tab - come back here to continue)</span></a>
+    <a class="btn" href="index.html#quickcheck" target="_blank" rel="noopener" style="display:block;text-align:center;background:var(--accent);color:#ffffff;border-color:var(--accent);font-size:15px;padding:12px;margin:6px 0 16px;text-decoration:none">🧠 Answer the Quick Check to find your EDSS &rarr; <span style="font-weight:400;font-size:12px;opacity:.85">(opens in a new tab - come back here to continue)</span></a>
     <div class="row">
       <div class="fld"><label>Your EDSS <span class="hint">from the Quick Check, or if you already know it</span></label><select id="edss_v" oninput="calcEDSSage()"><option value="">- select -</option><option value="0">0</option><option value="1">1</option><option value="1.5">1.5</option><option value="2">2</option><option value="2.5">2.5</option><option value="3">3</option><option value="3.5">3.5</option><option value="4">4</option><option value="4.5">4.5</option><option value="5">5</option><option value="5.5">5.5</option><option value="6">6</option><option value="6.5">6.5</option><option value="7">7</option><option value="7.5">7.5</option><option value="8">8</option><option value="8.5">8.5</option><option value="9">9</option><option value="9.5">9.5</option></select></div>
       <div class="fld"><label>Age (years) <span class="hint">for ARMSS</span></label><input type="number" id="edss_age" min="10" max="100" oninput="calcEDSSage()"></div>
@@ -551,9 +564,9 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="usenote"><b>What this covers.</b> It uses only what <b>you</b> can report yourself (PDDS, MSWS-12, FSS, MFIS, PHQ-9, GAD-7, MSIS-29, MSQOL-54, SymptoMScreen). It does <b>not</b> include the clinician cognitive tests (SDMT, BVMT-R, CVLT-II) or the full neurological <b>EDSS</b> - so a normal report does not rule out cognitive change. You can estimate the EDSS yourself with the Quick Check.</div>
     <div class="usenote" style="background:#fbf3ea;border-color:#ecdcc6;color:#6b4b2a"><b>Not a diagnosis.</b> MSpectrum computes scores from validated, published instruments and explains what they mean. Interpretation, diagnosis and treatment remain the decision of a qualified clinician.</div>
     <div class="report-flow" style="background:#eef5fb;border:1px solid #cfe0ec;border-radius:14px;padding:16px 16px 8px;margin-top:14px">
-    <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent);font-size:14px;padding:10px 18px" onclick="startGuided()">▶ Start questionnaires</button></div>
+    <div class="actions"><button class="btn" style="background:var(--accent);color:#ffffff;border-color:var(--accent);font-size:14px;padding:10px 18px" onclick="startGuided()">▶ Start questionnaires</button></div>
     <div id="report_checklist"></div>
-    <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent);font-size:15px;font-weight:700;padding:12px 22px" onclick="buildReport()">📋 Generate my report</button></div>
+    <div class="actions"><button class="btn" style="background:var(--accent);color:#ffffff;border-color:var(--accent);font-size:15px;font-weight:700;padding:12px 22px" onclick="buildReport()">📋 Generate my report</button></div>
     <div class="result" id="report_out"></div>
     <div class="actions no-print" id="report_actions" style="display:none"><button class="btn" onclick="reportPDF()">📄 Save my report</button></div>
     </div>
@@ -609,7 +622,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
       <div class="fld"><label>Race <span class="hint">optional, improves norm</span></label><select id="bic_race" oninput="calcBICAMS()"><option value="">- not used -</option><option value="1">White</option><option value="0">Black</option><option value="0">Other</option></select></div>
     </div>
     <div class="report-chk"><button class="btn" id="bicbtn_sdmt" onclick="openSub('sdmt','bicams')">1. SDMT &rarr;</button><button class="btn" id="bicbtn_cvlt" onclick="openSub('cvlt','bicams')">2. CVLT-II &rarr;</button><button class="btn" id="bicbtn_bvmt" onclick="openSub('bvmt','bicams')">3. BVMT-R &rarr;</button></div>
-    <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="calcBICAMS()">Calculate BICAMS</button></div>
+    <div class="actions"><button class="btn" style="background:var(--accent);color:#ffffff;border-color:var(--accent)" onclick="calcBICAMS()">Calculate BICAMS</button></div>
     <div class="result" id="bicams_out"></div>
     <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
 <b>Three domains:</b> Processing speed (SDMT), verbal memory (CVLT-II T1&ndash;5 total), visual memory (BVMT-R T1+T2+T3 total).<br>
@@ -625,7 +638,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>MSFC</h2><p class="lead">Multiple Sclerosis Functional Composite - the average of three z-scores: arm (9-HPT), leg (T25FW) and cognition (PASAT-3). Standardised <b>automatically</b> against the NMSS Task Force reference - no reference numbers needed. Enter T25FW, 9-HPT and PASAT-3 in their tools (buttons below).</p>
     <div class="report-chk"><button class="btn" id="msfcbtn_t25fw" onclick="openSub('t25fw','msfc')">T25FW &rarr;</button><button class="btn" id="msfcbtn_nhpt" onclick="openSub('nhpt','msfc')">9-HPT &rarr;</button><button class="btn" id="msfcbtn_pasat" onclick="openSub('pasat','msfc')">PASAT-3 &rarr;</button></div>
-    <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="calcMSFC()">Calculate MSFC</button></div>
+    <div class="actions"><button class="btn" style="background:var(--accent);color:#ffffff;border-color:var(--accent)" onclick="calcMSFC()">Calculate MSFC</button></div>
     <div class="result" id="msfc_out"></div>
     <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
 <b>Three z-scores averaged (NMSS Task Force / Fischer 2001 Manual):</b><br>
@@ -655,7 +668,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
   <section class="panel" id="p_clinreport">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>Clinician summary</h2><p class="lead">A consolidated, printable summary of every tool you have filled in this session (raw scores + z/T + interpretation). For clinical records and research; not a diagnosis.</p>
-    <div class="actions"><button class="btn" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="buildClinReport()">Compile / refresh</button></div>
+    <div class="actions"><button class="btn" style="background:var(--accent);color:#ffffff;border-color:var(--accent)" onclick="buildClinReport()">Compile / refresh</button></div>
     <div class="result" id="clin_out"></div>
     <div class="actions no-print" id="clin_actions" style="display:none"><button class="btn" onclick="clinReportPDF()">📄 Save / print as PDF</button></div>
   </section>
@@ -663,7 +676,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
   <div id="gnav" class="gnav" style="display:none">
     <button class="btn" id="gnav_prev" onclick="guidedPrev()">&larr; Previous</button>
     <span id="gnav_step"></span>
-    <button class="btn" id="gnav_next" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="guidedNext()">Next &rarr;</button>
+    <button class="btn" id="gnav_next" style="background:var(--accent);color:#ffffff;border-color:var(--accent)" onclick="guidedNext()">Next &rarr;</button>
   </div>
 
   <div id="printcard" class="pc-overlay" onclick="if(event.target===this)closePC()">
@@ -673,7 +686,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
       <p id="pc_subtitle" class="pc-subtitle"></p>
       <div id="pc_body"></div>
       <p class="pc-foot">Scores computed from your responses using validated, published algorithms. For discussion with your clinician only - not a diagnosis. Computed on your device; nothing is stored.</p>
-      <div class="pc-actions no-print"><button class="btn" onclick="pcSaveImage()" style="background:var(--accent);color:#fff;border-color:var(--accent)">📸 Save as image</button><button class="btn" onclick="_printCard()">💾 Save PDF / print</button><button class="btn" onclick="closePC()">Close</button></div>
+      <div class="pc-actions no-print"><button class="btn" onclick="pcSaveImage()" style="background:var(--accent);color:#ffffff;border-color:var(--accent)">📸 Save as image</button><button class="btn" onclick="_printCard()">💾 Save PDF / print</button><button class="btn" onclick="closePC()">Close</button></div>
     </div>
   </div>
 
@@ -1079,7 +1092,7 @@ function _openChk(id){ RETURN_TO="report"; showTool(id); }
 function goBack(){ if(RETURN_TO){ var t=RETURN_TO; RETURN_TO=null; showTool(t); if(t==="report"&&typeof renderChecklist==="function") renderChecklist(); } else { showHome(); } }
 function showHome(){GUIDED=false;RETURN_TO=null;var g=el("gnav");if(g)g.style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("home").style.display="block";var _bs=document.getElementById('brandSub');if(_bs)_bs.textContent='MS Score Hub';setTimeout(function(){window.scrollTo({top:window._hubSY||0,behavior:"smooth"});},20);}
 function showTool(id){if(el("home").style.display!=="none"){window._hubSY=window.scrollY;}var cur=document.querySelector(".panel.active");function _sw(){el("home").style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("p_"+id).classList.add("active");var _bs=document.getElementById('brandSub');if(_bs)_bs.textContent=(id==='report'?'Check my MS':((_TMAP[id]&&_TMAP[id].name)||'MS Score Hub'));if(id!=="report"){var bk=document.querySelector("#p_"+id+" .tool-back");if(bk){var nm={bicams:"BICAMS",msfc:"MSFC",report:"Check my MS"};bk.textContent=(RETURN_TO&&nm[RETURN_TO])?("← Back to "+nm[RETURN_TO]):"← Back to Score Hub";}}try{if(id==="bicams")calcBICAMS();else if(id==="msfc")calcMSFC();}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}if(cur){cur.classList.add("panel-exit");setTimeout(_sw,130);}else{_sw();}}
-(function(){if(typeof document==="undefined")return;var mk=function(){if(document.getElementById("scroll-top-btn"))return;var btn=document.createElement("button");btn.id="scroll-top-btn";btn.className="no-print";btn.textContent="\u2191 Top";btn.setAttribute("aria-label","Scroll to top");btn.style.cssText="position:fixed;bottom:20px;right:20px;z-index:200;display:none;padding:10px 14px;border:none;border-radius:24px;background:#1e4a6e;color:#fff;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);";btn.onclick=function(){window.scrollTo({top:0,behavior:"smooth"});};document.body.appendChild(btn);window.addEventListener("scroll",function(){btn.style.display=window.scrollY>300?"block":"none";},{passive:true});};if(document.body)mk();else document.addEventListener("DOMContentLoaded",mk);})();
+(function(){if(typeof document==="undefined")return;var mk=function(){if(document.getElementById("scroll-top-btn"))return;var btn=document.createElement("button");btn.id="scroll-top-btn";btn.className="no-print";btn.textContent="\u2191 Top";btn.setAttribute("aria-label","Scroll to top");btn.style.cssText="position:fixed;bottom:20px;right:20px;z-index:200;display:none;padding:10px 14px;border:none;border-radius:24px;background:#1e4a6e;color:#ffffff;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);";btn.onclick=function(){window.scrollTo({top:0,behavior:"smooth"});};document.body.appendChild(btn);window.addEventListener("scroll",function(){btn.style.display=window.scrollY>300?"block":"none";},{passive:true});};if(document.body)mk();else document.addEventListener("DOMContentLoaded",mk);})();
 function interp(cls,txt){ return '<div class="interp '+cls+'">'+txt+'</div>'; }
 function _zPlain(z){ return z<=-1.5?"In plain terms: this is in the <b>impaired range</b> - clearly below what is typical for similar people; worth discussing with the clinician.":z<=-1?"In plain terms: a little <b>below average</b> (borderline) - not clearly impaired, but worth keeping an eye on.":z<-0.5?"In plain terms: <b>broadly average</b> - reassuring.":"In plain terms: <b>average or above</b> for similar people - reassuring."; }
 function _flagBlanks(p,a,b){ for(var i=a;i<=b;i++){var e=el(p+i); if(e){ if(e.value==="") e.classList.add("blank"); else e.classList.remove("blank"); }} }
@@ -1465,7 +1478,7 @@ function calcPROMIS(){
   if(answered===0){ el("promis_out").innerHTML=""; return; }
   const o=scorePROMIS(resp,pi); const col=c=>c==="good"?"#216e39":c==="warn"?"#9a6700":"#9b2c2c"; let chips="";
   for(const d of PROMIS_DOMAINS){ const v=o[d[1]]; const T=promisT(d[1],v); const se=promisSE(d[1],v); const band=tBand(d[1],T);
-    chips+='<span class="chip">'+d[0]+' <b>'+(v==null?'<span style="color:#9b2c2c">NA</span>':v)+'</b>'+(T!=null?' &rarr; T '+T.toFixed(1)+((typeof se==='number')?' <small style="color:#555">&plusmn;'+se.toFixed(1)+'</small>':''):'')+(band?' <small style="color:'+col(band[0])+'">('+band[1]+')</small>':'')+'</span>'; }
+    chips+='<span class="chip">'+d[0]+' <b>'+(v==null?'<span style="color:#9b2c2c">NA</span>':v)+'</b>'+(T!=null?' &rarr; T '+T.toFixed(1)+((typeof se==='number')?' <small style="color:#555555">&plusmn;'+se.toFixed(1)+'</small>':''):'')+(band?' <small style="color:'+col(band[0])+'">('+band[1]+')</small>':'')+'</span>'; }
   const pb=promisBand("painIntensity",o.painIntensity);
   chips+='<span class="chip">Pain intensity <b>'+(o.painIntensity==null?'NA':o.painIntensity)+'</b>'+(pb?' <small style="color:'+col(pb[0])+'">('+pb[1]+')</small>':'')+'</span>';
   el("promis_out").innerHTML='<div class="subhead">Domains: raw (4&ndash;20) &rarr; official T-score</div><div class="chips">'+chips+'</div>'
@@ -1629,7 +1642,7 @@ function pcSaveImage(){
   var fn=(window._pcName||(el("pc_title")&&el("pc_title").textContent)||"MSpectrum_result").replace(/[^\w]+/g,"_");
   if(!window.html2canvas){ alert("Image export needs internet the first time to load the renderer. Use 'Save PDF / print' instead."); return; }
   var tmp=card.cloneNode(true); tmp.querySelectorAll(".no-print").forEach(function(e){e.remove();});
-  var holder=document.createElement("div"); holder.style.cssText="position:fixed;left:-10000px;top:0;width:720px;background:#fff;padding:24px;color:#1a1f2e";
+  var holder=document.createElement("div"); holder.style.cssText="position:fixed;left:-10000px;top:0;width:720px;background:#ffffff;padding:24px;color:#1a1f2e";
   holder.appendChild(tmp); document.body.appendChild(holder);
   html2canvas(holder,{scale:2,useCORS:true,backgroundColor:"#ffffff",logging:false}).then(function(canvas){
     holder.remove(); var a=document.createElement("a"); a.download=fn+".png"; a.href=canvas.toDataURL("image/png"); a.click();
@@ -2210,7 +2223,7 @@ function calcPromisCog() {
   el("promiscog_out").innerHTML = `
     <div class="scoreline">
       <div class="bigscore">${rawSum}<small> raw sum</small></div>
-      <div class="bigscore" style="color:var(--accent)">T ${tScore.toFixed(1)} <small style="color:#555">&plusmn;${(PROMIS_COG_SE[rawSum-4]).toFixed(1)}</small><small> T-score &plusmn; SE</small></div>
+      <div class="bigscore" style="color:var(--accent)">T ${tScore.toFixed(1)} <small style="color:#555555">&plusmn;${(PROMIS_COG_SE[rawSum-4]).toFixed(1)}</small><small> T-score &plusmn; SE</small></div>
     </div>
     ${interp(cls, `Perceived cognitive ability is <b>${desc}</b>`)}
     <div class="note">T-scores are standardized to the U.S. general population (mean 50, SD 10). Higher T-scores = better cognitive function.</div>
@@ -2589,15 +2602,229 @@ html[data-theme="dark"] input::placeholder,html[data-theme="dark"] textarea::pla
 html[data-theme="dark"] .tool-back,html[data-theme="dark"] .howto,html[data-theme="dark"] .howto>div,html[data-theme="dark"] .howto-read,html[data-theme="dark"] .pc-howread,html[data-theme="dark"] .item,html[data-theme="dark"] .rep-row,html[data-theme="dark"] .clin-block,html[data-theme="dark"] .gnav,html[data-theme="dark"] .pc-card,html[data-theme="dark"] .interp{background:#1e2636!important;border-color:var(--rule)!important;color:var(--ink)!important;}
 #theme-toggle{transition:transform .12s ease, box-shadow .12s ease;}
 #theme-toggle:hover{transform:translateY(-1px);}
-@media print{#theme-toggle{display:none !important;}}`;
+@media print{#theme-toggle{display:none !important;}}
+    /* ---- LIGHT SURFACES (inline/hardcoded) -> dark, matched by value. Single place. ---- */
+html[data-theme="dark"] [style*="background:#ffffff"],
+html[data-theme="dark"] [style*="background-color:#ffffff"],
+html[data-theme="dark"] [style*="background:#fcfcfc"],
+html[data-theme="dark"] [style*="background-color:#fcfcfc"],
+html[data-theme="dark"] [style*="background:#fbfcfd"],
+html[data-theme="dark"] [style*="background-color:#fbfcfd"],
+html[data-theme="dark"] [style*="background:#fafdfa"],
+html[data-theme="dark"] [style*="background-color:#fafdfa"],
+html[data-theme="dark"] [style*="background:#f6f6f6"],
+html[data-theme="dark"] [style*="background-color:#f6f6f6"],
+html[data-theme="dark"] [style*="background:#f4f6f8"],
+html[data-theme="dark"] [style*="background-color:#f4f6f8"] { background:#1a2130 !important; color:#f1f3f8 !important; border-color:#2a3446 !important; }
+html[data-theme="dark"] [style*="background:#f8fafc"],
+html[data-theme="dark"] [style*="background-color:#f8fafc"],
+html[data-theme="dark"] [style*="background:#f1f5f9"],
+html[data-theme="dark"] [style*="background-color:#f1f5f9"],
+html[data-theme="dark"] [style*="background:#eef2f6"],
+html[data-theme="dark"] [style*="background-color:#eef2f6"],
+html[data-theme="dark"] [style*="background:#f7f9fc"],
+html[data-theme="dark"] [style*="background-color:#f7f9fc"],
+html[data-theme="dark"] [style*="background:#eef1f4"],
+html[data-theme="dark"] [style*="background-color:#eef1f4"],
+html[data-theme="dark"] [style*="background:#f4f4f4"],
+html[data-theme="dark"] [style*="background-color:#f4f4f4"],
+html[data-theme="dark"] [style*="background:#e4e4e4"],
+html[data-theme="dark"] [style*="background-color:#e4e4e4"],
+html[data-theme="dark"] [style*="background:#e0e0e0"],
+html[data-theme="dark"] [style*="background-color:#e0e0e0"] { background:#141b28 !important; color:#e8ebf2 !important; border-color:#2a3446 !important; }
+html[data-theme="dark"] [style*="background:#eef4f8"],
+html[data-theme="dark"] [style*="background-color:#eef4f8"],
+html[data-theme="dark"] [style*="background:#f3f7fb"],
+html[data-theme="dark"] [style*="background-color:#f3f7fb"],
+html[data-theme="dark"] [style*="background:#edf6fb"],
+html[data-theme="dark"] [style*="background-color:#edf6fb"],
+html[data-theme="dark"] [style*="background:#eef5fb"],
+html[data-theme="dark"] [style*="background-color:#eef5fb"],
+html[data-theme="dark"] [style*="background:#e8eef4"],
+html[data-theme="dark"] [style*="background-color:#e8eef4"],
+html[data-theme="dark"] [style*="background:#e3eef5"],
+html[data-theme="dark"] [style*="background-color:#e3eef5"],
+html[data-theme="dark"] [style*="background:#f0f9ff"],
+html[data-theme="dark"] [style*="background-color:#f0f9ff"],
+html[data-theme="dark"] [style*="background:#e4f0fb"],
+html[data-theme="dark"] [style*="background-color:#e4f0fb"],
+html[data-theme="dark"] [style*="background:#e0f0ff"],
+html[data-theme="dark"] [style*="background-color:#e0f0ff"],
+html[data-theme="dark"] [style*="background:#e0ecff"],
+html[data-theme="dark"] [style*="background-color:#e0ecff"],
+html[data-theme="dark"] [style*="background:#dbeafe"],
+html[data-theme="dark"] [style*="background-color:#dbeafe"],
+html[data-theme="dark"] [style*="background:#d6e9fb"],
+html[data-theme="dark"] [style*="background-color:#d6e9fb"],
+html[data-theme="dark"] [style*="background:#f0f4ff"],
+html[data-theme="dark"] [style*="background-color:#f0f4ff"],
+html[data-theme="dark"] [style*="background:#dbe6f0"],
+html[data-theme="dark"] [style*="background-color:#dbe6f0"],
+html[data-theme="dark"] [style*="background:#e8f0fb"],
+html[data-theme="dark"] [style*="background-color:#e8f0fb"],
+html[data-theme="dark"] [style*="background:#e8f0f8"],
+html[data-theme="dark"] [style*="background-color:#e8f0f8"],
+html[data-theme="dark"] [style*="background:#cfe0ec"],
+html[data-theme="dark"] [style*="background-color:#cfe0ec"],
+html[data-theme="dark"] [style*="background:#f4f7fb"],
+html[data-theme="dark"] [style*="background-color:#f4f7fb"],
+html[data-theme="dark"] [style*="background:#e8edf8"],
+html[data-theme="dark"] [style*="background-color:#e8edf8"],
+html[data-theme="dark"] [style*="background:#f0f7ff"],
+html[data-theme="dark"] [style*="background-color:#f0f7ff"] { background:#16283a !important; color:#bcd6f0 !important; border-color:#2c4a63 !important; }
+html[data-theme="dark"] [style*="background:#fff6e6"],
+html[data-theme="dark"] [style*="background-color:#fff6e6"],
+html[data-theme="dark"] [style*="background:#fff8ec"],
+html[data-theme="dark"] [style*="background-color:#fff8ec"],
+html[data-theme="dark"] [style*="background:#fff8e8"],
+html[data-theme="dark"] [style*="background-color:#fff8e8"],
+html[data-theme="dark"] [style*="background:#fff6df"],
+html[data-theme="dark"] [style*="background-color:#fff6df"],
+html[data-theme="dark"] [style*="background:#fbf7ec"],
+html[data-theme="dark"] [style*="background-color:#fbf7ec"],
+html[data-theme="dark"] [style*="background:#fbf3ea"],
+html[data-theme="dark"] [style*="background-color:#fbf3ea"],
+html[data-theme="dark"] [style*="background:#fff3cd"],
+html[data-theme="dark"] [style*="background-color:#fff3cd"],
+html[data-theme="dark"] [style*="background:#fffbf0"],
+html[data-theme="dark"] [style*="background-color:#fffbf0"],
+html[data-theme="dark"] [style*="background:#fffde7"],
+html[data-theme="dark"] [style*="background-color:#fffde7"],
+html[data-theme="dark"] [style*="background:#fffbeb"],
+html[data-theme="dark"] [style*="background-color:#fffbeb"],
+html[data-theme="dark"] [style*="background:#fef5e8"],
+html[data-theme="dark"] [style*="background-color:#fef5e8"],
+html[data-theme="dark"] [style*="background:#fef3e2"],
+html[data-theme="dark"] [style*="background-color:#fef3e2"],
+html[data-theme="dark"] [style*="background:#fff8ed"],
+html[data-theme="dark"] [style*="background-color:#fff8ed"],
+html[data-theme="dark"] [style*="background:#f0e8cc"],
+html[data-theme="dark"] [style*="background-color:#f0e8cc"],
+html[data-theme="dark"] [style*="background:#f0e2c0"],
+html[data-theme="dark"] [style*="background-color:#f0e2c0"],
+html[data-theme="dark"] [style*="background:#f4ede0"],
+html[data-theme="dark"] [style*="background-color:#f4ede0"],
+html[data-theme="dark"] [style*="background:#faf8f3"],
+html[data-theme="dark"] [style*="background-color:#faf8f3"],
+html[data-theme="dark"] [style*="background:#fdf9f3"],
+html[data-theme="dark"] [style*="background-color:#fdf9f3"],
+html[data-theme="dark"] [style*="background:#fdf2e9"],
+html[data-theme="dark"] [style*="background-color:#fdf2e9"],
+html[data-theme="dark"] [style*="background:#fbe7d4"],
+html[data-theme="dark"] [style*="background-color:#fbe7d4"],
+html[data-theme="dark"] [style*="background:#f5e8da"],
+html[data-theme="dark"] [style*="background-color:#f5e8da"] { background:#322611 !important; color:#f0c987 !important; border-color:#5c4000 !important; }
+html[data-theme="dark"] [style*="background:#edf7ed"],
+html[data-theme="dark"] [style*="background-color:#edf7ed"],
+html[data-theme="dark"] [style*="background:#e8f5e9"],
+html[data-theme="dark"] [style*="background-color:#e8f5e9"],
+html[data-theme="dark"] [style*="background:#f3f7f0"],
+html[data-theme="dark"] [style*="background-color:#f3f7f0"],
+html[data-theme="dark"] [style*="background:#f4fbf4"],
+html[data-theme="dark"] [style*="background-color:#f4fbf4"],
+html[data-theme="dark"] [style*="background:#f2f9f2"],
+html[data-theme="dark"] [style*="background-color:#f2f9f2"],
+html[data-theme="dark"] [style*="background:#f0f4f0"],
+html[data-theme="dark"] [style*="background-color:#f0f4f0"],
+html[data-theme="dark"] [style*="background:#eefaf0"],
+html[data-theme="dark"] [style*="background-color:#eefaf0"],
+html[data-theme="dark"] [style*="background:#eef8ee"],
+html[data-theme="dark"] [style*="background-color:#eef8ee"],
+html[data-theme="dark"] [style*="background:#e7f3ec"],
+html[data-theme="dark"] [style*="background-color:#e7f3ec"],
+html[data-theme="dark"] [style*="background:#e4f3e8"],
+html[data-theme="dark"] [style*="background-color:#e4f3e8"],
+html[data-theme="dark"] [style*="background:#f1f8f2"],
+html[data-theme="dark"] [style*="background-color:#f1f8f2"],
+html[data-theme="dark"] [style*="background:#f0f5f0"],
+html[data-theme="dark"] [style*="background-color:#f0f5f0"],
+html[data-theme="dark"] [style*="background:#d4edda"],
+html[data-theme="dark"] [style*="background-color:#d4edda"],
+html[data-theme="dark"] [style*="background:#e6f4ea"],
+html[data-theme="dark"] [style*="background-color:#e6f4ea"],
+html[data-theme="dark"] [style*="background:#d7e4cf"],
+html[data-theme="dark"] [style*="background-color:#d7e4cf"] { background:#14271a !important; color:#a5d6a7 !important; border-color:#1e5631 !important; }
+html[data-theme="dark"] [style*="background:#fdeaea"],
+html[data-theme="dark"] [style*="background-color:#fdeaea"],
+html[data-theme="dark"] [style*="background:#fdf3f3"],
+html[data-theme="dark"] [style*="background-color:#fdf3f3"],
+html[data-theme="dark"] [style*="background:#fce4e4"],
+html[data-theme="dark"] [style*="background-color:#fce4e4"],
+html[data-theme="dark"] [style*="background:#fde8e8"],
+html[data-theme="dark"] [style*="background-color:#fde8e8"],
+html[data-theme="dark"] [style*="background:#f8d7da"],
+html[data-theme="dark"] [style*="background-color:#f8d7da"],
+html[data-theme="dark"] [style*="background:#f0c2c2"],
+html[data-theme="dark"] [style*="background-color:#f0c2c2"],
+html[data-theme="dark"] [style*="background:#fdf3f0"],
+html[data-theme="dark"] [style*="background-color:#fdf3f0"] { background:#2e1616 !important; color:#f0a3a3 !important; border-color:#5a2828 !important; }
+html[data-theme="dark"] [style*="background:#f0eaf8"],
+html[data-theme="dark"] [style*="background-color:#f0eaf8"],
+html[data-theme="dark"] [style*="background:#e2d9ef"],
+html[data-theme="dark"] [style*="background-color:#e2d9ef"],
+html[data-theme="dark"] [style*="background:#faf8ff"],
+html[data-theme="dark"] [style*="background-color:#faf8ff"],
+html[data-theme="dark"] [style*="background:#fdf6ff"],
+html[data-theme="dark"] [style*="background-color:#fdf6ff"],
+html[data-theme="dark"] [style*="background:#faf6fc"],
+html[data-theme="dark"] [style*="background-color:#faf6fc"] { background:#241a34 !important; color:#d6bff2 !important; border-color:#5a2f80 !important; }
+/* class-based light surfaces */
+html[data-theme="dark"] .tool-back{background:#1a2130!important;}
+html[data-theme="dark"] input[type=number], html[data-theme="dark"] select{background:#1a2130!important;}
+html[data-theme="dark"] input.oor{background:#2e1616!important;}
+html[data-theme="dark"] select.blank, html[data-theme="dark"] input.blank{background:#322611!important;border-color:#5c4000!important;}
+html[data-theme="dark"] .scale button{background:#1a2130!important;}
+html[data-theme="dark"] .scale button:hover{background:#16283a!important;}
+html[data-theme="dark"] .howto>summary{background:#16283a!important;color:#bcd6f0!important;border-color:#2c4a63!important;}
+html[data-theme="dark"] .howto>summary:hover{background:#16283a!important;}
+html[data-theme="dark"] .howto>div{background:#14271a!important;border-color:#1e5631!important;}
+html[data-theme="dark"] .howto-read{background:#16283a!important;border-color:#2c4a63!important;}
+html[data-theme="dark"] .pc-howread{background:#16283a!important;color:#bcd6f0!important;border-color:#2c4a63!important;}
+html[data-theme="dark"] .item{background:#1a2130!important;}
+html[data-theme="dark"] .gbtn{background:#1a2130!important;}
+html[data-theme="dark"] .interp.neutral{background:#141b28!important;}
+html[data-theme="dark"] .btn{background:#1a2130!important;}
+html[data-theme="dark"] .usenote{background:#16283a!important;color:#bcd6f0!important;border-color:#2c4a63!important;}
+html[data-theme="dark"] .rep-row{background:#1a2130!important;}
+html[data-theme="dark"] .clin-block{background:#1a2130!important;}
+html[data-theme="dark"] .gnav{background:#1a2130!important;}
+html[data-theme="dark"] .chk-done{background:#14271a!important;color:#a5d6a7!important;}
+html[data-theme="dark"] .pdds-opt:hover{background:#16283a!important;}
+html[data-theme="dark"] .pdds-opt.sel{background:#16283a!important;}
+html[data-theme="dark"] .pc-card{background:#1a2130!important;}
+html[data-theme="dark"] #printcard{background:#1a2130!important;}
+
+/* lift dark text on dark */
+html[data-theme="dark"] .privacy b{color:#f0c987 !important;}
+html[data-theme="dark"] .howto-read>summary{color:#bcd6f0 !important;}
+html[data-theme="dark"] .pc-howread b{color:#bcd6f0 !important;}
+`;
   var st=document.createElement("style"); st.textContent=css; document.head.appendChild(st);
   var KEY="mspectrum-theme";
   function apply(t){ document.documentElement.setAttribute("data-theme",t); }
   var saved="light"; try{ var s=localStorage.getItem(KEY); if(s==="dark"||s==="light") saved=s; }catch(e){}
   apply(saved);
   window.toggleTheme=function(){ var cur=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark"; apply(cur); try{localStorage.setItem(KEY,cur);}catch(e){} var l=document.getElementById("theme-toggle-lbl"); if(l) l.textContent=(cur==="dark"?"Light":"Dark"); };
-  function mk(){ if(document.getElementById("theme-toggle"))return; var b=document.createElement("button"); b.id="theme-toggle"; b.type="button"; b.className="no-print"; b.setAttribute("aria-label","Toggle dark mode"); b.setAttribute("onclick","toggleTheme()"); b.style.cssText="position:fixed;left:14px;bottom:72px;z-index:9999;display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:20px;border:1px solid var(--rule-strong);background:var(--paper);color:var(--ink);font-size:12px;font-weight:600;box-shadow:var(--shadow-md,0 4px 12px rgba(0,0,0,.2));cursor:pointer;"; b.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span id="theme-toggle-lbl">'+(saved==="dark"?"Light":"Dark")+'</span>'; document.body.appendChild(b); }
+  function mk(){ if(document.getElementById("theme-toggle"))return; var b=document.createElement("button"); b.id="theme-toggle"; b.type="button"; b.className="no-print"; b.setAttribute("aria-label","Toggle dark mode"); b.setAttribute("onclick","toggleTheme()"); b.style.cssText="position:fixed;top:16px;right:16px;z-index:9999;display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:20px;border:1px solid var(--rule-strong);background:var(--paper);color:var(--ink);font-size:12px;font-weight:600;box-shadow:var(--shadow-md,0 4px 12px rgba(0,0,0,.2));cursor:pointer;"; b.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span id="theme-toggle-lbl">'+(saved==="dark"?"Light":"Dark")+'</span>'; document.body.appendChild(b); }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",mk); else mk();
+})();
+</script>
+<script>
+/* Entrance reveal (matches landing). Load-triggered; re-fires when hidden panels show. */
+(function(){
+  var SEL="#home .hero, #home #toolgrid > *";
+  function run(){
+    var els=[].slice.call(document.querySelectorAll(SEL));
+    if(!els.length) return false;
+    if(!("IntersectionObserver" in window)){ els.forEach(function(e){e.classList.add("in");}); return true; }
+    els.forEach(function(e,i){ if(e.classList.contains("reveal-on-scroll"))return; e.classList.add("reveal-on-scroll"); e.style.transitionDelay=Math.min((i%4)*60,240)+"ms"; });
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);}});},{threshold:.1,rootMargin:"0px 0px -5% 0px"});
+    els.forEach(function(e){io.observe(e);});
+    setTimeout(function(){els.forEach(function(e){if(!e.classList.contains("in")&&e.offsetParent!==null){var r=e.getBoundingClientRect();if(r.top<((window.innerHeight||0)+60)&&r.bottom>-60){e.classList.add("in");io.unobserve(e);}}});},1500);
+    return true;
+  }
+  function init(){ if(!run()) setTimeout(run,300); }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init); else init();
 })();
 </script>
 </body>
