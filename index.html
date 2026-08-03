@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://docs.opencv.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://docs.opencv.org; object-src 'none'; base-uri 'self'">
-<meta name="description" content="MSpectrum - a free, offline hub for multiple sclerosis outcome measures and diagnosis: the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a 2024 McDonald-criteria diagnostic checker.">
+<meta name="description" content="MSpectrum - a free, browser-based hub for multiple sclerosis outcome measures and diagnosis: the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a 2024 McDonald-criteria diagnostic checker.">
 <title>MSpectrum - Comprehensive MS scoring & diagnosis (EDSS & beyond)</title>
 <meta name="keywords" content="multiple sclerosis, MS, EDSS, EDSS calculator, Neurostatus, MS outcome measures, MS scores, SDMT, BICAMS, MSFC, PDDS, MSSS, ARMSS, MFIS, FSS, MSWS-12, PROMIS-29, MSQOL-54, McDonald criteria 2024, MS diagnosis">
 <meta name="author" content="Anas Nourelden, Anza Memon - Wayne State University, Department of Neurology">
@@ -16,14 +16,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MSpectrum">
 <meta property="og:title" content="MSpectrum - MS scoring & diagnosis (EDSS & beyond)">
-<meta property="og:description" content="A free, offline, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.">
+<meta property="og:description" content="A free, browser-based, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.">
 <meta property="og:url" content="https://anaszakarya.github.io/MSpectrum/">
 <meta property="og:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MSpectrum - MS scoring & diagnosis (EDSS & beyond)">
-<meta name="twitter:description" content="A free, offline, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.">
+<meta name="twitter:description" content="A free, browser-based, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.">
 <meta name="twitter:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MSpectrum - MS scoring & diagnosis (EDSS & beyond)","url":"https://anaszakarya.github.io/MSpectrum/","description":"A free, offline, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"},{"@type":"Person","name":"Anza Memon"}],"publisher":{"@type":"Organization","name":"Wayne State University, Department of Neurology"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MSpectrum - MS scoring & diagnosis (EDSS & beyond)","url":"https://anaszakarya.github.io/MSpectrum/","description":"A free, browser-based, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"},{"@type":"Person","name":"Anza Memon"}],"publisher":{"@type":"Organization","name":"Wayne State University, Department of Neurology"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -3317,12 +3317,12 @@ html[data-theme="dark"] .way-card.checker-card:hover .way-cta{color:#bcd6f0 !imp
   <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.22;z-index:0"></canvas>
   <div class="hero" style="position:relative;z-index:1">
     <h1><span class="hl" id="hero-edss-hl">MS</span>pectrum</h1>
-    <p class="tagline">MSpectrum is a free, offline suite covering the spectrum of multiple sclerosis measures - the full EDSS alongside scores for cognition, fatigue, mood, walking, quality of life and disease severity, a guided patient report, and a diagnostic checker for the 2024 McDonald criteria.</p>
+    <p class="tagline">MSpectrum is a free, browser-based suite covering the spectrum of multiple sclerosis measures - the full EDSS alongside scores for cognition, fatigue, mood, walking, quality of life and disease severity, a guided patient report, and a diagnostic checker for the 2024 McDonald criteria.</p>
     <div class="hero-cta">
       <button class="btn-cta" id="hero-start-btn" aria-label="Get started">Get started ↓</button>
       <a class="btn-cta secondary" href="#features" aria-label="Learn More">Learn More ↓</a>
     </div>
-    <div class="privacy-tag">🔒 Private &amp; offline - your data never leaves your device. Please don't enter patient names or identifiers (PHI).</div>
+    <div class="privacy-tag">🔒 Private &amp; browser-based - your data never leaves your device. Please don't enter patient names or identifiers (PHI).</div>
   </div>
   </div><!-- /hero-wrap -->
 
@@ -3367,7 +3367,7 @@ html[data-theme="dark"] .way-card.checker-card:hover .way-cta{color:#bcd6f0 !imp
       </div>
       <div class="feature-card">
         <div class="feature-icon">🔒</div>
-        <h3>Private &amp; offline</h3>
+        <h3>Private &amp; browser-based</h3>
         <p>Everything runs in your browser - no account, no tracking, nothing uploaded, and no patient identifiers needed. Works with or without internet after first load.</p>
       </div>
       <div class="feature-card">
@@ -3480,7 +3480,7 @@ html[data-theme="dark"] .way-card.checker-card:hover .way-cta{color:#bcd6f0 !imp
   <div class="section-block about-block">
     <h2>About MSpectrum</h2>
     <div class="section-rule"></div>
-    <p>MSpectrum is a free, offline, privacy-first hub for the outcome measures used in multiple sclerosis - the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a diagnostic checker for the 2024 McDonald criteria. Everything is computed in your browser; nothing is uploaded or stored. Built for research (reproducible, granular scoring for trials and registries) and useful for routine clinical and educational use.</p>
+    <p>MSpectrum is a free, browser-based, privacy-first hub for the outcome measures used in multiple sclerosis - the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a diagnostic checker for the 2024 McDonald criteria. Everything is computed in your browser; nothing is uploaded or stored. Built for research (reproducible, granular scoring for trials and registries) and useful for routine clinical and educational use.</p>
     <details class="about-toggle"><summary>🧠 AutoEDSSguide - EDSS assessment</summary>
       <p>Full Neurostatus EDSS with real-time scoring across the 7 Functional Systems + ambulation, a print-ready Neurostatus sheet, an OCR sheet scanner, inconsistency flags, and REDCap/CSV export. Includes a fast <strong>Clinical</strong> mode (streamlined sEDSS, for neurologists) and a plain-language <strong>Quick Check</strong> for people with MS. One shared, Neurostatus/Fouad-exact engine drives every view.</p>
     </details>
@@ -3533,7 +3533,7 @@ html[data-theme="dark"] .way-card.checker-card:hover .way-cta{color:#bcd6f0 !imp
     </details>
     <details class="about-toggle"><summary>📌 Cite us</summary>
       <p>If you are a researcher and used MSpectrum for research purposes, please cite it:</p>
-      <p style="background:#f3f7f0;border:1px solid #d7e4cf;border-radius:8px;padding:10px 12px;font-size:13px">Nourelden A, Memon A. <em>MSpectrum: a free, offline toolkit for multiple sclerosis outcome measures and diagnosis (AutoEDSSguide, MS Score Hub and MS Criteria Checker)</em>. Wayne State University, Department of Neurology; 2026. Available from: https://github.com/AnasZakarya/MSpectrum.</p>
+      <p style="background:#f3f7f0;border:1px solid #d7e4cf;border-radius:8px;padding:10px 12px;font-size:13px">Nourelden A, Memon A. <em>MSpectrum: a free, browser-based toolkit for multiple sclerosis outcome measures and diagnosis (AutoEDSSguide, MS Score Hub and MS Criteria Checker)</em>. Wayne State University, Department of Neurology; 2026. Available from: https://github.com/AnasZakarya/MSpectrum.</p>
     </details>
   </div>
 
@@ -10857,7 +10857,7 @@ window.scExtractAllZones = async function(){
   const setL=t=>{ if(lbl) lbl.textContent=t; };
   try{console.log("[ocr2] scExtractAllZones running (offline engine)");}catch(e){}
   try{ if(!window.__ocr2ran){ window.__ocr2ran=true; console.log("[ocr2] first run may download the vision engine (~10 MB)"); } }catch(e){}
-  setL("Offline OCR - loading vision engine…");
+  setL("On-device OCR - loading vision engine…");
   await _ocr2EnsureLib("https://docs.opencv.org/4.x/opencv.js", ()=>window.cv&&window.cv.Mat);
   await _ocr2EnsureLib("https://cdn.jsdelivr.net/npm/onnxruntime-web@1.19.2/dist/ort.min.js", ()=>window.ort);
   try{ await cvReady(); }catch(e){}
@@ -10899,8 +10899,8 @@ window.scExtractAllZones = async function(){
   setL("Calculating scores…");
   try{ if(typeof scCalculate==="function") scCalculate(); else if(typeof scGeminiCalc==="function") scGeminiCalc(); else if(typeof calculateSectionScores==="function") calculateSectionScores(); }catch(e){ console.error("calc",e); }
   try{ if(typeof scUpdateReviewBanner==="function") scUpdateReviewBanner(nReview,nFilled); }catch(e){}
-  if(nFilled===0) setL("Offline OCR: read 0 values - check the photo / open console (F12) for [ocr2] errors.");
-  else setL("Offline OCR: filled "+nFilled+" values ("+nReview+" to review).");
+  if(nFilled===0) setL("On-device OCR: read 0 values - check the photo / open console (F12) for [ocr2] errors.");
+  else setL("On-device OCR: filled "+nFilled+" values ("+nReview+" to review).");
   if(bar) bar.style.width="100%";
 };
 
