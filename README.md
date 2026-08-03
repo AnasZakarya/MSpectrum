@@ -1,13 +1,13 @@
 # MSpectrum
 
-**MSpectrum** is a free, offline, privacy-first hub for the outcome measures used in multiple sclerosis. Everything is computed in your browser; nothing is uploaded or stored. It has four parts:
+**MSpectrum** is a free, browser-based, privacy-first hub for the outcome measures used in multiple sclerosis. Everything is computed in your browser; nothing is uploaded or stored. It has four parts:
 
-- **AutoEDSSguide** (`index.html`): the full Neurostatus EDSS (Kappos 2011) with the algorithmic combination rules of Fouad et al. 2023, plus streamlined (Baldassari 2017) and patient-reported (Romeo 2021) fast modes, a print-ready Neurostatus sheet, and an OCR sheet scanner.
-- **MS Score Hub** (`scores.html`): stateless calculators and full questionnaires for the cognition, fatigue, mood, walking, quality-of-life and disease-severity measures used alongside the EDSS, each with automatic published norms (z / T / percentile) and a plain-language interpretation.
-- **Check my MS** (`scores.html#report`): a guided, patient-facing pathway that walks through the self-report questionnaires and produces one plain-language summary of how MS is affecting the person, for understanding and discussion rather than diagnosis.
-- **MS Criteria Checker** (`mcdonald.html`): an adaptive wizard that applies the 2024 revisions of the McDonald criteria (Montalban et al., Lancet Neurol 2025) to reach an MS diagnosis across relapsing, progressive and RIS onset, covering the five DIS regions (incl. optic nerve), DIT, CSF (OCB / k-FLC) and susceptibility markers (CVS, PRL), with older-onset and mimic safeguards and a printable summary.
+* **AutoEDSSguide** (`index.html`): the full Neurostatus EDSS with algorithmic combination rules, plus streamlined and patient-reported fast modes, a print-ready Neurostatus sheet, and an OCR sheet scanner.
+* **MS Score Hub** (`scores.html`): stateless calculators and full questionnaires for the cognition, fatigue, mood, walking, quality-of-life and disease-severity measures used alongside the EDSS, each with automatic published norms (z / T / percentile) and a plain-language interpretation.
+* **Check my MS** (`scores.html#report`): a guided, patient-facing pathway that walks through the self-report questionnaires and produces one plain-language summary of how MS is affecting the person, for understanding and discussion rather than diagnosis.
+* **MS Criteria Checker** (`mcdonald.html`): an adaptive wizard that applies the 2024 revisions of the McDonald criteria to reach an MS diagnosis across relapsing, progressive and RIS onset, covering the five DIS regions (incl. optic nerve), DIT, CSF (OCB / k-FLC) and susceptibility markers (CVS, PRL), with older-onset and mimic safeguards and a printable summary.
 
-Developed at Wayne State University, Department of Neurology.
+Developed at Wayne State University, Department of Neurology, by Anas Nourelden, under the supervision of Dr. Anza Memon.
 
 ---
 
@@ -15,7 +15,7 @@ Developed at Wayne State University, Department of Neurology.
 
 **[▶ Open MSpectrum](https://anaszakarya.github.io/MSpectrum/)**
 
-No installation. No login. Works in any modern browser.
+No installation. No login. Works in any modern browser and is suitable for all devices and operating systems.
 
 ---
 
@@ -25,8 +25,8 @@ No installation. No login. Works in any modern browser.
 |------|----------|------------|
 | **Roadmap** | Raters / research | Full Neurostatus exam, guided step-by-step in exam order (history, then cranial nerves, then body). |
 | **System view** | Raters | All 7 Functional Systems on one page, classic Neurostatus layout. |
-| **Clinical EDSS** | Neurologists | Fast adaptive follow-up scoring (streamlined sEDSS, Baldassari 2017). |
-| **Quick Check** | People with MS | Plain-language adaptive questionnaire (~14 questions, ePR-EDSS / Romeo 2021) to self-estimate EDSS. |
+| **Clinical EDSS** | Neurologists | Fast adaptive follow-up scoring (streamlined sEDSS). |
+| **Quick Check** | People with MS | Plain-language adaptive questionnaire (~14 questions) to self-estimate EDSS. |
 | **Sheet Scanner** | Raters | Upload or photograph a completed Neurostatus form; fields are OCR-extracted and scored. |
 
 All modes compute through a **single shared engine**, so the header, roadmap, printed sheet, and scanner always produce identical EDSS values.
@@ -58,12 +58,6 @@ A **Score & norm converter** turns a whole list of patients into finished scores
 
 ---
 
-## Offline & privacy
-
-Works fully offline once loaded (open `index.html` directly). No account, no tracking, nothing uploaded or stored. Do not enter patient names or identifiers (PHI); use a non-identifying code.
-
----
-
 ## MS Criteria Checker: diagnosis by the 2024 McDonald criteria
 
 An adaptive, single-page wizard (`mcdonald.html`) that implements the **2024 revisions of the McDonald criteria** (Montalban et al., Lancet Neurol 2025) and their companion consensus papers. It adapts to patient age and onset course (relapsing, primary-progressive, RIS), asks only about the investigations you have, and reports the diagnosis, the criteria it rests on, safety cautions and recommended next steps, with a print / PDF summary.
@@ -74,25 +68,76 @@ An adaptive, single-page wizard (`mcdonald.html`) that implements the **2024 rev
 
 ---
 
+## Privacy
+
+Works fully in your browser once loaded. No account, no tracking, nothing uploaded or stored. Do not enter patient names or identifiers (PHI); use a non-identifying code.
+
+---
+
 ## Cite us
 
 If you used MSpectrum in research, please cite it:
 
-> Nourelden A, Memon A. *MSpectrum: a free, offline toolkit for multiple sclerosis outcome measures and diagnosis (AutoEDSSguide, MS Score Hub and MS Criteria Checker).* Wayne State University, Department of Neurology; 2026. Available from: https://github.com/AnasZakarya/MSpectrum
+> Nourelden A, Memon A. *MSpectrum: a free, browser-based toolkit for multiple sclerosis outcome measures and diagnosis (AutoEDSSguide, MS Score Hub, patient report, and MS Criteria Checker).* Wayne State University, Department of Neurology; 2026. Available from: https://github.com/AnasZakarya/MSpectrum
 
 (GitHub also offers ready APA/BibTeX via the "Cite this repository" button, generated from `CITATION.cff`.)
 
 ---
 
-## Algorithm & scoring sources
+## References & scoring sources
 
-- Kappos L. *Neurostatus scoring definitions* (v04/10.2), 2011.
-- Fouad S et al. *An algorithmic approach to the EDSS.* Mult Scler J–ETC (2023). DOI: [10.1177/20552173231155055](https://doi.org/10.1177/20552173231155055).
-- Baldassari LE et al. *Streamlined EDSS (sEDSS).* Mult Scler J (2017) (Clinical EDSS mode).
-- Romeo AR et al. *Electronic patient-reported EDSS (ePR-EDSS).* Mult Scler (2021) (Quick Check mode).
-- MS Score Hub instruments are cited in full inside the app (References & scoring sources).
-- Montalban X, Lebrun-Frénay C, Oh J et al. *Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria.* Lancet Neurol (2025);24(10):850–865 (MS Criteria Checker), with companion consensus papers (2024 MAGNIMS–CMSC–NAIMS MRI recommendations; visual system; kFLC / OCB) and Solomon AJ et al. Lancet Neurol 2023;22:750–68 (differential diagnosis).
-- Functional-System scoring follows the **Neurostatus v04/10.2 definitions** exactly, including the Cerebellar (severe-ataxia) and Bowel/Bladder (loss-of-function to FS 5/6) rules, and an optional toggle to exclude fatigue from the Cerebral FS per study protocol.
+**EDSS & diagnosis (algorithm)**
+- Neurostatus/EDSS FS: Kappos L. Neurostatus definitions v04/10.2, 2011.
+- EDSS algorithm: Fouad AM et al. Mult Scler J Exp Transl Clin 2023;9(1). doi:10.1177/20552173231155055.
+- Streamlined EDSS (Clinical mode): Baldassari LE et al. Mult Scler J 2018;24(11):1526-35.
+- Patient-reported EDSS (Quick Check): Romeo AR et al. Mult Scler J 2021;27(9):1432-41.
+- McDonald 2024: Montalban X et al. Lancet Neurol 2025;24(10):850-65.
+- Differential diagnosis: Solomon AJ et al. Lancet Neurol 2023;22(8):750-68.
+
+**Cognition**
+- SDMT: Smith A. SDMT manual, 1982; norms Strober L et al. 2020.
+- BVMT-R: Benedict RHB. BVMT-R manual. PAR, 1997.
+- CVLT-II: Delis DC et al. CVLT-II manual. Pearson, 2000; Parmenter BA et al. J Int Neuropsychol Soc 2010;16:6-16; Marrie RA et al. Front Neurol 2021;11:621010.
+- BICAMS: Langdon DW et al. Mult Scler J 2012;18(6):891-8; Marrie RA et al. Front Neurol 2021;11:621010.
+- PASAT-3: Gronwall DMA. Percept Mot Skills 1977;44:367-73; Fischer JS et al. Mult Scler 1999;5(4):244-50.
+- PROMIS Cognitive Abilities 4a: Cella D et al. J Clin Epidemiol 2010; HealthMeasures (Northwestern).
+
+**Fatigue**
+- MFIS: Fisk JD et al. Clin Infect Dis 1994;18(Suppl 1):S79-83.
+- FSS: Krupp LB et al. Arch Neurol 1989;46(10):1121-3.
+- FSMC: Penner IK et al. Mult Scler 2009;15(12):1509-17.
+
+**Mood**
+- PHQ-9: Kroenke K et al. J Gen Intern Med 2001;16(9):606-13.
+- GAD-7: Spitzer RL et al. Arch Intern Med 2006;166(10):1092-7.
+
+**Walking & motor**
+- MSWS-12: Hobart JC et al. Neurology 2003;60(1):31-6.
+- T25FW: Fischer JS et al. Mult Scler 1999;5(4):244-50 (MSFC).
+- 9-HPT: Mathiowetz V et al. Occup Ther J Res 1985;5(1):24-38; Fischer JS et al. Mult Scler 1999;5(4):244-50.
+- 6MWT: Enright PL, Sherrill DL. Am J Respir Crit Care Med 1998;158:1384-7; Goldman MD et al. Mult Scler 2008.
+- MSFC: Fischer JS et al. Mult Scler 1999;5(4):244-50.
+
+**Quality of life & disability**
+- PDDS: Hohol MJ et al. Neurology 1995;45(2):251-5; Learmonth YC et al. BMC Neurol 2013;13:37.
+- MSQOL-54: Vickrey BG et al. Qual Life Res 1995;4(3):187-206.
+- PROMIS-29: Cella D et al. J Clin Epidemiol 2010;63(11):1179-94.
+- MSIS-29: Hobart J et al. Brain 2001;124(Pt 5):962-73.
+
+**Pain, balance & symptoms**
+- PROMIS Pain Intensity (Global07): Cella D et al. 2010; HealthMeasures.
+- ABC scale: Powell LE, Myers AM. J Gerontol A Biol Sci Med Sci 1995;50A(1):M28-34.
+- FES-I: Yardley L et al. Age Ageing 2005;34(6):614-9.
+- SymptoMScreen: Green R et al. Int J MS Care 2017;19(1):1-8.
+
+**Vision**
+- LCVA: Sloan LL et al. J Opt Soc Am 1952; Balcer LJ et al. Neurology 2003;61(10):1433-5.
+
+**Disease severity**
+- ARMSS: Manouchehrinia A et al. Mult Scler 2017;23:1938-46.
+- MSSS: Roxburgh RH et al. Neurology 2005;64:1144-51.
+
+Note: ARR, CDP and NEDA-3/4 are computed disease-activity metrics based on standard published definitions (no single instrument citation).
 
 ---
 
