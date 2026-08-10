@@ -837,13 +837,13 @@
 /* Mobile: keep theme toggle clear of the header CTA and any bottom bar; icon-only circle. */
 @media (max-width: 600px){
   #theme-toggle{ top:auto !important; bottom:20px !important; right:16px !important; padding:10px !important; border-radius:50% !important; gap:0 !important; box-shadow:0 3px 10px rgba(0,0,0,.28) !important; }
-  #theme-toggle #theme-toggle-lbl{ display:none !important; }
+  #theme-toggle #theme-toggle-lbl{ display:inline !important; }
 }
 /* ---- Floating action dock: buttons flow + reflow automatically, never overlap ---- */
 #fab-dock{ position:fixed; right:16px; bottom:16px; z-index:9999; display:flex; flex-direction:row; align-items:center; gap:10px; }
 #fab-dock > *{ position:static !important; top:auto !important; right:auto !important; bottom:auto !important; left:auto !important; margin:0 !important; }
-#fab-dock #theme-toggle{ border-radius:50% !important; padding:10px !important; gap:0 !important; }
-#fab-dock #theme-toggle #theme-toggle-lbl{ display:none !important; }
+#fab-dock #theme-toggle{ border-radius:16px !important; padding:7px 11px !important; gap:6px !important; font-size:11.5px !important; font-weight:700 !important; background:var(--accent) !important; color:#fff !important; border-color:transparent !important; box-shadow:0 3px 10px rgba(0,0,0,.28) !important; }
+#fab-dock #theme-toggle #theme-toggle-lbl{ display:inline !important; }
 body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 </style>
   <link rel="manifest" href="manifest.webmanifest">
