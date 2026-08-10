@@ -2194,9 +2194,10 @@ input[type="checkbox"] {
 }
 @media (max-width: 600px) {
   .app-header { padding: 10px 14px; }
-  /* Stop the brand text from overflowing under the EDSS readout on phones */
+  /* Phones: in the EDSS header hide the brand wordmark (keep logo + Home) so the
+     EDSS readout fits cleanly with no overlap. Landing header is left untouched. */
   .app-header .header-grid > div:first-child { min-width: 0; overflow: hidden; }
-  .app-header .brand-mark { overflow: hidden; text-overflow: ellipsis; }
+  .app-header .header-grid:not(.landing) img[alt="MSpectrum logo"] + div { display: none; }
   .edss-readout { padding: 5px 10px; gap: 8px; flex-shrink: 0; }
   .edss-readout-value { font-size: 22px; }
   .edss-explain-btn { padding: 5px 9px; font-size: 11px; }
@@ -3376,8 +3377,8 @@ html[data-theme="dark"] .way-card.checker-card:hover .way-cta{color:#bcd6f0 !imp
       </div>
       <div class="feature-card">
         <div class="feature-icon">🔒</div>
-        <h3>Private &amp; browser-based</h3>
-        <p>Everything runs in your browser - no account, no tracking, nothing uploaded, and no patient identifiers needed. Works with or without internet after first load.</p>
+        <h3>Private, browser-based &amp; installable</h3>
+        <p>Everything runs in your browser - no account, no tracking, nothing uploaded, and no patient identifiers needed. Install it as an app on any device or operating system, and it works with or without internet after first load.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📊</div>
