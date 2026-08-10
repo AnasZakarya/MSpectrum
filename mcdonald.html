@@ -836,13 +836,20 @@
 .reveal-on-scroll.in{opacity:1;transform:none}
 /* Mobile: keep theme toggle clear of the header CTA and any bottom bar; icon-only circle. */
 @media (max-width: 600px){
-  #theme-toggle{ top:auto !important; bottom:74px !important; right:14px !important; padding:10px !important; border-radius:50% !important; gap:0 !important; box-shadow:0 3px 10px rgba(0,0,0,.28) !important; }
+  #theme-toggle{ top:auto !important; bottom:20px !important; right:16px !important; padding:10px !important; border-radius:50% !important; gap:0 !important; box-shadow:0 3px 10px rgba(0,0,0,.28) !important; }
   #theme-toggle #theme-toggle-lbl{ display:none !important; }
 }
+/* ---- Floating action dock: buttons flow + reflow automatically, never overlap ---- */
+#fab-dock{ position:fixed; right:16px; bottom:16px; z-index:9999; display:flex; flex-direction:row; align-items:center; gap:10px; }
+#fab-dock > *{ position:static !important; top:auto !important; right:auto !important; bottom:auto !important; left:auto !important; margin:0 !important; }
+#fab-dock #theme-toggle{ border-radius:50% !important; padding:10px !important; gap:0 !important; }
+#fab-dock #theme-toggle #theme-toggle-lbl{ display:none !important; }
+body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 </style>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script>
+  <script>(function(){function dk(){try{var t=document.getElementById("theme-toggle");if(!t)return false;var d=document.getElementById("fab-dock");if(!d){d=document.createElement("div");d.id="fab-dock";d.className="no-print";document.body.appendChild(d);}var tp=document.getElementById("scroll-top-btn");if(tp&&tp.parentNode!==d)d.appendChild(tp);if(t.parentNode!==d)d.appendChild(t);return true;}catch(e){return true;}}function init(){if(!dk()){var n=0,iv=setInterval(function(){if(dk()||++n>25)clearInterval(iv);},150);}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();})();</script>
 </head>
 <body>
 
