@@ -18,11 +18,11 @@
 <meta property="og:title" content="MSpectrum - MS scoring & diagnosis (EDSS & beyond)">
 <meta property="og:description" content="A free, browser-based, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.">
 <meta property="og:url" content="https://anaszakarya.github.io/MSpectrum/">
-<meta property="og:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png">
+<meta property="og:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png?v=2">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MSpectrum - MS scoring & diagnosis (EDSS & beyond)">
 <meta name="twitter:description" content="A free, browser-based, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.">
-<meta name="twitter:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png">
+<meta name="twitter:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png?v=2">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MSpectrum - MS scoring & diagnosis (EDSS & beyond)","url":"https://anaszakarya.github.io/MSpectrum/","description":"A free, browser-based, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"},{"@type":"Person","name":"Anza Memon"}],"publisher":{"@type":"Organization","name":"Wayne State University, Department of Neurology"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2194,6 +2194,12 @@ input[type="checkbox"] {
 }
 @media (max-width: 600px) {
   .app-header { padding: 10px 14px; }
+  /* Stop the brand text from overflowing under the EDSS readout on phones */
+  .app-header .header-grid > div:first-child { min-width: 0; overflow: hidden; }
+  .app-header .brand-mark { overflow: hidden; text-overflow: ellipsis; }
+  .edss-readout { padding: 5px 10px; gap: 8px; flex-shrink: 0; }
+  .edss-readout-value { font-size: 22px; }
+  .edss-explain-btn { padding: 5px 9px; font-size: 11px; }
   .app-main { padding: 20px 14px 60px; }
   .tabnav-inner { padding: 0 14px; }
   .tab-btn { padding: 10px 12px; font-size: 12px; }
@@ -3296,6 +3302,9 @@ html[data-theme="dark"] .way-card.checker-card:hover .way-cta{color:#bcd6f0 !imp
   #theme-toggle #theme-toggle-lbl{ display:none !important; }
 }
 </style>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script>
 </head>
 <body>
 
