@@ -2197,7 +2197,9 @@ input[type="checkbox"] {
   /* Phones: in the EDSS header hide the brand wordmark (keep logo + Home) so the
      EDSS readout fits cleanly with no overlap. Landing header is left untouched. */
   .app-header .header-grid > div:first-child { min-width: 0; overflow: hidden; }
-  .app-header .header-grid:not(.landing) img[alt="MSpectrum logo"] + div { display: none; }
+  .app-header .header-grid:not(.landing) img[alt="MSpectrum logo"] + div,
+  .app-header .header-grid:not(.landing) .brand-mark,
+  .app-header .header-grid:not(.landing) .brand-mark + span { display: none !important; }
   .edss-readout { padding: 5px 10px; gap: 8px; flex-shrink: 0; }
   .edss-readout-value { font-size: 22px; }
   .edss-explain-btn { padding: 5px 9px; font-size: 11px; }
@@ -3299,8 +3301,9 @@ html[data-theme="dark"] .way-card.checker-card:hover .way-cta{color:#bcd6f0 !imp
     @media screen and (max-width: 380px) { #sc-review .sc-sheet-card { zoom: 0.4; } }
 /* Mobile: keep theme toggle clear of the header CTA and any bottom bar; icon-only circle. */
 @media (max-width: 600px){
-  #theme-toggle{ top:auto !important; bottom:74px !important; right:14px !important; padding:10px !important; border-radius:50% !important; gap:0 !important; box-shadow:0 3px 10px rgba(0,0,0,.28) !important; }
+  #theme-toggle{ top:auto !important; bottom:20px !important; right:16px !important; padding:10px !important; border-radius:50% !important; gap:0 !important; box-shadow:0 3px 10px rgba(0,0,0,.28) !important; }
   #theme-toggle #theme-toggle-lbl{ display:none !important; }
+  #scroll-top-btn{ right:64px !important; bottom:20px !important; }
 }
 </style>
   <link rel="manifest" href="manifest.webmanifest">
