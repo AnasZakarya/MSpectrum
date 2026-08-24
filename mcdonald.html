@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; object-src 'none'; base-uri 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="description" content="MS Criteria Checker (McDonald 2024) - an adaptive clinician decision-support tool for diagnosing Multiple Sclerosis based on the 2024 Lancet Neurology revisions.">
   <title>MS Criteria Checker (McDonald 2024) - MSpectrum</title>
 <meta name="keywords" content="multiple sclerosis, MS, EDSS, EDSS calculator, Neurostatus, MS outcome measures, MS scores, SDMT, BICAMS, MSFC, PDDS, MSSS, ARMSS, MFIS, FSS, MSWS-12, PROMIS-29, MSQOL-54, McDonald criteria 2024, MS diagnosis">
@@ -26,9 +26,19 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MS Criteria Checker - 2024 McDonald Criteria for MS diagnosis","url":"https://anaszakarya.github.io/MSpectrum/mcdonald.html","description":"A free, step-by-step calculator that applies the 2024 McDonald criteria to help diagnose multiple sclerosis across relapsing, progressive and RIS onset - covering DIS, DIT, CSF and susceptibility biomarkers, with mimic and older-onset safeguards.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"},{"@type":"Person","name":"Anza Memon"}],"publisher":{"@type":"Organization","name":"Wayne State University, Department of Neurology"}}</script>
   
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=IBM+Plex+Mono:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/fraunces-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/ibm-plex-sans-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <style id="mspectrum-fonts">/* self-hosted fonts (privacy-first, no third-party requests) */
+  /* a11y: visible keyboard focus */ :focus-visible{outline:3px solid var(--accent,#1e4a6e);outline-offset:2px;border-radius:3px}
+@font-face{font-family:"Fraunces";font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/fraunces-standard-normal.woff2") format("woff2")}
+  @font-face{font-family:"Fraunces";font-style:italic;font-weight:100 900;font-display:swap;src:url("fonts/fraunces-standard-italic.woff2") format("woff2")}
+  @font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:100 700;font-display:swap;src:url("fonts/ibm-plex-sans-wght-normal.woff2") format("woff2")}
+  @font-face{font-family:"IBM Plex Sans";font-style:italic;font-weight:100 700;font-display:swap;src:url("fonts/ibm-plex-sans-wght-italic.woff2") format("woff2")}
+  @font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/ibm-plex-mono-400-normal.woff2") format("woff2")}
+  @font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/ibm-plex-mono-500-normal.woff2") format("woff2")}
+  @font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/ibm-plex-mono-600-normal.woff2") format("woff2")}
+  @font-face{font-family:"IBM Plex Mono";font-style:italic;font-weight:400;font-display:swap;src:url("fonts/ibm-plex-mono-400-italic.woff2") format("woff2")}
+  </style>
 
   <style>
     /* Design Tokens from MSpectrum */

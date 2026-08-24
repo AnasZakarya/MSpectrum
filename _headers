@@ -1,0 +1,24 @@
+# MSpectrum - HTTP response headers
+# Format: Netlify / Cloudflare Pages "_headers" file.
+# GitHub Pages IGNORES this file (it cannot set custom headers); the in-page
+# <meta> CSP is what protects the current GitHub Pages deploy. Use this file
+# only when serving MSpectrum from Netlify, Cloudflare Pages, or a host that
+# reads a _headers file. For Nginx/Apache use the samples in deploy/.
+
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://docs.opencv.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; worker-src 'self' blob:; connect-src 'self' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://docs.opencv.org; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
+  Permissions-Policy: camera=(self), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  X-Permitted-Cross-Domain-Policies: none
+
+# Long-cache the fingerprint-free static assets. Fonts and vendored libs are
+# version-pinned by content, safe to cache hard.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/vendor/*
+  Cache-Control: public, max-age=31536000, immutable

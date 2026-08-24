@@ -4,10 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' blob: data: https://cdnjs.cloudflare.com; object-src 'none'; base-uri 'self'">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<link rel="preload" href="fonts/fraunces-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style id="mspectrum-fonts">/* self-hosted fonts (privacy-first, no third-party requests) */
+/* a11y: visible keyboard focus */ :focus-visible{outline:3px solid var(--accent,#1e4a6e);outline-offset:2px;border-radius:3px}
+@font-face{font-family:"Fraunces";font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/fraunces-standard-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:100 700;font-display:swap;src:url("fonts/ibm-plex-sans-wght-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/ibm-plex-mono-400-normal.woff2") format("woff2")}
+</style>
 <meta name="description" content="MSpectrum - MS Score Hub: stateless calculators and questionnaires for multiple sclerosis cognition, fatigue, mood, walking, quality-of-life and severity measures.">
 <title>MSpectrum · MS Score Hub</title>
 <meta name="keywords" content="multiple sclerosis, MS, EDSS, EDSS calculator, Neurostatus, MS outcome measures, MS scores, SDMT, BICAMS, MSFC, PDDS, MSSS, ARMSS, MFIS, FSS, MSWS-12, PROMIS-29, MSQOL-54, McDonald criteria 2024, MS diagnosis">
@@ -526,10 +531,24 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="actions no-print"><button class="btn" onclick="patientSummary('smscreen','SymptoMScreen')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('smscreen','SymptoMScreen')">Researcher: CSV</button></div>
   </section>
 
+  <section class="panel" id="p_mas">
+    <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
+    <h2>Modified Ashworth Scale</h2><p class="lead">Clinician-rated muscle tone (spasticity) on the Modified Ashworth Scale (Bohannon &amp; Smith 1987). Move each limb passively and grade the resistance 0&ndash;4 per muscle group. A documentation aid, not a normed score.</p>
+    <div class="actions"><button class="btn" onclick="fillMAS('0')">All 0</button><button class="btn" onclick="clearMAS()">Clear</button></div>
+    <div class="items" id="mas_items"></div>
+    <div class="result" id="mas_out"></div>
+    <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
+<b>Grades (Bohannon &amp; Smith 1987):</b> 0 = no increase in tone; 1 = slight increase, a catch and release or minimal resistance at the end of range; 1+ = slight increase, a catch then minimal resistance through less than half the range; 2 = more marked increase through most of the range, but the part is still easily moved; 3 = considerable increase, passive movement difficult; 4 = the part is rigid in flexion or extension.<br>
+<b>Use:</b> Grade during a slow passive stretch. There is no validated total; report the per-muscle grades and re-grade the same muscles at each visit to track change.<br>
+<b>Reference:</b> Bohannon RW, Smith MB. Interrater reliability of a modified Ashworth scale of muscle spasticity. <em>Phys Ther</em> 1987;67(2):206&ndash;7.
+</div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('mas','Modified Ashworth Scale')">📄 Save summary</button><button class="btn" onclick="exportCSV('mas','Modified Ashworth Scale')">Researcher: CSV</button></div>
+  </section>
+
   <section class="panel" id="p_sixmwt">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>6MWT</h2><p class="lead">Six-Minute Walk Test &ndash; total distance walked in 6 minutes (metres). Higher = better walking endurance. Optionally add age, sex, height and weight for an estimated % of predicted.</p>
-    <div class="row"><div class="fld"><label>Distance walked (metres) <span class="hint">&gt; 0</span></label><input type="number" id="sixmwt_dist" min="0" step="1" oninput="calc6MWT()"></div></div>
+    <div class="row"><div class="fld ms-time-wrap-fld"><label>Distance walked (metres) <span class="hint">&gt; 0</span></label><input type="number" id="sixmwt_dist" min="0" step="1" oninput="calc6MWT()"><button type="button" class="ms-countdown no-print" data-mins="6" title="6-minute countdown for the walk" aria-label="6 minute countdown">&#9201; 6:00</button></div></div>
     <div class="row">
       <div class="fld"><label>Age (years) <span class="hint">optional</span></label><input type="number" id="sixmwt_age" min="0" step="1" oninput="calc6MWT()"></div>
       <div class="fld"><label>Sex <span class="hint">optional</span></label><select id="sixmwt_sex" oninput="calc6MWT()"><option value="">- select -</option><option value="M">Male</option><option value="F">Female</option></select></div>
@@ -583,8 +602,8 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>T25FW</h2><p class="lead">Timed 25-Foot Walk - the patient walks 25 feet (7.62 m) as fast as safely possible. Enter two trials; score = average time (seconds). Lower = faster = better. Clinician-timed.</p>
     <div class="row">
-      <div class="fld"><label>Trial 1 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="t25fw_1" min="0" step="0.1" oninput="calcT25FW()"></div>
-      <div class="fld"><label>Trial 2 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="t25fw_2" min="0" step="0.1" oninput="calcT25FW()"></div>
+      <div class="fld"><label>Trial 1 (sec) <span class="hint">&gt; 0</span></label><span class="ms-time-wrap"><input type="number" id="t25fw_1" min="0" step="0.1" oninput="calcT25FW()"><button type="button" class="ms-timer no-print" data-target="t25fw_1" title="Stopwatch: tap to start, tap again to stop and fill this time" aria-label="Stopwatch">&#9201;</button></span></div>
+      <div class="fld"><label>Trial 2 (sec) <span class="hint">&gt; 0</span></label><span class="ms-time-wrap"><input type="number" id="t25fw_2" min="0" step="0.1" oninput="calcT25FW()"><button type="button" class="ms-timer no-print" data-target="t25fw_2" title="Stopwatch: tap to start, tap again to stop and fill this time" aria-label="Stopwatch">&#9201;</button></span></div>
     </div>
     <div class="result" id="t25fw_out"></div>
     <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
@@ -600,12 +619,12 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>9-HPT</h2><p class="lead">Nine-Hole Peg Test - place and remove 9 pegs as fast as possible; time each hand twice. Score = average time (seconds); lower = better dexterity. Clinician-timed.</p>
     <div class="row">
-      <div class="fld"><label>Dominant - Trial 1 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="nhpt_d1" min="0" step="0.1" oninput="calcNHPT()"></div>
-      <div class="fld"><label>Dominant - Trial 2 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="nhpt_d2" min="0" step="0.1" oninput="calcNHPT()"></div>
+      <div class="fld"><label>Dominant - Trial 1 (sec) <span class="hint">&gt; 0</span></label><span class="ms-time-wrap"><input type="number" id="nhpt_d1" min="0" step="0.1" oninput="calcNHPT()"><button type="button" class="ms-timer no-print" data-target="nhpt_d1" title="Stopwatch: tap to start, tap again to stop and fill this time" aria-label="Stopwatch">&#9201;</button></span></div>
+      <div class="fld"><label>Dominant - Trial 2 (sec) <span class="hint">&gt; 0</span></label><span class="ms-time-wrap"><input type="number" id="nhpt_d2" min="0" step="0.1" oninput="calcNHPT()"><button type="button" class="ms-timer no-print" data-target="nhpt_d2" title="Stopwatch: tap to start, tap again to stop and fill this time" aria-label="Stopwatch">&#9201;</button></span></div>
     </div>
     <div class="row">
-      <div class="fld"><label>Non-dominant - Trial 1 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="nhpt_n1" min="0" step="0.1" oninput="calcNHPT()"></div>
-      <div class="fld"><label>Non-dominant - Trial 2 (sec) <span class="hint">&gt; 0</span></label><input type="number" id="nhpt_n2" min="0" step="0.1" oninput="calcNHPT()"></div>
+      <div class="fld"><label>Non-dominant - Trial 1 (sec) <span class="hint">&gt; 0</span></label><span class="ms-time-wrap"><input type="number" id="nhpt_n1" min="0" step="0.1" oninput="calcNHPT()"><button type="button" class="ms-timer no-print" data-target="nhpt_n1" title="Stopwatch: tap to start, tap again to stop and fill this time" aria-label="Stopwatch">&#9201;</button></span></div>
+      <div class="fld"><label>Non-dominant - Trial 2 (sec) <span class="hint">&gt; 0</span></label><span class="ms-time-wrap"><input type="number" id="nhpt_n2" min="0" step="0.1" oninput="calcNHPT()"><button type="button" class="ms-timer no-print" data-target="nhpt_n2" title="Stopwatch: tap to start, tap again to stop and fill this time" aria-label="Stopwatch">&#9201;</button></span></div>
     </div>
     <div class="result" id="nhpt_out"></div>
     <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
@@ -1065,6 +1084,7 @@ const TOOLS=[
   {id:"abc", ic:"⚖️", name:"ABC Scale", tag:"Balance Confidence", desc:"Activities-specific Balance Confidence Scale (16 items, 0-100%)."},
   {id:"fesi", ic:"🚶", name:"FES-I", tag:"Fear of Falls", desc:"Falls Efficacy Scale-International: concern of falling (16-64)."},
   {id:"lcva", ic:"👁️", name:"LCVA Sloan Letters", tag:"Visual Function", desc:"Low-Contrast Visual Acuity (0-60 letters correct for Sloan 2.5% and 1.25%)."},
+  {id:"mas", ic:"💪", name:"Modified Ashworth", tag:"Spasticity · muscle tone", desc:"Modified Ashworth Scale: clinician-rated muscle tone (0-4) for key muscle groups."},
   {id:"arr", ic:"🔁", name:"ARR", tag:"Relapse rate", desc:"Annualized Relapse Rate (relapses per year)."},
   {id:"cdp", ic:"📈", name:"CDP", tag:"EDSS progression", desc:"Confirmed Disability Progression from baseline & follow-up EDSS."},
   {id:"neda", ic:"🎯", name:"NEDA-3 / NEDA-4", tag:"Disease activity", desc:"No Evidence of Disease Activity status."},
@@ -1121,6 +1141,7 @@ const GROUPS=[
  {name:"Fatigue", sub:"Self-report.", ids:["mfis","fss","fsmc"]},
  {name:"Mood", sub:"Self-report screens.", ids:["phq9","gad7"]},
  {name:"Symptom burden", sub:"Global self-report of MS symptom severity.", ids:["smscreen"]},
+ {name:"Spasticity &amp; tone", sub:"Clinician-rated muscle tone on the Modified Ashworth Scale.", ids:["mas"]},
  {name:"Walking &amp; motor function", sub:"MSWS-12 is self-report; T25FW, 9-HPT &amp; 6MWT are clinician-administered.", ids:["msws","t25fw","nhpt","sixmwt","abc","fesi","lcva"]},
  {name:"Quality of life &amp; impact", sub:"Self-report.", ids:["msqol","promis","msis","promispain"]},
  {name:"Composite - MSFC", sub:"Arm + leg + cognition combined into one z-score (needs reference values).", ids:["msfc"]},
@@ -2149,8 +2170,8 @@ function buildClinReport(){
 }
 function clinReportPDF(){ var r=el("clin_out"); if(!r||!r.textContent.trim())return; el("pc_title").textContent="MS clinical summary"; el("pc_date").textContent=new Date().toLocaleDateString(); el("pc_body").innerHTML=r.cloneNode(true).innerHTML; el("printcard").classList.add("show"); }
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha384-Yv5O+t3uE3hunW8uyrbpPW3iw6/5/Y7HitWJBLgqfMoA36NogMmy+8wWZMpn3HWc" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="vendor/html2canvas.min.js"></script>
+<script src="vendor/html2pdf.bundle.min.js"></script>
 <script>
 /* ── Animation observers ── */
 (function(){
@@ -2835,6 +2856,85 @@ html[data-theme="dark"] .pc-howread b{color:#bcd6f0 !important;}
   }
   function init(){ if(!run()) setTimeout(run,300); }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init); else init();
+})();
+</script>
+<style id="mspectrum-mas">
+#mas_items .mas-grid{display:flex;flex-direction:column;gap:8px}
+#mas_items .mas-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px 0;border-bottom:1px solid var(--line,#e2e8f0)}
+#mas_items .mas-mus{flex:1 1 150px;font-weight:600;font-size:14px}
+#mas_items .mas-cell{display:flex;align-items:center;gap:5px;font-size:12px}
+#mas_items .mas-cell select{min-width:62px}
+</style>
+<script>
+/* Modified Ashworth Scale (spasticity) - clinician-rated muscle tone, documentation aid. */
+var MAS_MUSCLES=[{k:"elbow",n:"Elbow flexors"},{k:"wrist",n:"Wrist flexors"},{k:"hipadd",n:"Hip adductors"},{k:"kneeflex",n:"Knee flexors"},{k:"kneeext",n:"Knee extensors"},{k:"ankle",n:"Ankle plantarflexors"}];
+var MAS_OPTS=[["0","0"],["1","1"],["1+","1+"],["2","2"],["3","3"],["4","4"]];
+var MAS_N={"0":0,"1":1,"1+":1.5,"2":2,"3":3,"4":4};
+(function(){ var box=(typeof el==="function")?el("mas_items"):null; if(!box) return;
+  function cell(side,k){ return '<label class="mas-cell"><small>'+side+'</small><select id="mas_'+k+'_'+side+'" oninput="calcMAS()"><option value="">-</option>'+MAS_OPTS.map(function(o){return '<option value="'+o[0]+'">'+o[1]+'</option>';}).join('')+'</select></label>'; }
+  box.innerHTML='<div class="note" style="margin-bottom:6px">Grade the passive-stretch resistance for each muscle group, right and left (0&ndash;4).</div><div class="mas-grid">'+MAS_MUSCLES.map(function(m){return '<div class="mas-row"><span class="mas-mus">'+m.n+'</span>'+cell("R",m.k)+cell("L",m.k)+'</div>';}).join('')+'</div>';
+})();
+function readMAS(){ var rows=[]; MAS_MUSCLES.forEach(function(m){ ["R","L"].forEach(function(side){ var e=(typeof el==="function")?el("mas_"+m.k+"_"+side):null; var v=e?e.value:""; if(v!==""){ rows.push({muscle:m.n,side:side,v:v,n:MAS_N[v]}); } }); }); return rows; }
+function scoreMAS(rows){ if(!rows.length) return {answered:0}; var maxN=-1,maxRow=null,elevated=0,sum=0; rows.forEach(function(r){ sum+=r.n; if(r.n>=1)elevated++; if(r.n>maxN){maxN=r.n;maxRow=r;} }); return {answered:rows.length,maxN:maxN,maxRow:maxRow,elevated:elevated,mean:sum/rows.length}; }
+function calcMAS(){ var out=(typeof el==="function")?el("mas_out"):null; if(!out) return; var r=scoreMAS(readMAS()); if(!r.answered){ out.innerHTML=""; return; }
+  var cls=r.maxN>=3?"bad":r.maxN>=2?"warn":"good";
+  var msg=r.maxN>=3?"Severe tone in at least one muscle group (passive movement difficult or rigid).":r.maxN>=2?"Moderate increase in tone in at least one muscle group.":r.maxN>=1?"Mild increase in tone (catch on passive stretch).":"No increase in tone recorded.";
+  var side=r.maxRow.side==="R"?"right":"left";
+  var note="Documentation aid: MAS grades muscle tone 0&ndash;4 per muscle group; there is no validated composite. Graded "+r.answered+" muscle group(s), "+r.elevated+" with increased tone (&ge;1). Highest = "+r.maxRow.v+" in "+r.maxRow.muscle.toLowerCase()+" ("+side+"). Mean grade = "+(Math.round(r.mean*100)/100)+" (1+ counted as 1.5). Re-grade the same muscles at each visit to track change.";
+  out.innerHTML='<div class="scoreline"><div class="bigscore">'+r.maxRow.v+'<small> highest MAS</small></div></div>'+interp(cls,msg)+'<div class="note">'+note+'</div>'; }
+function fillMAS(v){ MAS_MUSCLES.forEach(function(m){ ["R","L"].forEach(function(side){ var e=(typeof el==="function")?el("mas_"+m.k+"_"+side):null; if(e)e.value=v; }); }); calcMAS(); }
+function clearMAS(){ MAS_MUSCLES.forEach(function(m){ ["R","L"].forEach(function(side){ var e=(typeof el==="function")?el("mas_"+m.k+"_"+side):null; if(e)e.value=""; }); }); var out=(typeof el==="function")?el("mas_out"):null; if(out)out.innerHTML=""; }
+</script>
+<style id="mspectrum-timers">
+.ms-time-wrap{display:flex;align-items:center;gap:6px;width:100%}
+.ms-time-wrap>input{flex:1;min-width:0}
+.ms-time-wrap-fld>.ms-countdown{margin-top:6px;align-self:flex-start}
+.ms-timer,.ms-countdown{flex:none;cursor:pointer;font-family:var(--mono,ui-monospace,SFMono-Regular,Menlo,monospace);font-weight:600;font-size:12px;line-height:1;padding:8px 9px;border:1px solid var(--line,#cbd5e1);border-radius:8px;background:var(--card,#fff);color:var(--ink,#1f2933);min-width:54px;text-align:center;transition:background .15s,color .15s,border-color .15s}
+.ms-timer:hover,.ms-countdown:hover{border-color:var(--accent,#1e4a6e)}
+.ms-timer.running{background:var(--accent,#1e4a6e);color:#fff;border-color:var(--accent,#1e4a6e)}
+.ms-countdown.running{background:#f57c00;color:#fff;border-color:#f57c00}
+.ms-countdown.done{background:#c62828;color:#fff;border-color:#c62828}
+</style>
+<script>
+/* Bedside stopwatches: fill T25FW/9-HPT time cells directly; 6-min countdown for 6MWT. */
+(function(){
+  function now(){ return (window.performance&&performance.now)?performance.now():Date.now(); }
+  var up=new WeakMap(), down=new WeakMap();
+  document.addEventListener("click",function(e){
+    var b=e.target.closest?e.target.closest(".ms-timer"):null;
+    if(b){ e.preventDefault(); toggleUp(b); return; }
+    var c=e.target.closest?e.target.closest(".ms-countdown"):null;
+    if(c){ e.preventDefault(); toggleDown(c); }
+  });
+  function toggleUp(b){
+    var st=up.get(b);
+    if(st&&st.iv){
+      clearInterval(st.iv);
+      var sec=Math.round(Math.max(0,(now()-st.t0)/1000)*10)/10;
+      var inp=document.getElementById(b.getAttribute("data-target"));
+      if(inp){ inp.value=sec; inp.dispatchEvent(new Event("input",{bubbles:true})); }
+      b.classList.remove("running"); b.innerHTML="&#9201;"; b.title="Recorded "+sec+"s. Tap to re-time.";
+      up.set(b,{});
+    }else{
+      var t0=now(); b.classList.add("running");
+      var iv=setInterval(function(){ b.textContent=((now()-t0)/1000).toFixed(1)+"s"; },100);
+      up.set(b,{iv:iv,t0:t0});
+    }
+  }
+  function toggleDown(c){
+    var cur=down.get(c);
+    if(cur&&cur.iv){ clearInterval(cur.iv); reset(c); return; }
+    var mins=parseFloat(c.getAttribute("data-mins")||"6"), end=now()+mins*60000;
+    c.classList.remove("done"); c.classList.add("running");
+    function tick(){
+      var ms=end-now();
+      if(ms<=0){ var s2=down.get(c); if(s2&&s2.iv) clearInterval(s2.iv);
+        c.classList.remove("running"); c.classList.add("done"); c.textContent="Time up"; c.title="Enter the distance walked"; down.set(c,{}); return; }
+      var s=Math.ceil(ms/1000); c.innerHTML="&#9201; "+Math.floor(s/60)+":"+("0"+(s%60)).slice(-2);
+    }
+    var iv=setInterval(tick,200); down.set(c,{iv:iv}); tick();
+  }
+  function reset(c){ c.classList.remove("running","done"); c.innerHTML="&#9201; "+Math.floor(parseFloat(c.getAttribute("data-mins")||"6"))+":00"; c.title="6-minute countdown for the walk"; down.set(c,{}); }
 })();
 </script>
 </body>

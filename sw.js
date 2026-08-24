@@ -1,11 +1,16 @@
 /* MSpectrum service worker - NETWORK-FIRST.
    Always serves the freshest version when online (so deployed changes show immediately);
    falls back to the cached copy only when there is no connection. Bump CACHE to force-clear. */
-const CACHE = "mspectrum-v1";
+const CACHE = "mspectrum-v2";
 const CORE = [
   "./", "./index.html", "./scores.html", "./mcdonald.html", "./manifest.webmanifest",
   "./mspectrum-logo.svg", "./favicon.svg",
-  "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png"
+  "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png",
+  // self-hosted fonts (correct typography offline)
+  "./fonts/fraunces-standard-normal.woff2", "./fonts/ibm-plex-sans-wght-normal.woff2",
+  "./fonts/ibm-plex-mono-400-normal.woff2",
+  // self-hosted export libraries (PDF/image export offline)
+  "./vendor/html2canvas.min.js", "./vendor/jspdf.umd.min.js", "./vendor/html2pdf.bundle.min.js"
 ];
 
 self.addEventListener("install", function (e) {

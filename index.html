@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://docs.opencv.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://docs.opencv.org; object-src 'none'; base-uri 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://docs.opencv.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://docs.opencv.org; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="description" content="MSpectrum - a free, browser-based hub for multiple sclerosis outcome measures and diagnosis: the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a 2024 McDonald-criteria diagnostic checker.">
 <title>MSpectrum - Comprehensive MS scoring & diagnosis (EDSS & beyond)</title>
 <meta name="keywords" content="multiple sclerosis, MS, EDSS, EDSS calculator, Neurostatus, MS outcome measures, MS scores, SDMT, BICAMS, MSFC, PDDS, MSSS, ARMSS, MFIS, FSS, MSWS-12, PROMIS-29, MSQOL-54, McDonald criteria 2024, MS diagnosis">
@@ -24,9 +24,18 @@
 <meta name="twitter:description" content="A free, browser-based, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.">
 <meta name="twitter:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png?v=2">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MSpectrum - MS scoring & diagnosis (EDSS & beyond)","url":"https://anaszakarya.github.io/MSpectrum/","description":"A free, browser-based, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"},{"@type":"Person","name":"Anza Memon"}],"publisher":{"@type":"Organization","name":"Wayne State University, Department of Neurology"}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/fraunces-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style id="mspectrum-fonts">/* self-hosted fonts (privacy-first, no third-party requests) */
+@font-face{font-family:"Fraunces";font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/fraunces-standard-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:100 700;font-display:swap;src:url("fonts/ibm-plex-sans-wght-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/ibm-plex-mono-400-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/ibm-plex-mono-500-normal.woff2") format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/ibm-plex-mono-600-normal.woff2") format("woff2")}
+/* export-only EDSS interpretation page: hidden on screen, printed as page 3 */
+#sc-page-explain{display:none}
+@media print{#sc-page-explain{display:block!important}}
+</style>
 <style>
 /* ============================================================
    AutoEDSSguide - design tokens
@@ -3343,7 +3352,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       <button class="btn-cta" id="hero-start-btn" aria-label="Get started">Get started ↓</button>
       <a class="btn-cta secondary" href="#features" aria-label="Learn More">Learn More ↓</a>
     </div>
-    <div class="privacy-tag">🔒 Private &amp; browser-based - your data never leaves your device. Please don't enter patient names or identifiers (PHI).</div>
+    <div class="privacy-tag">🔒 Private &amp; browser-based - your data never leaves your device. Any identifiers you enter stay on this device only; prefer a non-identifying code where you can.</div>
   </div>
   </div><!-- /hero-wrap -->
 
@@ -3413,7 +3422,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
           <span class="way-cta">Open AutoEDSSguide →</span>
         </button>
         <a class="way-card hub-card" href="scores.html" style="text-decoration:none;" aria-label="Open MS Score Hub">
-          <span class="badge" style="background:#2a9d8f;color:white;">29 tools</span>
+          <span class="badge" style="background:#2a9d8f;color:white;">30 tools</span>
           <h3>📊 MS Score Hub</h3>
           <div class="way-sub">SDMT · BVMT-R · CVLT-II · PDDS · MFIS · FSS · PHQ-9 · GAD-7 · MSWS-12 · MSIS-29 · MSQOL-54 · PROMIS-29 · T25FW · 9-HPT · PASAT-3 · BICAMS · MSFC · SymptoMScreen · 6MWT · FSMC · MS severity</div>
           <p>Stateless calculators &amp; questionnaires for cognition, fatigue, mood and quality of life - each with plain-language interpretation and optional normalization.</p>
@@ -3515,7 +3524,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       <p><b>Accuracy &amp; verification.</b> Scoring rules are implemented faithfully from the cited primary sources, but no guarantee is made that every result is error-free or current. Verify any score locally against the original instrument before clinical or trial use. The cognitive tests (SDMT, BVMT-R, CVLT-II) must be administered and interpreted by a trained professional.</p>
       <p><b>Licensed &amp; proprietary instruments.</b> Some instruments are licensed or proprietary (e.g. the MSWS-12 and MSIS-29 wording, and the SDMT / BVMT-R / CVLT-II stimuli and norm tables). Their full content is not reproduced here - short functional labels are shown for orientation only. Use the official forms for clinical or research use and ensure you hold any required licence.</p>
       <p><b>Mental-health screens.</b> PHQ-9 and GAD-7 are screening tools, not diagnoses. If thoughts of self-harm are reported, or if you or someone else may be in danger, seek help immediately - in the US you can call or text 988 (Suicide &amp; Crisis Lifeline), or contact local emergency services.</p>
-      <p><b>Privacy &amp; your responsibility.</b> All computation is local to your browser; nothing is uploaded, stored or transmitted, and there is no account or tracking. Do not enter patient names or identifiers (PHI) - use a non-identifying code. You are responsible for using the tool in line with the privacy, data-protection and professional rules that apply to you (e.g. HIPAA, GDPR, local regulations).</p>
+      <p><b>Privacy &amp; your responsibility.</b> All computation is local to your browser; nothing is uploaded, stored or transmitted, and there is no account or tracking. Prefer a non-identifying code over patient names or identifiers (PHI). Anything you do enter stays on this device only; it is never uploaded, and handling it lawfully remains your responsibility. You are responsible for using the tool in line with the privacy, data-protection and professional rules that apply to you (e.g. HIPAA, GDPR, local regulations).</p>
       <p><b>No warranty.</b> MSpectrum is provided &ldquo;as is&rdquo;, without warranty of any kind, express or implied. To the maximum extent permitted by law, the authors and Wayne State University accept no liability for any loss or harm arising from its use. Use is at your own discretion and risk.</p>
     </details>
     <details class="about-toggle"><summary>📚 References &amp; scoring sources</summary>
@@ -4172,6 +4181,8 @@ AutoEDSSguide provides automated scoring for guidance purposes only and does not
       </div>
       <div class="value" id="explain-edss-value">-</div>
     </div>
+    <div class="explain-plain" id="explain-plain" style="margin:10px 0;font-size:13px;line-height:1.55"></div>
+    <div id="explain-radar" style="margin:2px 0 12px"></div>
     <ul class="explain-list" id="explain-list"></ul>
     <div class="explain-rule" id="explain-rule">-</div>
     <details class="explain-steps-toggle">
@@ -4840,7 +4851,7 @@ const CARDS = {
     title: "Identification",
     fields: [
       { type: "text", id: "pt_id", label: "Patient ID" },
-      { type: "date", id: "pt_dob", label: "Date of birth" },
+      { type: "number", id: "pt_dob", label: "Year of birth (optional)", min: 1900, max: 2025, placeholder: "YYYY" },
       { type: "select", id: "pt_sex", label: "Sex",
         options: [["", "-"], ["M","Male"], ["F","Female"], ["O","Other / not specified"]] },
       { type: "text", id: "pt_study", label: "Study / Centre" },
@@ -5985,6 +5996,7 @@ function renderFinalSheet() {
           <button class="btn" id="btn-export-redcap" title="Flat CSV with REDCap-compatible variable names">Export CSV / REDCap</button>
           <button class="btn" id="btn-export-dict" title="One-time project setup: the data dictionary defines the fields (names, types, labels) to create the REDCap instrument. The data itself goes in via 'Export CSV / REDCap'.">REDCap dictionary (project setup)</button>
           <button class="btn btn-warn" id="btn-reset">Reset all</button>
+          <button class="btn btn-warn" id="btn-wipe" title="Erase everything MSpectrum saved in this browser (use on shared or clinic computers)">Clear saved data</button>
         </div>
       </div>
 
@@ -6836,7 +6848,7 @@ function syncPatientHeader(inp) {
   setv("study-name", inp.pt_study);
   setv("patient-id", inp.pt_id);
   setv("rater-name", inp.pt_rater);
-  _fillDateBoxes("dob", inp.pt_dob, 4);
+  (function(){ var y=String(inp.pt_dob||"").replace(/\D/g,"").slice(0,4); ["dob-d1","dob-d2","dob-m1","dob-m2","dob-m3","dob-y1","dob-y2","dob-y3","dob-y4"].forEach(function(id){var e=document.getElementById(id); if(e) e.value="";}); if(y.length===4){ ["y1","y2","y3","y4"].forEach(function(sfx,i){var e=document.getElementById("dob-"+sfx); if(e) e.value=y[i];}); } })();
   _fillDateBoxes("doe", inp.pt_exam, 2);
 }
 
@@ -7041,6 +7053,7 @@ function syncFinalSheet(inp, r) {
     container.innerHTML = "";
     container.appendChild(clone);
   }
+  _syncExplainSheetPage(container, r);
 }
 
 // ============================================================
@@ -7335,14 +7348,16 @@ async function emailFinalSheet() {
   if (!pages.length) { showToast("Open the Final Sheet tab first, then press Email again."); return; }
   try {
     showToast("Preparing the PDF\u2026");
-    await _loadScriptOnce("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
-    await _loadScriptOnce("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
+    try { await _loadScriptOnce("vendor/html2canvas.min.js"); } catch (e) { await _loadScriptOnce("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"); }
+    try { await _loadScriptOnce("vendor/jspdf.umd.min.js"); } catch (e) { await _loadScriptOnce("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"); }
     const JsPDF = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : null;
     if (!JsPDF || typeof html2canvas === "undefined") throw new Error("libs missing");
     const pdf = new JsPDF({ orientation: "p", unit: "mm", format: "a4", compress: true });
     const W = 210, H = 297;
     for (let i = 0; i < pages.length; i++) {
+      const _pd = pages[i].style.display; pages[i].style.display = "block";
       const canvas = await html2canvas(pages[i], { scale: 1.5, backgroundColor: "#ffffff", useCORS: true, logging: false });
+      pages[i].style.display = _pd;
       // JPEG (quality 0.85) keeps the PDF small - PNG made it ~30 MB for two pages.
       const img = canvas.toDataURL("image/jpeg", 0.85);
       const ratio = Math.min(W / canvas.width, H / canvas.height);
@@ -7438,7 +7453,7 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove("show"), 2000);
 }
 
-function clearForm() {
+function clearSystemForm() {
   FORM_STATE = {};
   document.querySelectorAll("#form-root input, #form-root select").forEach(el => {
     if (el.type === "radio" || el.type === "checkbox") el.checked = false;
@@ -7454,8 +7469,14 @@ document.addEventListener("click", (ev) => {
     try {
       FORM_STATE = { ...FORM_STATE, ...captureState() };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(FORM_STATE));
-      showToast("Saved to this browser");
+      try { localStorage.setItem(STORAGE_KEY + "_savedAt", String(Date.now())); } catch (e) {}
+      showToast("Saved to this browser only. Use \u2018Clear saved data\u2019 on shared computers.");
     } catch (e) { showToast("Could not save: " + e.message); }
+  } else if (t.id === "btn-wipe") {
+    if (confirm("Erase ALL MSpectrum data saved in this browser on this device? This cannot be undone.")) {
+      try { localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(STORAGE_KEY + "_savedAt"); } catch (e) {}
+      showToast("Saved data cleared from this browser");
+    }
   } else if (t.id === "btn-load") {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -7463,7 +7484,10 @@ document.addEventListener("click", (ev) => {
       FORM_STATE = JSON.parse(raw);
       applyState();
       recalc();
-      showToast("Loaded");
+      var _ts = null; try { _ts = Number(localStorage.getItem(STORAGE_KEY + "_savedAt")); } catch (e) {}
+      var _age = "";
+      if (_ts) { var _h = (Date.now() - _ts) / 3.6e6; _age = _h < 1 ? " (saved just now)" : _h < 24 ? " (saved " + Math.round(_h) + "h ago)" : " (saved " + Math.round(_h/24) + "d ago)"; }
+      showToast("Loaded" + _age);
     } catch (e) { showToast("Could not load: " + e.message); }
   } else if (t.id === "btn-export-json") {
     FORM_STATE = { ...FORM_STATE, ...captureState() };
@@ -7488,7 +7512,7 @@ document.addEventListener("click", (ev) => {
     document.querySelector('.tab-btn[data-tab="finalsheet"]')?.click();
     setTimeout(() => window.print(), 200);
   } else if (t.id === "btn-reset") {
-    if (confirm("Clear all entries on this form?")) clearForm();
+    if (confirm("Clear all entries on this form?")) clearSystemForm();
   } else if (t.id === "btn-explain" || t.id === "explain-close") {
     toggleExplain(t.id === "btn-explain");
   }
@@ -7548,6 +7572,97 @@ function fillExplainPanel(r) {
 
   const rule = document.getElementById("explain-rule");
   rule.textContent = explainRule(r);
+  var _pl = document.getElementById("explain-plain"); if (_pl) _pl.innerHTML = edssPlainLanguage(r);
+  var _rd = document.getElementById("explain-radar"); if (_rd) _rd.innerHTML = fsRadarSVG(r);
+}
+
+// Plain-language, one-line clinical summary of the EDSS + what is driving it.
+function edssPlainLanguage(r) {
+  var step = (r.edss_step == null) ? null : Number(r.edss_step);
+  var amb;
+  if (step == null) amb = "";
+  else if (step === 0) amb = "a normal neurological examination";
+  else if (step < 2) amb = "no disability, only minimal neurological signs";
+  else if (step < 3) amb = "minimal disability, fully ambulatory";
+  else if (step < 4) amb = "moderate disability but still fully ambulatory";
+  else if (step < 5) amb = "fully ambulatory without aid, walking a few hundred metres, with more significant disability";
+  else if (step < 6) amb = "ambulatory without aid for limited distances; disability begins to limit full daily activities";
+  else if (step < 6.5) amb = "needs intermittent or unilateral support to walk about 100 m";
+  else if (step < 7) amb = "needs bilateral support to walk about 20 m";
+  else if (step < 8) amb = "essentially restricted to a wheelchair";
+  else if (step < 9) amb = "essentially restricted to bed or a chair";
+  else if (step < 10) amb = "helpless and bed-bound";
+  else amb = "death attributable to MS";
+  var axes = [
+    ["visual", Number(r.visual_fs_conv) || 0], ["brainstem", Number(r.brainstem_fs) || 0],
+    ["pyramidal (motor)", Number(r.pyramidal_fs) || 0], ["cerebellar (coordination)", Number(r.cerebellar_fs) || 0],
+    ["sensory", Number(r.sensory_fs) || 0], ["bowel/bladder", Number(r.bb_fs_conv) || 0],
+    ["cerebral (cognition/fatigue)", Number(r.cerebral_fs) || 0]
+  ];
+  var maxv = Math.max.apply(null, axes.map(function (a) { return a[1]; }));
+  var drivers = axes.filter(function (a) { return a[1] === maxv && maxv > 0; }).map(function (a) { return a[0]; });
+  var driverTxt = maxv <= 0 ? "No functional-system involvement is recorded."
+    : ("The main " + (drivers.length > 1 ? "contributors are " : "contributor is ") + drivers.join(" and ") + " (grade " + maxv + ").");
+  var ambNote = (r.ambulation_source === "auto" && Number(r.ambulation_score) >= 5) ? " Walking ability is the limiting factor here." : "";
+  var head = (step == null) ? "EDSS not yet determined." : ("EDSS " + step.toFixed(1) + ": " + amb + ".");
+  return "<b>In plain terms.</b> " + head + " " + driverTxt + ambNote;
+}
+
+// Inline SVG radar of the 7 Functional Systems (converted where the EDSS uses the converted grade).
+function fsRadarSVG(r, fixed) {
+  var A = fixed ? "#1e4a6e" : "var(--accent,#1e4a6e)", L = fixed ? "#c7d2dd" : "var(--line,#cbd5e1)", M = fixed ? "#5a6b7b" : "var(--muted,#64748b)";
+  function nz(x) { x = Number(x); return isNaN(x) ? 0 : x; }
+  var axes = [["Visual", nz(r.visual_fs_conv)], ["Brainstem", nz(r.brainstem_fs)], ["Pyramidal", nz(r.pyramidal_fs)],
+    ["Cerebellar", nz(r.cerebellar_fs)], ["Sensory", nz(r.sensory_fs)], ["Bowel/Bladder", nz(r.bb_fs_conv)], ["Cerebral", nz(r.cerebral_fs)]];
+  var N = axes.length, cx = 140, cy = 132, R = 86, MAX = 6, lab = R + 22;
+  function pt(i, rad) { var a = -Math.PI / 2 + i * 2 * Math.PI / N; return [cx + rad * Math.cos(a), cy + rad * Math.sin(a)]; }
+  var grid = "";
+  [2, 4, 6].forEach(function (g) { var pts = ""; for (var i = 0; i < N; i++) { var p = pt(i, R * g / MAX); pts += (i ? " " : "") + p[0].toFixed(1) + "," + p[1].toFixed(1); } grid += '<polygon points="' + pts + '" fill="none" stroke="' + L + '" stroke-width="1"/>'; });
+  var spokes = "", labels = "", maxv = -1, maxi = 0;
+  for (var i = 0; i < N; i++) { if (axes[i][1] > maxv) { maxv = axes[i][1]; maxi = i; } }
+  for (var i = 0; i < N; i++) {
+    var e = pt(i, R); spokes += '<line x1="' + cx + '" y1="' + cy + '" x2="' + e[0].toFixed(1) + '" y2="' + e[1].toFixed(1) + '" stroke="' + L + '" stroke-width="1"/>';
+    var lp = pt(i, lab); var anchor = Math.abs(lp[0] - cx) < 6 ? "middle" : (lp[0] > cx ? "start" : "end");
+    var wt = (i === maxi && maxv > 0) ? "700" : "400";
+    labels += '<text x="' + lp[0].toFixed(1) + '" y="' + (lp[1] + 3).toFixed(1) + '" text-anchor="' + anchor + '" font-size="10" font-weight="' + wt + '" fill="' + M + '">' + axes[i][0] + '</text>';
+  }
+  var dpts = "", dots = "";
+  for (var i = 0; i < N; i++) { var v = Math.max(0, Math.min(MAX, axes[i][1])); var p = pt(i, R * v / MAX); dpts += (i ? " " : "") + p[0].toFixed(1) + "," + p[1].toFixed(1); dots += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="' + ((i === maxi && maxv > 0) ? 3.6 : 2.2) + '" fill="' + A + '"/>'; }
+  return '<svg viewBox="0 0 280 264" width="100%" style="max-width:300px;display:block;margin:0 auto" role="img" aria-label="Functional systems radar (0 to 6 per system)">' +
+    grid + spokes + '<polygon points="' + dpts + '" fill="' + A + '" fill-opacity="0.15" stroke="' + A + '" stroke-width="2"/>' + dots + labels +
+    '<text x="140" y="130" text-anchor="middle" font-size="9" fill="' + M + '">0</text><text x="140" y="' + (132 - R + 8) + '" text-anchor="middle" font-size="8" fill="' + M + '">6</text></svg>';
+}
+
+// Build the export-only "EDSS interpretation" page (radar + plain-language + FS table + rule).
+function _explainPageInner(r) {
+  var step = (r.edss_step == null) ? "-" : Number(r.edss_step).toFixed(1);
+  var rows = [["Visual (converted)", r.visual_fs_conv + " (raw " + r.visual_fs + ")"], ["Brainstem", String(r.brainstem_fs)],
+    ["Pyramidal", String(r.pyramidal_fs)], ["Cerebellar", r.cerebellar_fs + (r.cerebellar_x ? " X" : "")], ["Sensory", String(r.sensory_fs)],
+    ["Bowel/Bladder (converted)", r.bb_fs_conv + " (raw " + r.bb_fs + ")"], ["Cerebral", String(r.cerebral_fs)],
+    ["Ambulation Score", r.ambulation_score + " (" + r.ambulation_source + ")"]];
+  var tbl = rows.map(function (x) { return '<tr><td style="padding:3px 8px;border-bottom:1px solid #e3e8ee">' + x[0] + '</td><td style="padding:3px 8px;border-bottom:1px solid #e3e8ee;text-align:right;font-weight:700">' + x[1] + '</td></tr>'; }).join("");
+  return '<div style="color:#1a2330;padding:4mm 2mm">' +
+    '<div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid #1e4a6e;padding-bottom:6px;margin-bottom:12px"><div style="font-size:15pt;font-weight:800;color:#1e4a6e">EDSS interpretation</div><div style="font-size:14pt;font-weight:800">EDSS ' + step + '</div></div>' +
+    '<div style="font-size:10.5pt;line-height:1.5;margin-bottom:12px">' + edssPlainLanguage(r) + '</div>' +
+    '<div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start">' +
+      '<div style="flex:1 1 250px;min-width:230px">' + fsRadarSVG(r, true) + '</div>' +
+      '<div style="flex:1 1 230px;min-width:210px"><div style="font-weight:700;margin-bottom:4px;font-size:10pt">Functional systems (grade 0 to 6)</div><table style="width:100%;border-collapse:collapse;font-size:9.5pt">' + tbl + '</table></div>' +
+    '</div>' +
+    '<div style="margin-top:12px;font-size:9pt;color:#33414f"><b>Combination rule:</b> ' + explainRule(r) + '</div>' +
+    '<div style="margin-top:14px;font-size:8pt;color:#7a8896;border-top:1px solid #e3e8ee;padding-top:6px">Generated by MSpectrum. Decision support, not a diagnosis; the final EDSS step remains the examiner\'s responsibility.</div>' +
+    '</div>';
+}
+// Append the export-only interpretation page to the cloned final sheet (hidden on screen, shown in print/PDF).
+function _syncExplainSheetPage(container, r) {
+  try {
+    if (!container) return;
+    var host = container.querySelector(".sc-pages-container") || container.querySelector(".sc-sheet-wrap") || container;
+    var old = container.querySelector("#sc-page-explain"); if (old) old.remove();
+    var pg = document.createElement("div");
+    pg.className = "sc-page"; pg.id = "sc-page-explain";
+    pg.innerHTML = _explainPageInner(r);
+    host.appendChild(pg);
+  } catch (e) {}
 }
 
 function explainRule(r) {
@@ -9056,7 +9171,7 @@ function buildFlatRecord() {
     // Identifiers
     record_id:           g("pt_id")      || "",
     visit_date:          g("pt_exam")    || today,
-    date_of_birth:       g("pt_dob")     || "",
+    year_of_birth:       g("pt_dob")     || "",
     sex:                 g("pt_sex")     || "",
     rater:               g("pt_rater")   || "",
     ms_type:             g("pt_ms_type") || "",
@@ -9155,7 +9270,7 @@ function exportREDCapDictionary() {
   const FIELD_DEFS = {
     record_id:            ["text","Record ID","","","","","",""],
     visit_date:           ["text","Visit date","","date_ymd","","","",""],
-    date_of_birth:        ["text","Date of birth","","date_ymd","","","",""],
+    year_of_birth:        ["text","Year of birth","","integer","","","",""],
     sex:                  ["dropdown","Sex","M, Male | F, Female | O, Other","","","","",""],
     rater:                ["text","Rater name / ID","","","","","",""],
     ms_type:              ["text","MS type (RRMS/SPMS/PPMS)","","","","","",""],
@@ -9665,7 +9780,7 @@ async function scRunExtraction(){
 // Debug view: shows the flattened page with reading zones, and for every cell the
 // crop, the 28x28 the model saw, and its read + confidence. Lets us see alignment vs reading.
 function scShowDebug(){
-  // Rewritten for the offline v2 engine: renders from window.__ocr2dbg captured during
+  // Rewritten for the on-device v2 engine: renders from window.__ocr2dbg captured during
   // scExtractAllZones (registered ref page + per-cell box, crop, cleaned glyph, read, conf).
   const box=document.getElementById("sc-debug"); if(!box) return;
   box.style.display="block"; box.innerHTML="";
@@ -9675,7 +9790,7 @@ function scShowDebug(){
   box.appendChild(head);
   if(!dbg || !dbg.pages || !dbg.pages.length){
     const p=document.createElement("p"); p.style.cssText="font-size:12px;color:#aa3333;margin:0 0 8px";
-    p.innerHTML="No OCR run captured yet. Click <b>“Align &amp; read sheet (offline v2)”</b> first, then reopen OCR debug.";
+    p.innerHTML="No OCR run captured yet. Click <b>“Align &amp; read sheet (on-device v2)”</b> first, then reopen OCR debug.";
     box.appendChild(p); if(box.scrollIntoView) box.scrollIntoView({behavior:"smooth"}); return;
   }
   const info=document.createElement("p"); info.style.cssText="font-size:12px;color:#555555;margin:0 0 8px";

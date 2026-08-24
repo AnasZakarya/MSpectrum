@@ -1,0 +1,9 @@
+{
+  "name": "mspectrum",
+  "version": "1.0.0",
+  "description": "MSpectrum — browser-based MS scoring & diagnosis toolkit (static site).",
+  "scripts": {
+    "test": "node tests/run.js"
+  },
+  "license": "AGPL-3.0"
+}
