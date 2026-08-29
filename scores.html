@@ -513,7 +513,8 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 <b>ARMSS (Age-Related MS Severity Score):</b> Compares your EDSS to MS patients worldwide of the same age using a global calibration matrix (Manouchehrinia A et al. <em>Mult Scler</em> 2017;23:1938&ndash;46). Score 0&ndash;10; 5.0 = median disability for your age. &gt; 5 = more disabled than the median patient at that age.<br>
 <b>Updated MSSS:</b> Compares EDSS to MS patients with the same disease duration (Roxburgh RH et al. <em>Neurology</em> 2005;64:1144&ndash;51, updated coefficients). Score 0&ndash;10; 5.0 = median at that disease duration.<br>
 <b>Original MSSS:</b> From the original Roxburgh 2005 lookup table (slightly different calibration).<br>
-<b>These are cross-sectional severity benchmarks, not prognostic tools</b> - they show where the patient stands relative to the MS population, not where they are headed.
+<b>These are cross-sectional severity benchmarks, not prognostic tools</b> - they show where the patient stands relative to the MS population, not where they are headed.<br>
+<b>Both ARMSS (Manouchehrinia 2017) and MSSS (Roxburgh 2005) are validated, published research measures</b> for comparing disability with peers; use them for research and context, not as a stand-alone individual clinical decision.
 </div></details>
   </section>
 
@@ -2592,7 +2593,7 @@ function calcARR(){ var n=_num(el("arr_n").value), d=_num(el("arr_dur").value), 
   if(n==null||d==null||d<=0){el("arr_out").innerHTML="";return;}
   var yrs=(u==="months")?d/12:d; if(yrs<=0){el("arr_out").innerHTML="";return;}
   var arr=n/yrs; var cls=arr===0?"good":arr<0.5?"neutral":arr<1?"warn":"bad";
-  el("arr_out").innerHTML=interp(cls,"Annualized relapse rate: <b>"+arr.toFixed(2)+"</b> relapses/year (from "+n+" relapse(s) over "+yrs.toFixed(2)+" year(s)).")+'<div class="note">ARR = relapses \u00f7 years observed. Untreated relapsing MS commonly ~0.4&ndash;1.2/yr; a key treatment goal is to reduce ARR toward zero. Context only.</div>'; }
+  el("arr_out").innerHTML=interp(cls,"Annualized relapse rate: <b>"+arr.toFixed(2)+"</b> relapses/year &ndash; <b>"+(arr===0?"no relapses in this period":arr<0.5?"relatively low activity":arr<1?"intermediate activity":"high activity")+"</b> (from "+n+" relapse(s) over "+yrs.toFixed(2)+" year(s)).")+'<div class="note">ARR = relapses \u00f7 years observed. For context (not a formal cut-off): under ~0.5/yr is relatively low, ~0.5&ndash;1 intermediate, and &ge;1 high. Untreated relapsing MS historically averages ~0.4&ndash;1.2/yr, while modern high-efficacy treatment aims for well under 0.2 (ideally zero). Occasional relapses can still occur; a rising or persistently high ARR is worth reviewing with the treating clinician.</div>'; }
 
 function calcCDP(){ var b=_num(el("cdp_base").value), f=_num(el("cdp_fu").value), conf=el("cdp_conf").value;
   if(b==null||f==null){el("cdp_out").innerHTML="";return;}

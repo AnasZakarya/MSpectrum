@@ -3422,7 +3422,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
           <span class="way-cta">Open AutoEDSSguide →</span>
         </button>
         <a class="way-card hub-card" href="scores.html" style="text-decoration:none;" aria-label="Open MS Score Hub">
-          <span class="badge" style="background:#2a9d8f;color:white;">30 tools</span>
+          <span class="badge" style="background:#2a9d8f;color:white;">31 tools</span>
           <h3>📊 MS Score Hub</h3>
           <div class="way-sub">SDMT · BVMT-R · CVLT-II · PDDS · MFIS · FSS · PHQ-9 · GAD-7 · MSWS-12 · MSIS-29 · MSQOL-54 · PROMIS-29 · T25FW · 9-HPT · PASAT-3 · BICAMS · MSFC · SymptoMScreen · 6MWT · FSMC · MS severity</div>
           <p>Stateless calculators &amp; questionnaires for cognition, fatigue, mood and quality of life - each with plain-language interpretation and optional normalization.</p>
@@ -3498,8 +3498,8 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
         <summary>References &amp; scoring sources</summary>
         <div class="ref-item" style="margin-top:12px;"><span class="ref-name">EDSS / Neurostatus</span><span class="ref-cite">Kurtzke JF. <em>Neurology</em> 1983;33:1444&ndash;52. &middot; Kappos L. Neurostatus Scoring Definitions (v04/10.2), 2011.</span></div>
         <div class="ref-item"><span class="ref-name">Combination algorithm</span><span class="ref-cite">Fouad S et al. <em>Mult Scler J&ndash;ETC</em> 2023. DOI:10.1177/20552173231155055.</span></div>
-        <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE et al. <em>Mult Scler J</em> 2017.</span></div>
-        <div class="ref-item"><span class="ref-name">Quick Check (ePR-EDSS)</span><span class="ref-cite">Romeo AR et al. <em>Mult Scler</em> 2021;27(9):1432&ndash;41.</span></div>
+        <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE, Salter AR, Longbrake EE, Cross AH, Naismith RT. <em>Mult Scler J</em> 2018;24(10):1347&ndash;55. DOI:10.1177/1352458517721357.</span></div>
+        <div class="ref-item"><span class="ref-name">Quick Check (based on ePR-EDSS)</span><span class="ref-cite">Romeo AR et al. <em>Mult Scler</em> 2021;27(9):1432&ndash;41.</span></div>
       </details>
     </div>
     <p style="margin-top:16px;color:var(--ink-faint);font-size:12px;text-align:center;">MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b style="color:var(--ink-soft)">It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is stored.</p>
@@ -3533,8 +3533,8 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       <div class="ref-cat">EDSS - AutoEDSSguide</div>
       <div class="ref-item"><span class="ref-name">EDSS / Neurostatus</span><span class="ref-cite">Kurtzke JF. <em>Neurology</em> 1983;33:1444&ndash;52. &middot; Kappos L. Neurostatus Scoring Definitions (v04/10.2), 2011.</span></div>
       <div class="ref-item"><span class="ref-name">Combination algorithm</span><span class="ref-cite">Fouad S et al. <em>Mult Scler J&ndash;ETC</em> 2023. DOI:10.1177/20552173231155055.</span></div>
-      <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE et al. <em>Mult Scler J</em> 2017.</span></div>
-      <div class="ref-item"><span class="ref-name">Quick Check (ePR-EDSS)</span><span class="ref-cite">Romeo AR et al. <em>Mult Scler</em> 2021;27(9):1432&ndash;41.</span></div>
+      <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE, Salter AR, Longbrake EE, Cross AH, Naismith RT. <em>Mult Scler J</em> 2018;24(10):1347&ndash;55. DOI:10.1177/1352458517721357.</span></div>
+      <div class="ref-item"><span class="ref-name">Quick Check (based on ePR-EDSS)</span><span class="ref-cite">Romeo AR et al. <em>Mult Scler</em> 2021;27(9):1432&ndash;41.</span></div>
       <div class="ref-cat">MS Score Hub</div>
       <div class="ref-item"><span class="ref-name">SDMT</span><span class="ref-cite">Smith A. Symbol Digit Modalities Test. Western Psychological Services, 1982. US norms: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (oral); Smith A. SDMT Manual (WPS) 1982 (written).</span></div>
       <div class="ref-item"><span class="ref-name">BVMT-R</span><span class="ref-cite">Benedict RHB. Brief Visuospatial Memory Test&ndash;Revised. PAR, 1997. US MS regression norms: Marrie RA et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
@@ -7730,62 +7730,75 @@ function explainRule(r) {
 // Walking is special: assistance type → AS branch logic.
 // All other systems map answer index → FS-shaped inputs.
 
+// ============================================================
+// Quick Check questions — FAITHFUL to the ePR-EDSS (Romeo 2021).
+// Q1–Q4 (ambulation): the published ePR uses walk-ability + distance +
+//   %-time-per-aid. Our engine needs assistance-type + distance, so this block
+//   is an intentional, documented adaptation of ePR Q1–Q4 that also drives the
+//   early-exit shortcut (a severely limited walker is scored straight away).
+// Q5–Q23: verbatim ePR item text + answer wording, mapped to the shared
+//   Neurostatus engine. Multi-limb ePR items are grouped by region (arms/legs)
+//   or worst side, which the FS logic (worst-limb) preserves.
+// Documented-only (not scored, mirrors the clinician "documented only" items):
+//   Q5 daily activities, Q23 mood (PHQ-2) — collected for completeness.
+// Q16 hearing is deliberately down-weighted (ePR found hearing over-scores).
+// ============================================================
 const QC_QUESTIONS = [
-  // ---- 1. Walking - assistance ----
+  // ---- Q1. Ability to walk (ePR Q1, adapted to assistance type) ----
   {
     id: "qc_walk_assist",
-    title: "How do you mainly walk?",
-    help: "Pick the option that fits most days. Don't worry about brief good or bad days.",
+    title: "Which of the following best describes your ability to walk?",
+    help: "Pick what fits most days. Don't worry about brief good or bad days. (If you use an aid, choose the aid you rely on.)",
     options: [
-      { icon: "🚶", title: "Normally - no problems",
+      { icon: "🚶", title: "I can walk without any problem",
         desc: "I walk like other people my age, no restriction at all.",
         mapping: { amb_assistance: "none", amb_is_normal: true } },
-      { icon: "🚶", title: "On my own, but with some restriction",
-        desc: "No cane or walker, but my walking is slower or limited compared to before.",
+      { icon: "🚶", title: "I have difficulties with walking (no aid)",
+        desc: "No cane or walker, but my walking is slower or more limited than before.",
         mapping: { amb_assistance: "none", amb_is_normal: false } },
-      { icon: "🦯", title: "Cane, crutch, or brace on ONE side",
-        desc: "I use a unilateral walking aid - even just sometimes outdoors.",
+      { icon: "🦯", title: "I use a cane, crutch, or brace on ONE side",
+        desc: "A unilateral walking aid - even just sometimes outdoors.",
         mapping: { amb_assistance: "unilateral" } },
-      { icon: "🦯", title: "Aid on BOTH sides, or someone helping me",
+      { icon: "🦯", title: "I use an aid on BOTH sides, or someone helps me",
         desc: "Two canes, two crutches, a walker, or another person assisting me.",
         mapping: { amb_assistance: "bilateral" } },
-      { icon: "♿", title: "Wheelchair - I manage on my own",
-        desc: "I wheel myself and transfer in/out of the chair without help.",
+      { icon: "♿", title: "I use a wheelchair - I manage on my own",
+        desc: "I wheel myself and transfer in and out without help.",
         mapping: { amb_assistance: "wheelchair_indep" } },
-      { icon: "♿", title: "Wheelchair - I need help",
+      { icon: "♿", title: "I use a wheelchair - I need help",
         desc: "I need help to wheel or to transfer in and out.",
         mapping: { amb_assistance: "wheelchair_help" } },
-      { icon: "🛏", title: "Mostly in bed or chair",
-        desc: "I'm essentially bed/chair-bound but I can still use my arms.",
+      { icon: "🛏", title: "I spend most of my time in bed",
+        desc: "Essentially bed/chair-bound, but I can still use my arms.",
         mapping: { amb_assistance: "bedbound" } },
     ],
   },
 
-  // ---- 2. Walking - distance (CONDITIONAL: only if not wheelchair/bedbound) ----
+  // ---- Q2/Q3. Walking distance (ePR Q2 no-aid / Q3 with-aid) ----
   {
     id: "qc_walk_dist",
-    title: "How far can you walk before needing to rest?",
-    help: "Estimate your usual outdoor distance. One city block ≈ 200 meters (~650 feet).",
+    title: "How far can you walk before needing to stop and rest?",
+    help: "Estimate your usual distance. One city block ≈ 200 meters (~650 feet); one football field ≈ 100 m.",
     skipIf: (answers) => {
       const a = answers.qc_walk_assist;
       if (!a) return false;
-      // Skip if wheelchair or bedbound
       if (["wheelchair_indep", "wheelchair_help", "bedbound"].includes(a.mapping.amb_assistance)) return true;
-      // Skip if fully unrestricted - no distance needed, EDSS driven by FS only
       if (a.mapping.amb_is_normal === true) return true;
       return false;
     },
-    // Distance options vary by assistance type (set dynamically in render)
     dynamicOptions: (answers) => {
       const assist = answers.qc_walk_assist?.mapping?.amb_assistance || "none";
       if (assist === "unilateral") {
         return [
-          { icon: "🌳", title: "More than about 50 meters (~half a block)",
-            desc: "I can walk more than 50 m with my cane or crutch before needing to stop.",
-            mapping: { amb_distance_reported: 80 } },
-          { icon: "🏠", title: "Less than 50 meters (just a short walk)",
-            desc: "Even with my aid, I can only manage a short distance - less than half a block.",
-            mapping: { amb_distance_reported: 25 } },
+          { icon: "🌳", title: "About 100 m / 300 ft or more (with my aid)",
+            desc: "I can walk at least ~100 m with my cane or crutch before stopping.",
+            mapping: { amb_distance_reported: 100 } },
+          { icon: "🏠", title: "About 20 m / 60 ft, up to under 100 m",
+            desc: "A short distance with my aid - less than about a football field.",
+            mapping: { amb_distance_reported: 40 } },
+          { icon: "🏠", title: "Only about 8 m / 24 ft or less",
+            desc: "Just a few steps with my aid, essentially indoors.",
+            mapping: { amb_distance_reported: 8 } },
         ];
       }
       if (assist === "bilateral") {
@@ -7793,282 +7806,354 @@ const QC_QUESTIONS = [
           { icon: "🌳", title: "About a city block or more (~120 m+)",
             desc: "Roughly 1 block with my two aids or with someone helping me.",
             mapping: { amb_distance_reported: 150 } },
-          { icon: "🏘️", title: "Less than a city block (5–120 m)",
+          { icon: "🏘️", title: "Less than a city block (about 5–120 m)",
             desc: "Less than a block - typically only inside the home.",
             mapping: { amb_distance_reported: 60 } },
         ];
       }
-      // "none" - no aid
+      // No aid (ePR Q2)
       return [
-        { icon: "🌳", title: "More than 5 city blocks (>500 m)",
-          desc: "I can walk a long distance without resting - but I still feel some restriction.",
+        { icon: "🌳", title: "More than 1500 ft (500 m, ~5 football fields)",
+          desc: "A long distance without resting - but I still feel some restriction.",
           mapping: { amb_distance_reported: 600 } },
-        { icon: "🏘️", title: "About 3–5 city blocks (300–500 m)",
-          desc: "I can walk that distance but then I usually need to stop and rest.",
+        { icon: "🏘️", title: "About 900–1500 ft (300 m, ~3 football fields)",
+          desc: "I can walk that far, then I usually need to stop and rest.",
           mapping: { amb_distance_reported: 400 } },
-        { icon: "🏘️", title: "About 2–3 city blocks (200–300 m)",
+        { icon: "🏘️", title: "About 600–899 ft (200 m, ~2 football fields)",
           desc: "I have to stop and rest after this distance.",
           mapping: { amb_distance_reported: 250 } },
-        { icon: "🏘️", title: "About 1–2 city blocks (100–200 m)",
+        { icon: "🏘️", title: "About 300–599 ft (100 m, ~1 football field)",
           desc: "I can walk only this far before I have to stop.",
           mapping: { amb_distance_reported: 150 } },
-        { icon: "🏠", title: "Less than 1 city block (under 100 m)",
-          desc: "I can walk only a short distance, just around the home.",
+        { icon: "🏠", title: "Less than 300 ft (under ~100 m)",
+          desc: "Only a short distance, just around the home.",
           mapping: { amb_distance_reported: 60 } },
       ];
     },
   },
 
-  // ---- 3. Visual - Right eye ----
+  // ---- Q5. Functional abilities / daily activities (ePR Q5, DOCUMENTED ONLY) ----
   {
-    id: "qc_vis_R",
-    title: "How is the vision in your RIGHT eye?",
-    help: "Cover your left eye and think about how clearly you see with the right eye alone, with your usual glasses or contact lenses.",
+    id: "qc_adl",
+    title: "Which of the following best describes your daily activities?",
+    help: "For context only - this answer is recorded but does not change the estimate.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
     options: [
-      { icon: "👁️", title: "Normal", desc: "I see clearly - like 20/20 or 20/25 vision.",
-        mapping: { v_va_od: "20/20" } },
-      { icon: "👁️", title: "Slightly blurry", desc: "I can still read most things, but it's not as sharp as before.",
-        mapping: { v_va_od: "20/40" } },
-      { icon: "🌫️", title: "Moderately blurry", desc: "I have trouble reading regular print; vision is clearly reduced.",
-        mapping: { v_va_od: "20/60" } },
-      { icon: "🌫️", title: "Very blurry / dark spot", desc: "I struggle to read even larger text; there may be a dark patch in my vision.",
-        mapping: { v_va_od: "20/200" } },
-      { icon: "❌", title: "Severe loss / nearly no useful vision", desc: "I can barely see anything with this eye - only counting fingers, hand motion, or no vision at all.",
-        mapping: { v_va_od: "CF" } },
+      { icon: "🟢", title: "I carry out my usual daily activities without limitation.", desc: "", mapping: {} },
+      { icon: "🟡", title: "I have limitations but can do most usual activities, even if I need special provisions (altered hours or naps).", desc: "", mapping: {} },
+      { icon: "🟠", title: "I can do about only half of my usual daily activities, even with special provisions.", desc: "", mapping: {} },
+      { icon: "🔴", title: "I am severely limited in my ability to carry out usual daily activities.", desc: "", mapping: {} },
+      { icon: "⛔", title: "I need assistance with basic self-care (dressing, bathing, transferring, going to the bathroom).", desc: "", mapping: {} },
     ],
   },
 
-  // ---- 4. Visual - Left eye ----
-  {
-    id: "qc_vis_L",
-    title: "How is the vision in your LEFT eye?",
-    help: "Cover your right eye and think about how clearly you see with the left eye alone, with your usual glasses or contact lenses.",
-    options: [
-      { icon: "👁️", title: "Normal", desc: "I see clearly - like 20/20 or 20/25 vision.",
-        mapping: { v_va_os: "20/20" } },
-      { icon: "👁️", title: "Slightly blurry", desc: "I can still read most things, but it's not as sharp as before.",
-        mapping: { v_va_os: "20/40" } },
-      { icon: "🌫️", title: "Moderately blurry", desc: "I have trouble reading regular print; vision is clearly reduced.",
-        mapping: { v_va_os: "20/60" } },
-      { icon: "🌫️", title: "Very blurry / dark spot", desc: "I struggle to read even larger text; there may be a dark patch in my vision.",
-        mapping: { v_va_os: "20/200" } },
-      { icon: "❌", title: "Severe loss / nearly no useful vision", desc: "I can barely see anything with this eye - only counting fingers, hand motion, or no vision at all.",
-        mapping: { v_va_os: "CF" } },
-    ],
-  },
-
-  // ---- 5. Brainstem 1 - eyes/face/dizziness ----
-  {
-    id: "qc_bs_eyes",
-    title: "Do you have problems with eye movement, double vision, dizziness, or facial weakness/numbness?",
-    help: "Think about whether your eyes track normally, whether you see double, whether you feel off-balance from spinning, or whether one side of your face feels different.",
-    options: [
-      { icon: "🟢", title: "No - none of these", desc: "Eye movements feel normal, no double vision, no dizziness, and my face feels even on both sides.",
-        mapping: { b_eom: 0, b_face: 0, b_nys: 0, b_trig: 0 } },
-      { icon: "🟡", title: "Mild - only occasionally", desc: "Slight problem now and then with one of these - barely noticeable.",
-        mapping: { b_eom: 1, b_face: 1, b_nys: 1 } },
-      { icon: "🟠", title: "Moderate - I notice it daily", desc: "Clear and persistent: e.g., I see double in some directions, my face feels weak/numb on one side, or I'm dizzy often.",
-        mapping: { b_eom: 2, b_face: 2, b_nys: 2 } },
-      { icon: "🔴", title: "Marked - interferes with daily life", desc: "Severe symptoms in one or more of these - significantly limits driving, reading, or daily activities.",
-        mapping: { b_eom: 3, b_face: 3, b_nys: 3 } },
-      { icon: "⛔", title: "Very severe", desc: "Complete loss of eye movement in directions, severe facial palsy, or constant disabling vertigo.",
-        mapping: { b_eom: 4, b_face: 4, b_nys: 3 } },
-    ],
-  },
-
-  // ---- 6. Brainstem 2 - speech/swallow ----
-  {
-    id: "qc_bs_speech",
-    title: "Do you have trouble speaking clearly or swallowing?",
-    help: "Think about whether your speech sounds slurred, whether others ask you to repeat yourself, and whether you cough or choke when eating or drinking.",
-    options: [
-      { icon: "🟢", title: "No - speech and swallowing are normal", desc: "I speak clearly and can eat and drink anything without coughing or choking.",
-        mapping: { b_dysarth: 0, b_dysphag: 0 } },
-      { icon: "🟡", title: "Slight - I notice it but others usually don't", desc: "My speech occasionally feels slightly off, or I rarely cough on thin liquids.",
-        mapping: { b_dysarth: 1, b_dysphag: 1 } },
-      { icon: "🟠", title: "Mild - others sometimes notice", desc: "People occasionally ask me to repeat, or I cough/choke sometimes on thin liquids.",
-        mapping: { b_dysarth: 2, b_dysphag: 2 } },
-      { icon: "🔴", title: "Moderate", desc: "Speech is clearly slurred and harder to understand, or I have to be careful with both liquids and solids.",
-        mapping: { b_dysarth: 3, b_dysphag: 3 } },
-      { icon: "⛔", title: "Severe", desc: "Speech is hard to understand or I can't speak; I need pureed food or can't swallow safely.",
-        mapping: { b_dysarth: 4, b_dysphag: 4 } },
-    ],
-  },
-
-  // ---- 7. Pyramidal - Arms ----
-  {
-    id: "qc_pyr_arms",
-    title: "How is the strength in your arms?",
-    help: "Think about everyday tasks: lifting groceries, opening jars, carrying a bag, brushing your hair, typing.",
-    options: [
-      { icon: "🟢", title: "Normal", desc: "I can do all these tasks without difficulty.",
-        mapping: { p_str_deltoid_R: 5, p_str_deltoid_L: 5, p_str_biceps_R: 5, p_str_biceps_L: 5,
-                   p_str_triceps_R: 5, p_str_triceps_L: 5, p_str_wflex_R: 5, p_str_wflex_L: 5,
-                   p_str_wext_R: 5, p_str_wext_L: 5, p_overall: 0 } },
-      { icon: "🟡", title: "Mild fatigue only", desc: "My arms get tired faster than they used to, but full strength is there when I push.",
-        mapping: { p_str_deltoid_R: 5, p_str_deltoid_L: 5, p_str_biceps_R: 5, p_str_biceps_L: 5,
-                   p_overall: 1 } },
-      { icon: "🟠", title: "Mild weakness - I notice it daily", desc: "I drop things, struggle with tight jars, or have trouble with heavy doors.",
-        mapping: { p_str_biceps_R: 4, p_str_biceps_L: 4, p_str_wflex_R: 4, p_str_wflex_L: 4,
-                   p_overall: 2 } },
-      { icon: "🔴", title: "Moderate weakness", desc: "Clearly weak in one or both arms - daily tasks like brushing my hair are hard.",
-        mapping: { p_str_biceps_R: 3, p_str_biceps_L: 3, p_str_wflex_R: 3, p_str_wflex_L: 3,
-                   p_str_wext_R: 3, p_str_wext_L: 3, p_overall: 2 } },
-      { icon: "⛔", title: "Severe weakness", desc: "I can barely lift my arm against gravity.",
-        mapping: { p_str_deltoid_R: 2, p_str_deltoid_L: 2, p_str_biceps_R: 2, p_str_biceps_L: 2,
-                   p_overall: 2 } },
-      { icon: "❌", title: "No useful arm function", desc: "I cannot move my arms purposefully.",
-        mapping: { p_str_deltoid_R: 0, p_str_deltoid_L: 0, p_str_biceps_R: 0, p_str_biceps_L: 0,
-                   p_str_triceps_R: 0, p_str_triceps_L: 0, p_overall: 2 } },
-    ],
-  },
-
-  // ---- 8. Pyramidal - Legs ----
-  {
-    id: "qc_pyr_legs",
-    title: "How is the strength in your legs?",
-    help: "Think about: climbing stairs, getting up from a chair, standing on your toes or heels. (Don't think about walking distance - we already covered that.)",
-    options: [
-      { icon: "🟢", title: "Normal", desc: "I can climb stairs, stand up easily, and balance on toes or heels.",
-        mapping: { p_str_hipflex_R: 5, p_str_hipflex_L: 5, p_str_kneeflex_R: 5, p_str_kneeflex_L: 5,
-                   p_str_kneeext_R: 5, p_str_kneeext_L: 5, p_str_ankdorsi_R: 5, p_str_ankdorsi_L: 5,
-                   p_str_ankplant_R: 5, p_str_ankplant_L: 5 } },
-      { icon: "🟡", title: "Mild fatigue only", desc: "My legs get tired on long walks or many flights of stairs.",
-        mapping: { p_str_hipflex_R: 5, p_str_hipflex_L: 5, p_str_kneeflex_R: 5, p_str_kneeflex_L: 5, p_overall: 1 } }, // FIX: leg fatigability now registers (matches arms)
-      { icon: "🟠", title: "Mild weakness - I notice it daily", desc: "Stairs feel harder; getting up from a low chair takes effort.",
-        mapping: { p_str_hipflex_R: 4, p_str_hipflex_L: 4, p_str_kneeflex_R: 4, p_str_kneeflex_L: 4 } },
-      { icon: "🔴", title: "Moderate weakness", desc: "I struggle with stairs - sometimes I need to grab onto things or use the railing.",
-        mapping: { p_str_hipflex_R: 3, p_str_hipflex_L: 3, p_str_kneeflex_R: 3, p_str_kneeflex_L: 3,
-                   p_str_kneeext_R: 3, p_str_kneeext_L: 3 } },
-      { icon: "⛔", title: "Severe weakness", desc: "I can barely lift my leg against gravity - cannot stand on toes or heels at all.",
-        mapping: { p_str_hipflex_R: 2, p_str_hipflex_L: 2, p_str_kneeflex_R: 2, p_str_kneeflex_L: 2,
-                   p_str_kneeext_R: 2, p_str_kneeext_L: 2 } },
-      { icon: "❌", title: "No useful leg function", desc: "I cannot move my legs purposefully (paraplegia).",
-        mapping: { p_str_hipflex_R: 0, p_str_hipflex_L: 0, p_str_kneeflex_R: 0, p_str_kneeflex_L: 0,
-                   p_str_kneeext_R: 0, p_str_kneeext_L: 0 } },
-    ],
-  },
-
-  // ---- 9. Cerebellar - balance / coordination ----
-  {
-    id: "qc_cer",
-    title: "Do you have problems with balance, coordination, or shaky hands?",
-    help: "Think about: walking in a straight line, turning quickly, doing fine tasks like buttons, or having a tremor in your hands.",
-    options: [
-      { icon: "🟢", title: "No - coordination feels normal", desc: "Balance and fine movements feel fine.",
-        mapping: { c_gait_ataxia: 0, c_tandem: 0, c_tremor_ue_R: 0, c_tremor_ue_L: 0, c_trunc: 0 } },
-      { icon: "🟡", title: "Mild - only on testing", desc: "I can feel a slight clumsiness or tremor only when I really concentrate.",
-        mapping: { c_gait_ataxia: 1, c_tremor_ue_R: 1, c_tremor_ue_L: 1 } },
-      { icon: "🟠", title: "Mild - I notice in fine tasks", desc: "Buttons, writing, or pouring drinks are harder than they used to be.",
-        mapping: { c_gait_ataxia: 2, c_tandem: 1, c_tremor_ue_R: 2, c_tremor_ue_L: 2 } },
-      { icon: "🔴", title: "Moderate - interferes with daily tasks", desc: "Clear unsteadiness or tremor that gets in the way of everyday activities.",
-        mapping: { c_gait_ataxia: 3, c_tandem: 2, c_tremor_ue_R: 3, c_tremor_ue_L: 3,
-                   c_tremor_le_R: 3, c_tremor_le_L: 3, c_trunc: 2 } },
-      { icon: "⛔", title: "Severe - cannot perform coordinated movements", desc: "Severe ataxia in all limbs or I cannot sit/stand without support.",
-        mapping: { c_gait_ataxia: 4, c_tandem: 2, c_tremor_ue_R: 4, c_tremor_ue_L: 4,
-                   c_tremor_le_R: 4, c_tremor_le_L: 4, c_trunc: 4 } },
-    ],
-  },
-
-  // ---- 10. Sensory - numbness / tingling ----
+  // ---- Q6. Sensation - hands/arms + feet/legs on one screen (ePR Q6 a–d) ----
   {
     id: "qc_sens",
-    title: "Do you have numbness, tingling, or 'pins and needles' that bother you daily?",
-    help: "Focus on changes in feeling - touch, sharpness, or temperature. Don't include balance issues here (those go under coordination).",
-    options: [
-      { icon: "🟢", title: "No - feeling is normal", desc: "I feel touch, hot/cold, and sharp/dull normally everywhere.",
-        mapping: { s_sup_ue_R: 0, s_sup_ue_L: 0, s_sup_le_R: 0, s_sup_le_L: 0,
-                   s_sup_trunk_R: 0, s_sup_trunk_L: 0, s_vib_le_R: 0, s_vib_le_L: 0 } },
-      { icon: "🟡", title: "Mild - only in 1 or 2 limbs", desc: "Some numbness or tingling in one arm or leg, but I can still feel touch and pain there.",
-        mapping: { s_sup_ue_R: 1, s_vib_le_R: 1 } },
-      { icon: "🟠", title: "Moderate - affects 1–2 limbs significantly, OR mild in many areas", desc: "Significant numbness in a limb (touch and pain are reduced), or mild numbness over a wider area.",
-        mapping: { s_sup_ue_R: 2, s_sup_ue_L: 2, s_sup_le_R: 2, s_vib_le_R: 2, s_vib_le_L: 2 } },
-      { icon: "🔴", title: "Severe - major numbness in 1–2 limbs OR moderate over most of the body", desc: "Marked loss of feeling in a limb, or moderate numbness in most of my body.",
-        mapping: { s_sup_ue_R: 4, s_sup_ue_L: 4, s_sup_le_R: 4, s_sup_le_L: 4,
-                   s_vib_le_R: 3, s_vib_le_L: 3, s_pos_le_R: 2, s_pos_le_L: 2 } },
-      { icon: "⛔", title: "Almost no feeling below the head", desc: "I have lost most or all sensation below the neck.",
-        mapping: { s_sup_ue_R: 5, s_sup_ue_L: 5, s_sup_le_R: 5, s_sup_le_L: 5,
-                   s_sup_trunk_R: 5, s_sup_trunk_L: 5, s_vib_le_R: 3, s_vib_le_L: 3,
-                   s_pos_le_R: 3, s_pos_le_L: 3 } },
+    title: "On an average day, how is the sensation (feeling, numbness, ability to sense touch or hot/cold) in your limbs?",
+    help: "For each row, answer for the limb that is more affected.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    scale: [
+      { icon: "🟢", title: "Feeling is very good - no problems", desc: "" },
+      { icon: "🟡", title: "Feeling is mildly impaired", desc: "" },
+      { icon: "🟠", title: "Feeling is clearly impaired", desc: "" },
+      { icon: "🔴", title: "Feeling is very poor or completely gone", desc: "" },
+    ],
+    parts: [
+      { key: "arms", label: "Hands or arms", optionMaps: [
+        { s_sup_ue_R: 0, s_sup_ue_L: 0 }, { s_sup_ue_R: 1, s_sup_ue_L: 1 },
+        { s_sup_ue_R: 2, s_sup_ue_L: 2 }, { s_sup_ue_R: 4, s_sup_ue_L: 4 } ] },
+      { key: "legs", label: "Feet or legs", optionMaps: [
+        { s_sup_le_R: 0, s_sup_le_L: 0, s_vib_le_R: 0, s_vib_le_L: 0 },
+        { s_sup_le_R: 1, s_sup_le_L: 1, s_vib_le_R: 1, s_vib_le_L: 1 },
+        { s_sup_le_R: 2, s_sup_le_L: 2, s_vib_le_R: 2, s_vib_le_L: 2 },
+        { s_sup_le_R: 4, s_sup_le_L: 4, s_vib_le_R: 3, s_vib_le_L: 3 } ] },
     ],
   },
 
-  // ---- 11. Bladder ----
+  // ---- Q7. Strength - arms + legs on one screen (ePR Q7 a–d) ----
   {
-    id: "qc_bladder",
-    title: "Do you have problems with your bladder?",
-    help: "Think about urgency (sudden need to go), accidents, having to push to start, or needing a catheter.",
-    options: [
-      { icon: "🟢", title: "No - bladder works normally", desc: "No urgency, no accidents, no catheter needed.",
-        mapping: { bb_hes: 0, bb_urg: 0, bb_cath: 0 } },
-      { icon: "🟡", title: "Mild urgency or hesitation, but no accidents", desc: "Sometimes I have to rush to the bathroom, or it's a bit hard to start, but I don't leak.",
-        mapping: { bb_hes: 1, bb_urg: 1, bb_cath: 0 } },
-      { icon: "🟠", title: "Frequent urgency - I sometimes can't make it (must wear pads)", desc: "I have accidents from time to time, and I rely on pads or protection.",
-        mapping: { bb_hes: 2, bb_urg: 2, bb_cath: 0 } },
-      { icon: "🔴", title: "Frequent accidents OR I self-catheterize", desc: "I leak frequently, or I have to use a catheter at intervals to empty my bladder.",
-        mapping: { bb_hes: 3, bb_urg: 3, bb_cath: 1 } },
-      { icon: "⛔", title: "Constant catheter or no bladder control at all", desc: "I have lost bladder control, or I have a permanent catheter.",
-        mapping: { bb_hes: 4, bb_urg: 4, bb_cath: 2 } },
+    id: "qc_str",
+    title: "In general, how much strength do you have to raise your arms and legs in the air?",
+    help: "For each row, answer for the weaker side. \"Raise it\" means lifting the whole limb up against gravity (an arm to a high shelf; a leg while sitting or lying - not walking).",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    scale: [
+      { icon: "🟢", title: "I can easily raise it and keep it raised", desc: "" },
+      { icon: "🟡", title: "I can raise it, but have mild or occasional trouble with my full strength", desc: "" },
+      { icon: "🟠", title: "I have to make some effort to raise it", desc: "" },
+      { icon: "🔴", title: "I can barely raise it", desc: "" },
+      { icon: "🟤", title: "I can move it, but I cannot raise it", desc: "" },
+      { icon: "⛔", title: "I cannot move it at all", desc: "" },
+    ],
+    parts: [
+      { key: "arms", label: "Arms", optionMaps: [
+        { p_overall: 0 }, { p_overall: 1 },
+        { p_str_deltoid_R: 4, p_str_deltoid_L: 4, p_str_biceps_R: 4, p_str_biceps_L: 4 },
+        { p_str_deltoid_R: 3, p_str_deltoid_L: 3, p_str_biceps_R: 3, p_str_biceps_L: 3 },
+        { p_str_deltoid_R: 2, p_str_deltoid_L: 2, p_str_biceps_R: 2, p_str_biceps_L: 2 },
+        { p_str_deltoid_R: 0, p_str_deltoid_L: 0, p_str_biceps_R: 0, p_str_biceps_L: 0, p_str_triceps_R: 0, p_str_triceps_L: 0, p_str_wflex_R: 0, p_str_wflex_L: 0, p_str_wext_R: 0, p_str_wext_L: 0 } ] },
+      { key: "legs", label: "Legs", optionMaps: [
+        {}, { p_overall: 1 },
+        { p_str_hipflex_R: 4, p_str_hipflex_L: 4, p_str_kneeflex_R: 4, p_str_kneeflex_L: 4 },
+        { p_str_hipflex_R: 3, p_str_hipflex_L: 3, p_str_kneeflex_R: 3, p_str_kneeflex_L: 3 },
+        { p_str_hipflex_R: 2, p_str_hipflex_L: 2, p_str_kneeflex_R: 2, p_str_kneeflex_L: 2 },
+        { p_str_hipflex_R: 0, p_str_hipflex_L: 0, p_str_kneeflex_R: 0, p_str_kneeflex_L: 0, p_str_kneeext_R: 0, p_str_kneeext_L: 0, p_str_ankdorsi_R: 0, p_str_ankdorsi_L: 0, p_str_ankplant_R: 0, p_str_ankplant_L: 0 } ] },
     ],
   },
 
-  // ---- 12. Bowel ----
+  // ---- Q8. Spasticity / stiffness (ePR Q8) ----
+  {
+    id: "qc_spast",
+    title: "In general, do muscle spasms or stiffness ('spasticity') make it hard for you to use (bend or straighten) your arms and legs?",
+    help: "Answer for the limb where stiffness is worst.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "I do not have stiffness or spasms", desc: "", mapping: { p_spast_arms_R: 0, p_spast_arms_L: 0, p_spast_legs_R: 0, p_spast_legs_L: 0 } },
+      { icon: "🟡", title: "Mild - does not make it hard for me to use", desc: "", mapping: { p_spast_legs_R: 1, p_spast_legs_L: 1 } },
+      { icon: "🟠", title: "Moderate stiffness, but with effort I can use", desc: "", mapping: { p_spast_legs_R: 2, p_spast_legs_L: 2 } },
+      { icon: "🔴", title: "Sometimes I cannot overcome the stiffness to use my arm or leg", desc: "", mapping: { p_spast_legs_R: 3, p_spast_legs_L: 3 } },
+      { icon: "⛔", title: "My arm or leg is so contracted that I cannot use it at all", desc: "", mapping: { p_spast_legs_R: 4, p_spast_legs_L: 4 } },
+    ],
+  },
+
+  // ---- Q9. Tremor / coordination (ePR Q9 arms + legs) ----
+  {
+    id: "qc_tremor",
+    title: "In general, do tremors or coordination problems make it hard for you to use your arms and legs?",
+    help: "Think about shaky hands, clumsy movements, buttons, writing, or pouring drinks. Answer for the limb most affected.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "I do not have tremors or coordination problems", desc: "", mapping: { c_tremor_ue_R: 0, c_tremor_ue_L: 0, c_tremor_le_R: 0, c_tremor_le_L: 0 } },
+      { icon: "🟡", title: "Rarely make it hard for me to use", desc: "", mapping: { c_tremor_ue_R: 1, c_tremor_ue_L: 1 } },
+      { icon: "🟠", title: "Sometimes make it hard for me to use", desc: "", mapping: { c_tremor_ue_R: 2, c_tremor_ue_L: 2 } },
+      { icon: "🔴", title: "Often make it hard for me to use", desc: "", mapping: { c_tremor_ue_R: 3, c_tremor_ue_L: 3, c_tremor_le_R: 3, c_tremor_le_L: 3 } },
+      { icon: "⛔", title: "Always make it hard for me to use", desc: "", mapping: { c_tremor_ue_R: 4, c_tremor_ue_L: 4, c_tremor_le_R: 4, c_tremor_le_L: 4 } },
+    ],
+  },
+
+  // ---- Q10. Balance (ePR Q10 standing / walking / sitting, combined) ----
+  {
+    id: "qc_balance",
+    title: "In general, how is your balance when standing, walking, and sitting?",
+    help: "Pick the answer that best describes your balance overall.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "Very good - I never or rarely lose my balance", desc: "", mapping: { c_gait_ataxia: 0, c_romberg: 0, c_trunc: 0, c_tandem: 0 } },
+      { icon: "🟡", title: "I sometimes sway or lose balance when my eyes are closed", desc: "", mapping: { c_romberg: 1, c_tandem: 1 } },
+      { icon: "🟠", title: "I often lose my balance or sway, even with my eyes open", desc: "", mapping: { c_gait_ataxia: 2, c_romberg: 2, c_tandem: 2 } },
+      { icon: "🔴", title: "I frequently lose my balance and have to concentrate not to fall", desc: "", mapping: { c_gait_ataxia: 3, c_trunc: 2, c_romberg: 2 } },
+      { icon: "⛔", title: "I almost always lose my balance / I need help to stay balanced", desc: "", mapping: { c_gait_ataxia: 4, c_trunc: 4 } },
+    ],
+  },
+
+  // ---- Q11. Facial weakness (ePR Q11) ----
+  {
+    id: "qc_face_weak",
+    title: "In general, how much muscle weakness do you have in your face?",
+    help: "Answer for the side of your face that is more affected.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "I do not have muscle weakness in my face", desc: "", mapping: { b_face: 0 } },
+      { icon: "🟡", title: "A little, such as when I furrow my eyebrows or laugh", desc: "", mapping: { b_face: 1 } },
+      { icon: "🟠", title: "A lot, such as trouble with drooling or when closing my eye(s)", desc: "", mapping: { b_face: 2 } },
+      { icon: "🔴", title: "Total weakness or palsy, such as Bell's palsy", desc: "", mapping: { b_face: 3 } },
+    ],
+  },
+
+  // ---- Q12. Facial sensation (ePR Q12) ----
+  {
+    id: "qc_face_feel",
+    title: "In general, how much feeling do you have in your face?",
+    help: "Answer for the side of your face that is more affected.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "Feeling is very good - no numbness or pain", desc: "", mapping: { b_trig: 0 } },
+      { icon: "🟡", title: "Feeling is good - some numbness", desc: "", mapping: { b_trig: 1 } },
+      { icon: "🟠", title: "Feeling is fair - hard to tell sharp touch from dull touch", desc: "", mapping: { b_trig: 2 } },
+      { icon: "🔴", title: "Feeling is poor - mild pain", desc: "", mapping: { b_trig: 2 } },
+      { icon: "⛔", title: "Feeling is very poor or gone - moderate to severe pain", desc: "", mapping: { b_trig: 3 } },
+    ],
+  },
+
+  // ---- Q13. Double vision (ePR Q13) ----
+  {
+    id: "qc_diplopia",
+    title: "Do you have double vision?",
+    help: "Double vision means seeing two images of a single object.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "I do NOT have any double vision", desc: "", mapping: { b_eom: 0, b_nys: 0 } },
+      { icon: "🟡", title: "I have double vision that comes and goes", desc: "", mapping: { b_eom: 1 } },
+      { icon: "🟠", title: "I almost always have double vision that goes away when one eye is closed", desc: "", mapping: { b_eom: 2 } },
+      { icon: "🔴", title: "I have complete loss of eye movement in one or more directions (one or both eyes)", desc: "", mapping: { b_eom: 3 } },
+    ],
+  },
+
+  // ---- Q14. Speech (ePR Q14) ----
+  {
+    id: "qc_speech",
+    title: "In general, how is your ability to speak?",
+    help: "Think about slurring and whether others can understand you.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "I do not have problems speaking", desc: "", mapping: { b_dysarth: 0 } },
+      { icon: "🟡", title: "I sometimes slur words but others don't seem to notice", desc: "", mapping: { b_dysarth: 1 } },
+      { icon: "🟠", title: "I often slur words and others notice", desc: "", mapping: { b_dysarth: 2 } },
+      { icon: "🔴", title: "I slur words so much that it interferes with my conversations", desc: "", mapping: { b_dysarth: 3 } },
+      { icon: "⛔", title: "I slur so much that others cannot understand me, or I cannot speak", desc: "", mapping: { b_dysarth: 3 } },
+    ],
+  },
+
+  // ---- Q15. Swallowing (ePR Q15) ----
+  {
+    id: "qc_swallow",
+    title: "For an average day, which best describes your ability to swallow liquids and solids?",
+    help: "Think about coughing or choking when eating or drinking.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "I do NOT have any problems swallowing liquids or foods", desc: "", mapping: { b_dysphag: 0 } },
+      { icon: "🟡", title: "I have problems swallowing liquids or solid foods", desc: "", mapping: { b_dysphag: 1 } },
+      { icon: "🟠", title: "I have frequent problems with swallowing and need a pureed diet", desc: "", mapping: { b_dysphag: 2 } },
+      { icon: "🔴", title: "I cannot swallow food or liquids", desc: "", mapping: { b_dysphag: 3 } },
+    ],
+  },
+
+  // ---- Q16. Hearing (ePR Q16, deliberately down-weighted) ----
+  {
+    id: "qc_hearing",
+    title: "Do you have any problems with your hearing?",
+    help: "Hearing is recorded but has only a small effect on the estimate (per the ePR-EDSS).",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "I do not have problems hearing", desc: "", mapping: { b_hear: 0 } },
+      { icon: "🟡", title: "I have mild hearing loss on one side", desc: "", mapping: { b_hear: 0 } },
+      { icon: "🟠", title: "I have moderate or severe hearing loss on one side", desc: "", mapping: { b_hear: 1 } },
+      { icon: "🔴", title: "I have total hearing loss on both sides - I am effectively deaf", desc: "", mapping: { b_hear: 2 } },
+    ],
+  },
+
+  // ---- Q17a/b. Vision - right + left eye on one screen (ePR Q17 a/b) ----
+  {
+    id: "qc_vis",
+    title: "How is your ability to SEE with each eye?",
+    help: "Describe your vision with your usual glasses or contact lenses. For each eye, cover the other one.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    scale: [
+      { icon: "👁️", title: "I have no problems with my ability to see", desc: "" },
+      { icon: "👁️", title: "My vision is slightly impaired", desc: "" },
+      { icon: "🌫️", title: "My vision is very impaired", desc: "" },
+      { icon: "❌", title: "I am blind, or almost blind, in that eye", desc: "" },
+    ],
+    parts: [
+      { key: "right", label: "Right eye", optionMaps: [
+        { v_va_od: "20/20" }, { v_va_od: "20/40" }, { v_va_od: "20/200" }, { v_va_od: "HM" } ] },
+      { key: "left", label: "Left eye", optionMaps: [
+        { v_va_os: "20/20" }, { v_va_os: "20/40" }, { v_va_os: "20/200" }, { v_va_os: "HM" } ] },
+    ],
+  },
+
+  // ---- Q17c. Blind spots / scotoma (ePR Q17 c) ----
+  {
+    id: "qc_scotoma",
+    title: "Do you have blind spots in your vision?",
+    help: "A blind spot is a patch of missing or dark vision.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "I do NOT have any blind spots in my vision", desc: "", mapping: { v_scotoma_R: 0 } },
+      { icon: "🟡", title: "My doctor told me I have a blind spot but I do not notice it", desc: "", mapping: { v_scotoma_R: 1 } },
+      { icon: "🟠", title: "Yes, I notice a blind spot in my vision", desc: "", mapping: { v_scotoma_R: 2 } },
+    ],
+  },
+
+  // ---- Q18. Bladder urgency / leakage (ePR Q18 a/b/c) ----
+  {
+    id: "qc_bladder_urg",
+    title: "In the last 4 weeks, how often did you have urinary urgency or leak urine without meaning to?",
+    help: "Urgency = a sudden, uncomfortable feeling that you must urinate soon. Include any leaking and whether you wear a pad.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "Never or rarely - no urgency and no leaking", desc: "", mapping: { bb_urg: 0 } },
+      { icon: "🟡", title: "About once a week - urgency, but little or no leaking", desc: "", mapping: { bb_urg: 1 } },
+      { icon: "🟠", title: "A few times a week - I sometimes leak and wear a pad", desc: "", mapping: { bb_urg: 2 } },
+      { icon: "🔴", title: "Every day - frequent leaking", desc: "", mapping: { bb_urg: 3 } },
+      { icon: "⛔", title: "Several times a day - I have little or no bladder control", desc: "", mapping: { bb_urg: 4 } },
+    ],
+  },
+
+  // ---- Q19. Difficulty urinating / retention (ePR Q19) ----
+  {
+    id: "qc_bladder_hes",
+    title: "On an average day, how easy is it for you to start urinating?",
+    help: "Think about hesitancy, straining, infections, or needing a catheter.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "I have normal function", desc: "", mapping: { bb_hes: 0, bb_cath: 0 } },
+      { icon: "🟡", title: "I sometimes have trouble starting to urinate", desc: "", mapping: { bb_hes: 1, bb_cath: 0 } },
+      { icon: "🟠", title: "I often have trouble starting, and/or I get frequent urinary tract infections", desc: "", mapping: { bb_hes: 2, bb_cath: 0 } },
+      { icon: "🔴", title: "My difficulty is so severe that I need intermittent catheterization", desc: "", mapping: { bb_hes: 3, bb_cath: 1 } },
+      { icon: "⛔", title: "So severe that I need an indwelling catheter, or I have overflow leakage", desc: "", mapping: { bb_hes: 4, bb_cath: 2 } },
+    ],
+  },
+
+  // ---- Q20. Bowel (ePR Q20 constipation + frequency) ----
   {
     id: "qc_bowel",
-    title: "Do you have problems with your bowels?",
-    help: "Think about constipation, accidents, or needing enemas/laxatives daily.",
+    title: "On an average day, which best describes your bowels?",
+    help: "Consider both constipation and needing to be near a bathroom or control problems.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
     options: [
-      { icon: "🟢", title: "No - bowels work normally", desc: "No constipation problems, no accidents.",
-        mapping: { bb_bowel: 0 } },
-      { icon: "🟡", title: "Mild constipation, but no accidents", desc: "Sometimes constipated, but I manage with diet or occasional laxatives.",
-        mapping: { bb_bowel: 1 } },
-      { icon: "🟠", title: "Moderate - must wear pads OR change my routine significantly", desc: "Bowel issues are clearly affecting my daily life - pads or specific dietary measures are needed.",
-        mapping: { bb_bowel: 2 } },
-      { icon: "🔴", title: "Severe - need enemas or manual measures regularly", desc: "I rely on enemas, suppositories, or manual measures to manage my bowels.",
-        mapping: { bb_bowel: 3 } },
-      { icon: "⛔", title: "Complete loss of bowel control", desc: "I have lost bowel control entirely.",
-        mapping: { bb_bowel: 4 } },
+      { icon: "🟢", title: "No constipation and normal control", desc: "", mapping: { bb_bowel: 0 } },
+      { icon: "🟡", title: "Some constipation, or mildly increased urge - but I stay in control", desc: "", mapping: { bb_bowel: 1 } },
+      { icon: "🟠", title: "I need to be close to a bathroom at all times and/or wear pads", desc: "", mapping: { bb_bowel: 2 } },
+      { icon: "🔴", title: "Severe constipation - I cannot move my bowels without an enema or manual measure", desc: "", mapping: { bb_bowel: 3 } },
+      { icon: "⛔", title: "I am not able to control my bowels", desc: "", mapping: { bb_bowel: 4 } },
     ],
   },
 
-  // ---- 13. Cerebral - cognition ----
+  // ---- Q21. Cognition (ePR Q21) ----
   {
     id: "qc_cog",
-    title: "Have you noticed problems with memory, focus, or finding words?",
-    help: "Think about how your thinking has changed compared to before - not how tired you feel (that's the next question).",
+    title: "On an average day, which best describes your cognitive (thinking) ability?",
+    help: "Think about concentration, memory, and coping with stress.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
     options: [
-      { icon: "🟢", title: "No - my thinking is normal", desc: "Memory, focus, and word-finding feel the same as before.",
-        mapping: { m_ment: 0 } },
-      { icon: "🟡", title: "Slight - only I notice", desc: "I sense small changes in my thinking, but others don't notice.",
-        mapping: { m_ment: 1 } },
-      { icon: "🟠", title: "Mild - others have noticed too", desc: "My family or close friends have commented on my memory or focus.",
-        mapping: { m_ment: 2 } },
-      { icon: "🔴", title: "Moderate - clearly affects daily life", desc: "I have to write things down, ask people to repeat, or struggle to follow conversations.",
-        mapping: { m_ment: 3 } },
-      { icon: "⛔", title: "Severe - major cognitive decline or disorientation", desc: "I have significant trouble with daily tasks, may lose track of time/place, or rely on others.",
-        mapping: { m_ment: 4 } },
+      { icon: "🟢", title: "I have no problems with concentration or memory", desc: "", mapping: { m_ment: 0 } },
+      { icon: "🟡", title: "Some concentration/memory problems or trouble coping with stress, but I handle my daily routines (including this survey)", desc: "", mapping: { m_ment: 1 } },
+      { icon: "🟠", title: "Problems that my friends and family notice; it is beginning to affect my routine and makes this survey difficult", desc: "", mapping: { m_ment: 2 } },
+      { icon: "🔴", title: "Severe impairment - e.g. I sometimes forget where I am or who I am talking to; I need help with this survey", desc: "", mapping: { m_ment: 3 } },
+      { icon: "⛔", title: "I have no meaningful conversation and cannot handle my affairs; someone else must complete this survey", desc: "", mapping: { m_ment: 4 } },
     ],
   },
 
-  // ---- 14. Cerebral - fatigue ----
+  // ---- Q22. Fatigue (ePR Q22) ----
   {
     id: "qc_fatigue",
-    title: "How is your daily fatigue?",
-    help: "MS fatigue is different from regular tiredness - it's a heavy exhaustion that doesn't always improve with rest.",
+    title: "On an average day, which describes your fatigue?",
+    help: "MS fatigue is a heavy exhaustion that does not always improve with rest.",
+    skipIf: (answers) => qcIsSevereWalker(answers),
     options: [
-      { icon: "🟢", title: "No more than other people my age", desc: "Energy levels feel normal - I get tired like anyone else.",
-        mapping: { m_fat: 0 } },
-      { icon: "🟡", title: "Mild - doesn't really limit my activities", desc: "I notice MS fatigue but I can still do everything I want to do.",
-        mapping: { m_fat: 1 } },
-      { icon: "🟠", title: "Moderate - limits some activities (about 50% reduction)", desc: "Fatigue keeps me from doing some things - I have to plan rest into my day.",
-        mapping: { m_fat: 2 } },
-      { icon: "🔴", title: "Severe - major limitation (more than 50% reduction)", desc: "Fatigue is one of the biggest things stopping me from doing daily activities.",
-        mapping: { m_fat: 3 } },
+      { icon: "🟢", title: "I experience no fatigue", desc: "", mapping: { m_fat: 0 } },
+      { icon: "🟡", title: "Mild fatigue - I rest more often, but can still complete all my daily tasks", desc: "", mapping: { m_fat: 1 } },
+      { icon: "🟠", title: "I have to rest unusually often; this affects less than half of my daily activities", desc: "", mapping: { m_fat: 2 } },
+      { icon: "🔴", title: "Severe fatigue that has overtaken my life; I cannot complete more than half of my daily tasks", desc: "", mapping: { m_fat: 3 } },
     ],
   },
 
-  // ---- 15. Bedbound - arm function (only shown when bedbound) ----
-  // Distinguishes EDSS 8.0 (effective arm use) vs 8.5 (some arm use) vs 9.0 (communicate/eat) vs 9.5 (none)
+  // ---- Q23. Mood / PHQ-2 (ePR Q23, DOCUMENTED ONLY - not scored) ----
+  {
+    id: "qc_mood",
+    title: "Over the past 2 weeks, how often have you been bothered by little interest or pleasure in doing things, or feeling down, depressed, or hopeless?",
+    help: "For your wellbeing only - mood does not affect the EDSS estimate (depression is not part of EDSS scoring).",
+    skipIf: (answers) => qcIsSevereWalker(answers),
+    options: [
+      { icon: "🟢", title: "Not at all", desc: "", mapping: {} },
+      { icon: "🟡", title: "Several days", desc: "", mapping: {} },
+      { icon: "🟠", title: "More than half the days", desc: "", mapping: {} },
+      { icon: "🔴", title: "Nearly every day", desc: "", mapping: {} },
+    ],
+  },
+
+  // ---- Bedbound - arm function (shown only when bedbound; refines EDSS 8.0–9.5) ----
   {
     id: "qc_bedbound_arms",
     title: "How well can you use your arms and hands?",
@@ -8089,6 +8174,15 @@ const QC_QUESTIONS = [
     ],
   },
 ];
+
+// A patient already at a wheelchair/bedbound level (EDSS ≥7) has their score set
+// by ambulation; the detailed FS questions can't lower it, so we skip them (the
+// user's "if walking is bad from the start, compute like we do" shortcut).
+function qcIsSevereWalker(answers) {
+  const a = answers.qc_walk_assist;
+  if (!a) return false;
+  return ["wheelchair_indep", "wheelchair_help", "bedbound"].includes(a.mapping.amb_assistance);
+}
 
 // ---- Quick Check state ----
 let QC_ANSWERS = {};   // { question_id: option_object }
@@ -8122,8 +8216,9 @@ function qcCheckEarlyExit() {
     ? { as:7, edss:6.0, label:"Bilateral aid, ≥120 m",  isBedbound:false }
     : { as:9, edss:6.5, label:"Bilateral aid, 5–120 m", isBedbound:false };
   if ((assist === "none" || !assist) && dist !== undefined && dist < 100)
-    // FIX (review): unaided <100 m = AS5 -> EDSS floor 5.5 (6.0 requires unilateral aid).
-    return { as:5, edss:5.5, label:"Walks <100 m without aid", isBedbound:false };
+    // Neurostatus Ambulation Score: AS5 = walking range <100 m WITHOUT assistance = EDSS 6.0
+    // (neurostatus.net Definitions; matches the shared engine's calcEDSSStep AS5→6.0).
+    return { as:5, edss:6.0, label:"Walks <100 m without aid", isBedbound:false };
   return null;
 }
 
@@ -8150,8 +8245,13 @@ function qcRender() {
     `${((QC_INDEX) / visible.length) * 100}%`;
 
   const stage = document.getElementById("qc-stage");
-  const opts = q.dynamicOptions ? q.dynamicOptions(QC_ANSWERS) : q.options;
+  const isParts = Array.isArray(q.parts);   // merged multi-row question (e.g. arms+legs)
+  const opts = isParts ? null : (q.dynamicOptions ? q.dynamicOptions(QC_ANSWERS) : q.options);
   const selectedIdx = QC_ANSWERS[q.id]?.idx;
+  const partsAns = QC_ANSWERS[q.id]?.parts || {};
+  const qAnswered = isParts
+    ? q.parts.every(p => partsAns[p.key] !== undefined)
+    : (QC_ANSWERS[q.id] !== undefined);
 
   // Early-exit banner: show after Q1 (wheelchair) or Q2 (walking-aid/distance)
   const _exit = qcCheckEarlyExit();
@@ -8172,25 +8272,34 @@ function qcRender() {
     </div>
   ` : "";
 
-  stage.innerHTML = earlyExitBanner + `
-    <div class="qc-question" data-q="${q.id}">
-      <div class="qc-question-num">Question ${QC_INDEX + 1} · ${q.id.replace("qc_", "").replace("_", " ")}</div>
-      <h2 class="qc-question-text">${q.title}</h2>
-      <p class="qc-question-help">${q.help}</p>
-      <div class="qc-options">
-        ${opts.map((o, i) => `
+  const optionsHTML = isParts
+    ? q.parts.map(p => `
+        <div class="qc-part">
+          <div class="qc-part-label" style="font-weight:700;margin:16px 0 8px;color:var(--accent-ink);font-size:14px;">${p.label}</div>
+          ${q.scale.map((o, i) => `
+            <button type="button" class="qc-option qc-part-opt ${partsAns[p.key]?.idx === i ? 'selected' : ''}" data-part="${p.key}" data-opt="${i}">
+              <span class="qc-option-icon">${o.icon}</span>
+              <span class="qc-option-text"><span class="qc-option-title">${o.title}</span>${o.desc ? `<span class="qc-option-desc">${o.desc}</span>` : ""}</span>
+            </button>`).join("")}
+        </div>`).join("")
+    : opts.map((o, i) => `
           <button type="button" class="qc-option ${selectedIdx === i ? 'selected' : ''}" data-opt="${i}">
             <span class="qc-option-icon">${o.icon}</span>
             <span class="qc-option-text">
               <span class="qc-option-title">${o.title}</span>
               <span class="qc-option-desc">${o.desc}</span>
             </span>
-          </button>
-        `).join("")}
-      </div>
+          </button>`).join("");
+
+  stage.innerHTML = earlyExitBanner + `
+    <div class="qc-question" data-q="${q.id}">
+      <div class="qc-question-num">Question ${QC_INDEX + 1} · ${q.id.replace("qc_", "").replace(/_/g, " ")}</div>
+      <h2 class="qc-question-text">${q.title}</h2>
+      <p class="qc-question-help">${q.help}</p>
+      <div class="qc-options">${optionsHTML}</div>
       <div class="qc-nav">
         <button type="button" class="qc-btn" id="qc-back" ${QC_INDEX === 0 ? "disabled" : ""}>← Back</button>
-        <button type="button" class="qc-btn qc-btn-primary" id="qc-next" ${QC_ANSWERS[q.id] === undefined ? "disabled" : ""}>
+        <button type="button" class="qc-btn qc-btn-primary" id="qc-next" ${qAnswered ? "" : "disabled"}>
           ${QC_INDEX === visible.length - 1 ? "See my estimated EDSS →" : "Next →"}
         </button>
       </div>
@@ -8207,12 +8316,23 @@ function qcRender() {
     if (b) b.style.display = "none";
   });
 
-  // Wire option clicks
-  stage.querySelectorAll(".qc-option").forEach(btn => {
+  // Wire single-option clicks
+  stage.querySelectorAll(".qc-option:not(.qc-part-opt)").forEach(btn => {
     btn.addEventListener("click", () => {
       const idx = parseInt(btn.dataset.opt, 10);
       const optionObj = (q.dynamicOptions ? q.dynamicOptions(QC_ANSWERS) : q.options)[idx];
       QC_ANSWERS[q.id] = { idx, mapping: optionObj.mapping, label: optionObj.title };
+      qcRender();
+    });
+  });
+  // Wire multi-row (part) clicks
+  stage.querySelectorAll(".qc-part-opt").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const pk = btn.dataset.part, idx = parseInt(btn.dataset.opt, 10);
+      const part = q.parts.find(p => p.key === pk);
+      const cur = Object.assign({}, QC_ANSWERS[q.id]?.parts || {});
+      cur[pk] = { idx, mapping: part.optionMaps[idx] };
+      QC_ANSWERS[q.id] = { parts: cur };
       qcRender();
     });
   });
@@ -8232,12 +8352,14 @@ function qcRender() {
 }
 
 function qcComputeEDSS() {
-  // Merge all mappings into a flat input dict and feed the engine
+  // Merge all mappings into a flat input dict and feed the engine.
+  // Multi-row (part) questions store their answers under ans.parts.
   const inputs = {};
   for (const q of QC_QUESTIONS) {
     const ans = QC_ANSWERS[q.id];
     if (!ans) continue;
-    Object.assign(inputs, ans.mapping);
+    if (ans.parts) { for (const pk in ans.parts) Object.assign(inputs, ans.parts[pk].mapping || {}); }
+    if (ans.mapping) Object.assign(inputs, ans.mapping);
   }
   return calculateFullEDSS(inputs);
 }
@@ -8566,16 +8688,15 @@ function clinBuildSteps() {
     {
       id: "pyr",
       system: "💪 Pyramidal",
-      q: "Worst limb strength and corticospinal signs?",
-      hint: "Ignore isolated abnormal reflexes - they don't contribute (Baldassari). Score the single most-affected limb. Test fine finger movement and hopping if power is 5/5 throughout.",
+      q: "Strength and corticospinal function (score the worst finding)?",
+      hint: "sEDSS scores STRENGTH only - not reflexes, not spasticity (Baldassari). A limb counts as weak only when ≥2 muscle groups in it are weak. If power is 5/5 everywhere, test fine finger movements and hopping.",
       options: [
-        { key: "0", title: "Normal",                  desc: "Power 5/5 all limbs. Fine finger movement and hopping normal.", badge: "normal", score: 0 },
-        { key: "1", title: "Subtle CST signs only",   desc: "Power 5/5 but fine finger movement or hopping impaired. No functional weakness.", badge: "mild",   score: 1 },
-        { key: "2", title: "Mild weakness (4+/5 or 4/5)", desc: "≥2 weak muscles in one limb; not disabling.", badge: "mild",   score: 2 },
-        { key: "3", title: "Moderate weakness (3/5)", desc: "One or more limbs. Disabling but some useful movement.", badge: "mod",    score: 3 },
-        { key: "4", title: "Marked weakness (2/5)",   desc: "Severe - some voluntary movement preserved.", badge: "severe", score: 4 },
-        { key: "5", title: "Monoplegia / paraplegia", desc: "One or both lower limbs plegic.", badge: "severe", score: 5 },
-        { key: "6", title: "Quadriplegia",            desc: "All four limbs essentially plegic.", badge: "severe", score: 6 },
+        { key: "0", title: "Normal", desc: "Power 5/5 in all limbs; fine finger movements and hopping normal.", badge: "normal", score: 0 },
+        { key: "1", title: "Subtle", desc: "Motor fatigability, OR grade 4/5 in a single muscle of 1–2 limbs, OR isolated impaired fine-finger movements or hopping with otherwise full power.", badge: "mild", score: 1 },
+        { key: "2", title: "Minimal", desc: "Grade 4/5 in ≥2 muscles of one limb, OR grade 4/5 in a single muscle across 3+ limbs.", badge: "mild", score: 2 },
+        { key: "3", title: "Mild", desc: "Grade 4/5 in ≥2 muscles of 2+ limbs, OR grade 3/5 in ≥2 muscles of one limb.", badge: "mod", score: 3 },
+        { key: "4", title: "Moderate", desc: "Grade 3/5 in ≥2 muscles of 2+ limbs, OR severe (grade 0–2/5) in ≥2 muscles of one limb.", badge: "severe", score: 4 },
+        { key: "5", title: "Severe", desc: "Grade 0–2/5 in ≥2 muscles of 2+ limbs (e.g. paraparesis, hemiparesis, or worse).", badge: "severe", score: 5 },
       ]
     },
     // ── CEREBELLAR ─────────────────────────────────────────────────────────────
@@ -8584,15 +8705,14 @@ function clinBuildSteps() {
     {
       id: "cer",
       system: "🔄 Cerebellar",
-      q: "Cerebellar function - ataxia, tremor, coordination?",
-      hint: "Finger-nose, heel-shin, tandem gait. Severe gait ataxia alone can score 3–4. Tremor at rest or with intention both count.",
+      q: "Cerebellar function - limb ataxia, tremor, tandem and gait?",
+      hint: "sEDSS scores upper-limb ataxia/intention tremor, tandem gait, and gait ataxia (finger-nose, heel-shin). Severe gait ataxia alone can reach grade 4. Romberg is scored under Sensory, not here.",
       options: [
-        { key: "0", title: "Normal",                  desc: "No ataxia, tremor, or dysmetria.", badge: "normal", score: 0 },
-        { key: "1", title: "Signs without disability", desc: "Subtle dysmetria or tremor - no functional impact.", badge: "mild",   score: 1 },
-        { key: "2", title: "Mild ataxia",             desc: "Noticeable coordination deficit; some functional impact.", badge: "mild",   score: 2 },
-        { key: "3", title: "Moderate ataxia",         desc: "Significant disability from tremor or gait ataxia.", badge: "mod",    score: 3 },
-        { key: "4", title: "Severe ataxia",           desc: "Unable to perform coordinated movements in most limbs.", badge: "severe", score: 4 },
-        { key: "5", title: "Unable to coordinate",    desc: "All four limbs. Essentially unable to perform any coordinated task.", badge: "severe", score: 5 },
+        { key: "0", title: "Normal", desc: "No ataxia, dysmetria, or intention tremor; tandem and gait normal.", badge: "normal", score: 0 },
+        { key: "1", title: "Subtle", desc: "Signs on exam only (minor dysmetria, tremor, or subtle gait/tandem impairment) - no effect on function.", badge: "mild", score: 1 },
+        { key: "2", title: "Mild", desc: "Mild limb ataxia, mildly wide-based gait, or extra steps on turns - some functional impact.", badge: "mild", score: 2 },
+        { key: "3", title: "Moderate", desc: "Moderate limb ataxia that clearly interferes with function, OR moderately wide / unsafe gait.", badge: "mod", score: 3 },
+        { key: "4", title: "Severe", desc: "Severe / non-functional limb ataxia, OR unable to walk more than a few steps unassisted because of ataxia.", badge: "severe", score: 4 },
       ]
     },
     // ── BRAINSTEM ──────────────────────────────────────────────────────────────
@@ -8602,15 +8722,13 @@ function clinBuildSteps() {
     {
       id: "bst",
       system: "🧠 Brainstem",
-      q: "Brainstem - eye movements, speech, swallowing, face?",
-      hint: "Check: nystagmus, INO/diplopia, gaze palsy, facial sensation/weakness, dysarthria, dysphagia. Exclude hearing unless clearly MS-related.",
+      q: "Brainstem - eye movements, nystagmus, face, speech, swallowing?",
+      hint: "sEDSS combines EOM, nystagmus, trigeminal sensation, facial weakness, dysarthria, and 'other' (dysphagia/hearing) into a single 0–3 score. Take the worst category. Hearing loss alone tends to over-score - include only if clearly MS-related.",
       options: [
-        { key: "0", title: "Normal",                  desc: "No brainstem signs on exam.", badge: "normal", score: 0 },
-        { key: "1", title: "Signs only, no disability", desc: "Nystagmus, subtle INO, or minor facial finding - no functional impact.", badge: "mild",   score: 1 },
-        { key: "2", title: "Moderate dysfunction",    desc: "Intermittent diplopia, mild dysarthria, or mild facial weakness.", badge: "mild",   score: 2 },
-        { key: "3", title: "Significant dysfunction", desc: "Marked dysarthria, dysphagia, or sustained gaze palsy.", badge: "mod",    score: 3 },
-        { key: "4", title: "Severe dysfunction",      desc: "Major disability - near-inability to speak or swallow.", badge: "severe", score: 4 },
-        { key: "5", title: "Complete dysfunction",    desc: "Unable to swallow or speak intelligibly.", badge: "severe", score: 5 },
+        { key: "0", title: "Normal", desc: "No brainstem signs.", badge: "normal", score: 0 },
+        { key: "1", title: "Subtle", desc: "Signs the patient is unaware of: mild gaze-evoked nystagmus, subtle EOM limitation, or diminished facial sensation - no functional impact.", badge: "mild", score: 1 },
+        { key: "2", title: "Mild", desc: "Patient-aware findings: nystagmus at 30°, mild facial weakness, detectable dysarthria, or facial numbness the patient notices.", badge: "mild", score: 2 },
+        { key: "3", title: "Moderate/severe", desc: "Nystagmus in primary gaze or oscillopsia, active trigeminal neuralgia, incomplete/complete facial palsy, moderate-severe dysarthria, or dysphagia.", badge: "severe", score: 3 },
       ]
     },
     // ── SENSORY ────────────────────────────────────────────────────────────────
@@ -8620,16 +8738,14 @@ function clinBuildSteps() {
     {
       id: "sen",
       system: "✋ Sensory",
-      q: "Sensory loss - vibration (worst limb) and light touch?",
-      hint: "Use tuning fork for vibration; pinprick or light touch for superficial. Proprioception not needed (redundant with vibration). Score worst region and extent.",
+      q: "Sensory function - superficial sensation and vibration (worst area)?",
+      hint: "sEDSS scores superficial sensation (touch/pin) and vibration (Rydel-Seiffer 64 Hz fork: normal UE ≥7/8, LE ≥6/8). Proprioception is dropped (redundant with vibration). Score by severity AND number of limbs; a positive Romberg is captured here.",
       options: [
-        { key: "0", title: "Normal",                  desc: "No sensory loss in any modality.", badge: "normal", score: 0 },
-        { key: "1", title: "Decreased vibration in 1–2 limbs", desc: "Mild, no functional impact.", badge: "mild",   score: 1 },
-        { key: "2", title: "Mild touch/pain loss in 1–2 limbs", desc: "Noticeable but limited.", badge: "mild",   score: 2 },
-        { key: "3", title: "Moderate loss in 3–4 limbs OR severe in 1–2", desc: "Including any trunk involvement.", badge: "mod",    score: 3 },
-        { key: "4", title: "Severe loss in most limbs, including trunk", desc: "Marked anesthesia below neck.", badge: "severe", score: 4 },
-        { key: "5", title: "Loss of sensation below the neck", desc: "Essentially anesthetic trunk and limbs.", badge: "severe", score: 5 },
-        { key: "6", title: "Loss including head/face", desc: "Anesthesia extending above the neck.", badge: "severe", score: 6 },
+        { key: "0", title: "Normal", desc: "Normal touch, pin, and vibration in all limbs.", badge: "normal", score: 0 },
+        { key: "1", title: "Subtle", desc: "Diminished touch/pin the patient is unaware of, OR mild vibration loss (UE 4–6/8, LE 3–5/8) in 1–2 limbs.", badge: "mild", score: 1 },
+        { key: "2", title: "Mild", desc: "Patient-aware diminished touch/pin in 1–2 limbs, OR moderate vibration loss in 1–2 limbs, OR positive Romberg (unstable eyes-closed).", badge: "mild", score: 2 },
+        { key: "3", title: "Moderate", desc: "Diminished sensation in 3–4 limbs, impaired sharp/dull discrimination, OR absent vibration in 1–2 limbs.", badge: "mod", score: 3 },
+        { key: "4", title: "Severe", desc: "Unable to feel touch or discriminate sharp/dull in several limbs, OR absent vibration in 3+ limbs.", badge: "severe", score: 4 },
       ]
     },
     // ── VISUAL ─────────────────────────────────────────────────────────────────
@@ -8638,25 +8754,15 @@ function clinBuildSteps() {
     {
       id: "vis",
       system: "👁️ Visual",
-      q: "Best-corrected visual acuity - worse eye?",
-      hint: "20/25 is NORMAL unless there is a known history of optic neuritis in that eye (Baldassari). Do not score disc pallor alone.",
+      q: "Best-corrected acuity (worse eye) and visual fields?",
+      hint: "sEDSS uses corrected acuity + fields/scotoma only (disc pallor dropped). 20/25 counts as NORMAL unless there is a history of optic neuritis in that eye (Baldassari).",
       options: [
-        { key: "0", title: "20/20 – 20/25",           desc: "Normal (or 20/25 with no prior optic neuritis).", badge: "normal", score: 0 },
-        { key: "1", title: "20/30 – 20/59",           desc: "Mild impairment.", badge: "mild",   score: 1 },
-        { key: "2", title: "20/60 – 20/99",           desc: "Moderate impairment.", badge: "mod",    score: 2 },
-        { key: "3", title: "20/100 – 20/199",         desc: "Severe impairment.", badge: "severe", score: 3 },
-        { key: "4", title: "≤ 20/200 in worse eye",   desc: "Functional blindness in one eye.", badge: "severe", score: 4 },
-        { key: "5", title: "≤ 20/200 in both eyes",   desc: "Functional blindness bilaterally.", badge: "severe", score: 5 },
-      ],
-      optional: {
-        label: "Visual fields (improves accuracy - check worse eye)",
-        id: "vis_vf",
-        options: [
-          { key: "0", title: "Normal",                score: 0 },
-          { key: "1", title: "Scotoma or partial VF defect", score: 1 },
-          { key: "2", title: "Hemianopia or severe VF loss", score: 2 },
-        ]
-      }
+        { key: "0", title: "Normal", desc: "20/20–20/25 with no field defect (and no prior optic neuritis in that eye).", badge: "normal", score: 0 },
+        { key: "1", title: "Grade 1", desc: "20/25 with a history of optic neuritis, OR a scotoma/field defect the patient is aware of but that is not functionally limiting.", badge: "mild", score: 1 },
+        { key: "2", title: "Grade 2", desc: "Worse-eye acuity 20/30–20/99, OR a functionally limiting field defect/scotoma (e.g. affects driving or reading).", badge: "mod", score: 2 },
+        { key: "3", title: "Grade 3", desc: "Worse-eye acuity 20/100 or worse (better eye still better than 20/60).", badge: "severe", score: 3 },
+        { key: "4", title: "Grade 4", desc: "Worse-eye acuity 20/200 or worse AND better eye 20/60 or worse.", badge: "severe", score: 4 },
+      ]
     },
     // ── BOWEL & BLADDER ────────────────────────────────────────────────────────
     // Baldassari: bladder symptoms only in sEDSS (bowel eliminated - accounted for
@@ -8664,16 +8770,15 @@ function clinBuildSteps() {
     // but bladder drives the score. "Must use pads" rubric (Romeo ePR-EDSS) is useful.
     {
       id: "bb",
-      system: "🚻 Bladder / Bowel",
-      q: "Urinary dysfunction? (Bowel symptoms if present)",
-      hint: "Bladder scores drive this FS. Urgency, hesitancy, incontinence, retention, catheter use. Note: bowel was excluded from sEDSS (Baldassari) - only include if clearly MS-related and severe.",
+      system: "🚻 Bladder",
+      q: "Urinary function - hesitancy/retention and urgency/incontinence?",
+      hint: "sEDSS scores bladder only (bowel dropped - Baldassari). Combine hesitancy/retention with urgency/incontinence and take the worst. The 'must wear pads' rubric helps grade leakage.",
       options: [
-        { key: "0", title: "Normal",                  desc: "No urinary or bowel symptoms.", badge: "normal", score: 0 },
-        { key: "1", title: "Mild urgency or hesitancy", desc: "No incontinence. No catheter.", badge: "mild",   score: 1 },
-        { key: "2", title: "Moderate urgency / occasional leakage", desc: "Uses pads sometimes. No catheter.", badge: "mild",   score: 2 },
-        { key: "3", title: "Frequent incontinence or intermittent catheter", desc: "Significantly affecting daily life.", badge: "mod",    score: 3 },
-        { key: "4", title: "Near-constant catheterisation or severe dysfunction", desc: "Indwelling catheter or complete retention.", badge: "severe", score: 4 },
-        { key: "5", title: "Loss of bladder and bowel control", desc: "Complete incontinence or dependence.", badge: "severe", score: 5 },
+        { key: "0", title: "Normal", desc: "No urinary symptoms.", badge: "normal", score: 0 },
+        { key: "1", title: "Mild", desc: "Mild urgency or hesitancy; no impact on lifestyle; no incontinence or catheter.", badge: "mild", score: 1 },
+        { key: "2", title: "Moderate", desc: "Needs to push/strain or has recurrent UTIs, OR moderate urgency with occasional leakage (pad ≤ once/week).", badge: "mild", score: 2 },
+        { key: "3", title: "Severe", desc: "Requires intermittent catheterisation, OR frequent incontinence (> once/week).", badge: "mod", score: 3 },
+        { key: "4", title: "Loss of function", desc: "Indwelling catheter, OR incontinence requiring diapers / near-total loss of control.", badge: "severe", score: 4 },
       ]
     },
     // ── CEREBRAL ───────────────────────────────────────────────────────────────
@@ -8683,39 +8788,40 @@ function clinBuildSteps() {
     {
       id: "cbr",
       system: "🧩 Cerebral",
-      q: "MS-related fatigue or cognitive symptoms?",
-      hint: "Score 1 for MS fatigue alone. Cognitive impairment adds. Do NOT score depression or generalized fatigue as cerebral FS (Baldassari).",
+      q: "Mentation and MS-related fatigue?",
+      hint: "sEDSS combines mentation and fatigue and takes the worse. Score MS-related fatigue (grade 1 if fatigue only). Do NOT score depression or mood (dropped in sEDSS).",
       options: [
-        { key: "0", title: "None",                    desc: "No MS-related cognitive or fatigue symptoms.", badge: "normal", score: 0 },
-        { key: "1", title: "MS fatigue only",         desc: "Fatigue clearly attributable to MS; no cognitive deficit.", badge: "mild",   score: 1 },
-        { key: "2", title: "Mild cognitive symptoms", desc: "Word-finding difficulty, slowed processing - not disabling.", badge: "mild",   score: 2 },
-        { key: "3", title: "Moderate cognitive impairment", desc: "Memory or executive dysfunction affecting daily activities.", badge: "mod",    score: 3 },
-        { key: "4", title: "Severe cognitive impairment", desc: "Major disability from cognitive MS involvement.", badge: "severe", score: 4 },
-        { key: "5", title: "Dementia",                desc: "Severe MS-related cognitive failure.", badge: "severe", score: 5 },
+        { key: "0", title: "Normal", desc: "Normal mentation; no MS fatigue beyond normal for age.", badge: "normal", score: 0 },
+        { key: "1", title: "Grade 1", desc: "Subtle mentation change (multitasking, occasional word-finding), OR mild MS fatigue that doesn't interfere with activities.", badge: "mild", score: 1 },
+        { key: "2", title: "Grade 2", desc: "Mild but clearly abnormal mentation (slowed processing, needs lists), OR moderate fatigue limiting < 50% of activities.", badge: "mild", score: 2 },
+        { key: "3", title: "Grade 3", desc: "Moderate mentation impairment affecting work or relationships, OR severe fatigue limiting ≥ 50% of activities.", badge: "mod", score: 3 },
+        { key: "4", title: "Grade 4", desc: "Marked cognitive impairment - unable to work, may need supervision.", badge: "severe", score: 4 },
       ]
     },
   ];
 }
 
 function clinCalcEDSS() {
+  // UNIFIED: Clinical mode now feeds the SAME audited engine as System view
+  // (calcAmbulationScore + calcEDSSStep). The 7 FS grades collected here are the
+  // sEDSS-capped Baldassari subscale scores; they map 1:1 onto the Neurostatus
+  // FS→EDSS derivation. Bedbound/wheelchair keep their detail sub-steps for 7.0–9.5.
   const amb     = CLIN_STATE.amb     ?? 0;
-  const amb_dist = CLIN_STATE.amb_dist ?? null;  // 0-4, null if not asked
+  const amb_dist = CLIN_STATE.amb_dist ?? null;  // integer band, null if not asked
   const pyr  = CLIN_STATE.pyr  ?? 0;
   const cer  = CLIN_STATE.cer  ?? 0;
   const bst  = CLIN_STATE.bst  ?? 0;
   const sen  = CLIN_STATE.sen  ?? 0;
-  const vis  = Math.max(CLIN_STATE.vis ?? 0, CLIN_STATE.vis_vf ?? 0);
+  const vis  = CLIN_STATE.vis  ?? 0;
   const bb   = CLIN_STATE.bb   ?? 0;
   const cbr  = CLIN_STATE.cbr  ?? 0;
 
   const fs = [pyr, cer, bst, sen, vis, bb, cbr];
+  const fsObj = { pyramidal: pyr, cerebellar: cer, brainstem: bst,
+                  sensory: sen, visual: vis, bb: bb, cerebral: cbr };
 
-  // Map clinical amb scores to Neurostatus AS values:
-  // amb=5 (bedbound) → EDSS 8.0-9.5 range (use FS for precision, but AS=12 as floor)
-  // amb=4 (WC help) → AS 11 → EDSS 7.5
-  // amb=3 (WC indep) → AS 10 → EDSS 7.0
+  // Bedbound (amb=4): AS 12 → EDSS 8.0–9.5 via bed_detail sub-step.
   if (amb === 4) {
-    // Bedbound
     const detail = CLIN_STATE.bed_detail ?? 0;
     const edssMap = [8.0, 8.5, 9.0, 9.5];
     const lblMap  = ["Restricted to bed/chair - effective arm use",
@@ -8724,72 +8830,37 @@ function clinCalcEDSS() {
                      "Totally helpless - cannot communicate or eat"];
     return { edss: edssMap[detail], fs, label: lblMap[detail] };
   }
+  // Wheelchair (amb=3): wc_detail 0 → AS 10 (EDSS 7.0), 1 → AS 11 (EDSS 7.5).
   if (amb === 3) {
-    // Wheelchair: wc_detail 0=indep(7.0), 1=needs help(7.5)
     const detail = CLIN_STATE.wc_detail ?? 0;
-    return detail === 0
-      ? { edss: 7.0, fs, label: "Wheelchair - self-propelling, transfers alone" }
-      : { edss: 7.5, fs, label: "Wheelchair - needs help to wheel or transfer" };
+    const as = detail === 0 ? 10 : 11;
+    const edss = calcEDSSStep(fsObj, as);
+    return { edss, fs, label: detail === 0
+      ? "Wheelchair - self-propelling, transfers alone"
+      : "Wheelchair - needs help to wheel or transfer" };
   }
 
-  // Aided walkers: use amb_dist to determine exact AS
-  // amb=2 (bilateral): dist=0 (≥120m) → AS7 → EDSS 6.0; dist=1 (<120m) → AS9 → EDSS 6.5
-  // FIX (Bug 4): removed stale duplicate comment that said "≥20m"; Neurostatus
-  // bilateral threshold is 120 m (>120 m -> 6.0, 10-120 m -> 6.5). Code already correct.
-  if (amb === 2) {
-    const as = (amb_dist === null || amb_dist === 0) ? 7 : 9;
-    const edssVal = as === 7 ? 6.0 : 6.5;
-    return { edss: edssVal, fs, label: as === 7 ? "Bilateral aid - walks ≥ 120 m" : "Bilateral aid - walks < 120 m" };
-  }
-  // amb=1 (unilateral): dist=0 (≥50m) → AS6 → EDSS 6.0; dist=1 (<50m) → AS8 → EDSS 6.5
-  if (amb === 1) {
-    const as = (amb_dist === null || amb_dist === 0) ? 6 : 8;
-    const edssVal = as === 6 ? 6.0 : 6.5;
-    return { edss: edssVal, fs, label: as === 6 ? "Unilateral aid - walks ≥ 50 m" : "Unilateral aid - walks < 50 m" };
-  }
-
-  // amb=0 (unaided): use amb_dist to set AS and floor
-  // dist: 0=unrestricted→AS0, 1=≥500m restricted→AS1, 2=300-500m→AS2, 3=200-300m→AS3, 4=100-200m→AS4, 5=<100m→AS5
-  const asFromDist = (amb_dist !== null) ? amb_dist : 0;
-  const distFloor = [0, 2.0, 4.5, 5.0, 5.0, 5.5][asFromDist] ?? 0;
-
-  // FS-dominant range
-  const N  = Math.max(...fs);
-  const nN = fs.filter(x => x === N).length;
-  const others = fs.filter(x => x !== N);
-  const anyOtherGt1 = others.some(x => x > 1);
-  const anyOtherGt0 = others.some(x => x > 0);
-
-  // Override for ambulation score 2 (< 200m unaided) → EDSS ≥ 4.0
-  let edss = 0;
-
-  if (N === 0) { edss = 0; }
-  else if (N === 1) { edss = nN >= 2 ? 2.0 : 1.0; }
-  else if (N === 2) {
-    if (nN >= 5) edss = 5.0;
-    else if (nN >= 3) edss = anyOtherGt1 ? 3.5 : 3.0;
-    else if (nN === 2) edss = anyOtherGt1 ? 3.0 : 2.5;
-    else edss = anyOtherGt0 ? 2.5 : 2.0;
-  }
-  else if (N === 3) {
-    if (nN >= 3) edss = anyOtherGt1 ? 5.0 : 4.5;
-    else if (nN === 2) edss = anyOtherGt1 ? 4.5 : 4.0;
-    else edss = anyOtherGt1 ? 4.0 : 3.5;
-  }
-  else if (N === 4) {
-    edss = nN >= 2 ? (anyOtherGt1 ? 6.0 : 5.5) : (anyOtherGt1 ? 5.5 : 5.0);
-  }
-  else if (N === 5) { edss = nN >= 2 ? 6.5 : 6.0; }
-  else { edss = 7.0; }
-
-  // Ambulation override: apply distance-based floor
-  if (distFloor && edss < distFloor) edss = distFloor;
-  // Legacy fallback if amb_dist not collected
-  if (amb_dist === null) {
-    if (amb === 2 && edss < 4.0) edss = 4.0;
-    if (amb === 1 && edss < 2.0) edss = 2.0;
+  // Ambulatory paths (amb 0/1/2): translate to the calcAmbulationScore contract,
+  // then let the audited engine derive AS and EDSS.
+  let assistance = "none", distance_m = null, is_normal = false;
+  if (amb === 1) {            // unilateral aid: band 0 = ≥50 m, band 1 = <50 m
+    assistance = "unilateral";
+    distance_m = (amb_dist === 1) ? 25 : 80;
+  } else if (amb === 2) {     // bilateral aid: band 0 = ≥120 m, band 1 = <120 m
+    assistance = "bilateral";
+    distance_m = (amb_dist === 1) ? 60 : 150;
+  } else {                    // amb === 0, unaided
+    assistance = "none";
+    if (amb_dist === null || amb_dist === 0) {
+      is_normal = true;       // unrestricted for age → AS 0
+    } else {
+      // bands: 1=≥500m, 2=300–500m, 3=200–300m, 4=100–200m, 5=<100m
+      distance_m = [null, 500, 400, 250, 150, 60][amb_dist] ?? null;
+    }
   }
 
+  const as = calcAmbulationScore({ assistance, distance_m, is_normal });
+  const edss = calcEDSSStep(fsObj, as ?? 0);
   const label = clinEdssLabel(edss);
   return { edss, fs, label };
 }
