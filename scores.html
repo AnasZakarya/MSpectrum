@@ -885,7 +885,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="result" id="arr_out"></div>
     <details class="howto-read" open><summary>&#8505; How to read this score</summary><div>
       <b>ARR = number of relapses &divide; years observed.</b> Example: 2 relapses over 18 months = 2 &divide; 1.5 = 1.33/year.<br>
-      Untreated relapsing-remitting MS commonly runs ~0.4&ndash;1.2 relapses/year; a central goal of treatment is to lower ARR toward zero. Descriptive rate for context, not a treatment decision.
+      Interpretation anchors: 0 = no clinical activity; &ge;1 relapse/year = &ldquo;active&rdquo; disease (Lublin 2014); &ge;2 relapses/year <b>with MRI activity</b> = &ldquo;rapidly evolving severe&rdquo; MS (EMA threshold for high-efficacy therapy). For context, untreated relapsing-remitting MS historically averaged ~0.4&ndash;1.2 relapses/year (lower in recent cohorts) and high-efficacy treatment targets ~0.1&ndash;0.2. Descriptive rate for context, not a treatment decision.
     </div></details>
   </section>
 
@@ -959,7 +959,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="ref-item"><span class="ref-name">FES-I</span><span class="ref-cite">Yardley L, Beyer N, Hauer K, Kempen G, Piot-Ziegler C, Todd C. <em>Age Ageing</em> 2005;34(6):614&ndash;9.</span></div>
     <div class="ref-item"><span class="ref-name">LCVA (Sloan)</span><span class="ref-cite">Sloan LL, Habel V. <em>J Opt Soc Am</em> 1952;42:548&ndash;52. Balcer LJ et al. <em>Neurology</em> 2003;61(10):1433&ndash;5.</span></div>
     <div class="ref-cat">Disease activity &amp; progression</div>
-    <div class="ref-item"><span class="ref-name">ARR</span><span class="ref-cite">Annualized relapse rate = relapses &divide; patient-years of follow-up; standard efficacy endpoint across MS disease-modifying therapy trials.</span></div>
+    <div class="ref-item"><span class="ref-name">ARR</span><span class="ref-cite">Annualized relapse rate = relapses &divide; patient-years; standard MS trial endpoint. Interpretation anchors: Lublin FD et al. <em>Neurology</em> 2014;83(3):278&ndash;86 (&ge;1 relapse = &ldquo;active&rdquo;); EMA &ldquo;rapidly evolving severe&rdquo; criteria (&ge;2 relapses/yr + MRI); historical rates Nicholas R et al. <em>Mult Scler</em> 2011;17(11):1290&ndash;8.</span></div>
     <div class="ref-item"><span class="ref-name">CDP</span><span class="ref-cite">Confirmed disability progression: EDSS increase (&ge; 1.5 / 1.0 / 0.5 by baseline) sustained at 12&ndash;24 weeks, as used in pivotal MS trials; thresholds vary slightly by study.</span></div>
     <div class="ref-item"><span class="ref-name">NEDA-3 / NEDA-4</span><span class="ref-cite">NEDA-3 (disease-activity-free): Havrdov&aacute; E et al. <em>Lancet Neurol</em> 2010. NEDA-4 (adds brain volume loss &le; 0.4%/yr): Kappos L et al. <em>Mult Scler</em> 2016;22(10):1297&ndash;1305.</span></div>
     <div class="ref-cat">Performance &amp; composites</div>
@@ -2592,8 +2592,9 @@ function calcLCVA() {
 function calcARR(){ var n=_num(el("arr_n").value), d=_num(el("arr_dur").value), u=el("arr_unit").value;
   if(n==null||d==null||d<=0){el("arr_out").innerHTML="";return;}
   var yrs=(u==="months")?d/12:d; if(yrs<=0){el("arr_out").innerHTML="";return;}
-  var arr=n/yrs; var cls=arr===0?"good":arr<0.5?"neutral":arr<1?"warn":"bad";
-  el("arr_out").innerHTML=interp(cls,"Annualized relapse rate: <b>"+arr.toFixed(2)+"</b> relapses/year &ndash; <b>"+(arr===0?"no relapses in this period":arr<0.5?"relatively low activity":arr<1?"intermediate activity":"high activity")+"</b> (from "+n+" relapse(s) over "+yrs.toFixed(2)+" year(s)).")+'<div class="note">ARR = relapses \u00f7 years observed. For context (not a formal cut-off): under ~0.5/yr is relatively low, ~0.5&ndash;1 intermediate, and &ge;1 high. Untreated relapsing MS historically averages ~0.4&ndash;1.2/yr, while modern high-efficacy treatment aims for well under 0.2 (ideally zero). Occasional relapses can still occur; a rising or persistently high ARR is worth reviewing with the treating clinician.</div>'; }
+  var arr=n/yrs; var cls=arr===0?"good":arr<2?"warn":"bad";
+  var band=arr===0?"no relapses recorded in this period (no clinical activity)":arr<2?"indicates relapse activity &ndash; \u2018active\u2019 disease if a relapse occurred in the past year (Lublin 2014)":"\u2265 2 relapses/year &ndash; meets the relapse criterion for \u2018rapidly evolving severe\u2019 MS (EMA), which also requires MRI activity";
+  el("arr_out").innerHTML=interp(cls,"Annualized relapse rate: <b>"+arr.toFixed(2)+"</b> relapses/year &ndash; "+band+" (from "+n+" relapse(s) over "+yrs.toFixed(2)+" year(s)).")+'<div class="note">ARR = relapses \u00f7 years observed. Interpretation anchors: <b>0</b> = no clinical activity and <b>&ge;1 relapse/year</b> = \u201cactive\u201d disease (Lublin et al., <em>Neurology</em> 2014); <b>&ge;2 relapses in a year with MRI activity</b> = \u201crapidly evolving severe\u201d MS, an EMA threshold used to consider high-efficacy therapy (this tool counts relapses only &ndash; MRI is assessed separately). For context, untreated relapsing MS historically averaged ~0.4&ndash;1.2/yr (lower in recent cohorts; Nicholas et al., <em>Mult Scler</em> 2011) and high-efficacy treatment targets ~0.1&ndash;0.2. A rising or persistently high ARR is worth reviewing with the treating clinician &ndash; not a stand-alone decision.</div>'; }
 
 function calcCDP(){ var b=_num(el("cdp_base").value), f=_num(el("cdp_fu").value), conf=el("cdp_conf").value;
   if(b==null||f==null){el("cdp_out").innerHTML="";return;}

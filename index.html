@@ -7931,18 +7931,33 @@ const QC_QUESTIONS = [
     ],
   },
 
-  // ---- Q10. Balance (ePR Q10 standing / walking / sitting, combined) ----
+  // ---- Q10. Balance - standing / walking / sitting on one screen (ePR Q10, verbatim) ----
   {
     id: "qc_balance",
-    title: "In general, how is your balance when standing, walking, and sitting?",
-    help: "Pick the answer that best describes your balance overall.",
+    title: "In general, how is your balance?",
+    help: "Answer each row with the option that best describes you.",
     skipIf: (answers) => qcIsSevereWalker(answers),
-    options: [
-      { icon: "🟢", title: "Very good - I never or rarely lose my balance", desc: "", mapping: { c_gait_ataxia: 0, c_romberg: 0, c_trunc: 0, c_tandem: 0 } },
-      { icon: "🟡", title: "I sometimes sway or lose balance when my eyes are closed", desc: "", mapping: { c_romberg: 1, c_tandem: 1 } },
-      { icon: "🟠", title: "I often lose my balance or sway, even with my eyes open", desc: "", mapping: { c_gait_ataxia: 2, c_romberg: 2, c_tandem: 2 } },
-      { icon: "🔴", title: "I frequently lose my balance and have to concentrate not to fall", desc: "", mapping: { c_gait_ataxia: 3, c_trunc: 2, c_romberg: 2 } },
-      { icon: "⛔", title: "I almost always lose my balance / I need help to stay balanced", desc: "", mapping: { c_gait_ataxia: 4, c_trunc: 4 } },
+    parts: [
+      { key: "standing", label: "Balance when standing", scale: [
+          { icon: "🟢", title: "Very good. I never or rarely lose my balance" },
+          { icon: "🟡", title: "Good. I sometimes lose my balance or sway when my eyes are closed" },
+          { icon: "🟠", title: "Poor. I often lose my balance or sway, even when my eyes are open" },
+          { icon: "🔴", title: "Very poor. I always or almost always lose my balance" },
+        ], optionMaps: [ { c_romberg: 0 }, { c_romberg: 1 }, { c_romberg: 2 }, { c_romberg: 2, c_trunc: 2 } ] },
+      { key: "walking", label: "Balance when walking", scale: [
+          { icon: "🟢", title: "I can easily walk a straight line" },
+          { icon: "🟡", title: "I am stable with everyday walking, but find it difficult to walk in a straight line" },
+          { icon: "🟠", title: "I occasionally lose my balance with everyday walking" },
+          { icon: "🔴", title: "I frequently lose my balance with everyday walking and have to concentrate not to fall" },
+          { icon: "⛔", title: "I need help to hold my balance" },
+        ], optionMaps: [ { c_gait_ataxia: 0 }, { c_gait_ataxia: 1 }, { c_gait_ataxia: 2 }, { c_gait_ataxia: 3 }, { c_gait_ataxia: 4 } ] },
+      { key: "sitting", label: "Balance when sitting", scale: [
+          { icon: "🟢", title: "I am very steady when I sit" },
+          { icon: "🟡", title: "I sway once in a while when I sit" },
+          { icon: "🟠", title: "I sway when I sit if I close my eyes" },
+          { icon: "🔴", title: "I sometimes need support when I sit to keep from swaying" },
+          { icon: "⛔", title: "I usually need support when I sit to keep from swaying" },
+        ], optionMaps: [ { c_trunc: 0 }, { c_trunc: 1 }, { c_trunc: 1 }, { c_trunc: 3 }, { c_trunc: 4 } ] },
     ],
   },
 
@@ -7999,8 +8014,9 @@ const QC_QUESTIONS = [
       { icon: "🟢", title: "I do not have problems speaking", desc: "", mapping: { b_dysarth: 0 } },
       { icon: "🟡", title: "I sometimes slur words but others don't seem to notice", desc: "", mapping: { b_dysarth: 1 } },
       { icon: "🟠", title: "I often slur words and others notice", desc: "", mapping: { b_dysarth: 2 } },
-      { icon: "🔴", title: "I slur words so much that it interferes with my conversations", desc: "", mapping: { b_dysarth: 3 } },
-      { icon: "⛔", title: "I slur so much that others cannot understand me, or I cannot speak", desc: "", mapping: { b_dysarth: 3 } },
+      { icon: "🔴", title: "I slur words so much that it interferes with my ability to have conversations", desc: "", mapping: { b_dysarth: 3 } },
+      { icon: "🟤", title: "I slur my words so much that others cannot understand me", desc: "", mapping: { b_dysarth: 3 } },
+      { icon: "⛔", title: "I cannot speak", desc: "", mapping: { b_dysarth: 3 } },
     ],
   },
 
@@ -8065,18 +8081,26 @@ const QC_QUESTIONS = [
     ],
   },
 
-  // ---- Q18. Bladder urgency / leakage (ePR Q18 a/b/c) ----
+  // ---- Q18. Bladder - urgency / leakage / pad on one screen (ePR Q18, verbatim) ----
   {
     id: "qc_bladder_urg",
-    title: "In the last 4 weeks, how often did you have urinary urgency or leak urine without meaning to?",
-    help: "Urgency = a sudden, uncomfortable feeling that you must urinate soon. Include any leaking and whether you wear a pad.",
+    title: "In the last 4 weeks…",
+    help: "Answer each row about your bladder.",
     skipIf: (answers) => qcIsSevereWalker(answers),
-    options: [
-      { icon: "🟢", title: "Never or rarely - no urgency and no leaking", desc: "", mapping: { bb_urg: 0 } },
-      { icon: "🟡", title: "About once a week - urgency, but little or no leaking", desc: "", mapping: { bb_urg: 1 } },
-      { icon: "🟠", title: "A few times a week - I sometimes leak and wear a pad", desc: "", mapping: { bb_urg: 2 } },
-      { icon: "🔴", title: "Every day - frequent leaking", desc: "", mapping: { bb_urg: 3 } },
-      { icon: "⛔", title: "Several times a day - I have little or no bladder control", desc: "", mapping: { bb_urg: 4 } },
+    parts: [
+      { key: "urgency", label: "How often did you have a sudden and uncomfortable feeling that you had to urinate soon ('urgency')?", scale: [
+          { icon: "🟢", title: "Never or rarely" }, { icon: "🟡", title: "About once a week" },
+          { icon: "🟠", title: "A few times a week" }, { icon: "🔴", title: "Every day" },
+          { icon: "⛔", title: "Several times a day" },
+        ], optionMaps: [ { bb_urg: 0 }, { bb_urg: 1 }, { bb_urg: 2 }, { bb_urg: 3 }, { bb_urg: 4 } ] },
+      { key: "leak", label: "How often did you leak urine without meaning to, even a small amount?", scale: [
+          { icon: "🟢", title: "Never or rarely" }, { icon: "🟡", title: "A few times" },
+          { icon: "🟠", title: "About once a week" }, { icon: "🔴", title: "A few times a week to every day" },
+          { icon: "⛔", title: "Several times a day" },
+        ], optionMaps: [ { bb_urg2: 0 }, { bb_urg2: 1 }, { bb_urg2: 2 }, { bb_urg2: 3 }, { bb_urg2: 4 } ] },
+      { key: "pad", label: "Do you wear a pad for your bladder problems or use a urinal?", scale: [
+          { icon: "🟢", title: "No" }, { icon: "🔴", title: "Yes" },
+        ], optionMaps: [ { bb_pad: 0 }, { bb_pad: 1 } ] },
     ],
   },
 
@@ -8089,24 +8113,31 @@ const QC_QUESTIONS = [
     options: [
       { icon: "🟢", title: "I have normal function", desc: "", mapping: { bb_hes: 0, bb_cath: 0 } },
       { icon: "🟡", title: "I sometimes have trouble starting to urinate", desc: "", mapping: { bb_hes: 1, bb_cath: 0 } },
-      { icon: "🟠", title: "I often have trouble starting, and/or I get frequent urinary tract infections", desc: "", mapping: { bb_hes: 2, bb_cath: 0 } },
-      { icon: "🔴", title: "My difficulty is so severe that I need intermittent catheterization", desc: "", mapping: { bb_hes: 3, bb_cath: 1 } },
-      { icon: "⛔", title: "So severe that I need an indwelling catheter, or I have overflow leakage", desc: "", mapping: { bb_hes: 4, bb_cath: 2 } },
+      { icon: "🟠", title: "I often have trouble starting to urinate, and/or experience frequent urinary tract infections", desc: "", mapping: { bb_hes: 2, bb_cath: 0 } },
+      { icon: "🔴", title: "My difficulty urinating is so severe that I require intermittent catheterization", desc: "", mapping: { bb_hes: 3, bb_cath: 1 } },
+      { icon: "🟤", title: "My difficulty urinating is so severe that I require an indwelling catheter", desc: "", mapping: { bb_hes: 4, bb_cath: 2 } },
+      { icon: "⛔", title: "My retention is so severe that my bladder lets out unexpectedly, even when I don't feel the urge ('overflow incontinence')", desc: "", mapping: { bb_hes: 4 } },
     ],
   },
 
-  // ---- Q20. Bowel (ePR Q20 constipation + frequency) ----
+  // ---- Q20. Bowel - constipation / frequency on one screen (ePR Q20, verbatim) ----
   {
     id: "qc_bowel",
-    title: "On an average day, which best describes your bowels?",
-    help: "Consider both constipation and needing to be near a bathroom or control problems.",
+    title: "On an average day, which of the following best describes your…",
+    help: "Answer both rows about your bowels.",
     skipIf: (answers) => qcIsSevereWalker(answers),
-    options: [
-      { icon: "🟢", title: "No constipation and normal control", desc: "", mapping: { bb_bowel: 0 } },
-      { icon: "🟡", title: "Some constipation, or mildly increased urge - but I stay in control", desc: "", mapping: { bb_bowel: 1 } },
-      { icon: "🟠", title: "I need to be close to a bathroom at all times and/or wear pads", desc: "", mapping: { bb_bowel: 2 } },
-      { icon: "🔴", title: "Severe constipation - I cannot move my bowels without an enema or manual measure", desc: "", mapping: { bb_bowel: 3 } },
-      { icon: "⛔", title: "I am not able to control my bowels", desc: "", mapping: { bb_bowel: 4 } },
+    parts: [
+      { key: "constipation", label: "Constipation", scale: [
+          { icon: "🟢", title: "No constipation" },
+          { icon: "🟡", title: "Some constipation" },
+          { icon: "⛔", title: "Constipation so severe that I cannot move my bowels without an enema or manual measure" },
+        ], optionMaps: [ { bb_bowel: 0 }, { bb_bowel: 1 }, { bb_bowel: 3 } ] },
+      { key: "frequency", label: "Bowel frequency (more frequent need or increased urge to have a bowel movement)", scale: [
+          { icon: "🟢", title: "Normal" },
+          { icon: "🟡", title: "Mild frequency" },
+          { icon: "🔴", title: "I need to be close to the bathroom at all times and/or wear pads" },
+          { icon: "⛔", title: "I am not able to control my bowels" },
+        ], optionMaps: [ { bb_bowel2: 0 }, { bb_bowel2: 1 }, { bb_bowel2: 2 }, { bb_bowel2: 4 } ] },
     ],
   },
 
@@ -8276,7 +8307,7 @@ function qcRender() {
     ? q.parts.map(p => `
         <div class="qc-part">
           <div class="qc-part-label" style="font-weight:700;margin:16px 0 8px;color:var(--accent-ink);font-size:14px;">${p.label}</div>
-          ${q.scale.map((o, i) => `
+          ${(p.scale || q.scale).map((o, i) => `
             <button type="button" class="qc-option qc-part-opt ${partsAns[p.key]?.idx === i ? 'selected' : ''}" data-part="${p.key}" data-opt="${i}">
               <span class="qc-option-icon">${o.icon}</span>
               <span class="qc-option-text"><span class="qc-option-title">${o.title}</span>${o.desc ? `<span class="qc-option-desc">${o.desc}</span>` : ""}</span>
@@ -8361,7 +8392,18 @@ function qcComputeEDSS() {
     if (ans.parts) { for (const pk in ans.parts) Object.assign(inputs, ans.parts[pk].mapping || {}); }
     if (ans.mapping) Object.assign(inputs, ans.mapping);
   }
+  _qcReconcile(inputs);
   return calculateFullEDSS(inputs);
+}
+
+// Fold paired self-report rows that map to the same engine key (take the worst),
+// since Object.assign would otherwise let the later row overwrite the earlier one.
+function _qcReconcile(inp) {
+  if (inp.bb_urg2 !== undefined) { inp.bb_urg = Math.max(inp.bb_urg || 0, inp.bb_urg2); delete inp.bb_urg2; }
+  if (inp.bb_bowel2 !== undefined) { inp.bb_bowel = Math.max(inp.bb_bowel || 0, inp.bb_bowel2); delete inp.bb_bowel2; }
+  // "Must wear a pad" (ePR) floors urinary urgency at moderate.
+  if (inp.bb_pad) { inp.bb_urg = Math.max(inp.bb_urg || 0, 2); delete inp.bb_pad; }
+  return inp;
 }
 
 function qcInterpretation(edss) {
