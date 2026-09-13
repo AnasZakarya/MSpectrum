@@ -1,5 +1,5 @@
 """
-AutoEDSSguide — EDSS Calculation Engine
+AutoEDSSguide - EDSS Calculation Engine
 ========================================
 
 Pure Python functions to compute Functional System (FS) scores and the final
@@ -43,7 +43,7 @@ def _safe(v, default=0) -> int:
 
 
 # ============================================================
-# Visual FS (already 0-4 in Fouad's algorithm — no conversion needed)
+# Visual FS (already 0-4 in Fouad's algorithm - no conversion needed)
 # ============================================================
 
 # Snellen 20/20 → 0, 20/30 → 1, 20/60 → 2, 20/100 → 3, 20/200 → 4, worse → 5
@@ -153,7 +153,7 @@ def calc_brainstem_fs(
 
 
 # ============================================================
-# Pyramidal FS (BMRC distribution rules — Fouad Fig 2 + Neurostatus)
+# Pyramidal FS (BMRC distribution rules - Fouad Fig 2 + Neurostatus)
 # ============================================================
 
 # Muscle group keys for strength (BMRC 0-5, with 5 = normal)
@@ -173,7 +173,7 @@ def calc_pyramidal_fs(
     """
     Pyramidal FS per Neurostatus (Fouad Fig 2):
     0: all 5 (normal), no motor complaint
-    1: signs without disability — overall_motor=1 (fatigability)
+    1: signs without disability - overall_motor=1 (fatigability)
     2: BMRC 4 in 1-2 muscle groups
     3: BMRC 4 in 3+ groups, OR BMRC 3 in 1-2 groups, OR BMRC ≤2 in 1 group
     4: BMRC 2 in 2 limbs, OR monoplegia (BMRC 0-1 in 1 limb),
@@ -237,6 +237,23 @@ def calc_pyramidal_fs(
     if sum(1 for x in limbs if x <= 3) >= 3:
         return 4
 
+    # Severe monoparesis exceeding the FS-3 limit (matches JS engine):
+    # FS 3 "severe monoparesis" is officially "BMRC <=2 in ONE muscle group".
+    # A single limb with BMRC <=2 in >=2 muscle groups (but not a full
+    # monoplegia, which is already caught above) exceeds that limit ->
+    # per the Neurostatus "if you exceed one level, take the next" rule -> FS 4.
+    # Forum training case: RLE 2/5 all groups + RUE 3/5 all groups -> FS 4.
+    ue_muscles = ["deltoid", "biceps", "triceps", "wflex", "wext"]
+    le_muscles = ["hipflex", "kneeflex", "kneeext", "ankdorsi", "ankplant"]
+    def _leq2_in_limb(muscles, side):
+        return sum(1 for m in muscles
+                   if _safe(strength.get(m, {}).get(side, 5), 5) <= 2)
+    if (_leq2_in_limb(ue_muscles, "R") >= 2 or
+        _leq2_in_limb(ue_muscles, "L") >= 2 or
+        _leq2_in_limb(le_muscles, "R") >= 2 or
+        _leq2_in_limb(le_muscles, "L") >= 2):
+        return 4
+
     # Mild-to-moderate paraparesis or hemiparesis:
     # BMRC 3 in 1-2 groups OR BMRC ≤2 in 1 muscle group
     n_grade3_or_less = sum(1 for v in muscle_min.values() if v <= 3)
@@ -251,9 +268,12 @@ def calc_pyramidal_fs(
     if n_grade4 >= 1:
         return 2
 
-    # Signs without disability (motor fatigability)
+    # Minimal disability: motor fatigability / reduced performance in
+    # strenuous motor tasks (BMRC 5/5 everywhere) -> Pyramidal FS = 2.
+    # Per Neurostatus Forum (11.07.2014, 29.11.2007): fatigability alone
+    # scores FS 2, not FS 1. Overall motor performance subscore = 1.
     if _safe(overall_motor, 0) >= 1:
-        return 1
+        return 2
 
     return 0
 
@@ -351,7 +371,7 @@ def _superficial_score(sup_ue_R, sup_ue_L, sup_trunk_R, sup_trunk_L,
     4: marked (max=4) in 1-2 limbs OR moderate in >2 limbs
     5: complete loss (max=5) in 1-2 limbs OR marked in >2 limbs
     """
-    # Per-region max (UE, trunk, LE) — but for "limb" counting we use UE+LE × R/L
+    # Per-region max (UE, trunk, LE) - but for "limb" counting we use UE+LE × R/L
     # Treat trunk separately. Assume "limb count" means UE_R, UE_L, LE_R, LE_L.
     limbs = [_safe(sup_ue_R, 0), _safe(sup_ue_L, 0),
              _safe(sup_le_R, 0), _safe(sup_le_L, 0)]
@@ -498,20 +518,21 @@ def calc_cerebral_fs(
     euphoria: Optional[int] = None,    # 0-1 (does not contribute)
 ) -> int:
     """
-    Cerebral FS = Mentation score (0-5).
-    Fatigue contributes only if mentation = 0:
-    - 0 mentation + 0 fatigue → 0
-    - 0 mentation + ≥1 fatigue → 1 (signs only)
-    - mentation = 1 → 1 (signs only)
-    - mentation = 2 → 2 (mild + maybe fatigue)
-    - mentation = 3-5 → same value
-    Depression / euphoria documented but do not contribute.
+    Cerebral FS for the EDSS step (Neurostatus manual, cerebral FS):
+    = the higher of mentation and fatigue, where mild fatigue = 1 and
+    moderate or severe fatigue = 2.
+    Depression / euphoria alone give Cerebral FS 1 on the sheet but do not
+    contribute to the step (see cerebral_mood_only); they never raise this value.
     """
     m = _safe(mentation, 0)
     f = _safe(fatigue, 0)
-    if m == 0 and f >= 1:
-        return 1
-    return m
+    f_grade = 2 if f >= 2 else (1 if f >= 1 else 0)
+    return max(m, f_grade)
+
+
+def cerebral_mood_only(cerebral_fs: int, depression=None, euphoria=None) -> bool:
+    """Neurostatus manual: depression and/or euphoria alone -> Cerebral FS 1 on the sheet, not counted in the step."""
+    return cerebral_fs == 0 and (_safe(depression, 0) >= 1 or _safe(euphoria, 0) >= 1)
 
 
 # ============================================================
@@ -521,7 +542,7 @@ def calc_cerebral_fs(
 @dataclass
 class FSScores:
     """Bundle of all FS scores for EDSS calculation."""
-    visual: int = 0       # CONVERTED (0-4) — for EDSS step input
+    visual: int = 0       # CONVERTED (0-4) - for EDSS step input
     brainstem: int = 0    # 0-5
     pyramidal: int = 0    # 0-6
     cerebellar: int = 0   # 0-5
@@ -541,58 +562,64 @@ class FSScores:
 # AS 8 = unilateral <50m, AS 9 = bilateral 5-120m,
 # AS 10 = wheelchair (no help), AS 11 = wheelchair (with help),
 # AS 12 = bed-bound, can use arms
+# AS 13 = in bed much of the day, some arm use; AS 14 = helpless, can communicate and eat;
+# AS 15 = cannot communicate effectively or eat/swallow
 AS_TO_EDSS_FLOOR = {
-    0: 0.0, 1: 4.0, 2: 4.5, 3: 5.0, 4: 5.5,
+    0: 0.0, 1: 2.0, 2: 4.5, 3: 5.0, 4: 5.5,
     5: 6.0, 6: 6.0, 7: 6.0, 8: 6.5, 9: 6.5,
-    10: 7.0, 11: 7.5, 12: 8.0,
+    10: 7.0, 11: 7.5, 12: 8.0, 13: 8.5, 14: 9.0, 15: 9.5,
 }
 
 
 def _fs_only_step(fs_list) -> float:
     """
-    Compute EDSS step from FS pattern alone (assumes patient is unrestricted).
-    Used when AS == 0. Returns EDSS in range 0.0 - 6.0.
+    EDSS step from the FS pattern alone (Neurostatus 04/10.2 definitions, Kurtzke 1983).
+    Mirrors _fsOnlyStep in index.html exactly. The pattern alone never exceeds 5.0
+    ("EDSS steps 5.5 to 8.0 are exclusively defined by the ability to ambulate"); a FS
+    grade 6 forces 6.0 ("the EDSS step should not be lower than any individual FS",
+    visual and bowel/bladder enter already converted).
     """
     N = max(fs_list)
     if N == 0:
         return 0.0
+    n_n = sum(1 for v in fs_list if v == N)
+    rest = [v for v in fs_list if v != N]
+    any_gt1 = any(v > 1 for v in rest)
 
     if N == 1:
-        n_ones = sum(1 for v in fs_list if v == 1)
-        return 1.0 if n_ones == 1 else 1.5
+        return 1.5 if n_n >= 2 else 1.0
 
     if N == 2:
-        n_fs_2 = sum(1 for v in fs_list if v == 2)
-        # Special: 5 FSs of grade 2 → 5.0 (Fouad exception)
-        if n_fs_2 >= 5:
-            return 5.0
-        if n_fs_2 == 1:
+        if n_n >= 5:
+            return 3.5           # five FS grade 2 (Neurostatus 3.5)
+        if n_n == 1:
             return 2.0
-        if n_fs_2 == 2:
-            return 2.5
-        return 3.0  # 3 or 4
+        if n_n == 2:
+            return 3.0 if any_gt1 else 2.5
+        return 3.5 if any_gt1 else 3.0   # three or four FS grade 2
 
     if N == 3:
-        k = sum(1 for v in fs_list if v == 3)
-        n_twos = sum(1 for v in fs_list if v == 2)
-        if k == 1 and n_twos == 0:
-            return 3.0
-        if k == 1:
-            return 3.5
-        if k == 2:
-            return 3.5
-        return 4.0  # k >= 3
+        n_twos = sum(1 for v in rest if v == 2)
+        if n_n == 1:
+            return 3.0 if n_twos == 0 else (3.5 if n_twos <= 2 else 4.0)
+        if n_n == 2:
+            return 4.0 if any_gt1 else 3.5
+        return 4.5 if any_gt1 else 4.0
 
     if N == 4:
-        return 4.0
+        if n_n == 1:
+            n_gt1 = sum(1 for v in rest if v > 1)
+            if n_gt1 == 0:
+                return 4.0
+            if n_gt1 == 1:
+                return 4.5
+            return 5.0
+        return 5.0
 
     if N == 5:
         return 5.0
 
-    if N >= 6:
-        return 6.0
-
-    return float(N)
+    return 6.0
 
 
 def calc_edss_step(fs: FSScores, ambulation_score: Optional[int] = None) -> float:
@@ -629,7 +656,7 @@ def calc_edss_step(fs: FSScores, ambulation_score: Optional[int] = None) -> floa
 
     # ---------- High AS (6.0+): ambulation alone ----------
     if AS >= 12:
-        return 8.0
+        return AS_TO_EDSS_FLOOR[min(AS, 15)]
     if AS == 11:
         return 7.5
     if AS == 10:
@@ -658,8 +685,11 @@ def calc_edss_step(fs: FSScores, ambulation_score: Optional[int] = None) -> floa
         return max(4.5, fs_step)
 
     if AS == 1:
-        # >500m but not unrestricted → EDSS 4.0 floor
-        return max(4.0, fs_step)
+        # >=500m without aid but not unrestricted -> FS pattern drives EDSS.
+        # Per Neurostatus Forum (20.07.2009, 07.03.2009): fully ambulatory
+        # but restricted spans EDSS 2.0-5.0 depending on FS scores; there
+        # is no hard 4.0 floor. Floor of 2.0 matches JS engine.
+        return max(2.0, fs_step)
 
     # AS == 0: fully unrestricted → FS pattern alone determines
     return fs_step
@@ -766,10 +796,12 @@ def calculate_full_edss(inputs: Dict[str, Any]) -> Dict[str, Any]:
     bb_fs_conv = bb_fs_converted(bb_fs)
 
     # --- Cerebral ---
-    cerebral_fs = calc_cerebral_fs(
+    cerebral_fs_step = calc_cerebral_fs(
         mentation=g("m_ment"), fatigue=g("m_fat"),
         depression=g("m_depress"), euphoria=g("m_euph"),
     )
+    mood_only = cerebral_mood_only(cerebral_fs_step, g("m_depress"), g("m_euph"))
+    cerebral_fs = 1 if mood_only else cerebral_fs_step   # sheet value
 
     # --- Ambulation ---
     ambulation_score = _safe(g("a_score"), 0)
@@ -778,7 +810,7 @@ def calculate_full_edss(inputs: Dict[str, Any]) -> Dict[str, Any]:
     fs_bundle = FSScores(
         visual=visual_fs_conv, brainstem=brainstem_fs,
         pyramidal=pyramidal_fs, cerebellar=cerebellar_fs,
-        sensory=sensory_fs, bb=bb_fs_conv, cerebral=cerebral_fs,
+        sensory=sensory_fs, bb=bb_fs_conv, cerebral=cerebral_fs_step,
     )
     edss = calc_edss_step(fs_bundle, ambulation_score)
 
@@ -792,6 +824,8 @@ def calculate_full_edss(inputs: Dict[str, Any]) -> Dict[str, Any]:
         "bb_fs": bb_fs,
         "bb_fs_conv": bb_fs_conv,
         "cerebral_fs": cerebral_fs,
+        "cerebral_fs_step": cerebral_fs_step,
+        "cerebral_mood_only": mood_only,
         "ambulation_score": ambulation_score,
         "edss_step": edss,
     }

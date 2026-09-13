@@ -20,6 +20,7 @@ from edss_calc import (
     calc_cerebral_fs,
     calc_edss_step, FSScores,
     calculate_full_edss,
+    MUSCLE_KEYS,
 )
 
 
@@ -89,8 +90,10 @@ class TestPyramidal(unittest.TestCase):
         self.assertEqual(calc_pyramidal_fs(strength=s), 0)
 
     def test_signs_only_fatigability(self):
-        # Normal strength but fatigability complaint
-        self.assertEqual(calc_pyramidal_fs(strength={}, overall_motor=1), 1)
+        # Neurostatus Forum: motor fatigability with BMRC 5/5 -> FS 2 (minimal
+        # disability), not FS 1. FS 1 requires abnormal signs without weakness
+        # (reflexes/Babinski/spasticity), which are not present here.
+        self.assertEqual(calc_pyramidal_fs(strength={}, overall_motor=1), 2)
 
     def test_minimal_one_muscle_grade4(self):
         s = {"deltoid": {"R": 4, "L": 5}}
@@ -233,7 +236,10 @@ class TestCerebral(unittest.TestCase):
 
     def test_fatigue_only(self):
         # 0 mentation + ≥1 fatigue → 1
-        self.assertEqual(calc_cerebral_fs(mentation=0, fatigue=2), 1)
+        # Neurostatus manual: moderate or severe fatigue = Cerebral FS 2; mild fatigue = 1
+        self.assertEqual(calc_cerebral_fs(mentation=0, fatigue=2), 2)
+        self.assertEqual(calc_cerebral_fs(mentation=0, fatigue=1), 1)
+        self.assertEqual(calc_cerebral_fs(mentation=0, fatigue=3), 2)
 
     def test_mild_mentation(self):
         self.assertEqual(calc_cerebral_fs(mentation=2), 2)
@@ -244,6 +250,17 @@ class TestCerebral(unittest.TestCase):
     def test_depression_does_not_count(self):
         # Depression doesn't add to FS
         self.assertEqual(calc_cerebral_fs(mentation=0, depression=1), 0)
+        # mood alone: sheet 1, step unaffected
+        r = calculate_full_edss({"m_depress": 1})
+        self.assertEqual(r["cerebral_fs"], 1)
+        self.assertEqual(r["cerebral_fs_step"], 0)
+        self.assertTrue(r["cerebral_mood_only"])
+        self.assertEqual(r["edss_step"], 0.0)
+        # AS 13-15 (Neurostatus ambulation table): 8.5, 9.0, 9.5
+        self.assertEqual(calc_edss_step(FSScores(), 13), 8.5)
+        self.assertEqual(calc_edss_step(FSScores(), 14), 9.0)
+        self.assertEqual(calc_edss_step(FSScores(), 15), 9.5)
+        self.assertEqual(calc_edss_step(FSScores(), 12), 8.0)
 
 
 class TestEDSSStep(unittest.TestCase):
@@ -274,10 +291,31 @@ class TestEDSSStep(unittest.TestCase):
         self.assertEqual(calc_edss_step(fs), 3.0)
 
     def test_five_fs_two_special(self):
-        # 5 FSs of grade 2 → 5.0 (Fouad exception)
+        # Five FS grade 2, others 0 or 1 -> 3.5 (Neurostatus definition of step 3.5; Kurtzke 1983)
         fs = FSScores(pyramidal=2, sensory=2, cerebellar=2,
                       brainstem=2, visual=2)
-        self.assertEqual(calc_edss_step(fs), 5.0)
+        self.assertEqual(calc_edss_step(fs), 3.5)
+
+    def test_one_fs_three_plus_twos(self):
+        # one FS 3 with one or two FS 2 -> 3.5; with three FS 2 the pattern exceeds 3.5 -> 4.0
+        self.assertEqual(calc_edss_step(FSScores(pyramidal=3, sensory=2)), 3.5)
+        self.assertEqual(calc_edss_step(FSScores(pyramidal=3, sensory=2, cerebellar=2)), 3.5)
+        self.assertEqual(calc_edss_step(FSScores(pyramidal=3, sensory=2, cerebellar=2, brainstem=2)), 4.0)
+
+    def test_fs_four_combinations(self):
+        # Sen 2018 (Arch Neuropsychiatry 55 Suppl 1) worked examples
+        self.assertEqual(calc_edss_step(FSScores(brainstem=1, pyramidal=4, cerebellar=2, sensory=1)), 4.5)
+        self.assertEqual(calc_edss_step(FSScores(brainstem=1, pyramidal=4, cerebellar=3, sensory=4, bb=1, cerebral=1)), 5.0)
+        self.assertEqual(calc_edss_step(FSScores(brainstem=3)), 3.0)
+        self.assertEqual(calc_edss_step(FSScores(visual=1, brainstem=3, pyramidal=1, cerebellar=1, cerebral=1)), 3.0)
+
+    def test_fs_pattern_never_exceeds_five_without_ambulation(self):
+        # "EDSS steps 5.5 to 8.0 are exclusively defined by the ability to ambulate"
+        self.assertEqual(calc_edss_step(FSScores(pyramidal=5, sensory=3)), 5.0)
+        self.assertEqual(calc_edss_step(FSScores(pyramidal=5, cerebellar=5)), 5.0)
+        self.assertEqual(calc_edss_step(FSScores(pyramidal=4, cerebellar=4, sensory=3)), 5.0)
+        # a FS grade 6 keeps the EDSS at 6.0 or above
+        self.assertEqual(calc_edss_step(FSScores(sensory=6)), 6.0)
 
     def test_one_fs_three(self):
         fs = FSScores(pyramidal=3)
@@ -387,7 +425,7 @@ class TestAmbulationFSCombinations(unittest.TestCase):
     Each AS level dictates a floor; FS pattern can push higher.
     """
 
-    # ========== AS=0 (Unrestricted) — pure FS ==========
+    # ========== AS=0 (Unrestricted) - pure FS ==========
     def test_AS0_no_fs(self):
         self.assertEqual(calc_edss_step(FSScores(), 0), 0.0)
 
@@ -407,13 +445,15 @@ class TestAmbulationFSCombinations(unittest.TestCase):
         # FS=5 alone but unrestricted (rare but possible)
         self.assertEqual(calc_edss_step(FSScores(sensory=5), 0), 5.0)
 
-    # ========== AS=1 (>500m, not unrestricted) — floor 4.0 ==========
+    # ========== AS=1 (>=500m, not unrestricted) - floor 2.0 ==========
     def test_AS1_no_fs(self):
-        self.assertEqual(calc_edss_step(FSScores(), 1), 4.0)
+        # Neurostatus: AS=1 with all FS = 0 -> EDSS 2.0 (FS pattern drives).
+        self.assertEqual(calc_edss_step(FSScores(), 1), 2.0)
 
     def test_AS1_low_fs(self):
-        # Even with low FS, AS=1 gives 4.0 floor
-        self.assertEqual(calc_edss_step(FSScores(pyramidal=2), 1), 4.0)
+        # AS=1 + pyramidal=2 (single FS grade 2) -> EDSS 2.0.
+        # Floor is 2.0; FS pattern determines exact step between 2.0 and 5.0.
+        self.assertEqual(calc_edss_step(FSScores(pyramidal=2), 1), 2.0)
 
     def test_AS1_fs4(self):
         self.assertEqual(calc_edss_step(FSScores(pyramidal=4), 1), 4.0)
@@ -421,7 +461,7 @@ class TestAmbulationFSCombinations(unittest.TestCase):
     def test_AS1_fs5(self):
         self.assertEqual(calc_edss_step(FSScores(pyramidal=5), 1), 5.0)
 
-    # ========== AS=2 (300-499m) — floor 4.5 ==========
+    # ========== AS=2 (300-499m) - floor 4.5 ==========
     def test_AS2_no_fs(self):
         self.assertEqual(calc_edss_step(FSScores(), 2), 4.5)
 
@@ -435,7 +475,7 @@ class TestAmbulationFSCombinations(unittest.TestCase):
     def test_AS2_fs5(self):
         self.assertEqual(calc_edss_step(FSScores(pyramidal=5), 2), 5.0)
 
-    # ========== AS=3 (200-299m) — floor 5.0 ==========
+    # ========== AS=3 (200-299m) - floor 5.0 ==========
     def test_AS3_no_fs(self):
         # Critical case: AS=3 alone → 5.0
         self.assertEqual(calc_edss_step(FSScores(), 3), 5.0)
@@ -454,7 +494,7 @@ class TestAmbulationFSCombinations(unittest.TestCase):
         # FS=6 (tetraplegia) overrides AS=3 floor
         self.assertEqual(calc_edss_step(FSScores(pyramidal=6), 3), 6.0)
 
-    # ========== AS=4 (100-199m) — fixed 5.5 ==========
+    # ========== AS=4 (100-199m) - fixed 5.5 ==========
     def test_AS4_no_fs(self):
         self.assertEqual(calc_edss_step(FSScores(), 4), 5.5)
 
@@ -465,7 +505,7 @@ class TestAmbulationFSCombinations(unittest.TestCase):
         # FS=6 overrides
         self.assertEqual(calc_edss_step(FSScores(pyramidal=6), 4), 6.0)
 
-    # ========== AS=5+ (no aid <100m or with aid) — ambulation only ==========
+    # ========== AS=5+ (no aid <100m or with aid) - ambulation only ==========
     def test_AS5(self):
         self.assertEqual(calc_edss_step(FSScores(), 5), 6.0)
 
@@ -503,14 +543,15 @@ class TestClinicalScenariosExpanded(unittest.TestCase):
         self.assertEqual(result["edss_step"], 0.0)
 
     def test_signs_only(self):
-        # Just a hyperreflexia, no disability
+        # Neurostatus Forum: subjective fatigability with BMRC 5/5 -> FS 2,
+        # EDSS 2.0 (not FS 1 / EDSS 1.0). Matches JS engine.
         inputs = {
             "p_str_biceps_R": 5, "p_str_biceps_L": 5,
             "p_overall": 1,  # subjective fatigability only
         }
         result = calculate_full_edss(inputs)
-        self.assertEqual(result["pyramidal_fs"], 1)
-        self.assertEqual(result["edss_step"], 1.0)
+        self.assertEqual(result["pyramidal_fs"], 2)
+        self.assertEqual(result["edss_step"], 2.0)
 
     def test_minimal_two_fs(self):
         # Two FS at grade 2 → EDSS 2.5
@@ -625,6 +666,39 @@ class TestClinicalScenariosExpanded(unittest.TestCase):
         inputs = {"a_score": 12}
         result = calculate_full_edss(inputs)
         self.assertEqual(result["edss_step"], 8.0)
+
+
+
+class TestNeurostatusForumVerified(unittest.TestCase):
+    """
+    Cases verified against the official Neurostatus.net public forum Q&A.
+    These lock down behavior that was previously wrong in the Python engine
+    but correct in the JS engine (index.html).
+    """
+
+    def test_motor_fatigability_alone_returns_pyramidal_fs_2(self):
+        """Forum (11.07.2014, 29.11.2007): reduced performance in strenuous
+        motor tasks with BMRC 5/5 everywhere -> Pyramidal FS 2 (not FS 1)."""
+        strength_normal = {m: {"R": 5, "L": 5} for m in MUSCLE_KEYS}
+        self.assertEqual(
+            calc_pyramidal_fs(strength=strength_normal, overall_motor=1), 2)
+
+    def test_marked_hemiparesis_returns_pyramidal_fs_4(self):
+        """Forum training case: RLE 2/5 all groups + RUE 3/5 all groups,
+        LUE/LLE 5/5 -> Pyramidal FS 4 (marked hemiparesis / severe
+        monoparesis exceeding FS-3 limit)."""
+        strength = {m: {"R": 5, "L": 5} for m in MUSCLE_KEYS}
+        for m in ["deltoid", "biceps", "triceps", "wflex", "wext"]:
+            strength[m]["R"] = 3
+        for m in ["hipflex", "kneeflex", "kneeext", "ankdorsi", "ankplant"]:
+            strength[m]["R"] = 2
+        self.assertEqual(calc_pyramidal_fs(strength=strength), 4)
+
+    def test_restricted_ambulation_with_normal_fs_returns_edss_2(self):
+        """Forum (20.07.2009, 07.03.2009): AS=1 (>=500m without aid but
+        not unrestricted) with all FS = 0 should give EDSS 2.0, not 4.0.
+        Ambulation Score alone does not impose a hard 4.0 floor here."""
+        self.assertEqual(calc_edss_step(FSScores(), ambulation_score=1), 2.0)
 
 
 if __name__ == "__main__":

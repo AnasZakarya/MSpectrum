@@ -1,7 +1,7 @@
 /* MSpectrum service worker - NETWORK-FIRST.
    Always serves the freshest version when online (so deployed changes show immediately);
    falls back to the cached copy only when there is no connection. Bump CACHE to force-clear. */
-const CACHE = "mspectrum-v3";
+const CACHE = "mspectrum-v4";
 const CORE = [
   "./", "./index.html", "./scores.html", "./mcdonald.html", "./manifest.webmanifest",
   "./mspectrum-logo.svg", "./favicon.svg",
@@ -42,7 +42,13 @@ self.addEventListener("fetch", function (e) {
       } catch (_) {}
       return res;
     }).catch(function () {
-      return caches.match(req).then(function (m) { return m || caches.match("./index.html"); });
+      // Offline: serve the cached copy. Only page navigations fall back to the app shell;
+      // a failed script/asset request must not receive HTML.
+      return caches.match(req).then(function (m) {
+        if (m) return m;
+        if (req.mode === "navigate") return caches.match("./index.html");
+        return Response.error();
+      });
     })
   );
 });

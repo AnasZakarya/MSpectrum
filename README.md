@@ -68,10 +68,10 @@ Fonts and the PDF/export libraries are **self-hosted**, so a normal session make
 
 ## MS Criteria Checker: diagnosis by the 2024 McDonald criteria
 
-An adaptive, single-page wizard (`mcdonald.html`) that implements the **2024 revisions of the McDonald criteria** (Montalban et al., Lancet Neurol 2025) and their companion consensus papers. It adapts to patient age and onset course (relapsing, primary-progressive, RIS), asks only about the investigations you have, and reports the diagnosis, the criteria it rests on, safety cautions and recommended next steps, with a print / PDF summary.
+An adaptive, single-page wizard (`mcdonald.html`) that implements the **2024 revisions of the McDonald criteria** (Montalban et al., Lancet Neurol 2025) and their companion consensus papers. It adapts to patient age and onset course (relapsing, primary-progressive, RIS), asks only about the investigations you have, and reports which diagnostic category the findings fulfil (criteria met, possible MS, RIS, criteria not met or incomplete), the criteria it rests on, safety cautions and recommended next steps, with a print / PDF summary. It applies the criteria; the diagnosis stays with the treating neurologist.
 
 - **All 2024 pathways:** DIS across five regions (incl. optic nerve), the 4-region shortcut, DIT, CSF (OCB / k-FLC), and susceptibility markers (select-6 CVS, ≥ 1 PRL).
-- **Safeguards:** older-onset (≥ 50) vascular caution, pediatric ADEM / MOG-IgG guidance, atypical red-flag prompts for NMOSD / MOGAD, and a "no better explanation" acknowledgment.
+- **Safeguards:** older-onset (≥ 50) vascular caution, pediatric ADEM / MOG-IgG guidance, atypical red-flag prompts for NMOSD / MOGAD, and a "no better explanation" acknowledgment that is part of the criteria: until it is confirmed the category stays provisional.
 - Independent educational aid; not affiliated with any commercial application.
 
 ---
@@ -100,17 +100,17 @@ If you used MSpectrum in research, please cite it:
 
 ## License
 
-© 2026 Anas Z. Nourelden and Anza B. Memon. Licensed under the **GNU Affero General Public License v3.0** (AGPL-3.0) — see the [LICENSE](LICENSE) file for the full text.
+© 2026 Anas Z. Nourelden and Anza B. Memon. Licensed under the **GNU Affero General Public License v3.0** (AGPL-3.0) - see the [LICENSE](LICENSE) file for the full text.
 
 In short: you are free to use, study, share and modify MSpectrum, but any distributed or network-served modified version must also be released as open source under the same licence (AGPL Section 13, network-use clause). This keeps the tool free and open for the MS community while protecting the authors' work. For a different (e.g. commercial or closed) arrangement, contact the authors for separate licensing.
 
 ### Instrument use & attribution
 
-The AGPL-3.0 licence covers MSpectrum's own code, algorithms and interface — **not** the third-party clinical instruments it scores. Each instrument remains the property of its authors/publishers and is used here for research and educational purposes:
+The AGPL-3.0 licence covers MSpectrum's own code, algorithms and interface - **not** the third-party clinical instruments it scores. Each instrument remains the property of its authors/publishers and is used here for research and educational purposes:
 
 - **Free / open instruments** are reproduced verbatim with citation: PROMIS (29, Cognitive, Pain), PHQ-9, GAD-7, PDDS, MFIS, MSQOL-54, FSS, ABC, FES-I, SymptoMScreen.
-- **Reproduced under non-commercial academic use** (would require a paid licence if MSpectrum is ever commercialised): MSWS-12 and MSIS-29 (Transform MS CIC / Mapi-ePROVIDE), and FSS (Krupp — free for non-profit use).
-- **Licensed instruments are number-entry only** — item text is never reproduced: SDMT, BVMT-R, CVLT-II, LCVA/Sloan (performance tests) and FSMC (shown as "Item N").
+- **Reproduced under non-commercial academic use** (would require a paid licence if MSpectrum is ever commercialised): MSWS-12 and MSIS-29 (Transform MS CIC / Mapi-ePROVIDE), and FSS (Krupp - free for non-profit use).
+- **Licensed instruments are number-entry only** - item text is never reproduced: SDMT, BVMT-R, CVLT-II, LCVA/Sloan (performance tests) and FSMC (shown as "Item N").
 
 Normative conversion tables (e.g. the PROMIS raw→T→SE lookups) are taken verbatim from the official HealthMeasures scoring manuals and cited in-app. If you reuse MSpectrum, you are responsible for complying with each instrument's own terms.
 
