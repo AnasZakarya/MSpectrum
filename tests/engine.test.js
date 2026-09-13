@@ -103,6 +103,45 @@ eq('edss wheelchair indep -> 7.0', full({ amb_assistance: 'wheelchair_indep' }).
 const r1 = full({ p_str_hipflex_R: 1, p_str_kneeflex_R: 1, p_str_kneeext_R: 1, p_str_ankdorsi_R: 1, p_str_ankplant_R: 1, amb_assistance: 'bilateral', amb_distance_reported: 80 });
 eq('integration paretic leg + bilateral aid -> 6.5', r1.edss_step, 6.5);
 
+// ---------- 2026-09-13: AS 13-15, mood alone, boundary distances, trace ----------
+eq('AS 13 (bed much of day) -> 8.5', full({ amb_assistance: 'bed_much' }).edss_step, 8.5);
+eq('AS 14 (helpless, communicates) -> 9.0', full({ amb_assistance: 'bed_helpless' }).edss_step, 9.0);
+eq('AS 15 (cannot communicate/eat) -> 9.5', full({ amb_assistance: 'bed_nocomm' }).edss_step, 9.5);
+eq('manual AS 14 -> 9.0', full({ a_score: 14 }).edss_step, 9.0);
+eq('bedbound stays 8.0', full({ amb_assistance: 'bedbound' }).edss_step, 8.0);
+const rm = full({ m_depress: 1 });
+eq('mood alone: sheet cerebral 1', rm.cerebral_fs, 1);
+eq('mood alone: step cerebral 0', rm.cerebral_fs_step, 0);
+eq('mood alone: EDSS 0.0', rm.edss_step, 0.0);
+eq('mood alone flag', rm.cerebral_mood_only, true);
+eq('moderate fatigue -> cerebral 2 (manual)', E.calcCerebralFS({ mentation: 0, fatigue: 2 }), 2);
+eq('unilateral exactly 50 m -> AS 8 (manual: more than 50 m = 6.0)', E.calcAmbulationScore({ assistance: 'unilateral', distance_m: 50 }), 8);
+eq('unilateral 51 m -> AS 6', E.calcAmbulationScore({ assistance: 'unilateral', distance_m: 51 }), 6);
+eq('bilateral exactly 120 m -> AS 9', E.calcAmbulationScore({ assistance: 'bilateral', distance_m: 120 }), 9);
+eq('bilateral 121 m -> AS 7', E.calcAmbulationScore({ assistance: 'bilateral', distance_m: 121 }), 7);
+const tr = E.calcEDSSStepTrace({ visual: 0, brainstem: 0, pyramidal: 3, cerebellar: 3, sensory: 0, bb: 0, cerebral: 0 }, 0);
+eq('trace: two FS 3 unrestricted -> 3.5 by fs_pattern', tr.edss === 3.5 && tr.branch === 'fs_pattern', true);
+const tr2 = E.calcEDSSStepTrace({ visual: 0, brainstem: 0, pyramidal: 0, cerebellar: 0, sensory: 0, bb: 0, cerebral: 0 }, 3);
+eq('trace: AS 3 empty FS -> 5.0 by as_floor', tr2.edss === 5.0 && tr2.branch === 'as_floor', true);
+eq('five FS 2 -> 3.5', E.calcEDSSStep({ visual: 2, brainstem: 2, pyramidal: 2, cerebellar: 2, sensory: 2, bb: 0, cerebral: 0 }, 0), 3.5);
+eq('engine version present', typeof E.ENGINE_VERSION === 'string' && E.ENGINE_VERSION.length > 5, true);
+
+
+// ---------- FS combination table: Neurostatus 04/10.2 + Sen 2018 worked examples ----------
+const T = (fs, as) => E.calcEDSSStepTrace(Object.assign({ visual: 0, brainstem: 0, pyramidal: 0, cerebellar: 0, sensory: 0, bb: 0, cerebral: 0 }, fs), as || 0).edss;
+eq('Sen 2018 ex1: brainstem 3 alone -> 3.0', T({ brainstem: 3 }), 3.0);
+eq('Sen 2018 ex3: visual 1, brainstem 3, pyr 1, cbl 1, cerebral 1 -> 3.0', T({ visual: 1, brainstem: 3, pyramidal: 1, cerebellar: 1, cerebral: 1 }), 3.0);
+eq('Sen 2018 ex4: pyr 4 + cbl 2 -> 4.5', T({ brainstem: 1, pyramidal: 4, cerebellar: 2, sensory: 1 }), 4.5);
+eq('Sen 2018 ex5: pyr 4, sens 4, cbl 3 -> 5.0 (not 5.5)', T({ brainstem: 1, pyramidal: 4, cerebellar: 3, sensory: 4, bb: 1, cerebral: 1 }), 5.0);
+eq('one FS 3 + two FS 2 -> 3.5', T({ pyramidal: 3, sensory: 2, cerebellar: 2 }), 3.5);
+eq('one FS 3 + three FS 2 -> 4.0', T({ pyramidal: 3, sensory: 2, cerebellar: 2, brainstem: 2 }), 4.0);
+eq('two FS 3 + FS 2 -> 4.0', T({ pyramidal: 3, sensory: 3, cerebellar: 2 }), 4.0);
+eq('FS 5 + FS 3, AS 0 -> 5.0 (5.5+ needs ambulation)', T({ pyramidal: 5, sensory: 3 }), 5.0);
+eq('two FS 5, AS 0 -> 5.0', T({ pyramidal: 5, cerebellar: 5 }), 5.0);
+eq('FS 6 -> 6.0 floor', T({ sensory: 6 }), 6.0);
+eq('FS 5 with AS 4 -> 5.5 (ambulation)', T({ pyramidal: 5 }, 4), 5.5);
+eq('FS 2 with AS 3 -> 5.0 (ambulation floor)', T({ pyramidal: 2 }, 3), 5.0);
+
 module.exports = { cases };
 
 if (require.main === module) {
