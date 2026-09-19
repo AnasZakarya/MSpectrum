@@ -10688,58 +10688,6 @@ function scExportSheet(){
   var w=window.open("","_blank","width=920,height=1040"); if(!w){ alert("Allow pop-ups to export the sheet."); return; }
   var fix="<style>@media print{@page{margin:8mm}html,body{margin:0!important;padding:0!important}.sc-sheet-card{padding:0!important;box-shadow:none!important;border:none!important}.sc-pages-container{gap:0!important;padding:0!important;margin:0!important}.sc-sheet-wrap{gap:0!important;margin:0!important;padding:0!important}.sc-page{page-break-before:avoid;page-break-inside:avoid;break-inside:avoid;margin:0!important}.sc-page+.sc-page{page-break-before:always;break-before:page}.sc-page:last-child{page-break-after:avoid;break-after:avoid}}</style>";
   w.document.write("<!DOCTYPE html><html><head><meta charset=utf-8><title>Neurostatus sheet</title>"+css+fix+"</head><body style=\"padding:0;background:#ffffff\">"+clone.outerHTML+"<scr"+"ipt>window.onload=function(){setTimeout(function(){window.print();},250);}<\/scr"+"ipt>
-<script>
-// Toast notifications: window.mspectrumToast('message')
-(function(){
-  window.mspectrumToast = function(msg){
-    var c = document.getElementById('__mspec_toasts');
-    if(!c){ c=document.createElement('div'); c.id='__mspec_toasts'; c.className='toast-container'; document.body.appendChild(c); }
-    var t = document.createElement('div');
-    t.className='toast-item';
-    t.innerHTML='<span class="toast-check">✓</span><span>'+String(msg).replace(/</g,'&lt;')+'</span>';
-    c.appendChild(t);
-    requestAnimationFrame(function(){ t.classList.add('show'); });
-    setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 400); }, 2400);
-  };
-})();
-</script>
-
-<script>
-// #6 Install pill (PWA)
-(function(){
-  var deferredPrompt = null;
-  window.addEventListener('beforeinstallprompt', function(e){
-    e.preventDefault();
-    deferredPrompt = e;
-    var wrap = document.getElementById('install-pill-wrap');
-    var dismissed = false;
-    try { dismissed = !!localStorage.getItem('mspectrum-install-dismissed'); } catch(_) {}
-    if(wrap && !dismissed){ wrap.style.display='block'; }
-  });
-  document.addEventListener('DOMContentLoaded', function(){
-    var btn = document.getElementById('install-pill-btn');
-    var x = document.getElementById('install-pill-x');
-    var wrap = document.getElementById('install-pill-wrap');
-    if(btn){
-      btn.addEventListener('click', async function(){
-        if(deferredPrompt){
-          deferredPrompt.prompt();
-          try { await deferredPrompt.userChoice; } catch(_){}
-          deferredPrompt = null;
-          if(wrap) wrap.style.display='none';
-          if(window.mspectrumToast) window.mspectrumToast('Installation started');
-        }
-      });
-    }
-    if(x){
-      x.addEventListener('click', function(){
-        if(wrap) wrap.style.display='none';
-        try { localStorage.setItem('mspectrum-install-dismissed', String(Date.now())); } catch(_){}
-      });
-    }
-  });
-})();
-</script>
 </body></html>");
   w.document.close();
 }
@@ -11642,6 +11590,58 @@ window.scExtractAllZones = async function(){
     document.addEventListener("click", function(){ setTimeout(sweep, 120); }, true);
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+</script>
+<script>
+// Toast notifications: window.mspectrumToast('message')
+(function(){
+  window.mspectrumToast = function(msg){
+    var c = document.getElementById('__mspec_toasts');
+    if(!c){ c=document.createElement('div'); c.id='__mspec_toasts'; c.className='toast-container'; document.body.appendChild(c); }
+    var t = document.createElement('div');
+    t.className='toast-item';
+    t.innerHTML='<span class="toast-check">✓</span><span>'+String(msg).replace(/</g,'&lt;')+'</span>';
+    c.appendChild(t);
+    requestAnimationFrame(function(){ t.classList.add('show'); });
+    setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 400); }, 2400);
+  };
+})();
+</script>
+
+<script>
+// #6 Install pill (PWA)
+(function(){
+  var deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault();
+    deferredPrompt = e;
+    var wrap = document.getElementById('install-pill-wrap');
+    var dismissed = false;
+    try { dismissed = !!localStorage.getItem('mspectrum-install-dismissed'); } catch(_) {}
+    if(wrap && !dismissed){ wrap.style.display='block'; }
+  });
+  document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('install-pill-btn');
+    var x = document.getElementById('install-pill-x');
+    var wrap = document.getElementById('install-pill-wrap');
+    if(btn){
+      btn.addEventListener('click', async function(){
+        if(deferredPrompt){
+          deferredPrompt.prompt();
+          try { await deferredPrompt.userChoice; } catch(_){}
+          deferredPrompt = null;
+          if(wrap) wrap.style.display='none';
+          if(window.mspectrumToast) window.mspectrumToast('Installation started');
+        }
+      });
+    }
+    if(x){
+      x.addEventListener('click', function(){
+        if(wrap) wrap.style.display='none';
+        try { localStorage.setItem('mspectrum-install-dismissed', String(Date.now())); } catch(_){}
+      });
+    }
+  });
 })();
 </script>
 </body>
