@@ -3602,7 +3602,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     </div>
     <div class="cta-row">
 
-    <p class="sources-link-row no-print" style="margin-top:40px;text-align:center;font-size:13px;color:var(--ink-faint);">Sources: <a href="#about-sources" onclick="var d=document.getElementById('about-sources'); if(d){ d.open=true; requestAnimationFrame(function(){ d.scrollIntoView({behavior:'smooth',block:'start'}); }); } return false;">References &amp; scoring sources</a></p>
+    <p class="sources-link-row no-print" style="margin-top:40px;text-align:center;font-size:13px;color:var(--ink-faint);">Sources: <a href="#about-sources" onclick="var d=document.getElementById('about-sources'); if(d){ d.open=true; d.scrollIntoView({block:'start'}); } return false;">References &amp; scoring sources</a></p>
     <p style="margin-top:16px;color:var(--ink-faint);font-size:12px;text-align:center;">MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b style="color:var(--ink-soft)">It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is stored.</p>
     </div>
     </div><!-- /edss-modes -->
