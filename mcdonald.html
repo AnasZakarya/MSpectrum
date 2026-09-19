@@ -310,6 +310,16 @@
       .tool-disclaimer::before{left:10%;right:10%;top:-18px}
       .tool-disclaimer-head{font-size:13px}
     }
+
+    /* Dark mode polish for new elements */
+    html[data-theme="dark"] .tool-disclaimer-footer{border-top-color:var(--rule-strong)!important}
+    html[data-theme="dark"] .tool-disclaimer-footer .dot{color:var(--ink-faint)}
+    html[data-theme="dark"] .tool-search input::placeholder{color:var(--ink-faint);opacity:0.75}
+    html[data-theme="dark"] .tool-search-empty{color:var(--ink-soft)}
+    html[data-theme="dark"] .tool-search .clear-btn{color:var(--ink-soft)}
+    html[data-theme="dark"] .tool-search .clear-btn:hover{color:var(--ink);background:var(--rule-strong)}
+    /* Frame frame border a touch brighter for dark mode */
+    html[data-theme="dark"] .tool-hero-frame{border-color:var(--accent-ink)}
     html[data-theme="dark"] .tool-disclaimer{background:#1a2432;border-color:#2a3548;color:var(--ink-soft)}
     html[data-theme="dark"] .tool-disclaimer-head,
     html[data-theme="dark"] .tool-disclaimer b{color:var(--ink)}
@@ -1070,23 +1080,11 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 
 <div class="info-cards" role="note">
         <div class="info-card"><div class="info-card-head"><span class="info-ico">👥</span><span class="info-title">Who it is for</span></div><p>Clinicians assessing a suspected first demyelinating event, a progressive course, or incidental MRI findings, with the MRI, CSF and clinical findings at hand. It applies the criteria; the diagnosis stays with the treating neurologist.</p></div>
-        <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><p>Five short steps: age and onset course, the investigations you have, the clinical picture, MRI and visual findings, then CSF and susceptibility markers. The tool asks only about the tests you ticked and reports which 2024 McDonald category the findings fulfil, the criteria it rests on, safety cautions and next steps, with a print or PDF summary.</p></div>
+        <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><ol style="margin:6px 0 0;padding-left:20px;font-size:13px;line-height:1.6;color:var(--ink-soft)"><li>Enter the patient's <b>age</b> and <b>clinical onset</b> (relapsing, progressive, or RIS).</li><li>Tick which <b>investigations</b> were completed — the tool asks only about those.</li><li>Enter each test's findings: lesion locations, dissemination in time, and biomarkers.</li><li>Review the <b>result</b>: the category, the criteria it rests on, and any safety cautions.</li><li>Save or print the summary as a <b>PDF</b> for the record.</li></ol></div>
       </div>
 
       <div class="hero-cta" style="margin:14px 0 14px;text-align:center">
         <button class="btn-cta" id="btn-start">Start assessment &rarr;</button>
-      </div>
-
-      <!-- How to use -->
-      <div class="info-card box-how" style="margin-top:18px">
-        <div class="info-title">How to use this tool</div>
-        <ol>
-          <li>Enter the patient's age and clinical onset (relapsing, progressive, or RIS).</li>
-          <li>Tick which investigations were completed; the tool then asks only about those.</li>
-          <li>Enter each test's findings: lesion locations, dissemination in time, and biomarkers.</li>
-          <li>Review the result: the category, the criteria it rests on, and any safety cautions.</li>
-          <li>Save or print the result as a PDF for the record.</li>
-        </ol>
       </div>
 
       <!-- Features (collapsed) -->

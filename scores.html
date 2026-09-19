@@ -347,6 +347,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   .tool-disclaimer-head{font-size:13px}
 }
 
+/* Dark mode polish for new elements */
+html[data-theme="dark"] .tool-disclaimer-footer{border-top-color:var(--rule-strong)!important}
+html[data-theme="dark"] .tool-disclaimer-footer .dot{color:var(--ink-faint)}
+html[data-theme="dark"] .tool-search input::placeholder{color:var(--ink-faint);opacity:0.75}
+html[data-theme="dark"] .tool-search-empty{color:var(--ink-soft)}
+html[data-theme="dark"] .tool-search .clear-btn{color:var(--ink-soft)}
+html[data-theme="dark"] .tool-search .clear-btn:hover{color:var(--ink);background:var(--rule-strong)}
+/* Frame frame border a touch brighter for dark mode */
+html[data-theme="dark"] .tool-hero-frame{border-color:var(--accent-ink)}
+
+
 html[data-theme="dark"] .tool-disclaimer{background:#1a2432;border-color:#2a3548;color:var(--ink-soft)}
 html[data-theme="dark"] .tool-disclaimer-head,
 html[data-theme="dark"] .tool-disclaimer b{color:var(--ink)}
