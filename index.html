@@ -139,6 +139,61 @@ html[data-theme="dark"] .tool-hero-desc{background:#1e2636;border-color:var(--ru
   background:linear-gradient(90deg,transparent 0%,var(--rule-strong) 20%,var(--rule-strong) 80%,transparent 100%);
   pointer-events:none;
 }
+/* ==== Enhancement pack: disclaimer footer, focus, print, mobile ==== */
+.tool-disclaimer-footer{
+  margin-top:12px;
+  padding-top:10px;
+  border-top:1px dashed var(--rule);
+  font-size:11.5px;
+  color:var(--ink-faint);
+  text-align:center;
+  line-height:1.7;
+}
+.tool-disclaimer-footer a{
+  color:var(--ink-faint);
+  text-decoration:none;
+  margin:0 4px;
+  transition:color .18s ease;
+}
+.tool-disclaimer-footer a:hover{color:var(--accent);text-decoration:underline}
+.tool-disclaimer-footer .dot{color:var(--rule-strong);margin:0 2px}
+html[data-theme="dark"] .tool-disclaimer-footer{color:var(--ink-faint);border-top-color:var(--rule)}
+html[data-theme="dark"] .tool-disclaimer-footer a{color:var(--ink-soft)}
+html[data-theme="dark"] .tool-disclaimer-footer .dot{color:var(--rule)}
+html[data-theme="dark"] .tool-disclaimer::before{background:linear-gradient(90deg,transparent 0%,var(--rule-strong) 20%,var(--rule-strong) 80%,transparent 100%)}
+
+/* Accessibility: keyboard focus outline on interactive elements */
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[role="button"]:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+  border-radius:4px;
+}
+.way-card:focus-visible,.card:focus-visible,.tool-card:focus-visible{
+  outline:3px solid var(--accent);
+  outline-offset:3px;
+}
+
+/* Print polish: hide interactive chrome */
+@media print{
+  .tool-hero,.tool-disclaimer,.no-print,.sources-link-row,
+  #fab-dock,#theme-toggle,.back,.back-to-explore,.tool-back,
+  .patient-bar,.gnav,.privacy-banner{display:none!important}
+  body{background:#ffffff!important;color:#000000!important}
+  .app-header::after,.top::after{display:none!important}
+}
+
+/* Mobile polish: keep hero+description readable on small screens */
+@media (max-width:520px){
+  .tool-hero{margin:6px 0 12px}
+  .tool-hero-frame{padding:10px 18px}
+  .tool-hero-frame h1,.tool-hero-frame h2,.tool-hero-frame h3,
+  .tool-hero .tool-hero-frame h1,.tool-hero .tool-hero-frame h2,.tool-hero .tool-hero-frame h3{font-size:20px}
+  .tool-hero-desc{font-size:13px;padding:11px 14px;margin:10px 0 0}
+  .tool-disclaimer{padding:12px 14px;font-size:12.5px;margin:32px auto 8px}
+  .tool-disclaimer::before{left:10%;right:10%;top:-18px}
+  .tool-disclaimer-head{font-size:13px}
+}
+
 html[data-theme="dark"] .tool-disclaimer{background:#1a2432;border-color:#2a3548;color:var(--ink-soft)}
 html[data-theme="dark"] .tool-disclaimer-head,
 html[data-theme="dark"] .tool-disclaimer b{color:var(--ink)}
@@ -2994,6 +3049,13 @@ input[type="checkbox"] {
 #landing.picking{display:flex;flex-direction:column;min-height:100vh}
 #landing.picking .hero-wrap,#landing.picking #features,#landing.picking #explore>h2,#landing.picking #explore>.section-rule,#landing.picking #explore-home,#landing.picking .about-block,#landing.picking .app-footer{display:none!important}
 #landing.picking #edss-modes{flex:1;display:flex;flex-direction:column}
+/* Smooth EDSS mode entry */
+#edss-modes{animation:edssIn .32s ease both}
+@keyframes edssIn{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
 #landing.picking #edss-modes .cta-row{margin-top:auto}
 #landing.picking #edss-modes{display:block!important}
 #landing.picking #landing-start-btn{display:none!important}
@@ -3718,6 +3780,12 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     <div class="tool-disclaimer no-print">
       <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
       <p>MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is stored.</p>
+      <div class="tool-disclaimer-footer no-print">
+        <a href="index.html#about-mspectrum">About</a><span class="dot">·</span>
+        <a href="index.html#cite">Cite</a><span class="dot">·</span>
+        <a href="mailto:nour.anas@wayne.edu">Contact</a><span class="dot">·</span>
+        <span>&copy; 2026 MSpectrum</span>
+      </div>
     </div>
     </div>
     </div><!-- /edss-modes -->
@@ -3775,7 +3843,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     </div>
   </div>
 
-  <div class="section-block about-block">
+  <div class="section-block about-block" id="about-mspectrum">
     <h2>About MSpectrum</h2>
     <div class="section-rule"></div>
     <p>MSpectrum is a free, browser-based, privacy-first hub for the outcome measures used in multiple sclerosis - the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a diagnostic checker for the 2024 McDonald criteria. Everything is computed in your browser; nothing is uploaded or stored. Built for research (reproducible, granular scoring for trials and registries) and useful for routine clinical and educational use.</p>
@@ -3829,7 +3897,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     </div>
     <p style="font-size:12px;color:var(--ink-faint);margin-top:8px">Proprietary instruments (BVMT-R, CVLT-II, SDMT) are scored from entered numeric results only; their stimuli and norm tables are not reproduced here.</p>
     </details>
-    <details class="about-toggle"><summary>📌 Cite us</summary>
+    <details class="about-toggle" id="cite"><summary>📌 Cite us</summary>
       <p>If you are a researcher and used MSpectrum for research purposes, please cite it:</p>
       <p id="cite-text" style="background:#f3f7f0;border:1px solid #d7e4cf;border-radius:8px;padding:10px 12px;font-size:13px">Nourelden A, Memon A. <em>MSpectrum: a free, browser-based toolkit for multiple sclerosis outcome measures and diagnosis (AutoEDSSguide, MS Score Hub and MS Criteria Checker)</em>. Wayne State University, Department of Neurology; 2026. Available from: https://github.com/AnasZakarya/MSpectrum.</p>
       <button type="button" class="btn-cta secondary cite-copy" onclick="(function(b){var t=document.getElementById('cite-text').textContent; var done=function(){ b.textContent='Copied'; setTimeout(function(){ b.textContent='Copy citation'; },1500); }; if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(done); } else { done(); } })(this)">Copy citation</button>

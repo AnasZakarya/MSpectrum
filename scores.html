@@ -224,6 +224,129 @@ html[data-theme="dark"] .tool-hero-desc{background:#1e2636;border-color:var(--ru
   background:linear-gradient(90deg,transparent 0%,var(--rule-strong) 20%,var(--rule-strong) 80%,transparent 100%);
   pointer-events:none;
 }
+/* ==== Enhancement pack: disclaimer footer, focus, print, mobile ==== */
+.tool-disclaimer-footer{
+  margin-top:12px;
+  padding-top:10px;
+  border-top:1px dashed var(--rule);
+  font-size:11.5px;
+  color:var(--ink-faint);
+  text-align:center;
+  line-height:1.7;
+}
+.tool-disclaimer-footer a{
+  color:var(--ink-faint);
+  text-decoration:none;
+  margin:0 4px;
+  transition:color .18s ease;
+}
+.tool-disclaimer-footer a:hover{color:var(--accent);text-decoration:underline}
+.tool-disclaimer-footer .dot{color:var(--rule-strong);margin:0 2px}
+html[data-theme="dark"] .tool-disclaimer-footer{color:var(--ink-faint);border-top-color:var(--rule)}
+html[data-theme="dark"] .tool-disclaimer-footer a{color:var(--ink-soft)}
+html[data-theme="dark"] .tool-disclaimer-footer .dot{color:var(--rule)}
+
+/* Smoother panel fade + Check my MS Start button emphasis */
+.panel{opacity:1;transition:opacity .18s ease}
+.panel.panel-exit{opacity:0}
+.panel.active{animation:panelIn .28s ease both}
+@keyframes panelIn{
+  from{opacity:0;transform:translateY(4px)}
+  to{opacity:1;transform:translateY(0)}
+}
+#report .report-flow{position:relative}
+#report .report-flow > #report_checklist:empty::before{
+  content:"Start with 'EDSS & age', or open any questionnaire below in any order. Your answers stay in this browser only.";
+  display:block;padding:14px;color:var(--ink-faint);font-size:13px;font-style:italic;text-align:center;
+}
+
+/* Tool search bar for Score Hub */
+.tool-search{
+  margin:14px 0 6px;
+  position:relative;
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.tool-search input{
+  width:100%;
+  padding:10px 14px 10px 40px;
+  border:1.5px solid var(--rule);
+  border-radius:999px;
+  font-size:14px;
+  background:var(--paper);
+  color:var(--ink);
+  transition:border-color .18s ease,box-shadow .18s ease;
+  font-family:var(--sans);
+}
+.tool-search input:focus{
+  border-color:var(--accent);
+  outline:none;
+  box-shadow:0 0 0 3px rgba(30,74,110,0.12);
+}
+.tool-search::before{
+  content:"🔍";
+  position:absolute;
+  left:14px;top:50%;transform:translateY(-50%);
+  font-size:15px;
+  opacity:.55;
+  pointer-events:none;
+}
+.tool-search .clear-btn{
+  position:absolute;
+  right:12px;top:50%;transform:translateY(-50%);
+  background:transparent;border:none;cursor:pointer;
+  font-size:16px;color:var(--ink-faint);
+  padding:4px 8px;border-radius:50%;
+  display:none;
+}
+.tool-search .clear-btn:hover{color:var(--ink);background:var(--rule)}
+.tool-search.has-value .clear-btn{display:inline-block}
+.card.filtered-out{display:none!important}
+.grid-head.filtered-out{display:none!important}
+.tool-search-empty{
+  text-align:center;color:var(--ink-faint);
+  font-size:13px;padding:24px 0;display:none;
+}
+.tool-search.no-results ~ .tool-search-empty{display:block}
+html[data-theme="dark"] .tool-search input{background:var(--paper);border-color:var(--rule)}
+html[data-theme="dark"] .tool-search input:focus{box-shadow:0 0 0 3px rgba(106,166,221,0.20)}
+@media(max-width:520px){.tool-search{max-width:100%;margin:12px 0 6px}}
+
+html[data-theme="dark"] .tool-disclaimer::before{background:linear-gradient(90deg,transparent 0%,var(--rule-strong) 20%,var(--rule-strong) 80%,transparent 100%)}
+
+/* Accessibility: keyboard focus outline on interactive elements */
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[role="button"]:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+  border-radius:4px;
+}
+.way-card:focus-visible,.card:focus-visible,.tool-card:focus-visible{
+  outline:3px solid var(--accent);
+  outline-offset:3px;
+}
+
+/* Print polish: hide interactive chrome */
+@media print{
+  .tool-hero,.tool-disclaimer,.no-print,.sources-link-row,
+  #fab-dock,#theme-toggle,.back,.back-to-explore,.tool-back,
+  .patient-bar,.gnav,.privacy-banner{display:none!important}
+  body{background:#ffffff!important;color:#000000!important}
+  .app-header::after,.top::after{display:none!important}
+}
+
+/* Mobile polish: keep hero+description readable on small screens */
+@media (max-width:520px){
+  .tool-hero{margin:6px 0 12px}
+  .tool-hero-frame{padding:10px 18px}
+  .tool-hero-frame h1,.tool-hero-frame h2,.tool-hero-frame h3,
+  .tool-hero .tool-hero-frame h1,.tool-hero .tool-hero-frame h2,.tool-hero .tool-hero-frame h3{font-size:20px}
+  .tool-hero-desc{font-size:13px;padding:11px 14px;margin:10px 0 0}
+  .tool-disclaimer{padding:12px 14px;font-size:12.5px;margin:32px auto 8px}
+  .tool-disclaimer::before{left:10%;right:10%;top:-18px}
+  .tool-disclaimer-head{font-size:13px}
+}
+
 html[data-theme="dark"] .tool-disclaimer{background:#1a2432;border-color:#2a3548;color:var(--ink-soft)}
 html[data-theme="dark"] .tool-disclaimer-head,
 html[data-theme="dark"] .tool-disclaimer b{color:var(--ink)}
@@ -432,7 +555,12 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       <label>MS duration <input type="number" id="pb_dur" min="0" max="60" placeholder="y" oninput="pbApply()"></label>
       <span class="pb-hint">Optional. Feeds the norms in SDMT, BVMT-R, CVLT-II, BICAMS, 6MWT and ARMSS/MSSS so you enter them once. Nothing is stored.</span>
     </div>
+    <div class="tool-search no-print">
+      <input type="search" id="toolSearchInput" placeholder="Search tools (e.g. PROMIS, SDMT, walking, mood)" aria-label="Search tools" oninput="filterTools(this.value)">
+      <button type="button" class="clear-btn" aria-label="Clear search" onclick="document.getElementById('toolSearchInput').value='';filterTools('')">✕</button>
+    </div>
     <div class="grid" id="toolgrid"></div>
+    <div class="tool-search-empty" id="toolSearchEmpty">No tools match your search. Try another word (e.g. "cognition", "walk", "quality").</div>
     <div style="text-align:center;margin-top:20px"><button class="btn" onclick="openClin()" style="background:var(--accent);color:#ffffff;border-color:var(--accent);font-size:14px;padding:10px 18px">📋 Compile clinician summary (all entered tools)</button></div>
   </div>
 
@@ -1169,6 +1297,12 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
   <div class="tool-disclaimer no-print">
     <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
     <p>MSpectrum computes outcome-measure scores from published scoring rules and explains what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research and educational use; verify locally before clinical or trial use. All computation is local; nothing is stored.</p>
+    <div class="tool-disclaimer-footer no-print">
+      <a href="index.html#about-mspectrum">About</a><span class="dot">·</span>
+      <a href="index.html#cite">Cite</a><span class="dot">·</span>
+      <a href="mailto:nour.anas@wayne.edu">Contact</a><span class="dot">·</span>
+      <span>&copy; 2026 MSpectrum</span>
+    </div>
   </div>
 </div>
 
@@ -1416,6 +1550,38 @@ function _flagScale(prefix,a,b,on){ for(var i=a;i<=b;i++){ var e=el(prefix+i); i
 
 const _card=(t,i)=>'<div class="card" style="animation-delay:'+(i*0.03)+'s" onclick="showTool(\''+t.id+'\')"><div class="ic">'+t.ic+'</div><h3>'+t.name+'</h3><div class="tag">'+t.tag+'</div><div class="desc">'+t.desc+'</div></div>';
 const _ghead=(title,sub)=>'<div class="grid-head" style="grid-column:1/-1"><span>'+title+'</span><small>'+sub+'</small></div>';
+
+// Score Hub search: filter tool cards live by name/tag/desc/id
+function filterTools(q){
+  q = (q||"").trim().toLowerCase();
+  var searchDiv = document.querySelector(".tool-search");
+  if(searchDiv) searchDiv.classList.toggle("has-value", q.length>0);
+  var grid = document.getElementById("toolgrid");
+  if(!grid) return;
+  var cards = grid.querySelectorAll(".card");
+  var heads = grid.querySelectorAll(".grid-head");
+  var shown = 0;
+  cards.forEach(function(c){
+    var text = c.textContent.toLowerCase();
+    var oc = c.getAttribute("onclick")||"";
+    var match = !q || text.indexOf(q)!==-1 || oc.toLowerCase().indexOf(q)!==-1;
+    c.classList.toggle("filtered-out", !match);
+    if(match) shown++;
+  });
+  // Hide category headers that have no visible cards below them (until next header)
+  heads.forEach(function(h, idx){
+    var next = h.nextElementSibling;
+    var hasVisible = false;
+    while(next && !next.classList.contains("grid-head")){
+      if(next.classList.contains("card") && !next.classList.contains("filtered-out")){ hasVisible = true; break; }
+      next = next.nextElementSibling;
+    }
+    h.classList.toggle("filtered-out", q.length>0 && !hasVisible);
+  });
+  // Empty state
+  if(searchDiv) searchDiv.classList.toggle("no-results", q.length>0 && shown===0);
+}
+
 const _TMAP=Object.fromEntries(TOOLS.map(t=>[t.id,t]));
 const GROUPS=[
  {name:"Disability &amp; severity", sub:"Overall disability, and how it compares to others (ARMSS / MSSS).", ids:["edss","pdds"]},
