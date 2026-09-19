@@ -3602,7 +3602,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     </div>
     <div class="cta-row">
 
-    <p class="sources-link-row no-print" style="margin-top:40px;text-align:center;font-size:13px;color:var(--ink-faint);">Sources: <a href="#about-sources" onclick="var d=document.getElementById('about-sources'); if(d){ d.open=true; d.scrollIntoView({behavior:'smooth',block:'start'}); } return false;">References &amp; scoring sources</a></p>
+    <p class="sources-link-row no-print" style="margin-top:40px;text-align:center;font-size:13px;color:var(--ink-faint);">Sources: <a href="#about-sources" onclick="var d=document.getElementById('about-sources'); if(d){ d.open=true; requestAnimationFrame(function(){ d.scrollIntoView({behavior:'smooth',block:'start'}); }); } return false;">References &amp; scoring sources</a></p>
     <p style="margin-top:16px;color:var(--ink-faint);font-size:12px;text-align:center;">MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b style="color:var(--ink-soft)">It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is stored.</p>
     </div>
     </div><!-- /edss-modes -->
@@ -11234,7 +11234,7 @@ function orderQuad(pts){
 
 
 /* ================= integration adapter: fill MSpectrum sheet by gid + compute FS/EDSS ================= */
-window.SC_OCR2_READY=true; try{console.log("[ocr2] loaded - offline OCR engine active");}catch(e){}
+window.SC_OCR2_READY=true;
 try{ var _o2mark=function(){ var b=document.getElementById("sc-process-btn"); if(b && b.textContent.indexOf("Align & read")<0){ b.textContent="Align & read sheet \u2192"; } };
  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",_o2mark); else _o2mark();
  document.addEventListener("click", function(){ setTimeout(_o2mark,300); }); }catch(e){}
@@ -11243,8 +11243,6 @@ async function _ocr2EnsureLib(src,test){ if(test()) return; try{ await _ocr2Load
 window.scExtractAllZones = async function(){
   const bar=document.getElementById("sc-progress-bar"), lbl=document.getElementById("sc-progress-label");
   const setL=t=>{ if(lbl) lbl.textContent=t; };
-  try{console.log("[ocr2] scExtractAllZones running (offline engine)");}catch(e){}
-  try{ if(!window.__ocr2ran){ window.__ocr2ran=true; console.log("[ocr2] first run may download the vision engine (~10 MB)"); } }catch(e){}
   setL("On-device OCR - loading vision engine…");
   await _ocr2EnsureLib("https://docs.opencv.org/4.x/opencv.js", ()=>window.cv&&window.cv.Mat);
   await _ocr2EnsureLib("https://cdn.jsdelivr.net/npm/onnxruntime-web@1.19.2/dist/ort.min.js", ()=>window.ort);

@@ -2162,7 +2162,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       let complete = "";   // what would complete the criteria (empty when they are met)
       // Panel 6 safety rule: at age >= 50 OR with vascular risk factors, confirm with a highly specific marker
       const needsSpecific = isOlderOnset || hasVascularRisks;
-      const specificWho = isOlderOnset ? (hasVascularRisks ? "age &ge; 50 with vascular risk factors" : "age &ge; 50") : "vascular risk factors";
+      const specificWho = isOlderOnset ? (hasVascularRisks ? "age ≥ 50 with vascular risk factors" : "age ≥ 50") : "vascular risk factors";
 
       // 1. Pediatric ADEM Presentation Caveat
       if (isPediatric && document.getElementById('adem_check').checked) {
@@ -2173,7 +2173,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
           basis.push("McDonald Criteria cannot be finalized until follow-up reveals further disease activity.");
           complete = "A second, non-ADEM clinical attack, or a new T2 lesion on MRI more than 90 days after the ADEM onset.";
           
-          alertMsg = "ADEM Presentation: Diagnosis of MS requires a second typical non-ADEM attack OR a new T2 MRI lesion &gt; 90 days after ADEM onset.";
+          alertMsg = "ADEM Presentation: Diagnosis of MS requires a second typical non-ADEM attack OR a new T2 MRI lesion > 90 days after ADEM onset.";
           alertType = "warn";
           
           nextSteps.push("Perform follow-up brain and spine MRI &gt; 90 days from onset to check for new T2 lesions.");

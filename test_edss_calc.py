@@ -29,37 +29,44 @@ class TestVisual(unittest.TestCase):
         self.assertEqual(calc_visual_fs(va_od="20/20", va_os="20/20"), 0)
 
     def test_mild_one_eye(self):
-        # 20/30 in one eye = grade 1
-        self.assertEqual(calc_visual_fs(va_od="20/30", va_os="20/20"), 1)
+        # 20/30 in worse eye (Neurostatus 04/10.2 FS 2 zone: 20/30-20/50)
+        self.assertEqual(calc_visual_fs(va_od="20/30", va_os="20/20"), 2)
 
     def test_moderate_unilateral(self):
-        # 20/60 in one eye = grade 2
-        self.assertEqual(calc_visual_fs(va_od="20/60", va_os="20/20"), 2)
+        # 20/60 in worse eye (Neurostatus 04/10.2 FS 3 zone: 20/60-20/99)
+        self.assertEqual(calc_visual_fs(va_od="20/60", va_os="20/20"), 3)
 
     def test_with_scotoma(self):
-        self.assertEqual(calc_visual_fs(scotoma_od=2, va_od="20/20", va_os="20/20"), 2)
+        # Neurostatus 04/10.2: large scotoma (raw item 2) maps to Visual FS 3.
+        self.assertEqual(calc_visual_fs(scotoma_od=2, va_od="20/20", va_os="20/20"), 3)
 
     def test_with_field_defect(self):
-        # complete homonymous hemianopsia → grade 3
-        self.assertEqual(calc_visual_fs(vf_od=3, vf_os=3, va_od="20/20", va_os="20/20"), 3)
+        # Marked field defect (raw item 3) maps to Visual FS 4 each eye; when
+        # BOTH eyes are affected the worse-eye rule bumps the FS one grade to 5.
+        self.assertEqual(calc_visual_fs(vf_od=3, vf_os=3, va_od="20/20", va_os="20/20"), 5)
+        # Unilateral marked field defect (better eye normal) stays at grade 4.
+        self.assertEqual(calc_visual_fs(vf_od=3, va_od="20/20", va_os="20/20"), 4)
 
     def test_severe_one_eye_with_normal_other(self):
-        # Per Neurostatus: 20/200 in one eye, 20/20 in other → grade 3
-        # (severe in single eye when better eye is normal)
+        # 20/200 in worse eye, 20/20 in better -> Visual FS 4 (Neurostatus
+        # 04/10.2 20/100-20/200 zone; better eye normal, no grade bump).
         result = calc_visual_fs(va_od="20/200", va_os="20/20")
-        self.assertEqual(result, 3)
+        self.assertEqual(result, 4)
 
     def test_blindness(self):
-        # NLP both eyes
+        # NLP in worse eye = raw 5; when better eye is also 5, worse-eye rule
+        # bumps to 6 (bilateral blindness). Matches JS engine.
         self.assertEqual(calc_visual_fs(va_od="NLP", va_os="NLP"), 6)
 
     def test_conversion(self):
-        # Visual FS conversion: 0→0, 1→1, 2→2, 3→3, 4→3, 5→4, 6→5
+        # Neurostatus / JS engine conversion: raw 1->1, 2->2, 3->2, 4->3, 5->3, 6->4
         self.assertEqual(visual_fs_converted(0), 0)
         self.assertEqual(visual_fs_converted(1), 1)
+        self.assertEqual(visual_fs_converted(2), 2)
+        self.assertEqual(visual_fs_converted(3), 2)
         self.assertEqual(visual_fs_converted(4), 3)
-        self.assertEqual(visual_fs_converted(5), 4)
-        self.assertEqual(visual_fs_converted(6), 5)
+        self.assertEqual(visual_fs_converted(5), 3)
+        self.assertEqual(visual_fs_converted(6), 4)
 
 
 class TestBrainstem(unittest.TestCase):
@@ -160,10 +167,18 @@ class TestCerebellar(unittest.TestCase):
         self.assertEqual(calc_cerebellar_fs(gait_ataxia=4), 3)
 
     def test_severe_combined(self):
-        # Severe ataxia in 3-4 limbs + severe truncal/gait
+        # 3 limbs at grade 4 + severe gait + severe truncal -> FS 4 per the
+        # JS-aligned rule (needs >=3 SEVERE(grade 4) limbs plus one of severe
+        # gait/trunc, but NOT both, else FS 5). This case has all three severe
+        # so the FS 5 rule fires.
         self.assertEqual(calc_cerebellar_fs(
             tremor_ue_R=4, tremor_ue_L=4, tremor_le_R=4, tremor_le_L=3,
             gait_ataxia=4, truncal_ataxia=4,
+        ), 5)
+        # FS 4 requires SEVERE limbs + severe gait OR truncal (not both).
+        self.assertEqual(calc_cerebellar_fs(
+            tremor_ue_R=4, tremor_ue_L=4, tremor_le_R=4, tremor_le_L=3,
+            gait_ataxia=4, truncal_ataxia=3,
         ), 4)
 
 
@@ -219,8 +234,12 @@ class TestBowelBladder(unittest.TestCase):
         self.assertEqual(calc_bb_fs(catheterisation=2), 4)
 
     def test_severe_combination(self):
-        # urgency=4 + bowel=4 → FS 5
-        self.assertEqual(calc_bb_fs(urgency=4, bowel=4), 5)
+        # urgency=4 (bladder loss) + bowel=4 (bowel loss) -> FS 6 per Neurostatus
+        # 04/10.2 (loss of both bladder and bowel function). Matches JS.
+        self.assertEqual(calc_bb_fs(urgency=4, bowel=4), 6)
+        # Either alone -> FS 5
+        self.assertEqual(calc_bb_fs(urgency=4), 5)
+        self.assertEqual(calc_bb_fs(bowel=4), 5)
 
     def test_conversion(self):
         # B/B FS conversion
@@ -414,8 +433,10 @@ class TestRealWorldCases(unittest.TestCase):
             "v_va_od": "20/200", "v_va_os": "20/20",
         }
         result = calculate_full_edss(inputs)
-        # 20/200 in one eye, normal other → Visual FS=3 → conv=3
-        self.assertEqual(result["visual_fs"], 3)
+        # 20/200 worse eye + 20/20 better -> Visual FS raw 4 (Neurostatus zone
+        # 20/100-20/200); converted for the EDSS step = 3.
+        self.assertEqual(result["visual_fs"], 4)
+        self.assertEqual(result["visual_fs_conv"], 3)
         self.assertGreaterEqual(result["edss_step"], 3.0)
 
 

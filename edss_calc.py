@@ -48,11 +48,16 @@ def _safe(v, default=0) -> int:
 
 # Snellen 20/20 → 0, 20/30 → 1, 20/60 → 2, 20/100 → 3, 20/200 → 4, worse → 5
 SNELLEN_LOOKUP = {
-    "20/20": 0, "20/25": 0, "20/30": 1,
-    "20/40": 1, "20/50": 1, "20/60": 2,
-    "20/70": 2, "20/80": 2, "20/100": 3,
-    "20/200": 4, "20/400": 5, "CF": 5,  # Counting fingers
-    "HM": 5, "LP": 5, "NLP": 6,         # Hand motion / Light perception / No LP
+    # Aligned with the JS engine (index.html) so both engines produce the same
+    # Visual FS. Grades follow Neurostatus 04/10.2 worse-eye VA cut-offs:
+    # 20/25 -> 1 (signs only), 20/30-20/50 -> 2 (mild), 20/60-20/80 -> 3
+    # (moderate scotoma / VA 20/60-20/99 zone), 20/100-20/200 -> 4, worse -> 5.
+    "20/20": 0,
+    "20/25": 1,
+    "20/30": 2, "20/40": 2, "20/50": 2,
+    "20/60": 3, "20/70": 3, "20/80": 3,
+    "20/100": 4, "20/200": 4,
+    "20/400": 5, "CF": 5, "HM": 5, "LP": 5, "NLP": 5,
 }
 
 
@@ -86,46 +91,42 @@ def calc_visual_fs(
     - 5: VA <20/200 (worse eye) AND grade 4 in better eye
     - 6: VA <20/200 in BOTH eyes
     """
-    # Per-eye worst score from VA / VF / scotoma
+    # Neurostatus conversion of visual-field/scotoma raw grades to the higher
+    # FS grade they imply (e.g. moderate field defect = FS 3, marked = FS 4).
+    def _field_conv(v):
+        return [0, 1, 3, 4][min(_safe(v, 0), 3)]
+    def _scotoma_conv(v):
+        return [0, 1, 3][min(_safe(v, 0), 2)]
+
     od_score = max(
         snellen_to_score(va_od),
-        _safe(vf_od),
-        _safe(scotoma_od),
+        _field_conv(vf_od),
+        _scotoma_conv(scotoma_od),
+        1 if _safe(pallor_od, 0) > 0 else 0,
     )
     os_score = max(
         snellen_to_score(va_os),
-        _safe(vf_os),
-        _safe(scotoma_os),
+        _field_conv(vf_os),
+        _scotoma_conv(scotoma_os),
+        1 if _safe(pallor_os, 0) > 0 else 0,
     )
     worse = max(od_score, os_score)
     better = min(od_score, os_score)
 
-    # Apply Neurostatus rules for the combination
-    if worse == 0:
-        return 0
-    if worse <= 1:
-        return 1
-    if worse == 2:
-        return 2
-    if worse == 3:
-        return 3
-    if worse == 4 and better >= 3:
-        return 4
-    if worse == 4:
-        return 3  # only one eye affected
-    if worse == 5 and better >= 4:
-        return 5
-    if worse == 5:
-        return 4
-    # worse >= 6
-    if better >= 5:
-        return 6
-    return 5
+    # Grades 0-2 depend on the worse eye alone; for grade >= 3 the FS is bumped
+    # one grade only when the better eye is also <= 20/60 (raw grade >= 3):
+    # 3 -> 4, 4 -> 5, 5 -> 6. Matches calcVisualFS in index.html.
+    if worse <= 2:
+        return worse
+    return min(worse + 1, 6) if better >= 3 else worse
 
 
 def visual_fs_converted(visual_fs: int) -> int:
-    """Convert Visual FS (0-6) to EDSS-input scale (0-4) per Neurostatus."""
-    return [0, 1, 2, 3, 3, 4, 5][min(visual_fs, 6)]
+    """Convert Visual FS (0-6) to EDSS-input scale per Neurostatus.
+    Matches the JS engine's visualFSConverted table: raw 1->1, 2->2, 3->2,
+    4->3, 5->3, 6->4.
+    """
+    return [0, 1, 2, 2, 3, 3, 4][min(visual_fs, 6)]
 
 
 # ============================================================
@@ -313,10 +314,6 @@ def calc_cerebellar_fs(
     limb_tremor = _safe(_max_or_none(
         tremor_ue_R, tremor_ue_L, tremor_le_R, tremor_le_L,
     ), 0)
-    n_limbs_severe = sum(
-        1 for v in [tremor_ue_R, tremor_ue_L, tremor_le_R, tremor_le_L]
-        if _safe(v, 0) >= 3
-    )
 
     # Worst rapid alternating
     limb_rapid = _safe(_max_or_none(
@@ -324,17 +321,32 @@ def calc_cerebellar_fs(
     ), 0)
     limb_overall = max(limb_tremor, limb_rapid)
 
+    # Per-limb ataxia severity = worse of tremor/dysmetria and rapid-alternating.
+    # "Severe" per Neurostatus 04/10.2 = grade 4 (marked), matching the JS engine.
+    def _p(t, r):
+        return max(_safe(t, 0), _safe(r, 0))
+    per_limb = [
+        _p(tremor_ue_R, rapid_ue_R),
+        _p(tremor_ue_L, rapid_ue_L),
+        _p(tremor_le_R, rapid_le_R),
+        _p(tremor_le_L, rapid_le_L),
+    ]
+    n_limbs_severe = sum(1 for v in per_limb if v >= 4)
+
     gait = _safe(gait_ataxia, 0)
     trunc = _safe(truncal_ataxia, 0)
 
-    # Severe in 3+ limbs AND severe gait/truncal → 4
-    if n_limbs_severe >= 3 and (gait >= 3 or trunc >= 3):
-        return 4
-    # Unable to perform coordinated → 5 (max in everything)
-    if limb_overall >= 4 and gait >= 4 and trunc >= 4:
+    # RULE (Neurostatus 04/10.2 - Cerebellar FS), mirrors calcCerebellarFS in
+    # index.html:
+    #   5 = unable to perform coordinated movements (proxy: >=3 SEVERE limbs
+    #       AND severe gait AND severe truncal)
+    #   4 = SEVERE gait/truncal ataxia AND SEVERE ataxia in three or four limbs
+    #   3 = moderate limb ataxia and/or moderate-or-severe gait/truncal ataxia
+    #       (severe gait/truncal ALONE, without severe ataxia in 3-4 limbs, = 3)
+    if n_limbs_severe >= 3 and gait >= 4 and trunc >= 4:
         return 5
-
-    # Moderate limb ataxia OR moderate-severe gait/truncal
+    if n_limbs_severe >= 3 and (gait >= 4 or trunc >= 4):
+        return 4
     if limb_overall >= 3 or gait >= 3 or trunc >= 3:
         return 3
 
@@ -480,25 +492,42 @@ def calc_bb_fs(
     bowel: Optional[int] = None,       # 0-4
 ) -> int:
     """
-    B/B FS (Fouad Table 2):
-    Max of subscores. If 4 in urgency + bowel + (one more), score = 5.
-    Range 0-5 (already converted, no further conversion needed for EDSS).
+    Bowel/Bladder FS (Neurostatus 04/10.2). Matches calcBBFS in index.html.
+
+    Definitions:
+      loss of BLADDER function = hesitancy 4 (overflow) OR urgency 4 (loss of control)
+      loss of BOWEL   function = bowel 4 (complete loss)
+
+    Grades:
+      6 = loss of BOTH bladder and bowel
+      5 = loss of EITHER bladder or bowel
+      4 = almost constant catheterisation (c=2)
+      3 = requires cath / frequent incontinence / needs enemata / intermittent
+          self-cath (h/u/b >= 3 or c >= 1)
+      2 = moderate hesitancy / urgency / constipation (h/u/b >= 2)
+      1 = mild (h/u/b >= 1)
+      0 = normal
     """
     h = _safe(hesitancy, 0)
     u = _safe(urgency, 0)
     c = _safe(catheterisation, 0)
     b = _safe(bowel, 0)
 
-    base_max = max(h, u, c * 2, b)  # catheterisation 2 = grade 4 equivalent
-
-    # Special rule: 4 in urinary urgency + bowel dysfunction → 5
-    severe_count = sum(1 for x in [h, u, b] if x >= 4)
-    if severe_count >= 2 and c >= 1:
+    bladder_loss = (h >= 4 or u >= 4)
+    bowel_loss = (b >= 4)
+    if bladder_loss and bowel_loss:
+        return 6
+    if bladder_loss or bowel_loss:
         return 5
-    if u >= 4 and b >= 4:
-        return 5
-
-    return min(base_max, 5)
+    if c >= 2:
+        return 4
+    if h >= 3 or u >= 3 or b >= 3 or c >= 1:
+        return 3
+    if h >= 2 or u >= 2 or b >= 2:
+        return 2
+    if h >= 1 or u >= 1 or b >= 1:
+        return 1
+    return 0
 
 
 def bb_fs_converted(bb_fs: int) -> int:
