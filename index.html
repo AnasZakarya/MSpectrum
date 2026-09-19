@@ -302,6 +302,7 @@ html[data-theme="dark"] .tool-disclaimer b{color:var(--ink)}
 
 * { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
 html, body {
   margin: 0;
   padding: 0;
@@ -497,7 +498,7 @@ body {
 .landing-page.active { display: block; }
 
 .hero {
-  padding: 72px 24px 56px;
+  padding: 108px 24px 80px;
   text-align: center;
   max-width: 880px;
   margin: 0 auto;
@@ -2457,7 +2458,7 @@ input[type="checkbox"] {
   .card { padding: 16px; }
   .summary-tile .tile-value { font-size: 28px; }
   .summary-tile.edss-final .tile-value { font-size: 36px; }
-  .hero { padding: 48px 16px 32px; }
+  .hero { padding: 68px 16px 48px; }
   .section-block { padding: 40px 16px; }
 }
 
@@ -3607,17 +3608,39 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 .edss-readout:not([data-band]) .edss-scale { opacity: .35; }
 .edss-readout:not([data-band]) .edss-scale i { display: none; }
 
+
+/* Scroll down bounce arrow under hero CTAs */
+.hero-scroll-hint{
+  margin:22px auto 0;
+  width:34px;height:34px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);
+  font-size:22px;line-height:1;
+  animation:heroBounce 2.2s ease-in-out infinite;
+  opacity:0.55;
+  cursor:pointer;
+  transition:opacity .2s ease;
+  background:none;border:none;padding:0;font-family:inherit;
+}
+.hero-scroll-hint:hover{opacity:1}
+@keyframes heroBounce{
+  0%,100%{transform:translateY(0);opacity:0.55}
+  50%{transform:translateY(6px);opacity:0.85}
+}
+body.scrolled-past-hero .hero-scroll-hint{opacity:0;pointer-events:none}
+
 .hero-wrap::before {
-  content: ""; position: absolute; inset: -12%; z-index: 0; pointer-events: none;
+  content: ""; position: absolute; inset: -10%; z-index: 0; pointer-events: none;
   background:
-    radial-gradient(farthest-side at 12% 22%, rgba(42,120,170,.20), rgba(42,120,170,0) 62%),
-    radial-gradient(farthest-side at 90% 84%, rgba(200,110,40,.18), rgba(200,110,40,0) 62%);
+    radial-gradient(farthest-side at 12% 22%, rgba(42,120,170,.28), rgba(42,120,170,0) 68%),
+    radial-gradient(farthest-side at 90% 84%, rgba(200,110,40,.24), rgba(200,110,40,0) 68%),
+    radial-gradient(farthest-side at 50% 60%, rgba(123,63,160,.10), rgba(123,63,160,0) 55%);
   background-repeat: no-repeat;
   animation: heroAura 24s ease-in-out infinite alternate;
 }
 .hero-wrap::after {
   content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(ellipse 72% 82% at 50% 46%, rgba(250,248,243,0) 52%, var(--bg) 100%);
+  background: radial-gradient(ellipse 84% 92% at 50% 50%, rgba(250,248,243,0) 64%, var(--bg) 100%);
 }
 @keyframes heroAura { from { transform: translate(0, 0) scale(1); } to { transform: translate(3.5%, 2.5%) scale(1.06); } }
 
@@ -3732,7 +3755,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
   </header>
 
   <div class="hero-wrap" style="position:relative;overflow:hidden">
-  <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.22;z-index:0"></canvas>
+  <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.38;z-index:0"></canvas>
   <div class="hero" style="position:relative;z-index:1">
     <h1><span class="hl" id="hero-edss-hl">MS</span>pectrum</h1>
     <p class="tagline">One place for the numbers that describe MS: the full EDSS, the scores around it, a patient-friendly report, and the 2024 McDonald criteria. Free, in your browser, nothing uploaded.</p>
@@ -3749,6 +3772,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       </div>
     </div>
     <div class="privacy-tag">🔒 Private &amp; browser-based - your data never leaves your device. Any identifiers you enter stay on this device only; prefer a non-identifying code where you can.</div>
+    <button type="button" class="hero-scroll-hint no-print" aria-label="Scroll to see tools" onclick="var t=document.getElementById('explore')||document.getElementById('features');if(t)t.scrollIntoView({behavior:'smooth',block:'start'});">⌄</button>
   </div>
   </div><!-- /hero-wrap -->
 
@@ -7842,7 +7866,7 @@ function backToEdssModes() {
   // Axons: horizontal nerve fibres with travelling signal pulses
   // (MS motif: myelinated axons, demyelination patches, signal pulses)
   const AXONS = [];
-  const N_AXONS = 9;
+  const N_AXONS = 11;
 
   function resize() {
     const wrap = canvas.parentElement;
@@ -11649,6 +11673,41 @@ window.scExtractAllZones = async function(){
       });
     }
   });
+})();
+</script>
+
+<script>
+// Learn More: smooth scroll to #features
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    var lm = document.querySelector('a[href="#features"]');
+    if(!lm) return;
+    lm.addEventListener('click', function(e){
+      var tgt = document.getElementById('features');
+      if(!tgt) return;
+      e.preventDefault();
+      tgt.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+})();
+</script>
+
+<script>
+// Hide hero scroll hint once user scrolls
+(function(){
+  var body = document.body;
+  var hint = document.querySelector('.hero-scroll-hint');
+  if(!hint) return;
+  var hero = document.querySelector('.hero-wrap');
+  if(!hero) return;
+  function onScroll(){
+    if(window.scrollY > hero.offsetHeight * 0.4){
+      body.classList.add('scrolled-past-hero');
+    } else {
+      body.classList.remove('scrolled-past-hero');
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
 })();
 </script>
 </body>
