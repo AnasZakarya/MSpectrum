@@ -143,8 +143,16 @@ html[data-theme="dark"] .panel.split > .panel-side{background:#1e2636;border-col
 .info-ico{font-size:18px;line-height:1}
 .info-title{font-weight:700;font-size:13.5px;color:var(--accent-ink,#1e4a6e)}
 
+
+/* Spectrum strip under header — matches home + EDSS */
+.app-header{position:relative}
+.app-header::after{
+  content:""; position:absolute; left:0; right:0; bottom:-2px; height:3px;
+  pointer-events:none;
+  background:linear-gradient(90deg, var(--accent) 0%, #2a9d8f 38%, #7b3fa0 68%, var(--hl) 100%);
+}
 /* Unified tool-page hero + disclaimer (shared across MSpectrum tools) */
-.tool-hero{margin:22px 0 18px;text-align:center;animation:rise .4s ease both}
+.tool-hero{margin:8px 0 14px;text-align:center;animation:rise .4s ease both}
 .tool-hero-frame{
   display:inline-block;
   padding:14px 34px;
