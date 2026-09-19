@@ -63,6 +63,77 @@
 .sources-link-row .sources-icon{font-size:15px;line-height:1;}
 .sources-link-row .sources-arrow{color:var(--accent);font-weight:600;margin-left:2px;}
 .sources-link-row .sources-hint{color:var(--ink-faint);font-size:12px;font-weight:400;}
+
+/* ============================================================
+   Unified tool-page hero + disclaimer (shared across MSpectrum tools)
+   ============================================================ */
+.tool-hero{margin:22px 0 20px;text-align:center;animation:rise .4s ease both}
+.tool-hero-frame{
+  display:inline-block;
+  padding:14px 34px;
+  border:1.5px solid var(--accent);
+  border-radius:14px;
+  background:var(--paper);
+  box-shadow:0 2px 10px rgba(30,74,110,0.08);
+}
+.tool-hero-frame h1,
+.tool-hero-frame h2,
+.tool-hero-frame h3{
+  margin:0;
+  font-family:var(--serif);
+  font-size:28px;
+  color:var(--accent-ink);
+  font-weight:600;
+  letter-spacing:-.01em;
+  line-height:1.15;
+}
+.tool-hero-icon{margin-right:8px}
+.tool-hero-desc{
+  margin:18px auto 0;
+  max-width:760px;
+  padding:14px 20px;
+  background:var(--paper-tint,#f4f7fb);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--accent);
+  border-radius:10px;
+  color:var(--ink-soft);
+  font-size:14.5px;
+  text-align:left;
+  line-height:1.55;
+}
+html[data-theme="dark"] .tool-hero-frame{background:var(--paper);box-shadow:0 2px 10px rgba(0,0,0,0.35)}
+html[data-theme="dark"] .tool-hero-desc{background:#1e2636;border-color:var(--rule);color:var(--ink-soft)}
+@media (max-width:600px){
+  .tool-hero-frame{padding:12px 22px}
+  .tool-hero-frame h1,.tool-hero-frame h2,.tool-hero-frame h3{font-size:22px}
+  .tool-hero-desc{font-size:13.5px;padding:12px 16px}
+}
+
+/* Unified bottom-of-page disclaimer */
+.tool-disclaimer{
+  margin:40px 0 16px;
+  background:#f4f6f9;
+  border:1px solid var(--rule);
+  border-left:4px solid var(--ink-faint);
+  border-radius:10px;
+  padding:14px 18px;
+  color:var(--ink-soft);
+  font-size:13.5px;
+  line-height:1.55;
+}
+.tool-disclaimer-head{
+  display:flex;align-items:center;gap:8px;
+  font-weight:600;
+  margin-bottom:6px;
+  font-size:14px;
+  color:var(--ink);
+}
+.tool-disclaimer p{margin:0}
+.tool-disclaimer b{color:var(--ink)}
+html[data-theme="dark"] .tool-disclaimer{background:#1a2432;border-color:#2a3548;color:var(--ink-soft)}
+html[data-theme="dark"] .tool-disclaimer-head{color:var(--ink)}
+html[data-theme="dark"] .tool-disclaimer b{color:var(--ink)}
+
 </style>
 <style>
 /* ============================================================
@@ -3575,8 +3646,10 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     </div>
     <div id="edss-modes" style="display:none;">
     <button type="button" class="back-to-explore" id="back-to-explore">← Back to MSpectrum</button>
-    <h3 class="branch-head">🧠 AutoEDSSguide</h3>
-    <p style="color:var(--ink-soft);margin:2px 0 16px;">AutoEDSSguide scores the EDSS in real time from a full Neurostatus exam, with a print-ready sheet, OCR scanner and inconsistency flags. Choose how you want to work below - a guided exam, the classic system layout, a paper-sheet scanner, a fast clinical mode, or a plain-language self-check for people with MS.</p>
+    <div class="tool-hero">
+      <div class="tool-hero-frame"><h3><span class="tool-hero-icon">🧠</span>AutoEDSSguide</h3></div>
+      <div class="tool-hero-desc">AutoEDSSguide scores the EDSS in real time from a full Neurostatus exam, with a print-ready sheet, OCR scanner and inconsistency flags. Choose how you want to work below: a guided exam, the classic system layout, a paper-sheet scanner, a fast clinical mode, or a plain-language self-check for people with MS.</div>
+    </div>
     <div class="info-cards" role="note">
       <div class="info-card"><div class="info-card-head"><span class="info-ico">👥</span><span class="info-title">Who can use each mode</span></div><p><b>Roadmap</b> and <b>System view</b> are for clinicians performing a full Neurostatus exam. <b>Sheet Scanner</b> processes a completed paper form automatically. <b>Clinical EDSS</b> is a fast 5–10 min version for routine follow-up. <b>Quick Check</b> is for <b>people with MS</b>: a plain-language self-check that estimates the EDSS without a clinical exam. <b>Train mode</b> lets raters practise the FS-to-EDSS step on reference cases.</p></div>
       <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><p>Choose a mode below. Scores update <b>automatically</b> in real time as you enter exam findings; there is no Calculate button. The Roadmap guides you step by step; System view follows the classic Neurostatus layout. You can switch modes any time without losing your data, and "How was this scored?" shows the rule behind the number.</p></div>
@@ -3630,8 +3703,10 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     </div>
     <div class="cta-row">
 
-    <p class="sources-link-row no-print"><a class="sources-link" href="#about-sources" onclick="var d=document.getElementById('about-sources'); if(d){ d.open=true; d.scrollIntoView({block:'start'}); } return false;" aria-label="Jump to references and scoring sources"><span class="sources-icon" aria-hidden="true">📚</span><span>References &amp; scoring sources</span><span class="sources-arrow" aria-hidden="true">→</span></a></p>
-    <p style="margin-top:16px;color:var(--ink-faint);font-size:12px;text-align:center;">MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b style="color:var(--ink-soft)">It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is stored.</p>
+    <div class="tool-disclaimer no-print">
+      <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
+      <p>MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is stored.</p>
+    </div>
     </div>
     </div><!-- /edss-modes -->
   </div>

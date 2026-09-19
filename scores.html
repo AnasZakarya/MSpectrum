@@ -142,6 +142,73 @@ html[data-theme="dark"] .panel.split > .panel-side{background:#1e2636;border-col
 .info-card-head{display:flex;align-items:center;gap:8px}
 .info-ico{font-size:18px;line-height:1}
 .info-title{font-weight:700;font-size:13.5px;color:var(--accent-ink,#1e4a6e)}
+
+/* Unified tool-page hero + disclaimer (shared across MSpectrum tools) */
+.tool-hero{margin:22px 0 20px;text-align:center;animation:rise .4s ease both}
+.tool-hero-frame{
+  display:inline-block;
+  padding:14px 34px;
+  border:1.5px solid var(--accent);
+  border-radius:14px;
+  background:var(--paper);
+  box-shadow:0 2px 10px rgba(30,74,110,0.08);
+}
+.tool-hero-frame h1,
+.tool-hero-frame h2,
+.tool-hero-frame h3{
+  margin:0;
+  font-family:var(--serif);
+  font-size:28px;
+  color:var(--accent-ink);
+  font-weight:600;
+  letter-spacing:-.01em;
+  line-height:1.15;
+}
+.tool-hero-icon{margin-right:8px}
+.tool-hero-desc{
+  margin:18px auto 0;
+  max-width:760px;
+  padding:14px 20px;
+  background:var(--paper-tint,#f4f7fb);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--accent);
+  border-radius:10px;
+  color:var(--ink-soft);
+  font-size:14.5px;
+  text-align:left;
+  line-height:1.55;
+}
+html[data-theme="dark"] .tool-hero-frame{background:var(--paper);box-shadow:0 2px 10px rgba(0,0,0,0.35)}
+html[data-theme="dark"] .tool-hero-desc{background:#1e2636;border-color:var(--rule);color:var(--ink-soft)}
+@media (max-width:600px){
+  .tool-hero-frame{padding:12px 22px}
+  .tool-hero-frame h1,.tool-hero-frame h2,.tool-hero-frame h3{font-size:22px}
+  .tool-hero-desc{font-size:13.5px;padding:12px 16px}
+}
+.tool-disclaimer{
+  margin:40px 0 16px;
+  background:#f4f6f9;
+  border:1px solid var(--rule);
+  border-left:4px solid var(--ink-faint);
+  border-radius:10px;
+  padding:14px 18px;
+  color:var(--ink-soft);
+  font-size:13.5px;
+  line-height:1.55;
+}
+.tool-disclaimer-head{
+  display:flex;align-items:center;gap:8px;
+  font-weight:600;
+  margin-bottom:6px;
+  font-size:14px;
+  color:var(--ink);
+}
+.tool-disclaimer p{margin:0}
+.tool-disclaimer b{color:var(--ink)}
+html[data-theme="dark"] .tool-disclaimer{background:#1a2432;border-color:#2a3548;color:var(--ink-soft)}
+html[data-theme="dark"] .tool-disclaimer-head,
+html[data-theme="dark"] .tool-disclaimer b{color:var(--ink)}
+
 .info-card-warn{background:#fff8ee;border-color:#f0cba8}
 .info-card-warn .info-title{color:#7a4a1c}
 @media(max-width:860px){.info-cards{grid-template-columns:1fr}}
@@ -329,8 +396,10 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 <div class="wrap">
   <div id="home">
   <section class="hero">
-    <h1>📊 MS Score Hub</h1>
-    <p>Stateless calculators and questionnaires for the measures used alongside the EDSS - cognition, fatigue, mood, walking, quality of life and disease severity. Pick a tool, enter the data, and get the result with its plain-language meaning.</p>
+    <div class="tool-hero">
+      <div class="tool-hero-frame"><h1><span class="tool-hero-icon">📊</span>MS Score Hub</h1></div>
+      <div class="tool-hero-desc">Stateless calculators and questionnaires for the measures used alongside the EDSS: cognition, fatigue, mood, walking, quality of life and disease severity. Pick a tool, enter the data, and get the result with its plain-language meaning.</div>
+    </div>
     <div class="info-cards" role="note">
       <div class="info-card"><div class="info-card-head"><span class="info-ico">👥</span><span class="info-title">Who can use each tool</span></div><p>Self-report questionnaires (PDDS, MFIS, MSQOL-54, PROMIS-29, FSS, PHQ-9, GAD-7, MSWS-12, MSIS-29, FES-I, SymptoMScreen) can be filled by the <b>patient</b> directly: full question text and answer options are shown, and every result is explained in plain language with where the person sits versus others. Performance tests (SDMT, BVMT-R, CVLT-II, T25FW, 9-HPT, PASAT, 6MWT, LCVA) and the composites (BICAMS, MSFC) are <b>administered by a clinician</b>, who enters the raw results here.</p></div>
       <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><p>Every result updates <b>automatically</b> as you fill the boxes; there is no Calculate button (except the composites BICAMS and MSFC, which pull from other tools). Once you start a questionnaire, any <b>unanswered items are highlighted in amber</b> so you can see exactly what is missing. Age, sex and education entered once in "This patient" feed every norm-based tool. Nothing is stored or uploaded.</p></div>
@@ -678,8 +747,10 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
   </section>
 
   <section class="panel" id="p_report" style="background:transparent;border:none;padding:16px 0 0;box-shadow:none">
-    <h2 style="font-family:var(--serif);font-size:34px;letter-spacing:-.01em;margin:0 0 8px">🩺 Check my MS</h2>
-    <p class="lead" style="font-size:15.5px">A plain-language read on how MS is affecting you, built from published questionnaires and your own answers. Work through them and you get one summary to understand your situation and discuss it with your care team.</p>
+    <div class="tool-hero">
+      <div class="tool-hero-frame"><h2><span class="tool-hero-icon">🩺</span>Check my MS</h2></div>
+      <div class="tool-hero-desc">A plain-language read on how MS is affecting you, built from published questionnaires and your own answers. Work through them and you get one summary to understand your situation and discuss it with your care team.</div>
+    </div>
     <div class="info-cards" role="note">
       <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><p>Answer the questionnaires in order: press <b>Start</b> and you are guided from one to the next, or open any of them from the list below in any order. Stop and come back any time. At the end you get a single plain-language summary. Everything runs in your browser and <b>nothing is stored</b>.</p></div>
       <div class="info-card"><div class="info-card-head"><span class="info-ico">📋</span><span class="info-title">What this covers</span></div><p>Eleven questionnaires you can answer yourself: your EDSS and age (an EDSS you already know, or the Quick Check estimate), PDDS, MSWS-12, FES-I, MFIS, PROMIS Cognitive Function, PHQ-9, GAD-7, PROMIS Pain, MSIS-29 and MSQOL-54. It does <b>not</b> include an examined EDSS or the clinician cognitive tests (SDMT, BVMT-R, CVLT-II), so a normal report does not rule out cognitive change.</p></div>
@@ -1076,7 +1147,10 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 
 </div>
 
-  <div class="info-card info-card-warn" style="margin:28px 0 0"><div class="info-card-head"><span class="info-ico">⚠️</span><span class="info-title">Not a diagnosis</span></div><p>MSpectrum computes outcome-measure scores from published scoring rules and explains what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research and educational use; verify locally before clinical or trial use. All computation is local; nothing is stored. &middot; <a href="#refs-sec" onclick="var r=document.getElementById('refs-sec'),d=document.getElementById('refs-details'); if(r){ r.style.display='block'; if(d) d.open=true; r.scrollIntoView({behavior:'smooth',block:'start'}); } return false;">Sources</a></p></div>
+  <div class="tool-disclaimer no-print">
+    <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
+    <p>MSpectrum computes outcome-measure scores from published scoring rules and explains what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research and educational use; verify locally before clinical or trial use. All computation is local; nothing is stored.</p>
+  </div>
 </div>
 
 <script>

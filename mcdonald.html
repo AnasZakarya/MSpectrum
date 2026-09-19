@@ -176,6 +176,71 @@
       border-color: var(--accent-ink);
     }
 
+    /* Unified tool-page hero + disclaimer (shared across MSpectrum tools) */
+    .tool-hero{margin:22px 0 20px;text-align:center;animation:rise .4s ease both}
+    .tool-hero-frame{
+      display:inline-block;
+      padding:14px 34px;
+      border:1.5px solid var(--accent);
+      border-radius:14px;
+      background:var(--paper);
+      box-shadow:0 2px 10px rgba(30,74,110,0.08);
+    }
+    .tool-hero-frame h1,
+    .tool-hero-frame h2{
+      margin:0;
+      font-family:var(--serif);
+      font-size:28px;
+      color:var(--accent-ink);
+      font-weight:600;
+      letter-spacing:-.01em;
+      line-height:1.15;
+    }
+    .tool-hero-icon{margin-right:8px}
+    .tool-hero-desc{
+      margin:18px auto 0;
+      max-width:760px;
+      padding:14px 20px;
+      background:var(--paper-tint,#f4f7fb);
+      border:1px solid var(--rule);
+      border-left:3px solid var(--accent);
+      border-radius:10px;
+      color:var(--ink-soft);
+      font-size:14.5px;
+      text-align:left;
+      line-height:1.55;
+    }
+    html[data-theme="dark"] .tool-hero-frame{background:var(--paper);box-shadow:0 2px 10px rgba(0,0,0,0.35)}
+    html[data-theme="dark"] .tool-hero-desc{background:#1e2636;border-color:var(--rule);color:var(--ink-soft)}
+    @media (max-width:600px){
+      .tool-hero-frame{padding:12px 22px}
+      .tool-hero-frame h1,.tool-hero-frame h2{font-size:22px}
+      .tool-hero-desc{font-size:13.5px;padding:12px 16px}
+    }
+    .tool-disclaimer{
+      margin:40px 0 16px;
+      background:#f4f6f9;
+      border:1px solid var(--rule);
+      border-left:4px solid var(--ink-faint);
+      border-radius:10px;
+      padding:14px 18px;
+      color:var(--ink-soft);
+      font-size:13.5px;
+      line-height:1.55;
+    }
+    .tool-disclaimer-head{
+      display:flex;align-items:center;gap:8px;
+      font-weight:600;
+      margin-bottom:6px;
+      font-size:14px;
+      color:var(--ink);
+    }
+    .tool-disclaimer p{margin:0}
+    .tool-disclaimer b{color:var(--ink)}
+    html[data-theme="dark"] .tool-disclaimer{background:#1a2432;border-color:#2a3548;color:var(--ink-soft)}
+    html[data-theme="dark"] .tool-disclaimer-head,
+    html[data-theme="dark"] .tool-disclaimer b{color:var(--ink)}
+
     /* Landing screen & disclaimer */
     .hero {
       padding: 34px 0 10px;
@@ -924,8 +989,10 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
     <!-- Hero / Landing View -->
     <div id="landing-view">
       <section class="hero">
-        <h1>🔎 MS Criteria Checker</h1>
-        <p>Enter the onset course, MRI regions, CSF and susceptibility findings, and the checker tells you which 2024 McDonald category they fulfil and what is still missing, with built-in mimic and older-onset checks. It applies the criteria; the diagnosis stays with the treating neurologist.</p>
+        <div class="tool-hero">
+          <div class="tool-hero-frame"><h1><span class="tool-hero-icon">🔎</span>MS Criteria Checker</h1></div>
+          <div class="tool-hero-desc">Enter the onset course, MRI regions, CSF and susceptibility findings, and the checker tells you which 2024 McDonald category they fulfil and what is still missing, with built-in mimic and older-onset checks. It applies the criteria; the diagnosis stays with the treating neurologist.</div>
+        </div>
       </section>
 
       <div class="hero-cta" style="margin:4px 0 14px">
@@ -2651,7 +2718,10 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
   </script>
   <div style="max-width:920px;margin:32px auto 0;padding:0 18px">
     
-    <div class="info-card info-card-warn" style="margin-top:20px"><div class="info-card-head"><span class="info-ico">⚠️</span><span class="info-title">Clinical disclaimer</span></div><p>This tool automates the 2024 McDonald calculations from the entries you provide. It supports, but does not replace, expert neurological judgement. Always exclude better explanations and mimics (MOGAD, NMOSD, vascular disease) before finalising a diagnosis. &middot; <a href="#references-sec" onclick="var r=document.getElementById('references-sec'); if(r){ r.style.display='block'; var d=r.querySelector('details'); if(d) d.open=true; r.scrollIntoView({behavior:'smooth',block:'start'}); } return false;">Sources</a></p></div>
+    <div class="tool-disclaimer no-print">
+      <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
+      <p>This tool automates the 2024 McDonald calculations from the entries you provide. <b>It supports, but does not replace, expert neurological judgement.</b> Always exclude better explanations and mimics (MOGAD, NMOSD, vascular disease) before finalising a diagnosis. All computation is local; nothing is stored.</p>
+    </div>
   </div>
 <script>
 /* Unified dark-mode toggle (shared across MSpectrum pages via localStorage). Opt-in; default light. */
