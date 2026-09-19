@@ -133,10 +133,10 @@ html[data-theme="dark"] .tool-hero-desc{background:#1e2636;border-color:var(--ru
   content:"";
   position:absolute;
   top:-24px;
-  left:25%;
-  right:25%;
+  left:18%;
+  right:18%;
   height:1px;
-  background:linear-gradient(90deg,transparent 0%,var(--rule) 25%,var(--rule) 75%,transparent 100%);
+  background:linear-gradient(90deg,transparent 0%,var(--rule-strong) 20%,var(--rule-strong) 80%,transparent 100%);
   pointer-events:none;
 }
 html[data-theme="dark"] .tool-disclaimer{background:#1a2432;border-color:#2a3548;color:var(--ink-soft)}
@@ -2991,7 +2991,10 @@ input[type="checkbox"] {
 #landing.picking .brand-mark{padding-left:26px}
 .back-to-explore{background:#ffffff;border:1px solid var(--rule-strong);border-radius:20px;padding:6px 14px;font-size:13px;color:var(--accent-ink);cursor:pointer;margin-bottom:16px;font-weight:600}
 .back-to-explore:hover{background:var(--accent-ink);color:#ffffff;border-color:var(--accent-ink)}
+#landing.picking{display:flex;flex-direction:column;min-height:100vh}
 #landing.picking .hero-wrap,#landing.picking #features,#landing.picking #explore>h2,#landing.picking #explore>.section-rule,#landing.picking #explore-home,#landing.picking .about-block,#landing.picking .app-footer{display:none!important}
+#landing.picking #edss-modes{flex:1;display:flex;flex-direction:column}
+#landing.picking #edss-modes .cta-row{margin-top:auto}
 #landing.picking #edss-modes{display:block!important}
 #landing.picking #landing-start-btn{display:none!important}
 #landing.picking #landing-back-btn{display:inline-block!important}

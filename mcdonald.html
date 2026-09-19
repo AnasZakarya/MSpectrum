@@ -94,7 +94,7 @@
       font-family: var(--sans);
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 80px;
+      padding-bottom: 20px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -107,9 +107,8 @@
     .wrap {
       max-width: 920px;
       margin: 0 auto;
-      padding: 0 18px 40px;
+      padding: 0 18px 8px;
       width: 100%;
-      flex: 1;
     }
 
     /* Top Header matching scores.html with restored Neuron Logo and subtitle */
@@ -251,10 +250,10 @@
       content:"";
       position:absolute;
       top:-24px;
-      left:25%;
-      right:25%;
+      left:18%;
+      right:18%;
       height:1px;
-      background:linear-gradient(90deg,transparent 0%,var(--rule) 25%,var(--rule) 75%,transparent 100%);
+      background:linear-gradient(90deg,transparent 0%,var(--rule-strong) 20%,var(--rule-strong) 80%,transparent 100%);
       pointer-events:none;
     }
     html[data-theme="dark"] .tool-disclaimer{background:#1a2432;border-color:#2a3548;color:var(--ink-soft)}
@@ -1015,13 +1014,13 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
         </div>
       </section>
 
-      <div class="hero-cta" style="margin:4px 0 14px">
-        <button class="btn-cta" id="btn-start">Start assessment &rarr;</button>
-      </div>
-
-      <div class="info-cards" role="note">
+<div class="info-cards" role="note">
         <div class="info-card"><div class="info-card-head"><span class="info-ico">👥</span><span class="info-title">Who it is for</span></div><p>Clinicians assessing a suspected first demyelinating event, a progressive course, or incidental MRI findings, with the MRI, CSF and clinical findings at hand. It applies the criteria; the diagnosis stays with the treating neurologist.</p></div>
         <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><p>Five short steps: age and onset course, the investigations you have, the clinical picture, MRI and visual findings, then CSF and susceptibility markers. The tool asks only about the tests you ticked and reports which 2024 McDonald category the findings fulfil, the criteria it rests on, safety cautions and next steps, with a print or PDF summary.</p></div>
+      </div>
+
+      <div class="hero-cta" style="margin:14px 0 14px;text-align:center">
+        <button class="btn-cta" id="btn-start">Start assessment &rarr;</button>
       </div>
 
       <!-- How to use -->
@@ -2736,7 +2735,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       }
     }
   </script>
-  <div style="max-width:920px;margin:0 auto;padding:0 18px">
+  <div style="max-width:920px;margin:auto auto 0 auto;padding:0 18px;width:100%">
     
     <div class="tool-disclaimer no-print">
       <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
