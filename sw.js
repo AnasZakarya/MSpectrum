@@ -1,7 +1,7 @@
 /* MSpectrum service worker - NETWORK-FIRST.
    Always serves the freshest version when online (so deployed changes show immediately);
    falls back to the cached copy only when there is no connection. Bump CACHE to force-clear. */
-const CACHE = "mspectrum-v5";
+const CACHE = "mspectrum-v6";
 const CORE = [
   "./", "./index.html", "./scores.html", "./mcdonald.html", "./manifest.webmanifest",
   "./mspectrum-logo.svg", "./favicon.svg",
