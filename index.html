@@ -7812,7 +7812,9 @@ document.getElementById("view-toggle").addEventListener("click", (ev) => {
 // Landing → app navigation
 // ============================================================
 function showApp(forceView) {
-  document.getElementById("landing").classList.remove("active");
+  // Hide landing (including .picking) and any other open view — no stacking
+  document.getElementById("landing").classList.remove("active","picking");
+  ["scanner","clinical","quickcheck","train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
   document.getElementById("app").classList.add("active");
   // If user picked a specific view from landing, honor it
   if (forceView && (forceView === "roadmap" || forceView === "system")) {
@@ -9157,8 +9159,9 @@ const TRAIN_FS_NAMES = [["visual", "Visual"], ["brainstem", "Brainstem"], ["pyra
 const TRAIN_STEPS = [0, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5];
 let TRAIN_INDEX = 0, TRAIN_ANSWERS = [];
 function showTrain() {
-  document.getElementById("landing").classList.remove("active");
-  document.getElementById("app").classList.remove("active"); refreshTipsFab();
+  document.getElementById("landing").classList.remove("active","picking");
+  ["app","scanner","clinical","quickcheck"].forEach(id => document.getElementById(id)?.classList.remove("active"));
+  refreshTipsFab();
   document.getElementById("train").classList.add("active");
   TRAIN_INDEX = 0; TRAIN_ANSWERS = [];
   trainRender();
@@ -9208,8 +9211,9 @@ function trainAnswer(v) {
 document.getElementById("train-home-btn")?.addEventListener("click", backToEdssModes);
 
 function showQuickCheck() {
-  document.getElementById("landing").classList.remove("active");
-  document.getElementById("app").classList.remove("active"); refreshTipsFab();
+  document.getElementById("landing").classList.remove("active","picking");
+  ["app","scanner","clinical","train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
+  refreshTipsFab();
   document.getElementById("quickcheck").classList.add("active");
   QC_ANSWERS = {}; QC_INDEX = 0; QC_EARLY_EXIT = null;
   qcRender();
@@ -9810,10 +9814,9 @@ function clinRestart() {
 function clinGoHome() { backToEdssModes(); }
 
 function showClinical() {
-  document.getElementById("landing").classList.remove("active");
-  document.getElementById("app").classList.remove("active"); refreshTipsFab();
-  document.getElementById("quickcheck").classList.remove("active");
-  document.getElementById("scanner").classList.remove("active");
+  document.getElementById("landing").classList.remove("active","picking");
+  ["app","scanner","quickcheck","train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
+  refreshTipsFab();
   document.getElementById("clinical").classList.add("active");
   CLIN_STATE = {}; CLIN_STEP = 0;
   clinRender();
@@ -10135,7 +10138,8 @@ const ZONES = [
 ];
 
 function showScanner() {
-  document.getElementById("landing").classList.remove("active");
+  document.getElementById("landing").classList.remove("active","picking");
+  ["app","clinical","quickcheck","train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
   document.getElementById("scanner").classList.add("active");
   window.scrollTo({ top:0, behavior:"instant" });
   scInitUI();
