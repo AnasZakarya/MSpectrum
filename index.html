@@ -203,6 +203,41 @@ html[data-theme="dark"] .tool-search .clear-btn{color:var(--ink-soft)}
 html[data-theme="dark"] .tool-search .clear-btn:hover{color:var(--ink);background:var(--rule-strong)}
 /* Frame frame border a touch brighter for dark mode */
 html[data-theme="dark"] .tool-hero-frame{border-color:var(--accent-ink)}
+
+/* ==== #1 Reduced motion (accessibility) ==== */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:0.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:0.001ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+
+/* ==== #3 Toast notifications ==== */
+.toast-container{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none;display:flex;flex-direction:column;gap:8px;align-items:center}
+.toast-item{background:var(--ink);color:#fff;padding:9px 16px;border-radius:999px;font-size:12.5px;font-weight:500;box-shadow:0 4px 14px rgba(0,0,0,0.18);display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(20px);transition:opacity .3s ease,transform .3s ease;pointer-events:auto;max-width:90vw}
+.toast-item.show{opacity:1;transform:translateY(0)}
+.toast-item .toast-check{color:#5ec978;font-weight:700}
+html[data-theme="dark"] .toast-item{background:var(--paper);color:var(--ink);border:1px solid var(--rule)}
+
+/* ==== #6 Install pill (V1) ==== */
+.install-pill-wrap{text-align:center;margin:12px 0 4px}
+.install-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(90deg,rgba(30,74,110,0.04),rgba(184,92,26,0.05));
+  border:1px solid var(--accent-soft);
+  border-radius:999px;
+  padding:4px 6px 4px 12px;
+  font-size:10.5px;color:var(--ink-soft);
+}
+.install-pill .icons{font-size:11px;line-height:1}
+.install-pill .install-btn{background:var(--accent);color:#fff;padding:3px 10px;border-radius:999px;font-weight:600;border:none;cursor:pointer;font-size:10px;font-family:inherit;transition:background .18s ease}
+.install-pill .install-btn:hover{background:var(--accent-ink)}
+.install-pill .install-x{background:transparent;border:none;color:var(--ink-faint);cursor:pointer;font-size:12px;line-height:1;padding:0 4px;font-family:inherit}
+.install-pill .install-x:hover{color:var(--ink)}
+html[data-theme="dark"] .install-pill{background:linear-gradient(90deg,rgba(106,166,221,0.08),rgba(230,151,90,0.10));border-color:var(--rule)}
+
 /* Mobile: header Get started button — compact one line */
 @media (max-width:600px){
   #landing-start-btn{padding:8px 14px!important;font-size:12.5px!important;white-space:nowrap!important;border-radius:8px!important}
@@ -10652,7 +10687,60 @@ function scExportSheet(){
   var css=Array.prototype.map.call(document.querySelectorAll("style"),function(s){return s.outerHTML;}).join("");
   var w=window.open("","_blank","width=920,height=1040"); if(!w){ alert("Allow pop-ups to export the sheet."); return; }
   var fix="<style>@media print{@page{margin:8mm}html,body{margin:0!important;padding:0!important}.sc-sheet-card{padding:0!important;box-shadow:none!important;border:none!important}.sc-pages-container{gap:0!important;padding:0!important;margin:0!important}.sc-sheet-wrap{gap:0!important;margin:0!important;padding:0!important}.sc-page{page-break-before:avoid;page-break-inside:avoid;break-inside:avoid;margin:0!important}.sc-page+.sc-page{page-break-before:always;break-before:page}.sc-page:last-child{page-break-after:avoid;break-after:avoid}}</style>";
-  w.document.write("<!DOCTYPE html><html><head><meta charset=utf-8><title>Neurostatus sheet</title>"+css+fix+"</head><body style=\"padding:0;background:#ffffff\">"+clone.outerHTML+"<scr"+"ipt>window.onload=function(){setTimeout(function(){window.print();},250);}<\/scr"+"ipt></body></html>");
+  w.document.write("<!DOCTYPE html><html><head><meta charset=utf-8><title>Neurostatus sheet</title>"+css+fix+"</head><body style=\"padding:0;background:#ffffff\">"+clone.outerHTML+"<scr"+"ipt>window.onload=function(){setTimeout(function(){window.print();},250);}<\/scr"+"ipt>
+<script>
+// Toast notifications: window.mspectrumToast('message')
+(function(){
+  window.mspectrumToast = function(msg){
+    var c = document.getElementById('__mspec_toasts');
+    if(!c){ c=document.createElement('div'); c.id='__mspec_toasts'; c.className='toast-container'; document.body.appendChild(c); }
+    var t = document.createElement('div');
+    t.className='toast-item';
+    t.innerHTML='<span class="toast-check">✓</span><span>'+String(msg).replace(/</g,'&lt;')+'</span>';
+    c.appendChild(t);
+    requestAnimationFrame(function(){ t.classList.add('show'); });
+    setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 400); }, 2400);
+  };
+})();
+</script>
+
+<script>
+// #6 Install pill (PWA)
+(function(){
+  var deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault();
+    deferredPrompt = e;
+    var wrap = document.getElementById('install-pill-wrap');
+    var dismissed = false;
+    try { dismissed = !!localStorage.getItem('mspectrum-install-dismissed'); } catch(_) {}
+    if(wrap && !dismissed){ wrap.style.display='block'; }
+  });
+  document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('install-pill-btn');
+    var x = document.getElementById('install-pill-x');
+    var wrap = document.getElementById('install-pill-wrap');
+    if(btn){
+      btn.addEventListener('click', async function(){
+        if(deferredPrompt){
+          deferredPrompt.prompt();
+          try { await deferredPrompt.userChoice; } catch(_){}
+          deferredPrompt = null;
+          if(wrap) wrap.style.display='none';
+          if(window.mspectrumToast) window.mspectrumToast('Installation started');
+        }
+      });
+    }
+    if(x){
+      x.addEventListener('click', function(){
+        if(wrap) wrap.style.display='none';
+        try { localStorage.setItem('mspectrum-install-dismissed', String(Date.now())); } catch(_){}
+      });
+    }
+  });
+})();
+</script>
+</body></html>");
   w.document.close();
 }
 function scExportTableImage() {

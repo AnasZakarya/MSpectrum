@@ -260,6 +260,28 @@ html[data-theme="dark"] .tool-disclaimer-footer .dot{color:var(--rule)}
   display:block;padding:14px;color:var(--ink-faint);font-size:13px;font-style:italic;text-align:center;
 }
 
+
+
+.chk-progress-pct{color:var(--accent);font-weight:600}
+.chk-progress-left{color:var(--ink-faint)}
+
+/* ==== #1 Reduced motion (accessibility) ==== */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:0.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:0.001ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+
+/* ==== #3 Toast notifications ==== */
+.toast-container{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none;display:flex;flex-direction:column;gap:8px;align-items:center}
+.toast-item{background:var(--ink);color:#fff;padding:9px 16px;border-radius:999px;font-size:12.5px;font-weight:500;box-shadow:0 4px 14px rgba(0,0,0,0.18);display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(20px);transition:opacity .3s ease,transform .3s ease;pointer-events:auto;max-width:90vw}
+.toast-item.show{opacity:1;transform:translateY(0)}
+.toast-item .toast-check{color:#5ec978;font-weight:700}
+html[data-theme="dark"] .toast-item{background:var(--paper);color:var(--ink);border:1px solid var(--rule)}
+
 /* Tool search bar for Score Hub */
 .tool-search{
   margin:14px 0 6px;
@@ -302,6 +324,10 @@ html[data-theme="dark"] .tool-disclaimer-footer .dot{color:var(--rule)}
 }
 .tool-search .clear-btn:hover{color:var(--ink);background:var(--rule)}
 .tool-search.has-value .clear-btn{display:inline-block}
+
+.tool-search .kbd-hint{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:var(--rule);border-radius:4px;padding:1px 7px;font-size:10.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink-soft);border:1px solid var(--rule-strong);pointer-events:none;opacity:0.75}
+.tool-search.has-value .kbd-hint,.tool-search input:focus ~ .kbd-hint{display:none}
+
 .card.filtered-out{display:none!important}
 .grid-head.filtered-out{display:none!important}
 .tool-search-empty{
@@ -568,7 +594,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
     </div>
     <div class="tool-search no-print">
       <input type="search" id="toolSearchInput" placeholder="Search tools (e.g. PROMIS, SDMT, walking, mood)" aria-label="Search tools" oninput="filterTools(this.value)">
-      <button type="button" class="clear-btn" aria-label="Clear search" onclick="document.getElementById('toolSearchInput').value='';filterTools('')">✕</button>
+      <kbd class="kbd-hint">/</kbd><button type="button" class="clear-btn" aria-label="Clear search" onclick="document.getElementById('toolSearchInput').value='';filterTools('')">✕</button>
     </div>
     <div class="grid" id="toolgrid"></div>
     <div class="tool-search-empty" id="toolSearchEmpty">No tools match your search. Try another word (e.g. "cognition", "walk", "quality").</div>
@@ -2370,7 +2396,7 @@ function renderChecklist(){
         ? '<button class="btn btn-primary-lg" onclick="_startGuidedAt('+firstTodo+')">Continue: '+GFLOW[firstTodo][1]+' \u2192</button>'
         : '<button class="btn btn-primary-lg" onclick="buildReport()">📋 Generate my report</button>');
   _host.innerHTML='<div class="chk-head"><div class="chk-count">'+GFLOW.length+' short questionnaires, about '+total+' minutes in total. Any order; stop and come back any time.</div>'
-    +'<div class="chk-progress" aria-label="Progress"><span class="chk-progress-txt">'+doneN+' of '+GFLOW.length+' done</span><span class="chk-bar"><span class="chk-bar-fill" style="width:'+Math.round(100*doneN/GFLOW.length)+'%"></span></span></div></div>'
+    +'<div class="chk-progress" aria-label="Progress"><span class="chk-progress-txt"><b>'+doneN+' of '+GFLOW.length+'</b> done<span class="chk-progress-pct"> · '+Math.round(100*doneN/GFLOW.length)+'%</span>'+(doneN>0&&doneN<GFLOW.length?'<span class="chk-progress-left"> · ~'+GFLOW.filter(f=>!_gflowDone(f[0])).reduce((s,f)=>s+((GFLOW_META[f[0]]||{}).min||1),0)+' min left</span>':'')+'</span><span class="chk-bar"><span class="chk-bar-fill" style="width:'+Math.round(100*doneN/GFLOW.length)+'%"></span></span></div></div>'
     +'<div class="actions" style="margin:6px 0 10px">'+primary+'</div>'
     +'<div class="chk-list">'+rows+'</div>'
     +'<div class="actions" style="margin-top:12px"><button class="btn btn-primary-lg" id="btn-build-report" onclick="buildReport()"'+(doneN===0?' disabled title="Answer at least one questionnaire first"':'')+'>Generate my report</button>'
@@ -3440,6 +3466,56 @@ function clearMAS(){ MAS_MUSCLES.forEach(function(m){ ["R","L"].forEach(function
     var iv=setInterval(tick,200); down.set(c,{iv:iv}); tick();
   }
   function reset(c){ c.classList.remove("running","done"); c.innerHTML="&#9201; "+Math.floor(parseFloat(c.getAttribute("data-mins")||"6"))+":00"; c.title="6-minute countdown for the walk"; down.set(c,{}); }
+})();
+</script>
+
+<script>
+// Toast notifications: window.mspectrumToast('message')
+(function(){
+  window.mspectrumToast = function(msg){
+    var c = document.getElementById('__mspec_toasts');
+    if(!c){ c=document.createElement('div'); c.id='__mspec_toasts'; c.className='toast-container'; document.body.appendChild(c); }
+    var t = document.createElement('div');
+    t.className='toast-item';
+    t.innerHTML='<span class="toast-check">✓</span><span>'+String(msg).replace(/</g,'&lt;')+'</span>';
+    c.appendChild(t);
+    requestAnimationFrame(function(){ t.classList.add('show'); });
+    setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 400); }, 2400);
+  };
+})();
+</script>
+
+<script>
+// #5 Slash shortcut for Score Hub search
+(function(){
+  document.addEventListener('keydown', function(e){
+    if(e.key !== '/') return;
+    var tag = document.activeElement && document.activeElement.tagName;
+    if(['INPUT','TEXTAREA','SELECT'].indexOf(tag) !== -1) return;
+    if(document.activeElement && document.activeElement.isContentEditable) return;
+    var input = document.getElementById('toolSearchInput');
+    if(input){ e.preventDefault(); input.focus(); input.select(); }
+  });
+})();
+
+// #3 Toast hooks: wrap key export functions to show confirmation
+(function(){
+  function wrap(name, msgBuilder){
+    var orig = window[name];
+    if(typeof orig !== 'function') return;
+    window[name] = function(){
+      var args = Array.prototype.slice.call(arguments);
+      var r = orig.apply(this, args);
+      try { if(window.mspectrumToast){ window.mspectrumToast(msgBuilder(args)); } } catch(_){}
+      return r;
+    };
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    wrap('exportCSV', function(a){ return (a[1]||'Tool')+' CSV downloaded'; });
+    wrap('patientSummary', function(a){ return (a[1]||'Tool')+' summary saved'; });
+    wrap('reportPDF', function(){ return 'Report saved'; });
+    wrap('openClin', function(){ return 'Clinician summary opened'; });
+  });
 })();
 </script>
 </body>

@@ -183,6 +183,23 @@
       pointer-events:none; z-index:2;
       background:linear-gradient(90deg, var(--accent) 0%, #2a9d8f 38%, #7b3fa0 68%, var(--hl) 100%);
     }
+
+    /* ==== #1 Reduced motion (accessibility) ==== */
+    @media (prefers-reduced-motion: reduce){
+      *,*::before,*::after{
+        animation-duration:0.001ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:0.001ms!important;
+        scroll-behavior:auto!important;
+      }
+    }
+
+    /* ==== #3 Toast notifications ==== */
+    .toast-container{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:9999;pointer-events:none;display:flex;flex-direction:column;gap:8px;align-items:center}
+    .toast-item{background:var(--ink);color:#fff;padding:9px 16px;border-radius:999px;font-size:12.5px;font-weight:500;box-shadow:0 4px 14px rgba(0,0,0,0.18);display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(20px);transition:opacity .3s ease,transform .3s ease;pointer-events:auto;max-width:90vw}
+    .toast-item.show{opacity:1;transform:translateY(0)}
+    .toast-item .toast-check{color:#5ec978;font-weight:700}
+    html[data-theme="dark"] .toast-item{background:var(--paper);color:var(--ink);border:1px solid var(--rule)}
     /* Unified tool-page hero + disclaimer (shared across MSpectrum tools) */
     .tool-hero{margin:8px 0 14px;text-align:center;animation:rise .4s ease both}
     .tool-hero-frame{
@@ -3044,6 +3061,37 @@ html[data-theme="dark"] .box-cover .info-title{color:#a5d6a7 !important;}
   }
   function init(){ if(!run()) setTimeout(run,300); }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init); else init();
+})();
+</script>
+
+<script>
+// Toast notifications: window.mspectrumToast('message')
+(function(){
+  window.mspectrumToast = function(msg){
+    var c = document.getElementById('__mspec_toasts');
+    if(!c){ c=document.createElement('div'); c.id='__mspec_toasts'; c.className='toast-container'; document.body.appendChild(c); }
+    var t = document.createElement('div');
+    t.className='toast-item';
+    t.innerHTML='<span class="toast-check">✓</span><span>'+String(msg).replace(/</g,'&lt;')+'</span>';
+    c.appendChild(t);
+    requestAnimationFrame(function(){ t.classList.add('show'); });
+    setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 400); }, 2400);
+  };
+})();
+</script>
+
+<script>
+// #3 Toast hooks for McDonald actions
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    // Look for print/save buttons and wire toast to them
+    var savePDFBtns = document.querySelectorAll('button[onclick*="printPDF"],button[onclick*="window.print"],button[onclick*="savePDF"],button[onclick*="exportPDF"]');
+    savePDFBtns.forEach(function(b){
+      b.addEventListener('click', function(){
+        if(window.mspectrumToast) window.mspectrumToast('Report ready');
+      });
+    });
+  });
 })();
 </script>
 </body>
