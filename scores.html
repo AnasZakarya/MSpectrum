@@ -1291,8 +1291,8 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <summary>References &amp; scoring sources</summary>
     <div class="ref-cat">Cognition</div>
     <div class="ref-item"><span class="ref-name">SDMT</span><span class="ref-cite">Smith A. <em>Symbol Digit Modalities Test</em>. Los Angeles: Western Psychological Services, 1982 (WPS Manual Table 2 adult norms: N=1,307, age × education, both Written and Oral administrations - primary source for both administrations in MSpectrum). Oral SDMT US modern norms: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (age × sex × education; primary for Oral when sex and education are known, ages 18-74). Centofani CC. <em>Selected somatosensory and cognitive test performances as a function of age and education in normal and neurologically impaired adults</em>. Unpublished doctoral dissertation, University of Michigan, 1975 (N=420, age-only subset of the WPS 1982 sample; reproduced in Sheridan LK, Fitzgerald HE, Adams KM et al. <em>Arch Clin Neuropsychol</em> 2006;21(1):23–28) – retained in MSpectrum as the age-only fallback for Written when education is unknown (ages 18-64). Meaningful change (4 points or 10%): Benedict RHB, DeLuca J, Phillips G, LaRocca N, Hudson LD, Rudick R. <em>Mult Scler</em> 2017;23(5):721–33.</span></div>
-    <div class="ref-item"><span class="ref-name">BVMT-R</span><span class="ref-cite">Benedict RHB. Brief Visuospatial Memory Test&ndash;Revised. PAR, 1997. Healthy-control regression norms: Marrie RA et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
-    <div class="ref-item"><span class="ref-name">CVLT-II</span><span class="ref-cite">Delis DC, Kramer JH, Kaplan E, Ober BA. California Verbal Learning Test&ndash;II. Pearson, 2000. Healthy-control regression norms: Marrie RA et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
+    <div class="ref-item"><span class="ref-name">BVMT-R</span><span class="ref-cite">Benedict RHB. <em>Brief Visuospatial Memory Test&ndash;Revised</em>. PAR, 1997 (used for Learning Index and Delayed Recall T-scores from the age-stratified US normative tables). <b>Primary (MS-validated) regression norms for Total Recall:</b> Parmenter BA, Testa SM, Schretlen DJ, Weinstock-Guttman B, Benedict RHB. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16 (MACFIMS regression, N=100 healthy controls, validated in N=395 MS). <b>Secondary (Canadian) regression norms:</b> Marrie RA et al. <em>Front Neurol</em> 2021;11:621010.</span></div>
+    <div class="ref-item"><span class="ref-name">CVLT-II</span><span class="ref-cite">Delis DC, Kramer JH, Kaplan E, Ober BA. <em>California Verbal Learning Test&ndash;Second Edition</em>. Pearson, 2000 (test instrument). <b>Primary (MS-validated) regression norms for Total Learning (Trials 1&ndash;5):</b> Parmenter BA, Testa SM, Schretlen DJ, Weinstock-Guttman B, Benedict RHB. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16 (MACFIMS regression; LDFR T-score also from this source). <b>Secondary (Canadian) regression norms:</b> Marrie RA et al. <em>Front Neurol</em> 2021;11:621010.</span></div>
     <div class="ref-cat">Fatigue</div>
     <div class="ref-item"><span class="ref-name">MFIS</span><span class="ref-cite">Modified from Fisk JD et al. <em>Clin Infect Dis</em> 1994;18(Suppl 1):S79&ndash;83. 21-item MFIS: Multiple Sclerosis Council for Clinical Practice Guidelines, 1998 (National MS Society). Minimal important difference: Rooney S, McFadyen A, Wood L, Moffat F, Paul L. <em>Mult Scler Relat Disord</em> 2019;35:158&ndash;63.</span></div>
     <div class="ref-item"><span class="ref-name">FSS</span><span class="ref-cite">Krupp LB, LaRocca NG, Muir-Nash J, Steinberg AD. <em>Arch Neurol</em> 1989;46(10):1121&ndash;3.</span></div>
@@ -1739,6 +1739,14 @@ function cvltNorm(raw,age,sex,edu,race){ if(raw==null||age==null||!sex||edu==nul
 function bvmtNorm(raw,age,sex,edu,race){ if(raw==null||age==null||!sex||edu==null) return null; const sc=bvmtScaled(raw), cA=age-36.12; let exp,sd;
   if(race==="1"||race==="0"){ const R=Number(race); exp=7.51+1.18*sex-0.078*cA+0.001*cA*cA-0.048*edu+1.24*R; sd=2.49; } else { exp=8.45+1.02*sex-0.084*cA+0.001*cA*cA-0.028*edu; sd=2.53; }
   return {scaled:sc, z:(sc-exp)/sd}; }
+// ===== Parmenter 2010 MACFIMS regression-based norms (J Int Neuropsychol Soc 16:6-16) =====
+// Primary MS-research norms: regression equations from 100 healthy US controls, N=395 MS validation sample
+// Uses raw (uncentered) age; sex coded 1=male, 2=female; different raw-to-scaled bands than Marrie 2021
+function cvltScaledPar(r){ if(r<32)return 2; if(r<=35)return 4; if(r<=43)return 5; if(r<=46)return 6; if(r<=48)return 7; if(r<=51)return 8; if(r<=53)return 9; if(r<=57)return 10; if(r<=60)return 11; if(r<=63)return 12; if(r<=66)return 13; if(r<=70)return 14; if(r<=73)return 15; if(r<=74)return 16; return 18; }
+function bvmtScaledPar(r){ if(r<13)return 2; if(r<=13)return 3; if(r<=15)return 4; if(r<=16)return 5; if(r<=19)return 6; if(r<=22)return 8; if(r<=24)return 9; if(r<=26)return 10; if(r<=28)return 11; if(r<=30)return 12; if(r<=31)return 13; if(r<=32)return 14; if(r<=33)return 15; if(r<=35)return 16; return 18; }
+function cvltNormPar(raw,age,sex,edu){ if(raw==null||age==null||!sex||edu==null) return null; const sc=cvltScaledPar(raw); const pred=5.533+(-0.038)*age+0*age*age+2.451*sex+0.093*edu; const sd=2.8248; return {scaled:sc, z:(sc-pred)/sd}; }
+function bvmtNormPar(raw,age,sex,edu){ if(raw==null||age==null||!sex||edu==null) return null; const sc=bvmtScaledPar(raw); const pred=(-3.216)+0.437*age+(-0.006)*age*age+0.844*sex+0.391*edu; const sd=2.70744; return {scaled:sc, z:(sc-pred)/sd}; }
+function _zT(z){ return 50+10*z; }
 const BENEDICT_BVMT=[[20,3.63,1.67,10.79,1.37],[22,3.64,1.68,10.68,1.41],[24,3.64,1.68,10.57,1.45],[26,3.65,1.69,10.46,1.48],[28,3.66,1.70,10.35,1.52],[30,3.66,1.71,10.24,1.56],[32,3.67,1.71,10.13,1.60],[34,3.67,1.72,10.02,1.64],[36,3.68,1.73,9.91,1.67],[38,3.69,1.74,9.80,1.71],[40,3.69,1.74,9.69,1.75],[42,3.70,1.75,9.58,1.79],[44,3.70,1.76,9.47,1.83],[46,3.71,1.77,9.36,1.86],[48,3.71,1.77,9.25,1.90],[50,3.72,1.78,9.14,1.94],[52,3.73,1.79,9.03,1.98],[54,3.73,1.80,8.92,2.01],[56,3.74,1.80,8.81,2.05],[58,3.74,1.81,8.70,2.09],[60,3.75,1.82,8.59,2.13],[62,3.76,1.83,8.48,2.17],[64,3.76,1.83,8.37,2.20],[66,3.77,1.84,8.26,2.24],[68,3.77,1.85,8.15,2.28],[70,3.78,1.86,8.04,2.32],[72,3.78,1.86,7.93,2.36],[74,3.80,1.88,7.71,2.43]];
 function benedictBVMT(age){ if(age==null) return null; var a=age; if(a<20)a=20; if(a>74)a=74; var best=BENEDICT_BVMT[0]; for(var i=0;i<BENEDICT_BVMT.length;i++){ if(Math.abs(BENEDICT_BVMT[i][0]-a)<Math.abs(best[0]-a)) best=BENEDICT_BVMT[i]; } return {lrn:[best[1],best[2]], del:[best[3],best[4]]}; }
 function _Tsc(raw,ms){ return ((raw-ms[0])/ms[1])*10+50; }
@@ -1746,13 +1754,23 @@ function calcBVMT(){ const a=_num(el("bv1").value),b=_num(el("bv2").value),c=_nu
   var _be=[a,b,c].filter(x=>x!==null).length; _flagIds(["bv1","bv2","bv3"], _be>0&&_be<3);
   if(a===null||b===null||c===null){el("bvmt_out").innerHTML="";return;}
   const r=scoreBVMT(a,b,c); _curBvmtTotal=r.total;
-  const nm=bvmtNorm(r.total,_num(el("bvmt_age").value),_num(el("bvmt_sex").value),_num(el("bvmt_edu").value),el("bvmt_race")?el("bvmt_race").value:"");
-  _flagIds(["bvmt_age","bvmt_sex","bvmt_edu"], nm===null);
-  let zhtml = nm ? (interp(nm.z<=-1.5?"bad":(nm.z<=-1?"warn":"good"),"Norm-based: <b>z = "+nm.z.toFixed(2)+"</b> (scaled "+nm.scaled+")"+(nm.z<=-1.5?" - impaired range":"")+".")+'<div class="note">Norms: Marrie RA et al. regression-based norms from healthy controls, <em>Front Neurol</em> 2021;11:621010.</div>') : '<div class="note">Enter age, sex &amp; education above for an automatic z-score.</div>';
-  if(nm) zhtml += '<div class="note">'+_zPlain(nm.z)+' (&ldquo;Norm-based&rdquo; means we compare with published scores from people of similar age, sex and education; about 0 = average.)</div>';
+  const age=_num(el("bvmt_age").value), sex=_num(el("bvmt_sex").value), edu=_num(el("bvmt_edu").value), race=el("bvmt_race")?el("bvmt_race").value:"";
+  const nmP=bvmtNormPar(r.total,age,sex,edu);
+  const nmM=bvmtNorm(r.total,age,sex,edu,race);
+  _flagIds(["bvmt_age","bvmt_sex","bvmt_edu"], nmP===null);
+  let zhtml="";
+  if(nmP){
+    const pri=nmP, cls=pri.z<=-1.5?"bad":(pri.z<=-1?"warn":"good");
+    zhtml=interp(cls,"Primary (Parmenter 2010 MACFIMS, MS-validated): <b>z = "+pri.z.toFixed(2)+"</b> &middot; T = "+_zT(pri.z).toFixed(0)+" (scaled "+pri.scaled+")"+(pri.z<=-1.5?" - impaired range":"")+".");
+    if(nmM) zhtml+=interp("neutral","Secondary (Marrie 2021 Canadian): z = "+nmM.z.toFixed(2)+" &middot; T = "+_zT(nmM.z).toFixed(0)+" (scaled "+nmM.scaled+").");
+    zhtml+='<div class="note"><b>Norms:</b> Primary = Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16:6-16 (MACFIMS regression, N=100 healthy controls, MS-validated in N=395). Secondary = Marrie RA et al. <em>Front Neurol</em> 2021;11:621010 (Canadian regression). T = 50 + 10&times;z.</div>';
+    zhtml+='<div class="note">'+_zPlain(pri.z)+'</div>';
+  } else {
+    zhtml='<div class="note">Enter age, sex &amp; education above for the Parmenter 2010 (primary) and Marrie 2021 (secondary) z &amp; T scores.</div>';
+  }
   const dr=_num(el("bvmt_dr").value), bage=_num(el("bvmt_age").value), bd=benedictBVMT(bage);
   let sub='<div class="chips"><span class="chip">Learning Index <b>'+r.learning+'</b>'+(bd?' (T '+_Tsc(r.learning,bd.lrn).toFixed(0)+')':'')+'</span>'+(dr!=null?'<span class="chip">Delayed Recall <b>'+dr+'</b>/12'+(bd?' (T '+_Tsc(dr,bd.del).toFixed(0)+')':'')+'</span>':'')+'</div>';
-  let subnote = bd ? '<div class="note">Sub-score T-scores (Learning, Delayed Recall): Benedict 1997 US age norms (T = 50 &plusmn; 10; &le; 35 ~ impaired). Total Recall z uses Marrie 2021.</div>' : '';
+  let subnote = bd ? '<div class="note">Sub-score T-scores (Learning, Delayed Recall): Benedict 1997 US age norms. Total Recall z/T above uses Parmenter 2010 (primary) and Marrie 2021 (secondary).</div>' : '';
   el("bvmt_out").innerHTML='<div class="scoreline"><div class="bigscore">'+r.total+'<small> / 36 Total Recall</small></div></div>'+sub+interp("neutral","Total Recall = T1+T2+T3. Learning = max(T2,T3) - T1. Delayed Recall after ~25 min. Higher is better.")+zhtml+subnote;
 }
 function _probit(p){ if(p<=0)return -6; if(p>=1)return 6;
@@ -1769,10 +1787,20 @@ function calcCVLT(){ const ts=["cv1","cv2","cv3","cv4","cv5"].map(id=>_num(el(id
   var _ce=ts.filter(x=>x!==null).length; _flagIds(["cv1","cv2","cv3","cv4","cv5"], _ce>0&&_ce<5);
   if(ts.some(x=>x===null)){el("cvlt_out").innerHTML="";return;}
   const r=scoreCVLT(ts); _curCvltTotal=r.total;
-  const nm=cvltNorm(r.total,_num(el("cvlt_age").value),_num(el("cvlt_sex").value),_num(el("cvlt_edu").value),el("cvlt_race")?el("cvlt_race").value:"");
-  _flagIds(["cvlt_age","cvlt_sex","cvlt_edu"], nm===null);
-  let zhtml = nm ? (interp(nm.z<=-1.5?"bad":(nm.z<=-1?"warn":"good"),"Norm-based: <b>z = "+nm.z.toFixed(2)+"</b> (scaled "+nm.scaled+")"+(nm.z<=-1.5?" - impaired range":"")+".")+'<div class="note">Norms: Marrie RA et al. regression-based norms from healthy controls, <em>Front Neurol</em> 2021;11:621010.</div>') : '<div class="note">Enter age, sex &amp; education above for an automatic z-score.</div>';
-  if(nm) zhtml += '<div class="note">'+_zPlain(nm.z)+' (&ldquo;Norm-based&rdquo; means we compare with published scores from people of similar age, sex and education; about 0 = average.)</div>';
+  const age=_num(el("cvlt_age").value), sex=_num(el("cvlt_sex").value), edu=_num(el("cvlt_edu").value), race=el("cvlt_race")?el("cvlt_race").value:"";
+  const nmP=cvltNormPar(r.total,age,sex,edu);
+  const nmM=cvltNorm(r.total,age,sex,edu,race);
+  _flagIds(["cvlt_age","cvlt_sex","cvlt_edu"], nmP===null);
+  let zhtml="";
+  if(nmP){
+    const pri=nmP, cls=pri.z<=-1.5?"bad":(pri.z<=-1?"warn":"good");
+    zhtml=interp(cls,"Primary (Parmenter 2010 MACFIMS, MS-validated): <b>z = "+pri.z.toFixed(2)+"</b> &middot; T = "+_zT(pri.z).toFixed(0)+" (scaled "+pri.scaled+")"+(pri.z<=-1.5?" - impaired range":"")+".");
+    if(nmM) zhtml+=interp("neutral","Secondary (Marrie 2021 Canadian): z = "+nmM.z.toFixed(2)+" &middot; T = "+_zT(nmM.z).toFixed(0)+" (scaled "+nmM.scaled+").");
+    zhtml+='<div class="note"><b>Norms:</b> Primary = Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16:6-16 (MACFIMS regression, N=100 healthy controls, MS-validated in N=395). Secondary = Marrie RA et al. <em>Front Neurol</em> 2021;11:621010 (Canadian regression). T = 50 + 10&times;z (mean=50, SD=10; T&le;35 ~ impaired).</div>';
+    zhtml+='<div class="note">'+_zPlain(pri.z)+'</div>';
+  } else {
+    zhtml='<div class="note">Enter age, sex &amp; education above for the Parmenter 2010 (primary) and Marrie 2021 (secondary) z &amp; T scores.</div>';
+  }
   el("cvlt_out").innerHTML='<div class="scoreline"><div class="bigscore">'+r.total+'<small> / 80 Total (Trials 1-5)</small></div></div><div class="chips"><span class="chip">Best trial <b>'+r.best+'</b></span><span class="chip">Learning slope (T5-T1) <b>'+r.slopeSimple+'</b></span><span class="chip">Avg increase/trial <b>'+r.avgInc.toFixed(2)+'</b></span><span class="chip">Regression slope <b>'+r.slopeReg.toFixed(2)+'</b></span></div>'+interp("neutral","Total verbal learning across 5 trials (higher better).")+zhtml+_cvltSub();
 }
 function _ldfrScaled(r){ if(r<6)return 3; if(r<=6)return 4; if(r<=8)return 5; if(r<=9)return 6; if(r<=10)return 7; if(r<=11)return 8; if(r<=12)return 9; if(r<=13)return 10; if(r<=14)return 12; if(r<=15)return 13; return 16; }
@@ -2113,8 +2141,8 @@ const CONV={
  fesi:{label:"FES-I - fear of falling", n:16, fmt:"16 answers, each 1-4.", score:v=>{let t=0; for(let i=0;i<16;i++)t+=(_cvNum(v[i])||0); return {"Total (16-64)":t, Concern:(t>=28?"High":t>=20?"Moderate":"Low")};}},
  sdmt:{label:"SDMT (oral) - processing speed", n:4, fmt:"raw, age, sex (M/F or NA), education years (or NA) - e.g. <code>45, 52, F, 16</code>. Primary: Strober 2020 (age × sex × education, ages 18-74). Fallback: Smith 1982 Oral (age × education, ages 18-78) when sex is missing or age > 74.", score:v=>{const raw=_cvNum(v[0]),age=_cvNum(v[1]),sex=_cvSex(v[2]),edu=_cvNum(v[3]); if(raw==null||age==null)return{Raw:(raw==null?"":raw),z:"?",Percentile:"",Norms:""}; if(sex&&edu!=null&&age>=18&&age<=74){const eb=edu<16?"lo":"hi";const ms=SDMT_NORM[eb][sex.s][_ageBand(age)];const z=(raw-ms[0])/ms[1];const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100)));return {Raw:raw, z:_fx(z,2), Percentile:pct, Norms:"Strober 2020"};} if(edu!=null&&age>=18&&age<=78){const eb=edu>=13?"hi":"lo";const ms=SMITH1982_ORAL[eb][_ageBand(age)];const z=(raw-ms[0])/ms[1];const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100)));return {Raw:raw, z:_fx(z,2), Percentile:pct, Norms:"Smith 1982 Oral ("+(eb==="hi"?"≥13y":"≤12y")+" edu, fallback)"};} if(age<18||age>78)return{Raw:raw,z:"age 18-78 only",Percentile:"",Norms:""}; return{Raw:raw,z:"need education",Percentile:"",Norms:""};}},
  sdmt_w:{label:"SDMT (written) - processing speed", n:3, fmt:"raw, age, education years (or NA) - e.g. <code>45, 52, 16</code>. Primary: Smith 1982 WPS Manual Table 2 (age × education, N=1,307, ages 18-78). Fallback: Centofani 1975 (age-only, ages 18-64) when education is NA.", score:v=>{const raw=_cvNum(v[0]),age=_cvNum(v[1]),edu=_cvNum(v[2]); if(raw==null||age==null)return{Raw:(raw==null?"":raw),z:"?",Percentile:"",Norms:""}; if(edu!=null){if(age<18||age>78)return{Raw:raw,z:"age 18-78 only",Percentile:"",Norms:""}; const eb=edu>=13?"hi":"lo"; const ms=SMITH1982_WRITTEN[eb][_ageBand(age)]; const z=(raw-ms[0])/ms[1]; const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))); return {Raw:raw, z:_fx(z,2), Percentile:pct, Norms:"Smith 1982 ("+(eb==="hi"?"≥13y":"≤12y")+" edu)"};} if(age<18||age>64)return{Raw:raw,z:"age 18-64 only (without edu)",Percentile:"",Norms:""}; const ms=CENTOFANI_WRITTEN[_ageBand(age)]; const z=(raw-ms[0])/ms[1]; const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))); return {Raw:raw, z:_fx(z,2), Percentile:pct, Norms:"Centofani 1975 (age-only fallback)"};}},
- bvmt:{label:"BVMT-R - visual memory", n:7, fmt:"trial1, trial2, trial3, delayed, age, sex (M/F), education - e.g. <code>10,11,12,10,40,F,16</code>", score:v=>{const t1=_cvNum(v[0]),t2=_cvNum(v[1]),t3=_cvNum(v[2]),dl=_cvNum(v[3]),age=_cvNum(v[4]),sx=_cvSex(v[5]),edu=_cvNum(v[6]); if([t1,t2,t3,age].some(x=>x==null)||!sx)return{Total:"",z:"?"}; const total=t1+t2+t3, learn=Math.max(t2,t3)-t1; const nm=bvmtNorm(total,age,sx.n,edu,""); const bd=benedictBVMT(age); return {Total:total, z:nm?_fx(nm.z,2):"", "Learning T":bd?_fx(_Tsc(learn,bd.lrn),0):"", "Delayed T":(bd&&dl!=null)?_fx(_Tsc(dl,bd.del),0):""};}},
- cvlt:{label:"CVLT-II - verbal memory", n:9, fmt:"trial1..trial5, LDFR, age, sex (M/F), education - e.g. <code>8,10,11,12,13,12,40,F,16</code>", score:v=>{const t=[0,1,2,3,4].map(i=>_cvNum(v[i])); const ldfr=_cvNum(v[5]),age=_cvNum(v[6]),sx=_cvSex(v[7]),edu=_cvNum(v[8]); if(t.some(x=>x==null)||age==null||!sx)return{Total:"",z:"?"}; const total=t.reduce((a,b)=>a+b,0); const nm=cvltNorm(total,age,sx.n,edu,""); return {Total:total, z:nm?_fx(nm.z,2):"", "LDFR T":(ldfr!=null)?_fx(ldfrT(ldfr,age,sx.n,edu),0):""};}},
+ bvmt:{label:"BVMT-R - visual memory", n:7, fmt:"trial1, trial2, trial3, delayed, age, sex (M/F), education - e.g. <code>10,11,12,10,40,F,16</code>. Primary: Parmenter 2010 MACFIMS (MS-validated); Secondary: Marrie 2021 Canadian.", score:v=>{const t1=_cvNum(v[0]),t2=_cvNum(v[1]),t3=_cvNum(v[2]),dl=_cvNum(v[3]),age=_cvNum(v[4]),sx=_cvSex(v[5]),edu=_cvNum(v[6]); if([t1,t2,t3,age].some(x=>x==null)||!sx)return{Total:"","z (Parmenter)":"?"}; const total=t1+t2+t3, learn=Math.max(t2,t3)-t1; const nmP=bvmtNormPar(total,age,sx.n,edu); const nmM=bvmtNorm(total,age,sx.n,edu,""); const bd=benedictBVMT(age); return {Total:total, "z (Parmenter)":nmP?_fx(nmP.z,2):"", "T (Parmenter)":nmP?_fx(_zT(nmP.z),0):"", "z (Marrie)":nmM?_fx(nmM.z,2):"", "Learning T":bd?_fx(_Tsc(learn,bd.lrn),0):"", "Delayed T":(bd&&dl!=null)?_fx(_Tsc(dl,bd.del),0):""};}},
+ cvlt:{label:"CVLT-II - verbal memory", n:9, fmt:"trial1..trial5, LDFR, age, sex (M/F), education - e.g. <code>8,10,11,12,13,12,40,F,16</code>. Primary: Parmenter 2010 MACFIMS (MS-validated); Secondary: Marrie 2021 Canadian.", score:v=>{const t=[0,1,2,3,4].map(i=>_cvNum(v[i])); const ldfr=_cvNum(v[5]),age=_cvNum(v[6]),sx=_cvSex(v[7]),edu=_cvNum(v[8]); if(t.some(x=>x==null)||age==null||!sx)return{Total:"","z (Parmenter)":"?"}; const total=t.reduce((a,b)=>a+b,0); const nmP=cvltNormPar(total,age,sx.n,edu); const nmM=cvltNorm(total,age,sx.n,edu,""); return {Total:total, "z (Parmenter)":nmP?_fx(nmP.z,2):"", "T (Parmenter)":nmP?_fx(_zT(nmP.z),0):"", "z (Marrie)":nmM?_fx(nmM.z,2):"", "LDFR T":(ldfr!=null)?_fx(ldfrT(ldfr,age,sx.n,edu),0):""};}},
  pasat:{label:"PASAT-3 - working memory", n:1, fmt:"1 value: number correct (0-60).", score:v=>{const r=_cvNum(v[0]); return {Raw:(r==null?"":r), z:_fx(zPasat(r),2)};}},
  t25fw:{label:"T25FW - timed walk", n:2, fmt:"2 trial times in seconds - e.g. <code>6.2, 6.8</code>", score:v=>{const avg=scoreT25(_cvNum(v[0]),_cvNum(v[1])); return {"Mean (s)":_fx(avg,2), z:_fx(zWalk(avg),2)};}},
  nhpt:{label:"9-HPT - hand dexterity", n:4, fmt:"dominant t1, dominant t2, non-dominant t1, non-dominant t2 (seconds).", score:v=>{const nh=scoreNHPT(_cvNum(v[0]),_cvNum(v[1]),_cvNum(v[2]),_cvNum(v[3])); return {"Mean (s)":_fx(nh.mean,1), z:_fx(zPeg(nh),2)};}},
@@ -2693,8 +2721,9 @@ function calcBICAMS(){
     // Oral Smith 1982 fallback (age+edu only, no sex) when Strober can't be used
     else if(sdVer==="oral" && edu!=null && age>=18 && age<=78){ const eb=edu>=13?"hi":"lo"; const ms=SMITH1982_ORAL[eb][_ageBand(age)]; sdz=(sd-ms[0])/ms[1]; }
   }
-  const cn=cvltNorm(cvT,age,sexNum,edu,race); const cvz=cn?cn.z:null;
-  const bn=bvmtNorm(bvT,age,sexNum,edu,race); const bvz=bn?bn.z:null;
+  // Primary: Parmenter 2010 MACFIMS; secondary (shown as note): Marrie 2021
+  const cn=cvltNormPar(cvT,age,sexNum,edu); const cvz=cn?cn.z:null;
+  const bn=bvmtNormPar(bvT,age,sexNum,edu); const bvz=bn?bn.z:null;
   const tests=[{n:"SDMT (processing speed, "+(sdVer==="written"?"written, Smith 1982 norms":"oral, Strober 2020 norms")+")",v:sd,z:sdz},{n:"CVLT-II (verbal memory)",v:cvT,z:cvz},{n:"BVMT-R (visual memory)",v:bvT,z:bvz}];
   let rows="",imp=0,zc=0,have=0;
   var _bm={sdmt:sd,cvlt:cvT,bvmt:bvT}; for(var k in _bm){ var btn=el("bicbtn_"+k); if(btn) btn.classList.toggle("filled", _bm[k]!=null); }
@@ -2706,7 +2735,7 @@ function calcBICAMS(){
   }
   if(have===0){ el("bicams_out").innerHTML=interp("neutral","Open the SDMT, CVLT-II and BVMT-R tools and enter the raw scores, plus the demographics above, then it computes here."); return; }
   const summary= zc>0 ? (imp+" of "+zc+" cognitive domain(s) impaired (z &le; -1.5).") : "Raw scores captured. Enter age, sex &amp; education above to get z-scores and impairment flags.";
-  el("bicams_out").innerHTML='<div class="subhead">BICAMS cognitive battery</div>'+rows+interp(imp>0?"warn":"good",summary)+'<div class="note">Norms: SDMT oral (Strober 2020) or written (Smith 1982 manual, ages 18-64); CVLT-II &amp; BVMT-R (Marrie 2021, healthy controls). Impaired at z &le; -1.5 per domain.</div>'; }
+  el("bicams_out").innerHTML='<div class="subhead">BICAMS cognitive battery</div>'+rows+interp(imp>0?"warn":"good",summary)+'<div class="note">Norms: SDMT = Strober 2020 (oral) or Smith 1982 WPS Manual (written). CVLT-II &amp; BVMT-R = <b>Parmenter 2010 MACFIMS</b> (MS-validated regression, primary). Marrie 2021 Canadian regression also computed in the individual tools (secondary). Impaired at z &le; &minus;1.5 per domain.</div>'; }
 
 // ===== MSFC (arm 1/9HPT + leg T25FW + cognition SDMT) =====
 function calcPASAT(){ const p=_num(el("pasat_raw").value); if(p==null){el("pasat_out").innerHTML="";return;}
