@@ -613,13 +613,13 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       <div class="fld"><label>Sex</label><select id="sdmt_sex" oninput="calcSDMT()"><option value="">- select -</option><option value="M">Male</option><option value="F">Female</option></select></div>
       <div class="fld"><label>Education (years)</label><input type="number" id="sdmt_edu" min="0" max="25" oninput="calcSDMT()" placeholder="e.g. 16"></div>
     </div>
-    <div class="note">Oral: z by age/sex/education (Strober 2020). Written: z by age, 18-64 (Smith 1982 manual). No reference numbers needed.</div>
+    <div class="note">Oral: z by age/sex/education (Strober 2020). Written: z by age, 18-64 (Centofani 1975 adult norms, published in Sheridan et al. 2006). No reference numbers needed.</div>
     <div class="result" id="sdmt_out"></div>
     <details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div>
 <b>Raw score:</b> Correct symbol-to-digit substitutions in 90 seconds (range 0&ndash;110). Higher = better processing speed.<br>
 <b>z-score (automatic norm):</b> Compares the raw score to matched healthy people (same age, sex, education). z = 0 is the population average; z &le; &minus;1.5 is the impairment cut-off used across MS cognitive research (Benedict RHB et al. <em>J Int Neuropsychol Soc</em> 2006;12:549&ndash;58; Langdon DW et al. <em>Mult Scler</em> 2012;18:891&ndash;8).<br>
 <b>Clinically meaningful change:</b> a 4-point (or 10%) change in raw score is the accepted threshold (Benedict RHB et al. <em>Mult Scler</em> 2017;23(5):721&ndash;33).<br>
-<b>Norms source:</b> Oral: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (US; age/sex/education regression). Written: Centofani 1975 adult norms (adopted by the Smith 1982 WPS manual; reproduced in Sheridan et al. <em>Arch Clin Neuropsychol</em> 2006;21:23&ndash;28), US, age 18&ndash;64.
+<b>Norms source:</b> Oral: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (US; age/sex/education regression-based norms). Written: Centofani CC 1975 adult norms (reproduced in Sheridan LK et al. <em>Arch Clin Neuropsychol</em> 2006;21:23&ndash;28), US, age 18&ndash;64, age-stratified.
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('sdmt','SDMT')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('sdmt','SDMT')">Researcher: CSV</button></div>
   </section>
@@ -649,22 +649,23 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       <div class="fld"><label>Trial 3 <span class="hint">0&ndash;12</span></label><input type="number" id="bv3" min="0" max="12" oninput="calcBVMT()"></div>
       <div class="fld"><label>Delayed Recall <span class="hint">0&ndash;12, optional</span></label><input type="number" id="bvmt_dr" min="0" max="12" oninput="calcBVMT()"></div>
     </div>
-    <div class="subhead">Automatic norm (US MS regression, Marrie 2021)</div>
-    <div class="note" style="margin-top:2px"><b>What is a norm?</b> It compares this score with results from a large group of similar people - matched for age, sex and education (a process called <b>standardisation</b>). That turns the raw number into a <b>z-score</b>: about 0 = average for similar people, below 0 = below average, and z &le; -1.5 is the impaired range. Enter the details below so the comparison can be made.</div>
+    <div class="subhead">Regression-based norms (Parmenter 2010 primary, Marrie 2021 secondary)</div>
+    <div class="note" style="margin-top:2px"><b>What is a norm?</b> It compares this score with results from a large group of similar people, matched for age, sex and education, turning the raw number into a <b>z-score</b> (0 = average, &le;-1.5 = impaired range). Regression-based norms (used here) adjust continuously for demographics and identify more impairment cases that discrete manual tables miss in MS (Parmenter et al. <em>J Int Neuropsychol Soc</em> 2010;16:6&ndash;16).</div>
     <div class="row">
       <div class="fld"><label>Age (years) <span class="hint">18&ndash;74</span></label><input type="number" id="bvmt_age" min="18" max="90" oninput="calcBVMT()"></div>
       <div class="fld"><label>Sex</label><select id="bvmt_sex" oninput="calcBVMT()"><option value="">- select -</option><option value="1">Male</option><option value="2">Female</option></select></div>
       <div class="fld"><label>Education (years) <span class="hint">e.g. 12&ndash;18</span></label><input type="number" id="bvmt_edu" min="0" max="25" oninput="calcBVMT()"></div>
-      <div class="fld"><label>Race <span class="hint">optional, improves norm</span></label><select id="bvmt_race" oninput="calcBVMT()"><option value="">- not used -</option><option value="1">White</option><option value="0">Black</option><option value="0">Other</option></select></div>
+      <div class="fld"><label>Race <span class="hint">optional, Marrie 2021 only</span></label><select id="bvmt_race" oninput="calcBVMT()"><option value="">- not used -</option><option value="1">White</option><option value="0">Black</option><option value="0">Other</option></select></div>
     </div>
-    <div class="note">Enter age, sex &amp; education for an automatic z-score (impaired at z &le; -1.5). Race is optional.</div>
+    <div class="note">Enter age, sex &amp; education for z + T scores (impaired at z &le; &minus;1.5 / T &le; 35). Race is optional (only used by Marrie 2021).</div>
     <div class="result" id="bvmt_out"></div>
     <details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div>
 <b>Total score (T1+T2+T3):</b> 2 points per correctly reproduced figure in the correct location (6 figures &times; 3 trials = max 36). Higher = better visual memory.<br>
 <b>Learning score:</b> the better of Trial 2 or Trial 3, minus Trial 1; positive values indicate acquisition across trials.<br>
 <b>Delayed Recall (optional):</b> Score after a ~25-min delay (0&ndash;12). T-score from the BVMT-R manual age norms (Benedict RHB, 1997).<br>
-<b>z-score (automatic norm):</b> Total T1+T2+T3 compared with healthy adults matched for age, sex and education (regression norms from healthy controls, Marrie RA et al. <em>Front Neurol</em> 2021;11:621010). z &le; &minus;1.5 = impaired domain.<br>
-<b>Reference:</b> Benedict RHB. BVMT-R manual. PAR, 1997.
+<b>z-score (regression-based norms):</b> Total T1+T2+T3 vs healthy controls, continuously adjusted for age, age&sup2;, sex, and education. <b>Primary:</b> Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16:6&ndash;16 (MACFIMS, MS-validated, co-normed with CVLT-II and SDMT). <b>Secondary:</b> Marrie RA et al. <em>Front Neurol</em> 2021;11:621010 (Canadian cohort, optional race adjustment). z &le; &minus;1.5 (T &le; 35) = impaired domain.<br>
+<b>Why regression norms:</b> Parmenter et al. showed that regression-based norms identify more impairment cases in MS that discrete manual tables miss, by adjusting continuously for demographics instead of using fixed age brackets.<br>
+<b>Reference:</b> Benedict RHB. BVMT-R manual. PAR, 1997 (test instrument + Learning/Delayed sub-score age T-norms).
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('bvmt','BVMT-R')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('bvmt','BVMT-R')">Researcher: CSV</button></div>
   </section>
@@ -679,15 +680,15 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       <div class="fld"><label>Trial 4 <span class="hint">0&ndash;16</span></label><input type="number" id="cv4" min="0" max="16" oninput="calcCVLT()"></div>
       <div class="fld"><label>Trial 5 <span class="hint">0&ndash;16</span></label><input type="number" id="cv5" min="0" max="16" oninput="calcCVLT()"></div>
     </div>
-    <div class="subhead">Automatic norm (US MS regression, Marrie 2021)</div>
-    <div class="note" style="margin-top:2px"><b>What is a norm?</b> It compares this score with results from a large group of similar people - matched for age, sex and education (a process called <b>standardisation</b>). That turns the raw number into a <b>z-score</b>: about 0 = average for similar people, below 0 = below average, and z &le; -1.5 is the impaired range. Enter the details below so the comparison can be made.</div>
+    <div class="subhead">Regression-based norms (Parmenter 2010 primary, Marrie 2021 secondary)</div>
+    <div class="note" style="margin-top:2px"><b>What is a norm?</b> It compares this score with results from a large group of similar people, matched for age, sex and education, turning the raw number into a <b>z-score</b> (0 = average, &le;-1.5 = impaired range). Regression-based norms (used here) adjust continuously for demographics and identify more impairment cases that discrete manual tables miss in MS (Parmenter et al. <em>J Int Neuropsychol Soc</em> 2010;16:6&ndash;16).</div>
     <div class="row">
       <div class="fld"><label>Age (years) <span class="hint">18&ndash;74</span></label><input type="number" id="cvlt_age" min="18" max="90" oninput="calcCVLT()"></div>
       <div class="fld"><label>Sex</label><select id="cvlt_sex" oninput="calcCVLT()"><option value="">- select -</option><option value="1">Male</option><option value="2">Female</option></select></div>
       <div class="fld"><label>Education (years) <span class="hint">e.g. 12&ndash;18</span></label><input type="number" id="cvlt_edu" min="0" max="25" oninput="calcCVLT()"></div>
-      <div class="fld"><label>Race <span class="hint">optional, improves norm</span></label><select id="cvlt_race" oninput="calcCVLT()"><option value="">- not used -</option><option value="1">White</option><option value="0">Black</option><option value="0">Other</option></select></div>
+      <div class="fld"><label>Race <span class="hint">optional, Marrie 2021 only</span></label><select id="cvlt_race" oninput="calcCVLT()"><option value="">- not used -</option><option value="1">White</option><option value="0">Black</option><option value="0">Other</option></select></div>
     </div>
-    <div class="note">Enter age, sex &amp; education for an automatic z-score (impaired at z &le; -1.5). Race is optional.</div>
+    <div class="note">Enter age, sex &amp; education for z + T scores (impaired at z &le; &minus;1.5 / T &le; 35). Race is optional (only used by Marrie 2021).</div>
     <div class="subhead">Optional - recognition &amp; delayed sub-scores (raw)</div><div class="note" style="margin:-4px 0 8px">Fill these if they were administered; leave blank if not. SDFR = Short-Delay Free Recall; LDFR = Long-Delay Free Recall.</div><div>
     <div class="row">
       <div class="fld"><label>Short-Delay Free Recall <span class="hint">0&ndash;16</span></label><input type="number" id="cvlt_sdfr" min="0" max="16" oninput="calcCVLT()"></div>
@@ -709,8 +710,9 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 <b>SDFR / LDFR:</b> Short-delay free recall (~2 min) and long-delay free recall (~20 min), each 0&ndash;16. LDFR T-score via MS-specific norms (Parmenter 2010).<br>
 <b>Recognition (d&prime;):</b> Signal-detection discriminability index = z(hit rate) &minus; z(false positive rate). Higher = better; values near 0 or negative indicate poor discrimination.<br>
 <b>Forced Choice validity:</b> &le; 14 / 16 correct raises concern for sub-optimal effort (CVLT-II manual, Pearson 2000).<br>
-<b>z-score (automatic norm):</b> Total T1&ndash;T5 vs healthy controls by regression (Marrie 2021). z &le; &minus;1.5 = impaired.<br>
-<b>Reference:</b> Delis DC et al. CVLT-II manual. Pearson, 2000. Marrie RA et al. <em>Front Neurol</em> 2021;11:621010. Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16:6&ndash;16.
+<b>z-score (regression-based norms):</b> Total T1&ndash;T5 vs healthy controls, continuously adjusted for age, age&sup2;, sex, and education. <b>Primary:</b> Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16:6&ndash;16 (MACFIMS, MS-validated, co-normed with BVMT-R and SDMT). <b>Secondary:</b> Marrie RA et al. <em>Front Neurol</em> 2021;11:621010 (Canadian cohort, optional race adjustment). z &le; &minus;1.5 (T &le; 35) = impaired.<br>
+<b>Why regression norms:</b> Parmenter et al. showed that regression-based norms identify more impairment cases in MS that discrete manual tables miss, by adjusting continuously for demographics instead of using fixed age brackets.<br>
+<b>Reference:</b> Delis DC et al. CVLT-II manual. Pearson, 2000 (test instrument). LDFR T-score from Parmenter 2010.
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('cvlt','CVLT-II')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('cvlt','CVLT-II')">Researcher: CSV</button></div>
   </section>
@@ -1290,7 +1292,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
   <section class="refs-sec" id="refs-sec" style="display:none"><details class="refs" id="refs-details">
     <summary>References &amp; scoring sources</summary>
     <div class="ref-cat">Cognition</div>
-    <div class="ref-item"><span class="ref-name">SDMT</span><span class="ref-cite">Smith A. <em>Symbol Digit Modalities Test</em>. Los Angeles: Western Psychological Services, 1982 (WPS Manual Table 2 adult norms: N=1,307, age × education, both Written and Oral administrations - primary source for both administrations in MSpectrum). Oral SDMT US modern norms: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (age × sex × education; primary for Oral when sex and education are known, ages 18-74). Centofani CC. <em>Selected somatosensory and cognitive test performances as a function of age and education in normal and neurologically impaired adults</em>. Unpublished doctoral dissertation, University of Michigan, 1975 (N=420, age-only subset of the WPS 1982 sample; reproduced in Sheridan LK, Fitzgerald HE, Adams KM et al. <em>Arch Clin Neuropsychol</em> 2006;21(1):23–28) – retained in MSpectrum as the age-only fallback for Written when education is unknown (ages 18-64). Meaningful change (4 points or 10%): Benedict RHB, DeLuca J, Phillips G, LaRocca N, Hudson LD, Rudick R. <em>Mult Scler</em> 2017;23(5):721–33.</span></div>
+    <div class="ref-item"><span class="ref-name">SDMT</span><span class="ref-cite">Smith A. <em>Symbol Digit Modalities Test</em>. Los Angeles: Western Psychological Services, 1982 (test instrument; MSpectrum does not embed the WPS Manual normative tables). <b>Oral SDMT norms:</b> Strober LB, DeLuca J, Benedict RHB, Jacobs A, Cohen JA, Chiaravalloti N, Hudson LD, Rudick RA, LaRocca NG (Multiple Sclerosis Outcome Assessments Consortium). <em>Mult Scler Relat Disord</em> 2020;43:102154 (US regression-based norms, age × sex × education, N=675, ages 18-74). <b>Written SDMT norms:</b> Centofani CC. <em>Selected somatosensory and cognitive test performances as a function of age and education in normal and neurologically impaired adults</em>. Unpublished doctoral dissertation, University of Michigan, 1975 (N=420, age-stratified; reproduced in Sheridan LK, Fitzgerald HE, Adams KM, Nigg JT, Martel MM, Puttler LI, Wong MM, Zucker RA. <em>Arch Clin Neuropsychol</em> 2006;21(1):23–28; ages 18-64). Reliable change / meaningful change (4 points or 10%): Benedict RHB, DeLuca J, Phillips G, LaRocca N, Hudson LD, Rudick R. <em>Mult Scler</em> 2017;23(5):721–33. Oral SDMT Reliable Change Index: Strober LB et al. <em>Mult Scler Relat Disord</em> 2022;57:103405.</span></div>
     <div class="ref-item"><span class="ref-name">BVMT-R</span><span class="ref-cite">Benedict RHB. <em>Brief Visuospatial Memory Test&ndash;Revised</em>. PAR, 1997 (used for Learning Index and Delayed Recall T-scores from the age-stratified US normative tables). <b>Primary (MS-validated) regression norms for Total Recall:</b> Parmenter BA, Testa SM, Schretlen DJ, Weinstock-Guttman B, Benedict RHB. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16 (MACFIMS regression, N=100 healthy controls, validated in N=395 MS). <b>Secondary (Canadian) regression norms:</b> Marrie RA et al. <em>Front Neurol</em> 2021;11:621010.</span></div>
     <div class="ref-item"><span class="ref-name">CVLT-II</span><span class="ref-cite">Delis DC, Kramer JH, Kaplan E, Ober BA. <em>California Verbal Learning Test&ndash;Second Edition</em>. Pearson, 2000 (test instrument). <b>Primary (MS-validated) regression norms for Total Learning (Trials 1&ndash;5):</b> Parmenter BA, Testa SM, Schretlen DJ, Weinstock-Guttman B, Benedict RHB. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16 (MACFIMS regression; LDFR T-score also from this source). <b>Secondary (Canadian) regression norms:</b> Marrie RA et al. <em>Front Neurol</em> 2021;11:621010.</span></div>
     <div class="ref-cat">Fatigue</div>
@@ -1657,51 +1659,25 @@ const SDMT_NORM={
  hi:{ M:[[67.55,10.92],[62.65,6.11],[66.55,8.79],[58.62,9.92],[50.80,6.75],[49.18,4.67]],
       F:[[65.30,9.54],[70.41,7.23],[65.38,9.99],[64.95,7.31],[56.17,4.90],[52.35,8.06]] } };
 function _ageBand(a){ return a<25?0:a<35?1:a<45?2:a<55?3:a<65?4:5; }
-// Smith 1982 WPS Manual Table 2 (N=1,307) - age bands: 18-24, 25-34, 35-44, 45-54, 55-64, 65-78 - stratified by education
-const SMITH1982_WRITTEN={lo:[[54.40,8.31],[53.30,7.98],[51.50,8.03],[47.26,9.56],[42.80,8.08],[33.31,9.02]],hi:[[61.93,10.15],[57.72,9.08],[54.20,11.17],[52.27,8.48],[47.60,8.31],[43.55,11.27]]};
-const SMITH1982_ORAL={lo:[[61.31,11.39],[60.57,9.14],[59.87,10.49],[53.91,10.40],[49.03,9.03],[42.05,11.26]],hi:[[69.91,12.64],[65.71,11.64],[60.95,11.32],[58.31,8.67],[54.47,8.93],[52.89,13.54]]};
-// Centofani 1975 (N=420, age-only, ages 18-64) - subset of Smith 1982 sample; kept as fallback for Written when education unknown
+// SDMT Written: Centofani 1975 adult norms (age-only, ages 18-64) as reproduced in Sheridan et al. Arch Clin Neuropsychol 2006;21:23-28
+// Only peer-reviewed-journal source used; proprietary WPS Manual tables intentionally not embedded (IP protection).
 const CENTOFANI_WRITTEN=[[55.2,7.5],[53.6,6.6],[51.1,8.1],[46.8,8.4],[41.5,8.6]];
-// Legacy alias (kept for any lingering reference)
-const SMITH_WRITTEN=CENTOFANI_WRITTEN;
 function sdmtNorm(){ const raw=_num(el("sdmt_raw").value), age=_num(el("sdmt_age")?el("sdmt_age").value:null), sex=el("sdmt_sex")?el("sdmt_sex").value:"", eduStr=el("sdmt_edu")?el("sdmt_edu").value:"", ver=el("sdmt_ver")?el("sdmt_ver").value:"oral";
  const edu=(eduStr===""||eduStr==null)?null:_num(eduStr);
  if(raw==null||age==null) return null;
  if(ver==="written"){
-   // Primary: Smith 1982 WPS Manual Table 2 (age x education)
-   if(edu!=null){
-     if(age<18||age>78) return {oor:true,range:"18-78"};
-     const eb=edu>=13?"hi":"lo"; const ms=SMITH1982_WRITTEN[eb][_ageBand(age)]; const z=(raw-ms[0])/ms[1];
-     return {mean:ms[0],sd:ms[1],z:z,pct:Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))),
-       src:"Smith 1982 WPS Manual Table 2 (N=1,307), Written SDMT, age × education ("+(eb==="hi"?"&ge;13":"&le;12")+" years)"};
-   }
-   // Fallback: Centofani 1975 (age-only, ages 18-64)
-   if(age<18||age>64) return {oor:true,range:"18-64 without education (18-78 with education, Smith 1982)"};
+   // Centofani 1975 adult norms (age-only, ages 18-64) via Sheridan 2006
+   if(age<18||age>64) return {oor:true,range:"18-64 (Centofani 1975 adult norms)"};
    const ms=CENTOFANI_WRITTEN[_ageBand(age)]; const z=(raw-ms[0])/ms[1];
    return {mean:ms[0],sd:ms[1],z:z,pct:Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))),
-     src:"Centofani 1975 adult norms (N=420, age-only fallback). Enter education years above for the more precise Smith 1982 Table 2 norms."};
+     src:"Centofani CC 1975 adult norms (N=420, age-stratified), reproduced in Sheridan LK et al. Arch Clin Neuropsychol 2006;21:23-28. For a more precise Oral SDMT z, switch to Oral and enter sex + education."};
  }
- // Oral: Primary Strober 2020 (age x sex x education, ages 18-74)
+ // Oral SDMT: Strober 2020 US norms (age × sex × education, ages 18-74)
  if(sex && edu!=null){
-   if(age>=18 && age<=74){
-     const eb=edu<16?"lo":"hi"; const ms=SDMT_NORM[eb][sex][_ageBand(age)]; const z=(raw-ms[0])/ms[1];
-     return {mean:ms[0],sd:ms[1],z:z,pct:Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))),
-       src:"Strober LB et al. Oral SDMT US norms, Mult Scler Relat Disord 2020;43:102154 (age × sex × education)"};
-   }
-   // Age outside Strober range - Smith 1982 Oral fallback (covers up to 78)
-   if(age>=18 && age<=78){
-     const eb=edu>=13?"hi":"lo"; const ms=SMITH1982_ORAL[eb][_ageBand(age)]; const z=(raw-ms[0])/ms[1];
-     return {mean:ms[0],sd:ms[1],z:z,pct:Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))),
-       src:"Smith 1982 WPS Manual Table 2 Oral fallback (age "+age+" is outside Strober 2020 range 18-74; Smith covers 18-78, "+(eb==="hi"?"&ge;13":"&le;12")+" years education)"};
-   }
-   return {oor:true,range:"18-78"};
- }
- // Fallback Oral: Smith 1982 Oral (needs age + education; sex not required)
- if(edu!=null){
-   if(age<18||age>78) return {oor:true,range:"18-78"};
-   const eb=edu>=13?"hi":"lo"; const ms=SMITH1982_ORAL[eb][_ageBand(age)]; const z=(raw-ms[0])/ms[1];
+   if(age<18||age>74) return {oor:true,range:"18-74 (Strober 2020 US oral SDMT norms)"};
+   const eb=edu<16?"lo":"hi"; const ms=SDMT_NORM[eb][sex][_ageBand(age)]; const z=(raw-ms[0])/ms[1];
    return {mean:ms[0],sd:ms[1],z:z,pct:Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))),
-     src:"Smith 1982 WPS Manual Table 2 Oral (N=1,307, age × education, "+(eb==="hi"?"&ge;13":"&le;12")+" years). Add sex above for the Strober 2020 US norms."};
+     src:"Strober LB et al. Oral SDMT US regression-based norms, Mult Scler Relat Disord 2020;43:102154 (age × sex × education)"};
  }
  return null; }
 function calcSDMT(){ const r=_num(el("sdmt_raw").value);
@@ -1717,9 +1693,9 @@ function calcSDMT(){ const r=_num(el("sdmt_raw").value);
   _flagIds(ver==="written"?["sdmt_age","sdmt_edu"]:["sdmt_age","sdmt_sex","sdmt_edu"], (r!==null && nm===null));
   if(nm&&nm.oor){ out+='<div class="note">Norms cover ages '+(nm.range||"18-78")+'; enter an age in range for an automatic z-score.</div>'; }
   else if(nm){ const icls=nm.z<=-1.5?"bad":(nm.z<=-1?"warn":"good");
-    out+=interp(icls,"Norm-based: <b>z = "+nm.z.toFixed(2)+"</b> &middot; ~"+nm.pct+"th percentile vs the normative reference"+(nm.z<=-1.5?" - impaired range":"")+".")
-       +'<div class="note"><b>Norms:</b> '+(nm.src||"Smith 1982 WPS Manual")+'. '+_zPlain(nm.z)+'</div>'; }
-  else { out+='<div class="note">Higher is better. '+(ver==="written"?"Enter age (and education years if available) above for an automatic z-score &amp; percentile. With education: Smith 1982 WPS Manual Table 2 (N=1,307, age × education). Without education: Centofani 1975 (N=420, age-only fallback).":"Enter age, sex &amp; education above for an automatic z-score &amp; percentile. Primary: Strober 2020 US norms (age × sex × education); Smith 1982 WPS Manual Oral used as fallback.")+' A change of ~4 points between visits is often clinically meaningful.</div>'; }
+    out+=interp(icls,"Norm-based: <b>z = "+nm.z.toFixed(2)+"</b> &middot; <b>T = "+(50+10*nm.z).toFixed(0)+"</b> &middot; ~"+nm.pct+"th percentile vs the normative reference"+(nm.z<=-1.5?" - impaired range":"")+".")
+       +'<div class="note"><b>Norms:</b> '+(nm.src||"Peer-reviewed published norms")+'. T = 50 + 10&times;z (mean=50, SD=10; T&le;35 ~ impaired). '+_zPlain(nm.z)+'</div>'; }
+  else { out+='<div class="note">Higher is better. '+(ver==="written"?"Enter age above for an automatic z-score &amp; percentile (Centofani 1975 age-stratified adult norms, ages 18-64). For a more complete demographically-corrected norm, switch to Oral and enter sex + education.":"Enter age, sex &amp; education above for an automatic z-score &amp; percentile (Strober 2020 US regression-based norms, age × sex × education, ages 18-74).")+' A change of ~4 points between visits is often clinically meaningful. For research use only; verify clinically.</div>'; }
   el("sdmt_out").innerHTML=out;
 }
 const PDDS_LABELS={0:"Normal",1:"Mild disability",2:"Moderate disability",3:"Gait disability",4:"Early cane",5:"Late cane",6:"Bilateral support",7:"Wheelchair / scooter",8:"Bedridden"};
@@ -2069,7 +2045,7 @@ function calcPROMIS(){
 function clearPROMIS(){ for(let i=1;i<=28;i++){const e=el("pr_"+i); if(e) e.value="";} const p=el("pr_pi"); if(p){p.value="";p.classList.remove("blank");} _clearBlanks("pr_",1,28); el("promis_out").innerHTML=""; }
 buildPROMIS();
 var HOWTO={
- sdmt:"Enter correct answers plus age (required). For Oral: add sex and education years for Strober 2020 (age × sex × education); if sex is missing, Smith 1982 Oral is used as a fallback. For Written: add education years for Smith 1982 WPS Manual Table 2 (age × education); without education the age-only Centofani 1975 fallback is used. The norm set used is shown under each z-score.",
+ sdmt:"Enter correct answers plus age (required). For Oral: add sex and education years for Strober 2020 US regression-based norms (age × sex × education, ages 18-74). For Written: enter age for Centofani 1975 adult age-stratified norms (ages 18-64; reproduced in Sheridan et al. 2006). The norm set used is shown under each z-score. Research use only.",
  pasat:"Enter the number of correct responses. The z-score versus the Task Force reference appears automatically.",
  bvmt:"Enter the three immediate-recall trials (Delayed Recall is optional), plus age, sex and education for the norm. Results update automatically; required boxes still empty are highlighted in amber.",
  cvlt:"Enter the five List A trials, plus age, sex and education for the norm. Optional recognition/delayed sub-scores can be added below. Results update automatically; missing required boxes are highlighted in amber.",
@@ -2139,8 +2115,8 @@ const CONV={
  pdds:{label:"PDDS - disease steps", n:1, fmt:"1 value, 0-8.", score:v=>{const st=_cvNum(v[0]); return {Step:(st==null?"":st), Level:(PDDS_LABELS[st]||"")};}},
  abc:{label:"ABC - balance confidence", n:16, fmt:"16 answers, each 0-100 (%).", score:v=>{let sum=0,nn=0; for(let i=0;i<16;i++){const x=_cvNum(v[i]); if(x!=null){sum+=x;nn++;}} return {"Mean %":nn?_fx(sum/nn,1):""};}},
  fesi:{label:"FES-I - fear of falling", n:16, fmt:"16 answers, each 1-4.", score:v=>{let t=0; for(let i=0;i<16;i++)t+=(_cvNum(v[i])||0); return {"Total (16-64)":t, Concern:(t>=28?"High":t>=20?"Moderate":"Low")};}},
- sdmt:{label:"SDMT (oral) - processing speed", n:4, fmt:"raw, age, sex (M/F or NA), education years (or NA) - e.g. <code>45, 52, F, 16</code>. Primary: Strober 2020 (age × sex × education, ages 18-74). Fallback: Smith 1982 Oral (age × education, ages 18-78) when sex is missing or age > 74.", score:v=>{const raw=_cvNum(v[0]),age=_cvNum(v[1]),sex=_cvSex(v[2]),edu=_cvNum(v[3]); if(raw==null||age==null)return{Raw:(raw==null?"":raw),z:"?",Percentile:"",Norms:""}; if(sex&&edu!=null&&age>=18&&age<=74){const eb=edu<16?"lo":"hi";const ms=SDMT_NORM[eb][sex.s][_ageBand(age)];const z=(raw-ms[0])/ms[1];const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100)));return {Raw:raw, z:_fx(z,2), Percentile:pct, Norms:"Strober 2020"};} if(edu!=null&&age>=18&&age<=78){const eb=edu>=13?"hi":"lo";const ms=SMITH1982_ORAL[eb][_ageBand(age)];const z=(raw-ms[0])/ms[1];const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100)));return {Raw:raw, z:_fx(z,2), Percentile:pct, Norms:"Smith 1982 Oral ("+(eb==="hi"?"≥13y":"≤12y")+" edu, fallback)"};} if(age<18||age>78)return{Raw:raw,z:"age 18-78 only",Percentile:"",Norms:""}; return{Raw:raw,z:"need education",Percentile:"",Norms:""};}},
- sdmt_w:{label:"SDMT (written) - processing speed", n:3, fmt:"raw, age, education years (or NA) - e.g. <code>45, 52, 16</code>. Primary: Smith 1982 WPS Manual Table 2 (age × education, N=1,307, ages 18-78). Fallback: Centofani 1975 (age-only, ages 18-64) when education is NA.", score:v=>{const raw=_cvNum(v[0]),age=_cvNum(v[1]),edu=_cvNum(v[2]); if(raw==null||age==null)return{Raw:(raw==null?"":raw),z:"?",Percentile:"",Norms:""}; if(edu!=null){if(age<18||age>78)return{Raw:raw,z:"age 18-78 only",Percentile:"",Norms:""}; const eb=edu>=13?"hi":"lo"; const ms=SMITH1982_WRITTEN[eb][_ageBand(age)]; const z=(raw-ms[0])/ms[1]; const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))); return {Raw:raw, z:_fx(z,2), Percentile:pct, Norms:"Smith 1982 ("+(eb==="hi"?"≥13y":"≤12y")+" edu)"};} if(age<18||age>64)return{Raw:raw,z:"age 18-64 only (without edu)",Percentile:"",Norms:""}; const ms=CENTOFANI_WRITTEN[_ageBand(age)]; const z=(raw-ms[0])/ms[1]; const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))); return {Raw:raw, z:_fx(z,2), Percentile:pct, Norms:"Centofani 1975 (age-only fallback)"};}},
+ sdmt:{label:"SDMT (oral) - processing speed", n:4, fmt:"raw, age, sex (M/F), education years - e.g. <code>45, 52, F, 16</code>. Strober 2020 US regression-based norms (age × sex × education, ages 18-74).", score:v=>{const raw=_cvNum(v[0]),age=_cvNum(v[1]),sex=_cvSex(v[2]),edu=_cvNum(v[3]); if(raw==null||age==null)return{Raw:(raw==null?"":raw),z:"?",Percentile:"",Norms:""}; if(sex&&edu!=null&&age>=18&&age<=74){const eb=edu<16?"lo":"hi";const ms=SDMT_NORM[eb][sex.s][_ageBand(age)];const z=(raw-ms[0])/ms[1];const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100)));return {Raw:raw, z:_fx(z,2), T:_fx(50+10*z,0), Percentile:pct, Norms:"Strober 2020"};} if(age<18||age>74)return{Raw:raw,z:"age 18-74 only",Percentile:"",Norms:""}; return{Raw:raw,z:"need sex & education",Percentile:"",Norms:""};}},
+ sdmt_w:{label:"SDMT (written) - processing speed", n:2, fmt:"raw, age - e.g. <code>45, 52</code>. Centofani 1975 adult age-stratified norms (ages 18-64; reproduced in Sheridan et al. Arch Clin Neuropsychol 2006).", score:v=>{const raw=_cvNum(v[0]),age=_cvNum(v[1]); if(raw==null||age==null)return{Raw:(raw==null?"":raw),z:"?",Percentile:"",Norms:""}; if(age<18||age>64)return{Raw:raw,z:"age 18-64 only",Percentile:"",Norms:""}; const ms=CENTOFANI_WRITTEN[_ageBand(age)]; const z=(raw-ms[0])/ms[1]; const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))); return {Raw:raw, z:_fx(z,2), T:_fx(50+10*z,0), Percentile:pct, Norms:"Centofani 1975 (age-stratified)"};}},
  bvmt:{label:"BVMT-R - visual memory", n:7, fmt:"trial1, trial2, trial3, delayed, age, sex (M/F), education - e.g. <code>10,11,12,10,40,F,16</code>. Primary: Parmenter 2010 MACFIMS (MS-validated); Secondary: Marrie 2021 Canadian.", score:v=>{const t1=_cvNum(v[0]),t2=_cvNum(v[1]),t3=_cvNum(v[2]),dl=_cvNum(v[3]),age=_cvNum(v[4]),sx=_cvSex(v[5]),edu=_cvNum(v[6]); if([t1,t2,t3,age].some(x=>x==null)||!sx)return{Total:"","z (Parmenter)":"?"}; const total=t1+t2+t3, learn=Math.max(t2,t3)-t1; const nmP=bvmtNormPar(total,age,sx.n,edu); const nmM=bvmtNorm(total,age,sx.n,edu,""); const bd=benedictBVMT(age); return {Total:total, "z (Parmenter)":nmP?_fx(nmP.z,2):"", "T (Parmenter)":nmP?_fx(_zT(nmP.z),0):"", "z (Marrie)":nmM?_fx(nmM.z,2):"", "Learning T":bd?_fx(_Tsc(learn,bd.lrn),0):"", "Delayed T":(bd&&dl!=null)?_fx(_Tsc(dl,bd.del),0):""};}},
  cvlt:{label:"CVLT-II - verbal memory", n:9, fmt:"trial1..trial5, LDFR, age, sex (M/F), education - e.g. <code>8,10,11,12,13,12,40,F,16</code>. Primary: Parmenter 2010 MACFIMS (MS-validated); Secondary: Marrie 2021 Canadian.", score:v=>{const t=[0,1,2,3,4].map(i=>_cvNum(v[i])); const ldfr=_cvNum(v[5]),age=_cvNum(v[6]),sx=_cvSex(v[7]),edu=_cvNum(v[8]); if(t.some(x=>x==null)||age==null||!sx)return{Total:"","z (Parmenter)":"?"}; const total=t.reduce((a,b)=>a+b,0); const nmP=cvltNormPar(total,age,sx.n,edu); const nmM=cvltNorm(total,age,sx.n,edu,""); return {Total:total, "z (Parmenter)":nmP?_fx(nmP.z,2):"", "T (Parmenter)":nmP?_fx(_zT(nmP.z),0):"", "z (Marrie)":nmM?_fx(nmM.z,2):"", "LDFR T":(ldfr!=null)?_fx(ldfrT(ldfr,age,sx.n,edu),0):""};}},
  pasat:{label:"PASAT-3 - working memory", n:1, fmt:"1 value: number correct (0-60).", score:v=>{const r=_cvNum(v[0]); return {Raw:(r==null?"":r), z:_fx(zPasat(r),2)};}},
@@ -2151,7 +2127,7 @@ const CONV={
  armss:{label:"ARMSS - severity vs age", n:2, fmt:"EDSS, age - e.g. <code>4.0, 45</code>", score:v=>{const r=computeARMSS(_cvNum(v[0]),_cvNum(v[1])); return {ARMSS:(r==null?"":r)};}},
  msss:{label:"MSSS - severity vs duration", n:2, fmt:"EDSS, disease duration in years - e.g. <code>4.0, 10</code>", score:v=>{const e=_cvNum(v[0]),d=_cvNum(v[1]); const u=computeMSSSupd(e,d),o=computeMSSSorig(e,d); return {"MSSS (updated)":(u==null?"":u), "MSSS (original)":(o==null?"":o)};}}
 };
-const CONV_EG={"phq9": "2,1,3,2,0,1,2,1,0", "gad7": "1,2,1,0,2,1,1", "mfis": "2,3,1,2,0,2,3,1,2,3,1,2,0,2,1,3,2,1,2,2,3", "fss": "5,6,4,5,6,7,5,6,4", "msws": "3,2,4,3,2,3,4,2,3,3,2,3", "msis": "3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3", "msqol": "3,2,1,1,2,2,3,2,1,2,3,2,1,1,2,2,1,1,2,3,2,3,3,2,2,3,3,2,3,3,2,3,2,3,3,2,3,3,2,3,3,2,3,2,3,3,2,3,2,2,3,3,7,4", "smscreen": "3,4,2,3,5,1,2,4,3,2,3,4", "fsmc": "3,4,2,3,4,2,3,4,2,3,4,2,3,4,2,3,4,2,3,4", "pdds": "3", "abc": "85,90,80,95,70,88,92,75,80,85,90,78,82,88,90,84", "fesi": "1,2,1,3,2,1,2,1,2,3,1,2,2,1,2,1", "sdmt": "45, 52, F, 16", "sdmt_w": "45, 52, 16", "bvmt": "10,11,12, 10, 40, F, 16", "cvlt": "8,10,11,12,13, 12, 40, F, 16", "pasat": "48", "t25fw": "6.2, 6.8", "nhpt": "18.5, 19.0, 20.1, 21.3", "promis29": "3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3", "promiscog": "4,3,4,3", "armss": "4.0, 45", "msss": "4.0, 10"};
+const CONV_EG={"phq9": "2,1,3,2,0,1,2,1,0", "gad7": "1,2,1,0,2,1,1", "mfis": "2,3,1,2,0,2,3,1,2,3,1,2,0,2,1,3,2,1,2,2,3", "fss": "5,6,4,5,6,7,5,6,4", "msws": "3,2,4,3,2,3,4,2,3,3,2,3", "msis": "3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3", "msqol": "3,2,1,1,2,2,3,2,1,2,3,2,1,1,2,2,1,1,2,3,2,3,3,2,2,3,3,2,3,3,2,3,2,3,3,2,3,3,2,3,3,2,3,2,3,3,2,3,2,2,3,3,7,4", "smscreen": "3,4,2,3,5,1,2,4,3,2,3,4", "fsmc": "3,4,2,3,4,2,3,4,2,3,4,2,3,4,2,3,4,2,3,4", "pdds": "3", "abc": "85,90,80,95,70,88,92,75,80,85,90,78,82,88,90,84", "fesi": "1,2,1,3,2,1,2,1,2,3,1,2,2,1,2,1", "sdmt": "45, 52, F, 16", "sdmt_w": "45, 52", "bvmt": "10,11,12, 10, 40, F, 16", "cvlt": "8,10,11,12,13, 12, 40, F, 16", "pasat": "48", "t25fw": "6.2, 6.8", "nhpt": "18.5, 19.0, 20.1, 21.3", "promis29": "3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3", "promiscog": "4,3,4,3", "armss": "4.0, 45", "msss": "4.0, 10"};
 function _convOpts(){ let h=""; for(const grp of CONV_GROUPS){ h+='<optgroup label="'+grp.g+'">'; for(const id of grp.ids){ h+='<option value="'+id+'">'+CONV[id].label+'</option>'; } h+='</optgroup>'; } return h; }
 var _convInited=false;
 function convInit(){ if(_convInited)return; const sel=el("conv_tool"); if(!sel)return; sel.innerHTML='<option value="">- choose a questionnaire / test -</option>'+_convOpts(); _convInited=true; }
@@ -2712,19 +2688,15 @@ function calcBICAMS(){
   let sdz=null; const sdVer=(el("sdmt_ver")?el("sdmt_ver").value:"oral");
   if(sd!=null&&age!=null){
     if(sdVer==="written"){
-      // Primary: Smith 1982 WPS Manual (age x education, ages 18-78)
-      if(edu!=null && age>=18 && age<=78){ const eb=edu>=13?"hi":"lo"; const ms=SMITH1982_WRITTEN[eb][_ageBand(age)]; sdz=(sd-ms[0])/ms[1]; }
-      // Fallback: Centofani 1975 (age-only, ages 18-64)
-      else if(age>=18 && age<=64){ const ms=CENTOFANI_WRITTEN[_ageBand(age)]; sdz=(sd-ms[0])/ms[1]; }
+      // Centofani 1975 adult norms (age-only, ages 18-64) via Sheridan 2006
+      if(age>=18 && age<=64){ const ms=CENTOFANI_WRITTEN[_ageBand(age)]; sdz=(sd-ms[0])/ms[1]; }
     }
     else if(sx&&edu!=null&&age>=18&&age<=74){ const ec=edu<16?"lo":"hi"; const ms=SDMT_NORM[ec][sx][_ageBand(age)]; sdz=(sd-ms[0])/ms[1]; }
-    // Oral Smith 1982 fallback (age+edu only, no sex) when Strober can't be used
-    else if(sdVer==="oral" && edu!=null && age>=18 && age<=78){ const eb=edu>=13?"hi":"lo"; const ms=SMITH1982_ORAL[eb][_ageBand(age)]; sdz=(sd-ms[0])/ms[1]; }
   }
   // Primary: Parmenter 2010 MACFIMS; secondary (shown as note): Marrie 2021
   const cn=cvltNormPar(cvT,age,sexNum,edu); const cvz=cn?cn.z:null;
   const bn=bvmtNormPar(bvT,age,sexNum,edu); const bvz=bn?bn.z:null;
-  const tests=[{n:"SDMT (processing speed, "+(sdVer==="written"?"written, Smith 1982 norms":"oral, Strober 2020 norms")+")",v:sd,z:sdz},{n:"CVLT-II (verbal memory)",v:cvT,z:cvz},{n:"BVMT-R (visual memory)",v:bvT,z:bvz}];
+  const tests=[{n:"SDMT (processing speed, "+(sdVer==="written"?"written, Centofani 1975 norms":"oral, Strober 2020 norms")+")",v:sd,z:sdz},{n:"CVLT-II (verbal memory)",v:cvT,z:cvz},{n:"BVMT-R (visual memory)",v:bvT,z:bvz}];
   let rows="",imp=0,zc=0,have=0;
   var _bm={sdmt:sd,cvlt:cvT,bvmt:bvT}; for(var k in _bm){ var btn=el("bicbtn_"+k); if(btn) btn.classList.toggle("filled", _bm[k]!=null); }
   for(const t of tests){
@@ -2735,7 +2707,7 @@ function calcBICAMS(){
   }
   if(have===0){ el("bicams_out").innerHTML=interp("neutral","Open the SDMT, CVLT-II and BVMT-R tools and enter the raw scores, plus the demographics above, then it computes here."); return; }
   const summary= zc>0 ? (imp+" of "+zc+" cognitive domain(s) impaired (z &le; -1.5).") : "Raw scores captured. Enter age, sex &amp; education above to get z-scores and impairment flags.";
-  el("bicams_out").innerHTML='<div class="subhead">BICAMS cognitive battery</div>'+rows+interp(imp>0?"warn":"good",summary)+'<div class="note">Norms: SDMT = Strober 2020 (oral) or Smith 1982 WPS Manual (written). CVLT-II &amp; BVMT-R = <b>Parmenter 2010 MACFIMS</b> (MS-validated regression, primary). Marrie 2021 Canadian regression also computed in the individual tools (secondary). Impaired at z &le; &minus;1.5 per domain.</div>'; }
+  el("bicams_out").innerHTML='<div class="subhead">BICAMS cognitive battery</div>'+rows+interp(imp>0?"warn":"good",summary)+'<div class="note">Norms (all peer-reviewed, regression-based or age-stratified): SDMT = Strober 2020 US (oral, age × sex × education) or Centofani 1975 (written, age-stratified, via Sheridan 2006). CVLT-II &amp; BVMT-R = <b>Parmenter 2010 MACFIMS</b> (MS-validated regression, primary). Marrie 2021 Canadian regression also computed in the individual tools (secondary). Impaired at z &le; &minus;1.5 per domain. Research use only.</div>'; }
 
 // ===== MSFC (arm 1/9HPT + leg T25FW + cognition SDMT) =====
 function calcPASAT(){ const p=_num(el("pasat_raw").value); if(p==null){el("pasat_out").innerHTML="";return;}
