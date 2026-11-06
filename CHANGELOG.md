@@ -1,5 +1,9 @@
 # Changelog
 
+## v32 (2026-11-06)
+
+- Removed the "Scoring profile" option added in v31. The 50 m rule with one aid follows the Neurostatus manual ("more than 50 m"), as before v31.
+
 ## v31 (2026-11-06): new features
 
 - **Copy EMR note** (Final sheet toolbar): one click copies a paste-ready EDSS summary (EDSS, 7 FS, ambulation, P/T exclusions, severity, change vs baseline, engine version).
@@ -9,7 +13,6 @@
 - **Batch CSV scorer** (Final sheet toolbar): score many patients from a CSV on this device, with consistency flags, ARMSS/MSSS and change vs baseline; template download included.
 - **REDCap dictionary with choices**: item fields are dropdowns with the form's own coding (BMRC 0-5 for strength); every cell is CSV-quoted (labels with commas no longer break the file).
 - **Change vs baseline (CDP/PIRA screen)**: optional "Baseline / previous EDSS" and "Relapse in the last 90 days". Flags when the worsening threshold is met (+1.5 from 0.0, +1.0 from 1.0-5.5, +0.5 from 6.0) as possible RAW or possible PIRA; one visit cannot confirm progression.
-- **Scoring profile**: "Standard" (default, manual: more than 50 m with one aid) or "Forum answer: at least 50 m". Recorded in exports, notes and batch output; mirrored in `edss_calc.py` (parity test covers it).
 
 ## v30 (2026-11-06): Neurostatus naming
 

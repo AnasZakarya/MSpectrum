@@ -340,8 +340,7 @@ def cerebral_mood_only(cerebral_fs: int, depression=None, euphoria=None) -> bool
 # ============================================================
 # Ambulation Score and cerebellar X marker
 # ============================================================
-def calc_ambulation_score(assistance=None, distance_m=None, is_normal=False, profile=None) -> Optional[int]:
-    """profile: "standard" (default, "more than 50 m") or "forum50" ("at least 50 m")."""
+def calc_ambulation_score(assistance=None, distance_m=None, is_normal=False) -> Optional[int]:
     fixed = {"bed_nocomm": 15, "bed_helpless": 14, "bed_much": 13, "bedbound": 12,
              "wheelchair_help": 11, "wheelchair_indep": 10}
     if assistance in fixed:
@@ -352,8 +351,6 @@ def calc_ambulation_score(assistance=None, distance_m=None, is_normal=False, pro
     if assistance == "unilateral":
         if d is None:
             return 6
-        if profile == "forum50":
-            return 6 if d >= 50 else 8
         return 6 if d > 50 else 8
     if assistance == "bilateral":
         if d is None:
@@ -527,7 +524,7 @@ def calculate_full_edss(inputs: Dict[str, Any]) -> Dict[str, Any]:
     else:
         dm, dr = inputs.get("amb_distance_measured"), inputs.get("amb_distance_reported")
         dist = dm if (dm is not None and dm != "") else dr
-        auto = calc_ambulation_score(inputs.get("amb_assistance"), dist, _truthy(inputs.get("amb_is_normal")), inputs.get("score_profile"))
+        auto = calc_ambulation_score(inputs.get("amb_assistance"), dist, _truthy(inputs.get("amb_is_normal")))
         if auto is not None:
             ambulation_score, ambulation_source = auto, "auto"
         else:
@@ -551,7 +548,6 @@ def calculate_full_edss(inputs: Dict[str, Any]) -> Dict[str, Any]:
         "bb_fs": bb_fs, "bb_fs_conv": bb_fs_conv,
         "cerebral_fs": cerebral_fs, "cerebral_fs_step": cerebral_fs_step, "cerebral_mood_only": mood_only,
         "ambulation_score": ambulation_score, "ambulation_source": ambulation_source,
-        "score_profile": "forum50" if inputs.get("score_profile") == "forum50" else "standard",
         "edss_step": edss,
     }
 

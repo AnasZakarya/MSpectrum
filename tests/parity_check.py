@@ -66,7 +66,6 @@ def rnd_case(rng):
         if rng.random() < 0.7: c["amb_distance_reported"] = rng.choice([5, 10, 20, 49, 50, 51, 100, 119, 120, 121, 150, 199, 200, 250, 299, 300, 450, 499, 500, 800])
         if rng.random() < 0.3: c["amb_distance_measured"] = rng.choice([50, 120, 200, 300, 500])
         if rng.random() < 0.3: c["amb_is_normal"] = True
-        if rng.random() < 0.3: c["score_profile"] = rng.choice(["standard", "forum50", ""])
     return c
 
 

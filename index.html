@@ -4976,8 +4976,7 @@ function cerebralMoodOnly(cerebral_fs, depression, euphoria) {
 //   distance_m: number (meters reported by patient)
 //   is_normal: boolean (patient considers walking fully normal/unrestricted)
 // Returns: integer 0-12 (AS) or null if inputs incomplete
-// profile: "standard" (default; manual wording "more than 50 m") or "forum50" (forum answer "at least 50 m").
-function calcAmbulationScore({ assistance, distance_m, is_normal, profile } = {}) {
+function calcAmbulationScore({ assistance, distance_m, is_normal } = {}) {
     if (assistance === "bed_nocomm") return 15;   // cannot communicate effectively or eat/swallow (EDSS 9.5)
     if (assistance === "bed_helpless") return 14; // helpless bed patient, can communicate and eat (EDSS 9.0)
     if (assistance === "bed_much") return 13;     // in bed much of the day, some effective use of arms (EDSS 8.5)
@@ -4992,7 +4991,6 @@ function calcAmbulationScore({ assistance, distance_m, is_normal, profile } = {}
         // Neurostatus manual, ambulation exceptions 3 and 4: more than 50 m with one aid -> AS 6 (6.0); 50 m or less -> AS 8 (6.5)
         // If no distance entered, default to AS 6 (EDSS 6.0) - conservative estimate
         if (d === null) return 6;
-        if (profile === "forum50") return d >= 50 ? 6 : 8;  // forum answer: "at least 50 m" -> 6.0
         return d > 50 ? 6 : 8;  // Neurostatus: "more than 50 m" with one stick -> 6.0; 50 or less -> 6.5
     }
     if (assistance === "bilateral") {
@@ -5267,7 +5265,6 @@ function calculateFullEDSS(inputs) {
             assistance: g("amb_assistance"),
             distance_m: _distForCalc,
             is_normal: g("amb_is_normal") === true || g("amb_is_normal") === "true" || g("amb_is_normal") === 1,
-            profile: g("score_profile"),
         });
         if (auto !== null) {
             ambulation_score = auto;
@@ -5302,7 +5299,6 @@ function calculateFullEDSS(inputs) {
         sensory_fs,
         bb_fs, bb_fs_conv, cerebral_fs, cerebral_fs_step, cerebral_mood_only,
         ambulation_score, ambulation_source,
-        score_profile: g("score_profile") === "forum50" ? "forum50" : "standard",
         edss_step: edss,
         edss_trace: trace,
     };
@@ -5356,8 +5352,6 @@ const CARDS = {
       { type: "select", id: "pt_baseline_edss", label: "Baseline / previous EDSS (optional)",
         options: [["", "-"], ...[0,1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5].map(v => [String(v), v.toFixed(1)])] },
       { type: "checkbox", id: "pt_relapse90", label: "Relapse in the last 90 days" },
-      { type: "select", id: "score_profile", label: "Scoring profile",
-        options: [["standard", "Standard (manual: more than 50 m with one aid)"], ["forum50", "Forum answer: at least 50 m with one aid"]] },
     ],
     layout: "split-2",
   },
@@ -6921,7 +6915,7 @@ function _ambGuidanceNote() {
   const wrap = (body) => `<div class="amb-guidance-note" style="background:var(--hl-soft,#fdf2e9);border-left:3px solid var(--hl,#b85c1a);border-radius:6px;padding:9px 12px;margin-bottom:10px;font-size:12.5px;line-height:1.55;color:var(--ink,#222222);">${body}</div>`;
   if (!a) return wrap(`<strong>Pick an assistance type above.</strong> The distance brackets you need to ask about will appear here.`);
   if (a === "none") return wrap(`<strong>No aid - ask how far they walk, and whether it is truly unrestricted:</strong><br>Fully normal for their age &rarr; tick &ldquo;walks fully normally&rdquo; (AS 0) &middot; &gt;500 m but with any restriction &rarr; AS 1 &middot; 300&ndash;500 m &rarr; AS 2 &middot; 200&ndash;300 m &rarr; AS 3 &middot; 100&ndash;200 m &rarr; AS 4 &middot; &lt;100 m &rarr; AS 5`);
-  if (a === "unilateral") return wrap(`<strong>Unilateral aid (one cane/crutch/brace) - ask the distance with the aid:</strong><br>more than 50 m &rarr; AS 6 (EDSS 6.0) &middot; 50 m or less &rarr; AS 8 (EDSS 6.5). Rate the best performance; the Neurostatus manual says &ldquo;more than 50 m&rdquo;, the forum answer says &ldquo;at least 50 m&rdquo;; at exactly 50 m this tool follows the manual unless the Forum scoring profile is chosen in Identification.`);
+  if (a === "unilateral") return wrap(`<strong>Unilateral aid (one cane/crutch/brace) - ask the distance with the aid:</strong><br>more than 50 m &rarr; AS 6 (EDSS 6.0) &middot; 50 m or less &rarr; AS 8 (EDSS 6.5). Rate the best performance; the Neurostatus manual says &ldquo;more than 50 m&rdquo;, the forum answer says &ldquo;at least 50 m&rdquo;; at exactly 50 m this tool follows the manual.`);
   if (a === "bilateral") return wrap(`<strong>Bilateral aid (two aids or another person) - ask the distance:</strong><br>more than 120 m &rarr; AS 7 (EDSS 6.0) &middot; 10 to 120 m &rarr; AS 9 (EDSS 6.5)`);
   if (a === "wheelchair_indep") return wrap(`<strong>Wheelchair, self-propelled / transfers alone &rarr; AS 10 (EDSS 7.0).</strong> Distance not needed.`);
   if (a === "wheelchair_help") return wrap(`<strong>Wheelchair, needs help to wheel or transfer &rarr; AS 11 (EDSS 7.5).</strong> Distance not needed.`);
@@ -9995,7 +9989,6 @@ function buildFlatRecord() {
     worsening_flag: (_ch ? _ch.flag : ""),
     worsening_type: (_ch ? _ch.type : ""),
     relapse_last_90d: (g("pt_relapse90") === true || g("pt_relapse90") === "true") ? 1 : 0,
-    score_profile: r.score_profile,
     // Metadata
     tool_version: "MSpectrum-v29",
     export_timestamp: new Date().toISOString(),
@@ -10107,7 +10100,6 @@ function v31BuildEMRNote() {
     `Ambulation: AS ${r.ambulation_score} (${AS_LABEL[Math.min(r.ambulation_score, 15)] || ""})${amb.length ? "; " + amb.join(", ") : ""}.`,
   ];
   if (pts.length) lines.push(`Not attributed to MS (P/T), excluded from FS/EDSS: ${pts.map(k => (typeof _ptLabel === "function" ? _ptLabel(k) : k) + " " + PT_FLAGS[k]).join("; ")}.`);
-  if (r.score_profile === "forum50") lines.push("Scoring profile: 50 m rule per forum answer (at least 50 m).");
   const sev = v31Severity(inp, r.edss_step), ch = v31Change(inp, r.edss_step);
   const sv = [];
   if (sev.armss != null) sv.push(`ARMSS ${sev.armss.toFixed(2)}`);
@@ -10175,11 +10167,11 @@ function v31ScoreBatch(text) {
   if (rows.length < 2) throw new Error("Need a header row and at least one patient row.");
   const alias = Object.assign({}, v31ExportAliasMap(), V31_BATCH_EXTRA);
   const head = rows[0].map(h => String(h).trim());
-  const known = new Set(Object.values(alias).concat(["amb_is_normal", "score_profile", "c_x_marker", "excluded_pt_flags", "pt_onset", "pt_baseline_edss", "pt_relapse90"]));
+  const known = new Set(Object.values(alias).concat(["amb_is_normal", "c_x_marker", "excluded_pt_flags", "pt_onset", "pt_baseline_edss", "pt_relapse90"]));
   const col = head.map(h => alias[h] || alias[h.toLowerCase()] || h);
   const unknown = head.filter((h, i) => !known.has(col[i]) && !/^p_(str|refl|plantar|spast)_|^[vbpcsm]_|^bb_/.test(col[i]));
   const out = [["record_id", "edss", "fs_visual_raw", "fs_visual_conv", "fs_brainstem", "fs_pyramidal", "fs_cerebellar", "fs_cerebellar_x", "fs_sensory",
-    "fs_bowelbladder_raw", "fs_bowelbladder_conv", "fs_cerebral", "ambulation_score", "ambulation_source", "score_profile", "armss", "msss_updated",
+    "fs_bowelbladder_raw", "fs_bowelbladder_conv", "fs_cerebral", "ambulation_score", "ambulation_source", "armss", "msss_updated",
     "edss_change", "worsening_flag", "consistency_issues", "consistency_notes", "excluded_pt_flags", "engine_version"]];
   for (let i = 1; i < rows.length; i++) {
     const inp = {};
@@ -10197,7 +10189,7 @@ function v31ScoreBatch(text) {
     catch (e) { out.push([inp.pt_id || ("row " + i), "ERROR: " + e.message]); continue; }
     const sev = v31Severity(inp, r.edss_step), ch = v31Change(inp, r.edss_step);
     out.push([inp.pt_id || ("row " + i), r.edss_step != null ? r.edss_step.toFixed(1) : "", r.visual_fs, r.visual_fs_conv, r.brainstem_fs, r.pyramidal_fs,
-      r.cerebellar_fs, r.cerebellar_x ? 1 : 0, r.sensory_fs, r.bb_fs, r.bb_fs_conv, r.cerebral_fs, r.ambulation_score, r.ambulation_source, r.score_profile,
+      r.cerebellar_fs, r.cerebellar_x ? 1 : 0, r.sensory_fs, r.bb_fs, r.bb_fs_conv, r.cerebral_fs, r.ambulation_score, r.ambulation_source,
       sev.armss != null ? sev.armss.toFixed(2) : "", sev.msss_upd != null ? sev.msss_upd.toFixed(2) : "",
       ch ? ch.delta.toFixed(1) : "", ch ? ch.flag : "", issues.length, issues.slice(0, 3).map(x => x.msg).join(" | "), ptRaw, ENGINE_VERSION]);
   }
@@ -10206,7 +10198,7 @@ function v31ScoreBatch(text) {
 function v31BatchTemplate() {
   const alias = v31ExportAliasMap();
   const cols = ["record_id", "year_of_birth", "visit_date"].concat(Object.keys(alias).filter(k => !["record_id", "year_of_birth", "visit_date", "sex", "rater", "ms_type", "disease_duration_yr"].includes(k)))
-    .concat(["amb_is_normal", "a_score", "pt_onset", "pt_baseline_edss", "pt_relapse90", "score_profile", "excluded_pt_flags"]);
+    .concat(["amb_is_normal", "a_score", "pt_onset", "pt_baseline_edss", "pt_relapse90", "excluded_pt_flags"]);
   return [...new Set(cols)].join(",") + "\nPT001,1980,2026-11-06";
 }
 function v31OpenBatch() {
@@ -10286,7 +10278,6 @@ function exportREDCapDictionary() {
     worsening_flag:       ["dropdown","Change vs baseline (one visit; needs confirmation)","worsening, Worsening threshold met | improvement, Improvement | no_change, Below threshold","","","","",""],
     worsening_type:       ["text","Possible RAW / PIRA (screen only; needs a confirming visit)","","","","","",""],
     relapse_last_90d:     ["yesno","Relapse in the last 90 days","","","","","",""],
-    score_profile:        ["dropdown","Scoring profile","standard, Standard (more than 50 m) | forum50, Forum (at least 50 m)","","","","",""],
   };
 
   // v31: item fields get REDCap dropdown choices with the form's own coding; every cell is CSV-quoted.
