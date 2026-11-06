@@ -1,18 +1,18 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:02839206-7605-4c3c-b258-30ca599684fa",
+  "serialNumber": "urn:uuid:f5d852c8-9b26-4320-8b78-08a07bb4cf85",
   "version": 1,
   "metadata": {
     "timestamp": "2026-11-06T00:00:00Z",
     "component": {
       "type": "application",
       "name": "MSpectrum",
-      "version": "28",
+      "version": "31",
       "licenses": [
         {
           "license": {
-            "id": "AGPL-3.0-only"
+            "id": "AGPL-3.0-or-later"
           }
         }
       ]
@@ -59,7 +59,7 @@
       "properties": [
         {
           "name": "mspectrum:delivery",
-          "value": "vendored: vendor/jspdf.umd.min.js (jsDelivr fallback)"
+          "value": "vendored: vendor/jspdf.umd.min.js"
         }
       ],
       "hashes": [
@@ -109,7 +109,17 @@
       "properties": [
         {
           "name": "mspectrum:delivery",
-          "value": "CDN (cdnjs), loaded only by the Sheet Scanner; isEvalSupported:false"
+          "value": "vendored: vendor/ocr/pdfjs/ (CDN fallback); isEvalSupported:false"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5b5799e6f8c680663207ac5b42ee14eed2a406fa7af48f50c154f0c0b1566946"
+        },
+        {
+          "alg": "SHA-256",
+          "content": "feabdf309770ed24bba31a5467836cdc8cf639c705af27d52b585b041bb8527b"
         }
       ]
     },
@@ -128,7 +138,71 @@
       "properties": [
         {
           "name": "mspectrum:delivery",
-          "value": "CDN (jsDelivr, unpkg, cdnjs), Sheet Scanner only"
+          "value": "vendored: vendor/ocr/tesseract/ (CDN fallback)"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "be397e903f26199d428b528e8d834cdca8064f95c82068fa34ec8c4d34fd9de9"
+        },
+        {
+          "alg": "SHA-256",
+          "content": "2bcc88efb897e6a39517a05325b95e15a59e2bae1c74dee3deafb5a56aef846f"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tesseract.js-core",
+      "version": "5.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:npm/tesseract.js-core@5.1.0",
+      "properties": [
+        {
+          "name": "mspectrum:delivery",
+          "value": "vendored: vendor/ocr/tesseract-core/ (LSTM builds only)"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "18797eef96bab787636c40b53efaa445cf5ca1c97abd735c4fd8dc3d03652959"
+        },
+        {
+          "alg": "SHA-256",
+          "content": "50ec33088c93e69135b09917072c1b2c8cb77eb256946f16723cf6a83c7f8e49"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@tesseract.js-data/eng",
+      "version": "1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:npm/%40tesseract.js-data/eng@1.0.0",
+      "properties": [
+        {
+          "name": "mspectrum:delivery",
+          "value": "vendored: vendor/ocr/tessdata/eng.traineddata.gz (4.0.0_best_int)"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "45b4cb346724ac1774f1c36f42f182b887bcdb28ebe63e6fff90ac41f3fcff91"
         }
       ]
     },
@@ -147,14 +221,28 @@
       "properties": [
         {
           "name": "mspectrum:delivery",
-          "value": "CDN (jsDelivr), Sheet Scanner only"
+          "value": "vendored: vendor/ocr/ort/ (CDN fallback)"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6c5e8696a7993c8af6bbf7666a8acf7f3179165939d9dba459506a59c178061a"
+        },
+        {
+          "alg": "SHA-256",
+          "content": "d870a377322c3053fb97432d548423f165dd15e2af232947592fc07b0d2f3639"
+        },
+        {
+          "alg": "SHA-256",
+          "content": "1bf0b9ed7ad025cf9ca88ce6da29e54df3f128a169f8241d71823e81f078d578"
         }
       ]
     },
     {
       "type": "library",
       "name": "opencv.js",
-      "version": "4.10.0",
+      "version": "4.13.0",
       "licenses": [
         {
           "license": {
@@ -162,11 +250,17 @@
           }
         }
       ],
-      "purl": "pkg:generic/opencv.js@4.10.0",
+      "purl": "pkg:generic/opencv.js@4.13.0",
       "properties": [
         {
           "name": "mspectrum:delivery",
-          "value": "CDN (docs.opencv.org/4.10.0, fallback 4.x), Sheet Scanner only"
+          "value": "vendored: vendor/ocr/opencv/opencv.js (docs.opencv.org/4.x build, downloaded 2026-11-06; 4.x CDN fallback)"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "63366510248adf3a7eddf3e793dd825404efb7df3749f4d6f8557c7fa4ca8aa0"
         }
       ]
     },

@@ -1,5 +1,16 @@
 # Changelog
 
+## v31 (2026-11-06): new features
+
+- **Copy EMR note** (Final sheet toolbar): one click copies a paste-ready EDSS summary (EDSS, 7 FS, ambulation, P/T exclusions, severity, change vs baseline, engine version).
+- **ARMSS and MSSS in the EDSS result**: new optional "Year of first MS symptoms" field; ARMSS needs year of birth. Shown under the Final sheet toolbar and added to exports.
+- **Visual acuity labels** show the 6 m and decimal equivalents (for example 20/40 (6/12 · 0.5)). Stored values are unchanged.
+- **Self-hosted OCR libraries** (`vendor/ocr/`): pdf.js, tesseract.js (core + English data), onnxruntime-web and OpenCV.js load from MSpectrum itself first, so the scanner works offline and behind hospital firewalls; CDNs are only a fallback. Also fixes the v28 OpenCV pin (docs.opencv.org has no 4.10.0 build): the self-hosted file is the validated 4.x build (4.13.0).
+- **Batch CSV scorer** (Final sheet toolbar): score many patients from a CSV on this device, with consistency flags, ARMSS/MSSS and change vs baseline; template download included.
+- **REDCap dictionary with choices**: item fields are dropdowns with the form's own coding (BMRC 0-5 for strength); every cell is CSV-quoted (labels with commas no longer break the file).
+- **Change vs baseline (CDP/PIRA screen)**: optional "Baseline / previous EDSS" and "Relapse in the last 90 days". Flags when the worsening threshold is met (+1.5 from 0.0, +1.0 from 1.0-5.5, +0.5 from 6.0) as possible RAW or possible PIRA; one visit cannot confirm progression.
+- **Scoring profile**: "Standard" (default, manual: more than 50 m with one aid) or "Forum answer: at least 50 m". Recorded in exports, notes and batch output; mirrored in `edss_calc.py` (parity test covers it).
+
 ## v30 (2026-11-06): Neurostatus naming
 
 - "Neurostatus" is no longer used as a name for MSpectrum's own output, layout or exam: wording now says "standardized EDSS exam", "EDSS sheet" and "classic FS layout used on research and clinical-trial EDSS forms". Removed from page keywords and internal comments that described the sheet as a copy.

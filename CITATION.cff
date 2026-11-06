@@ -9,7 +9,7 @@ authors:
     affiliation: "Wayne State University, Department of Neurology"
     email: nour.anas@wayne.edu
 year: 2026
-version: "29"
+version: "31"
 date-released: "2026-11-06"
 url: "https://github.com/AnasZakarya/MSpectrum"
 # doi: "ADD_AFTER_ZENODO_RELEASE"

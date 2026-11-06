@@ -16,9 +16,20 @@ Fetched from npm at the pinned versions above. v28 (2026-11): jsPDF 2.5.1 -> 4.2
 - `index.html` loads the local copy first and falls back to the cdnjs URL if the
   local file is missing (e.g. not uploaded to the deploy root).
 
-> **Not yet vendored:** the OCR libraries (OpenCV.js, Tesseract.js,
-> onnxruntime-web, pdf.js) still load from CDN in `index.html`. See
-> `tools/fetch-vendor.mjs` and `SECURITY.md` for the path to fully self-host them.
+## OCR libraries (v31, `vendor/ocr/`)
+
+The Sheet Scanner now loads these self-hosted copies first and falls back to the CDN only if a file is missing, so OCR works offline and behind hospital firewalls that block CDNs.
+
+| Folder | Library | Version | License |
+|---|---|---|---|
+| `ocr/pdfjs/` | pdf.js (pdfjs-dist) | 3.11.174 | Apache-2.0 |
+| `ocr/tesseract/` | tesseract.js | 5.1.0 | Apache-2.0 |
+| `ocr/tesseract-core/` | tesseract.js-core (LSTM builds) | 5.1.0 | Apache-2.0 |
+| `ocr/tessdata/` | English data, 4.0.0_best_int (@tesseract.js-data/eng) | 1.0.0 | Apache-2.0 |
+| `ocr/ort/` | onnxruntime-web (single-thread WASM) | 1.19.2 | MIT |
+| `ocr/opencv/` | OpenCV.js (docs.opencv.org/4.x build) | 4.13.0 | Apache-2.0 |
+
+Note: docs.opencv.org serves no 4.10.0 build (404), so the 4.x build the scanner was validated with is self-hosted. SHA-256 hashes for every file are in `sbom.cdx.json`.
 
 ## Updating / verifying
 
