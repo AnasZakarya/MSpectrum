@@ -27,8 +27,8 @@ mkdirSync(FONTS, { recursive: true });
 // package spec -> [ [fileInsideTarball, destPath], ... ]
 const JOBS = [
   ['html2canvas@1.4.1', [['package/dist/html2canvas.min.js', join(VENDOR, 'html2canvas.min.js')]]],
-  ['jspdf@2.5.1', [['package/dist/jspdf.umd.min.js', join(VENDOR, 'jspdf.umd.min.js')]]],
-  ['html2pdf.js@0.10.1', [['package/dist/html2pdf.bundle.min.js', join(VENDOR, 'html2pdf.bundle.min.js')]]],
+  ['jspdf@4.2.1', [['package/dist/jspdf.umd.min.js', join(VENDOR, 'jspdf.umd.min.js')]]],
+  ['html2pdf.js@0.14.0', [['package/dist/html2pdf.bundle.min.js', join(VENDOR, 'html2pdf.bundle.min.js')]]],
   // --- OCR libs (uncomment to vendor; then re-point loaders, see notes below) ---
   // ['tesseract.js@5.1.0', [['package/dist/tesseract.min.js', join(VENDOR, 'tesseract.min.js')]]],
   // ['pdfjs-dist@3.11.174', [

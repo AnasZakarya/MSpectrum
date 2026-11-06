@@ -40,7 +40,7 @@ Stateless calculators and full questionnaires. Every result shows the raw score 
 | Domain | Instruments | Standardized output (source) |
 |--------|-------------|------------------------------|
 | Disability & severity | EDSS, PDDS, **ARMSS / MSSS** | severity vs peers by age / disease duration (Manouchehrinia 2017; Roxburgh 2005) |
-| Cognition (BICAMS) | SDMT, CVLT-II, BVMT-R, **BICAMS** panel | auto z + impairment (z ≤ −1.5): SDMT US norms (Strober 2020); CVLT-II/BVMT-R regression norms (Marrie 2021); BVMT-R Learning/Delayed-Recall T (Benedict 1997); CVLT-II LDFR T (Parmenter 2010) |
+| Cognition (BICAMS) | SDMT, CVLT-II, BVMT-R, **BICAMS** panel | auto z + impairment (z ≤ −1.5): SDMT US norms (Strober 2020); CVLT-II/BVMT-R regression norms (Marrie 2021); BVMT-R Delayed-Recall T and CVLT-II LDFR T (Parmenter 2010) |
 | Cognition (other) | PASAT-3 | z vs NMSS Task Force (Fischer 2001) |
 | Motor / function | T25FW, 9-HPT, **MSFC** | z & composite vs NMSS Task Force (Fischer 2001) |
 | Fatigue | MFIS (≈38), FSS (≥4) | clinical cut-offs |
@@ -80,7 +80,7 @@ An adaptive, single-page wizard (`mcdonald.html`) that implements the **2024 rev
 
 If you used MSpectrum in research, please cite it:
 
-> Nourelden A, Memon A. *MSpectrum: a free, browser-based toolkit for multiple sclerosis outcome measures and diagnosis (AutoEDSSguide, MS Score Hub and MS Criteria Checker).* Wayne State University, Department of Neurology; 2026. Available from: https://github.com/AnasZakarya/MSpectrum
+> Nourelden A. *MSpectrum: a free, browser-based toolkit for multiple sclerosis outcome measures and diagnosis (AutoEDSSguide, MS Score Hub and MS Criteria Checker).* Wayne State University, Department of Neurology; 2026. Available from: https://github.com/AnasZakarya/MSpectrum
 
 (GitHub also offers ready APA/BibTeX via the "Cite this repository" button, generated from `CITATION.cff`.)
 
@@ -94,13 +94,13 @@ If you used MSpectrum in research, please cite it:
 - Romeo AR et al. *Electronic patient-reported EDSS (ePR-EDSS).* Mult Scler (2021) (Quick Check mode).
 - MS Score Hub instruments are cited in full inside the app (References & scoring sources).
 - Montalban X, Lebrun-Frénay C, Oh J et al. *Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria.* Lancet Neurol (2025);24(10):850–865 (MS Criteria Checker), with companion consensus papers (2024 MAGNIMS–CMSC–NAIMS MRI recommendations; visual system; kFLC / OCB) and Solomon AJ et al. Lancet Neurol 2023;22:750–68 (differential diagnosis).
-- Functional-System scoring follows the **Neurostatus v04/10.2 definitions** exactly, including the Cerebellar (severe-ataxia) and Bowel/Bladder (loss-of-function to FS 5/6) rules, and an optional toggle to exclude fatigue from the Cerebral FS per study protocol.
+- Functional-System scoring follows the published **Neurostatus v04/10.2 scoring conventions** (implemented from the rules, with MSpectrum's own wording), including the Cerebellar (severe-ataxia) and Bowel/Bladder (loss-of-function to FS 5/6) rules, and an optional toggle to exclude fatigue from the Cerebral FS per study protocol.
 
 ---
 
 ## License
 
-© 2026 Anas Z. Nourelden and Anza B. Memon. Licensed under the **GNU Affero General Public License v3.0** (AGPL-3.0) - see the [LICENSE](LICENSE) file for the full text.
+© 2026 Anas Z. Nourelden. Licensed under the **GNU Affero General Public License v3.0** (AGPL-3.0) - see the [LICENSE](LICENSE) file for the full text.
 
 In short: you are free to use, study, share and modify MSpectrum, but any distributed or network-served modified version must also be released as open source under the same licence (AGPL Section 13, network-use clause). This keeps the tool free and open for the MS community while protecting the authors' work. For a different (e.g. commercial or closed) arrangement, contact the authors for separate licensing.
 
@@ -108,14 +108,17 @@ In short: you are free to use, study, share and modify MSpectrum, but any distri
 
 The AGPL-3.0 licence covers MSpectrum's own code, algorithms and interface - **not** the third-party clinical instruments it scores. Each instrument remains the property of its authors/publishers and is used here for research and educational purposes:
 
-- **Free / open instruments** are reproduced verbatim with citation: PROMIS (29, Cognitive, Pain), PHQ-9, GAD-7, PDDS, MFIS, MSQOL-54, FSS, ABC, FES-I, SymptoMScreen.
-- **Reproduced under non-commercial academic use** (would require a paid licence if MSpectrum is ever commercialised): MSWS-12 and MSIS-29 (Transform MS CIC / Mapi-ePROVIDE), and FSS (Krupp - free for non-profit use).
-- **Licensed instruments are number-entry only** - item text is never reproduced: SDMT, BVMT-R, CVLT-II, LCVA/Sloan (performance tests) and FSMC (shown as "Item N").
+- **Item wording shown in full, with citation** (public domain or free to use): PHQ-9, GAD-7 (Pfizer, no permission required), MFIS (public domain), PDDS (not copyrighted), SymptoMScreen (free to use), FES-I (free when referenced), and the 0-10 pain rating.
+- **Number-entry only, item wording not reproduced** (copyrighted; short topic labels only): FSS, MSQOL-54, ABC, MSWS-12, MSIS-29, PROMIS-29 and PROMIS Cognitive Function 4a, plus the licensed performance tests SDMT, BVMT-R, CVLT-II, LCVA/Sloan and FSMC. Enter answers from your own copy of the official form.
 
-Normative conversion tables (e.g. the PROMIS raw→T→SE lookups) are taken verbatim from the official HealthMeasures scoring manuals and cited in-app. If you reuse MSpectrum, you are responsible for complying with each instrument's own terms.
+PROMIS T-scores are computed from the publicly available HealthMeasures scoring manuals and cited in-app; the lookup tables are not offered as a separate download. PROMIS® is a registered trademark of the U.S. Department of Health and Human Services. BVMT-R and CVLT-II norms come from peer-reviewed papers (Parmenter 2010; Marrie 2021), not from the test manuals. If you reuse MSpectrum, you are responsible for complying with each instrument's own terms.
 
 ---
 
 ## Disclaimer
 
-For clinical, research and educational use. Not a diagnosis and not a substitute for a clinician. The final EDSS step remains the responsibility of the examining clinician; validate locally before any trial or registry use. Implements the Neurostatus scoring system © Ludwig Kappos; not affiliated with or endorsed by the Neurostatus group. Proprietary/licensed instruments (e.g. SDMT, BVMT-R, CVLT-II, MSWS-12, MSIS-29) are scored from entered values only; their full content and norm tables are not reproduced, and users must hold any required licence and use the official forms.
+For clinical, research and educational use. Not a diagnosis and not a substitute for a clinician. The final EDSS step remains the responsibility of the examining clinician; validate locally before any trial or registry use. EDSS scoring follows the Kurtzke EDSS (Kurtzke 1983), the published Neurostatus scoring conventions (Kappos 2011) and the algorithmic rules of Fouad et al. 2023 (CC BY-NC 4.0). MSpectrum is independent: it is not affiliated with, endorsed by, or licensed by Neurostatus-UHB AG or the University Hospital Basel, and Neurostatus-UHB AG was not involved in its development or validation. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG, named here only to identify the published conventions. The definitions shown in the tool are summaries written by the MSpectrum authors, not the official Neurostatus definitions; obtain official materials and rater certification from Neurostatus-UHB AG when a study requires them. Train mode is a practice aid, not Neurostatus training or certification.
+
+MSpectrum has not been reviewed, cleared, or approved by the U.S. Food and Drug Administration. It is provided "as is", without warranty of any kind; the authors accept no liability for any use of the tool or its results. All processing happens on the user's device; MSpectrum does not upload, store, or transmit data. Content and views are the authors' own and do not represent the official position of any institution.
+
+Parts of this code were written with AI-assisted tools and reviewed by the author. This repository contains no patient data or patient images. Proprietary/licensed instruments (e.g. SDMT, BVMT-R, CVLT-II, FSS, MSQOL-54, ABC, MSWS-12, MSIS-29, PROMIS) are scored from entered values only; their full content and norm tables are not reproduced, and users must hold any required licence and use the official forms.

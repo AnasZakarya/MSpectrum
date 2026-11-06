@@ -8,10 +8,8 @@ authors:
     given-names: Anas
     affiliation: "Wayne State University, Department of Neurology"
     email: nour.anas@wayne.edu
-  - family-names: Memon
-    given-names: Anza
-    affiliation: "Wayne State University, Department of Neurology; John D. Dingell VA Medical Center"
 year: 2026
-version: "1.0"
+version: "29"
+date-released: "2026-11-06"
 url: "https://github.com/AnasZakarya/MSpectrum"
 # doi: "ADD_AFTER_ZENODO_RELEASE"

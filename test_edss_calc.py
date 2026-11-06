@@ -423,8 +423,9 @@ class TestRealWorldCases(unittest.TestCase):
             "a_score": 10,  # Wheelchair without help
         }
         result = calculate_full_edss(inputs)
-        # Paraplegia → Pyramidal FS 5, AS=10 → EDSS 7.0
-        self.assertEqual(result["pyramidal_fs"], 5)
+        # v29 (parity with the JS engine): hip and knee flexors are 2/5, so the legs are not
+        # plegic (plegia needs ALL muscles 0-1). Marked paraparesis -> Pyramidal FS 4. AS=10 -> EDSS 7.0
+        self.assertEqual(result["pyramidal_fs"], 4)
         self.assertEqual(result["edss_step"], 7.0)
 
     def test_visual_dominant(self):

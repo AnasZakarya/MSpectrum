@@ -1,0 +1,210 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:02839206-7605-4c3c-b258-30ca599684fa",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-06T00:00:00Z",
+    "component": {
+      "type": "application",
+      "name": "MSpectrum",
+      "version": "28",
+      "licenses": [
+        {
+          "license": {
+            "id": "AGPL-3.0-only"
+          }
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "html2canvas",
+      "version": "1.4.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:npm/html2canvas@1.4.1",
+      "properties": [
+        {
+          "name": "mspectrum:delivery",
+          "value": "vendored: vendor/html2canvas.min.js"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e87e550794322e574a1fda0c1549a3c70dae5a93d9113417a429016838eab8cb"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "jspdf",
+      "version": "4.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:npm/jspdf@4.2.1",
+      "properties": [
+        {
+          "name": "mspectrum:delivery",
+          "value": "vendored: vendor/jspdf.umd.min.js (jsDelivr fallback)"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e6551fcdc32f09d6853b2c5126d18d01d9447e0da618a41a11ebeee0f6c20d54"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "html2pdf.js",
+      "version": "0.14.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:npm/html2pdf.js@0.14.0",
+      "properties": [
+        {
+          "name": "mspectrum:delivery",
+          "value": "vendored: vendor/html2pdf.bundle.min.js"
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9563c45f032179c73454293a649929e60fc24c05a326e8ab2811cfa8f25c3607"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pdfjs-dist",
+      "version": "3.11.174",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:npm/pdfjs-dist@3.11.174",
+      "properties": [
+        {
+          "name": "mspectrum:delivery",
+          "value": "CDN (cdnjs), loaded only by the Sheet Scanner; isEvalSupported:false"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tesseract.js",
+      "version": "5.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:npm/tesseract.js@5.1.0",
+      "properties": [
+        {
+          "name": "mspectrum:delivery",
+          "value": "CDN (jsDelivr, unpkg, cdnjs), Sheet Scanner only"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "onnxruntime-web",
+      "version": "1.19.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:npm/onnxruntime-web@1.19.2",
+      "properties": [
+        {
+          "name": "mspectrum:delivery",
+          "value": "CDN (jsDelivr), Sheet Scanner only"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "opencv.js",
+      "version": "4.10.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:generic/opencv.js@4.10.0",
+      "properties": [
+        {
+          "name": "mspectrum:delivery",
+          "value": "CDN (docs.opencv.org/4.10.0, fallback 4.x), Sheet Scanner only"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "Fraunces font",
+      "version": "standard",
+      "licenses": [
+        {
+          "license": {
+            "id": "OFL-1.1"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "mspectrum:delivery",
+          "value": "self-hosted: fonts/"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "name": "IBM Plex Sans / Mono fonts",
+      "version": "standard",
+      "licenses": [
+        {
+          "license": {
+            "id": "OFL-1.1"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "mspectrum:delivery",
+          "value": "self-hosted: fonts/"
+        }
+      ]
+    }
+  ]
+}

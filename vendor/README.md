@@ -7,11 +7,10 @@ supply-chain / PHI-exposure hardening) and so export works offline.
 | File | Library | Version | License | Used by |
 |---|---|---|---|---|
 | `html2canvas.min.js` | html2canvas | 1.4.1 | MIT | `index.html` (email PDF), `scores.html` |
-| `jspdf.umd.min.js` | jsPDF | 2.5.1 | MIT | `index.html` (email PDF) |
-| `html2pdf.bundle.min.js` | html2pdf.js (bundles html2canvas + jsPDF) | 0.10.1 | MIT | `scores.html` |
+| `jspdf.umd.min.js` | jsPDF | 4.2.1 | MIT | `index.html` (email PDF) |
+| `html2pdf.bundle.min.js` | html2pdf.js (bundles html2canvas + jsPDF 4 + DOMPurify) | 0.14.0 | MIT | `scores.html` |
 
-Byte-for-byte the same builds as the previously used cdnjs URLs (fetched from
-npm at the identical pinned versions).
+Fetched from npm at the pinned versions above. v28 (2026-11): jsPDF 2.5.1 -> 4.2.1 and html2pdf.js 0.10.1 -> 0.14.0 to clear CVE-2025-29907 and later jsPDF advisories.
 
 - `scores.html` now loads **only these local files** - no external origin.
 - `index.html` loads the local copy first and falls back to the cdnjs URL if the
@@ -24,6 +23,6 @@ npm at the identical pinned versions).
 ## Updating / verifying
 
 ```
-npm pack html2canvas@1.4.1 jspdf@2.5.1 html2pdf.js@0.10.1
+npm pack html2canvas@1.4.1 jspdf@4.2.1 html2pdf.js@0.14.0
 # then copy dist/html2canvas.min.js, dist/jspdf.umd.min.js, dist/html2pdf.bundle.min.js here
 ```

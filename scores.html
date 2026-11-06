@@ -16,7 +16,7 @@
 <meta name="description" content="MSpectrum - MS Score Hub: stateless calculators and questionnaires for multiple sclerosis cognition, fatigue, mood, walking, quality-of-life and severity measures.">
 <title>MSpectrum · MS Score Hub</title>
 <meta name="keywords" content="multiple sclerosis, MS, EDSS, EDSS calculator, Neurostatus, MS outcome measures, MS scores, SDMT, BICAMS, MSFC, PDDS, MSSS, ARMSS, MFIS, FSS, MSWS-12, PROMIS-29, MSQOL-54, McDonald criteria 2024, MS diagnosis">
-<meta name="author" content="Anas Nourelden, Anza Memon - Wayne State University, Department of Neurology">
+<meta name="author" content="Anas Nourelden - Wayne State University, Department of Neurology">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#1e4a6e">
 <link rel="canonical" href="https://anaszakarya.github.io/MSpectrum/scores.html">
@@ -31,7 +31,7 @@
 <meta name="twitter:title" content="MSpectrum - MS Score Hub (EDSS, SDMT, BICAMS, MSFC & more)">
 <meta name="twitter:description" content="Free, browser-based calculators and questionnaires for multiple sclerosis outcome measures: cognition (SDMT, BICAMS), fatigue (MFIS, FSS), mood, walking, quality of life and disease severity - with published norms and plain-language interpretation.">
 <meta name="twitter:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png?v=2">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MSpectrum - MS Score Hub (EDSS, SDMT, BICAMS, MSFC & more)","url":"https://anaszakarya.github.io/MSpectrum/scores.html","description":"Free, browser-based calculators and questionnaires for multiple sclerosis outcome measures: cognition (SDMT, BICAMS), fatigue (MFIS, FSS), mood, walking, quality of life and disease severity - with published norms and plain-language interpretation.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"},{"@type":"Person","name":"Anza Memon"}],"publisher":{"@type":"Organization","name":"Wayne State University, Department of Neurology"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MSpectrum - MS Score Hub (EDSS, SDMT, BICAMS, MSFC & more)","url":"https://anaszakarya.github.io/MSpectrum/scores.html","description":"Free, browser-based calculators and questionnaires for multiple sclerosis outcome measures: cognition (SDMT, BICAMS), fatigue (MFIS, FSS), mood, walking, quality of life and disease severity - with published norms and plain-language interpretation.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"}],"publisher":{"@type":"Organization","name":"Wayne State University, Department of Neurology"}}</script>
 <style>
 :root{
   --bg:#faf8f3; --paper:#ffffff; --ink:#1a1f2e; --ink-soft:#4a5060; --ink-faint:#8a8f9d;
@@ -618,8 +618,8 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
     <details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div>
 <b>Raw score:</b> Correct symbol-to-digit substitutions in 90 seconds (range 0&ndash;110). Higher = better processing speed.<br>
 <b>z-score (automatic norm):</b> Compares the raw score to matched healthy people (same age, sex, education). z = 0 is the population average; z &le; &minus;1.5 is the impairment cut-off used across MS cognitive research (Benedict RHB et al. <em>J Int Neuropsychol Soc</em> 2006;12:549&ndash;58; Langdon DW et al. <em>Mult Scler</em> 2012;18:891&ndash;8).<br>
-<b>Clinically meaningful change:</b> a 4-point (or 10%) change in raw score is the accepted threshold (Benedict RHB et al. <em>Mult Scler</em> 2017;23(5):721&ndash;33).<br>
-<b>Norms source:</b> Oral: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (US; age/sex/education regression-based norms). Written: Centofani CC 1975 adult norms (reproduced in Sheridan LK et al. <em>Arch Clin Neuropsychol</em> 2006;21:23&ndash;28), US, age 18&ndash;64, age-stratified.
+<b>Change between visits:</b> a 4-point (or 10%) change is often cited (Benedict RHB et al. <em>Mult Scler</em> 2017;23(5):721&ndash;33). In 219 healthy adults, a statistically reliable change needed about 7 to 10 points over 6 months and 8 to 12 points over 1 year (Strober LB et al. <em>Mult Scler Relat Disord</em> 2022;57:103405), so treat smaller changes with caution.<br>
+<b>Norms source:</b> Oral: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (675 healthy US adults; norms stratified by age, sex and education). Written: Centofani CC 1975 adult norms (reproduced in Sheridan LK et al. <em>Arch Clin Neuropsychol</em> 2006;21:23&ndash;28), US, age 18&ndash;64, age-stratified.
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('sdmt','SDMT')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('sdmt','SDMT')">Researcher: CSV</button></div>
   </section>
@@ -635,7 +635,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 <b>Scoring:</b> Single ordinal item - patient selects one step (0 = Normal, 8 = Bedridden). The selected step is the score; no calculation needed.<br>
 <b>Relationship to EDSS:</b> Strong correlation with clinician-rated EDSS (&#961; = 0.78, Spearman; Learmonth YC et al. <em>BMC Neurol</em> 2013). Not interchangeable: PDDS captures lived walking experience; EDSS covers all neurological functions.<br>
 <b>Meaningful change:</b> A change of &ge; 1 step is clinically meaningful (Learmonth 2013).<br>
-<b>Reference:</b> Hohol MJ, Orav EJ, Weiner HL. <em>Neurology</em> 1995;45(2):251&ndash;5. Self-report version: Marrie RA, Goldman M. <em>Mult Scler</em> 2007;13(9):1176&ndash;82. Learmonth YC et al. <em>BMC Neurol</em> 2013;13:37.
+<b>Reference:</b> Hohol MJ, Orav EJ, Weiner HL. <em>Neurology</em> 1995;45(2):251&ndash;5. Self-report version: Marrie RA, Goldman M. <em>Mult Scler</em> 2007;13(9):1176&ndash;82. Learmonth YC et al. <em>BMC Neurol</em> 2013;13:37. PDDS is not copyrighted; used as in the NARCOMS registry.
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('pdds','PDDS')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('pdds','PDDS')">Researcher: CSV</button></div>
   </section>
@@ -657,15 +657,15 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       <div class="fld"><label>Education (years) <span class="hint">e.g. 12&ndash;18</span></label><input type="number" id="bvmt_edu" min="0" max="25" oninput="calcBVMT()"></div>
       <div class="fld"><label>Race <span class="hint">optional, Marrie 2021 only</span></label><select id="bvmt_race" oninput="calcBVMT()"><option value="">- not used -</option><option value="1">White</option><option value="0">Black</option><option value="0">Other</option></select></div>
     </div>
-    <div class="note">Enter age, sex &amp; education for z + T scores (impaired at z &le; &minus;1.5 / T &le; 35). Race is optional (only used by Marrie 2021).</div>
+    <div class="note">Enter age, sex &amp; education for z + T scores (impaired at z &le; &minus;1.5 / T &le; 35). Race is optional (only used by Marrie 2021). Published norms can over-classify impairment in some groups (Marrie 2021); interpret with clinical context.</div>
     <div class="result" id="bvmt_out"></div>
     <details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div>
 <b>Total score (T1+T2+T3):</b> 2 points per correctly reproduced figure in the correct location (6 figures &times; 3 trials = max 36). Higher = better visual memory.<br>
 <b>Learning score:</b> the better of Trial 2 or Trial 3, minus Trial 1; positive values indicate acquisition across trials.<br>
-<b>Delayed Recall (optional):</b> Score after a ~25-min delay (0&ndash;12). T-score from the BVMT-R manual age norms (Benedict RHB, 1997).<br>
+<b>Delayed Recall (optional):</b> Score after a ~25-min delay (0&ndash;12). T-score from the Parmenter 2010 MACFIMS regression norms (needs age, sex and education).<br>
 <b>z-score (regression-based norms):</b> Total T1+T2+T3 vs healthy controls, continuously adjusted for age, age&sup2;, sex, and education. <b>Primary:</b> Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16:6&ndash;16 (MACFIMS, MS-validated, co-normed with CVLT-II and SDMT). <b>Secondary:</b> Marrie RA et al. <em>Front Neurol</em> 2021;11:621010 (Canadian cohort, optional race adjustment). z &le; &minus;1.5 (T &le; 35) = impaired domain.<br>
 <b>Why regression norms:</b> Parmenter et al. showed that regression-based norms identify more impairment cases in MS that discrete manual tables miss, by adjusting continuously for demographics instead of using fixed age brackets.<br>
-<b>Reference:</b> Benedict RHB. BVMT-R manual. PAR, 1997 (test instrument + Learning/Delayed sub-score age T-norms).
+<b>Reference:</b> Benedict RHB. BVMT-R manual. PAR, 1997 (test instrument; its norm tables are not used here). Delayed Recall norms: Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16:6&ndash;16.
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('bvmt','BVMT-R')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('bvmt','BVMT-R')">Researcher: CSV</button></div>
   </section>
@@ -688,7 +688,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       <div class="fld"><label>Education (years) <span class="hint">e.g. 12&ndash;18</span></label><input type="number" id="cvlt_edu" min="0" max="25" oninput="calcCVLT()"></div>
       <div class="fld"><label>Race <span class="hint">optional, Marrie 2021 only</span></label><select id="cvlt_race" oninput="calcCVLT()"><option value="">- not used -</option><option value="1">White</option><option value="0">Black</option><option value="0">Other</option></select></div>
     </div>
-    <div class="note">Enter age, sex &amp; education for z + T scores (impaired at z &le; &minus;1.5 / T &le; 35). Race is optional (only used by Marrie 2021).</div>
+    <div class="note">Enter age, sex &amp; education for z + T scores (impaired at z &le; &minus;1.5 / T &le; 35). Race is optional (only used by Marrie 2021). Published norms can over-classify impairment in some groups (Marrie 2021); interpret with clinical context.</div>
     <div class="subhead">Optional - recognition &amp; delayed sub-scores (raw)</div><div class="note" style="margin:-4px 0 8px">Fill these if they were administered; leave blank if not. SDFR = Short-Delay Free Recall; LDFR = Long-Delay Free Recall.</div><div>
     <div class="row">
       <div class="fld"><label>Short-Delay Free Recall <span class="hint">0&ndash;16</span></label><input type="number" id="cvlt_sdfr" min="0" max="16" oninput="calcCVLT()"></div>
@@ -727,7 +727,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 <b>Scoring:</b> 21 items &times; 0&ndash;4 &rarr; total 0&ndash;84 (higher = greater fatigue impact). Three subscales: Physical (9 items, 0&ndash;36), Cognitive (10 items, 0&ndash;40), Psychosocial (2 items, 0&ndash;8).<br>
 <b>Cut-off:</b> Total &ge; 38 = clinically significant fatigue impact on daily functioning (Flachenecker P et al. <em>Mult Scler</em> 2002).<br>
 <b>Clinically meaningful change:</b> about 4 points on the total (minimal important difference, Rooney S et al. <em>Mult Scler Relat Disord</em> 2019;35:158&ndash;63). Published cut-offs for significant fatigue vary between 34 and 43; 38 is used here.<br>
-<b>Reference:</b> Fisk JD et al. <em>Clin Infect Dis</em> 1994;18(Suppl 1):S79&ndash;83. 21-item version: NMSS Clinical Practice Guidelines 1998.
+<b>Reference:</b> Fisk JD et al. <em>Clin Infect Dis</em> 1994;18(Suppl 1):S79&ndash;83. 21-item version: NMSS Clinical Practice Guidelines 1998. MFIS is in the public domain (MSQLI, National MS Society).
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('mfis','MFIS')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('mfis','MFIS')">Researcher: CSV</button></div>
   </section>
@@ -737,7 +737,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
     <h2>MSQOL-54</h2><p class="lead">Multiple Sclerosis Quality of Life-54. Enter each item's raw response (the number circled on the form). Grouped by subscale; numbers are the MSQOL-54 item order. All scores 0&ndash;100 (higher = better). Subscales use the dynamic-denominator rule (averaged over answered items only).</p>
     <div id="msqol_items"></div>
     <div class="actions fill-row"><button class="btn" onclick="clearMSQOL()">Clear all</button></div>
-    <div class="note">Labels are short reminders - refer to the MSQOL-54 form (&copy; UCLA) for exact item wording. MSQOL-54 is free for clinical/research use.</div>
+    <div class="note">MSQOL-54 is copyrighted (&copy; 1995 University of California, Los Angeles). MSpectrum does not reproduce its items; labels are short reminders. Users are responsible for any permission the owner requires.</div>
     <div class="result" id="msqol_out"></div>
     <details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div>
 <b>Scoring:</b> 54 items recoded to 0&ndash;100 (higher = better quality of life); subscale score = mean of answered items. Partial completion is allowed per subscale.<br>
@@ -759,14 +759,14 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 <b>Scoring:</b> 7 domains &times; 4 items rated 1&ndash;5 &rarr; raw domain sum (4&ndash;20) converted to a <b>T-score</b> via official HealthMeasures calibration tables. Pain intensity is a separate 0&ndash;10 NRS item.<br>
 <b>T-score:</b> Mean = 50, SD = 10 in the US general population. For <em>symptom</em> domains (Anxiety, Depression, Fatigue, Sleep, Pain Interference): T &gt; 50 = worse than average; T = 60 = 1 SD above average (more symptoms). For <em>function</em> domains (Physical Function, Social Roles): T &lt; 50 = worse than average; T = 40 = 1 SD below average ability.<br>
 <b>Severity bands</b> (standard PROMIS T-score cut-points): <b>Normal / Mild / Moderate / Severe</b>, shown on each result line. Symptom domains (Anxiety, Depression, Fatigue, Sleep, Pain Interference): T &lt; 55 Normal &bull; 55&ndash;59.9 Mild &bull; 60&ndash;69.9 Moderate &bull; &ge; 70 Severe. Function domains (Physical Function, Social Roles) mirror this below the mean: T &ge; 45 Normal &bull; 40&ndash;44.9 Mild &bull; 30&ndash;39.9 Moderate &bull; &lt; 30 Severe.<br>
-<b>Reference:</b> Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. T-score tables: PROMIS Adult Profile Scoring Manual v2.1 (HealthMeasures / Northwestern University, 2021).
+<b>Reference:</b> Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. T-scores are computed from the publicly available PROMIS scoring manuals (PROMIS Adult Profile Scoring Manual v2.1, HealthMeasures / Northwestern University, 2021). PROMIS&reg; is a registered trademark of the U.S. Department of Health and Human Services. Item wording is not reproduced.
 </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('promis','PROMIS-29')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('promis','PROMIS-29')">Researcher: CSV</button><button class="btn" onclick="promisLookupCSV()">Download raw&rarr;T&rarr;SE lookup</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('promis','PROMIS-29')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('promis','PROMIS-29')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_fss">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
-    <h2>FSS</h2><p class="lead">Fatigue Severity Scale - 9 statements about the past week (1 = strongly disagree &hellip; 7 = strongly agree).</p>
+    <h2>FSS</h2><p class="lead">Fatigue Severity Scale - 9 items about the past week (1 = strongly disagree &hellip; 7 = strongly agree). FSS is copyrighted (Krupp LB et al. 1989); item wording is not reproduced, so enter each answer from your copy of the official form.</p>
     <div class="actions fill-row"><button class="btn" onclick="fillFSS(1)">All 1</button><button class="btn" onclick="fillFSS(7)">All 7</button><button class="btn" onclick="clearFSS()">Clear</button></div>
     <div class="items" id="fss_items"></div>
     <div class="result" id="fss_out"></div>
@@ -774,7 +774,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 <b>Scoring:</b> 9 statements rated 1&ndash;7; score = mean of 9 items (range 1.0&ndash;7.0). Higher = more severe fatigue.<br>
 <b>Cut-off:</b> Mean &ge; 4.0 = clinically significant fatigue. Original validation: healthy controls scored &asymp; 2.3 vs MS patients &asymp; 4.7 (Krupp LB et al. <em>Arch Neurol</em> 1989).<br>
 <b>Clinically meaningful change:</b> about 0.45 points in the mean (minimal important difference, Rooney S et al. <em>Mult Scler Relat Disord</em> 2019;35:158&ndash;63).<br>
-<b>Reference:</b> Krupp LB, LaRocca NG, Muir-Nash J, Steinberg AD. <em>Arch Neurol</em> 1989;46(10):1121&ndash;3.
+<b>Reference:</b> Krupp LB, LaRocca NG, Muir-Nash J, Steinberg AD. <em>Arch Neurol</em> 1989;46(10):1121&ndash;3. FSS is copyrighted; item wording is not reproduced. Users are responsible for any permission the owner requires.
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('fss','FSS')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('fss','FSS')">Researcher: CSV</button></div>
   </section>
@@ -791,7 +791,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 <b>Screening cut-off:</b> &ge; 10 = likely clinically significant depression (sensitivity 88%, specificity 88% for major depressive disorder; Kroenke 2001).<br>
 <b>Item 9 (thoughts of death / self-harm):</b> Any response &gt; 0 requires direct clinical assessment regardless of the total score.<br>
 <b>Note in MS:</b> Somatic item overlap (fatigue, sleep, concentration) may inflate scores; a cut-off of &ge; 11 is used in some MS-specific studies (Feinstein A et al. <em>Nat Rev Neurol</em> 2014).<br>
-<b>Reference:</b> Kroenke K, Spitzer RL, Williams JBW. <em>J Gen Intern Med</em> 2001;16(9):606&ndash;13. Public domain (Pfizer Inc.).
+<b>Reference:</b> Kroenke K, Spitzer RL, Williams JBW. <em>J Gen Intern Med</em> 2001;16(9):606&ndash;13. Developed by Drs. Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke and colleagues, with an educational grant from Pfizer Inc. No permission is required to reproduce, translate, display or distribute.
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('phq9','PHQ-9')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('phq9','PHQ-9')">Researcher: CSV</button></div>
   </section>
@@ -807,7 +807,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 <b>Severity bands:</b> 0&ndash;4 = Minimal &nbsp;&bull;&nbsp; 5&ndash;9 = Mild &nbsp;&bull;&nbsp; 10&ndash;14 = Moderate &nbsp;&bull;&nbsp; 15&ndash;21 = Severe (Spitzer RL et al. <em>Arch Intern Med</em> 2006).<br>
 <b>Screening cut-off:</b> &ge; 10 = likely clinically significant anxiety (sensitivity 89%, specificity 82% for generalised anxiety disorder; Spitzer 2006).<br>
 <b>Clinically meaningful change:</b> &asymp; 4-point change is a reliable clinical response (Rubin HC et al. <em>Gen Hosp Psychiatry</em> 2016).<br>
-<b>Reference:</b> Spitzer RL, Kroenke K, Williams JBW, L&ouml;we B. <em>Arch Intern Med</em> 2006;166(10):1092&ndash;7. Public domain (Pfizer Inc.).
+<b>Reference:</b> Spitzer RL, Kroenke K, Williams JBW, L&ouml;we B. <em>Arch Intern Med</em> 2006;166(10):1092&ndash;7. Developed by Drs. Robert L. Spitzer, Janet B.W. Williams, Kurt Kroenke and colleagues, with an educational grant from Pfizer Inc. No permission is required to reproduce, translate, display or distribute.
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('gad7','GAD-7')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('gad7','GAD-7')">Researcher: CSV</button></div>
   </section>
@@ -817,7 +817,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
     <h2>MSWS-12</h2><p class="lead">MS Walking Scale-12 - how MS has affected walking in the past 2 weeks (1 = not at all &hellip; 5 = extremely). Score 0&ndash;100, higher = greater walking limitation.</p>
     <div class="actions fill-row"><button class="btn" onclick="fillMSWS(1)">All 1</button><button class="btn" onclick="fillMSWS(5)">All 5</button><button class="btn" onclick="clearMSWS()">Clear</button></div>
     <div class="items" id="msws_items"></div>
-    <div class="note">The descriptions below are our own plain-language wording (the official MSWS-12 item text is licensed, &copy; Hobart/Thompson). Answer each on the 1&ndash;5 scale; for formal/clinical use refer to the official MSWS-12 form.</div>
+    <div class="note">MSWS-12 is copyrighted (&copy; 2000 Neurological Outcome Measures Unit). MSpectrum does not reproduce its items; users are responsible for any licence the owner requires.</div>
     <div class="result" id="msws_out"></div>
     <details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div>
 <b>Scoring:</b> 12 items rated 1&ndash;5 (all 12 required). Transformation: <b>(raw sum &minus; 12) &divide; 48 &times; 100</b> &rarr; 0&ndash;100. A score of 0 = no walking limitation; 100 = maximum limitation.<br>
@@ -833,7 +833,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
     <h2>MSIS-29</h2><p class="lead">MS Impact Scale-29 (v1) - the impact of MS over the past 2 weeks. Physical (items 1&ndash;20) and Psychological (items 21&ndash;29) subscales, each transformed to 0&ndash;100 (higher = greater impact).</p>
     <div class="actions fill-row"><button class="btn" onclick="fillMSIS(1)">All 1</button><button class="btn" onclick="fillMSIS(5)">All 5</button><button class="btn" onclick="clearMSIS()">Clear</button></div>
     <div class="items" id="msis_items"></div>
-    <div class="note">The descriptions below are our own plain-language wording (the official MSIS-29 item text is licensed, &copy; Hobart/Thompson). Answer each on the 1&ndash;5 scale; for formal/clinical use refer to the official MSIS-29 form.</div>
+    <div class="note">MSIS-29 is copyrighted (&copy; University of Plymouth and Plymouth Hospitals NHS Trust). MSpectrum does not reproduce its items; users are responsible for any licence the owner requires.</div>
     <div class="result" id="msis_out"></div>
     <details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div>
 <b>Physical subscale (items 1&ndash;20):</b> All 20 items required. <b>(raw sum &minus; 20) &divide; 80 &times; 100</b> &rarr; 0&ndash;100.<br>
@@ -875,7 +875,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div>
 <b>Scoring:</b> 12 symptom domains, each 0&ndash;6; total = sum (range 0&ndash;72). Higher = worse overall symptom burden; the individual domains are also useful to track.<br>
 <b>Use:</b> A brief, validated global measure of MS symptom severity, good for tracking change over time. There is no fixed "abnormal" cut-off - read the total together with the individual domains.<br>
-<b>Reference:</b> Green R, Kalina J, Ford R, Pandey K, Kister I. SymptoMScreen: a tool for rapid assessment of symptom severity in MS across multiple domains. <em>Appl Neuropsychol Adult</em> 2017;24(2):183&ndash;9.
+<b>Reference:</b> Green R, Kalina J, Ford R, Pandey K, Kister I. SymptoMScreen: a tool for rapid assessment of symptom severity in MS across multiple domains. <em>Appl Neuropsychol Adult</em> 2017;24(2):183&ndash;9. SymptoMScreen is free to use (symptomscreen.org).
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('smscreen','SymptoMScreen')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('smscreen','SymptoMScreen')">Researcher: CSV</button></div>
   </section>
@@ -939,7 +939,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     </div>
     <div class="info-cards" role="note">
       <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><p>Answer the questionnaires in order: press <b>Start</b> and you are guided from one to the next, or open any of them from the list below in any order. Stop and come back any time. At the end you get a single plain-language summary. Everything runs in your browser and <b>nothing is stored</b>.</p></div>
-      <div class="info-card"><div class="info-card-head"><span class="info-ico">📋</span><span class="info-title">What this covers</span></div><p>Eleven questionnaires you can answer yourself: your EDSS and age (an EDSS you already know, or the Quick Check estimate), PDDS, MSWS-12, FES-I, MFIS, PROMIS Cognitive Function, PHQ-9, GAD-7, PROMIS Pain, MSIS-29 and MSQOL-54. It does <b>not</b> include an examined EDSS or the clinician cognitive tests (SDMT, BVMT-R, CVLT-II), so a normal report does not rule out cognitive change.</p></div>
+      <div class="info-card"><div class="info-card-head"><span class="info-ico">📋</span><span class="info-title">What this covers</span></div><p>Eight questionnaires you can answer yourself: your EDSS and age (an EDSS you already know, or the Quick Check estimate), PDDS, FES-I, MFIS, SymptoMScreen, PHQ-9, GAD-7 and a 0&ndash;10 pain rating. It does <b>not</b> include an examined EDSS or the clinician cognitive tests (SDMT, BVMT-R, CVLT-II), so a normal report does not rule out cognitive change.</p><p style="margin-top:6px">This summary helps you understand your results and discuss them with your care team. It is not a diagnosis or medical advice. If you have thoughts of harming yourself, call or text <b>988</b> (U.S.) or your local emergency number now.</p></div>
     </div>
     <div class="report-flow" style="background:#eef5fb;border:1px solid #cfe0ec;border-radius:14px;padding:16px 16px 8px;margin-top:14px">
     <div id="report_checklist"></div>
@@ -1071,7 +1071,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 <section class="panel" id="p_promiscog">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>PROMIS Cognitive Abilities (4a)</h2>
-    <p class="lead">PROMIS Short Form v2.0 - Cognitive Function - Abilities 4a. Answer the 4 statements reflecting the past 7 days.</p>
+    <p class="lead">PROMIS Short Form v2.0 - Cognitive Function - Abilities 4a. Enter the 4 responses (past 7 days) from your copy of the official form; item wording is not reproduced.</p>
     <div class="actions">
       <button class="btn" onclick="fillPromisCog(5)">All 5 (Very much)</button>
       <button class="btn" onclick="fillPromisCog(1)">All 1 (Not at all)</button>
@@ -1137,7 +1137,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
   <section class="panel" id="p_abc">
     <button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button>
     <h2>Activities-specific Balance Confidence (ABC) Scale</h2>
-    <p class="lead">16-item self-report questionnaire assessing confidence in maintaining balance during common daily activities.</p>
+    <p class="lead">16-item self-report questionnaire assessing confidence in maintaining balance during common daily activities. ABC Scale &copy; 1995 Anita M. Myers; item wording is not reproduced.</p>
     <div class="actions">
       <button class="btn" onclick="fillABC(100)">All 100%</button>
       <button class="btn" onclick="fillABC(50)">All 50%</button>
@@ -1180,7 +1180,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
         <li><b>20 &ndash; 27:</b> Moderate concern of falling.</li>
         <li><b>28 &ndash; 64:</b> High concern of falling.</li>
       </ul>
-      <b>Reference:</b> Items: Yardley L, Beyer N, Hauer K, Kempen G, Piot-Ziegler C, Todd C. <em>Age Ageing</em> 2005;34(6):614&ndash;9. Cut-points (16&ndash;19, 20&ndash;27, 28&ndash;64): Delbaere K, Close JCT, Mikolaizak AS et al. <em>Age Ageing</em> 2010;39(2):210&ndash;6.
+      <b>Reference:</b> Items: Yardley L, Beyer N, Hauer K, Kempen G, Piot-Ziegler C, Todd C. <em>Age Ageing</em> 2005;34(6):614&ndash;9. FES-I is free for researchers and clinicians when referenced (University of Manchester). Cut-points (16&ndash;19, 20&ndash;27, 28&ndash;64): Delbaere K, Close JCT, Mikolaizak AS et al. <em>Age Ageing</em> 2010;39(2):210&ndash;6.
     </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('fesi','FES-I')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('fesi','FES-I')">📊 Researcher: CSV</button></div>
   </section>
@@ -1293,7 +1293,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <summary>References &amp; scoring sources</summary>
     <div class="ref-cat">Cognition</div>
     <div class="ref-item"><span class="ref-name">SDMT</span><span class="ref-cite">Smith A. <em>Symbol Digit Modalities Test</em>. Los Angeles: Western Psychological Services, 1982 (test instrument; MSpectrum does not embed the WPS Manual normative tables). <b>Oral SDMT norms:</b> Strober LB, DeLuca J, Benedict RHB, Jacobs A, Cohen JA, Chiaravalloti N, Hudson LD, Rudick RA, LaRocca NG (Multiple Sclerosis Outcome Assessments Consortium). <em>Mult Scler Relat Disord</em> 2020;43:102154 (US regression-based norms, age × sex × education, N=675, ages 18-74). <b>Written SDMT norms:</b> Centofani CC. <em>Selected somatosensory and cognitive test performances as a function of age and education in normal and neurologically impaired adults</em>. Unpublished doctoral dissertation, University of Michigan, 1975 (N=420, age-stratified; reproduced in Sheridan LK, Fitzgerald HE, Adams KM, Nigg JT, Martel MM, Puttler LI, Wong MM, Zucker RA. <em>Arch Clin Neuropsychol</em> 2006;21(1):23–28; ages 18-64). Reliable change / meaningful change (4 points or 10%): Benedict RHB, DeLuca J, Phillips G, LaRocca N, Hudson LD, Rudick R. <em>Mult Scler</em> 2017;23(5):721–33. Oral SDMT Reliable Change Index: Strober LB et al. <em>Mult Scler Relat Disord</em> 2022;57:103405.</span></div>
-    <div class="ref-item"><span class="ref-name">BVMT-R</span><span class="ref-cite">Benedict RHB. <em>Brief Visuospatial Memory Test&ndash;Revised</em>. PAR, 1997 (used for Learning Index and Delayed Recall T-scores from the age-stratified US normative tables). <b>Primary (MS-validated) regression norms for Total Recall:</b> Parmenter BA, Testa SM, Schretlen DJ, Weinstock-Guttman B, Benedict RHB. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16 (MACFIMS regression, N=100 healthy controls, validated in N=395 MS). <b>Secondary (Canadian) regression norms:</b> Marrie RA et al. <em>Front Neurol</em> 2021;11:621010.</span></div>
+    <div class="ref-item"><span class="ref-name">BVMT-R</span><span class="ref-cite">Benedict RHB. <em>Brief Visuospatial Memory Test&ndash;Revised</em>. PAR, 1997 (test instrument; manual norm tables not used). <b>Primary (MS-validated) regression norms for Total Recall:</b> Parmenter BA, Testa SM, Schretlen DJ, Weinstock-Guttman B, Benedict RHB. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16 (MACFIMS regression, N=100 healthy controls, validated in N=395 MS). <b>Secondary (Canadian) regression norms:</b> Marrie RA et al. <em>Front Neurol</em> 2021;11:621010.</span></div>
     <div class="ref-item"><span class="ref-name">CVLT-II</span><span class="ref-cite">Delis DC, Kramer JH, Kaplan E, Ober BA. <em>California Verbal Learning Test&ndash;Second Edition</em>. Pearson, 2000 (test instrument). <b>Primary (MS-validated) regression norms for Total Learning (Trials 1&ndash;5):</b> Parmenter BA, Testa SM, Schretlen DJ, Weinstock-Guttman B, Benedict RHB. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16 (MACFIMS regression; LDFR T-score also from this source). <b>Secondary (Canadian) regression norms:</b> Marrie RA et al. <em>Front Neurol</em> 2021;11:621010.</span></div>
     <div class="ref-cat">Fatigue</div>
     <div class="ref-item"><span class="ref-name">MFIS</span><span class="ref-cite">Modified from Fisk JD et al. <em>Clin Infect Dis</em> 1994;18(Suppl 1):S79&ndash;83. 21-item MFIS: Multiple Sclerosis Council for Clinical Practice Guidelines, 1998 (National MS Society). Minimal important difference: Rooney S, McFadyen A, Wood L, Moffat F, Paul L. <em>Mult Scler Relat Disord</em> 2019;35:158&ndash;63.</span></div>
@@ -1326,7 +1326,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="ref-item"><span class="ref-name">6MWT</span><span class="ref-cite">Enright PL, Sherrill DL. <em>Am J Respir Crit Care Med</em> 1998;158(5):1384&ndash;7 (predicted distance, ages 40&ndash;80). In MS: Goldman MD, Marrie RA, Cohen JA. <em>Mult Scler</em> 2008;14(3):383&ndash;90. Meaningful change: Baert I, Freeman J, Smedal T et al. <em>Neurorehabil Neural Repair</em> 2014;28(7):621&ndash;31.</span></div>
     <div class="ref-item"><span class="ref-name">MSIS-29</span><span class="ref-cite">Hobart J, Lamping D, Fitzpatrick R, Riazi A, Thompson A. <em>Brain</em> 2001;124(Pt 5):962&ndash;73. Meaningful change (about 8 points, physical): Costelloe L, O'Rourke K, Kearney H et al. <em>J Neurol Neurosurg Psychiatry</em> 2007;78(8):841&ndash;4.</span></div>
     <div class="ref-item"><span class="ref-name">PDDS</span><span class="ref-cite">Hohol MJ, Orav EJ, Weiner HL. <em>Neurology</em> 1995;45(2):251&ndash;5. Self-report version: Marrie RA, Goldman M. <em>Mult Scler</em> 2007;13(9):1176&ndash;82. Validation against EDSS: Learmonth YC et al. <em>BMC Neurol</em> 2013;13:37.</span></div>
-    <div class="ref-item"><span class="ref-name">MSQOL-54</span><span class="ref-cite">Vickrey BG, Hays RD, Harooni R, Myers LW, Ellison GW. <em>Qual Life Res</em> 1995;4(3):187&ndash;206. &copy; UCLA (free for clinical/research use).</span></div>
+    <div class="ref-item"><span class="ref-name">MSQOL-54</span><span class="ref-cite">Vickrey BG, Hays RD, Harooni R, Myers LW, Ellison GW. <em>Qual Life Res</em> 1995;4(3):187&ndash;206. &copy; 1995 UCLA; item wording not reproduced.</span></div>
     <div class="ref-item"><span class="ref-name">PROMIS-29</span><span class="ref-cite">Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. PROMIS-29 Profile v2.1; raw&rarr;T tables from the PROMIS Adult Profile Scoring Manual, HealthMeasures (Northwestern University).</span></div>
     <p style="font-size:12px;color:var(--ink-faint);margin-top:12px">Proprietary instruments (BVMT-R, CVLT-II, SDMT) are scored from entered numeric results only; their stimuli and norm tables are not reproduced here.</p>
   </details></section>
@@ -1335,7 +1335,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 
   <div class="tool-disclaimer no-print">
     <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
-    <p>MSpectrum computes outcome-measure scores from published scoring rules and explains what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research and educational use; verify locally before clinical or trial use. All computation is local; nothing is stored.</p>
+    <p>MSpectrum computes outcome-measure scores from published scoring rules and explains what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research and educational use; verify locally before clinical or trial use. All computation is local; nothing is stored.</p><p style="margin-top:8px;font-size:12px">MSpectrum is a free research and education tool for trained clinicians and researchers. It does not replace clinical judgment, a full neurological examination, or certified rater training; a qualified clinician must check every result before use in care or research. MSpectrum has not been reviewed, cleared, or approved by the U.S. Food and Drug Administration. Provided &quot;as is&quot;, without warranty of any kind; the authors accept no liability for any use of this tool or its results. Privacy: all processing happens on your device; MSpectrum does not upload, store, or transmit any data. Use study IDs rather than names where possible. Content and views are the authors&rsquo; own and do not represent the official position of any institution. Instrument copyrights and trademarks belong to their owners. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is independent and is not affiliated with or endorsed by Neurostatus-UHB AG.</p>
     <div class="tool-disclaimer-footer no-print">
       <a href="index.html#about-mspectrum">About</a><span class="dot">·</span>
       <a href="index.html#cite">Cite</a><span class="dot">·</span>
@@ -1677,7 +1677,7 @@ function sdmtNorm(){ const raw=_num(el("sdmt_raw").value), age=_num(el("sdmt_age
    if(age<18||age>74) return {oor:true,range:"18-74 (Strober 2020 US oral SDMT norms)"};
    const eb=edu<16?"lo":"hi"; const ms=SDMT_NORM[eb][sex][_ageBand(age)]; const z=(raw-ms[0])/ms[1];
    return {mean:ms[0],sd:ms[1],z:z,pct:Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))),
-     src:"Strober LB et al. Oral SDMT US regression-based norms, Mult Scler Relat Disord 2020;43:102154 (age × sex × education)"};
+     src:"Strober LB et al. Oral SDMT US normative data, 675 healthy adults stratified by age × sex × education, Mult Scler Relat Disord 2020;43:102154."+" Published norms can over-classify impairment in some groups (Marrie 2021); interpret z-scores with clinical context. They are not a diagnosis"};
  }
  return null; }
 function calcSDMT(){ const r=_num(el("sdmt_raw").value);
@@ -1695,7 +1695,7 @@ function calcSDMT(){ const r=_num(el("sdmt_raw").value);
   else if(nm){ const icls=nm.z<=-1.5?"bad":(nm.z<=-1?"warn":"good");
     out+=interp(icls,"Norm-based: <b>z = "+nm.z.toFixed(2)+"</b> &middot; <b>T = "+(50+10*nm.z).toFixed(0)+"</b> &middot; ~"+nm.pct+"th percentile vs the normative reference"+(nm.z<=-1.5?" - impaired range":"")+".")
        +'<div class="note"><b>Norms:</b> '+(nm.src||"Peer-reviewed published norms")+'. T = 50 + 10&times;z (mean=50, SD=10; T&le;35 ~ impaired). '+_zPlain(nm.z)+'</div>'; }
-  else { out+='<div class="note">Higher is better. '+(ver==="written"?"Enter age above for an automatic z-score &amp; percentile (Centofani 1975 age-stratified adult norms, ages 18-64). For a more complete demographically-corrected norm, switch to Oral and enter sex + education.":"Enter age, sex &amp; education above for an automatic z-score &amp; percentile (Strober 2020 US regression-based norms, age × sex × education, ages 18-74).")+' A change of ~4 points between visits is often clinically meaningful. For research use only; verify clinically.</div>'; }
+  else { out+='<div class="note">Higher is better. '+(ver==="written"?"Enter age above for an automatic z-score &amp; percentile (Centofani 1975 age-stratified adult norms, ages 18-64). For a more complete demographically-corrected norm, switch to Oral and enter sex + education.":"Enter age, sex &amp; education above for an automatic z-score &amp; percentile (Strober 2020 US regression-based norms, age × sex × education, ages 18-74).")+' A 4-point change is often cited, but a reliable change needs about 7 to 10 points at 6 months and 8 to 12 at 1 year (Strober 2022). For research use only; verify clinically.</div>'; }
   el("sdmt_out").innerHTML=out;
 }
 const PDDS_LABELS={0:"Normal",1:"Mild disability",2:"Moderate disability",3:"Gait disability",4:"Early cane",5:"Late cane",6:"Bilateral support",7:"Wheelchair / scooter",8:"Bedridden"};
@@ -1723,8 +1723,10 @@ function bvmtScaledPar(r){ if(r<13)return 2; if(r<=13)return 3; if(r<=15)return 
 function cvltNormPar(raw,age,sex,edu){ if(raw==null||age==null||!sex||edu==null) return null; const sc=cvltScaledPar(raw); const pred=5.533+(-0.038)*age+0*age*age+2.451*sex+0.093*edu; const sd=2.8248; return {scaled:sc, z:(sc-pred)/sd}; }
 function bvmtNormPar(raw,age,sex,edu){ if(raw==null||age==null||!sex||edu==null) return null; const sc=bvmtScaledPar(raw); const pred=(-3.216)+0.437*age+(-0.006)*age*age+0.844*sex+0.391*edu; const sd=2.70744; return {scaled:sc, z:(sc-pred)/sd}; }
 function _zT(z){ return 50+10*z; }
-const BENEDICT_BVMT=[[20,3.63,1.67,10.79,1.37],[22,3.64,1.68,10.68,1.41],[24,3.64,1.68,10.57,1.45],[26,3.65,1.69,10.46,1.48],[28,3.66,1.70,10.35,1.52],[30,3.66,1.71,10.24,1.56],[32,3.67,1.71,10.13,1.60],[34,3.67,1.72,10.02,1.64],[36,3.68,1.73,9.91,1.67],[38,3.69,1.74,9.80,1.71],[40,3.69,1.74,9.69,1.75],[42,3.70,1.75,9.58,1.79],[44,3.70,1.76,9.47,1.83],[46,3.71,1.77,9.36,1.86],[48,3.71,1.77,9.25,1.90],[50,3.72,1.78,9.14,1.94],[52,3.73,1.79,9.03,1.98],[54,3.73,1.80,8.92,2.01],[56,3.74,1.80,8.81,2.05],[58,3.74,1.81,8.70,2.09],[60,3.75,1.82,8.59,2.13],[62,3.76,1.83,8.48,2.17],[64,3.76,1.83,8.37,2.20],[66,3.77,1.84,8.26,2.24],[68,3.77,1.85,8.15,2.28],[70,3.78,1.86,8.04,2.32],[72,3.78,1.86,7.93,2.36],[74,3.80,1.88,7.71,2.43]];
-function benedictBVMT(age){ if(age==null) return null; var a=age; if(a<20)a=20; if(a>74)a=74; var best=BENEDICT_BVMT[0]; for(var i=0;i<BENEDICT_BVMT.length;i++){ if(Math.abs(BENEDICT_BVMT[i][0]-a)<Math.abs(best[0]-a)) best=BENEDICT_BVMT[i]; } return {lrn:[best[1],best[2]], del:[best[3],best[4]]}; }
+// v28: BVMT-R Delayed Recall T from Parmenter 2010 (MACFIMS) Table 1 raw->scaled and Table 4 regression (SD 2.37938).
+// Replaces the BVMT-R manual (PAR) age tables. The Learning Index has no published free norm, so it is shown raw only.
+function _bvmtDrScaled(r){ if(r<6)return 3; if(r<=7)return 5; if(r<=8)return 6; if(r<=9)return 8; if(r<=10)return 9; if(r<=11)return 10; return 13; }
+function bvmtDrT(raw,age,sex,edu){ if(raw==null||age==null||!sex||edu==null) return null; var sc=_bvmtDrScaled(raw); var pred=5.333+0.279*age-0.004*age*age+0.458*sex+0.01*edu; var z=(sc-pred)/2.37938; return z*10+50; }
 function _Tsc(raw,ms){ return ((raw-ms[0])/ms[1])*10+50; }
 function calcBVMT(){ const a=_num(el("bv1").value),b=_num(el("bv2").value),c=_num(el("bv3").value);
   var _be=[a,b,c].filter(x=>x!==null).length; _flagIds(["bv1","bv2","bv3"], _be>0&&_be<3);
@@ -1744,9 +1746,9 @@ function calcBVMT(){ const a=_num(el("bv1").value),b=_num(el("bv2").value),c=_nu
   } else {
     zhtml='<div class="note">Enter age, sex &amp; education above for the Parmenter 2010 (primary) and Marrie 2021 (secondary) z &amp; T scores.</div>';
   }
-  const dr=_num(el("bvmt_dr").value), bage=_num(el("bvmt_age").value), bd=benedictBVMT(bage);
-  let sub='<div class="chips"><span class="chip">Learning Index <b>'+r.learning+'</b>'+(bd?' (T '+_Tsc(r.learning,bd.lrn).toFixed(0)+')':'')+'</span>'+(dr!=null?'<span class="chip">Delayed Recall <b>'+dr+'</b>/12'+(bd?' (T '+_Tsc(dr,bd.del).toFixed(0)+')':'')+'</span>':'')+'</div>';
-  let subnote = bd ? '<div class="note">Sub-score T-scores (Learning, Delayed Recall): Benedict 1997 US age norms. Total Recall z/T above uses Parmenter 2010 (primary) and Marrie 2021 (secondary).</div>' : '';
+  const dr=_num(el("bvmt_dr").value), drT=(dr!=null)?bvmtDrT(dr,age,sex,edu):null;
+  let sub='<div class="chips"><span class="chip">Learning Index <b>'+r.learning+'</b> (raw)</span>'+(dr!=null?'<span class="chip">Delayed Recall <b>'+dr+'</b>/12'+(drT!=null?' (T '+drT.toFixed(0)+')':'')+'</span>':'')+'</div>';
+  let subnote = (dr!=null) ? '<div class="note">Delayed Recall T: Parmenter 2010 MACFIMS regression (age, sex, education). The Learning Index has no published free norm and is shown raw. Total Recall z/T above uses Parmenter 2010 (primary) and Marrie 2021 (secondary).</div>' : '';
   el("bvmt_out").innerHTML='<div class="scoreline"><div class="bigscore">'+r.total+'<small> / 36 Total Recall</small></div></div>'+sub+interp("neutral","Total Recall = T1+T2+T3. Learning = max(T2,T3) - T1. Delayed Recall after ~25 min. Higher is better.")+zhtml+subnote;
 }
 function _probit(p){ if(p<=0)return -6; if(p>=1)return 6;
@@ -1845,62 +1847,7 @@ const _O={
  satisf:["Very satisfied","Somewhat satisfied","Neither satisfied nor dissatisfied","Somewhat dissatisfied","Very dissatisfied"],
  ladder:["1 - Worst possible","2","3","4","5","6","7 - Best possible"]
 };
-const MSQOL_Q={
-1:"In general, would you say your health is:",
-2:"Compared to one year ago, how would you rate your health in general now?",
-3:"Does your health limit you: Vigorous activities (running, lifting heavy objects, strenuous sports)?",
-4:"Moderate activities (moving a table, vacuuming, bowling, golf)?",
-5:"Lifting or carrying groceries?",
-6:"Climbing several flights of stairs?",
-7:"Climbing one flight of stairs?",
-8:"Bending, kneeling, or stooping?",
-9:"Walking more than a mile?",
-10:"Walking several blocks?",
-11:"Walking one block?",
-12:"Bathing and dressing yourself?",
-13:"(Physical health) Cut down the amount of time spent on work or other activities",
-14:"(Physical health) Accomplished less than you would like",
-15:"(Physical health) Were limited in the kind of work or activities",
-16:"(Physical health) Had difficulty performing the work or activities (took extra effort)",
-17:"(Emotional) Cut down the amount of time spent on work or other activities",
-18:"(Emotional) Accomplished less than you would like",
-19:"(Emotional) Didn't do work or activities as carefully as usual",
-20:"To what extent has your physical health or emotional problems interfered with your normal social activities?",
-21:"How much bodily pain have you had during the past 4 weeks?",
-22:"During the past 4 weeks, how much did pain interfere with your normal work (incl. housework)?",
-23:"Did you feel full of pep?",
-24:"Have you been a very nervous person?",
-25:"Have you felt so down in the dumps that nothing could cheer you up?",
-26:"Have you felt calm and peaceful?",
-27:"Did you have a lot of energy?",
-28:"Have you felt downhearted and blue?",
-29:"Did you feel worn out?",
-30:"Have you been a happy person?",
-31:"Did you feel tired?",
-32:"Did you feel rested on waking in the morning?",
-33:"How much of the time has your physical/emotional health interfered with your social activities?",
-34:"I seem to get sick a little easier than other people",
-35:"I am as healthy as anybody I know",
-36:"I expect my health to get worse",
-37:"My health is excellent",
-38:"Were you discouraged by your health problems?",
-39:"Were you frustrated about your health?",
-40:"Was your health a worry in your life?",
-41:"Did you feel weighed down by your health problems?",
-42:"Have you had difficulty concentrating and thinking?",
-43:"Did you have trouble keeping your attention on an activity for long?",
-44:"Have you had trouble with your memory?",
-45:"Have others noticed that you have trouble with your memory or concentration?",
-46:"(Sexual function) Lack of sexual interest",
-47:"Difficulty getting/keeping an erection (or inadequate lubrication)",
-48:"Difficulty having orgasm",
-49:"Ability to satisfy sexual partner",
-50:"Overall, how satisfied were you with your sexual function during the past 4 weeks?",
-51:"To what extent have bowel/bladder problems interfered with your normal social activities?",
-52:"During the past 4 weeks, how much did pain interfere with your enjoyment of life?",
-53:"Overall, how would you rate your own quality of life? (0 = worst, 10 = best)",
-54:"Which best describes how you feel about your life as a whole? (1 = worst possible … 7 = best possible)"
-};
+const MSQOL_Q=MSQOL_LABEL;  // v28: MSQOL-54 item wording (© 1995 UCLA) not reproduced; short labels only
 const MSQOL_FORM=[
  ["General health",[1,2]],
  ["Physical limitations (does your health limit you?)",[3,4,5,6,7,8,9,10,11,12]],
@@ -1960,26 +1907,7 @@ const PR_SEV=[["Not at all",1],["A little bit",2],["Somewhat",3],["Quite a bit",
 const PR_SOC=[["Never",5],["Rarely",4],["Sometimes",3],["Often",2],["Always",1]];
 const PR_SLQ=[["Very poor",5],["Poor",4],["Fair",3],["Good",2],["Very good",1]];
 const PR_SLR=[["Not at all",5],["A little bit",4],["Somewhat",3],["Quite a bit",2],["Very much",1]];
-const PROMIS_Q={
-1:"Are you able to do chores such as vacuuming or yard work?",
-2:"Are you able to go up and down stairs at a normal pace?",
-3:"Are you able to go for a walk of at least 15 minutes?",
-4:"Are you able to run errands and shop?",
-5:"I felt fearful…",6:"I found it hard to focus on anything other than my anxiety",
-7:"My worries overwhelmed me…",8:"I felt uneasy…",
-9:"I felt worthless…",10:"I felt helpless…",11:"I felt depressed…",12:"I felt hopeless…",
-13:"I feel fatigued…",14:"I have trouble starting things because I am tired",
-15:"How run-down did you feel on average?",16:"How fatigued were you on average?",
-17:"My sleep quality was…",18:"My sleep was refreshing…",19:"I had a problem with my sleep…",20:"I had difficulty falling asleep…",
-21:"I have trouble doing all of my regular leisure activities with others",
-22:"I have trouble doing all of the family activities that I want to do",
-23:"I have trouble doing all of my usual work (including work at home)",
-24:"I have trouble doing all of the activities with friends that I want to do",
-25:"How much did pain interfere with your day-to-day activities?",
-26:"How much did pain interfere with work around the home?",
-27:"How much did pain interfere with your ability to participate in social activities?",
-28:"How much did pain interfere with your household chores?"
-};
+const PROMIS_Q={1:"Chores",2:"Stairs",3:"15-minute walk",4:"Errands and shopping",5:"Fearful",6:"Focus beyond anxiety",7:"Overwhelming worries",8:"Uneasy",9:"Worthless",10:"Helpless",11:"Depressed",12:"Hopeless",13:"Fatigued",14:"Starting things when tired",15:"Run-down",16:"Fatigue level",17:"Sleep quality",18:"Refreshing sleep",19:"Sleep problem",20:"Falling asleep",21:"Leisure with others",22:"Family activities",23:"Usual work",24:"Activities with friends",25:"Pain: daily activities",26:"Pain: work at home",27:"Pain: social activities",28:"Pain: household chores"};  // v28: topic labels only; PROMIS item wording (HealthMeasures) not reproduced
 function _prOpts(i){
   if(i>=1&&i<=4) return PR_PF;
   if(i>=5&&i<=12) return PR_FREQ;
@@ -1992,7 +1920,7 @@ function _prOpts(i){
   return PR_SEV;
 }
 function buildPROMIS(){
-  let html='<div class="note" style="margin-bottom:10px">Recall period: the past 7 days. Pick the response for each item.</div>';
+  let html='<div class="note" style="margin-bottom:10px">Item wording is not reproduced here (PROMIS-29 v2.1, HealthMeasures). Enter each answer from your copy of the official form; the labels are short topic reminders only. Recall period: the past 7 days.</div>';
   for(let di=0; di<PROMIS_DOMAINS.length; di++){ const d=PROMIS_DOMAINS[di];
     html+='<div class="subhead">'+d[0]+_grpBar("pr",di)+'</div><div class="items">';
     for(const i of d[2]){ const labs=_prOpts(i); let opts="";
@@ -2045,7 +1973,7 @@ function calcPROMIS(){
 function clearPROMIS(){ for(let i=1;i<=28;i++){const e=el("pr_"+i); if(e) e.value="";} const p=el("pr_pi"); if(p){p.value="";p.classList.remove("blank");} _clearBlanks("pr_",1,28); el("promis_out").innerHTML=""; }
 buildPROMIS();
 var HOWTO={
- sdmt:"Enter correct answers plus age (required). For Oral: add sex and education years for Strober 2020 US regression-based norms (age × sex × education, ages 18-74). For Written: enter age for Centofani 1975 adult age-stratified norms (ages 18-64; reproduced in Sheridan et al. 2006). The norm set used is shown under each z-score. Research use only.",
+ sdmt:"Enter correct answers plus age (required). For Oral: add sex and education years for Strober 2020 US norms (stratified by age × sex × education, ages 18-74). For Written: enter age for Centofani 1975 adult age-stratified norms (ages 18-64; reproduced in Sheridan et al. 2006). The norm set used is shown under each z-score. Research use only.",
  pasat:"Enter the number of correct responses. The z-score versus the Task Force reference appears automatically.",
  bvmt:"Enter the three immediate-recall trials (Delayed Recall is optional), plus age, sex and education for the norm. Results update automatically; required boxes still empty are highlighted in amber.",
  cvlt:"Enter the five List A trials, plus age, sex and education for the norm. Optional recognition/delayed sub-scores can be added below. Results update automatically; missing required boxes are highlighted in amber.",
@@ -2115,9 +2043,9 @@ const CONV={
  pdds:{label:"PDDS - disease steps", n:1, fmt:"1 value, 0-8.", score:v=>{const st=_cvNum(v[0]); return {Step:(st==null?"":st), Level:(PDDS_LABELS[st]||"")};}},
  abc:{label:"ABC - balance confidence", n:16, fmt:"16 answers, each 0-100 (%).", score:v=>{let sum=0,nn=0; for(let i=0;i<16;i++){const x=_cvNum(v[i]); if(x!=null){sum+=x;nn++;}} return {"Mean %":nn?_fx(sum/nn,1):""};}},
  fesi:{label:"FES-I - fear of falling", n:16, fmt:"16 answers, each 1-4.", score:v=>{let t=0; for(let i=0;i<16;i++)t+=(_cvNum(v[i])||0); return {"Total (16-64)":t, Concern:(t>=28?"High":t>=20?"Moderate":"Low")};}},
- sdmt:{label:"SDMT (oral) - processing speed", n:4, fmt:"raw, age, sex (M/F), education years - e.g. <code>45, 52, F, 16</code>. Strober 2020 US regression-based norms (age × sex × education, ages 18-74).", score:v=>{const raw=_cvNum(v[0]),age=_cvNum(v[1]),sex=_cvSex(v[2]),edu=_cvNum(v[3]); if(raw==null||age==null)return{Raw:(raw==null?"":raw),z:"?",Percentile:"",Norms:""}; if(sex&&edu!=null&&age>=18&&age<=74){const eb=edu<16?"lo":"hi";const ms=SDMT_NORM[eb][sex.s][_ageBand(age)];const z=(raw-ms[0])/ms[1];const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100)));return {Raw:raw, z:_fx(z,2), T:_fx(50+10*z,0), Percentile:pct, Norms:"Strober 2020"};} if(age<18||age>74)return{Raw:raw,z:"age 18-74 only",Percentile:"",Norms:""}; return{Raw:raw,z:"need sex & education",Percentile:"",Norms:""};}},
+ sdmt:{label:"SDMT (oral) - processing speed", n:4, fmt:"raw, age, sex (M/F), education years - e.g. <code>45, 52, F, 16</code>. Strober 2020 US norms (stratified by age × sex × education, ages 18-74).", score:v=>{const raw=_cvNum(v[0]),age=_cvNum(v[1]),sex=_cvSex(v[2]),edu=_cvNum(v[3]); if(raw==null||age==null)return{Raw:(raw==null?"":raw),z:"?",Percentile:"",Norms:""}; if(sex&&edu!=null&&age>=18&&age<=74){const eb=edu<16?"lo":"hi";const ms=SDMT_NORM[eb][sex.s][_ageBand(age)];const z=(raw-ms[0])/ms[1];const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100)));return {Raw:raw, z:_fx(z,2), T:_fx(50+10*z,0), Percentile:pct, Norms:"Strober 2020"};} if(age<18||age>74)return{Raw:raw,z:"age 18-74 only",Percentile:"",Norms:""}; return{Raw:raw,z:"need sex & education",Percentile:"",Norms:""};}},
  sdmt_w:{label:"SDMT (written) - processing speed", n:2, fmt:"raw, age - e.g. <code>45, 52</code>. Centofani 1975 adult age-stratified norms (ages 18-64; reproduced in Sheridan et al. Arch Clin Neuropsychol 2006).", score:v=>{const raw=_cvNum(v[0]),age=_cvNum(v[1]); if(raw==null||age==null)return{Raw:(raw==null?"":raw),z:"?",Percentile:"",Norms:""}; if(age<18||age>64)return{Raw:raw,z:"age 18-64 only",Percentile:"",Norms:""}; const ms=CENTOFANI_WRITTEN[_ageBand(age)]; const z=(raw-ms[0])/ms[1]; const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))); return {Raw:raw, z:_fx(z,2), T:_fx(50+10*z,0), Percentile:pct, Norms:"Centofani 1975 (age-stratified)"};}},
- bvmt:{label:"BVMT-R - visual memory", n:7, fmt:"trial1, trial2, trial3, delayed, age, sex (M/F), education - e.g. <code>10,11,12,10,40,F,16</code>. Primary: Parmenter 2010 MACFIMS (MS-validated); Secondary: Marrie 2021 Canadian.", score:v=>{const t1=_cvNum(v[0]),t2=_cvNum(v[1]),t3=_cvNum(v[2]),dl=_cvNum(v[3]),age=_cvNum(v[4]),sx=_cvSex(v[5]),edu=_cvNum(v[6]); if([t1,t2,t3,age].some(x=>x==null)||!sx)return{Total:"","z (Parmenter)":"?"}; const total=t1+t2+t3, learn=Math.max(t2,t3)-t1; const nmP=bvmtNormPar(total,age,sx.n,edu); const nmM=bvmtNorm(total,age,sx.n,edu,""); const bd=benedictBVMT(age); return {Total:total, "z (Parmenter)":nmP?_fx(nmP.z,2):"", "T (Parmenter)":nmP?_fx(_zT(nmP.z),0):"", "z (Marrie)":nmM?_fx(nmM.z,2):"", "Learning T":bd?_fx(_Tsc(learn,bd.lrn),0):"", "Delayed T":(bd&&dl!=null)?_fx(_Tsc(dl,bd.del),0):""};}},
+ bvmt:{label:"BVMT-R - visual memory", n:7, fmt:"trial1, trial2, trial3, delayed, age, sex (M/F), education - e.g. <code>10,11,12,10,40,F,16</code>. Primary: Parmenter 2010 MACFIMS (MS-validated); Secondary: Marrie 2021 Canadian.", score:v=>{const t1=_cvNum(v[0]),t2=_cvNum(v[1]),t3=_cvNum(v[2]),dl=_cvNum(v[3]),age=_cvNum(v[4]),sx=_cvSex(v[5]),edu=_cvNum(v[6]); if([t1,t2,t3,age].some(x=>x==null)||!sx)return{Total:"","z (Parmenter)":"?"}; const total=t1+t2+t3, learn=Math.max(t2,t3)-t1; const nmP=bvmtNormPar(total,age,sx.n,edu); const nmM=bvmtNorm(total,age,sx.n,edu,""); return {Total:total, "z (Parmenter)":nmP?_fx(nmP.z,2):"", "T (Parmenter)":nmP?_fx(_zT(nmP.z),0):"", "z (Marrie)":nmM?_fx(nmM.z,2):"", "Learning (raw)":learn, "Delayed T (Parmenter)":(dl!=null&&edu!=null)?_fx(bvmtDrT(dl,age,sx.n,edu),0):""};}},
  cvlt:{label:"CVLT-II - verbal memory", n:9, fmt:"trial1..trial5, LDFR, age, sex (M/F), education - e.g. <code>8,10,11,12,13,12,40,F,16</code>. Primary: Parmenter 2010 MACFIMS (MS-validated); Secondary: Marrie 2021 Canadian.", score:v=>{const t=[0,1,2,3,4].map(i=>_cvNum(v[i])); const ldfr=_cvNum(v[5]),age=_cvNum(v[6]),sx=_cvSex(v[7]),edu=_cvNum(v[8]); if(t.some(x=>x==null)||age==null||!sx)return{Total:"","z (Parmenter)":"?"}; const total=t.reduce((a,b)=>a+b,0); const nmP=cvltNormPar(total,age,sx.n,edu); const nmM=cvltNorm(total,age,sx.n,edu,""); return {Total:total, "z (Parmenter)":nmP?_fx(nmP.z,2):"", "T (Parmenter)":nmP?_fx(_zT(nmP.z),0):"", "z (Marrie)":nmM?_fx(nmM.z,2):"", "LDFR T":(ldfr!=null)?_fx(ldfrT(ldfr,age,sx.n,edu),0):""};}},
  pasat:{label:"PASAT-3 - working memory", n:1, fmt:"1 value: number correct (0-60).", score:v=>{const r=_cvNum(v[0]); return {Raw:(r==null?"":r), z:_fx(zPasat(r),2)};}},
  t25fw:{label:"T25FW - timed walk", n:2, fmt:"2 trial times in seconds - e.g. <code>6.2, 6.8</code>", score:v=>{const avg=scoreT25(_cvNum(v[0]),_cvNum(v[1])); return {"Mean (s)":_fx(avg,2), z:_fx(zWalk(avg),2)};}},
@@ -2235,7 +2163,7 @@ function pcDownloadPDF(){
   _printCard();
 }
 // ===== FSS =====
-const FSS_TEXT={1:"My motivation is lower when I am fatigued.",2:"Exercise brings on my fatigue.",3:"I am easily fatigued.",4:"Fatigue interferes with my physical functioning.",5:"Fatigue causes frequent problems for me.",6:"My fatigue prevents sustained physical functioning.",7:"Fatigue interferes with carrying out certain duties and responsibilities.",8:"Fatigue is among my three most disabling symptoms.",9:"Fatigue interferes with my work, family, or social life."};
+const FSS_TEXT={1:"Motivation",2:"Exercise",3:"Easily fatigued",4:"Physical functioning",5:"Frequent problems",6:"Sustained activity",7:"Duties and responsibilities",8:"Among most disabling symptoms",9:"Work, family, social life"};  // v28: topic labels only; FSS item wording (© Krupp) not reproduced
 el("fss_items").innerHTML=Array.from({length:9},(_,k)=>{const i=k+1;
   const labs={1:"1 - Strongly disagree",2:"2",3:"3",4:"4 - Neutral",5:"5",6:"6",7:"7 - Strongly agree"};
   let opts=""; for(let v=1;v<=7;v++) opts+='<option value="'+v+'">'+labs[v]+'</option>';
@@ -2313,7 +2241,7 @@ function calcPHQ(){const o=readPHQ();const ans=Object.values(o).filter(v=>v!=nul
   const r=scorePHQ(o);const t=r.total;
   const band=t<=4?["good","Minimal"]:t<=9?["neutral","Mild"]:t<=14?["warn","Moderate"]:t<=19?["warn","Moderately severe"]:["bad","Severe"];
   let extra="";
-  if(o[9]!=null&&o[9]>0){extra=interp("bad","<b>Item 9 endorsed.</b> Thoughts of being better off dead or of self-harm were reported. Talk with the person directly and help connect them to appropriate support. If there is any immediate danger, contact local emergency services; in the US you can call or text <b>988</b> (Suicide &amp; Crisis Lifeline), and outside the US contact the local emergency number or crisis line.");}
+  if(o[9]!=null&&o[9]>0){extra=interp("bad","<b>Item 9 endorsed.</b> Thoughts of being better off dead or of self-harm were reported. Talk with the person directly and help connect them to appropriate support. If there is any immediate danger, contact local emergency services; in the US you can call or text <b>988</b> (Suicide &amp; Crisis Lifeline), and outside the US contact the local emergency number or crisis line. MSpectrum does not monitor answers or alert anyone.");}
   const note="PHQ-9 is a screening questionnaire, not a diagnosis. Cut-points: 5 mild, 10 moderate, 15 moderately severe, 20 severe; &ge;10 has good sensitivity/specificity for major depression.";
   const bandLine = ans<9 ? interp("neutral","<b>"+ans+" of 9 items answered.</b> The severity band is shown once all nine items are answered (partial total so far: "+t+").") : interp(band[0],"Depressive symptoms on screening: <b>"+band[1]+"</b>.");
   el("phq9_out").innerHTML='<div class="scoreline"><div class="bigscore">'+(ans<9?"&ndash;":t)+'<small> / 27</small></div></div>'+bandLine+extra+'<div class="note keep">'+note+'</div>';}
@@ -2335,8 +2263,8 @@ function fillGAD(v){_fillScale("gad_",1,7,v);calcGAD();}
 function clearGAD(){_clearScale("gad_",1,7);el("gad7_out").innerHTML="";}
 
 // ===== MSWS-12 =====
-const MSWS_TEXT={1:"Limited your ability to walk?",2:"Limited your ability to run?",3:"Limited your ability to climb up and down stairs?",4:"Made standing when doing things more difficult?",5:"Limited your balance when standing or walking?",6:"Limited how far you are able to walk?",7:"Increased the effort needed for you to walk?",8:"Made it necessary for you to use support when walking indoors (eg holding on to furniture, using a stick, etc.)?",9:"Made it necessary for you to use support when walking outdoors (eg using a stick, a frame, etc.)?",10:"Slowed down your walking?",11:"Affected how smoothly you walk?",12:"Made you concentrate on your walking?"};
-el("msws_items").innerHTML='<div class="note" style="margin-bottom:8px">In the past two weeks, how much has your MS&hellip;</div>'+Array.from({length:12},(_,k)=>{const i=k+1;return _scaleRow("msws_",i,MSWS_TEXT[i],[[1,"Not at all"],[2,"A little"],[3,"Moderately"],[4,"Quite a lot"],[5,"Extremely"]],"calcMSWS");}).join("");
+const MSWS_TEXT={1:"Walking ability",2:"Running",3:"Stairs",4:"Standing",5:"Balance",6:"Walking distance",7:"Walking effort",8:"Support indoors",9:"Support outdoors",10:"Walking speed",11:"Walking smoothness",12:"Concentration on walking"};  // v28: topic labels only; MSWS-12 wording (© 2000 Neurological Outcome Measures Unit) not reproduced
+el("msws_items").innerHTML='<div class="note" style="margin-bottom:8px">Item wording is not reproduced here (MSWS-12 &copy; 2000 Neurological Outcome Measures Unit). Enter each answer from your copy of the official form; the labels are short topic reminders only. Response scale 1&ndash;5.</div>'+Array.from({length:12},(_,k)=>{const i=k+1;return _scaleRow("msws_",i,MSWS_TEXT[i],[[1,"Not at all"],[2,"A little"],[3,"Moderately"],[4,"Quite a lot"],[5,"Extremely"]],"calcMSWS");}).join("");
 function readMSWS(){const o={};for(let i=1;i<=12;i++)o[i]=_num(el("msws_"+i).value);return o;}
 function calcMSWS(){const o=readMSWS();const ans=Object.values(o).filter(v=>v!=null).length;if(ans===0){el("msws_out").innerHTML="";return;} _flagScale("msws_",1,12,ans<12);
   const r=scoreMSWS(o);
@@ -2348,8 +2276,8 @@ function fillMSWS(v){_fillScale("msws_",1,12,v);calcMSWS();}
 function clearMSWS(){_clearScale("msws_",1,12);el("msws_out").innerHTML="";}
 
 // ===== MSIS-29 =====
-const MSIS_TEXT={1:"Do physically demanding tasks?",2:"Grip things tightly (e.g. turning on taps)?",3:"Carry things?",4:"Problems with your balance?",5:"Difficulties moving about indoors?",6:"Being clumsy?",7:"Stiffness?",8:"Heavy arms and/or legs?",9:"Tremor of your arms or legs?",10:"Spasms in your limbs?",11:"Your body not doing what you want it to do?",12:"Having to depend on others to do things for you?",13:"Limitations in your social and leisure activities at home?",14:"Being stuck at home more than you would like to be?",15:"Difficulties using your hands in everyday tasks?",16:"Having to cut down the amount of time you spent on work or other daily activities?",17:"Problems using transport (e.g. car, bus, train, taxi, etc.)?",18:"Taking longer to do things?",19:"Difficulty doing things spontaneously (e.g. going out on the spur of the moment)?",20:"Needing to go to the toilet urgently?",21:"Feeling unwell?",22:"Problems sleeping?",23:"Feeling mentally fatigued?",24:"Worries related to your MS?",25:"Feeling anxious or tense?",26:"Feeling irritable, impatient, or short tempered?",27:"Problems concentrating?",28:"Lack of confidence?",29:"Feeling depressed?"};
-el("msis_items").innerHTML='<div class="note" style="margin-bottom:8px">In the past two weeks - items 1&ndash;3: how much has your MS <b>limited your ability to</b>&hellip;; items 4&ndash;29: how much have you been <b>bothered by</b>&hellip;</div><div class="subhead">Physical impact (items 1–20)</div><div class="items">'+
+const MSIS_TEXT={1:"Demanding physical tasks",2:"Grip",3:"Carrying",4:"Balance",5:"Moving indoors",6:"Clumsiness",7:"Stiffness",8:"Heavy limbs",9:"Tremor",10:"Spasms",11:"Body control",12:"Dependence on others",13:"Social and leisure at home",14:"Stuck at home",15:"Hand use",16:"Time cut from work/daily tasks",17:"Transport",18:"Slowness",19:"Spontaneity",20:"Toilet urgency",21:"Feeling unwell",22:"Sleep",23:"Mental fatigue",24:"MS worries",25:"Anxiety or tension",26:"Irritability",27:"Concentration",28:"Confidence",29:"Low mood"};  // v28: topic labels only; MSIS-29 wording (© University of Plymouth) not reproduced
+el("msis_items").innerHTML='<div class="note" style="margin-bottom:8px">Item wording is not reproduced here (MSIS-29 &copy; University of Plymouth). Enter each answer from your copy of the official form; the labels are short topic reminders only. Response scale 1&ndash;5.</div><div class="subhead">Physical impact (items 1–20)</div><div class="items">'+
   MSIS_PHYS.map(i=>_scaleRow("msis_",i,MSIS_TEXT[i],[[1,"Not at all"],[2,"A little"],[3,"Moderately"],[4,"Quite a bit"],[5,"Extremely"]],"calcMSIS")).join("")+
   '</div><div class="subhead">Psychological impact (items 21–29)</div><div class="items">'+
   MSIS_PSY.map(i=>_scaleRow("msis_",i,MSIS_TEXT[i],[[1,"Not at all"],[2,"A little"],[3,"Moderately"],[4,"Quite a bit"],[5,"Extremely"]],"calcMSIS")).join("")+'</div>';
@@ -2398,7 +2326,9 @@ function calcEDSSage(){ const e=el("edss_v").value, ag=_num(el("edss_age").value
   else if(dur==null && ag!=null) html+='<div class="note">Enter disease duration (years since first symptoms) to also get the MSSS - severity compared with people who have had MS for the same number of years.</div>';
   el("edss_out").innerHTML=html; }
 let GUIDED=false, GSTEP=0;
-const GFLOW=[["edss","EDSS & age"],["pdds","Disability (PDDS)"],["msws","Walking (MSWS-12)"],["fesi","Falls concern (FES-I)"],["mfis","Fatigue (MFIS)"],["promiscog","Thinking & memory (PROMIS Cog)"],["phq9","Mood - depression (PHQ-9)"],["gad7","Mood - anxiety (GAD-7)"],["promispain","Pain (PROMIS)"],["msis","Overall impact (MSIS-29)"],["msqol","Quality of life (MSQOL-54)"]];
+// v28: the guided patient flow uses only instruments whose wording may be shown (public domain or free to use).
+// MSWS-12, PROMIS Cog 4a, MSIS-29 and MSQOL-54 stay available in the Score Hub as number-entry tools.
+const GFLOW=[["edss","EDSS & age"],["pdds","Disability (PDDS)"],["fesi","Falls concern (FES-I)"],["mfis","Fatigue (MFIS)"],["smscreen","Symptoms (SymptoMScreen)"],["phq9","Mood - depression (PHQ-9)"],["gad7","Mood - anxiety (GAD-7)"],["promispain","Pain (0-10)"]];
 function openReport(){ const g=el("gnav"); if(g)g.style.display="none"; GUIDED=false; showTool('report'); renderChecklist(); }
 function startGuided(){ GUIDED=true; GSTEP=0; _gstep(); }
 function _gstep(){ showTool(GFLOW[GSTEP][0]); const g=el("gnav"); g.style.display="flex";
@@ -2415,6 +2345,7 @@ const GFLOW_META={
   pdds:{sub:"walking and disability, one step",min:1,done:()=>el('pdds_v').value!==""},
   msws:{sub:"how walking is affected, 12 items",min:2,done:()=>_cnt(readMSWS)>0},
   fesi:{sub:"concern about falling, 16 items",min:3,done:()=>_cnt(readFesi)>0},
+  smscreen:{sub:"common MS symptoms, 12 items",min:2,done:()=>_cnt(readSMS)>0},
   mfis:{sub:"fatigue impact, 21 items",min:4,done:()=>_cnt(readMFIS)>0},
   promiscog:{sub:"thinking and memory, 4 items",min:1,done:()=>_cnt(readPromisCog)>0},
   phq9:{sub:"low mood, 9 items",min:2,done:()=>_cnt(readPHQ)>0},
@@ -2707,7 +2638,7 @@ function calcBICAMS(){
   }
   if(have===0){ el("bicams_out").innerHTML=interp("neutral","Open the SDMT, CVLT-II and BVMT-R tools and enter the raw scores, plus the demographics above, then it computes here."); return; }
   const summary= zc>0 ? (imp+" of "+zc+" cognitive domain(s) impaired (z &le; -1.5).") : "Raw scores captured. Enter age, sex &amp; education above to get z-scores and impairment flags.";
-  el("bicams_out").innerHTML='<div class="subhead">BICAMS cognitive battery</div>'+rows+interp(imp>0?"warn":"good",summary)+'<div class="note">Norms (all peer-reviewed, regression-based or age-stratified): SDMT = Strober 2020 US (oral, age × sex × education) or Centofani 1975 (written, age-stratified, via Sheridan 2006). CVLT-II &amp; BVMT-R = <b>Parmenter 2010 MACFIMS</b> (MS-validated regression, primary). Marrie 2021 Canadian regression also computed in the individual tools (secondary). Impaired at z &le; &minus;1.5 per domain. Research use only.</div>'; }
+  el("bicams_out").innerHTML='<div class="subhead">BICAMS cognitive battery</div>'+rows+interp(imp>0?"warn":"good",summary)+'<div class="note">Norms (all peer-reviewed, regression-based or age-stratified): SDMT = Strober 2020 US (oral, age × sex × education) or Centofani 1975 (written, age-stratified, via Sheridan 2006). CVLT-II &amp; BVMT-R = <b>Parmenter 2010 MACFIMS</b> (MS-validated regression, primary). Marrie 2021 Canadian regression also computed in the individual tools (secondary). Impaired at z &le; &minus;1.5 per domain. Published norms can over-classify impairment in some groups (Marrie 2021); interpret z-scores with clinical context. They are not a diagnosis. Research use only.</div>'; }
 
 // ===== MSFC (arm 1/9HPT + leg T25FW + cognition SDMT) =====
 function calcPASAT(){ const p=_num(el("pasat_raw").value); if(p==null){el("pasat_out").innerHTML="";return;}
@@ -2777,12 +2708,7 @@ function clinReportPDF(){ var r=el("clin_out"); if(!r||!r.textContent.trim())ret
 <script>
 /* ===== Supplementary measures logic (isolated); functions global (hoisted) ===== */
 // ===== PROMIS Cognitive Abilities (4a) =====
-const COG_TEXT = {
-  1: "My mind has been as sharp as usual.",
-  2: "My memory has been as good as usual.",
-  3: "I have been able to keep track of what I was doing.",
-  4: "I have been able to think as fast as usual."
-};
+const COG_TEXT = {1:"Mental sharpness",2:"Memory",3:"Keeping track",4:"Thinking speed"};  // v28: topic labels only
 const COG_OPTS = [[1,"Not at all"],[2,"A little"],[3,"Somewhat"],[4,"Quite a bit"],[5,"Very much"]];
 
 el("promiscog_items").innerHTML = Array.from({length:4}, (_, k) => {
@@ -2881,26 +2807,9 @@ function calcPromisPain() {
 
 
 // ===== ABC Scale =====
-const ABC_TEXT = {
-  1: "...walk around the house?",
-  2: "...walk up or down stairs?",
-  3: "...bend over and pick up a slipper from the front of a closet floor?",
-  4: "...reach for a small can off a shelf at eye level?",
-  5: "...stand on your tip toes and reach for something above your head?",
-  6: "...stand on a chair and reach for something?",
-  7: "...sweep the floor?",
-  8: "...walk outside the house to a car parked in the driveway?",
-  9: "...get into or out of a car?",
-  10: "...walk across a parking lot to the mall?",
-  11: "...walk up or down a ramp?",
-  12: "...walk in a crowded mall where people rapidly walk past you?",
-  13: "...are bumped into by people as you walk through the mall?",
-  14: "...step onto or off of an escalator while you are holding onto a railing?",
-  15: "...step onto or off an escalator while holding onto parcels such that you cannot hold onto the railing?",
-  16: "...walk outside on icy sidewalks?"
-};
+const ABC_TEXT = {1:"Walk around the house",2:"Stairs",3:"Bend and pick up from floor",4:"Reach shelf at eye level",5:"Reach overhead on tiptoes",6:"Stand on a chair to reach",7:"Sweep the floor",8:"Walk outside to a car",9:"Get in or out of a car",10:"Cross a parking lot",11:"Ramp",12:"Crowded mall",13:"Bumped in a crowd",14:"Escalator, holding rail",15:"Escalator, hands full",16:"Icy sidewalks"};  // v28: topic labels only; ABC wording (© Myers 1995) not reproduced
 
-let abcHtml = '<div class="note" style="margin-bottom:8px">How confident are you that you will not lose your balance or become unsteady when you...</div>';
+let abcHtml = '<div class="note" style="margin-bottom:8px">Item wording is not reproduced here (ABC Scale &copy; 1995 Anita M. Myers). Enter each answer from your copy of the official form; the labels are short topic reminders only. Confidence 0&ndash;100%.</div>';
 for (let i = 1; i <= 16; i++) {
   let opts = '<option value="">- select -</option>';
   for (let c = 100; c >= 0; c -= 10) {
