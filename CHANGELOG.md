@@ -1,5 +1,10 @@
 # Changelog
 
+## v30 (2026-11-06): Neurostatus naming
+
+- "Neurostatus" is no longer used as a name for MSpectrum's own output, layout or exam: wording now says "standardized EDSS exam", "EDSS sheet" and "classic FS layout used on research and clinical-trial EDSS forms". Removed from page keywords and internal comments that described the sheet as a copy.
+- Kept on purpose: citations of Kappos 2011, the phrase "published Neurostatus conventions" (what the scoring follows), rule citations in messages and code, and the trademark and non-affiliation notices.
+
 ## v29 (2026-11-06): bug fixes, privacy and engine parity
 
 ### Fixes

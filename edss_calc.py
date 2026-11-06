@@ -24,7 +24,7 @@ Conventions:
 from typing import Optional, Dict, Any
 from dataclasses import dataclass
 
-ENGINE_VERSION = "MSpectrum scoring rules v3.2 (Neurostatus 04/10.2)"
+ENGINE_VERSION = "MSpectrum scoring rules v3.2 (Neurostatus conventions 04/10.2)"
 
 
 # ============================================================

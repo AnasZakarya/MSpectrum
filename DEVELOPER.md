@@ -53,10 +53,10 @@ PRIVACY-and-HIPAA.md  privacy / HIPAA-conscious usage guide
   and its explanation cannot drift apart. Clinical mode calls the same engine
   through `clinCalcEDSS`. `ENGINE_VERSION` is stamped on the Final Sheet, the
   exports and the "Scoring conventions" panel in About; bump it when a rule
-  changes. `edss_calc.py` mirrors the engine (116 unittest cases).
+  changes. `edss_calc.py` mirrors the engine (119 unittest cases; `tests/parity_check.py` locks JS-Python parity).
 - FS combination table (`_fsOnlyStep`, mirrored in `edss_calc._fs_only_step`):
-  the FS pattern alone never exceeds 5.0 ("EDSS steps 5.5 to 8.0 are
-  exclusively defined by the ability to ambulate", Neurostatus general rules)
+  the FS pattern alone never exceeds 5.0 (steps 5.5 to 8.0 depend on
+  ambulation alone, per the published Neurostatus conventions)
   and a FS 6 forces at least 6.0. Engine 3.2 fixed this (3.1 returned 5.5/6.0
   from FS alone). Verified against the Sen 2018 worked examples.
 - Ambulation Score 0 to 15 (`AS_FIXED_EDSS`, `AS_FLOOR_EDSS`, `AS_LABEL`);

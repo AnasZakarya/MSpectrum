@@ -2,7 +2,7 @@
 
 **MSpectrum** is a free, browser-based, privacy-first hub for the outcome measures used in multiple sclerosis. Everything is computed in your browser; nothing is uploaded or stored. It has four parts:
 
-- **AutoEDSSguide** (`index.html`): the full Neurostatus EDSS (Kappos 2011) with the algorithmic combination rules of Fouad et al. 2023, plus streamlined (Baldassari 2017) and patient-reported (Romeo 2021) fast modes, a print-ready Neurostatus sheet, and an OCR sheet scanner.
+- **AutoEDSSguide** (`index.html`): the full EDSS exam, scored with the published Neurostatus conventions (Kappos 2011) and the algorithmic combination rules of Fouad et al. 2023, plus streamlined (Baldassari 2017) and patient-reported (Romeo 2021) fast modes, a print-ready EDSS sheet in the standard FS layout used on research and clinical-trial forms, and an OCR sheet scanner.
 - **MS Score Hub** (`scores.html`): stateless calculators and full questionnaires for the cognition, fatigue, mood, walking, quality-of-life and disease-severity measures used alongside the EDSS, each with automatic published norms (z / T / percentile) and a plain-language interpretation.
 - **Check my MS** (`scores.html#report`): a guided, patient-facing pathway that walks through the self-report questionnaires and produces one plain-language summary of how MS is affecting the person, for understanding and discussion rather than diagnosis.
 - **MS Criteria Checker** (`mcdonald.html`): an adaptive wizard that applies the 2024 revisions of the McDonald criteria (Montalban et al., Lancet Neurol 2025) to reach an MS diagnosis across relapsing, progressive and RIS onset, covering the five DIS regions (incl. optic nerve), DIT, CSF (OCB / k-FLC) and susceptibility markers (CVS, PRL), with older-onset and mimic safeguards and a printable summary.
@@ -23,11 +23,11 @@ No installation. No login. Works in any modern browser.
 
 | Mode | For whom | What it is |
 |------|----------|------------|
-| **Roadmap** | Raters / research | Full Neurostatus exam, guided step-by-step in exam order (history, then cranial nerves, then body). |
-| **System view** | Raters | All 7 Functional Systems on one page, classic Neurostatus layout. |
+| **Roadmap** | Raters / research | Full standardized EDSS exam, guided step-by-step in exam order (history, then cranial nerves, then body). |
+| **System view** | Raters | All 7 Functional Systems on one page, in the classic FS layout used on research EDSS forms. |
 | **Clinical EDSS** | Neurologists | Fast adaptive follow-up scoring (streamlined sEDSS, Baldassari 2017). |
 | **Quick Check** | People with MS | Plain-language adaptive questionnaire (~14 questions, ePR-EDSS / Romeo 2021) to self-estimate EDSS. |
-| **Sheet Scanner** | Raters | Upload or photograph a completed Neurostatus form; fields are OCR-extracted and scored. |
+| **Sheet Scanner** | Raters | Upload or photograph a completed EDSS scoring sheet (standard research layout); fields are OCR-extracted and scored. |
 
 All modes compute through a **single shared engine**, so the header, roadmap, printed sheet, and scanner always produce identical EDSS values.
 
