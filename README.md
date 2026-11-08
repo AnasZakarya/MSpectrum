@@ -40,14 +40,14 @@ Stateless calculators and full questionnaires. Results show the raw score and, w
 | Domain | Instruments | Standardized output (source) |
 |--------|-------------|------------------------------|
 | Disability & severity | EDSS, PDDS, **ARMSS / MSSS** | severity vs peers by age / disease duration (Manouchehrinia 2017; Roxburgh 2005) |
-| Cognition (BICAMS) | SDMT, CVLT-II, BVMT-R, **BICAMS** panel | auto z + impairment (z ≤ −1.5): oral SDMT US norms (Strober 2020); written SDMT regression norms (Fellows & Schmitter-Edgecombe 2020, ages 18-91); CVLT-II/BVMT-R regression norms (Marrie 2021, ages 18-65); BVMT-R Delayed-Recall T and CVLT-II LDFR T (Parmenter 2010) |
+| Cognition (BICAMS) | SDMT, CVLT-II, BVMT-R, **BICAMS** panel | auto z + impairment (z ≤ −1.5): oral SDMT US norms (Strober 2020) and reliable change between visits (Strober 2022); written SDMT regression norms (Fellows & Schmitter-Edgecombe 2020, ages 18-91); CVLT-II/BVMT-R regression norms (Marrie 2021, ages 18-65); BVMT-R Delayed-Recall T and CVLT-II LDFR T (Parmenter 2010) |
 | Cognition (other) | PASAT-3 | z vs NMSS Task Force (Fischer 2001) |
 | Motor / function | T25FW, 9-HPT, **MSFC**, **TUG**, **2MWT** | z & composite vs NMSS Task Force (Fischer 2001); TUG and 2MWT with published MS reference values (Kalron 2017; Nilsagård 2007; Scalzitti 2018) |
 | Fatigue | MFIS (≈38), FSS (≥4) | clinical cut-offs |
 | Mood | PHQ-9, GAD-7 | validated severity bands (+ PHQ-9 item-9 safety prompt) |
 | Walking | MSWS-12 | 0–100 transform |
 | Quality of life / impact | MSQOL-54, PROMIS-29 v2.1, PROMIS Cognitive Function 4a, MSIS-29 | MSQOL composites; PROMIS raw sums per domain (T-score tables not included); 0–100 transforms |
-| Symptoms (MSQLI, NMSS 1997) | **Pain Effects Scale, Bladder Control Scale, Bowel Control Scale, Impact of Visual Impairment Scale** | summed scores as in the MSQLI manual (Ritvo et al. 1997) |
+| MSQLI scales (NMSS 1997) | **Pain Effects Scale, Bladder Control Scale, Bowel Control Scale, Impact of Visual Impairment Scale, Sexual Satisfaction Scale, Perceived Deficits Questionnaire (PDQ-20 and PDQ-5), Mental Health Inventory (MHI-18), MOS Modified Social Support Survey** | totals and subscales scored exactly as in the MSQLI manual (Ritvo et al. 1997) |
 
 Extras: demographics entered once drive the cognitive z-scores; CVLT-II recognition sub-scores (SDFR, LDFR, d′, discriminability, Forced-Choice validity); a guided **Check my MS** patient pathway with a plain-language report; a **Clinician summary** that compiles all entered tools; out-of-range input flagging; unanswered-item highlighting; an **"ℹ How it works"** helper on every tool; **Export JSON / CSV** per tool. Self-report questionnaires can be filled by the patient; performance tests and composites are clinician-administered.
 
@@ -114,7 +114,7 @@ In short: you are free to use, study, share and modify MSpectrum, but any distri
 
 The AGPL-3.0 licence covers MSpectrum's own code, algorithms and interface - **not** the third-party clinical instruments it scores. Each instrument remains the property of its authors/publishers and is used here for research and educational purposes:
 
-- **Item wording shown in full, with citation** (public domain or free to use): PHQ-9, GAD-7 (Pfizer, no permission required), MFIS (public domain), PDDS (not copyrighted; provided by the NARCOMS Registry), SymptoMScreen (free to use), FES-I (free when referenced), the MSQLI symptom scales (NMSS 1997 manual) and the 0-10 pain rating. See [LICENSES-INSTRUMENTS.md](LICENSES-INSTRUMENTS.md) for one row per instrument.
+- **Item wording shown in full, with citation** (public domain or free to use): PHQ-9, GAD-7 (Pfizer, no permission required), MFIS (public domain), PDDS (not copyrighted; provided by the NARCOMS Registry), SymptoMScreen (free to use), FES-I (free when referenced), the MSQLI scales (NMSS 1997 manual, provided for photocopying and use) and the 0-10 pain rating. See [LICENSES-INSTRUMENTS.md](LICENSES-INSTRUMENTS.md) for one row per instrument.
 - **Number-entry only, item wording not reproduced** (copyrighted; short topic labels only): FSS, MSQOL-54, ABC, MSWS-12, MSIS-29, PROMIS-29 and PROMIS Cognitive Function 4a, plus the licensed performance tests SDMT, BVMT-R, CVLT-II, LCVA/Sloan and FSMC. Enter answers from your own copy of the official form.
 
 PROMIS T-scores are not computed: HealthMeasures holds copyright in the scoring tables, so MSpectrum shows raw sums only until written permission is given. PROMIS® is a registered trademark of the U.S. Department of Health and Human Services. BVMT-R and CVLT-II norms come from peer-reviewed papers (Parmenter 2010; Marrie 2021), not from the test manuals. If you reuse MSpectrum, you are responsible for complying with each instrument's own terms.

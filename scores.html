@@ -609,11 +609,16 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
     <div class="note" style="margin-top:2px"><b>What is a norm?</b> It compares this score with results from a large group of similar people - matched for age, sex and education (a process called <b>standardisation</b>). That turns the raw number into a <b>z-score</b>: about 0 = average for similar people, below 0 = below average, and z &le; -1.5 is the impaired range. Enter the details below so the comparison can be made.</div>
     <div class="row">
       <div class="fld"><label>Version</label><select id="sdmt_ver" oninput="calcSDMT()"><option value="oral">Oral</option><option value="written">Written</option></select></div>
-      <div class="fld"><label>Age (years) <span class="hint">18&ndash;74 oral; 18&ndash;91 written</span></label><input type="number" id="sdmt_age" min="18" max="90" oninput="calcSDMT()"></div>
+      <div class="fld"><label>Age (years) <span class="hint">18&ndash;74 oral; 18&ndash;91 written</span></label><input type="number" id="sdmt_age" min="18" max="91" oninput="calcSDMT()"></div>
       <div class="fld"><label>Sex</label><select id="sdmt_sex" oninput="calcSDMT()"><option value="">- select -</option><option value="M">Male</option><option value="F">Female</option></select></div>
       <div class="fld"><label>Education (years)</label><input type="number" id="sdmt_edu" min="0" max="25" oninput="calcSDMT()" placeholder="e.g. 16"></div>
     </div>
     <div class="note">Oral: z by age/sex/education (Strober 2020, ages 18-74). Written: z by age/sex/education (Fellows 2020 regression norms, ages 18-91). No reference numbers needed.</div>
+    <div class="subhead">Change from a previous visit (optional, oral version)</div>
+    <div class="row">
+      <div class="fld"><label>Previous oral SDMT</label><input type="number" id="sdmt_prev" min="0" max="110" oninput="calcSDMT()"></div>
+      <div class="fld"><label>Time between tests</label><select id="sdmt_int" oninput="calcSDMT()"><option value="6">About 6 months</option><option value="12">About 1 year</option></select></div>
+    </div>
     <div class="result" id="sdmt_out"></div>
     <details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div>
 <b>Raw score:</b> Correct symbol-to-digit substitutions in 90 seconds (range 0&ndash;110). Higher = better processing speed.<br>
@@ -1297,7 +1302,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="ref-item"><span class="ref-name">PHQ-9</span><span class="ref-cite">Kroenke K, Spitzer RL, Williams JBW. <em>J Gen Intern Med</em> 2001;16(9):606&ndash;13. Public domain (Pfizer).</span></div>
     <div class="ref-item"><span class="ref-name">GAD-7</span><span class="ref-cite">Spitzer RL, Kroenke K, Williams JBW, L&ouml;we B. <em>Arch Intern Med</em> 2006;166(10):1092&ndash;7. Public domain (Pfizer).</span></div>
     <div class="ref-cat">Supplementary measures (balance, falls, vision, pain, cognition &amp; mood)</div>
-    <div class="ref-item"><span class="ref-name">PROMIS Cog 4a</span><span class="ref-cite">Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. HealthMeasures, PROMIS scoring manual (Northwestern Univ.).</span></div>
+    <div class="ref-item"><span class="ref-name">PROMIS Cog 4a</span><span class="ref-cite">Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. PROMIS Cognitive Function Abilities 4a; raw sum only (T-score tables not included).</span></div>
     <div class="ref-item"><span class="ref-name">PROMIS Pain Intensity</span><span class="ref-cite">Amtmann D et al. <em>Pain</em> 2010;150(1):173&ndash;82 (Global07 / NRS-11). NRS bands (mild 1&ndash;4, moderate 5&ndash;6, severe 7&ndash;10): Serlin RC, Mendoza TR, Nakamura Y, Edwards KR, Cleeland CS. <em>Pain</em> 1995;61(2):277&ndash;84.</span></div>
     <div class="ref-item"><span class="ref-name">ABC Scale</span><span class="ref-cite">Powell LE, Myers AM. <em>J Gerontol A Biol Sci Med Sci</em> 1995;50A(1):M28&ndash;34. 67% fall-risk cut-off: Lajoie Y, Gallagher SP. <em>Arch Gerontol Geriatr</em> 2004;38(1):11&ndash;26.</span></div>
     <div class="ref-item"><span class="ref-name">FES-I</span><span class="ref-cite">Yardley L, Beyer N, Hauer K, Kempen G, Piot-Ziegler C, Todd C. <em>Age Ageing</em> 2005;34(6):614&ndash;9. Cut-points: Delbaere K, Close JCT, Mikolaizak AS, Sachdev PS, Brodaty H, Lord SR. <em>Age Ageing</em> 2010;39(2):210&ndash;6.</span></div>
@@ -1320,7 +1325,10 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="ref-item"><span class="ref-name">MSIS-29</span><span class="ref-cite">Hobart J, Lamping D, Fitzpatrick R, Riazi A, Thompson A. <em>Brain</em> 2001;124(Pt 5):962&ndash;73. Meaningful change (about 8 points, physical): Costelloe L, O'Rourke K, Kearney H et al. <em>J Neurol Neurosurg Psychiatry</em> 2007;78(8):841&ndash;4.</span></div>
     <div class="ref-item"><span class="ref-name">PDDS</span><span class="ref-cite">Hohol MJ, Orav EJ, Weiner HL. <em>Neurology</em> 1995;45(2):251&ndash;5. Self-report version: Marrie RA, Goldman M. <em>Mult Scler</em> 2007;13(9):1176&ndash;82. Validation against EDSS: Learmonth YC et al. <em>BMC Neurol</em> 2013;13:37. The PDDS is provided for use by the NARCOMS Registry (www.narcoms.org/pdds). NARCOMS is supported in part by the Consortium of Multiple Sclerosis Centers (CMSC) and the CMSC Foundation.</span></div>
     <div class="ref-item"><span class="ref-name">MSQOL-54</span><span class="ref-cite">Vickrey BG, Hays RD, Harooni R, Myers LW, Ellison GW. <em>Qual Life Res</em> 1995;4(3):187&ndash;206. &copy; 1995 UCLA; item wording not reproduced.</span></div>
-    <div class="ref-item"><span class="ref-name">PROMIS-29</span><span class="ref-cite">Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. PROMIS-29 Profile v2.1; raw&rarr;T tables from the PROMIS Adult Profile Scoring Manual, HealthMeasures (Northwestern University).</span></div>
+    <div class="ref-item"><span class="ref-name">PROMIS-29</span><span class="ref-cite">Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. PROMIS-29 Profile v2.1. MSpectrum shows raw sums only; official T-scores need the HealthMeasures scoring tables, which are not included. PROMIS&reg; is a registered trademark of the U.S. Department of Health and Human Services.</span></div>
+    <div class="ref-item"><span class="ref-name">MSQLI scales</span><span class="ref-cite">Ritvo PG, Fischer JS, Miller DM, Andrews H, Paty DW, LaRocca NG. <em>Multiple Sclerosis Quality of Life Inventory: A User&rsquo;s Manual</em>. New York: National Multiple Sclerosis Society; 1997 (PES, BLCS, BWCS, IVIS, SSS, PDQ, MHI-18, MSSS: items and scoring as in the manual). Field test: Fischer JS et al. <em>Mult Scler</em> 1999;5(4):251&ndash;9. PDQ: Sullivan MJL, Edgley K, Dehoux E. <em>Can J Rehabil</em> 1990;4:99&ndash;105. MHI: Veit CT, Ware JE. <em>J Consult Clin Psychol</em> 1983;51(5):730&ndash;42. MOS Social Support Survey: Sherbourne CD, Stewart AL. <em>Soc Sci Med</em> 1991;32(6):705&ndash;14. Not affiliated with or endorsed by the National MS Society.</span></div>
+    <div class="ref-item"><span class="ref-name">TUG</span><span class="ref-cite">Podsiadlo D, Richardson S. <em>J Am Geriatr Soc</em> 1991;39(2):142&ndash;8. MS values: Kalron A et al. <em>Eur J Phys Rehabil Med</em> 2017;53(6):841&ndash;7; Nilsag&aring;rd Y et al. <em>Physiother Res Int</em> 2007;12(2):105&ndash;14; Quinn G et al. <em>Clin Rehabil</em> 2019;33(2):317&ndash;26.</span></div>
+    <div class="ref-item"><span class="ref-name">2MWT</span><span class="ref-cite">Scalzitti DA et al. <em>Int J MS Care</em> 2018;20(4):158&ndash;63.</span></div>
     <p style="font-size:12px;color:var(--ink-faint);margin-top:12px">Proprietary instruments (BVMT-R, CVLT-II, SDMT) are scored from entered numeric results only; their stimuli and norm tables are not reproduced here.</p>
   </details></section>
 
@@ -1538,6 +1546,10 @@ const TOOLS=[
   {id:"blcs", ic:"🚻", name:"BLCS", tag:"Bladder control (MSQLI)", desc:"Bladder Control Scale: 4 items, 0-22."},
   {id:"bwcs", ic:"🚻", name:"BWCS", tag:"Bowel control (MSQLI)", desc:"Bowel Control Scale: 5 items, 0-26."},
   {id:"ivis", ic:"👁️", name:"IVIS", tag:"Visual impact (MSQLI)", desc:"Impact of Visual Impairment Scale: 5 items, 0-15."},
+  {id:"sss", ic:"💞", name:"SSS", tag:"Sexual satisfaction (MSQLI)", desc:"Sexual Satisfaction Scale: 4 items after a partner question, 4-24."},
+  {id:"pdq", ic:"🧠", name:"PDQ", tag:"Perceived cognition (MSQLI)", desc:"Perceived Deficits Questionnaire: 20 items, 0-80, with 4 subscales and PDQ-5."},
+  {id:"mhi", ic:"🌤️", name:"MHI-18", tag:"Mental health (MSQLI)", desc:"Mental Health Inventory: 18 items, total and 4 subscales, 0-100."},
+  {id:"msss", ic:"🤝", name:"MSSS", tag:"Social support (MSQLI)", desc:"MOS Modified Social Support Survey: 18 items, 4 subscales, 0-100."},
   {id:"lcva", ic:"👁️", name:"LCVA Sloan Letters", tag:"Visual Function", desc:"Low-Contrast Visual Acuity (0 to 70 letters correct for Sloan 2.5% and 1.25%)."},
   {id:"mas", ic:"💪", name:"Modified Ashworth", tag:"Spasticity · muscle tone", desc:"Modified Ashworth Scale: clinician-rated muscle tone (0-4) for key muscle groups."},
   {id:"arr", ic:"🔁", name:"ARR", tag:"Relapse rate", desc:"Annualized Relapse Rate (relapses per year)."},
@@ -1575,6 +1587,7 @@ function goBack(){ if(RETURN_TO){ var t=RETURN_TO; RETURN_TO=null; showTool(t); 
 function showHome(){GUIDED=false;RETURN_TO=null;try{document.body.classList.remove("patient-flow");}catch(e){}var g=el("gnav");if(g)g.style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("home").style.display="block";var _bs=document.getElementById('brandSub');if(_bs)_bs.textContent='MS Score Hub';setTimeout(function(){window.scrollTo({top:window._hubSY||0,behavior:"smooth"});},20);}
 function showTool(id){try{document.body.classList.toggle("patient-flow", !!(GUIDED||RETURN_TO==="report"));}catch(e){} if(el("home").style.display!=="none"){window._hubSY=window.scrollY;}var cur=document.querySelector(".panel.active");function _sw(){el("home").style.display="none";document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active","panel-exit"));el("p_"+id).classList.add("active");var _bs=document.getElementById('brandSub');if(_bs)_bs.textContent=(id==='report'?'Check my MS':((_TMAP[id]&&_TMAP[id].name)||'MS Score Hub'));if(id!=="report"){var bk=document.querySelector("#p_"+id+" .tool-back");if(bk){var nm={bicams:"BICAMS",msfc:"MSFC",report:"Check my MS"};bk.textContent=(RETURN_TO&&nm[RETURN_TO])?("← Back to "+nm[RETURN_TO]):"← Back to Score Hub";}}try{if(id==="bicams")calcBICAMS();else if(id==="msfc")calcMSFC();}catch(e){}window.scrollTo({top:0,behavior:"smooth"});}if(cur){cur.classList.add("panel-exit");setTimeout(_sw,130);}else{_sw();}}
 (function(){if(typeof document==="undefined")return;var mk=function(){if(document.getElementById("scroll-top-btn"))return;var btn=document.createElement("button");btn.id="scroll-top-btn";btn.className="no-print";btn.textContent="\u2191 Top";btn.setAttribute("aria-label","Scroll to top");btn.style.cssText="position:fixed;bottom:20px;right:20px;z-index:200;display:none;padding:10px 14px;border:none;border-radius:24px;background:#1e4a6e;color:#ffffff;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);";btn.onclick=function(){window.scrollTo({top:0,behavior:"smooth"});};document.body.appendChild(btn);window.addEventListener("scroll",function(){btn.style.display=window.scrollY>300?"block":"none";},{passive:true});};if(document.body)mk();else document.addEventListener("DOMContentLoaded",mk);})();
+function _ord(n){ const v=Math.round(+n), t=v%100; return v+((t>=11&&t<=13)?"th":(["th","st","nd","rd"][v%10]||"th")); }
 function interp(cls,txt){ return '<div class="interp '+cls+'">'+txt+'</div>'; }
 function _zPlain(z){ return z<=-1.5?"In plain terms: this is in the <b>impaired range</b> - clearly below what is typical for similar people; worth discussing with the clinician.":z<=-1?"In plain terms: a little <b>below average</b> (borderline) - not clearly impaired, but worth keeping an eye on.":z<-0.5?"In plain terms: <b>broadly average</b> - reassuring.":"In plain terms: <b>average or above</b> for similar people - reassuring."; }
 function _flagBlanks(p,a,b){ for(var i=a;i<=b;i++){var e=el(p+i); if(e){ if(e.value==="") e.classList.add("blank"); else e.classList.remove("blank"); }} }
@@ -1624,13 +1637,13 @@ const _TMAP=Object.fromEntries(TOOLS.map(t=>[t.id,t]));
 const GROUPS=[
  {name:"Disability &amp; severity", sub:"Overall disability, and how it compares to others (ARMSS / MSSS).", ids:["edss","pdds"]},
  {name:"Disease activity &amp; progression", sub:"Relapse rate, confirmed EDSS progression and NEDA status - computed, no questionnaire.", ids:["arr","cdp","neda"]},
- {name:"Cognition - BICAMS battery", sub:"Clinician-administered. Processing speed + verbal &amp; visual memory; impaired at z &le; -1.5.", ids:["bicams","sdmt","cvlt","bvmt","pasat","promiscog"]},
+ {name:"Cognition - BICAMS battery", sub:"Clinician-administered tests: processing speed + verbal &amp; visual memory; impaired at z &le; -1.5. PROMIS Cognitive 4a and PDQ are self-report.", ids:["bicams","sdmt","cvlt","bvmt","pasat","promiscog","pdq"]},
  {name:"Fatigue", sub:"Self-report.", ids:["mfis","fss","fsmc"]},
- {name:"Mood", sub:"Self-report screens.", ids:["phq9","gad7"]},
- {name:"Symptom burden", sub:"Self-report of MS symptom severity and impact (SymptoMScreen; MSQLI pain, bladder, bowel and vision scales).", ids:["smscreen","pes","blcs","bwcs","ivis"]},
+ {name:"Mood", sub:"Self-report screens and the MSQLI Mental Health Inventory.", ids:["phq9","gad7","mhi"]},
+ {name:"Symptom burden", sub:"Self-report of MS symptom severity and impact (SymptoMScreen; MSQLI pain, bladder, bowel, vision and sexual satisfaction scales).", ids:["smscreen","pes","blcs","bwcs","ivis","sss"]},
  {name:"Spasticity &amp; tone", sub:"Clinician-rated muscle tone on the Modified Ashworth Scale.", ids:["mas"]},
  {name:"Walking &amp; motor function", sub:"MSWS-12 is self-report; T25FW, 9-HPT, 6MWT, 2MWT &amp; TUG are clinician-administered.", ids:["msws","t25fw","nhpt","sixmwt","twomwt","tug","abc","fesi","lcva"]},
- {name:"Quality of life &amp; impact", sub:"Self-report.", ids:["msqol","promis","msis","promispain"]},
+ {name:"Quality of life &amp; impact", sub:"Self-report.", ids:["msqol","promis","msis","promispain","msss"]},
  {name:"Composite - MSFC", sub:"Arm + leg + cognition combined into one z-score (needs reference values).", ids:["msfc"]},
  {name:"Conversion &amp; bulk tools", sub:"Convert a whole spreadsheet of raw answers into finished scores at once - totals, subscales and norm-based scores. Works with any dataset (REDCap export, Excel, or manual entry).", ids:["batch"]}
 ];
@@ -1642,6 +1655,7 @@ el("toolgrid").innerHTML = GROUPS.map(g=> _ghead(g.name,g.sub) + g.ids.map(id=>_
 // Paty DW, LaRocca NG. Multiple Sclerosis Quality of Life Inventory: A User's Manual. New York:
 // National Multiple Sclerosis Society; 1997 (forms provided for photocopying and use).
 const _F4=[[0,"Not at all"],[1,"Once"],[2,"Two to four times"],[3,"More than weekly but not daily"],[4,"Daily"]];
+const _SAT6=[[1,"Extremely Satisfied"],[2,"Moderately Satisfied"],[3,"Slightly Satisfied"],[4,"Slightly Dissatisfied"],[5,"Moderately Dissatisfied"],[6,"Extremely Dissatisfied"]];
 const _N10=[[0,"0 Not at all"],[1,"1"],[2,"2"],[3,"3"],[4,"4"],[5,"5"],[6,"6"],[7,"7"],[8,"8"],[9,"9"],[10,"10 Severely"]];
 const MSQLI_SCALES={
  pes:{name:"MOS Pain Effects Scale (PES)", min:6, max:30, hi:"greater impact of pain on mood and behavior",
@@ -1659,24 +1673,69 @@ const MSQLI_SCALES={
   stem:"During the past 4 weeks, how often have you...",
   items:["been constipated?","lost control of your bowels or had an accident?","almost lost control of your bowels or almost had an accident?","altered your activities because of bowel control problems?","During the past 4 weeks, how much have bowel problems restricted your overall lifestyle?"],
   itemOpts:{5:_N10}, opts:_F4},
+ sss:{name:"Sexual Satisfaction Scale (SSS)", min:4, max:24, hi:"greater problems with sexual satisfaction",
+  instr:"The next series of questions concerns your intimate relationships and your satisfaction with your sex life. Many of these questions are very personal, but this is an important topic to cover. Please answer every question. If you are not sure which answer to select, please choose the one answer that comes closest to describing you.",
+  stem:"",
+  items:["Do you have a relationship with one primary partner?","During the past 4 weeks, how satisfied have you been with the amount of affection expressed physically in your relationship?","During the past 4 weeks, how satisfied have you been with the variety of sexual activities you engage in with your partner?","During the past 4 weeks, how satisfied have you been with your sexual relationship in general?","How satisfied do you think your partner has been with your sexual relationship in general, during the past 4 weeks?"],
+  itemOpts:{1:[[0,"No"],[1,"Yes"]]}, opts:_SAT6,
+  scoring:"items 2&ndash;5 are summed (range 4&ndash;24); higher scores indicate greater problems with sexual satisfaction. Item 1 is a filter: with no primary partner the scale is skipped.",
+  custom:function(v){ if(v[0]===0) return {done:true, html:interp("neutral","No primary partner: the manual skips this scale, so no score is computed.")};
+    const it=v.slice(1); if(v[0]==null||it.some(x=>x==null)) return null; const t=it.reduce((a,b)=>a+b,0);
+    return {done:true, html:_msqliBig(t,24)+interp("neutral","Total "+t+" (range 4&ndash;24); higher scores indicate greater problems with sexual satisfaction.")}; }},
  ivis:{name:"Impact of Visual Impairment Scale (IVIS)", min:0, max:15, hi:"greater impact of visual problems on daily activities",
   instr:"The following questions concern your vision and how any visual problems have affected your ability to do your daily activities. Please circle the appropriate response based on how your vision has been during the past 4 weeks.",
   stem:"During the past 4 weeks, how difficult did you find it to...",
   items:["read or access personal letters or notes?","read or access printed materials, such as books, magazines, newspaper, etc.?","read or access dials, such as on stoves, thermostats, etc.?","watch television or identify faces from a distance?","identify house numbers, street signs, etc.?"],
-  opts:[[0,"Not at all difficult"],[1,"Somewhat difficult"],[2,"Extremely difficult"],[3,"Could not do due to visual problems"]]}
+  opts:[[0,"Not at all difficult"],[1,"Somewhat difficult"],[2,"Extremely difficult"],[3,"Could not do due to visual problems"]]},
+ pdq:{name:"Perceived Deficits Questionnaire (PDQ)", min:0, max:80, hi:"greater perceived cognitive impairment",
+  instr:"Everyone at some point experiences problems with memory, attention, or concentration, but these problems may occur more frequently for individuals with neurologic diseases like MS. The following questions describe several situations in which a person may encounter problems with memory, attention or concentration. Please circle the appropriate response based on your cognitive function during the past 4 weeks. Please answer every question. If you are not sure which answer to select, please choose the one answer that comes closest to describing you.",
+  stem:"During the past 4 weeks, how often did you...",
+  items:["lose your train of thought when speaking?","have difficulty remembering the names of people, even ones you have met several times?","forget what you came into the room for?","have trouble getting things organized?","have trouble concentrating on what people are saying during a conversation?","forget if you had already done something?","miss appointments and meetings you had scheduled?","have difficulty planning what to do in the day?","have trouble concentrating on things like watching a television program or reading a book?","forget what you did the night before?","forget the date unless you looked it up?","have trouble getting started, even if you had a lot of things to do?","find your mind drifting?","forget what you talked about after a telephone conversation?","forget to do things like turn off the stove or turn on your alarm clock?","feel like your mind went totally blank?","have trouble holding phone numbers in your head, even for a few seconds?","forget what you did last weekend?","forget to take your medication?","have trouble making decisions?"],
+  opts:[[0,"Never"],[1,"Rarely"],[2,"Sometimes"],[3,"Often"],[4,"Almost always"]],
+  note:"Item 19: if you take no medications, choose 0.",
+  scoring:"total = sum of all 20 items (0&ndash;80). Subscales (0&ndash;20 each): Attention/Concentration items 1, 5, 9, 13, 17; Retrospective Memory 2, 6, 10, 14, 18; Prospective Memory 3, 7, 11, 15, 19; Planning/Organization 4, 8, 12, 16, 20. PDQ-5 = items 4, 9, 11, 14, 16 (0&ndash;20). Higher = greater perceived impairment. The MSQLI field test did not confirm the 4-subscale structure, so interpret subscales with caution.",
+  custom:function(v){ if(v.some(x=>x==null)) return null; const sm=a=>a.reduce((t,i)=>t+v[i-1],0); const tot=sm([...Array(20)].map((_,k)=>k+1));
+    const sub=[["Attention/Concentration",[1,5,9,13,17]],["Retrospective Memory",[2,6,10,14,18]],["Prospective Memory",[3,7,11,15,19]],["Planning/Organization",[4,8,12,16,20]],["PDQ-5",[4,9,11,14,16]]];
+    return {done:true, html:_msqliBig(tot,80)+'<div class="chips">'+sub.map(x=>'<span class="chip">'+x[0]+' <b>'+sm(x[1])+'</b>/20</span>').join("")+'</div>'+interp("neutral","Total "+tot+" (range 0&ndash;80); higher scores indicate greater perceived cognitive impairment. Self-report may differ from tested cognition; use with an objective test such as the SDMT.")}; }},
+ mhi:{name:"Mental Health Inventory (MHI-18)", min:0, max:100, hi:"better mental health",
+  instr:"The next set of questions are about how you feel, and how things have been for you during the past 4 weeks. Please answer every question. If you are not sure which answer to select, please choose the one answer that comes closest to describing you.",
+  stem:"During the past 4 weeks, how much of the time...",
+  items:["has your daily life been full of things that were interesting to you?","did you feel depressed?","have you felt loved and wanted?","have you been a very nervous person?","have you been in firm control of your behavior, thoughts, emotions, feelings?","have you felt tense or high-strung?","have you felt calm and peaceful?","have you felt emotionally stable?","have you felt downhearted and blue?","were you able to relax without difficulty?","have you felt restless, fidgety, or impatient?","have you been moody, or brooded about things?","have you felt cheerful, light-hearted?","have you been in low or very low spirits?","were you a happy person?","did you feel you had nothing to look forward to?","have you felt so down in the dumps that nothing could cheer you up?","have you been anxious or worried?"],
+  opts:[[1,"All of the time"],[2,"Most of the time"],[3,"A good bit of the time"],[4,"Some of the time"],[5,"A little bit of the time"],[6,"None of the time"]],
+  partial:true,
+  scoring:"items 1, 3, 5, 7, 8, 10, 13 and 15 are reversed (1&rarr;6 &hellip; 6&rarr;1). Each score = (mean item score &minus; 1) &times; 100 / 5, range 0&ndash;100, higher = better mental health. Total: all 18 items, not computed if more than 9 are skipped. Subscales, not computed if more than 2 items are skipped: Anxiety 4, 6, 10, 11, 18; Depression 2, 9, 12, 14; Behavioral Control 5, 8, 16, 17; Positive Affect 1, 7, 13, 15. Item 3 counts only in the total.",
+  custom:function(v){ const R=[1,3,5,7,8,10,13,15]; const val=i=>{ const x=v[i-1]; return x==null?null:(R.includes(i)?7-x:x); };
+    const sc=(ids,maxMiss)=>{ const a=ids.map(val).filter(x=>x!=null); if(ids.length-a.length>maxMiss) return null; const m=a.reduce((t,x)=>t+x,0)/a.length; return (m-1)*100/5; };
+    const all=[...Array(18)].map((_,k)=>k+1); const tot=sc(all,9);
+    const sub=[["Anxiety",[4,6,10,11,18]],["Depression",[2,9,12,14]],["Behavioral Control",[5,8,16,17]],["Positive Affect",[1,7,13,15]]];
+    const f=x=>x==null?"n/c":x.toFixed(1); const miss=v.filter(x=>x==null).length;
+    if(tot==null) return {done:false, html:interp("neutral","Answered "+(18-miss)+"/18. The total needs at least 9 items.")};
+    return {done:miss===0, html:'<div class="scoreline"><div class="bigscore">'+f(tot)+'<small> / 100</small></div></div><div class="chips">'+sub.map(x=>'<span class="chip">'+x[0]+' <b>'+f(sc(x[1],2))+'</b></span>').join("")+'</div>'+interp("neutral","MHI-18 total "+f(tot)+" (0&ndash;100); higher scores indicate better mental health."+(miss?" Computed from "+(18-miss)+" answered items; n/c = subscale not computed (more than 2 items skipped).":""))}; }},
+ msss:{name:"MOS Modified Social Support Survey (MSSS)", min:0, max:100, hi:"greater perceived support",
+  instr:"People sometimes look to others for companionship, assistance, or other types of support. This questionnaire covers the types of support that would be available to you if you needed it. Please circle the appropriate response based on the support available to you during the past 4 weeks. Please answer every question. If you are not sure which answer to select, please choose the one answer that comes closest to describing you.",
+  stem:"How often is someone available...",
+  items:["to help you if you are confined to bed?","to listen to you when you need to talk?","to give you good advice about a crisis?","to take you to the doctor if you need to go?","to show you love and affection?","to have a good time with?","to give you information to help you understand a situation?","to confide in or talk to about yourself or your problems?","to hug you?","to get together with for relaxation?","to prepare your meals if you are unable to do it yourself?","whose advice you really want?","to help with daily chores if you are sick?","to share your private worries and fears with?","to turn to for suggestions about how to deal with a personal problem?","to do something enjoyable with?","to understand your problems?","to love and make you feel wanted?"],
+  opts:[[1,"None of the time"],[2,"A little of the time"],[3,"Some of the time"],[4,"Most of the time"],[5,"All of the time"]],
+  scoring:"no reverse scoring. Subscales are summed and transformed to 0&ndash;100: Tangible Support items 1, 4, 11, 13 ((raw &minus; 4) / 16 &times; 100); Emotional/Informational 2, 3, 7, 8, 12, 14, 15, 17 ((raw &minus; 8) / 32 &times; 100); Affectionate 5, 9, 18 ((raw &minus; 3) / 12 &times; 100); Positive Social Interaction 6, 10, 16 ((raw &minus; 3) / 12 &times; 100). Total = mean of the 4 subscale scores. MSSS-5 = items 4, 6, 9, 11, 17 ((raw &minus; 5) / 20 &times; 100). Higher = greater perceived support.",
+  custom:function(v){ if(v.some(x=>x==null)) return null; const sm=a=>a.reduce((t,i)=>t+v[i-1],0); const tr=(a)=>(sm(a)-a.length)/(4*a.length)*100;
+    const sub=[["Tangible",[1,4,11,13]],["Emotional/Informational",[2,3,7,8,12,14,15,17]],["Affectionate",[5,9,18]],["Positive Social Interaction",[6,10,16]]];
+    const sv=sub.map(x=>tr(x[1])); const tot=sv.reduce((a,b)=>a+b,0)/4;
+    return {done:true, html:'<div class="scoreline"><div class="bigscore">'+tot.toFixed(1)+'<small> / 100</small></div></div><div class="chips">'+sub.map((x,k)=>'<span class="chip">'+x[0]+' <b>'+sv[k].toFixed(1)+'</b></span>').join("")+'<span class="chip">MSSS-5 <b>'+tr([4,6,9,11,17]).toFixed(1)+'</b></span></div>'+interp("neutral","MSSS total "+tot.toFixed(1)+" (0&ndash;100); higher scores indicate greater perceived support.")}; }}
 };
+function _msqliBig(t,max){ return '<div class="scoreline"><div class="bigscore">'+t+'<small> / '+max+'</small></div></div>'; }
 const MSQLI_REF='Ritvo PG, Fischer JS, Miller DM, Andrews H, Paty DW, LaRocca NG. <em>Multiple Sclerosis Quality of Life Inventory: A User&rsquo;s Manual</em>. New York: National Multiple Sclerosis Society; 1997. Field test: Fischer JS et al. <em>Mult Scler</em> 1999;5(4):251&ndash;9. Acknowledgement: the MSQLI was developed by the Consortium of Multiple Sclerosis Centers Health Services Research Subcommittee with funding from the National MS Society. MSpectrum is not affiliated with or endorsed by the National MS Society.';
-function calcMSQLI(id){ const S=MSQLI_SCALES[id]; if(!S) return; const n=S.items.length; let sum=0, a=0;
-  for(let i=1;i<=n;i++){ const v=_num(el(id+"_"+i).value); if(v!=null){ sum+=v; a++; } }
+function calcMSQLI(id){ const S=MSQLI_SCALES[id]; if(!S) return; const n=S.items.length; let sum=0, a=0; const vals=[];
+  for(let i=1;i<=n;i++){ const v=_num(el(id+"_"+i).value); vals.push(v); if(v!=null){ sum+=v; a++; } }
   if(a===0){ el(id+"_out").innerHTML=""; return; }
+  if(S.custom){ const r=S.custom(vals); _flagScale(id+"_",1,n,!(r&&r.done)); el(id+"_out").innerHTML = r ? r.html : interp("neutral","Answered "+a+"/"+n+". The score needs every item."); return; }
   _flagScale(id+"_",1,n,a<n);
   if(a<n){ el(id+"_out").innerHTML=interp("neutral","Answered "+a+"/"+n+". The total needs every item."); return; }
   el(id+"_out").innerHTML='<div class="scoreline"><div class="bigscore">'+sum+'<small> / '+S.max+'</small></div></div>'+interp("neutral","Total "+sum+" (range "+S.min+"&ndash;"+S.max+"); higher scores indicate "+S.hi+".")+'<div class="note">Sum of the raw item scores, as in the MSQLI manual. The manual gives no cut-off; use the total to track change over time.</div>'; }
 function clearMSQLI(id){ if(!MSQLI_SCALES[id]) return; const n=MSQLI_SCALES[id].items.length; _clearScale(id+"_",1,n); el(id+"_out").innerHTML=""; }
 (function(){ if(typeof document==="undefined"||!el("p_promiscog")) return; let html="";
   for(const id of Object.keys(MSQLI_SCALES)){ const S=MSQLI_SCALES[id];
-    const rows=S.items.map((t,k)=>{ const i=k+1, opts=(S.itemOpts&&S.itemOpts[i])||S.opts; const lab=(S.itemOpts&&S.itemOpts[i])?t:(S.stem+" "+t); return _scaleRow(id+"_",i,lab,opts,"function(){calcMSQLI('"+id+"')}"); }).join("");
-    html+='<section class="panel" id="p_'+id+'"><button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button><h2>'+S.name+'</h2><p class="lead" style="font-style:italic">'+S.instr+'</p><div class="actions"><button class="btn" onclick="clearMSQLI(\''+id+'\')">Clear</button></div><div class="items" id="'+id+'_items">'+rows+'</div><div class="result" id="'+id+'_out"></div><details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div><b>Scoring:</b> sum of the raw item scores (range '+S.min+'&ndash;'+S.max+'); higher scores indicate '+S.hi+'.<br><b>Reference:</b> '+MSQLI_REF+'</div></details></section>'; }
+    const rows=S.items.map((t,k)=>{ const i=k+1, opts=(S.itemOpts&&S.itemOpts[i])||S.opts; const lab=(S.itemOpts&&S.itemOpts[i])||!S.stem?t:(S.stem+" "+t); return _scaleRow(id+"_",i,lab,opts,"function(){calcMSQLI('"+id+"')}"); }).join("");
+    html+='<section class="panel" id="p_'+id+'"><button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button><h2>'+S.name+'</h2><p class="lead" style="font-style:italic">'+S.instr+'</p>'+(S.note?'<div class="note">'+S.note+'</div>':'')+'<div class="actions"><button class="btn" onclick="clearMSQLI(\''+id+'\')">Clear</button></div><div class="items" id="'+id+'_items">'+rows+'</div><div class="result" id="'+id+'_out"></div><details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div><b>Scoring:</b> '+(S.scoring||('sum of the raw item scores (range '+S.min+'&ndash;'+S.max+'); higher scores indicate '+S.hi+'.'))+'<br><b>Reference:</b> '+MSQLI_REF+'</div></details></section>'; }
   // Timed Up and Go and 2-Minute Walk Test
   html+='<section class="panel" id="p_tug"><button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button><h2>Timed Up and Go (TUG)</h2><p class="lead">From sitting in a chair with arms: stand up, walk 3 m (10 feet) to a mark, turn, walk back and sit down. Usual walking aid and footwear; no physical help. Time in seconds; record one or two trials.</p><div class="row"><div class="fld"><label>Trial 1 (s)</label><input type="number" id="tug_1" min="0" step="0.1" oninput="calcTUG()"></div><div class="fld"><label>Trial 2 (s) <span class="hint">optional</span></label><input type="number" id="tug_2" min="0" step="0.1" oninput="calcTUG()"></div></div><div class="result" id="tug_out"></div><details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div><b>Score:</b> time in seconds (mean of the trials entered); lower = better. In 285 people with MS the mean TUG was 9.3 s (SD 5.1) (Kalron A et al. <em>Eur J Phys Rehabil Med</em> 2017;53(6):841&ndash;7). In moderate MS one trial is enough, and a real change needs about &minus;23% or +31% (smallest real difference; Nilsag&aring;rd Y et al. <em>Physiother Res Int</em> 2007;12(2):105&ndash;14). A cut-off of 9 s or more did not predict falls well in MS (Quinn G et al. <em>Clin Rehabil</em> 2019;33(2):317&ndash;26).<br><b>Reference:</b> Podsiadlo D, Richardson S. <em>J Am Geriatr Soc</em> 1991;39(2):142&ndash;8.</div></details></section>';
   html+='<section class="panel" id="p_twomwt"><button class="tool-back" onclick="goBack()">&larr; Back to Score Hub</button><h2>2-Minute Walk Test (2MWT)</h2><p class="lead">Distance walked in 2 minutes at a fast, safe speed on a flat course, with the usual walking aid.</p><div class="row"><div class="fld"><label>Distance (m)</label><input type="number" id="twomwt_m" min="0" oninput="calcTwoMWT()"></div></div><div class="result" id="twomwt_out"></div><details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div><b>Score:</b> metres walked in 2 minutes; higher = better. In MS the 2MWT correlates closely with the 6MWT (r = 0.947) and explains 89% of its variance (Scalzitti DA et al. <em>Int J MS Care</em> 2018;20(4):158&ndash;63).</div></details></section>';
@@ -1700,7 +1759,7 @@ function normBlock(prefix, raw, higherBetter){
   const pct=Math.max(1,Math.min(99,Math.round(_normCDF(z)*100)));
   const cls=z<=-1.5?"bad":(z<=-1?"warn":"good");
   const sev=z<=-1.5?"&ge;1.5 SD below the reference mean (impaired range)":(z<=-1?"about 1&ndash;1.5 SD below (borderline / low)":"within ~1 SD of the reference (typical range)");
-  return interp(cls, "Normalized: <b>z = "+z.toFixed(2)+"</b> &middot; ~"+pct+"th percentile vs the reference group - "+sev+".");
+  return interp(cls, "Normalized: <b>z = "+z.toFixed(2)+"</b> &middot; ~"+_ord(pct)+" percentile vs the reference group - "+sev+".");
 }
 const SDMT_NORM={
  lo:{ M:[[65.32,10.17],[61.33,8.93],[56.77,8.42],[55.42,6.63],[50.50,8.46],[47.85,5.76]],
@@ -1752,11 +1811,23 @@ function calcSDMT(){ const r=_num(el("sdmt_raw").value);
   _flagIds(["sdmt_age","sdmt_sex","sdmt_edu"], (r!==null && nm===null));
   if(nm&&nm.oor){ out+='<div class="note">Norms cover ages '+(nm.range||"18-78")+'; enter an age in range for an automatic z-score.</div>'; }
   else if(nm){ const icls=nm.z<=-1.5?"bad":(nm.z<=-1?"warn":"good");
-    out+=interp(icls,"Norm-based: <b>z = "+nm.z.toFixed(2)+"</b> &middot; <b>T = "+(50+10*nm.z).toFixed(0)+"</b> &middot; ~"+nm.pct+"th percentile vs the normative reference"+(nm.z<=-1.5?" - impaired range":"")+".")
+    out+=interp(icls,"Norm-based: <b>z = "+nm.z.toFixed(2)+"</b> &middot; <b>T = "+(50+10*nm.z).toFixed(0)+"</b> &middot; ~"+_ord(nm.pct)+" percentile vs the normative reference"+(nm.z<=-1.5?" - impaired range":"")+".")
        +'<div class="note"><b>Norms:</b> '+(nm.src||"Peer-reviewed published norms")+'. T = 50 + 10&times;z (mean=50, SD=10; T&le;35 ~ impaired). '+_zPlain(nm.z)+'</div>'; }
   else { out+='<div class="note">Higher is better. '+(ver==="written"?"Enter age, sex &amp; education above for an automatic z-score &amp; percentile (Fellows 2020 US regression-based norms for the written SDMT, ages 18-91).":"Enter age, sex &amp; education above for an automatic z-score &amp; percentile (Strober 2020 US regression-based norms, age × sex × education, ages 18-74).")+' A 4-point change is often cited, but a reliable change needs about 7 to 10 points at 6 months and 8 to 12 at 1 year (Strober 2022). For research use only; verify clinically.</div>'; }
+  out+=sdmtChange(r, ver);
   el("sdmt_out").innerHTML=out;
 }
+// Reliable change for the oral SDMT: Strober LB et al. Mult Scler Relat Disord 2022;57:103405
+// (219 healthy adults). Change needed at the 70%, 80% and 90% confidence levels:
+// 6-month interval 7, 8, 10 points; 1-year interval 8, 10, 12 points (abstract).
+const SDMT_RCI={6:[7,8,10],12:[8,10,12]};
+function sdmtChange(cur, ver){ const pe=el("sdmt_prev"); const prev=pe?_num(pe.value):null; if(prev==null||cur==null) return "";
+  if(ver==="written") return '<div class="note">Change between visits: the reliable-change values (Strober 2022) are for the oral SDMT only.</div>';
+  const iv=el("sdmt_int")&&el("sdmt_int").value==="12"?12:6, c=SDMT_RCI[iv], d=cur-prev, ad=Math.abs(d);
+  const lvl=ad>=c[2]?"90%":ad>=c[1]?"80%":ad>=c[0]?"70%":null;
+  const dir=d<0?"decline":"improvement";
+  const txt="Change "+(d>0?"+":"")+d+" points over "+(iv===12?"about 1 year":"about 6 months")+". "+(lvl?"This "+dir+" is a statistically reliable change at the "+lvl+" confidence level.":"This is smaller than the reliable-change threshold ("+c[0]+", "+c[1]+" or "+c[2]+" points at 70%, 80% or 90% confidence), so it may reflect retest variation.");
+  return interp(lvl&&d<0?"warn":"neutral",txt)+'<div class="note">Reliable change indices for the oral SDMT from 219 healthy adults (Strober LB et al. <em>Mult Scler Relat Disord</em> 2022;57:103405). A 4-point or 10% change is the common clinical responder definition (Benedict 2017).</div>'; }
 const PDDS_LABELS={0:"Normal",1:"Mild disability",2:"Moderate disability",3:"Gait disability",4:"Early cane",5:"Late cane",6:"Bilateral support",7:"Wheelchair / scooter",8:"Bedridden"};
 function setPdds(n){ el("pdds_v").value=n; document.querySelectorAll(".pdds-opt").forEach(function(x){x.classList.toggle("sel",+x.getAttribute("data-v")===n);}); calcPDDS(); }
 function calcPDDS(){ const v=el("pdds_v").value;

@@ -1,5 +1,20 @@
 # Changelog
 
+## v34 (2026-11-08): more MSQLI scales, SDMT reliable change, clean-up
+
+### MS Score Hub
+- **New MSQLI scales** (NMSS MSQLI User's Manual, 1997; items and scoring as in the manual): Mental Health Inventory (MHI-18: total and Anxiety, Depression, Behavioral Control and Positive Affect subscales, 0-100, with the manual's missing-item rules), Perceived Deficits Questionnaire (PDQ-20 with 4 subscales and PDQ-5), MOS Modified Social Support Survey (4 subscales, total and MSSS-5, 0-100) and Sexual Satisfaction Scale (4-24, skipped when there is no primary partner).
+- **SDMT change between visits**: optional previous oral SDMT and interval (about 6 months or 1 year); the change is compared with the reliable-change indices of Strober 2022 (7/8/10 points at 6 months, 8/10/12 points at 1 year for 70/80/90% confidence). Written SDMT age field now allows 91.
+- Percentile labels now use correct ordinals (1st, 2nd, 3rd instead of 1th, 2th, 3th).
+- References list: MSQLI, TUG and 2MWT added; the PROMIS-29 and PROMIS Cognitive 4a entries no longer mention T-score tables (missed in v33).
+
+### AutoEDSSguide
+- Removed the last two mentions of the members-only Neurostatus Forum (an ambulation note shown to users and a code comment). The 50 m rule note now cites the published rule (Kappos 2011); the restricted-ambulation check is described as a plausibility check.
+
+### Repository
+- New `tests/v34_scorehub.test.js` (hand-computed MHI-18, PDQ, MSSS and SSS cases; SDMT reliable change).
+- `LICENSES-INSTRUMENTS.md` and README updated for the new scales.
+
 ## v33 (2026-11-08): copyright clean-up and new tools
 
 ### AutoEDSSguide

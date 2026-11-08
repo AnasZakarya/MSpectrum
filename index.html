@@ -6912,7 +6912,7 @@ function _ambGuidanceNote() {
   const wrap = (body) => `<div class="amb-guidance-note" style="background:var(--hl-soft,#fdf2e9);border-left:3px solid var(--hl,#b85c1a);border-radius:6px;padding:9px 12px;margin-bottom:10px;font-size:12.5px;line-height:1.55;color:var(--ink,#222222);">${body}</div>`;
   if (!a) return wrap(`<strong>Pick an assistance type above.</strong> The distance brackets you need to ask about will appear here.`);
   if (a === "none") return wrap(`<strong>No aid - ask how far they walk, and whether it is truly unrestricted:</strong><br>Fully normal for their age &rarr; tick &ldquo;walks fully normally&rdquo; (AS 0) &middot; &gt;500 m but with any restriction &rarr; AS 1 &middot; 300&ndash;500 m &rarr; AS 2 &middot; 200&ndash;300 m &rarr; AS 3 &middot; 100&ndash;200 m &rarr; AS 4 &middot; &lt;100 m &rarr; AS 5`);
-  if (a === "unilateral") return wrap(`<strong>Unilateral aid (one cane/crutch/brace) - ask the distance with the aid:</strong><br>more than 50 m &rarr; AS 6 (EDSS 6.0) &middot; 50 m or less &rarr; AS 8 (EDSS 6.5). Rate the best performance; the Neurostatus manual says &ldquo;more than 50 m&rdquo;, the forum answer says &ldquo;at least 50 m&rdquo;; at exactly 50 m this tool follows the manual.`);
+  if (a === "unilateral") return wrap(`<strong>Unilateral aid (one cane/crutch/brace) - ask the distance with the aid:</strong><br>more than 50 m &rarr; AS 6 (EDSS 6.0) &middot; 50 m or less &rarr; AS 8 (EDSS 6.5). Rate the best performance. The published rule (Kappos 2011) is &ldquo;more than 50 m&rdquo;, so exactly 50 m scores AS 8.`);
   if (a === "bilateral") return wrap(`<strong>Bilateral aid (two aids or another person) - ask the distance:</strong><br>more than 120 m &rarr; AS 7 (EDSS 6.0) &middot; 10 to 120 m &rarr; AS 9 (EDSS 6.5)`);
   if (a === "wheelchair_indep") return wrap(`<strong>Wheelchair, self-propelled / transfers alone &rarr; AS 10 (EDSS 7.0).</strong> Distance not needed.`);
   if (a === "wheelchair_help") return wrap(`<strong>Wheelchair, needs help to wheel or transfer &rarr; AS 11 (EDSS 7.5).</strong> Distance not needed.`);
@@ -7169,15 +7169,14 @@ function runConsistencyCheck(inp, r) {
   }
 
   // ── 1b. CROSS-SYSTEM: Restricted ambulation without motor FS ───
-  // Per Neurostatus Forum (20.07.2009, 07.03.2009): fully ambulatory but
-  // restricted (AS ≥ 1) implies at least the pyramidal or cerebellar FS
-  // must be ≥ 2 to explain the restriction. Flag as a warning so the
+  // Plausibility check: restricted ambulation (AS 1-4) is usually explained
+  // by a Pyramidal or Cerebellar FS of 2 or more. Flag as a warning so the
   // rater rechecks either the ambulation entry or the FS scoring.
   if (AS !== null && AS >= 1 && AS <= 4 &&
       (pyrFS === null || pyrFS < 2) &&
       (crbFS === null || crbFS < 2)) {
     issues.push({ sev: "warning", tab: "ambulation",
-      msg: "Restricted ambulation without a Pyramidal or Cerebellar FS ≥ 2 to explain it. Under the published scoring conventions (Kappos 2011), at least one motor system should account for the restriction. Recheck the ambulation entry or the FS scoring." });
+      msg: "Restricted ambulation without a Pyramidal or Cerebellar FS ≥ 2 to explain it. Usually at least one motor system accounts for the restriction. Recheck the ambulation entry or the FS scoring." });
   }
 
   // ── 2. CROSS-SYSTEM: Pyramidal ↔ Cerebellar X marker ────────
