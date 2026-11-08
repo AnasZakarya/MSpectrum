@@ -15,7 +15,7 @@ How to read the "Use in MSpectrum" column:
 | EDSS (Kurtzke) | Kurtzke JF. Neurology 1983;33:1444-52 | Published method | Method only; FS definitions are summaries written by the MSpectrum authors | Citation |
 | Neurostatus scoring conventions | Kappos L. Neurostatus Scoring Definitions v04/10.2, 2011; Neurostatus-UHB AG | Booklet, form, name and certification belong to Neurostatus-UHB AG | Method only (published conventions); no Neurostatus form or text copied | Trademark and non-affiliation notice; trials need their own Neurostatus licence and certification |
 | Algorithmic EDSS rules | Fouad AM et al. Mult Scler J Exp Transl Clin 2023;9(1):20552173231155055 | CC BY-NC 4.0 | Method only | Citation |
-| Visual and Bowel/Bladder conversion, worked cases | Şen S. Arch Neuropsychiatry 2018;55(Suppl 1):S69-S75; Piri Çınar B et al. 2018 | Open-access articles | Method only | Citation |
+| Visual and Bowel/Bladder conversion, worked cases | Şen S. Arch Neuropsychiatry 2018;55(Suppl 1):S80-S83; Piri Çınar B, Güven Yorgun Y. Arch Neuropsychiatry 2018;55(Suppl 1):S69-S75 | Open-access articles | Method only | Citation |
 | sEDSS (Clinical mode) | Baldassari LE et al. Mult Scler 2018;24(10):1347-55, Supplementary Appendix 1 | Published method | Same scoring and subscores; wording and order are MSpectrum's own | Citation |
 | SRDSS (Quick Check) | Kaufmann M et al. Mult Scler Relat Disord 2020;42:102148 | CC BY-NC-ND 4.0 | Three questions and the decision tree used unchanged (category only: ≤3.5 / 4-6.5 / ≥7) | Citation and licence |
 | PDDS (Quick Check and Score Hub) | Hohol MJ et al. Neurology 1995;45:251-5; NARCOMS Registry | Not copyrighted; credit line requested | Full text | NARCOMS credit line |
