@@ -1097,7 +1097,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 
 <div class="info-cards" role="note">
         <div class="info-card"><div class="info-card-head"><span class="info-ico">👥</span><span class="info-title">Who it is for</span></div><p>Clinicians assessing a suspected first demyelinating event, a progressive course, or incidental MRI findings, with the MRI, CSF and clinical findings at hand. It applies the criteria; the diagnosis stays with the treating neurologist.</p></div>
-        <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><ol style="margin:6px 0 0;padding-left:20px;font-size:13px;line-height:1.6;color:var(--ink-soft)"><li>Enter the patient's <b>age</b> and <b>clinical onset</b> (relapsing, progressive, or RIS).</li><li>Tick which <b>investigations</b> were completed — the tool asks only about those.</li><li>Enter each test's findings: lesion locations, dissemination in time, and biomarkers.</li><li>Review the <b>result</b>: the category, the criteria it rests on, and any safety cautions.</li><li>Save or print the summary as a <b>PDF</b> for the record.</li></ol></div>
+        <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><ol style="margin:6px 0 0;padding-left:20px;font-size:13px;line-height:1.6;color:var(--ink-soft)"><li>Enter the patient's <b>age</b> and <b>clinical onset</b> (relapsing, progressive, or RIS).</li><li>Tick which <b>investigations</b> were completed; the tool asks only about those.</li><li>Enter each test's findings: lesion locations, dissemination in time, and biomarkers.</li><li>Review the <b>result</b>: the category, the criteria it rests on, and any safety cautions.</li><li>Save or print the summary as a <b>PDF</b> for the record.</li></ol></div>
       </div>
 
       <div class="hero-cta" style="margin:14px 0 14px;text-align:center">
@@ -1433,6 +1433,18 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
                 <input type="checkbox" id="bio_kflc">
                 <label for="bio_kflc">Elevated CSF kappa free light chain (k-FLC) index <span class="help-icon" data-tooltip="Index above your local laboratory cut-off (commonly &gt; 5.8&ndash;6.1). Interchangeable with OCB in the 2024 criteria.">?</span></label>
               </div>
+              <details class="kflc-calc" style="margin:4px 0 10px 28px;font-size:13px">
+                <summary style="cursor:pointer">k-FLC index calculator (optional)</summary>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:8px">
+                  <label>CSF k-FLC (mg/L)<input type="number" step="any" min="0" id="kflc_csf" oninput="kflcCalc()"></label>
+                  <label>Serum k-FLC (mg/L)<input type="number" step="any" min="0" id="kflc_ser" oninput="kflcCalc()"></label>
+                  <label>CSF albumin (mg/L)<input type="number" step="any" min="0" id="kflc_calb" oninput="kflcCalc()"></label>
+                  <label>Serum albumin (g/L)<input type="number" step="any" min="0" id="kflc_salb" oninput="kflcCalc()"></label>
+                  <label>Index cut-off<input type="number" step="any" min="0" id="kflc_cut" value="6.1" oninput="kflcCalc()"></label>
+                </div>
+                <div id="kflc_out" style="margin-top:8px"></div>
+                <p style="font-size:11px;color:var(--ink-faint,#666);margin:6px 0 0">k-FLC index = (CSF k-FLC / serum k-FLC) / (CSF albumin / serum albumin). Default cut-off 6.1 (Hegen H et al. <em>Mult Scler</em> 2023;29:169&ndash;81, meta-analysis); use your laboratory&rsquo;s cut-off if different. Intrathecal fraction from the Reiber hyperbolic reference range: Q<sub>lim</sub>(k-FLC) = 3.27&radic;(Q<sub>Alb</sub><sup>2</sup> + 33) &minus; 8.2 (both &times;10<sup>-3</sup>) (Reiber H et al. <em>Clin Chim Acta</em> 2019;497:153&ndash;62). The calculator only informs; tick the box above yourself.</p>
+              </details>
             </div>
 
             <!-- Susceptibility (CVS / PRL) -->
@@ -2808,7 +2820,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
     
     <div class="tool-disclaimer no-print">
       <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
-      <p>This tool automates the 2024 McDonald calculations from the entries you provide. <b>It supports, but does not replace, expert neurological judgement.</b> Always exclude better explanations and mimics (MOGAD, NMOSD, vascular disease) before finalising a diagnosis. An MS diagnosis requires a clinician to exclude better explanations; the output is not a diagnosis. All computation is local; nothing is stored.</p><p style="margin-top:8px;font-size:12px">MSpectrum is a free research and education tool for trained clinicians and researchers. It does not replace clinical judgment, a full neurological examination, or certified rater training; a qualified clinician must check every result before use in care or research. MSpectrum has not been reviewed, cleared, or approved by the U.S. Food and Drug Administration. Provided &quot;as is&quot;, without warranty of any kind; the authors accept no liability for any use of this tool or its results. Privacy: all processing happens on your device; MSpectrum does not upload, store, or transmit any data. Use study IDs rather than names where possible. Content and views are the authors&rsquo; own and do not represent the official position of any institution. Instrument copyrights and trademarks belong to their owners. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is independent and is not affiliated with or endorsed by Neurostatus-UHB AG.</p>
+      <p>This tool automates the 2024 McDonald calculations from the entries you provide. <b>It supports, but does not replace, expert neurological judgement.</b> Always exclude better explanations and mimics (MOGAD, NMOSD, vascular disease) before finalising a diagnosis. An MS diagnosis requires a clinician to exclude better explanations; the output is not a diagnosis. All computation is local; nothing is stored.</p><p style="margin-top:8px;font-size:12px">MSpectrum is a free research and education tool for trained clinicians and researchers. It does not replace clinical judgment, a full neurological examination, or certified rater training; a qualified clinician must check every result before use in care or research. MSpectrum has not been reviewed, cleared, or approved by the U.S. Food and Drug Administration. Provided &quot;as is&quot;, without warranty of any kind; the authors accept no liability for any use of this tool or its results. Privacy: all processing happens on your device; MSpectrum does not upload, store, or transmit any data. Use study IDs rather than names where possible. Content and views are the authors&rsquo; own and do not represent the official position of any institution. Instrument copyrights and trademarks belong to their owners. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is independent and is not affiliated with or endorsed by Neurostatus-UHB AG, the National MS Society, Western Psychological Services, PAR, Pearson or any other instrument owner. Users are responsible for any licence or rater certification their study requires (for example Neurostatus-EDSS certification in clinical trials).</p>
       <div class="tool-disclaimer-footer no-print">
         <a href="index.html#about-mspectrum">About</a><span class="dot">·</span>
         <a href="index.html#cite">Cite</a><span class="dot">·</span>
@@ -3093,6 +3105,17 @@ html[data-theme="dark"] .box-cover .info-title{color:#a5d6a7 !important;}
     });
   });
 })();
+</script>
+<script>
+// v33: k-FLC index and Reiber intrathecal fraction (calculator only; does not tick the criterion)
+function kflcCalc(){ const g=id=>{const v=parseFloat(document.getElementById(id).value); return isFinite(v)?v:null;};
+  const c=g("kflc_csf"), s=g("kflc_ser"), ca=g("kflc_calb"), sa=g("kflc_salb"), cut=g("kflc_cut")||6.1, out=document.getElementById("kflc_out");
+  if(c==null||s==null||ca==null||sa==null||s<=0||sa<=0||ca<=0){ out.innerHTML=""; return; }
+  const qk=c/s, qalb=(ca/1000)/sa;           // CSF albumin mg/L -> g/L, serum albumin g/L
+  const idx=qk/qalb, qk3=qk*1000, qa3=qalb*1000;
+  const qlim=3.27*Math.sqrt(qa3*qa3+33)-8.2, IF=qk3>qlim?(1-qlim/qk3)*100:0;
+  const pos=idx>=cut;
+  out.innerHTML='<b>k-FLC index '+idx.toFixed(2)+'</b> ('+(pos?'at or above':'below')+' the cut-off of '+cut+'). Q<sub>k-FLC</sub> = '+qk3.toFixed(2)+' &times;10<sup>-3</sup>; Q<sub>Alb</sub> = '+qa3.toFixed(2)+' &times;10<sup>-3</sup>; Reiber Q<sub>lim</sub> = '+qlim.toFixed(2)+' &times;10<sup>-3</sup>; intrathecal fraction '+IF.toFixed(0)+'%.'; }
 </script>
 </body>
 </html>

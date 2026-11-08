@@ -3820,7 +3820,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <div class="tool-hero-desc">AutoEDSSguide scores the EDSS in real time from a full standardized neurological exam, with a print-ready sheet, OCR scanner and inconsistency flags. Choose how you want to work below: a guided exam, the classic system layout, a paper-sheet scanner, a fast clinical mode, or a plain-language self-check for people with MS.</div>
     </div>
     <div class="info-cards" role="note">
-      <div class="info-card"><div class="info-card-head"><span class="info-ico">👥</span><span class="info-title">Who can use each mode</span></div><p><b>Roadmap</b> and <b>System view</b> are for clinicians performing a full standardized EDSS exam. <b>Sheet Scanner</b> processes a completed paper form automatically. <b>Clinical EDSS</b> is a fast 5–10 min version for routine follow-up. <b>Quick Check</b> is for <b>people with MS</b>: a plain-language self-check that estimates the EDSS without a clinical exam. <b>Train mode</b> lets raters practise the FS-to-EDSS step on reference cases.</p></div>
+      <div class="info-card"><div class="info-card-head"><span class="info-ico">👥</span><span class="info-title">Who can use each mode</span></div><p><b>Roadmap</b> and <b>System view</b> are for clinicians performing a full standardized EDSS exam. <b>Sheet Scanner</b> processes a completed paper form automatically. <b>Clinical EDSS</b> is the streamlined EDSS (sEDSS), a 7–10 min version for routine follow-up. <b>Quick Check</b> is for <b>people with MS</b>: four published self-report questions that estimate an EDSS range without a clinical exam. <b>Train mode</b> lets raters practise the FS-to-EDSS step on reference cases.</p></div>
       <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><p>Choose a mode below. Scores update <b>automatically</b> in real time as you enter exam findings; there is no Calculate button. The Roadmap guides you step by step; System view follows the classic FS layout used on research EDSS forms. You can switch modes any time without losing your data, and "How was this scored?" shows the rule behind the number.</p></div>
     </div>
     <p class="ways-group-label" style="font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);margin:20px 0 12px;border-bottom:2px solid var(--rule);padding-bottom:6px;display:block;">Full EDSS - detailed assessment</p>
@@ -3851,8 +3851,8 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <button type="button" class="way-card clinical-waycard" id="clinical-way-btn" aria-label="Start Clinical EDSS">
         <span class="badge" style="background:#7b3fa0;color:white;">For neurologists</span>
         <h3>Clinical EDSS</h3>
-        <div class="way-sub">5–10 min · Adaptive · Routine follow-up</div>
-        <p>Fast scoring for clinic visits. Ambulation assessed first - if the patient is wheelchair-bound, scoring completes in under a minute. Uses worst-limb scoring (no bilateral R/L) for speed without sacrificing accuracy.</p>
+        <div class="way-sub">7–10 min · sEDSS · Routine follow-up</div>
+        <p>The streamlined EDSS (sEDSS, Baldassari 2018) for clinic visits: fewer maneuvers, each functional system scored as its highest subscore, walking by patient report. Ambulation comes first; if the patient uses a wheelchair, scoring ends in under a minute.</p>
         <span class="way-cta">Start Clinical →</span>
       </button>
       <button type="button" class="way-card train-card" data-enter-view="train" aria-label="Start Train mode">
@@ -3865,8 +3865,8 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <button type="button" class="way-card patient-card" data-enter-view="quickcheck" aria-label="Start Quick Check">
         <span class="badge badge-patient">For patients</span>
         <h3>Quick Check</h3>
-        <div class="way-sub">Plain language · Adaptive questions</div>
-        <p>A short plain-language questionnaire for <strong>people with MS</strong> to estimate their own EDSS. Questions adapt in real time - only the most relevant ones appear. Result is an estimate, not a clinical diagnosis.</p>
+        <div class="way-sub">4 questions · SRDSS + PDDS · About 1 minute</div>
+        <p>Four published self-report questions for <strong>people with MS</strong>: the 3-question SRDSS gives an estimated EDSS range (3.5 or lower, 4.0 to 6.5, or 7.0 or higher), and the PDDS adds your disease step. An estimate, not a clinical examination.</p>
         <span class="way-cta">Start Quick Check →</span>
       </button>
     </div>
@@ -3933,7 +3933,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <div class="feature-card">
         <div class="feature-icon">📊</div>
         <h3>Validated, normed &amp; flagged</h3>
-        <p>Every score implements a published rule, standardised into z-scores, T-scores and percentiles where norms exist (Strober, Marrie, Parmenter, Centofani, HealthMeasures, ARMSS/MSSS) with each source cited. EDSS mismatches and cross-system conflicts are flagged, and missing items handled transparently.</p>
+        <p>Every score implements a published rule, standardised into z-scores, T-scores and percentiles where norms exist (Strober, Fellows, Marrie, Parmenter, ARMSS/MSSS) with each source cited. EDSS mismatches and cross-system conflicts are flagged, and missing items handled transparently.</p>
       </div>
     </div>
   </div>
@@ -3951,7 +3951,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     <details class="about-toggle"><summary>⚖️ Disclaimer &amp; terms of use</summary>
       <p><b>Not a diagnosis or medical advice.</b> MSpectrum computes outcome-measure scores and applies published diagnostic criteria, and explains what they mean. It supports clinical judgement but does not itself establish a diagnosis, does not recommend, start, stop or change any treatment, and is not a substitute for examination, testing, or the judgment of a qualified clinician. Using it creates no doctor-patient relationship.</p>
       <p><b>What it is for.</b> It is intended for research, education, and to support - not replace - decisions made by patients and their care teams. Diagnosis, interpretation and treatment remain the responsibility of a qualified clinician who knows the individual.</p>
-      <p><b>Scores and estimates are approximations.</b> Self-report tools (including the Quick Check EDSS estimate, PDDS and the patient questionnaires) reflect what a person reports and are not the same as a clinician-examined EDSS or a formal assessment. Norm-based results (z-scores, T-scores, percentiles) are population-level comparisons; they describe how a score relates to a reference group and do not, on their own, establish impairment in an individual.</p>
+      <p><b>Scores and estimates are approximations.</b> Self-report tools (including the Quick Check EDSS range, PDDS and the patient questionnaires) reflect what a person reports and are not the same as a clinician-examined EDSS or a formal assessment. Norm-based results (z-scores, T-scores, percentiles) are population-level comparisons; they describe how a score relates to a reference group and do not, on their own, establish impairment in an individual.</p>
       <p><b>Accuracy &amp; verification.</b> Scoring rules are implemented faithfully from the cited primary sources, but no guarantee is made that every result is error-free or current. Verify any score locally against the original instrument before clinical or trial use. The cognitive tests (SDMT, BVMT-R, CVLT-II) must be administered and interpreted by a trained professional.</p>
       <p><b>Licensed &amp; proprietary instruments.</b> Some instruments are licensed or proprietary (e.g. the MSWS-12 and MSIS-29 wording, and the SDMT / BVMT-R / CVLT-II stimuli and norm tables). Their full content is not reproduced here - short functional labels are shown for orientation only. Use the official forms for clinical or research use and ensure you hold any required licence.</p>
       <p><b>Mental-health screens.</b> PHQ-9 and GAD-7 are screening tools, not diagnoses. If thoughts of self-harm are reported, or if you or someone else may be in danger, seek help immediately - in the US you can call or text 988 (Suicide &amp; Crisis Lifeline), or contact local emergency services.</p>
@@ -3963,11 +3963,12 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     <div class="ref-list">
       <div class="ref-cat">EDSS - AutoEDSSguide</div>
       <div class="ref-item"><span class="ref-name">EDSS / Neurostatus</span><span class="ref-cite">Kurtzke JF. <em>Neurology</em> 1983;33:1444&ndash;52. &middot; Kappos L. Neurostatus Scoring Definitions (v04/10.2), 2011.</span></div>
-      <div class="ref-item"><span class="ref-name">Combination algorithm</span><span class="ref-cite">Fouad S et al. <em>Mult Scler J&ndash;ETC</em> 2023. DOI:10.1177/20552173231155055.</span></div>
-      <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE et al. Streamlined EDSS for use in multiple sclerosis clinical practice: development and cross-sectional validation. <em>Mult Scler</em> 2018;24(10):1347&ndash;55.</span></div>
-      <div class="ref-item"><span class="ref-name">Quick Check (ePR-EDSS)</span><span class="ref-cite">Romeo AR et al. <em>Mult Scler</em> 2021;27(9):1432&ndash;41.</span></div>
+      <div class="ref-item"><span class="ref-name">Combination algorithm</span><span class="ref-cite">Fouad AM, Abdel Naseer M, Farghaly M, Hegazy MI. New algorithmic approach for easier and faster extended disability status scale calculation. <em>Mult Scler J Exp Transl Clin</em> 2023;9(1):20552173231155055.</span></div>
+      <div class="ref-item"><span class="ref-name">FS conversions &amp; worked cases</span><span class="ref-cite">Sen S. Neurostatus and EDSS calculation with cases. <em>Arch Neuropsychiatry</em> 2018;55(Suppl 1):S80&ndash;S83. DOI:10.29399/npa.23412. &middot; Piri &Ccedil;&#305;nar B, G&uuml;ven Yorgun Y. What we learned from the history of multiple sclerosis measurement: Expanded Disability Status Scale. <em>Arch Neuropsychiatry</em> 2018;55(Suppl 1):S69&ndash;S75. DOI:10.29399/npa.23343.</span></div>
+      <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE et al. Streamlined EDSS for use in multiple sclerosis clinical practice: development and cross-sectional validation. <em>Mult Scler</em> 2018;24(10):1347&ndash;55 (Supplementary Appendix 1: sEDSS scoring, implemented as published).</span></div>
+      <div class="ref-item"><span class="ref-name">Quick Check (SRDSS + PDDS)</span><span class="ref-cite">Kaufmann M, Salmen A, Barin L et al. Development and validation of the self-reported disability status scale (SRDSS) to estimate EDSS-categories. <em>Mult Scler Relat Disord</em> 2020;42:102148 (CC BY-NC-ND 4.0; used unchanged). &middot; PDDS: Hohol MJ et al. <em>Neurology</em> 1995;45:251&ndash;5; Learmonth YC et al. <em>BMC Neurol</em> 2013;13:37. The PDDS is provided for use by the NARCOMS Registry (www.narcoms.org/pdds). NARCOMS is supported in part by the Consortium of Multiple Sclerosis Centers (CMSC) and the CMSC Foundation.</span></div>
       <div class="ref-cat">MS Score Hub</div>
-      <div class="ref-item"><span class="ref-name">SDMT</span><span class="ref-cite">Smith A. Symbol Digit Modalities Test. Western Psychological Services, 1982. US norms: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (oral, stratified norms); Centofani 1975 via Sheridan 2006 (written). Reliable change: Strober LB et al. <em>Mult Scler Relat Disord</em> 2022;57:103405.</span></div>
+      <div class="ref-item"><span class="ref-name">SDMT</span><span class="ref-cite">Smith A. Symbol Digit Modalities Test. Western Psychological Services, 1982. US norms: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (oral, stratified norms); Fellows RP, Schmitter-Edgecombe M. <em>Arch Clin Neuropsychol</em> 2020;35(1):105&ndash;115 (written, regression norms). Reliable change: Strober LB et al. <em>Mult Scler Relat Disord</em> 2022;57:103405.</span></div>
       <div class="ref-item"><span class="ref-name">BVMT-R</span><span class="ref-cite">Benedict RHB. Brief Visuospatial Memory Test&ndash;Revised. PAR, 1997. Healthy-control regression norms: Marrie RA et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
       <div class="ref-item"><span class="ref-name">CVLT-II</span><span class="ref-cite">Delis DC, Kramer JH, Kaplan E, Ober BA. California Verbal Learning Test&ndash;II. Pearson, 2000. Healthy-control regression norms: Marrie RA et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
       <div class="ref-item"><span class="ref-name">PDDS</span><span class="ref-cite">Hohol MJ, Orav EJ, Weiner HL. <em>Neurology</em> 1995; validated by Learmonth YC et al. <em>BMC Neurol</em> 2013.</span></div>
@@ -3979,7 +3980,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <div class="ref-item"><span class="ref-name">PROMIS-29</span><span class="ref-cite">Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. Profile v2.1, HealthMeasures (Northwestern).</span></div>
       <div class="ref-item"><span class="ref-name">PHQ-9</span><span class="ref-cite">Kroenke K, Spitzer RL, Williams JBW. <em>J Gen Intern Med</em> 2001;16(9):606&ndash;13. Public domain (Pfizer).</span></div>
       <div class="ref-item"><span class="ref-name">GAD-7</span><span class="ref-cite">Spitzer RL, Kroenke K, Williams JBW, L&ouml;we B. <em>Arch Intern Med</em> 2006;166(10):1092&ndash;7. Public domain (Pfizer).</span></div>
-      <div class="ref-item"><span class="ref-name">MS severity (ARMSS/MSSS)</span><span class="ref-cite">Manouchehrinia A, Westerlind H, Kingwell E et al. <em>Mult Scler</em> 2017;23(14):1938&ndash;46 (ARMSS). Roxburgh RH et al. <em>Neurology</em> 2005;64(7):1144&ndash;51 (MSSS). Matrices via the ms.sev package.</span></div>
+      <div class="ref-item"><span class="ref-name">MS severity (ARMSS/MSSS)</span><span class="ref-cite">Manouchehrinia A, Westerlind H, Kingwell E et al. <em>Mult Scler</em> 2017;23(14):1938&ndash;46 (ARMSS). Roxburgh RH et al. <em>Neurology</em> 2005;64(7):1144&ndash;51 (MSSS). Matrices from the 2017 article's Supplementary Files 1 and 2 (CC BY-NC 4.0; non-commercial use).</span></div>
       <div class="ref-item"><span class="ref-name">PASAT</span><span class="ref-cite">Gronwall DMA. <em>Percept Mot Skills</em> 1977;44:367&ndash;73 (MSFC cognitive component).</span></div>
       <div class="ref-item"><span class="ref-name">MSFC / T25FW</span><span class="ref-cite">Fischer JS, Rudick RA, Cutter GR, Reingold SC. <em>Mult Scler</em> 1999;5(4):244&ndash;50.</span></div>
       <div class="ref-item"><span class="ref-name">9-HPT</span><span class="ref-cite">Mathiowetz V, Weber K, Kashman N, Volland G. <em>Occup Ther J Res</em> 1985;5(1):24&ndash;38.</span></div>
@@ -4448,12 +4449,12 @@ details.card-optional .card-optional-body { margin-top: 12px; }
                 </div>
                 <div style="font-size:7.5px;color:#64748b;line-height:1.6;margin-bottom:6px;">
                   <span style="font-weight:700;">References</span><br>
-                  Kurtzke JF. Neurology 1983;33:1444&ndash;52 (EDSS). Kappos L. Neurostatus scoring definitions, v04/10.2, 2011 (scoring conventions). Fouad S et al. 2023 (algorithmic combination rules).<br>
+                  Kurtzke JF. Neurology 1983;33:1444&ndash;52 (EDSS). Kappos L. Neurostatus scoring definitions, v04/10.2, 2011 (scoring conventions). Fouad AM et al. Mult Scler J Exp Transl Clin 2023;9(1) (algorithmic combination rules). Sen S. Arch Neuropsychiatry 2018;55(Suppl 1):S80-S83 (Visual and Bowel/Bladder conversion).<br>
                   Generated by MSpectrum AutoEDSSguide, https://anaszakarya.github.io/MSpectrum/
                 </div>
                 <div style="font-size:7.5px;color:#64748b;line-height:1.5;">
                   <span style="font-weight:700;">Disclaimer</span><br>
-                  Not an official Neurostatus form. MSpectrum is independent and is not affiliated with or endorsed by Neurostatus-UHB AG. Neurostatus-EDSS is a trademark of Neurostatus-UHB AG. Automated scoring for guidance only; a qualified clinician must verify all results.
+                  Not an official Neurostatus form. MSpectrum is independent and is not affiliated with or endorsed by Neurostatus-UHB AG. Neurostatus-EDSS is a trademark of Neurostatus-UHB AG. Clinical trials using the Neurostatus-EDSS need their own Neurostatus licence and rater certification; this record does not replace them. Automated scoring for guidance only; a qualified clinician must verify all results.
                 </div>
               </div>
               <div class="sc-page-number" style="position:static;text-align:right;margin-top:8px;font-size:9px;font-weight:700;color:#475569;">Page 2</div>
@@ -4525,7 +4526,7 @@ AutoEDSSguide provides automated scoring for guidance purposes only and does not
 <section class="clinical-view" id="clinical">
   <header class="clinical-header">
     <button class="home-btn" id="clin-home-btn" aria-label="Back to home">← Home</button>
-    <div class="clinical-brand brand-mark">Auto<em>EDSS</em>guide · Clinical</div>
+    <div class="clinical-brand brand-mark">Auto<em>EDSS</em>guide · Clinical (sEDSS)</div>
     <div class="clinical-progress-wrap">
       <div class="clinical-progress-bar"><div class="clinical-progress-fill" id="clin-progress-fill"></div></div>
       <div class="clinical-progress-text" id="clin-progress-text">Step 1</div>
@@ -4612,7 +4613,7 @@ AutoEDSSguide provides automated scoring for guidance purposes only and does not
   <main class="app-main">
     <div id="form-root"></div>
   </main>
-  <div class="no-print" style="max-width:1100px;margin:28px auto 0;padding:0 16px"><div class="info-card info-card-warn"><div class="info-card-head"><span class="info-ico">⚠️</span><span class="info-title">Not a diagnosis</span></div><p>AutoEDSSguide automates EDSS scoring from the data you enter using the published Neurostatus conventions. It provides guidance only and does not replace clinical judgment; results must be verified by a qualified neurologist before any clinical or research use.</p><p style="margin-top:8px;font-size:12px">MSpectrum is a free research and education tool for trained clinicians and researchers. It does not replace clinical judgment, a full neurological examination, or certified rater training; a qualified clinician must check every result before use in care or research. MSpectrum has not been reviewed, cleared, or approved by the U.S. Food and Drug Administration. Provided &quot;as is&quot;, without warranty of any kind; the authors accept no liability for any use of this tool or its results. Privacy: all processing happens on your device; MSpectrum does not upload, store, or transmit any data. Use study IDs rather than names where possible. Content and views are the authors&rsquo; own and do not represent the official position of any institution. Instrument copyrights and trademarks belong to their owners. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is independent and is not affiliated with or endorsed by Neurostatus-UHB AG.</p></div></div>
+  <div class="no-print" style="max-width:1100px;margin:28px auto 0;padding:0 16px"><div class="info-card info-card-warn"><div class="info-card-head"><span class="info-ico">⚠️</span><span class="info-title">Not a diagnosis</span></div><p>AutoEDSSguide automates EDSS scoring from the data you enter using the published Neurostatus conventions. It provides guidance only and does not replace clinical judgment; results must be verified by a qualified neurologist before any clinical or research use.</p><p style="margin-top:8px;font-size:12px">MSpectrum is a free research and education tool for trained clinicians and researchers. It does not replace clinical judgment, a full neurological examination, or certified rater training; a qualified clinician must check every result before use in care or research. MSpectrum has not been reviewed, cleared, or approved by the U.S. Food and Drug Administration. Provided &quot;as is&quot;, without warranty of any kind; the authors accept no liability for any use of this tool or its results. Privacy: all processing happens on your device; MSpectrum does not upload, store, or transmit any data. Use study IDs rather than names where possible. Content and views are the authors&rsquo; own and do not represent the official position of any institution. Instrument copyrights and trademarks belong to their owners. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is independent and is not affiliated with or endorsed by Neurostatus-UHB AG, the National MS Society, Western Psychological Services, PAR, Pearson or any other instrument owner. Users are responsible for any licence or rater certification their study requires (for example Neurostatus-EDSS certification in clinical trials).</p></div></div>
   <div class="no-print" style="text-align:center;font-size:11px;color:var(--ink-faint);padding:14px 16px 26px;line-height:1.6;margin-top:10px">&copy; 2026 Anas Z. Nourelden &middot; Wayne State University, Dept. of Neurology<br>Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is not affiliated with or endorsed by Neurostatus-UHB AG &middot; all outcome-measure &amp; instrument copyrights belong to their respective owners</div>
 </section>
 
@@ -4680,7 +4681,7 @@ function _maxOrNone(...values) {
     return vals.length ? Math.max(...vals) : null;
 }
 // Engine version: printed on the Final Sheet and written into every export (G5).
-const ENGINE_VERSION = "MSpectrum scoring rules v3.2 (Neurostatus conventions 04/10.2)";
+const ENGINE_VERSION = "MSpectrum scoring rules v3.3 (Neurostatus conventions 04/10.2)";
 function _safe(v, def = 0) {
     return (v === null || v === undefined || Number.isNaN(v)) ? def : v;
 }
@@ -4725,12 +4726,14 @@ function calcVisualFS({ va_od, va_os, vf_od, vf_os, scotoma_od, scotoma_os, pall
     const od_score = Math.max(snellenToScore(va_od), _fieldConv(vf_od), _scotomaConv(scotoma_od), _safe(pallor_od) > 0 ? 1 : 0);
     const os_score = Math.max(snellenToScore(va_os), _fieldConv(vf_os), _scotomaConv(scotoma_os), _safe(pallor_os) > 0 ? 1 : 0);
     const worse = Math.max(od_score, os_score);
-    const better = Math.min(od_score, os_score);
-
-    // Grades 0-2 depend on the worse eye alone; for grade >=3 the FS is bumped one
-    // grade only when the BETTER eye is also <=20/60 (raw grade >=3): 3->4, 4->5, 5->6.
+    // Kurtzke 1983 grades 4-6: "grade 3 [4, 5] plus maximal ACUITY of better eye of 20/60
+    // or less". The better eye is the less affected eye; only its visual ACUITY triggers
+    // the bump (its fields, scotoma or pallor do not): 3->4, 4->5, 5->6. If both eyes have
+    // the same grade, the eye with the better acuity is the better eye.
+    const aOD = snellenToScore(va_od), aOS = snellenToScore(va_os);
+    const betterAcuity = od_score > os_score ? aOS : os_score > od_score ? aOD : Math.min(aOD, aOS);
     if (worse <= 2) return worse;
-    return better >= 3 ? Math.min(worse + 1, 6) : worse;
+    return betterAcuity >= 3 ? Math.min(worse + 1, 6) : worse;
 }
 
 function visualFSConverted(visual_fs) {
@@ -5774,13 +5777,7 @@ const CARDS = {
     tip: `<p><span class="cmd">"Do you feel your strength has decreased - compared to before, or to people your age? Does this make walking, climbing stairs, or using your hands more difficult?"</span></p>
       <p style="margin-top:8px"><b>Motor fatigability - definition and examples</b></p>
       <p><b>Definition:</b> reduction of &gt;30&ndash;50% in strenuous motor performance, not explained by non-MS causes (arthrosis, joint pain, cardiac disease, etc.).</p>
-      <p><b>Examples (Neurostatus Forum, 11.07.2014 &amp; 29.11.2007):</b></p>
-      <ul>
-        <li>Now jogs a considerably shorter distance or for shorter time than previously.</li>
-        <li>Difficulty with a daily walk that was previously effortless.</li>
-        <li>Cannot keep up with peers in sports (e.g., tennis).</li>
-        <li>Completely exhausted after a workout that was previously well-tolerated.</li>
-      </ul>
+      <p><b>Typical patient reports:</b> a clear drop in distance or duration of a usual physical activity (for example walking, running or sport) compared with before or with peers, without a non-MS cause.</p>
       <p><b>Scoring:</b> if no non-MS explanation exists, assume MS-related. Fatigability alone with BMRC 5/5 &rarr; Pyramidal FS = 2 (Overall motor subscore = 1).</p>`,
   },
   pyramidal_spasticity: {
@@ -6946,7 +6943,7 @@ const FS_SCORE_REF = {
     [3,"Large scotoma, or moderate decrease in fields, with worse-eye VA 20/60–20/99"],
     [4,"Marked field loss or VA 20/100–20/200; or grade 3 + better eye ≤20/60"],
     [5,"Worse eye VA <20/200; or grade 4 + better eye ≤20/60"],
-    [6,"Grade 5 + better eye VA <20/60"],
+    [6,"Grade 5 + better eye VA ≤20/60"],
   ],
   brainstem: [
     [0,"Normal"],
@@ -7020,7 +7017,7 @@ const FS_SCORE_REF = {
 };
 // FS interpretation lookups for Roadmap summary boxes
 const FS_INTERP = {
-  visual: ["Normal","Disc pallor/scotoma or VA 20/20–20/30 worse eye","VA 20/30–20/59 worse eye","Large scotoma or moderate field loss, or VA 20/60–20/99 worse eye","Marked field loss or VA 20/100–20/200","Worse eye VA <20/200; grade 4 + better eye ≤20/60","Both eyes VA <20/60"],
+  visual: ["Normal","Disc pallor/scotoma or VA 20/20–20/30 worse eye","VA 20/30–20/59 worse eye","Large scotoma or moderate field loss, or VA 20/60–20/99 worse eye","Marked field loss or VA 20/100–20/200","Worse eye VA <20/200; grade 4 + better eye ≤20/60","Grade 5 + better eye VA ≤20/60"],
   brainstem: ["Normal","Signs only","Moderate nystagmus/EOM impairment or other mild CN disability","Severe nystagmus, marked EOM weakness, or moderate other CN disability","Marked dysarthria or other marked CN disability","Unable to swallow or speak"],
   pyramidal: ["Normal","Signs only - no disability","Minimal: motor fatigability or BMRC 4 in 1–2 groups","Mild-moderate paraparesis/hemiparesis or severe monoparesis (BMRC ≤2 in 1 group)","Marked paraparesis/hemiparesis (BMRC 2 in 2 limbs) or monoplegia or moderate tetraparesis","Paraplegia (BMRC 0–1 all LL groups), marked tetraparesis, or hemiplegia","Tetraplegia (BMRC 0–1 all UL and LL groups)"],
   cerebellar: ["Normal","Abnormal signs, no disability","Mild ataxia and/or moderate Romberg and/or tandem not possible","Moderate limb ataxia and/or moderate-severe gait/truncal ataxia","Severe gait/truncal ataxia plus severe ataxia of 3–4 limbs","Unable to perform coordinated movements due to ataxia"],
@@ -7137,7 +7134,7 @@ function runConsistencyCheck(inp, r) {
     const severeMono = limbs.some(a => a.filter(v => v <= 2).length >= 2 && Math.max(...a) > 1);
     if (severeMono && weakLimbs === 1 && pyrFS === 4) {
       issues.push({ sev: "info", tab: "pyramidal",
-        msg: "Pyramidal FS = 4: a severe monoparesis (BMRC ≤2 in more than one muscle group of a single limb) exceeds the FS 3 definition (\"≤2 in one muscle group\"), so it is scored one level up per the Neurostatus \"if you exceed one level, take the next\" rule." });
+        msg: "Pyramidal FS = 4: a severe monoparesis (BMRC ≤2 in more than one muscle group of a single limb) exceeds the FS 3 definition (\"≤2 in one muscle group\"), so it is scored one level up under the published scoring conventions (Kappos 2011)." });
     }
   })();
 
@@ -7180,7 +7177,7 @@ function runConsistencyCheck(inp, r) {
       (pyrFS === null || pyrFS < 2) &&
       (crbFS === null || crbFS < 2)) {
     issues.push({ sev: "warning", tab: "ambulation",
-      msg: "Restricted ambulation without a Pyramidal or Cerebellar FS ≥ 2 to explain it. Per Neurostatus, at least one motor system should account for the restriction. Recheck the ambulation entry or the FS scoring." });
+      msg: "Restricted ambulation without a Pyramidal or Cerebellar FS ≥ 2 to explain it. Under the published scoring conventions (Kappos 2011), at least one motor system should account for the restriction. Recheck the ambulation entry or the FS scoring." });
   }
 
   // ── 2. CROSS-SYSTEM: Pyramidal ↔ Cerebellar X marker ────────
@@ -7194,7 +7191,7 @@ function runConsistencyCheck(inp, r) {
 
   if (pyrFS !== null && pyrFS >= 2 && hasAnyAtaxia && !r.cerebellar_x) {
     issues.push({ sev: "info", tab: "cerebellar",
-      msg: `Pyramidal FS = ${pyrFS} (weakness present) with cerebellar findings recorded but X marker not set. Consider marking X if weakness confounds ataxia assessment (Neurostatus convention).` });
+      msg: `Pyramidal FS = ${pyrFS} (weakness present) with cerebellar findings recorded but X marker not set. Consider marking X if weakness confounds ataxia assessment (Kappos 2011 conventions).` });
   }
 
   // ── 3. CROSS-SYSTEM: Cerebellar FS ≥ 3 without X → ambulation ─
@@ -7219,7 +7216,7 @@ function runConsistencyCheck(inp, r) {
   const vfOD = inp.v_vf_od; const vfOS = inp.v_vf_os;
   if ((pallorOD || pallorOS) && visFS === 0 && !isMissing(vaOD)) {
     issues.push({ sev: "info", tab: "visual",
-      msg: "Disc pallor recorded but Visual FS = 0. Disc pallor alone scores FS = 1 per Neurostatus (even with normal acuity/fields). Check if pallor was graded correctly." });
+      msg: "Disc pallor recorded but Visual FS = 0. Disc pallor alone scores FS = 1 under the published scoring conventions (even with normal acuity/fields). Check if pallor was graded correctly." });
   }
 
   // Scotoma present but VA/VF normal and FS = 0
@@ -7247,7 +7244,7 @@ function runConsistencyCheck(inp, r) {
 
   if (posDeficits >= 2 && hasAnyAtaxia && !r.cerebellar_x) {
     issues.push({ sev: "info", tab: "sensory",
-      msg: `Proprioceptive loss in ≥2 limbs and cerebellar findings present - X marker not set. Position-sense loss can mimic/confound ataxia; consider marking X (Neurostatus).` });
+      msg: `Proprioceptive loss in ≥2 limbs and cerebellar findings present - X marker not set. Position-sense loss can mimic/confound ataxia; consider marking X (published scoring conventions).` });
   }
 
   // ── 8. EDSS STEP CHECKS ───────────────────────────────────────
@@ -7270,7 +7267,7 @@ function runConsistencyCheck(inp, r) {
   // EDSS ≥ 7.0 requires AS ≥ 10 (wheelchair or worse); AS 8-9 give 6.5
   if (edss !== null && edss >= 7.0 && AS !== null && AS < 10) {
     issues.push({ sev: "warning", tab: "ambulation",
-      msg: `EDSS = ${edss.toFixed(1)} (≥7.0) but Ambulation Score = ${AS} (<10). EDSS ≥ 7.0 requires AS ≥ 10 (wheelchair or worse) per Neurostatus. Is the ambulation entry correct?` });
+      msg: `EDSS = ${edss.toFixed(1)} (≥7.0) but Ambulation Score = ${AS} (<10). EDSS ≥ 7.0 requires AS ≥ 10 (wheelchair or worse) under the published scoring conventions. Is the ambulation entry correct?` });
   }
 
   // EDSS ≥ 4.0 requires AS ≥ 1 OR FS pattern
@@ -8342,9 +8339,9 @@ function explainRule(r) {
     visual: r.visual_fs_conv, brainstem: r.brainstem_fs, pyramidal: r.pyramidal_fs, cerebellar: r.cerebellar_fs,
     sensory: r.sensory_fs, bb: r.bb_fs_conv, cerebral: r.cerebral_fs_step != null ? r.cerebral_fs_step : r.cerebral_fs,
   }, r.ambulation_score);
-  const src = tr.branch === "fs_pattern" ? "[Kurtzke 1983; Neurostatus (Kappos) FS combination table]"
-            : tr.branch === "as_fixed" ? "[Neurostatus Ambulation Score table]"
-            : "[Neurostatus Ambulation Score table; Kurtzke 1983 FS combinations]";
+  const src = tr.branch === "fs_pattern" ? "[Kurtzke 1983; Kappos 2011; Fouad 2023]"
+            : tr.branch === "as_fixed" ? "[Kappos 2011 ambulation rules; Sen 2018]"
+            : "[Kappos 2011 ambulation rules; Kurtzke 1983 FS combinations]";
   let extra = "";
   if (r.cerebral_mood_only) extra += " Depression or euphoria alone gives Cerebral FS 1 on the sheet and is not counted in the step.";
   if (r.ambulation_source === "incomplete") extra += " Ambulation not entered: assumed unrestricted (AS 0); the step is provisional.";
@@ -8410,586 +8407,166 @@ function edssProvisional(inputs, r) {
 }
 
 /* ============================================================
-   QUICK CHECK - patient-facing 14-question flow
-   Methodology adapted from Romeo AR, Bove RM et al.
-   Mult Scler. 2021;27(9):1432–1441.
+   QUICK CHECK - patient self-report (v33)
+   Uses only validated instruments that are published in full, word for word:
+   - SRDSS: Kaufmann M et al. Development and validation of the self-reported
+     disability status scale (SRDSS) to estimate EDSS-categories. Mult Scler Relat
+     Disord 2020;42:102148 (CC BY-NC-ND 4.0; questions and decision tree from
+     Supplementary Table A1, used unchanged).
+   - PDDS: Hohol MJ et al. Neurology 1995; NARCOMS self-report version (not copyrighted).
+   No questions of our own; the result is an EDSS category, not an examined EDSS.
 ============================================================ */
 
-// Each question has options. Each option carries a `mapping` object
-// of input ids → values that get fed to the same calculateFullEDSS engine.
-//
-// Walking is special: assistance type → AS branch logic.
-// All other systems map answer index → FS-shaped inputs.
-
 const QC_QUESTIONS = [
-  // ---- 1. Walking - assistance ----
   {
-    id: "qc_walk_assist",
-    title: "How do you mainly walk?",
-    help: "Pick the option that fits most days. Don't worry about brief good or bad days.",
+    id: "qc_srdss_walk",
+    title: "How far can you currently walk in a flat terrain?",
+    help: "Self-reported disability status scale (SRDSS), question 1 of 3.",
     options: [
-      { icon: "🚶", title: "Normally - no problems",
-        desc: "I walk like other people my age, no restriction at all.",
-        mapping: { amb_assistance: "none", amb_is_normal: true } },
-      { icon: "🚶", title: "On my own, but with some restriction",
-        desc: "No cane or walker, but my walking is slower or limited compared to before.",
-        mapping: { amb_assistance: "none", amb_is_normal: false } },
-      { icon: "🦯", title: "Cane, crutch, or brace on ONE side",
-        desc: "I use a unilateral walking aid - even just sometimes outdoors.",
-        mapping: { amb_assistance: "unilateral" } },
-      { icon: "🦯", title: "Aid on BOTH sides, or someone helping me",
-        desc: "Two canes, two crutches, a walker, or another person assisting me.",
-        mapping: { amb_assistance: "bilateral" } },
-      { icon: "♿", title: "Wheelchair - I manage on my own",
-        desc: "I wheel myself and transfer in/out of the chair without help.",
-        mapping: { amb_assistance: "wheelchair_indep" } },
-      { icon: "♿", title: "Wheelchair - I need help",
-        desc: "I need help to wheel or to transfer in and out.",
-        mapping: { amb_assistance: "wheelchair_help" } },
-      { icon: "🛏", title: "Mostly in bed or chair",
-        desc: "I'm essentially bed/chair-bound but I can still use my arms.",
-        mapping: { amb_assistance: "bedbound" } },
-    ],
+      { icon: "🚶", title: "500 m or more", desc: "", value: "ge500" },
+      { icon: "🚶", title: "10 to 500 m", desc: "", value: "10to500" },
+      { icon: "🛑", title: "Less than 10 m", desc: "", value: "lt10" },
+    ]
   },
-
-  // ---- 2. Walking - distance (CONDITIONAL: only if not wheelchair/bedbound) ----
   {
-    id: "qc_walk_dist",
-    title: "How far can you walk before needing to rest?",
-    help: "Estimate your usual outdoor distance. One city block ≈ 200 meters (~650 feet).",
-    skipIf: (answers) => {
-      const a = answers.qc_walk_assist;
-      if (!a) return false;
-      // Skip if wheelchair or bedbound
-      if (["wheelchair_indep", "wheelchair_help", "bedbound"].includes(a.mapping.amb_assistance)) return true;
-      // Skip if fully unrestricted - no distance needed, EDSS driven by FS only
-      if (a.mapping.amb_is_normal === true) return true;
-      return false;
-    },
-    // Distance options vary by assistance type (set dynamically in render)
-    dynamicOptions: (answers) => {
-      const assist = answers.qc_walk_assist?.mapping?.amb_assistance || "none";
-      if (assist === "unilateral") {
-        return [
-          { icon: "🌳", title: "More than 50 meters (about half a block)",
-            desc: "I can walk more than 50 m with my cane or crutch before needing to stop.",
-            mapping: { amb_distance_reported: 80 } },
-          { icon: "🏠", title: "50 meters or less (just a short walk)",
-            desc: "Even with my aid, I can only manage a short distance - less than half a block.",
-            mapping: { amb_distance_reported: 25 } },
-        ];
-      }
-      if (assist === "bilateral") {
-        return [
-          { icon: "🌳", title: "More than about a city block (over 120 m)",
-            desc: "Roughly 1 block with my two aids or with someone helping me.",
-            mapping: { amb_distance_reported: 150 } },
-          { icon: "🏘️", title: "Up to about a city block (10 to 120 m)",
-            desc: "Less than a block - typically only inside the home.",
-            mapping: { amb_distance_reported: 60 } },
-        ];
-      }
-      // "none" - no aid
-      return [
-        { icon: "🌳", title: "More than 5 city blocks (>500 m)",
-          desc: "I can walk a long distance without resting - but I still feel some restriction.",
-          mapping: { amb_distance_reported: 600 } },
-        { icon: "🏘️", title: "About 3–5 city blocks (300–500 m)",
-          desc: "I can walk that distance but then I usually need to stop and rest.",
-          mapping: { amb_distance_reported: 400 } },
-        { icon: "🏘️", title: "About 2–3 city blocks (200–300 m)",
-          desc: "I have to stop and rest after this distance.",
-          mapping: { amb_distance_reported: 250 } },
-        { icon: "🏘️", title: "About 1–2 city blocks (100–200 m)",
-          desc: "I can walk only this far before I have to stop.",
-          mapping: { amb_distance_reported: 150 } },
-        { icon: "🏠", title: "Less than 1 city block (under 100 m)",
-          desc: "I can walk only a short distance, just around the home.",
-          mapping: { amb_distance_reported: 60 } },
-      ];
-    },
-  },
-
-  // ---- 3. Visual - Right eye ----
-  {
-    id: "qc_vis_R",
-    title: "How is the vision in your RIGHT eye?",
-    help: "Cover your left eye and think about how clearly you see with the right eye alone, with your usual glasses or contact lenses.",
+    id: "qc_srdss_aid",
+    title: "Are you currently using a walking aid (rollator)?",
+    help: "SRDSS question 2 of 3. A cane or a rollator counts as a walking aid.",
     options: [
-      { icon: "👁️", title: "Normal", desc: "I see clearly - like 20/20 or 20/25 vision.",
-        mapping: { v_va_od: "20/20" } },
-      { icon: "👁️", title: "Slightly blurry", desc: "I can still read most things, but it's not as sharp as before.",
-        mapping: { v_va_od: "20/40" } },
-      { icon: "🌫️", title: "Moderately blurry", desc: "I have trouble reading regular print; vision is clearly reduced.",
-        mapping: { v_va_od: "20/60" } },
-      { icon: "🌫️", title: "Very blurry / dark spot", desc: "I struggle to read even larger text; there may be a dark patch in my vision.",
-        mapping: { v_va_od: "20/200" } },
-      { icon: "❌", title: "Severe loss / nearly no useful vision", desc: "I can barely see anything with this eye - only counting fingers, hand motion, or no vision at all.",
-        mapping: { v_va_od: "CF" } },
-    ],
+      { icon: "🦯", title: "Yes", desc: "", value: 1 },
+      { icon: "🚶", title: "No", desc: "", value: 0 },
+    ]
   },
-
-  // ---- 4. Visual - Left eye ----
   {
-    id: "qc_vis_L",
-    title: "How is the vision in your LEFT eye?",
-    help: "Cover your right eye and think about how clearly you see with the left eye alone, with your usual glasses or contact lenses.",
+    id: "qc_srdss_wc",
+    title: "Are you currently using a wheelchair?",
+    help: "SRDSS question 3 of 3.",
     options: [
-      { icon: "👁️", title: "Normal", desc: "I see clearly - like 20/20 or 20/25 vision.",
-        mapping: { v_va_os: "20/20" } },
-      { icon: "👁️", title: "Slightly blurry", desc: "I can still read most things, but it's not as sharp as before.",
-        mapping: { v_va_os: "20/40" } },
-      { icon: "🌫️", title: "Moderately blurry", desc: "I have trouble reading regular print; vision is clearly reduced.",
-        mapping: { v_va_os: "20/60" } },
-      { icon: "🌫️", title: "Very blurry / dark spot", desc: "I struggle to read even larger text; there may be a dark patch in my vision.",
-        mapping: { v_va_os: "20/200" } },
-      { icon: "❌", title: "Severe loss / nearly no useful vision", desc: "I can barely see anything with this eye - only counting fingers, hand motion, or no vision at all.",
-        mapping: { v_va_os: "CF" } },
-    ],
+      { icon: "♿", title: "Yes", desc: "", value: 1 },
+      { icon: "🚶", title: "No", desc: "", value: 0 },
+    ]
   },
-
-  // ---- 5. Brainstem 1 - eyes/face/dizziness ----
   {
-    id: "qc_bs_eyes",
-    title: "Do you have problems with eye movement, double vision, dizziness, or facial weakness/numbness?",
-    help: "Think about whether your eyes track normally, whether you see double, whether you feel off-balance from spinning, or whether one side of your face feels different.",
+    id: "qc_pdds",
+    title: "Patient Determined Disease Steps (PDDS)",
+    help: "Choose the step that best describes you.",
     options: [
-      { icon: "🟢", title: "No - none of these", desc: "Eye movements feel normal, no double vision, no dizziness, and my face feels even on both sides.",
-        mapping: { b_eom: 0, b_face: 0, b_nys: 0, b_trig: 0 } },
-      { icon: "🟡", title: "Mild - only occasionally", desc: "Slight problem now and then with one of these - barely noticeable.",
-        mapping: { b_eom: 1, b_face: 1, b_nys: 1 } },
-      { icon: "🟠", title: "Moderate - I notice it daily", desc: "Clear and persistent: e.g., I see double in some directions, my face feels weak/numb on one side, or I'm dizzy often.",
-        mapping: { b_eom: 2, b_face: 2, b_nys: 2 } },
-      { icon: "🔴", title: "Marked - interferes with daily life", desc: "Severe symptoms in one or more of these - significantly limits driving, reading, or daily activities.",
-        mapping: { b_eom: 3, b_face: 3, b_nys: 3 } },
-      { icon: "⛔", title: "Very severe", desc: "Complete loss of eye movement in directions, severe facial palsy, or constant disabling vertigo.",
-        mapping: { b_eom: 4, b_face: 4, b_nys: 3 } },
-    ],
-  },
-
-  // ---- 6. Brainstem 2 - speech/swallow ----
-  {
-    id: "qc_bs_speech",
-    title: "Do you have trouble speaking clearly or swallowing?",
-    help: "Think about whether your speech sounds slurred, whether others ask you to repeat yourself, and whether you cough or choke when eating or drinking.",
-    options: [
-      { icon: "🟢", title: "No - speech and swallowing are normal", desc: "I speak clearly and can eat and drink anything without coughing or choking.",
-        mapping: { b_dysarth: 0, b_dysphag: 0 } },
-      { icon: "🟡", title: "Slight - I notice it but others usually don't", desc: "My speech occasionally feels slightly off, or I rarely cough on thin liquids.",
-        mapping: { b_dysarth: 1, b_dysphag: 1 } },
-      { icon: "🟠", title: "Mild - others sometimes notice", desc: "People occasionally ask me to repeat, or I cough/choke sometimes on thin liquids.",
-        mapping: { b_dysarth: 2, b_dysphag: 2 } },
-      { icon: "🔴", title: "Moderate", desc: "Speech is clearly slurred and harder to understand, or I have to be careful with both liquids and solids.",
-        mapping: { b_dysarth: 3, b_dysphag: 3 } },
-      { icon: "⛔", title: "Severe", desc: "Speech is hard to understand or I can't speak; I need pureed food or can't swallow safely.",
-        mapping: { b_dysarth: 4, b_dysphag: 4 } },
-    ],
-  },
-
-  // ---- 7. Pyramidal - Arms ----
-  {
-    id: "qc_pyr_arms",
-    title: "How is the strength in your arms?",
-    help: "Think about everyday tasks: lifting groceries, opening jars, carrying a bag, brushing your hair, typing.",
-    options: [
-      { icon: "🟢", title: "Normal", desc: "I can do all these tasks without difficulty.",
-        mapping: { p_str_deltoid_R: 5, p_str_deltoid_L: 5, p_str_biceps_R: 5, p_str_biceps_L: 5,
-                   p_str_triceps_R: 5, p_str_triceps_L: 5, p_str_wflex_R: 5, p_str_wflex_L: 5,
-                   p_str_wext_R: 5, p_str_wext_L: 5, p_overall: 0 } },
-      { icon: "🟡", title: "Mild fatigue only", desc: "My arms get tired faster than they used to, but full strength is there when I push.",
-        mapping: { p_str_deltoid_R: 5, p_str_deltoid_L: 5, p_str_biceps_R: 5, p_str_biceps_L: 5,
-                   p_overall: 1 } },
-      { icon: "🟠", title: "Mild weakness - I notice it daily", desc: "I drop things, struggle with tight jars, or have trouble with heavy doors.",
-        mapping: { p_str_biceps_R: 4, p_str_biceps_L: 4, p_str_wflex_R: 4, p_str_wflex_L: 4,
-                   p_overall: 2 } },
-      { icon: "🔴", title: "Moderate weakness", desc: "Clearly weak in one or both arms - daily tasks like brushing my hair are hard.",
-        mapping: { p_str_biceps_R: 3, p_str_biceps_L: 3, p_str_wflex_R: 3, p_str_wflex_L: 3,
-                   p_str_wext_R: 3, p_str_wext_L: 3, p_overall: 2 } },
-      { icon: "⛔", title: "Severe weakness", desc: "I can barely lift my arm against gravity.",
-        mapping: { p_str_deltoid_R: 2, p_str_deltoid_L: 2, p_str_biceps_R: 2, p_str_biceps_L: 2,
-                   p_overall: 2 } },
-      { icon: "❌", title: "No useful arm function", desc: "I cannot move my arms purposefully.",
-        mapping: { p_str_deltoid_R: 0, p_str_deltoid_L: 0, p_str_biceps_R: 0, p_str_biceps_L: 0,
-                   p_str_triceps_R: 0, p_str_triceps_L: 0, p_overall: 2 } },
-    ],
-  },
-
-  // ---- 8. Pyramidal - Legs ----
-  {
-    id: "qc_pyr_legs",
-    title: "How is the strength in your legs?",
-    help: "Think about: climbing stairs, getting up from a chair, standing on your toes or heels. (Don't think about walking distance - we already covered that.)",
-    options: [
-      { icon: "🟢", title: "Normal", desc: "I can climb stairs, stand up easily, and balance on toes or heels.",
-        mapping: { p_str_hipflex_R: 5, p_str_hipflex_L: 5, p_str_kneeflex_R: 5, p_str_kneeflex_L: 5,
-                   p_str_kneeext_R: 5, p_str_kneeext_L: 5, p_str_ankdorsi_R: 5, p_str_ankdorsi_L: 5,
-                   p_str_ankplant_R: 5, p_str_ankplant_L: 5 } },
-      { icon: "🟡", title: "Mild fatigue only", desc: "My legs get tired on long walks or many flights of stairs.",
-        mapping: { p_str_hipflex_R: 5, p_str_hipflex_L: 5, p_str_kneeflex_R: 5, p_str_kneeflex_L: 5, p_overall: 1 } }, // FIX: leg fatigability now registers (matches arms)
-      { icon: "🟠", title: "Mild weakness - I notice it daily", desc: "Stairs feel harder; getting up from a low chair takes effort.",
-        mapping: { p_str_hipflex_R: 4, p_str_hipflex_L: 4, p_str_kneeflex_R: 4, p_str_kneeflex_L: 4 } },
-      { icon: "🔴", title: "Moderate weakness", desc: "I struggle with stairs - sometimes I need to grab onto things or use the railing.",
-        mapping: { p_str_hipflex_R: 3, p_str_hipflex_L: 3, p_str_kneeflex_R: 3, p_str_kneeflex_L: 3,
-                   p_str_kneeext_R: 3, p_str_kneeext_L: 3 } },
-      { icon: "⛔", title: "Severe weakness", desc: "I can barely lift my leg against gravity - cannot stand on toes or heels at all.",
-        mapping: { p_str_hipflex_R: 2, p_str_hipflex_L: 2, p_str_kneeflex_R: 2, p_str_kneeflex_L: 2,
-                   p_str_kneeext_R: 2, p_str_kneeext_L: 2 } },
-      { icon: "❌", title: "No useful leg function", desc: "I cannot move my legs purposefully (paraplegia).",
-        mapping: { p_str_hipflex_R: 0, p_str_hipflex_L: 0, p_str_kneeflex_R: 0, p_str_kneeflex_L: 0,
-                   p_str_kneeext_R: 0, p_str_kneeext_L: 0 } },
-    ],
-  },
-
-  // ---- 9. Cerebellar - balance / coordination ----
-  {
-    id: "qc_cer",
-    title: "Do you have problems with balance, coordination, or shaky hands?",
-    help: "Think about: walking in a straight line, turning quickly, doing fine tasks like buttons, or having a tremor in your hands.",
-    options: [
-      { icon: "🟢", title: "No - coordination feels normal", desc: "Balance and fine movements feel fine.",
-        mapping: { c_gait_ataxia: 0, c_tandem: 0, c_tremor_ue_R: 0, c_tremor_ue_L: 0, c_trunc: 0 } },
-      { icon: "🟡", title: "Mild - only on testing", desc: "I can feel a slight clumsiness or tremor only when I really concentrate.",
-        mapping: { c_gait_ataxia: 1, c_tremor_ue_R: 1, c_tremor_ue_L: 1 } },
-      { icon: "🟠", title: "Mild - I notice in fine tasks", desc: "Buttons, writing, or pouring drinks are harder than they used to be.",
-        mapping: { c_gait_ataxia: 2, c_tandem: 1, c_tremor_ue_R: 2, c_tremor_ue_L: 2 } },
-      { icon: "🔴", title: "Moderate - interferes with daily tasks", desc: "Clear unsteadiness or tremor that gets in the way of everyday activities.",
-        mapping: { c_gait_ataxia: 3, c_tandem: 2, c_tremor_ue_R: 3, c_tremor_ue_L: 3,
-                   c_tremor_le_R: 3, c_tremor_le_L: 3, c_trunc: 2 } },
-      { icon: "⛔", title: "Severe - cannot perform coordinated movements", desc: "Severe ataxia in all limbs or I cannot sit/stand without support.",
-        mapping: { c_gait_ataxia: 4, c_tandem: 2, c_tremor_ue_R: 4, c_tremor_ue_L: 4,
-                   c_tremor_le_R: 4, c_tremor_le_L: 4, c_trunc: 4 } },
-    ],
-  },
-
-  // ---- 10. Sensory - numbness / tingling ----
-  {
-    id: "qc_sens",
-    title: "Do you have numbness, tingling, or 'pins and needles' that bother you daily?",
-    help: "Focus on changes in feeling - touch, sharpness, or temperature. Don't include balance issues here (those go under coordination).",
-    options: [
-      { icon: "🟢", title: "No - feeling is normal", desc: "I feel touch, hot/cold, and sharp/dull normally everywhere.",
-        mapping: { s_sup_ue_R: 0, s_sup_ue_L: 0, s_sup_le_R: 0, s_sup_le_L: 0,
-                   s_sup_trunk_R: 0, s_sup_trunk_L: 0, s_vib_le_R: 0, s_vib_le_L: 0 } },
-      { icon: "🟡", title: "Mild - only in 1 or 2 limbs", desc: "Some numbness or tingling in one arm or leg, but I can still feel touch and pain there.",
-        mapping: { s_sup_ue_R: 1, s_vib_le_R: 1 } },
-      { icon: "🟠", title: "Moderate - affects 1–2 limbs significantly, OR mild in many areas", desc: "Significant numbness in a limb (touch and pain are reduced), or mild numbness over a wider area.",
-        mapping: { s_sup_ue_R: 2, s_sup_ue_L: 2, s_sup_le_R: 2, s_vib_le_R: 2, s_vib_le_L: 2 } },
-      { icon: "🔴", title: "Severe - major numbness in 1–2 limbs OR moderate over most of the body", desc: "Marked loss of feeling in a limb, or moderate numbness in most of my body.",
-        mapping: { s_sup_ue_R: 4, s_sup_ue_L: 4, s_sup_le_R: 4, s_sup_le_L: 4,
-                   s_vib_le_R: 3, s_vib_le_L: 3, s_pos_le_R: 2, s_pos_le_L: 2 } },
-      { icon: "⛔", title: "Almost no feeling below the head", desc: "I have lost most or all sensation below the neck.",
-        mapping: { s_sup_ue_R: 5, s_sup_ue_L: 5, s_sup_le_R: 5, s_sup_le_L: 5,
-                   s_sup_trunk_R: 5, s_sup_trunk_L: 5, s_vib_le_R: 3, s_vib_le_L: 3,
-                   s_pos_le_R: 3, s_pos_le_L: 3 } },
-    ],
-  },
-
-  // ---- 11. Bladder ----
-  {
-    id: "qc_bladder",
-    title: "Do you have problems with your bladder?",
-    help: "Think about urgency (sudden need to go), accidents, having to push to start, or needing a catheter.",
-    options: [
-      { icon: "🟢", title: "No - bladder works normally", desc: "No urgency, no accidents, no catheter needed.",
-        mapping: { bb_hes: 0, bb_urg: 0, bb_cath: 0 } },
-      { icon: "🟡", title: "Mild urgency or hesitation, but no accidents", desc: "Sometimes I have to rush to the bathroom, or it's a bit hard to start, but I don't leak.",
-        mapping: { bb_hes: 1, bb_urg: 1, bb_cath: 0 } },
-      { icon: "🟠", title: "Frequent urgency - I sometimes can't make it (must wear pads)", desc: "I have accidents from time to time, and I rely on pads or protection.",
-        mapping: { bb_hes: 2, bb_urg: 2, bb_cath: 0 } },
-      { icon: "🔴", title: "Frequent accidents OR I self-catheterize", desc: "I leak frequently, or I have to use a catheter at intervals to empty my bladder.",
-        mapping: { bb_hes: 3, bb_urg: 3, bb_cath: 1 } },
-      { icon: "⛔", title: "Constant catheter or no bladder control at all", desc: "I have lost bladder control, or I have a permanent catheter.",
-        mapping: { bb_hes: 4, bb_urg: 4, bb_cath: 2 } },
-    ],
-  },
-
-  // ---- 12. Bowel ----
-  {
-    id: "qc_bowel",
-    title: "Do you have problems with your bowels?",
-    help: "Think about constipation, accidents, or needing enemas/laxatives daily.",
-    options: [
-      { icon: "🟢", title: "No - bowels work normally", desc: "No constipation problems, no accidents.",
-        mapping: { bb_bowel: 0 } },
-      { icon: "🟡", title: "Mild constipation, but no accidents", desc: "Sometimes constipated, but I manage with diet or occasional laxatives.",
-        mapping: { bb_bowel: 1 } },
-      { icon: "🟠", title: "Moderate - must wear pads OR change my routine significantly", desc: "Bowel issues are clearly affecting my daily life - pads or specific dietary measures are needed.",
-        mapping: { bb_bowel: 2 } },
-      { icon: "🔴", title: "Severe - need enemas or manual measures regularly", desc: "I rely on enemas, suppositories, or manual measures to manage my bowels.",
-        mapping: { bb_bowel: 3 } },
-      { icon: "⛔", title: "Complete loss of bowel control", desc: "I have lost bowel control entirely.",
-        mapping: { bb_bowel: 4 } },
-    ],
-  },
-
-  // ---- 13. Cerebral - cognition ----
-  {
-    id: "qc_cog",
-    title: "Have you noticed problems with memory, focus, or finding words?",
-    help: "Think about how your thinking has changed compared to before - not how tired you feel (that's the next question).",
-    options: [
-      { icon: "🟢", title: "No - my thinking is normal", desc: "Memory, focus, and word-finding feel the same as before.",
-        mapping: { m_ment: 0 } },
-      { icon: "🟡", title: "Slight - only I notice", desc: "I sense small changes in my thinking, but others don't notice.",
-        mapping: { m_ment: 1 } },
-      { icon: "🟠", title: "Mild - others have noticed too", desc: "My family or close friends have commented on my memory or focus.",
-        mapping: { m_ment: 2 } },
-      { icon: "🔴", title: "Moderate - clearly affects daily life", desc: "I have to write things down, ask people to repeat, or struggle to follow conversations.",
-        mapping: { m_ment: 3 } },
-      { icon: "⛔", title: "Severe - major cognitive decline or disorientation", desc: "I have significant trouble with daily tasks, may lose track of time/place, or rely on others.",
-        mapping: { m_ment: 4 } },
-    ],
-  },
-
-  // ---- 14. Cerebral - fatigue ----
-  {
-    id: "qc_fatigue",
-    title: "How is your daily fatigue?",
-    help: "MS fatigue is different from regular tiredness - it's a heavy exhaustion that doesn't always improve with rest.",
-    options: [
-      { icon: "🟢", title: "No more than other people my age", desc: "Energy levels feel normal - I get tired like anyone else.",
-        mapping: { m_fat: 0 } },
-      { icon: "🟡", title: "Mild - doesn't really limit my activities", desc: "I notice MS fatigue but I can still do everything I want to do.",
-        mapping: { m_fat: 1 } },
-      { icon: "🟠", title: "Moderate - limits some activities (about 50% reduction)", desc: "Fatigue keeps me from doing some things - I have to plan rest into my day.",
-        mapping: { m_fat: 2 } },
-      { icon: "🔴", title: "Severe - major limitation (more than 50% reduction)", desc: "Fatigue is one of the biggest things stopping me from doing daily activities.",
-        mapping: { m_fat: 3 } },
-    ],
-  },
-
-  // ---- 15. Bedbound - arm function (only shown when bedbound) ----
-  // Distinguishes EDSS 8.0 (effective arm use) vs 8.5 (some arm use) vs 9.0 (communicate/eat) vs 9.5 (none)
-  {
-    id: "qc_bedbound_arms",
-    title: "How well can you use your arms and hands?",
-    help: "Think about reaching, holding objects, feeding yourself, or pressing buttons. Only answer what applies to your typical day.",
-    skipIf: (answers) => {
-      const a = answers.qc_walk_assist;
-      return !(a && a.mapping.amb_assistance === "bedbound");
-    },
-    options: [
-      { icon: "🟢", title: "I'm out of bed most of the day and can care for myself", desc: "I use my arms well - I can feed myself, adjust position, and handle most personal care.",
-        mapping: { amb_assistance: "bedbound" } },   // AS 12, EDSS 8.0
-      { icon: "🟡", title: "I'm mostly in bed but have some arm use", desc: "I can do a few things with my arms but rely on others for most activities.",
-        mapping: { amb_assistance: "bed_much" } },   // AS 13, EDSS 8.5
-      { icon: "🟠", title: "I'm in bed all day - I can still talk and eat", desc: "I can communicate and swallow, but my arms are not useful for self-care.",
-        mapping: { amb_assistance: "bed_helpless" } },   // AS 14, EDSS 9.0
-      { icon: "🔴", title: "I'm fully dependent - I cannot talk or eat on my own", desc: "I cannot communicate effectively or eat/swallow safely without help.",
-        mapping: { amb_assistance: "bed_nocomm" } },   // AS 15, EDSS 9.5
-    ],
+      { icon: "🙂", title: "0 \u00b7 Normal", desc: "I may have some mild symptoms, mostly sensory due to MS but they do not limit my activity. If I do have an attack, I return to normal when the attack has passed.", value: 0 },
+      { icon: "🙂", title: "1 \u00b7 Mild Disability", desc: "I have some noticeable symptoms from my MS but they are minor and have only a small effect on my lifestyle.", value: 1 },
+      { icon: "🙂", title: "2 \u00b7 Moderate Disability", desc: "I don't have any limitations in my walking ability. However, I do have significant problems due to MS that limit daily activities in other ways.", value: 2 },
+      { icon: "🚶", title: "3 \u00b7 Gait Disability", desc: "MS does interfere with my activities, especially my walking. I can work a full day, but athletic or physically demanding activities are more difficult than they used to be. I usually don't need a cane or other assistance to walk, but I might need some assistance during an attack.", value: 3 },
+      { icon: "🦯", title: "4 \u00b7 Early Cane", desc: "I use a cane or a single crutch or some other form of support (such as touching a wall or leaning on someone's arm) for walking all the time or part of the time, especially when walking outside. I think I can walk 25 feet in 20 seconds without a cane or crutch. I always need some assistance (cane or crutch) if I want to walk as far as 3 blocks.", value: 4 },
+      { icon: "🦯", title: "5 \u00b7 Late Cane", desc: "To be able to walk 25 feet, I have to have a cane, crutch or someone to hold onto. I can get around the house or other buildings by holding onto furniture or touching the walls for support. I may use a scooter or wheelchair if I want to go greater distances.", value: 5 },
+      { icon: "🦯", title: "6 \u00b7 Bilateral Support", desc: "To be able to walk as far as 25 feet I must have 2 canes or crutches or a walker. I may use a scooter or wheelchair for longer distances.", value: 6 },
+      { icon: "♿", title: "7 \u00b7 Wheelchair/Scooter", desc: "My main form of mobility is a wheelchair. I may be able to stand and/or take one or two steps, but I can't walk 25 feet, even with crutches or a walker.", value: 7 },
+      { icon: "🛏", title: "8 \u00b7 Bedridden", desc: "Unable to sit in a wheelchair for more than one hour.", value: 8 }
+    ]
   },
 ];
 
-// ---- Quick Check state ----
-let QC_ANSWERS = {};   // { question_id: option_object }
-let QC_EE_DISMISSED = false;   // v29: "Continue anyway" hides the early-exit banner until the check restarts
+let QC_ANSWERS = {};   // { question_id: { idx, value, label } }
+let QC_EE_DISMISSED = false;
 let QC_INDEX = 0;
-let QC_EARLY_EXIT = null; // { as, edss, label, isBedbound } when early exit applies
+let QC_EARLY_EXIT = null;
 
-// Early-exit: derive from Q1 (assist) + Q2 (distance) answers
-function qcCheckEarlyExit() {
-  const ans1 = QC_ANSWERS["qc_walk_assist"];
-  if (!ans1) return null;
-  const assist = ans1.mapping && ans1.mapping.amb_assistance;
-  if (assist === "wheelchair_indep") return { as:10, edss:7.0, label:"Wheelchair - independent",  isBedbound:false };
-  if (assist === "wheelchair_help")  return { as:11, edss:7.5, label:"Wheelchair - with help",     isBedbound:false };
-  if (assist === "bedbound") {
-    // Refine with the arm-function answer (AS 12 to 15)
-    const armsAns = QC_ANSWERS["qc_bedbound_arms"];
-    const a2 = armsAns && armsAns.mapping ? armsAns.mapping.amb_assistance : "bedbound";
-    const asOf = { bedbound: 12, bed_much: 13, bed_helpless: 14, bed_nocomm: 15 };
-    const lblOf = { bedbound: "Bed or chair-bound, effective arm use", bed_much: "In bed much of the day, some arm use",
-                    bed_helpless: "Helpless in bed, can communicate and eat", bed_nocomm: "Cannot communicate or eat, total care" };
-    const as = asOf[a2] || 12;
-    return { as, edss: AS_FIXED_EDSS[as], label: lblOf[a2] || lblOf.bedbound, isBedbound: true };
-  }
-  const ans2 = QC_ANSWERS["qc_walk_dist"];
-  if (!ans2) return null;
-  const dist = ans2.mapping && ans2.mapping.amb_distance_reported;
-  if (assist === "unilateral") return dist > 50
-    ? { as:6, edss:6.0, label:"Unilateral aid, more than 50 m", isBedbound:false }
-    : { as:8, edss:6.5, label:"Unilateral aid, 50 m or less",  isBedbound:false };
-  if (assist === "bilateral") return dist > 120
-    ? { as:7, edss:6.0, label:"Bilateral aid, more than 120 m",  isBedbound:false }
-    : { as:9, edss:6.5, label:"Bilateral aid, 10 to 120 m", isBedbound:false };
-  if ((assist === "none" || !assist) && dist !== undefined && dist < 100)
-    // Neurostatus AS 5: less than 100 m without aid -> EDSS 6.0
-    return { as:5, edss:6.0, label:"Walks less than 100 m without aid", isBedbound:false };
-  return null;
+// SRDSS decision tree (Kaufmann 2020, Supplementary Table A1): <10 m -> EDSS >=7;
+// 10-500 m -> 4-6.5; >=500 m with a walking aid or a wheelchair -> 4-6.5; otherwise <=3.5.
+function qcSRDSS(walk, aid, wc) {
+  if (walk == null || aid == null || wc == null) return null;
+  if (walk === "lt10") return { cat: "≥7.0", lo: 7, hi: 9.5 };
+  if (walk === "10to500") return { cat: "4.0–6.5", lo: 4, hi: 6.5 };
+  return (aid === 1 || wc === 1) ? { cat: "4.0–6.5", lo: 4, hi: 6.5 } : { cat: "≤3.5", lo: 0, hi: 3.5 };
 }
 
-// Bedbound partial mode: only cerebral + B/B questions
-const QC_BEDBOUND_ALLOWED = new Set(["qc_walk_assist","qc_bedbound_arms"]);
-
-function qcGetVisibleQuestions() {
-  const exit = qcCheckEarlyExit();
-  if (exit && exit.isBedbound)
-    return QC_QUESTIONS.filter(q => QC_BEDBOUND_ALLOWED.has(q.id));
-  return QC_QUESTIONS.filter(q => !q.skipIf || !q.skipIf(QC_ANSWERS));
-}
+function qcCheckEarlyExit() { return null; }
+function qcGetVisibleQuestions() { return QC_QUESTIONS; }
 
 function qcRender() {
   const visible = qcGetVisibleQuestions();
-  // Clamp index in case skipIf logic changed
   if (QC_INDEX >= visible.length) QC_INDEX = visible.length - 1;
   const q = visible[QC_INDEX];
-
-  // Progress
-  document.getElementById("qc-progress-text").textContent =
-    `Question ${QC_INDEX + 1} of ${visible.length}`;
-  document.getElementById("qc-progress-fill").style.width =
-    `${((QC_INDEX) / visible.length) * 100}%`;
-
+  document.getElementById("qc-progress-text").textContent = `Question ${QC_INDEX + 1} of ${visible.length}`;
+  document.getElementById("qc-progress-fill").style.width = `${(QC_INDEX / visible.length) * 100}%`;
   const stage = document.getElementById("qc-stage");
-  const opts = q.dynamicOptions ? q.dynamicOptions(QC_ANSWERS) : q.options;
   const selectedIdx = QC_ANSWERS[q.id]?.idx;
-
-  // Early-exit banner: show after Q1 (wheelchair) or Q2 (walking-aid/distance)
-  const _exit = qcCheckEarlyExit();
-  const _showEE = _exit && !_exit.isBedbound && !QC_EE_DISMISSED
-    && (QC_ANSWERS["qc_walk_assist"] !== undefined)
-    && (_exit.as <= 9 ? QC_ANSWERS["qc_walk_dist"] !== undefined : true);
-  const earlyExitBanner = _showEE ? `
-    <div class="qc-early-exit-banner" id="qc-early-exit-banner">
-      <div class="qc-ee-icon">⚡</div>
-      <div class="qc-ee-body">
-        <div class="qc-ee-title">Your walking answers already set the estimate</div>
-        <div class="qc-ee-desc">Based on your walking answers (${_exit.label}), your estimated EDSS is <strong>${_exit.edss.toFixed(1)}</strong>. More questions will not change the number.</div>
-      </div>
-      <div class="qc-ee-actions">
-        <button type="button" class="qc-btn qc-btn-primary" id="qc-ee-see-result">See result now →</button>
-        <button type="button" class="qc-btn qc-ee-continue-btn" id="qc-ee-continue">Continue anyway</button>
-      </div>
-    </div>
-  ` : "";
-
-  stage.innerHTML = earlyExitBanner + `
+  stage.innerHTML = `
     <div class="qc-question" data-q="${q.id}">
-      <div class="qc-question-num">Question ${QC_INDEX + 1} · ${q.id.replace("qc_", "").replace("_", " ")}</div>
+      <div class="qc-question-num">Question ${QC_INDEX + 1} of ${visible.length}</div>
       <h2 class="qc-question-text">${q.title}</h2>
       <p class="qc-question-help">${q.help}</p>
       <div class="qc-options">
-        ${opts.map((o, i) => `
+        ${q.options.map((o, i) => `
           <button type="button" class="qc-option ${selectedIdx === i ? 'selected' : ''}" data-opt="${i}">
             <span class="qc-option-icon">${o.icon}</span>
             <span class="qc-option-text">
               <span class="qc-option-title">${o.title}</span>
-              <span class="qc-option-desc">${o.desc}</span>
+              ${o.desc ? `<span class="qc-option-desc">${o.desc}</span>` : ""}
             </span>
-          </button>
-        `).join("")}
+          </button>`).join("")}
       </div>
       <div class="qc-nav">
         <button type="button" class="qc-btn" id="qc-back" ${QC_INDEX === 0 ? "disabled" : ""}>← Back</button>
         <button type="button" class="qc-btn qc-btn-primary" id="qc-next" ${QC_ANSWERS[q.id] === undefined ? "disabled" : ""}>
-          ${QC_INDEX === visible.length - 1 ? "See my estimated EDSS →" : "Next →"}
+          ${QC_INDEX === visible.length - 1 ? "See my result →" : "Next →"}
         </button>
       </div>
-    </div>
-  `;
-
-  // Wire early-exit buttons
-  document.getElementById("qc-ee-see-result")?.addEventListener("click", () => {
-    QC_EARLY_EXIT = _exit;
-    qcShowResult();
-  });
-  document.getElementById("qc-ee-continue")?.addEventListener("click", () => {
-    QC_EE_DISMISSED = true;
-    const b = document.getElementById("qc-early-exit-banner");
-    if (b) b.style.display = "none";
-  });
-
-  // Wire option clicks
+    </div>`;
   stage.querySelectorAll(".qc-option").forEach(btn => {
     btn.addEventListener("click", () => {
       const idx = parseInt(btn.dataset.opt, 10);
-      const optionObj = (q.dynamicOptions ? q.dynamicOptions(QC_ANSWERS) : q.options)[idx];
-      QC_ANSWERS[q.id] = { idx, mapping: optionObj.mapping, label: optionObj.title };
+      const o = q.options[idx];
+      QC_ANSWERS[q.id] = { idx, value: o.value, label: o.title };
       qcRender();
     });
   });
-
-  // Wire nav
-  document.getElementById("qc-back")?.addEventListener("click", () => {
-    if (QC_INDEX > 0) { QC_INDEX--; qcRender(); }
-  });
+  document.getElementById("qc-back")?.addEventListener("click", () => { if (QC_INDEX > 0) { QC_INDEX--; qcRender(); } });
   document.getElementById("qc-next")?.addEventListener("click", () => {
-    const visibleNow = qcGetVisibleQuestions();
-    if (QC_INDEX < visibleNow.length - 1) {
-      QC_INDEX++; qcRender();
-    } else {
-      qcShowResult();
-    }
+    if (QC_INDEX < visible.length - 1) { QC_INDEX++; qcRender(); } else { qcShowResult(); }
   });
 }
 
-function qcComputeEDSS() {
-  // Merge all mappings into a flat input dict and feed the engine
-  const inputs = {};
-  for (const q of QC_QUESTIONS) {
-    const ans = QC_ANSWERS[q.id];
-    if (!ans) continue;
-    Object.assign(inputs, ans.mapping);
-  }
-  return calculateFullEDSS(inputs);
+function qcComputeResult() {
+  const v = id => QC_ANSWERS[id] ? QC_ANSWERS[id].value : null;
+  const sr = qcSRDSS(v("qc_srdss_walk"), v("qc_srdss_aid"), v("qc_srdss_wc"));
+  const pdds = v("qc_pdds");
+  return { srdss: sr, pdds, pddsLabel: QC_ANSWERS.qc_pdds ? QC_ANSWERS.qc_pdds.label : "" };
 }
 
-function qcInterpretation(edss) {
-  if (edss == null || isNaN(edss)) return "We need a complete set of answers to estimate your score.";
-  if (edss === 0) return "Your responses suggest a normal neurological status - no functional impairment detected.";
-  if (edss <= 1.5) return "Your responses suggest only mild signs of MS, with no functional disability in daily life.";
-  if (edss <= 3.5) return "Your responses suggest some functional impact, but you remain fully independent in daily activities.";
-  if (edss <= 4.5) return "Your responses suggest your walking is somewhat limited, but you remain self-sufficient and active most of the day.";
-  if (edss <= 5.5) return "Your responses suggest your walking is significantly limited, and some daily activities may be affected.";
-  if (edss <= 6.5) return "Your responses suggest you require walking aids (cane, walker, or assistance) to walk.";
-  if (edss <= 7.5) return "Your responses suggest you primarily rely on a wheelchair for mobility.";
-  if (edss <= 8.5) return "Your responses suggest your mobility is significantly restricted, with most of the day in bed or chair.";
-  return "Your responses suggest very high disability. This estimate especially needs review with your neurologist.";
+function qcInterpretation(sr) {
+  if (!sr) return "We need all answers to estimate your EDSS range.";
+  if (sr.lo === 0) return "Your answers fit an EDSS of 3.5 or lower: walking is not limited, although MS may affect other functions.";
+  if (sr.lo === 4) return "Your answers fit an EDSS between 4.0 and 6.5: walking is limited, or you use a walking aid.";
+  return "Your answers fit an EDSS of 7.0 or higher: walking is limited to a few steps, and a wheelchair is usually needed.";
 }
 
 function qcShowResult() {
-  let r, edssTxt, meaning, earlyExitNote = "";
-  if (QC_EARLY_EXIT) {
-    r = qcComputeEDSS();
-    r.edss_step = Math.max(QC_EARLY_EXIT.edss, r.edss_step || 0);
-    edssTxt = r.edss_step.toFixed(1);
-    meaning = qcInterpretation(r.edss_step);
-    earlyExitNote = `<div class="qc-ee-result-note">⚡ Score determined by mobility (${QC_EARLY_EXIT.label}). More questions would not change this result.</div>`;
-  } else {
-    r = qcComputeEDSS();
-    edssTxt = (r.edss_step != null) ? r.edss_step.toFixed(1) : "-";
-    meaning = qcInterpretation(r.edss_step);
-  }
-
+  const r = qcComputeResult();
+  const catTxt = r.srdss ? r.srdss.cat : "-";
+  const meaning = qcInterpretation(r.srdss);
   document.getElementById("qc-progress-fill").style.width = "100%";
   document.getElementById("qc-progress-text").textContent = "Result";
-
   document.getElementById("qc-stage").innerHTML = `
     <div class="qc-result">
-      <div class="qc-result-label">Your estimated EDSS</div>
-      <div class="qc-result-number" id="qc-result-number">${edssTxt}</div>
-      ${earlyExitNote}
+      <div class="qc-result-label">Your estimated EDSS range</div>
+      <div class="qc-result-number" id="qc-result-number">${catTxt}</div>
       <div class="qc-result-divider"></div>
       <div class="qc-result-meaning">
         <strong>What this usually means</strong>
         ${meaning}
       </div>
+      ${r.pdds != null ? `<div class="qc-result-meaning"><strong>Your PDDS step</strong>${escHtml(r.pddsLabel)}. PDDS ranges from 0 (normal) to 8 (bedridden) and correlates closely with the EDSS.</div>` : ""}
       <div class="qc-disclaimer">
         <div class="qc-disclaimer-title">⚠ Important - please read</div>
-        This is a <strong>self-reported estimate</strong>, not an examined EDSS.
-        Self-scores are usually close to the neurologist's score but can differ by a step or more, most often at low scores.
-        Please discuss this number - and any concerns - with your neurologist.
+        This is a <strong>self-reported estimate</strong>, not an examined EDSS. The EDSS range comes from the self-reported disability status scale (SRDSS), which matched the neurologist's EDSS category in 88% of people in its validation study (Kaufmann et al. 2020). Only a neurological examination gives an exact EDSS. Please discuss this result with your neurologist.
       </div>
+      <p style="font-size:11px;color:var(--ink-faint);margin:10px 0 0">Sources: SRDSS - Kaufmann M et al. <em>Mult Scler Relat Disord</em> 2020;42:102148 (CC BY-NC-ND 4.0; questions used unchanged). PDDS - Hohol MJ et al. <em>Neurology</em> 1995; provided for use by the NARCOMS Registry (www.narcoms.org/pdds).</p>
       <div class="qc-result-actions">
         <button class="qc-btn qc-btn-primary" id="qc-save-img">💾 Save as image</button>
         <button class="qc-btn" id="qc-restart">↻ Start over</button>
         <button class="qc-btn" id="qc-go-clinician">→ Open clinician version</button>
       </div>
-    </div>
-  `;
-
-  document.getElementById("qc-save-img").addEventListener("click", () => qcSaveAsImage(edssTxt, meaning));
+    </div>`;
+  document.getElementById("qc-save-img").addEventListener("click", () => qcSaveAsImage(catTxt, meaning + (r.pdds != null ? " PDDS: " + r.pddsLabel + "." : "")));
   document.getElementById("qc-restart").addEventListener("click", () => {
     QC_ANSWERS = {}; QC_INDEX = 0; QC_EARLY_EXIT = null; QC_EE_DISMISSED = false; qcRender();
   });
@@ -9042,12 +8619,12 @@ function qcSaveAsImage(edssText, meaningText) {
   ctx.font = "600 22px 'IBM Plex Sans', sans-serif";
   ctx.textAlign = "center";
   // Approximate small caps via uppercase + letter-spacing trick
-  drawSpacedText(ctx, "YOUR ESTIMATED EDSS", W/2, 345, 4);
+  drawSpacedText(ctx, "YOUR ESTIMATED EDSS RANGE", W/2, 345, 4);
 
   // Big number
   ctx.fillStyle = "#b85c1a";
-  ctx.font = "700 220px 'Fraunces', Georgia, serif";
-  ctx.fillText(edssText, W/2, 540);
+  ctx.font = "700 150px 'Fraunces', Georgia, serif";
+  ctx.fillText(edssText, W/2, 520);
 
   // Divider
   ctx.strokeStyle = "#e6e2d6";
@@ -9079,7 +8656,7 @@ function qcSaveAsImage(edssText, meaningText) {
   ctx.fillStyle = "#1a1f2e";
   ctx.font = "400 18px 'IBM Plex Sans', sans-serif";
   ctx.textAlign = "left";
-  wrapText(ctx, "Self-reported estimate, not an examined EDSS. Please discuss this number with your neurologist.",
+  wrapText(ctx, "Self-reported estimate (SRDSS, Kaufmann 2020; PDDS), not an examined EDSS. Please discuss it with your neurologist.",
     210, dY + 64, W - 420, 26, "left");
 
   // Footer
@@ -9250,264 +8827,314 @@ let CLIN_STATE = {};   // stores answers keyed by step id
 let CLIN_STEP  = 0;
 let CLIN_STEPS = [];   // computed adaptive sequence
 
-// ---- Step definitions ----
-// Each step: { id, system, badge, q, hint, options, optional?, skip? }
-// options: [{ key, title, desc, badge, score }]
-// score = numeric value stored in CLIN_STATE
+// ---- Step definitions (v33: streamlined EDSS, sEDSS) ----
+// Implements the sEDSS of Baldassari LE et al., Mult Scler 2018;24(10):1347-55, Supplementary
+// Appendix 1: same subscores, categories, thresholds and scoring; wording lightly edited.
+// Each functional system score = the highest subscore. No Visual or Bladder conversion, no
+// separate ambulation score; the overall step follows the EDSS (Kurtzke 1983) rules.
+// Step types: { id, system, q, hint, options } (single choice) or { id, system, q, hint, subs }
+// where subs = [{ id, label, optional?, options:[{key,title,score}] }] and the FS = max(subs).
+
+const _sub = (id, label, opts, optional) => ({ id, label, optional: !!optional,
+  options: opts.map((t, i) => ({ key: String(i), title: t, score: i })) });
 
 function clinBuildSteps() {
   return [
-    // ── AMBULATION STEP 1: Assistance type ────────────────────────────────────
+    // ── AMBULATION: device ────────────────────────────────────────────────────
     {
       id: "amb",
       system: "🚶 Ambulation",
-      q: "What assistance does the patient need to walk?",
-      hint: "Choose the level of support used on a typical day.",
+      q: "What does the patient use to walk?",
+      hint: "Patient report is acceptable (sEDSS). Choose the support used on a typical day.",
       options: [
-        { key: "A", title: "No aid - walks unaided",           desc: "No device or person needed. May or may not have distance restriction.", badge: "normal", score: 0 },
-        { key: "B", title: "Unilateral aid (cane / crutch)",   desc: "One cane, crutch, or brace on one side.", badge: "mod",    score: 1 },
-        { key: "C", title: "Bilateral aid (walker / 2 canes)", desc: "Walker, two canes, two crutches, or another person.", badge: "severe", score: 2 },
-        { key: "D", title: "Wheelchair",                        desc: "Cannot walk - uses a wheelchair.", badge: "severe", score: 3 },
-        { key: "E", title: "Bedbound / chair-bound",            desc: "Essentially confined to bed or chair; arms may still function.", badge: "severe", score: 4 },
+        { key: "A", title: "No aid",                                   desc: "Walks without a device or another person.", badge: "normal", score: 0 },
+        { key: "B", title: "Unilateral aid",                           desc: "One cane, crutch or brace, used intermittently or constantly.", badge: "mod", score: 1 },
+        { key: "C", title: "Bilateral aid",                            desc: "Two canes or crutches, a walker, or bilateral braces, used constantly.", badge: "severe", score: 2 },
+        { key: "D", title: "Wheelchair",                               desc: "Unable to walk beyond about 5 m even with aid.", badge: "severe", score: 3 },
+        { key: "E", title: "Restricted to bed or chair",               desc: "Essentially restricted to bed or chair, or perambulated in a wheelchair.", badge: "severe", score: 4 },
       ]
     },
-    // ── AMBULATION STEP 2: Distance (options adapt to assistance type) ────────
-    // Shown only for unaided (amb=0) and aided walkers (amb=1,2)
-    // Wheelchair and bedbound skip this - distance irrelevant for AS calc
+    // ── AMBULATION: distance (sEDSS: patient-reported time, pace and device) ──
     {
       id: "amb_dist",
       system: "🚶 Ambulation - Distance",
-      q: "How far can the patient walk before needing to stop and rest?",
-      hint: "Use patient-reported distance or direct observation. Usual maximum distance - not best performance.",
+      q: "How far can the patient reasonably walk without rest?",
+      hint: "Ask: \"How many minutes can you reasonably walk without rest, and at what pace? Assume flat ground, nice weather, well rested.\" The distance to the clinic parking lot can be a guide.",
+      timeHelper: true,
       dynamicOptions: (state) => {
         const assist = state.amb ?? 0;
-        if (assist === 0) return [  // unaided
-          { key: "A", title: "Unrestricted (normal for age)", desc: "No limitation whatsoever.", badge: "normal", score: 0 },
-          { key: "B", title: "≥ 500 m",    desc: "Walks freely but notes some restriction.", badge: "mild",   score: 1 },
-          { key: "C", title: "300–500 m",  desc: "3–5 city blocks. Stops before 500 m.", badge: "mild",   score: 2 },
-          { key: "D", title: "200–300 m",  desc: "2–3 city blocks.", badge: "mod",    score: 3 },
-          { key: "E", title: "100–200 m",  desc: "1–2 city blocks.", badge: "mod",    score: 4 },
-          { key: "F", title: "< 100 m",    desc: "Less than 1 block - mostly indoors.", badge: "severe", score: 5 },
+        if (assist === 0) return [
+          { key: "A", title: "500 m or more",  desc: "EDSS step from the functional systems (4.0 or lower).", badge: "normal", score: 0 },
+          { key: "B", title: "300 to 499 m",   desc: "EDSS 4.5 or higher.", badge: "mild",   score: 2 },
+          { key: "C", title: "200 to 299 m",   desc: "EDSS 5.0 or higher.", badge: "mod",    score: 3 },
+          { key: "D", title: "100 to 199 m",   desc: "EDSS 5.5.", badge: "mod",    score: 4 },
+          { key: "E", title: "Less than 100 m", desc: "Cannot walk about 100 m without aid: EDSS 6.0.", badge: "severe", score: 5 },
         ];
-        if (assist === 1) return [  // unilateral - Neurostatus manual: more than 50 m -> AS 6 (6.0); 50 m or less -> AS 8 (6.5)
-          { key: "A", title: "More than 50 m with cane / crutch",
-            desc: "Walks more than 50 m with unilateral support.", badge: "mod",    score: 0 },
-          { key: "B", title: "50 m or less with cane / crutch",
-            desc: "Cannot walk more than 50 m even with one-sided aid.", badge: "severe", score: 1 },
+        if (assist === 1) return [
+          { key: "A", title: "About 100 m (with or without resting)", desc: "EDSS 6.0.", badge: "mod",    score: 6 },
+          { key: "B", title: "Cannot walk about 100 m even with the aid", desc: "EDSS 6.5.", badge: "severe", score: 8 },
         ];
-        if (assist === 2) return [  // bilateral - Neurostatus manual: more than 120 m -> AS 7 (6.0); 10 to 120 m -> AS 9 (6.5)
-          { key: "A", title: "More than 120 m with bilateral aid",
-            desc: "Walks more than 120 m with walker / two canes.", badge: "mod",    score: 0 },
-          { key: "B", title: "120 m or less with bilateral aid",
-            desc: "Cannot walk more than 120 m even with bilateral support.", badge: "severe", score: 1 },
+        if (assist === 2) return [
+          { key: "A", title: "About 20 m without resting", desc: "Constant bilateral assistance: EDSS 6.5. If the patient cannot walk beyond about 5 m even with aid, choose Wheelchair instead.", badge: "severe", score: 9 },
         ];
-        return []; // wheelchair/bedbound - no distance needed
+        return [];
       },
-      options: [] // populated dynamically
+      options: []
     },
-    // ── BEDBOUND DETAIL: distinguishes EDSS 8.0–9.5 ─────────────────────────
-    // Only shown when amb=5 (bedbound). Matches Neurostatus definitions exactly.
+    // ── BED OR CHAIR: EDSS 8.0-9.5 (Kurtzke 1983) ────────────────────────────
     {
       id: "bed_detail",
-      system: "🛏 Bedbound - Function",
-      q: "How much function does the patient retain in bed?",
-      hint: "EDSS step definitions for 8.0–9.5 (Kurtzke 1983). Assess arm use and ability to communicate and eat.",
+      system: "🛏 Bed or chair",
+      q: "How much function does the patient retain?",
+      hint: "EDSS steps 8.0 to 9.5 (Kurtzke 1983).",
       options: [
-        { key: "A", title: "Out of bed most of the day - effective arm use",
-          desc: "Restricted to bed/chair but up most of the day. Retains many self-care functions. Effective use of arms.", badge: "mod",    score: 0 },  // EDSS 8.0
-        { key: "B", title: "Mostly in bed - some arm use",
-          desc: "In bed much of the day. Has some effective use of arm(s). Retains some self-care functions.", badge: "severe", score: 1 },  // EDSS 8.5
-        { key: "C", title: "Helpless in bed - can communicate and eat",
-          desc: "Essentially helpless. Can still communicate and eat/swallow.", badge: "severe", score: 2 },  // EDSS 9.0
-        { key: "D", title: "Totally helpless - cannot communicate or eat",
-          desc: "Unable to communicate effectively or eat/swallow. Requires total care.", badge: "severe", score: 3 },  // EDSS 9.5
+        { key: "A", title: "Out of bed much of the day; effective use of arms", desc: "Retains many self-care functions.", badge: "mod",    score: 0 },
+        { key: "B", title: "In bed much of the day; some effective use of arm(s)", desc: "Retains some self-care functions.", badge: "severe", score: 1 },
+        { key: "C", title: "Helpless in bed; can communicate and eat", desc: "", badge: "severe", score: 2 },
+        { key: "D", title: "Totally helpless; cannot communicate effectively or eat/swallow", desc: "", badge: "severe", score: 3 },
       ]
     },
-    // ── WHEELCHAIR DETAIL: distinguishes EDSS 7.0 vs 7.5 ──────────────────────
-    // Only shown when amb=3 or amb=4.
+    // ── WHEELCHAIR: EDSS 7.0 vs 7.5 (Kurtzke 1983) ───────────────────────────
     {
       id: "wc_detail",
       system: "♿ Wheelchair",
       q: "What best describes the patient's wheelchair use?",
-      hint: "Determines EDSS 7.0 vs 7.5 (Kurtzke 1983 step definitions).",
+      hint: "EDSS steps 7.0 and 7.5 (Kurtzke 1983).",
       options: [
-        { key: "A", title: "Self-propelling - wheels self, transfers alone",
-          desc: "Restricted to wheelchair but fully independent. Up and about in wheelchair ~12 hrs/day.", badge: "severe", score: 0 },  // EDSS 7.0
-        { key: "B", title: "Needs help to wheel or transfer",
-          desc: "Cannot self-propel well or transfer without assistance.", badge: "severe", score: 1 },  // EDSS 7.5
+        { key: "A", title: "Wheels self in a standard wheelchair and transfers alone", desc: "Up and about in the wheelchair about 12 hours a day.", badge: "severe", score: 0 },
+        { key: "B", title: "Cannot take more than a few steps; may need help to transfer", desc: "Wheels self but cannot carry on in a standard wheelchair a full day; may need a motorized wheelchair.", badge: "severe", score: 1 },
       ]
     },
-    // ── PYRAMIDAL ──────────────────────────────────────────────────────────────
-    // Baldassari sEDSS: score only strength (not reflexes, not spasticity).
-    // Weakness = ≥2 weak muscles in same limb. Score worst limb (no bilateral split).
-    // Fine finger movements + hopping included when power is 5/5 (sensitive CST markers).
+    // ── PYRAMIDAL (sEDSS 0-5) ─────────────────────────────────────────────────
     {
       id: "pyr",
       system: "💪 Pyramidal",
-      q: "Worst limb strength and corticospinal signs?",
-      hint: "Ignore isolated abnormal reflexes - they don't contribute (Baldassari). Score the single most-affected limb. Test fine finger movement and hopping if power is 5/5 throughout.",
-      options: [
-        { key: "0", title: "Normal",                  desc: "Power 5/5 all limbs. Fine finger movement and hopping normal.", badge: "normal", score: 0 },
-        { key: "1", title: "Subtle CST signs only",   desc: "Power 5/5 but fine finger movement or hopping impaired. No functional weakness.", badge: "mild",   score: 1 },
-        { key: "2", title: "Mild weakness (4+/5 or 4/5)", desc: "≥2 weak muscles in one limb; not disabling.", badge: "mild",   score: 2 },
-        { key: "3", title: "Moderate weakness (3/5)", desc: "One or more limbs. Disabling but some useful movement.", badge: "mod",    score: 3 },
-        { key: "4", title: "Marked weakness (2/5) or monoplegia", desc: "Marked paraparesis or hemiparesis, moderate tetraparesis, or one limb plegic.", badge: "severe", score: 4 },
-        { key: "5", title: "Paraplegia, hemiplegia or marked tetraparesis", desc: "Both legs, or one side, essentially plegic; or marked weakness of all four limbs.", badge: "severe", score: 5 },
-        { key: "6", title: "Tetraplegia",             desc: "All four limbs essentially plegic.", badge: "severe", score: 6 },
+      q: "Strength, finger movements and hopping",
+      hint: "A limb counts as weak only when 2 or more muscles in it are weak. Reflexes and spasticity are not scored. Pyramidal score = highest subscore.",
+      subs: [
+        _sub("pyr_str", "Strength (BMRC)", [
+          "Normal",
+          "Motor fatigability or reduced performance by report, or grade 4 in 1 muscle in 1-2 limbs",
+          "Grade 4 in 2 or more muscles in 1 limb, or in 1 muscle in 3 or more limbs",
+          "Grade 4 in 2 or more muscles in 2 or more limbs, or grade 3 in 2 or more muscles in 1 limb",
+          "Grade 3 in 2 or more muscles in 2 or more limbs, or grade 0-2 in 2 or more muscles in 1 limb",
+          "Grade 0-2 in 2 or more muscles in 2 or more limbs",
+        ]),
+        _sub("pyr_fing", "Fine finger movements (required when arm strength is 5/5)", ["Normal", "Clearly impaired"], true),
+        _sub("pyr_hop", "Hopping (do not count if limited by pain)", ["Normal", "Impaired: fewer than 10 in a row on either side"], true),
       ]
     },
-    // ── CEREBELLAR ─────────────────────────────────────────────────────────────
-    // Baldassari: finger-nose, heel-shin, tandem gait, tremor. Severe gait ataxia 
-    // counts more (scores higher) than mild limb ataxia. No bilateral split needed.
+    // ── CEREBELLAR (sEDSS 0-4) ────────────────────────────────────────────────
     {
       id: "cer",
       system: "🔄 Cerebellar",
-      q: "Cerebellar function - ataxia, tremor, coordination?",
-      hint: "Finger-nose, heel-shin, tandem gait. Severe gait ataxia alone can score 3–4. Tremor at rest or with intention both count.",
-      options: [
-        { key: "0", title: "Normal",                  desc: "No ataxia, tremor, or dysmetria.", badge: "normal", score: 0 },
-        { key: "1", title: "Signs without disability", desc: "Subtle dysmetria or tremor - no functional impact.", badge: "mild",   score: 1 },
-        { key: "2", title: "Mild ataxia",             desc: "Noticeable coordination deficit; some functional impact.", badge: "mild",   score: 2 },
-        { key: "3", title: "Moderate ataxia",         desc: "Significant disability from tremor or gait ataxia.", badge: "mod",    score: 3 },
-        { key: "4", title: "Severe ataxia",           desc: "Unable to perform coordinated movements in most limbs.", badge: "severe", score: 4 },
-        { key: "5", title: "Unable to coordinate",    desc: "All four limbs. Essentially unable to perform any coordinated task.", badge: "severe", score: 5 },
+      q: "Limb ataxia, tandem gait and gait ataxia",
+      hint: "Romberg is scored under Sensory. Severe gait ataxia alone gives a Cerebellar score of 4. Cerebellar score = highest subscore.",
+      subs: [
+        _sub("cer_ul", "Upper limb ataxia or intention tremor (rapid alternating movements, finger-nose-finger)", [
+          "Normal",
+          "Subtle; no interference with function",
+          "Mild, one or both sides; minor interference with function",
+          "Moderate, one or both sides; clearly interferes with function",
+          "Severe or non-functional, one or both sides",
+        ]),
+        _sub("cer_tan", "Tandem gait", ["Normal", "Impaired", "Not possible"]),
+        _sub("cer_gait", "Gait ataxia", [
+          "Normal",
+          "Minimal: subtle impairment on turns",
+          "Mild: mildly wide base, extra steps on turns",
+          "Moderate: moderately wide base and unsafe on turns, or moderate sway with feet together and eyes open",
+          "Severe: unable to walk more than a few steps unassisted because of ataxia",
+        ]),
       ]
     },
-    // ── BRAINSTEM ──────────────────────────────────────────────────────────────
-    // Baldassari: Brainstem correlated highest with EDSS (rho 0.97). 
-    // Include: nystagmus, INO, gaze palsy, trigeminal, facial, dysarthria, dysphagia.
-    // Exclude: hearing (ePR-EDSS found it contributed to overscoring).
+    // ── BRAINSTEM (sEDSS 0-3) ─────────────────────────────────────────────────
     {
       id: "bst",
       system: "🧠 Brainstem",
-      q: "Brainstem - eye movements, speech, swallowing, face?",
-      hint: "Check: nystagmus, INO/diplopia, gaze palsy, facial sensation/weakness, dysarthria, dysphagia. Exclude hearing unless clearly MS-related.",
-      options: [
-        { key: "0", title: "Normal",                  desc: "No brainstem signs on exam.", badge: "normal", score: 0 },
-        { key: "1", title: "Signs only, no disability", desc: "Nystagmus, subtle INO, or minor facial finding - no functional impact.", badge: "mild",   score: 1 },
-        { key: "2", title: "Moderate dysfunction",    desc: "Intermittent diplopia, mild dysarthria, or mild facial weakness.", badge: "mild",   score: 2 },
-        { key: "3", title: "Significant dysfunction", desc: "Marked dysarthria, dysphagia, or sustained gaze palsy.", badge: "mod",    score: 3 },
-        { key: "4", title: "Severe dysfunction",      desc: "Major disability - near-inability to speak or swallow.", badge: "severe", score: 4 },
-        { key: "5", title: "Complete dysfunction",    desc: "Unable to swallow or speak intelligibly.", badge: "severe", score: 5 },
+      q: "Eye movements, nystagmus, face, speech and swallowing",
+      hint: "Brainstem score = highest subscore (0-3).",
+      subs: [
+        _sub("bst_eom", "Extraocular movements", [
+          "Normal",
+          "Subtle; patient unaware",
+          "Subtle with patient aware, or obvious with patient unaware",
+          "Obvious incomplete or complete paresis; patient aware",
+        ]),
+        _sub("bst_nys", "Nystagmus", [
+          "Normal",
+          "Mild gaze-evoked nystagmus",
+          "Nystagmus at 30 degrees but not in primary gaze",
+          "Nystagmus in primary gaze, or oscillopsia",
+        ]),
+        _sub("bst_trig", "Trigeminal", [
+          "Normal",
+          "Diminished or altered facial sensation; patient unaware",
+          "Diminished or altered facial sensation; patient aware",
+          "Active trigeminal neuralgia (at least 1 attack in the past 24 h)",
+        ]),
+        _sub("bst_face", "Facial weakness", [
+          "Normal",
+          "Subtle; patient unaware",
+          "Mild; patient aware",
+          "Incomplete or complete palsy: failure to close the eye or drooling",
+        ]),
+        _sub("bst_dys", "Dysarthria", [
+          "Normal",
+          "Subtle; patient unaware",
+          "Detectable; patient aware",
+          "Moderate or severe: speech difficult to understand",
+        ]),
+        _sub("bst_oth", "Other (for example dysphagia or hearing loss due to MS)", [
+          "Normal",
+          "Subtle; patient unaware",
+          "Detectable; patient aware",
+          "Moderate or marked disability",
+        ]),
       ]
     },
-    // ── SENSORY ────────────────────────────────────────────────────────────────
-    // Baldassari: use vibration (tuning fork) only - proprioception shares pathways
-    // and is redundant. Add light touch/superficial sensation for scoring when vibration
-    // is normal. Score by worst affected region AND number of limbs.
+    // ── SENSORY (sEDSS 0-4) ───────────────────────────────────────────────────
     {
       id: "sen",
       system: "✋ Sensory",
-      q: "Sensory loss - vibration (worst limb) and light touch?",
-      hint: "Use tuning fork for vibration; pinprick or light touch for superficial. Proprioception not needed (redundant with vibration). Score worst region and extent.",
-      options: [
-        { key: "0", title: "Normal",                  desc: "No sensory loss in any modality.", badge: "normal", score: 0 },
-        { key: "1", title: "Decreased vibration in 1–2 limbs", desc: "Mild, no functional impact.", badge: "mild",   score: 1 },
-        { key: "2", title: "Mild touch/pain loss in 1–2 limbs", desc: "Noticeable but limited.", badge: "mild",   score: 2 },
-        { key: "3", title: "Moderate loss in 3–4 limbs, or severe loss in 1–2", desc: "Touch, pain or proprioception.", badge: "mod",    score: 3 },
-        { key: "4", title: "Marked loss in 1–2 limbs, or moderate loss in more than two limbs", desc: "Marked decrease of touch or pain, or loss of proprioception.", badge: "severe", score: 4 },
-        { key: "5", title: "Loss of sensation in 1–2 limbs, or moderate loss for most of the body below the head", desc: "Essentially anaesthetic limb(s).", badge: "severe", score: 5 },
-        { key: "6", title: "Sensation essentially lost below the head", desc: "Trunk and all limbs.", badge: "severe", score: 6 },
+      q: "Superficial sensation, vibration and Romberg",
+      hint: "Proprioception is not tested in the sEDSS. Vibration: Rydel-Seiffer 64 Hz graduated tuning fork at the most distal joint. Sensory score = highest subscore.",
+      subs: [
+        _sub("sen_sup", "Superficial sensation (touch or pin)", [
+          "Normal",
+          "Diminished touch or pin; patient unaware before testing",
+          "Diminished touch or pin; patient aware; 1-2 limbs",
+          "Diminished touch in 3-4 limbs, or impaired sharp/dull discrimination in 1-2 limbs",
+          "Unable to feel touch or to discriminate sharp/dull in 1-2 limbs",
+        ]),
+        _sub("sen_vib", "Vibration (Rydel-Seiffer scale reading)", [
+          "Normal: arms 7.0 or more, legs 6.0 or more",
+          "Mild in 1-2 limbs: arms 4.0-6.5, legs 3.0-5.5",
+          "Moderate in 1-2 limbs (arms 1-3.5, legs 1-2.5), or mild in 3 or more limbs",
+          "Moderate in 3 or more limbs, or absent in 1-2 limbs",
+          "Absent in 3 or more limbs",
+        ]),
+        _sub("sen_rom", "Romberg", [
+          "Normal with eyes open and eyes closed",
+          "Mild: normal with eyes open, mild sway with eyes closed",
+          "Moderate: normal with eyes open, unstable with eyes closed",
+        ]),
       ]
     },
-    // ── VISUAL ─────────────────────────────────────────────────────────────────
-    // Baldassari: acuity + VF only. Disc pallor eliminated (no functional disability alone).
-    // Key change vs Neurostatus: 20/25 = NORMAL unless prior optic neuritis in that eye.
+    // ── VISUAL (sEDSS 0-4) ────────────────────────────────────────────────────
     {
       id: "vis",
       system: "👁️ Visual",
-      q: "Best-corrected visual acuity - worse eye?",
-      hint: "20/25 is NORMAL unless there is a known history of optic neuritis in that eye (Baldassari). Do not score disc pallor alone.",
-      options: [   // score = Neurostatus visual grade; converted (6→4, 5→3, 4→3, 3→2, 2→2, 1→1) for the EDSS step
-        { key: "0", title: "20/20 – 20/25",           desc: "Normal (or 20/25 with no prior optic neuritis).", badge: "normal", score: 0 },
-        { key: "2", title: "20/30 – 20/59",           desc: "Visual FS grade 2 (converted 2).", badge: "mild",   score: 2 },
-        { key: "3", title: "20/60 – 20/99",           desc: "Visual FS grade 3 (converted 2).", badge: "mod",    score: 3 },
-        { key: "4", title: "20/100 – 20/200",         desc: "Visual FS grade 4 (converted 3).", badge: "severe", score: 4 },
-        { key: "5", title: "Worse than 20/200 in the worse eye", desc: "Visual FS grade 5 (converted 3).", badge: "severe", score: 5 },
-        { key: "6", title: "Worse eye worse than 20/200 and better eye 20/60 or worse", desc: "Visual FS grade 6 (converted 4).", badge: "severe", score: 6 },
-      ],
-      optional: {
-        label: "Visual fields (improves accuracy - check worse eye)",
-        id: "vis_vf",
-        options: [   // score = Neurostatus visual grade from fields alone
-          { key: "0", title: "Normal",                score: 0 },
-          { key: "1", title: "Small scotoma or mild field defect", score: 1 },
-          { key: "3", title: "Large scotoma or moderate field loss", score: 3 },
-          { key: "4", title: "Marked field loss (e.g. hemianopia)", score: 4 },
-        ]
-      }
-    },
-    // ── BOWEL & BLADDER ────────────────────────────────────────────────────────
-    // Baldassari: bladder symptoms only in sEDSS (bowel eliminated - accounted for
-    // discrepancies in 11% of patients). We keep mild bowel symptoms as optional context
-    // but bladder drives the score. "Must use pads" rubric (Romeo ePR-EDSS) is useful.
-    {
-      id: "bb",
-      system: "🚻 Bladder / Bowel",
-      q: "Urinary dysfunction? (Bowel symptoms if present)",
-      hint: "Bladder scores drive this FS. Urgency, hesitancy, incontinence, retention, catheter use. Note: bowel was excluded from sEDSS (Baldassari) - only include if clearly MS-related and severe.",
-      options: [   // score = Neurostatus bowel/bladder grade; converted (6→5, 5→4, 4→3, 3→3, 2→2, 1→1) for the EDSS step
-        { key: "0", title: "Normal",                  desc: "No urinary or bowel symptoms.", badge: "normal", score: 0 },
-        { key: "1", title: "Mild urgency or hesitancy", desc: "No incontinence. No catheter.", badge: "mild",   score: 1 },
-        { key: "2", title: "Moderate urgency, hesitancy or retention; rare incontinence", desc: "Leakage no more than weekly. No catheter.", badge: "mild",   score: 2 },
-        { key: "3", title: "Frequent incontinence or intermittent self-catheterisation", desc: "Leakage more than weekly; or constant measures for bowel.", badge: "mod",    score: 3 },
-        { key: "4", title: "Almost constant catheterisation", desc: "Indwelling catheter or near-constant self-catheterisation (converted 3).", badge: "severe", score: 4 },
-        { key: "5", title: "Loss of bladder or bowel function", desc: "Complete incontinence or retention of one of them (converted 4).", badge: "severe", score: 5 },
-        { key: "6", title: "Loss of bladder and bowel function", desc: "Both lost (converted 5).", badge: "severe", score: 6 },
+      q: "Visual acuity and visual fields",
+      hint: "Corrected acuity with a 20-foot or 14-inch Snellen chart, best-corrected vision or pinhole. Disc pallor is not scored. Visual score = highest subscore; no conversion.",
+      subs: [
+        _sub("vis_va", "Visual acuity (worse eye, corrected)", [
+          "20/20, or 20/25 without prior optic neuritis in that eye",
+          "20/25 with prior optic neuritis in that eye",
+          "20/30 to 20/99",
+          "20/100 or worse",
+          "20/200 or worse, and better eye 20/60 or worse",
+        ]),
+        _sub("vis_vf", "Visual fields or scotoma (blurred or grayed spots in central or peripheral vision)", [
+          "Normal, or patient unaware",
+          "Patient aware, but not functionally limiting",
+          "Functionally limiting (for example driving or reading)",
+        ]),
       ]
     },
-    // ── CEREBRAL ───────────────────────────────────────────────────────────────
-    // Baldassari: fatigue included (score 1 if fatigue only). Cognitive symptoms add.
-    // Depression excluded (CombiRx scoring didn't record it; contributed to discrepancies).
-    // Only score if clearly MS-related - not depression, not generalized fatigue.
+    // ── BLADDER (sEDSS 0-4) ───────────────────────────────────────────────────
+    {
+      id: "bb",
+      system: "🚻 Bladder",
+      q: "Urinary hesitancy/retention and urgency/incontinence",
+      hint: "The sEDSS scores bladder function only (bowel symptoms are not scored). Bladder score = highest subscore; no conversion.",
+      subs: [
+        _sub("bb_hes", "Urinary hesitancy and retention", [
+          "Normal",
+          "Mild: takes extra time to start; no impact on lifestyle",
+          "Moderate: needs to push or strain; urinary infections more than 2 per year",
+          "Severe: requires intermittent catheterization",
+          "Indwelling catheter",
+        ]),
+        _sub("bb_urg", "Urinary urgency and incontinence", [
+          "Normal",
+          "Mild: no impact on lifestyle",
+          "Moderate: full bladder incontinence once a week or less; pad for leakage",
+          "Severe: incontinent more than once a week",
+          "Loss of function: requires diapers",
+        ]),
+      ]
+    },
+    // ── CEREBRAL (sEDSS 0-4) ──────────────────────────────────────────────────
     {
       id: "cbr",
       system: "🧩 Cerebral",
-      q: "MS-related fatigue or cognitive symptoms?",
-      hint: "Score 1 for MS fatigue alone. Cognitive impairment adds. Do NOT score depression or generalized fatigue as cerebral FS (Baldassari).",
-      options: [
-        { key: "0", title: "None",                    desc: "No MS-related cognitive or fatigue symptoms.", badge: "normal", score: 0 },
-        { key: "1", title: "Mild MS fatigue only",    desc: "Fatigue clearly attributable to MS, not interfering with daily activities; no cognitive deficit.", badge: "mild",   score: 1 },
-        { key: "2", title: "Moderate or severe MS fatigue, or mild cognitive symptoms", desc: "Fatigue that interferes with daily activities; or word-finding difficulty, slowed processing - not disabling.", badge: "mild",   score: 2 },
-        { key: "3", title: "Moderate cognitive impairment", desc: "Memory or executive dysfunction affecting daily activities.", badge: "mod",    score: 3 },
-        { key: "4", title: "Severe cognitive impairment", desc: "Major disability from cognitive MS involvement.", badge: "severe", score: 4 },
-        { key: "5", title: "Dementia",                desc: "Severe MS-related cognitive failure.", badge: "severe", score: 5 },
+      q: "Mentation and fatigue",
+      hint: "Mood is not scored in the sEDSS. Cerebral score = highest subscore.",
+      subs: [
+        _sub("cbr_ment", "Mentation", [
+          "Normal",
+          "Subtle: changed from before but within the normal range (difficulty multitasking, may need lists, occasional word-finding difficulty, memory not as when younger)",
+          "Mild: clearly abnormal and not due to aging (slow processing of routine information, needs detailed lists, frequent word-finding difficulty)",
+          "Moderate: clearly affects job or relationships (often loses train of thought, frequent errors, cannot function under stress, forgets conversations, names or events; abnormal neuropsychological testing)",
+          "Demented: unable to work, may need supervision (severe short-term memory loss, may get lost, unsafe to drive, may be disoriented, severe communication problems)",
+        ]),
+        _sub("cbr_fat", "Fatigue", [
+          "Normal",
+          "Mild: does not interfere with activities",
+          "Moderate: interferes with less than half of activities (can still work or run the home, not both)",
+          "Severe: interferes with half or more of activities (cannot work or run the home)",
+        ]),
       ]
     },
   ];
 }
 
+// sEDSS ambulation (Kurtzke 1983 steps) mapped onto the shared step engine:
+// 0 = 500 m or more (FS pattern decides), 2 = 300-499 m (4.5), 3 = 200-299 m (5.0),
+// 4 = 100-199 m (5.5), 5 = less than 100 m without aid (6.0), 6 = unilateral aid about
+// 100 m (6.0), 8 = unilateral aid, less (6.5), 9 = bilateral aid about 20 m (6.5),
+// 10/11 = wheelchair (7.0/7.5), 12-15 = bed or chair (8.0-9.5).
+const CLIN_AMB_TEXT = {
+  0: "walks 500 m or more without aid", 2: "walks 300 to 499 m without aid", 3: "walks 200 to 299 m without aid",
+  4: "walks 100 to 199 m without aid", 5: "walks less than 100 m without aid", 6: "unilateral aid, about 100 m",
+  8: "unilateral aid, less than about 100 m", 9: "constant bilateral aid, about 20 m", 10: "wheelchair, wheels self and transfers alone",
+  11: "wheelchair, cannot carry on a full day", 12: "out of bed much of the day, effective arm use", 13: "in bed much of the day, some arm use",
+  14: "helpless in bed, can communicate and eat", 15: "totally helpless, cannot communicate or eat",
+};
+
+function _clinSubsDone(step) {
+  const has = k => CLIN_STATE[k] !== undefined && CLIN_STATE[k] !== null;
+  return step.subs.filter(s => !s.optional).every(s => has(s.id));
+}
+function _clinSubsMax(step) {
+  const vals = step.subs.map(s => CLIN_STATE[s.id]).filter(v => v !== undefined && v !== null);
+  return vals.length ? Math.max(...vals) : null;
+}
+
 function clinCalcEDSS() {
   const amb      = CLIN_STATE.amb      ?? 0;
-  const amb_dist = CLIN_STATE.amb_dist ?? null;  // unaided: 0-5; aided: 0 (longer) / 1 (shorter); null if not asked
-  const pyr  = CLIN_STATE.pyr  ?? 0;
-  const cer  = CLIN_STATE.cer  ?? 0;
-  const bst  = CLIN_STATE.bst  ?? 0;
-  const sen  = CLIN_STATE.sen  ?? 0;
-  const visRaw = Math.max(CLIN_STATE.vis ?? 0, CLIN_STATE.vis_vf ?? 0);   // Neurostatus raw visual grade
-  const bbRaw  = CLIN_STATE.bb   ?? 0;                                     // Neurostatus raw bowel/bladder grade
-  const cbr  = CLIN_STATE.cbr  ?? 0;
-  const vis  = visualFSConverted(visRaw);
-  const bb   = bbFSConverted(bbRaw);
-  const fs = [pyr, cer, bst, sen, vis, bb, cbr];   // converted grades, as used for the step
+  const amb_dist = CLIN_STATE.amb_dist ?? null;
+  const v = k => CLIN_STATE[k] ?? 0;
+  const pyr = v("pyr"), cer = v("cer"), bst = v("bst"), sen = v("sen"), vis = v("vis"), bb = v("bb"), cbr = v("cbr");
+  const fs = [pyr, cer, bst, sen, vis, bb, cbr];   // sEDSS functional system scores (no conversion)
 
-  // Clinical answers -> Neurostatus Ambulation Score, then the one shared engine (calcEDSSStepTrace).
-  let AS, label;
-  if (amb === 4) {            // bed or chair-bound: bed_detail 0-3 -> AS 12-15
-    AS = 12 + (CLIN_STATE.bed_detail ?? 0);
-  } else if (amb === 3) {     // wheelchair: wc_detail 0 -> AS 10, 1 -> AS 11
-    AS = 10 + (CLIN_STATE.wc_detail ?? 0);
-  } else if (amb === 2) {     // bilateral aid: more than 120 m -> AS 7; 120 m or less -> AS 9
-    AS = (amb_dist === null || amb_dist === 0) ? 7 : 9;
-  } else if (amb === 1) {     // unilateral aid: more than 50 m -> AS 6; 50 m or less -> AS 8
-    AS = (amb_dist === null || amb_dist === 0) ? 6 : 8;
-  } else {                    // unaided: distance band 0-5 = AS 0-5
-    AS = (amb_dist !== null) ? amb_dist : 0;
-  }
-  const tr = calcEDSSStepTrace({ visual: vis, brainstem: bst, pyramidal: pyr, cerebellar: cer, sensory: sen, bb: bb, cerebral: cbr }, AS);
+  let AS;
+  if (amb === 4)      AS = 12 + (CLIN_STATE.bed_detail ?? 0);
+  else if (amb === 3) AS = 10 + (CLIN_STATE.wc_detail ?? 0);
+  else if (amb === 2) AS = 9;
+  else if (amb === 1) AS = amb_dist === 8 ? 8 : 6;
+  else                AS = amb_dist !== null ? amb_dist : 0;
+
+  const tr = calcEDSSStepTrace({ visual: vis, brainstem: bst, pyramidal: pyr, cerebellar: cer, sensory: sen, bb, cerebral: cbr }, AS);
   const edss = tr.edss;
-  label = AS >= 5 ? AS_LABEL[Math.min(AS, 15)].replace(/^./, c => c.toUpperCase()) : clinEdssLabel(edss);
-  return { edss, fs, label, as: AS, trace: tr, raw: { vis: visRaw, bb: bbRaw } };
+  const walk = CLIN_AMB_TEXT[AS] || "";
+  let reason;
+  if (AS >= 5) reason = `Walking: ${walk}. This sets the sEDSS at ${edss.toFixed(1)} (Kurtzke step definitions).`;
+  else if (AS >= 2) reason = `Walking: ${walk} (at least ${tr.floor.toFixed(1)}). Functional system pattern: ${tr.fs_step.toFixed(1)}. sEDSS = the higher, ${edss.toFixed(1)}.`;
+  else reason = `Walking: ${walk}. The sEDSS comes from the functional system pattern: ${_fsPatternText([vis, bst, pyr, cer, sen, bb, cbr])}.`;
+  const label = AS >= 5 ? walk.replace(/^./, c => c.toUpperCase()) : clinEdssLabel(edss);
+  return { edss, fs, label, as: AS, trace: tr, reason };
 }
 
 function clinEdssLabel(e) {
@@ -9528,7 +9155,7 @@ function clinEdssLabel(e) {
 // FS steps that are still in CLIN_STEPS, which used to show them as 0 instead of N/C.
 function _clinAnswered(key) {
   const has = k => CLIN_STATE[k] !== undefined && CLIN_STATE[k] !== null;
-  return key === "vis" ? (has("vis") || has("vis_vf")) : has(key);
+  return has(key);
 }
 function clinComputeSteps() {
   const all = clinBuildSteps();
@@ -9581,7 +9208,7 @@ function clinRender() {
   // Options - use dynamicOptions if defined (adapts to current CLIN_STATE)
   const stepOptions = step.dynamicOptions ? step.dynamicOptions(CLIN_STATE) : step.options;
 
-  const opts = stepOptions.map((o, i) => `
+  const opts = step.subs ? "" : stepOptions.map((o, i) => `
     <div class="clinical-opt${CLIN_STATE[step.id] === o.score ? " selected" : ""}"
          onclick="clinSelect('${step.id}', ${o.score}, ${i})">
       <div class="clinical-opt-key">${o.key}</div>
@@ -9591,6 +9218,30 @@ function clinRender() {
       </div>
       ${o.badge ? `<div class="clinical-opt-badge ${o.badge}">${o.badge}</div>` : ""}
     </div>`).join("");
+
+  // v33 sEDSS: subscores (each FS = highest subscore)
+  let subsHTML = "";
+  if (step.subs) {
+    subsHTML = step.subs.map(sb => {
+      const sel = CLIN_STATE[sb.id] ?? null;
+      const so = sb.options.map(o => `
+        <div class="clinical-opt${sel === o.score ? " selected" : ""}" style="padding:10px 14px;"
+             onclick="clinSelectSub('${step.id}', '${sb.id}', ${o.score})">
+          <div class="clinical-opt-key" style="width:22px;height:22px;font-size:11px;">${o.key}</div>
+          <div class="clinical-opt-body"><div class="clinical-opt-title" style="font-size:13px;">${o.title}</div></div>
+        </div>`).join("");
+      return `<div class="clinical-optional-section"><div class="clinical-optional-label">${sb.label}${sb.optional ? " - if tested" : ""}</div><div class="clinical-options" style="gap:6px;">${so}</div></div>`;
+    }).join("") + `<div class="clinical-nav" style="justify-content:flex-start;margin-top:8px"><button class="clinical-btn" onclick="clinAllNormal('${step.id}')">All subscores normal (0)</button></div>`;
+  }
+  // v33 sEDSS: walking time x pace helper (brisk 100, leisurely 50, dragging 30 m/min)
+  let helperHTML = "";
+  if (step.timeHelper && (CLIN_STATE.amb ?? 0) === 0) {
+    helperHTML = `<div class="clinical-optional-section"><div class="clinical-optional-label">Walking time helper (optional)</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:13px">
+        <input type="number" id="clin-amb-min" min="0" step="1" placeholder="minutes" style="width:96px" onchange="clinAmbHelper()">
+        <select id="clin-amb-pace" onchange="clinAmbHelper()"><option value="100">Brisk pace (100 m/min)</option><option value="50" selected>Leisurely pace (50 m/min)</option><option value="30">Dragging pace (30 m/min)</option></select>
+        <span id="clin-amb-m"></span></div></div>`;
+  }
 
   // Optional sub-question
   let optionalHTML = "";
@@ -9609,8 +9260,8 @@ function clinRender() {
       </div>`;
   }
 
-  const canNext = CLIN_STATE[step.id] !== null && CLIN_STATE[step.id] !== undefined
-    && (step.dynamicOptions ? step.dynamicOptions(CLIN_STATE).length > 0 : step.options.length > 0);
+  const canNext = step.subs ? _clinSubsDone(step) : (CLIN_STATE[step.id] !== null && CLIN_STATE[step.id] !== undefined
+    && (step.dynamicOptions ? step.dynamicOptions(CLIN_STATE).length > 0 : step.options.length > 0));
 
   stage.innerHTML = `
     ${exitBanner}
@@ -9618,7 +9269,8 @@ function clinRender() {
       <div class="clinical-system-badge">${step.system}</div>
       <div class="clinical-q">${step.q}</div>
       ${step.hint ? `<div class="clinical-hint">${step.hint}</div>` : ""}
-      <div class="clinical-options">${opts}</div>
+      ${helperHTML}
+      ${step.subs ? subsHTML : `<div class="clinical-options">${opts}</div>`}
       ${optionalHTML}
       ${(() => {
         const ambS = CLIN_STATE.amb ?? -1;
@@ -9649,12 +9301,12 @@ function clinRender() {
 }
 
 function clinShowResult(stage) {
-  const { edss, fs, label, as, trace } = clinCalcEDSS();
-  const _clinRule = `Ambulation Score ${as}. ${trace.reason}`;
+  const { edss, fs, label, as, trace, reason } = clinCalcEDSS();
+  const _clinRule = reason;
   // Determine which systems were actually assessed
   const collectedIds = CLIN_STEPS.map(s => s.id);
   const fsMap = { pyr:0, cer:1, bst:2, sen:3, vis:4, bb:5, cbr:6 };
-  const fsNames = ["Pyramidal","Cerebellar","Brainstem","Sensory","Visual","Bowel/Bladder","Cerebral"];
+  const fsNames = ["Pyramidal","Cerebellar","Brainstem","Sensory","Visual","Bladder","Cerebral"];
   const fsGrid = fs.map((v, i) => {
     const key = Object.keys(fsMap).find(k => fsMap[k] === i);
     const calculated = _clinAnswered(key);  // v29: only systems actually answered (not every step in the list)
@@ -9672,20 +9324,20 @@ function clinShowResult(stage) {
   stage.innerHTML = `
     <div class="clinical-card" id="clin-result-card">
       <div class="clinical-result">
-        <div class="clinical-result-label">EDSS Score</div>
+        <div class="clinical-result-label">sEDSS (streamlined EDSS)</div>
         <div class="clinical-result-score">${edss.toFixed(1)}</div>
         <div class="clinical-result-desc">${label}</div>
         <div class="clinical-fs-grid">${fsGrid}</div>
-        <p style="font-size:11px;color:var(--ink-faint);text-align:center;margin:0 0 6px;">N/C = not calculated (ambulation-dominant scoring). Visual and bowel/bladder shown as converted grades.</p>
+        <p style="font-size:11px;color:var(--ink-faint);text-align:center;margin:0 0 6px;">N/C = not calculated (walking alone sets the step). Functional system scores are sEDSS scores (highest subscore; no conversion).</p>
         <p style="font-size:12px;color:var(--ink-soft);text-align:center;margin:0 0 12px;">${escHtml(_clinRule)}</p>
-        <p style="font-size:11px;color:var(--ink-faint);text-align:center;margin:0 0 16px;">Streamlined mode omits: reflexes, spasticity, right/left split, disc pallor, hearing, depression and euphoria. Use the Roadmap or System view for a full standardized EDSS exam.</p>
+        <p style="font-size:11px;color:var(--ink-faint);text-align:center;margin:0 0 16px;">Streamlined EDSS (sEDSS): Baldassari LE et al. <em>Mult Scler</em> 2018;24(10):1347&ndash;55. It correlates closely with the full EDSS (Spearman rho 0.97 to 0.99) but is not identical to it. Use the Roadmap or System view for a full standardized EDSS exam.</p>
         <div class="clinical-result-actions">
           <button class="clinical-btn primary" onclick="clinRestart()">New Assessment</button>
           <button class="clinical-btn" id="clin-export-btn">Save as image</button>
           <button class="clinical-btn" onclick="clinGoHome()">← Home</button>
         </div>
         <div class="clinical-disclaimer">
-          ⚠️ Calculated from streamlined clinical input. For research or trial use, the full standardized EDSS exam (Roadmap or System view) is recommended. Clinical judgement always takes precedence.
+          ⚠️ sEDSS from a streamlined exam. For research or trial use, the full standardized EDSS exam (Roadmap or System view) is recommended. Clinical judgement always takes precedence.
         </div>
       </div>
     </div>`;
@@ -9725,7 +9377,7 @@ function clinSaveAsImage(edssText, labelText, fs, collectedIds) {
   ctx.fillText("AutoEDSSguide", W/2, 195);
   ctx.fillStyle = "#7b3fa0";
   ctx.font = "italic 20px 'Fraunces', Georgia, serif";
-  ctx.fillText("Clinical EDSS Result", W/2, 228);
+  ctx.fillText("sEDSS (streamlined EDSS) Result", W/2, 228);
 
   // Divider
   ctx.strokeStyle = "#e2d9ef";
@@ -9735,7 +9387,7 @@ function clinSaveAsImage(edssText, labelText, fs, collectedIds) {
   // Label
   ctx.fillStyle = "#8a8f9d";
   ctx.font = "600 20px 'IBM Plex Sans', sans-serif";
-  drawSpacedText(ctx, "EDSS STEP", W/2, 320, 4);
+  drawSpacedText(ctx, "sEDSS", W/2, 320, 4);
 
   // Big score
   ctx.fillStyle = "#7b3fa0";
@@ -9752,7 +9404,7 @@ function clinSaveAsImage(edssText, labelText, fs, collectedIds) {
   ctx.beginPath(); ctx.moveTo(240, 590); ctx.lineTo(W-240, 590); ctx.stroke();
 
   // FS grid - 7 systems in 2 rows
-  const fsNames = ["Pyramidal","Cerebellar","Brainstem","Sensory","Visual","BB","Cerebral"];
+  const fsNames = ["Pyramidal","Cerebellar","Brainstem","Sensory","Visual","Bladder","Cerebral"];
   const fsMap = { pyr:0, cer:1, bst:2, sen:3, vis:4, bb:5, cbr:6 };
   const cols = 4, cellW = (W-200)/cols, startX = 100, startY = 630;
   ctx.font = "700 16px 'IBM Plex Sans', sans-serif";
@@ -9779,7 +9431,7 @@ function clinSaveAsImage(edssText, labelText, fs, collectedIds) {
   // Disclaimer
   ctx.fillStyle = "#94a3b8";
   ctx.font = "400 15px 'IBM Plex Sans', sans-serif";
-  wrapText(ctx, "Streamlined clinical scoring. Clinical judgement takes precedence.", W/2, 900, W-200, 24);
+  wrapText(ctx, "sEDSS (Baldassari et al., Mult Scler 2018). Clinical judgement takes precedence.", W/2, 900, W-200, 24);
 
   // Date
   ctx.fillStyle = "#cbd5e1";
@@ -9806,6 +9458,37 @@ function clinSelect(id, score, optIdx) {
     if (CLIN_STEP >= CLIN_STEPS.length) CLIN_STEP = CLIN_STEPS.length - 1;
   }
   clinRender();
+}
+
+function clinSelectSub(stepId, subId, score) {
+  CLIN_STATE[subId] = score;
+  const step = clinBuildSteps().find(x => x.id === stepId);
+  if (step && _clinSubsDone(step)) CLIN_STATE[stepId] = _clinSubsMax(step);
+  else delete CLIN_STATE[stepId];
+  clinRender();
+}
+
+function clinAllNormal(stepId) {
+  const step = clinBuildSteps().find(x => x.id === stepId);
+  if (!step) return;
+  step.subs.forEach(sb => { if (!sb.optional || CLIN_STATE[sb.id] == null) CLIN_STATE[sb.id] = 0; });
+  CLIN_STATE[stepId] = _clinSubsMax(step);
+  clinRender();
+}
+
+function clinAmbHelper() {
+  const min = parseFloat(document.getElementById("clin-amb-min")?.value);
+  const pace = parseFloat(document.getElementById("clin-amb-pace")?.value || "50");
+  const out = document.getElementById("clin-amb-m");
+  if (!isFinite(min) || min < 0) { if (out) out.textContent = ""; return; }
+  const m = Math.round(min * pace);
+  if (out) out.textContent = "≈ " + m + " m";
+  const band = m >= 500 ? 0 : m >= 300 ? 2 : m >= 200 ? 3 : m >= 100 ? 4 : 5;
+  CLIN_STATE.amb_dist = band;
+  const keep = { min: document.getElementById("clin-amb-min").value, pace: document.getElementById("clin-amb-pace").value };
+  clinRender();
+  const mi = document.getElementById("clin-amb-min"), pa = document.getElementById("clin-amb-pace"), o2 = document.getElementById("clin-amb-m");
+  if (mi) mi.value = keep.min; if (pa) pa.value = keep.pace; if (o2) o2.textContent = "≈ " + m + " m";
 }
 
 function clinNext() {
@@ -10009,7 +9692,7 @@ function objToCSV(obj) {
 // v31 features: severity (ARMSS/MSSS), change vs baseline (CDP/PIRA screen),
 // EMR note, batch CSV scorer, REDCap choices. All on-device; nothing is uploaded.
 // ============================================================
-var GLOBAL_ARMSS={"0.0":{"18":1.5,"19":1.59,"20":1.44,"21":1.4,"22":1.33,"23":1.28,"24":1.14,"25":1.09,"26":1.01,"27":1.01,"28":0.96,"29":0.9,"30":0.88,"31":0.87,"32":0.82,"33":0.77,"34":0.72,"35":0.68,"36":0.61,"37":0.57,"38":0.56,"39":0.54,"40":0.5,"41":0.49,"42":0.43,"43":0.39,"44":0.37,"45":0.35,"46":0.33,"47":0.31,"48":0.29,"49":0.26,"50":0.23,"51":0.22,"52":0.2,"53":0.19,"54":0.17,"55":0.17,"56":0.14,"57":0.14,"58":0.12,"59":0.11,"60":0.1,"61":0.08,"62":0.08,"63":0.07,"64":0.06,"65":0.05,"66":0.06,"67":0.06,"68":0.05,"69":0.05,"70":0.05,"71":0.04,"72":0.04,"73":0.03,"74":0.03,"75":0.03},"1.0":{"18":4.24,"19":4.29,"20":3.85,"21":3.77,"22":3.62,"23":3.53,"24":3.28,"25":3.24,"26":3.07,"27":3.04,"28":2.94,"29":2.84,"30":2.76,"31":2.71,"32":2.62,"33":2.5,"34":2.36,"35":2.26,"36":2.08,"37":1.96,"38":1.87,"39":1.81,"40":1.69,"41":1.62,"42":1.49,"43":1.39,"44":1.31,"45":1.23,"46":1.16,"47":1.09,"48":1.03,"49":0.94,"50":0.87,"51":0.84,"52":0.78,"53":0.7,"54":0.68,"55":0.64,"56":0.59,"57":0.58,"58":0.53,"59":0.47,"60":0.44,"61":0.38,"62":0.36,"63":0.33,"64":0.3,"65":0.26,"66":0.27,"67":0.24,"68":0.22,"69":0.2,"70":0.19,"71":0.16,"72":0.13,"73":0.13,"74":0.12,"75":0.13},"1.5":{"18":5.79,"19":5.75,"20":5.25,"21":5.23,"22":5.12,"23":5.03,"24":4.82,"25":4.82,"26":4.67,"27":4.63,"28":4.53,"29":4.41,"30":4.28,"31":4.16,"32":4.04,"33":3.9,"34":3.73,"35":3.6,"36":3.39,"37":3.23,"38":3.09,"39":2.96,"40":2.79,"41":2.67,"42":2.49,"43":2.34,"44":2.24,"45":2.13,"46":2.02,"47":1.9,"48":1.8,"49":1.67,"50":1.56,"51":1.51,"52":1.41,"53":1.29,"54":1.27,"55":1.21,"56":1.13,"57":1.1,"58":1.0,"59":0.91,"60":0.84,"61":0.76,"62":0.71,"63":0.66,"64":0.59,"65":0.53,"66":0.49,"67":0.47,"68":0.42,"69":0.37,"70":0.36,"71":0.27,"72":0.26,"73":0.3,"74":0.3,"75":0.3},"2.0":{"18":6.71,"19":6.71,"20":6.31,"21":6.33,"22":6.31,"23":6.28,"24":6.12,"25":6.09,"26":5.98,"27":5.94,"28":5.84,"29":5.68,"30":5.53,"31":5.36,"32":5.21,"33":5.04,"34":4.88,"35":4.78,"36":4.57,"37":4.41,"38":4.27,"39":4.13,"40":3.89,"41":3.73,"42":3.52,"43":3.37,"44":3.22,"45":3.12,"46":3.01,"47":2.86,"48":2.67,"49":2.51,"50":2.36,"51":2.26,"52":2.13,"53":2.03,"54":1.96,"55":1.86,"56":1.75,"57":1.69,"58":1.53,"59":1.43,"60":1.33,"61":1.22,"62":1.13,"63":1.04,"64":0.94,"65":0.84,"66":0.77,"67":0.76,"68":0.71,"69":0.63,"70":0.63,"71":0.51,"72":0.48,"73":0.5,"74":0.43,"75":0.35},"2.5":{"18":7.62,"19":7.62,"20":7.25,"21":7.29,"22":7.34,"23":7.37,"24":7.26,"25":7.23,"26":7.13,"27":7.05,"28":6.96,"29":6.81,"30":6.66,"31":6.49,"32":6.33,"33":6.11,"34":5.93,"35":5.87,"36":5.69,"37":5.52,"38":5.4,"39":5.26,"40":4.96,"41":4.76,"42":4.55,"43":4.42,"44":4.24,"45":4.11,"46":4.01,"47":3.83,"48":3.61,"49":3.41,"50":3.27,"51":3.11,"52":2.93,"53":2.79,"54":2.7,"55":2.56,"56":2.41,"57":2.34,"58":2.16,"59":2.02,"60":1.9,"61":1.78,"62":1.62,"63":1.5,"64":1.38,"65":1.24,"66":1.14,"67":1.13,"68":1.06,"69":0.99,"70":0.98,"71":0.85,"72":0.76,"73":0.77,"74":0.65,"75":0.53},"3.0":{"18":8.18,"19":8.06,"20":7.87,"21":7.92,"22":8.02,"23":8.06,"24":7.98,"25":7.93,"26":7.84,"27":7.78,"28":7.69,"29":7.56,"30":7.4,"31":7.25,"32":7.06,"33":6.84,"34":6.68,"35":6.63,"36":6.48,"37":6.33,"38":6.22,"39":6.08,"40":5.78,"41":5.56,"42":5.37,"43":5.21,"44":5.05,"45":4.9,"46":4.8,"47":4.64,"48":4.44,"49":4.22,"50":4.1,"51":3.91,"52":3.71,"53":3.51,"54":3.42,"55":3.26,"56":3.1,"57":3.03,"58":2.87,"59":2.7,"60":2.57,"61":2.4,"62":2.21,"63":2.1,"64":1.99,"65":1.8,"66":1.71,"67":1.67,"68":1.52,"69":1.46,"70":1.47,"71":1.32,"72":1.22,"73":1.22,"74":1.06,"75":0.86},"3.5":{"18":8.53,"19":8.53,"20":8.5,"21":8.49,"22":8.57,"23":8.6,"24":8.52,"25":8.45,"26":8.38,"27":8.36,"28":8.27,"29":8.16,"30":7.99,"31":7.86,"32":7.66,"33":7.45,"34":7.31,"35":7.27,"36":7.15,"37":7.01,"38":6.92,"39":6.78,"40":6.51,"41":6.29,"42":6.1,"43":5.94,"44":5.78,"45":5.61,"46":5.53,"47":5.4,"48":5.22,"49":5.01,"50":4.9,"51":4.72,"52":4.49,"53":4.29,"54":4.18,"55":4.02,"56":3.85,"57":3.77,"58":3.62,"59":3.45,"60":3.31,"61":3.1,"62":2.9,"63":2.76,"64":2.61,"65":2.39,"66":2.33,"67":2.24,"68":2.05,"69":1.99,"70":2.0,"71":1.83,"72":1.66,"73":1.57,"74":1.41,"75":1.18},"4.0":{"18":8.89,"19":8.89,"20":8.88,"21":8.86,"22":8.93,"23":8.96,"24":8.86,"25":8.79,"26":8.76,"27":8.75,"28":8.66,"29":8.59,"30":8.42,"31":8.31,"32":8.12,"33":7.92,"34":7.78,"35":7.75,"36":7.63,"37":7.5,"38":7.4,"39":7.27,"40":7.03,"41":6.84,"42":6.67,"43":6.54,"44":6.39,"45":6.23,"46":6.13,"47":6.01,"48":5.85,"49":5.65,"50":5.54,"51":5.36,"52":5.14,"53":4.93,"54":4.85,"55":4.68,"56":4.51,"57":4.42,"58":4.29,"59":4.11,"60":3.94,"61":3.72,"62":3.5,"63":3.32,"64":3.1,"65":2.86,"66":2.76,"67":2.66,"68":2.46,"69":2.41,"70":2.44,"71":2.24,"72":2.07,"73":1.92,"74":1.81,"75":1.52},"4.5":{"18":9.01,"19":9.01,"20":9.01,"21":9.01,"22":9.11,"23":9.17,"24":9.04,"25":8.97,"26":8.98,"27":8.97,"28":8.87,"29":8.83,"30":8.69,"31":8.58,"32":8.41,"33":8.24,"34":8.09,"35":8.06,"36":7.94,"37":7.81,"38":7.7,"39":7.58,"40":7.36,"41":7.22,"42":7.08,"43":6.94,"44":6.82,"45":6.69,"46":6.56,"47":6.43,"48":6.28,"49":6.06,"50":5.92,"51":5.75,"52":5.54,"53":5.34,"54":5.29,"55":5.14,"56":4.96,"57":4.87,"58":4.75,"59":4.58,"60":4.39,"61":4.17,"62":3.93,"63":3.73,"64":3.49,"65":3.22,"66":3.08,"67":2.98,"68":2.77,"69":2.7,"70":2.77,"71":2.61,"72":2.43,"73":2.3,"74":2.16,"75":1.78},"5.0":{"18":9.13,"19":9.13,"20":9.23,"21":9.14,"22":9.25,"23":9.3,"24":9.17,"25":9.11,"26":9.12,"27":9.1,"28":9.0,"29":8.96,"30":8.83,"31":8.72,"32":8.58,"33":8.45,"34":8.31,"35":8.28,"36":8.16,"37":8.01,"38":7.92,"39":7.81,"40":7.6,"41":7.49,"42":7.36,"43":7.21,"44":7.08,"45":6.97,"46":6.84,"47":6.72,"48":6.59,"49":6.39,"50":6.25,"51":6.08,"52":5.88,"53":5.69,"54":5.64,"55":5.5,"56":5.32,"57":5.24,"58":5.1,"59":4.93,"60":4.74,"61":4.54,"62":4.28,"63":4.07,"64":3.82,"65":3.53,"66":3.37,"67":3.28,"68":3.06,"69":2.98,"70":3.05,"71":2.89,"72":2.7,"73":2.56,"74":2.42,"75":2.11},"5.5":{"18":9.33,"19":9.33,"20":9.4,"21":9.31,"22":9.4,"23":9.4,"24":9.28,"25":9.27,"26":9.26,"27":9.22,"28":9.14,"29":9.1,"30":8.95,"31":8.85,"32":8.75,"33":8.64,"34":8.53,"35":8.49,"36":8.38,"37":8.21,"38":8.14,"39":8.02,"40":7.85,"41":7.75,"42":7.63,"43":7.48,"44":7.37,"45":7.25,"46":7.12,"47":7.03,"48":6.92,"49":6.74,"50":6.62,"51":6.46,"52":6.27,"53":6.11,"54":6.04,"55":5.89,"56":5.72,"57":5.63,"58":5.47,"59":5.28,"60":5.1,"61":4.89,"62":4.6,"63":4.4,"64":4.17,"65":3.86,"66":3.71,"67":3.65,"68":3.43,"69":3.31,"70":3.39,"71":3.22,"72":3.0,"73":2.83,"74":2.65,"75":2.47},"6.0":{"18":9.52,"19":9.52,"20":9.57,"21":9.51,"22":9.58,"23":9.55,"24":9.5,"25":9.45,"26":9.47,"27":9.42,"28":9.35,"29":9.3,"30":9.2,"31":9.12,"32":9.05,"33":8.98,"34":8.87,"35":8.86,"36":8.76,"37":8.63,"38":8.57,"39":8.47,"40":8.33,"41":8.27,"42":8.19,"43":8.06,"44":7.99,"45":7.89,"46":7.76,"47":7.69,"48":7.57,"49":7.43,"50":7.33,"51":7.21,"52":7.08,"53":6.95,"54":6.86,"55":6.72,"56":6.55,"57":6.43,"58":6.29,"59":6.12,"60":5.97,"61":5.82,"62":5.52,"63":5.32,"64":5.15,"65":4.82,"66":4.69,"67":4.65,"68":4.53,"69":4.41,"70":4.48,"71":4.28,"72":4.1,"73":3.83,"74":3.69,"75":3.44},"6.5":{"18":9.62,"19":9.62,"20":9.66,"21":9.69,"22":9.71,"23":9.72,"24":9.73,"25":9.69,"26":9.7,"27":9.65,"28":9.61,"29":9.56,"30":9.51,"31":9.47,"32":9.41,"33":9.37,"34":9.29,"35":9.31,"36":9.24,"37":9.15,"38":9.13,"39":9.07,"40":8.95,"41":8.91,"42":8.9,"43":8.82,"44":8.79,"45":8.73,"46":8.61,"47":8.53,"48":8.43,"49":8.33,"50":8.28,"51":8.23,"52":8.18,"53":8.08,"54":8.0,"55":7.89,"56":7.74,"57":7.62,"58":7.54,"59":7.43,"60":7.32,"61":7.24,"62":6.97,"63":6.81,"64":6.65,"65":6.38,"66":6.25,"67":6.24,"68":6.21,"69":6.18,"70":6.32,"71":6.16,"72":6.03,"73":5.71,"74":5.59,"75":5.35},"7.0":{"18":9.74,"19":9.76,"20":9.78,"21":9.79,"22":9.8,"23":9.81,"24":9.82,"25":9.79,"26":9.81,"27":9.78,"28":9.76,"29":9.72,"30":9.69,"31":9.65,"32":9.61,"33":9.58,"34":9.54,"35":9.56,"36":9.52,"37":9.44,"38":9.43,"39":9.39,"40":9.29,"41":9.26,"42":9.28,"43":9.23,"44":9.21,"45":9.18,"46":9.09,"47":9.01,"48":8.96,"49":8.87,"50":8.85,"51":8.84,"52":8.83,"53":8.72,"54":8.69,"55":8.6,"56":8.46,"57":8.38,"58":8.33,"59":8.26,"60":8.19,"61":8.11,"62":7.94,"63":7.85,"64":7.71,"65":7.51,"66":7.45,"67":7.43,"68":7.4,"69":7.37,"70":7.58,"71":7.46,"72":7.35,"73":7.07,"74":7.0,"75":6.81},"7.5":{"18":9.85,"19":9.85,"20":9.85,"21":9.85,"22":9.86,"23":9.87,"24":9.87,"25":9.87,"26":9.87,"27":9.84,"28":9.82,"29":9.79,"30":9.78,"31":9.76,"32":9.72,"33":9.7,"34":9.68,"35":9.7,"36":9.66,"37":9.6,"38":9.59,"39":9.56,"40":9.48,"41":9.47,"42":9.49,"43":9.44,"44":9.42,"45":9.4,"46":9.35,"47":9.29,"48":9.27,"49":9.21,"50":9.18,"51":9.18,"52":9.15,"53":9.05,"54":9.04,"55":8.97,"56":8.84,"57":8.78,"58":8.78,"59":8.71,"60":8.64,"61":8.57,"62":8.48,"63":8.42,"64":8.33,"65":8.19,"66":8.21,"67":8.15,"68":8.12,"69":8.05,"70":8.24,"71":8.11,"72":8.05,"73":7.85,"74":7.86,"75":7.71},"8.0":{"18":9.92,"19":9.92,"20":9.93,"21":9.93,"22":9.94,"23":9.93,"24":9.93,"25":9.91,"26":9.91,"27":9.91,"28":9.9,"29":9.88,"30":9.87,"31":9.87,"32":9.84,"33":9.82,"34":9.82,"35":9.83,"36":9.81,"37":9.77,"38":9.76,"39":9.75,"40":9.7,"41":9.68,"42":9.7,"43":9.67,"44":9.65,"45":9.64,"46":9.62,"47":9.59,"48":9.58,"49":9.54,"50":9.52,"51":9.51,"52":9.49,"53":9.43,"54":9.42,"55":9.39,"56":9.32,"57":9.28,"58":9.29,"59":9.24,"60":9.18,"61":9.16,"62":9.12,"63":9.09,"64":9.04,"65":8.97,"66":8.96,"67":8.91,"68":8.88,"69":8.84,"70":8.94,"71":8.89,"72":8.85,"73":8.82,"74":8.85,"75":8.83},"8.5":{"18":9.95,"19":9.95,"20":9.95,"21":9.95,"22":9.95,"23":9.95,"24":9.95,"25":9.95,"26":9.95,"27":9.94,"28":9.94,"29":9.94,"30":9.93,"31":9.93,"32":9.92,"33":9.91,"34":9.91,"35":9.92,"36":9.91,"37":9.9,"38":9.9,"39":9.89,"40":9.87,"41":9.87,"42":9.88,"43":9.86,"44":9.85,"45":9.84,"46":9.82,"47":9.81,"48":9.8,"49":9.78,"50":9.79,"51":9.78,"52":9.77,"53":9.74,"54":9.74,"55":9.72,"56":9.69,"57":9.68,"58":9.68,"59":9.66,"60":9.64,"61":9.66,"62":9.65,"63":9.66,"64":9.64,"65":9.61,"66":9.56,"67":9.55,"68":9.53,"69":9.53,"70":9.58,"71":9.62,"72":9.59,"73":9.61,"74":9.58,"75":9.63},"9.0":{"18":9.97,"19":9.97,"20":9.97,"21":9.97,"22":9.97,"23":9.97,"24":9.97,"25":9.97,"26":9.97,"27":9.97,"28":9.96,"29":9.96,"30":9.95,"31":9.95,"32":9.94,"33":9.95,"34":9.95,"35":9.95,"36":9.95,"37":9.95,"38":9.95,"39":9.96,"40":9.95,"41":9.95,"42":9.96,"43":9.95,"44":9.94,"45":9.93,"46":9.92,"47":9.91,"48":9.92,"49":9.91,"50":9.91,"51":9.91,"52":9.91,"53":9.9,"54":9.9,"55":9.88,"56":9.87,"57":9.87,"58":9.87,"59":9.86,"60":9.85,"61":9.87,"62":9.87,"63":9.88,"64":9.87,"65":9.86,"66":9.85,"67":9.84,"68":9.85,"69":9.86,"70":9.89,"71":9.91,"72":9.9,"73":9.88,"74":9.86,"75":9.86},"9.5":{"18":9.97,"19":9.97,"20":9.97,"21":9.97,"22":9.98,"23":9.98,"24":9.98,"25":9.99,"26":9.99,"27":9.99,"28":9.98,"29":9.98,"30":9.98,"31":9.98,"32":9.98,"33":9.98,"34":9.98,"35":9.99,"36":9.99,"37":9.99,"38":9.99,"39":9.99,"40":9.99,"41":9.99,"42":9.99,"43":9.99,"44":9.99,"45":9.99,"46":9.98,"47":9.98,"48":9.98,"49":9.98,"50":9.99,"51":9.99,"52":9.99,"53":9.99,"54":9.99,"55":9.98,"56":9.98,"57":9.98,"58":9.98,"59":9.97,"60":9.98,"61":9.98,"62":9.99,"63":9.98,"64":9.98,"65":9.98,"66":9.99,"67":9.98,"68":9.98,"69":9.98,"70":9.98,"71":9.98,"72":9.98,"73":9.98,"74":9.97,"75":9.97}}; /* Global ARMSS matrix, Manouchehrinia 2017 (ms.sev). EDSS(col)x age 18-75 */
+var GLOBAL_ARMSS={"0.0":{"18":1.5,"19":1.59,"20":1.44,"21":1.4,"22":1.33,"23":1.28,"24":1.14,"25":1.09,"26":1.01,"27":1.01,"28":0.96,"29":0.9,"30":0.88,"31":0.87,"32":0.82,"33":0.77,"34":0.72,"35":0.68,"36":0.61,"37":0.57,"38":0.56,"39":0.54,"40":0.5,"41":0.49,"42":0.43,"43":0.39,"44":0.37,"45":0.35,"46":0.33,"47":0.31,"48":0.29,"49":0.26,"50":0.23,"51":0.22,"52":0.2,"53":0.19,"54":0.17,"55":0.17,"56":0.14,"57":0.14,"58":0.12,"59":0.11,"60":0.1,"61":0.08,"62":0.08,"63":0.07,"64":0.06,"65":0.05,"66":0.06,"67":0.06,"68":0.05,"69":0.05,"70":0.05,"71":0.04,"72":0.04,"73":0.03,"74":0.03,"75":0.03},"1.0":{"18":4.24,"19":4.29,"20":3.85,"21":3.77,"22":3.62,"23":3.53,"24":3.28,"25":3.24,"26":3.07,"27":3.04,"28":2.94,"29":2.84,"30":2.76,"31":2.71,"32":2.62,"33":2.5,"34":2.36,"35":2.26,"36":2.08,"37":1.96,"38":1.87,"39":1.81,"40":1.69,"41":1.62,"42":1.49,"43":1.39,"44":1.31,"45":1.23,"46":1.16,"47":1.09,"48":1.03,"49":0.94,"50":0.87,"51":0.84,"52":0.78,"53":0.7,"54":0.68,"55":0.64,"56":0.59,"57":0.58,"58":0.53,"59":0.47,"60":0.44,"61":0.38,"62":0.36,"63":0.33,"64":0.3,"65":0.26,"66":0.27,"67":0.24,"68":0.22,"69":0.2,"70":0.19,"71":0.16,"72":0.13,"73":0.13,"74":0.12,"75":0.13},"1.5":{"18":5.79,"19":5.75,"20":5.25,"21":5.23,"22":5.12,"23":5.03,"24":4.82,"25":4.82,"26":4.67,"27":4.63,"28":4.53,"29":4.41,"30":4.28,"31":4.16,"32":4.04,"33":3.9,"34":3.73,"35":3.6,"36":3.39,"37":3.23,"38":3.09,"39":2.96,"40":2.79,"41":2.67,"42":2.49,"43":2.34,"44":2.24,"45":2.13,"46":2.02,"47":1.9,"48":1.8,"49":1.67,"50":1.56,"51":1.51,"52":1.41,"53":1.29,"54":1.27,"55":1.21,"56":1.13,"57":1.1,"58":1.0,"59":0.91,"60":0.84,"61":0.76,"62":0.71,"63":0.66,"64":0.59,"65":0.53,"66":0.49,"67":0.47,"68":0.42,"69":0.37,"70":0.36,"71":0.27,"72":0.26,"73":0.3,"74":0.3,"75":0.3},"2.0":{"18":6.71,"19":6.71,"20":6.31,"21":6.33,"22":6.31,"23":6.28,"24":6.12,"25":6.09,"26":5.98,"27":5.94,"28":5.84,"29":5.68,"30":5.53,"31":5.36,"32":5.21,"33":5.04,"34":4.88,"35":4.78,"36":4.57,"37":4.41,"38":4.27,"39":4.13,"40":3.89,"41":3.73,"42":3.52,"43":3.37,"44":3.22,"45":3.12,"46":3.01,"47":2.86,"48":2.67,"49":2.51,"50":2.36,"51":2.26,"52":2.13,"53":2.03,"54":1.96,"55":1.86,"56":1.75,"57":1.69,"58":1.53,"59":1.43,"60":1.33,"61":1.22,"62":1.13,"63":1.04,"64":0.94,"65":0.84,"66":0.77,"67":0.76,"68":0.71,"69":0.63,"70":0.63,"71":0.51,"72":0.48,"73":0.5,"74":0.43,"75":0.35},"2.5":{"18":7.62,"19":7.62,"20":7.25,"21":7.29,"22":7.34,"23":7.37,"24":7.26,"25":7.23,"26":7.13,"27":7.05,"28":6.96,"29":6.81,"30":6.66,"31":6.49,"32":6.33,"33":6.11,"34":5.93,"35":5.87,"36":5.69,"37":5.52,"38":5.4,"39":5.26,"40":4.96,"41":4.76,"42":4.55,"43":4.42,"44":4.24,"45":4.11,"46":4.01,"47":3.83,"48":3.61,"49":3.41,"50":3.27,"51":3.11,"52":2.93,"53":2.79,"54":2.7,"55":2.56,"56":2.41,"57":2.34,"58":2.16,"59":2.02,"60":1.9,"61":1.78,"62":1.62,"63":1.5,"64":1.38,"65":1.24,"66":1.14,"67":1.13,"68":1.06,"69":0.99,"70":0.98,"71":0.85,"72":0.76,"73":0.77,"74":0.65,"75":0.53},"3.0":{"18":8.18,"19":8.06,"20":7.87,"21":7.92,"22":8.02,"23":8.06,"24":7.98,"25":7.93,"26":7.84,"27":7.78,"28":7.69,"29":7.56,"30":7.4,"31":7.25,"32":7.06,"33":6.84,"34":6.68,"35":6.63,"36":6.48,"37":6.33,"38":6.22,"39":6.08,"40":5.78,"41":5.56,"42":5.37,"43":5.21,"44":5.05,"45":4.9,"46":4.8,"47":4.64,"48":4.44,"49":4.22,"50":4.1,"51":3.91,"52":3.71,"53":3.51,"54":3.42,"55":3.26,"56":3.1,"57":3.03,"58":2.87,"59":2.7,"60":2.57,"61":2.4,"62":2.21,"63":2.1,"64":1.99,"65":1.8,"66":1.71,"67":1.67,"68":1.52,"69":1.46,"70":1.47,"71":1.32,"72":1.22,"73":1.22,"74":1.06,"75":0.86},"3.5":{"18":8.53,"19":8.53,"20":8.5,"21":8.49,"22":8.57,"23":8.6,"24":8.52,"25":8.45,"26":8.38,"27":8.36,"28":8.27,"29":8.16,"30":7.99,"31":7.86,"32":7.66,"33":7.45,"34":7.31,"35":7.27,"36":7.15,"37":7.01,"38":6.92,"39":6.78,"40":6.51,"41":6.29,"42":6.1,"43":5.94,"44":5.78,"45":5.61,"46":5.53,"47":5.4,"48":5.22,"49":5.01,"50":4.9,"51":4.72,"52":4.49,"53":4.29,"54":4.18,"55":4.02,"56":3.85,"57":3.77,"58":3.62,"59":3.45,"60":3.31,"61":3.1,"62":2.9,"63":2.76,"64":2.61,"65":2.39,"66":2.33,"67":2.24,"68":2.05,"69":1.99,"70":2.0,"71":1.83,"72":1.66,"73":1.57,"74":1.41,"75":1.18},"4.0":{"18":8.89,"19":8.89,"20":8.88,"21":8.86,"22":8.93,"23":8.96,"24":8.86,"25":8.79,"26":8.76,"27":8.75,"28":8.66,"29":8.59,"30":8.42,"31":8.31,"32":8.12,"33":7.92,"34":7.78,"35":7.75,"36":7.63,"37":7.5,"38":7.4,"39":7.27,"40":7.03,"41":6.84,"42":6.67,"43":6.54,"44":6.39,"45":6.23,"46":6.13,"47":6.01,"48":5.85,"49":5.65,"50":5.54,"51":5.36,"52":5.14,"53":4.93,"54":4.85,"55":4.68,"56":4.51,"57":4.42,"58":4.29,"59":4.11,"60":3.94,"61":3.72,"62":3.5,"63":3.32,"64":3.1,"65":2.86,"66":2.76,"67":2.66,"68":2.46,"69":2.41,"70":2.44,"71":2.24,"72":2.07,"73":1.92,"74":1.81,"75":1.52},"4.5":{"18":9.01,"19":9.01,"20":9.01,"21":9.01,"22":9.11,"23":9.17,"24":9.04,"25":8.97,"26":8.98,"27":8.97,"28":8.87,"29":8.83,"30":8.69,"31":8.58,"32":8.41,"33":8.24,"34":8.09,"35":8.06,"36":7.94,"37":7.81,"38":7.7,"39":7.58,"40":7.36,"41":7.22,"42":7.08,"43":6.94,"44":6.82,"45":6.69,"46":6.56,"47":6.43,"48":6.28,"49":6.06,"50":5.92,"51":5.75,"52":5.54,"53":5.34,"54":5.29,"55":5.14,"56":4.96,"57":4.87,"58":4.75,"59":4.58,"60":4.39,"61":4.17,"62":3.93,"63":3.73,"64":3.49,"65":3.22,"66":3.08,"67":2.98,"68":2.77,"69":2.7,"70":2.77,"71":2.61,"72":2.43,"73":2.3,"74":2.16,"75":1.78},"5.0":{"18":9.13,"19":9.13,"20":9.23,"21":9.14,"22":9.25,"23":9.3,"24":9.17,"25":9.11,"26":9.12,"27":9.1,"28":9.0,"29":8.96,"30":8.83,"31":8.72,"32":8.58,"33":8.45,"34":8.31,"35":8.28,"36":8.16,"37":8.01,"38":7.92,"39":7.81,"40":7.6,"41":7.49,"42":7.36,"43":7.21,"44":7.08,"45":6.97,"46":6.84,"47":6.72,"48":6.59,"49":6.39,"50":6.25,"51":6.08,"52":5.88,"53":5.69,"54":5.64,"55":5.5,"56":5.32,"57":5.24,"58":5.1,"59":4.93,"60":4.74,"61":4.54,"62":4.28,"63":4.07,"64":3.82,"65":3.53,"66":3.37,"67":3.28,"68":3.06,"69":2.98,"70":3.05,"71":2.89,"72":2.7,"73":2.56,"74":2.42,"75":2.11},"5.5":{"18":9.33,"19":9.33,"20":9.4,"21":9.31,"22":9.4,"23":9.4,"24":9.28,"25":9.27,"26":9.26,"27":9.22,"28":9.14,"29":9.1,"30":8.95,"31":8.85,"32":8.75,"33":8.64,"34":8.53,"35":8.49,"36":8.38,"37":8.21,"38":8.14,"39":8.02,"40":7.85,"41":7.75,"42":7.63,"43":7.48,"44":7.37,"45":7.25,"46":7.12,"47":7.03,"48":6.92,"49":6.74,"50":6.62,"51":6.46,"52":6.27,"53":6.11,"54":6.04,"55":5.89,"56":5.72,"57":5.63,"58":5.47,"59":5.28,"60":5.1,"61":4.89,"62":4.6,"63":4.4,"64":4.17,"65":3.86,"66":3.71,"67":3.65,"68":3.43,"69":3.31,"70":3.39,"71":3.22,"72":3.0,"73":2.83,"74":2.65,"75":2.47},"6.0":{"18":9.52,"19":9.52,"20":9.57,"21":9.51,"22":9.58,"23":9.55,"24":9.5,"25":9.45,"26":9.47,"27":9.42,"28":9.35,"29":9.3,"30":9.2,"31":9.12,"32":9.05,"33":8.98,"34":8.87,"35":8.86,"36":8.76,"37":8.63,"38":8.57,"39":8.47,"40":8.33,"41":8.27,"42":8.19,"43":8.06,"44":7.99,"45":7.89,"46":7.76,"47":7.69,"48":7.57,"49":7.43,"50":7.33,"51":7.21,"52":7.08,"53":6.95,"54":6.86,"55":6.72,"56":6.55,"57":6.43,"58":6.29,"59":6.12,"60":5.97,"61":5.82,"62":5.52,"63":5.32,"64":5.15,"65":4.82,"66":4.69,"67":4.65,"68":4.53,"69":4.41,"70":4.48,"71":4.28,"72":4.1,"73":3.83,"74":3.69,"75":3.44},"6.5":{"18":9.62,"19":9.62,"20":9.66,"21":9.69,"22":9.71,"23":9.72,"24":9.73,"25":9.69,"26":9.7,"27":9.65,"28":9.61,"29":9.56,"30":9.51,"31":9.47,"32":9.41,"33":9.37,"34":9.29,"35":9.31,"36":9.24,"37":9.15,"38":9.13,"39":9.07,"40":8.95,"41":8.91,"42":8.9,"43":8.82,"44":8.79,"45":8.73,"46":8.61,"47":8.53,"48":8.43,"49":8.33,"50":8.28,"51":8.23,"52":8.18,"53":8.08,"54":8.0,"55":7.89,"56":7.74,"57":7.62,"58":7.54,"59":7.43,"60":7.32,"61":7.24,"62":6.97,"63":6.81,"64":6.65,"65":6.38,"66":6.25,"67":6.24,"68":6.21,"69":6.18,"70":6.32,"71":6.16,"72":6.03,"73":5.71,"74":5.59,"75":5.35},"7.0":{"18":9.74,"19":9.76,"20":9.78,"21":9.79,"22":9.8,"23":9.81,"24":9.82,"25":9.79,"26":9.81,"27":9.78,"28":9.76,"29":9.72,"30":9.69,"31":9.65,"32":9.61,"33":9.58,"34":9.54,"35":9.56,"36":9.52,"37":9.44,"38":9.43,"39":9.39,"40":9.29,"41":9.26,"42":9.28,"43":9.23,"44":9.21,"45":9.18,"46":9.09,"47":9.01,"48":8.96,"49":8.87,"50":8.85,"51":8.84,"52":8.83,"53":8.72,"54":8.69,"55":8.6,"56":8.46,"57":8.38,"58":8.33,"59":8.26,"60":8.19,"61":8.11,"62":7.94,"63":7.85,"64":7.71,"65":7.51,"66":7.45,"67":7.43,"68":7.4,"69":7.37,"70":7.58,"71":7.46,"72":7.35,"73":7.07,"74":7.0,"75":6.81},"7.5":{"18":9.85,"19":9.85,"20":9.85,"21":9.85,"22":9.86,"23":9.87,"24":9.87,"25":9.87,"26":9.87,"27":9.84,"28":9.82,"29":9.79,"30":9.78,"31":9.76,"32":9.72,"33":9.7,"34":9.68,"35":9.7,"36":9.66,"37":9.6,"38":9.59,"39":9.56,"40":9.48,"41":9.47,"42":9.49,"43":9.44,"44":9.42,"45":9.4,"46":9.35,"47":9.29,"48":9.27,"49":9.21,"50":9.18,"51":9.18,"52":9.15,"53":9.05,"54":9.04,"55":8.97,"56":8.84,"57":8.78,"58":8.78,"59":8.71,"60":8.64,"61":8.57,"62":8.48,"63":8.42,"64":8.33,"65":8.19,"66":8.21,"67":8.15,"68":8.12,"69":8.05,"70":8.24,"71":8.11,"72":8.05,"73":7.85,"74":7.86,"75":7.71},"8.0":{"18":9.92,"19":9.92,"20":9.93,"21":9.93,"22":9.94,"23":9.93,"24":9.93,"25":9.91,"26":9.91,"27":9.91,"28":9.9,"29":9.88,"30":9.87,"31":9.87,"32":9.84,"33":9.82,"34":9.82,"35":9.83,"36":9.81,"37":9.77,"38":9.76,"39":9.75,"40":9.7,"41":9.68,"42":9.7,"43":9.67,"44":9.65,"45":9.64,"46":9.62,"47":9.59,"48":9.58,"49":9.54,"50":9.52,"51":9.51,"52":9.49,"53":9.43,"54":9.42,"55":9.39,"56":9.32,"57":9.28,"58":9.29,"59":9.24,"60":9.18,"61":9.16,"62":9.12,"63":9.09,"64":9.04,"65":8.97,"66":8.96,"67":8.91,"68":8.88,"69":8.84,"70":8.94,"71":8.89,"72":8.85,"73":8.82,"74":8.85,"75":8.83},"8.5":{"18":9.95,"19":9.95,"20":9.95,"21":9.95,"22":9.95,"23":9.95,"24":9.95,"25":9.95,"26":9.95,"27":9.94,"28":9.94,"29":9.94,"30":9.93,"31":9.93,"32":9.92,"33":9.91,"34":9.91,"35":9.92,"36":9.91,"37":9.9,"38":9.9,"39":9.89,"40":9.87,"41":9.87,"42":9.88,"43":9.86,"44":9.85,"45":9.84,"46":9.82,"47":9.81,"48":9.8,"49":9.78,"50":9.79,"51":9.78,"52":9.77,"53":9.74,"54":9.74,"55":9.72,"56":9.69,"57":9.68,"58":9.68,"59":9.66,"60":9.64,"61":9.66,"62":9.65,"63":9.66,"64":9.64,"65":9.61,"66":9.56,"67":9.55,"68":9.53,"69":9.53,"70":9.58,"71":9.62,"72":9.59,"73":9.61,"74":9.58,"75":9.63},"9.0":{"18":9.97,"19":9.97,"20":9.97,"21":9.97,"22":9.97,"23":9.97,"24":9.97,"25":9.97,"26":9.97,"27":9.97,"28":9.96,"29":9.96,"30":9.95,"31":9.95,"32":9.94,"33":9.95,"34":9.95,"35":9.95,"36":9.95,"37":9.95,"38":9.95,"39":9.96,"40":9.95,"41":9.95,"42":9.96,"43":9.95,"44":9.94,"45":9.93,"46":9.92,"47":9.91,"48":9.92,"49":9.91,"50":9.91,"51":9.91,"52":9.91,"53":9.9,"54":9.9,"55":9.88,"56":9.87,"57":9.87,"58":9.87,"59":9.86,"60":9.85,"61":9.87,"62":9.87,"63":9.88,"64":9.87,"65":9.86,"66":9.85,"67":9.84,"68":9.85,"69":9.86,"70":9.89,"71":9.91,"72":9.9,"73":9.88,"74":9.86,"75":9.86},"9.5":{"18":9.97,"19":9.97,"20":9.97,"21":9.97,"22":9.98,"23":9.98,"24":9.98,"25":9.99,"26":9.99,"27":9.99,"28":9.98,"29":9.98,"30":9.98,"31":9.98,"32":9.98,"33":9.98,"34":9.98,"35":9.99,"36":9.99,"37":9.99,"38":9.99,"39":9.99,"40":9.99,"41":9.99,"42":9.99,"43":9.99,"44":9.99,"45":9.99,"46":9.98,"47":9.98,"48":9.98,"49":9.98,"50":9.99,"51":9.99,"52":9.99,"53":9.99,"54":9.99,"55":9.98,"56":9.98,"57":9.98,"58":9.98,"59":9.97,"60":9.98,"61":9.98,"62":9.99,"63":9.98,"64":9.98,"65":9.98,"66":9.99,"67":9.98,"68":9.98,"69":9.98,"70":9.98,"71":9.98,"72":9.98,"73":9.98,"74":9.97,"75":9.97}}; /* Global ARMSS matrix, Manouchehrinia 2017, Supplementary File (CC BY-NC 4.0). EDSS(col)x age 18-75 */
 function _armssLookup(edss,age){ if(!GLOBAL_ARMSS) return null; const k=Number(edss).toFixed(1); const row=GLOBAL_ARMSS[k]; if(!row) return null;
   let a=Math.round(age); if(a<18||a>75) return null;   // outside the published matrix (ages 18 to 75): no value rather than an edge value
   const v=row[String(a)]; return (v==null?null:v); }
@@ -10080,7 +9763,7 @@ function v31RenderExtras(inp, r) {
       : ch.flag === "improvement" ? `improvement of at least ${ch.thr.toFixed(1)}.` : `below the worsening threshold (+${ch.thr.toFixed(1)}).`;
     chHtml = `<div><b>Change vs baseline</b> ${ch.base.toFixed(1)} &rarr; ${edss.toFixed(1)} (${sign}${ch.delta.toFixed(1)}): ${msg}</div>`;
   }
-  el.innerHTML = `<div>${parts.join(" &middot; ")}</div>${chHtml}<div class="fs-x-dim" style="margin-top:2px">ARMSS: Manouchehrinia 2017; MSSS: Roxburgh 2005 (updated global matrix, ms.sev). Change thresholds: Kappos 2020 (PIRA). Research aid; not a diagnosis.</div>`;
+  el.innerHTML = `<div>${parts.join(" &middot; ")}</div>${chHtml}<div class="fs-x-dim" style="margin-top:2px">ARMSS: Manouchehrinia 2017; MSSS: Roxburgh 2005 (updated global matrix; Manouchehrinia 2017, CC BY-NC 4.0). Change thresholds: Kappos 2020 (PIRA). Research aid; not a diagnosis.</div>`;
 }
 
 // ---------- EMR note ----------

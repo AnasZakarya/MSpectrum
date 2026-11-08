@@ -3,7 +3,7 @@
 // Each suite is run in an isolated child process so DOM stubs never collide.
 const { execFileSync } = require('child_process');
 const path = require('path');
-const suites = ['engine.test.js', 'v29.test.js', 'scorehub.test.js', 'convert.test.js', 'promis.test.js', 'norms.test.js', 'mcdonald.test.js'];
+const suites = ['engine.test.js', 'v29.test.js', 'scorehub.test.js', 'convert.test.js', 'promis.test.js', 'norms.test.js', 'v33_scorehub.test.js', 'mcdonald.test.js'];
 let failed = 0;
 for (const s of suites) {
   console.log('\n=== ' + s + ' ===');

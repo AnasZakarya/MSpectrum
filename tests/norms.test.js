@@ -13,7 +13,7 @@ global.document.getElementById = (id) => ({
   value: (id in inputs) ? inputs[id] : '',
   classList:{add(){},remove(){},toggle(){},contains(){return false;}},
   parentNode:{classList:{add(){},remove(){},toggle(){}}},
-  querySelectorAll:()=>[], addEventListener(){}, style:{}, innerHTML:'',
+  querySelectorAll:()=>[], addEventListener(){}, insertAdjacentHTML(){}, style:{}, innerHTML:'',
 });
 try { (0, eval)(code); } catch (e) {}
 
@@ -83,12 +83,11 @@ zclose('CVLT LDFR T (Parmenter regression) raw12/age40/M/edu12 = 49.37', global.
   results.push({name:'Benedict manual tables removed', ok: typeof global.benedictBVMT==='undefined' && !html.includes('BENEDICT_BVMT')});
 })();
 
-// --- SDMT written norms (Centofani 1975, adopted by the Smith 1982 WPS manual) —
-//     VERIFIED vs Sheridan 2006 Table 1 (Norms/SDMT-Written-Younger.pdf). ---
-(function(){ const exp=[[20,55.2,7.5],[30,53.6,6.6],[40,51.1,8.1],[50,46.8,8.4],[60,41.5,8.6]];
-  for(const [age,m,sd] of exp){ inputs.sdmt_ver='written'; inputs.sdmt_raw='50'; inputs.sdmt_age=String(age); inputs.sdmt_sex=''; inputs.sdmt_edu='';
+// --- v33: SDMT written norms = Fellows & Schmitter-Edgecombe 2020 (oracle: authors' Excel calculator) ---
+(function(){ const exp=[[45,52,'F',16,37.5296],[60,30,'M',12,52.2625]];
+  for(const [raw,age,sex,edu,T] of exp){ inputs.sdmt_ver='written'; inputs.sdmt_raw=String(raw); inputs.sdmt_age=String(age); inputs.sdmt_sex=sex; inputs.sdmt_edu=String(edu);
     const n=global.sdmtNorm();
-    results.push({name:`SDMT-written age${age} = ${m}(${sd}) [Centofani/Sheridan Table 1]`, ok:n&&Math.abs(n.mean-m)<0.005&&Math.abs(n.sd-sd)<0.005}); }
+    results.push({name:`SDMT-written (Fellows 2020) raw${raw}/age${age}/${sex}/edu${edu} -> T ${T}`, ok:n&&Math.abs(50+10*n.z-T)<0.01}); }
   inputs.sdmt_ver='oral';
 })();
 

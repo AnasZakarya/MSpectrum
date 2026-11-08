@@ -41,9 +41,11 @@ class TestVisual(unittest.TestCase):
         self.assertEqual(calc_visual_fs(scotoma_od=2, va_od="20/20", va_os="20/20"), 3)
 
     def test_with_field_defect(self):
-        # Marked field defect (raw item 3) maps to Visual FS 4 each eye; when
-        # BOTH eyes are affected the worse-eye rule bumps the FS one grade to 5.
-        self.assertEqual(calc_visual_fs(vf_od=3, vf_os=3, va_od="20/20", va_os="20/20"), 5)
+        # Marked field defect (raw item 3) maps to Visual FS 4. Kurtzke 1983: the
+        # one-grade bump needs ACUITY of the better eye 20/60 or less, so bilateral
+        # field defects with 20/20 acuity stay at 4; with better-eye 20/70 it is 5.
+        self.assertEqual(calc_visual_fs(vf_od=3, vf_os=3, va_od="20/20", va_os="20/20"), 4)
+        self.assertEqual(calc_visual_fs(vf_od=3, vf_os=3, va_od="20/70", va_os="20/70"), 5)
         # Unilateral marked field defect (better eye normal) stays at grade 4.
         self.assertEqual(calc_visual_fs(vf_od=3, va_od="20/20", va_os="20/20"), 4)
 

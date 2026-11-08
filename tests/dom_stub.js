@@ -6,7 +6,7 @@ function makeEl() {
     style: {}, dataset: {}, options: [], selectedIndex: 0, files: [], children: [],
     classList: { add(){}, remove(){}, toggle(){}, contains(){ return false; } },
     setAttribute(){}, removeAttribute(){}, getAttribute(){ return null; },
-    appendChild(){}, removeChild(){}, insertBefore(){}, cloneNode(){ return makeEl(); },
+    appendChild(){}, removeChild(){}, insertBefore(){}, insertAdjacentHTML(){}, cloneNode(){ return makeEl(); },
     addEventListener(){}, removeEventListener(){}, click(){}, focus(){}, blur(){},
     querySelector(){ return makeEl(); }, querySelectorAll(){ return []; },
     getBoundingClientRect(){ return { top:0,left:0,width:0,height:0,bottom:0,right:0 }; },

@@ -13,7 +13,10 @@ rec('scores.html inline JS loads without throwing', load.ok, load.err);
 
 const ids = [...html.matchAll(/\{id:"([a-z0-9]+)"/g)].map(m => m[1]);
 rec('TOOLS array present', ids.length > 0, `${ids.length} tools`);
-const missingPanel = ids.filter(id => !html.includes(`id="p_${id}"`));
+// MSQLI panels (v33) are built at load from MSQLI_SCALES, so a key there counts as a panel.
+const msqliKeys = (html.match(/const MSQLI_SCALES\s*=\s*\{[\s\S]*?\n\};/) || [''])[0];
+const dynamicPanel = id => new RegExp('\\n\\s*' + id + ':\\s*\\{').test(msqliKeys);
+const missingPanel = ids.filter(id => !html.includes(`id="p_${id}"`) && !dynamicPanel(id));
 rec('every tool id has a panel (p_<id>)', missingPanel.length === 0, missingPanel.join(', '));
 
 const calcNames = [...html.matchAll(/function (calc[A-Za-z0-9_]+)/g)].map(m => m[1]);

@@ -14,7 +14,8 @@ const has=(name,out,...needles)=>results.push({name, ok: needles.every(n=>out.in
 has('PHQ-9 total+band+ID', run('phq9','A001, 2,1,3,2,0,1,2,1,0'), '12 / 27','Moderate','A001');
 has('PHQ-9 severe (no ID)', run('phq9','3 3 2 3 2 3 3 2 1'), '22 / 27','Severe');
 has('SDMT z+percentile', run('sdmt','P1 45 52 F 16'), 'Percentile');
-has('PROMIS-29 T+SE (all 3)', run('promis29','X '+Array(28).fill('3').join(' ')), '36.7','2.3');
+has('SDMT written (Fellows 2020)', run('sdmt_w','W1 45 52 F 16'), 'Fellows 2020');
+has('PROMIS-29 raw sums (no T)', run('promis29','X '+Array(28).fill('3').join(' ')), 'Physical Function raw');
 has('CVLT LDFR T', run('cvlt','c1,8,10,11,12,13,12,40,F,16'), 'LDFR T');
 has('ARMSS 4.0x40=7.03', run('armss','p 4.0 40'), '7.03');
 has('MSSS 4.0x10 (upd 6.26, orig 5.267)', run('msss','p 4.0 10'), '6.26','5.267');

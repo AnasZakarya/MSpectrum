@@ -24,7 +24,7 @@ Conventions:
 from typing import Optional, Dict, Any
 from dataclasses import dataclass
 
-ENGINE_VERSION = "MSpectrum scoring rules v3.2 (Neurostatus conventions 04/10.2)"
+ENGINE_VERSION = "MSpectrum scoring rules v3.3 (Neurostatus conventions 04/10.2)"
 
 
 # ============================================================
@@ -94,10 +94,13 @@ def calc_visual_fs(va_od=None, va_os=None, vf_od=None, vf_os=None,
     scotoma_conv = lambda v: [0, 1, 3][min(_safe(v), 2)]
     od = max(snellen_to_score(va_od), field_conv(vf_od), scotoma_conv(scotoma_od), 1 if _safe(pallor_od) > 0 else 0)
     os_ = max(snellen_to_score(va_os), field_conv(vf_os), scotoma_conv(scotoma_os), 1 if _safe(pallor_os) > 0 else 0)
-    worse, better = max(od, os_), min(od, os_)
+    worse = max(od, os_)
+    # Kurtzke 1983: the bump depends on the ACUITY (20/60 or less) of the better (less affected) eye only.
+    a_od, a_os = snellen_to_score(va_od), snellen_to_score(va_os)
+    better_acuity = a_os if od > os_ else a_od if os_ > od else min(a_od, a_os)
     if worse <= 2:
         return worse
-    return min(worse + 1, 6) if better >= 3 else worse
+    return min(worse + 1, 6) if better_acuity >= 3 else worse
 
 
 def visual_fs_converted(visual_fs: int) -> int:

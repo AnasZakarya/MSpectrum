@@ -1,5 +1,31 @@
 # Changelog
 
+## v33 (2026-11-08): copyright clean-up and new tools
+
+### AutoEDSSguide
+- **Clinical mode rebuilt as the sEDSS** (streamlined EDSS; Baldassari LE et al. Mult Scler 2018;24(10):1347-55, Supplementary Appendix 1): each FS is the highest subscore, no Visual or Bowel/Bladder conversion, no separate ambulation score, Kurtzke step rules, and ambulation from the patient-reported walking time and pace. Same scoring as the paper; the question wording and order are MSpectrum's own.
+- **Quick Check rebuilt from published instruments only**: the 3-question SRDSS decision tree (Kaufmann M et al. Mult Scler Relat Disord 2020;42:102148, CC BY-NC-ND 4.0) gives an EDSS range (3.5 or lower, 4.0-6.5, 7.0 or higher), shown with the PDDS step (NARCOMS). MSpectrum's own early-exit rules and invented questions were removed.
+- **Visual FS fix**: the one-grade bump now follows Kurtzke 1983 exactly: it needs the ACUITY of the better (less affected) eye to be 20/60 or worse. Field or scotoma findings in the better eye no longer trigger it. Grade 6 label corrected. Engine version is now v3.3 (JS and Python identical on 2000 random cases).
+- Checker messages cite "the published scoring conventions (Kappos 2011)"; the Pyramidal examples were rewritten as typical patient reports; the Fouad 2023 citation was corrected; Şen 2018 and Piri Çınar 2018 were added to the references.
+- Non-affiliation notice now names Neurostatus-UHB AG, NMSS, WPS, PAR and Pearson, and states that users are responsible for licences and rater certification; the sheet adds that clinical trials need their own Neurostatus licence.
+
+### MS Score Hub
+- **PROMIS**: T-score and SE tables removed (HealthMeasures claims copyright in them). PROMIS-29, PROMIS Cognitive Function 4a and the converter now give raw sums only. The PROMIS lookup CSV download was removed.
+- **Written SDMT norms** now use the regression equations of Fellows RP, Schmitter-Edgecombe M (Arch Clin Neuropsychol 2020;35(1):105-15; 536 healthy US adults, ages 18-91), checked against the authors' calculator. The Centofanti 1975 table was removed.
+- Marrie 2021 CVLT-II / BVMT-R norms are given only for ages 18-65, the range of that sample.
+- **FES-I**: official 16 items, order and instructions. **SymptoMScreen**: official domain names, instruction and anchor labels.
+- PDDS shows the NARCOMS credit line. Non-affiliation lines added for WPS (SDMT), PAR (BVMT-R), Pearson (CVLT-II) and NMSS (MFIS, MSFC, MSQLI).
+- **New tools**: MSQLI Pain Effects Scale, Bladder Control Scale, Bowel Control Scale and Impact of Visual Impairment Scale (NMSS MSQLI manual, 1997), Timed Up and Go (with MS reference values from Kalron 2017 and Nilsagård 2007) and 2-Minute Walk Test (Scalzitti 2018).
+- ARMSS citation corrected to Mult Scler 2017;23(14) and its source files and licence named.
+
+### MS Criteria Checker
+- **κ-FLC index helper** under the CSF item: (CSF/serum κ-FLC) / (CSF/serum albumin), compared with an editable cut-off (default 6.1; Hegen H et al. Mult Scler 2023;29:169-81), with the Reiber hyperbolic limit and intrathecal fraction (Clin Chim Acta 2019;497:153-62). It informs only and does not tick the criterion.
+
+### Repository
+- New `LICENSES-INSTRUMENTS.md`: one row per instrument with owner, status, how MSpectrum uses it and the notice shown.
+- No links to external tools inside MSpectrum.
+- Tests: new `v33_scorehub.test.js`; Visual FS, PROMIS raw-only, Fellows norms and dynamic panel checks updated. Python test for bilateral field defects corrected to the Kurtzke rule.
+
 ## v32 (2026-11-06)
 
 - Removed the "Scoring profile" option added in v31. The 50 m rule with one aid follows the Neurostatus manual ("more than 50 m"), as before v31.
