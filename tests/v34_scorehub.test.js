@@ -33,10 +33,10 @@ rec('PDQ total 40, subscales 10/20', has(r, '40<small> / 80') && has(r, 'Attenti
 rec('PDQ needs every item', S.pdq && S.pdq.custom(fill(20, i => (i === 1 ? null : 2))) === null);
 
 // MSSS: all 3 -> every subscale (3-1)/4*100 = 50.0, total 50.0, MSSS-5 50.0; all 5 -> 100.
-r = S.msss && S.msss.custom(fill(18, () => 3));
-rec('MSSS all 3 -> 50.0 everywhere', has(r, '50.0<small> / 100') && has(r, 'Tangible <b>50.0') && has(r, 'MSSS-5 <b>50.0'));
-r = S.msss && S.msss.custom(fill(18, () => 5));
-rec('MSSS all 5 -> 100.0', has(r, '100.0<small> / 100'));
+r = S.mosss && S.mosss.custom(fill(18, () => 3));
+rec('MOS-SSS all 3 -> 50.0 everywhere', has(r, '50.0<small> / 100') && has(r, 'Tangible <b>50.0') && has(r, '5-item version <b>50.0'));
+r = S.mosss && S.mosss.custom(fill(18, () => 5));
+rec('MOS-SSS all 5 -> 100.0', has(r, '100.0<small> / 100'));
 
 // SSS: partner yes, items 2-5 = 3 -> 12 / 24; no partner -> skipped.
 r = S.sss && S.sss.custom([1, 3, 3, 3, 3]);
@@ -55,6 +55,20 @@ rec('SDMT -5 over 6 months -> not reliable', chg && chg(45, 'oral').includes('sm
 set('sdmt_int', '12');
 rec('SDMT -8 over 1 year -> reliable at 70%', chg && chg(42, 'oral').includes('70% confidence'));
 rec('SDMT written -> oral-only note', chg && chg(42, 'written').includes('oral SDMT only'));
+
+// Converter: MSQLI scales give the same numbers as the tool pages.
+const conv = G('_msqliConv');
+const cm = conv && conv('mhi', Array(18).fill('1'));
+rec('Converter MHI-18 all 1 -> total 44.4, Anxiety 20, Behavioral Control 50', cm && cm['Total (0-100)'] === 44.4 && cm.Anxiety === 20 && cm['Behavioral Control'] === 50);
+const cm2 = conv && conv('mhi', Array(8).fill('1').concat(Array(10).fill('NA')));
+rec('Converter MHI-18 total blank with 10 skipped', cm2 && cm2['Total (0-100)'] === '');
+const cp = conv && conv('pdq', Array(20).fill('2'));
+rec('Converter PDQ all 2 -> 40 / PDQ-5 10', cp && cp['Total (0-80)'] === 40 && cp['PDQ-5'] === 10);
+const cs = conv && conv('mosss', Array(18).fill('3'));
+rec('Converter MOS-SSS all 3 -> 50', cs && cs['Total (0-100)'] === 50 && cs['5-item version'] === 50);
+rec('Converter SSS no partner -> not scored', conv && /not scored/.test(conv('sss', ['0','NA','NA','NA','NA'])['Total (4-24)']));
+rec('Converter BLCS item 4 accepts 0-10, rejects 11', conv && conv('blcs', ['1','2','1','10'])['Total (0-22)'] === 14 && !!conv('blcs', ['1','2','1','11'])._err);
+rec('Converter PES out-of-range value flagged', conv && !!conv('pes', ['0','1','1','1','1','1'])._err);
 
 module.exports = { results };
 if (require.main === module) {

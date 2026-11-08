@@ -1,6 +1,6 @@
 # Instruments: owners, status and how MSpectrum uses them
 
-The AGPL-3.0 licence covers MSpectrum's own code and interface only. Each instrument below stays the property of its authors or publisher. This table is MSpectrum's own reading of the published terms (version 34, November 2026). It is not legal advice. If you reuse MSpectrum, you are responsible for each instrument's own terms, licences and rater certification.
+The AGPL-3.0 licence covers MSpectrum's own code and interface only. Each instrument below stays the property of its authors or publisher. This table is MSpectrum's own reading of the published terms (version 35, November 2026). It is not legal advice. If you reuse MSpectrum, you are responsible for each instrument's own terms, licences and rater certification.
 
 How to read the "Use in MSpectrum" column:
 
@@ -28,7 +28,7 @@ How to read the "Use in MSpectrum" column:
 | MFIS | Fisk JD et al. 1994; MSQLI (NMSS) | Public domain | Full text | Citation |
 | FES-I | Yardley L et al. 2005 | Free when referenced | Full text (official 16 items, order and instructions) | Citation |
 | SymptoMScreen | Green R et al. 2017 | Free to use | Full text (official domain names, instruction and anchor labels) | Citation |
-| MSQLI: PES, BLCS, BWCS, IVIS, SSS, PDQ, MHI-18, MSSS | Ritvo PG et al. MSQLI User's Manual, National MS Society, 1997 ("copies of all the MSQLI scales are included so that the user can photocopy these and use them immediately"). Source instruments: PDQ (Sullivan 1990), MHI (Veit & Ware 1983, RAND), MOS Social Support Survey (Sherbourne & Stewart 1991, RAND) | Free NMSS manual | Full text, scored as in the manual | Citation and NMSS non-affiliation line |
+| MSQLI: PES, BLCS, BWCS, IVIS, SSS, PDQ, MHI-18, MOS-SSS | Ritvo PG et al. MSQLI User's Manual, National MS Society, 1997 ("copies of all the MSQLI scales are included so that the user can photocopy these and use them immediately"). Source instruments: PDQ (Sullivan 1990), MHI (Veit & Ware 1983, RAND), MOS Social Support Survey (Sherbourne & Stewart 1991, RAND) | Free NMSS manual | Full text, scored as in the manual | Citation and NMSS non-affiliation line |
 | SDMT | Smith A; Western Psychological Services | Copyrighted test | Numbers only | WPS non-affiliation line |
 | SDMT oral norms | Strober LB et al. Mult Scler Relat Disord 2020;43:102154 | Published article | Method only (published tables) | Citation |
 | SDMT reliable change | Strober LB et al. Mult Scler Relat Disord 2022;57:103405 | Published article | Method only (published thresholds) | Citation |

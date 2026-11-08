@@ -1,5 +1,14 @@
 # Changelog
 
+## v35 (2026-11-08): new tools wired into every part of the site
+
+- **Score & norm converter**: the eight MSQLI scales were added (new group "MSQLI scales"; 31 instruments in six groups). Same rules as the tool pages; out-of-range answers are flagged; MHI-18 accepts NA for skipped items.
+- **New tools in the shared features**: MSQLI, TUG and 2MWT pages now have "Save patient summary" and "Researcher: CSV"; every tool has a subtitle on the patient summary; the Clinician summary now compiles every Score Hub tool (it listed only 21).
+- The MSQLI social support survey is shown as **MOS-SSS** so it is not confused with the MS Severity Score (MSSS); its page explains the manual's name.
+- **Home page**: Score Hub badge 30 → 40 tools, updated tool list and description; AutoEDSSguide card names the sEDSS and the SRDSS + PDDS Quick Check; About lists all 40 Score Hub tools by domain; References add MSQLI, TUG/2MWT, a pointer to the Score Hub list and the κ-FLC sources (Hegen 2023; Reiber 2019).
+- No em dashes left in user-visible text (patient summary title, EDSS e-mail subject and body, two PDF messages).
+- Page keywords updated (MSQLI, MHI-18, TUG, 2MWT, sEDSS, SRDSS, κ-FLC).
+
 ## v34 (2026-11-08): more MSQLI scales, SDMT reliable change, clean-up
 
 ### MS Score Hub

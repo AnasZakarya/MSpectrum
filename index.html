@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://docs.opencv.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://docs.opencv.org; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="description" content="MSpectrum - a free, browser-based hub for multiple sclerosis outcome measures and diagnosis: the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a 2024 McDonald-criteria diagnostic checker.">
 <title>MSpectrum - Comprehensive MS scoring & diagnosis (EDSS & beyond)</title>
-<meta name="keywords" content="multiple sclerosis, MS, EDSS, EDSS calculator, MS outcome measures, MS scores, SDMT, BICAMS, MSFC, PDDS, MSSS, ARMSS, MFIS, FSS, MSWS-12, PROMIS-29, MSQOL-54, McDonald criteria 2024, MS diagnosis">
+<meta name="keywords" content="multiple sclerosis, MS, EDSS, EDSS calculator, MS outcome measures, MS scores, SDMT, BICAMS, MSFC, PDDS, MSSS, ARMSS, MFIS, FSS, MSWS-12, PROMIS-29, MSQOL-54, MSQLI, MHI-18, TUG, 2MWT, sEDSS, SRDSS, kappa free light chain index, McDonald criteria 2024, MS diagnosis">
 <meta name="author" content="Anas Nourelden - Wayne State University, Department of Neurology">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#1e4a6e">
@@ -3787,14 +3787,14 @@ details.card-optional .card-optional-body { margin-top: 12px; }
           <span class="badge">EDSS</span>
           <h3>🧠 AutoEDSSguide</h3>
           <div class="way-sub">EDSS assessment · 5 modes</div>
-          <p>Full EDSS exam scored with the published Neurostatus conventions in real time, a print-ready sheet and OCR scanner, plus a fast Clinical mode and a plain-language patient Quick Check.</p>
+          <p>Full EDSS exam scored with the published Neurostatus conventions in real time, a print-ready sheet and OCR scanner, plus a fast Clinical mode (sEDSS) and a patient Quick Check (SRDSS + PDDS).</p>
           <span class="way-cta">Open AutoEDSSguide →</span>
         </button>
         <a class="way-card hub-card" href="scores.html" style="text-decoration:none;" aria-label="Open MS Score Hub">
-          <span class="badge" style="background:#2a9d8f;color:white;">30 tools</span>
+          <span class="badge" style="background:#2a9d8f;color:white;">40 tools</span>
           <h3>📊 MS Score Hub</h3>
-          <div class="way-sub">SDMT · BVMT-R · CVLT-II · PDDS · MFIS · FSS · PHQ-9 · GAD-7 · MSWS-12 · MSIS-29 · MSQOL-54 · PROMIS-29 · T25FW · 9-HPT · PASAT-3 · BICAMS · MSFC · SymptoMScreen · 6MWT · FSMC · MS severity</div>
-          <p>Stateless calculators &amp; questionnaires for cognition, fatigue, mood and quality of life - each with plain-language interpretation and optional normalization.</p>
+          <div class="way-sub">SDMT · BICAMS · PDDS · MFIS · PHQ-9 · GAD-7 · MSWS-12 · MSIS-29 · MSQOL-54 · PROMIS-29 · T25FW · 9-HPT · TUG · 2MWT · SymptoMScreen · MSQLI scales · MS severity · and more</div>
+          <p>Stateless calculators &amp; questionnaires for cognition, fatigue, mood, symptoms, walking and quality of life - each with plain-language interpretation and optional normalization.</p>
           <span class="way-cta">Open Score Hub →</span>
         </a>
         <a class="way-card checker-card" href="mcdonald.html" style="text-decoration:none;" aria-label="Open MS Criteria Checker">
@@ -3945,8 +3945,8 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     <details class="about-toggle"><summary>🧠 AutoEDSSguide: EDSS assessment</summary>
       <p>Full EDSS exam, scored with the published Neurostatus conventions, with real-time scoring across the 7 Functional Systems + ambulation, a print-ready EDSS sheet, an OCR sheet scanner, inconsistency flags, and REDCap/CSV export. Includes a fast <strong>Clinical</strong> mode (streamlined sEDSS, for neurologists) and a plain-language <strong>Quick Check</strong> for people with MS. One shared engine, built on the published Kurtzke, Neurostatus and Fouad rules, drives every view.</p>
     </details>
-    <details class="about-toggle"><summary>📊 MS Score Hub: cognition, fatigue &amp; quality of life</summary>
-      <p>Stateless calculators / questionnaires for SDMT, BVMT-R, CVLT-II, PDDS, MFIS, FSS, PHQ-9, GAD-7, MSWS-12, MSIS-29, MSQOL-54 and PROMIS-29, plus the timed motor tests T25FW and 9-HPT, PASAT-3, the BICAMS cognitive battery, the MSFC composite, and MS severity (ARMSS by age, MSSS by duration) - each with clinical interpretation, severity bands, and optional normalization (z-score &amp; percentile). Self-report questionnaires can be filled by the patient; performance tests and composites are entered by a clinician. Nothing is stored.</p>
+    <details class="about-toggle"><summary>📊 MS Score Hub: cognition, fatigue, mood, symptoms, walking &amp; quality of life</summary>
+      <p>40 stateless calculators / questionnaires. Cognition: SDMT, BVMT-R, CVLT-II, PASAT-3, the BICAMS battery, PROMIS Cognitive 4a and the PDQ. Fatigue: MFIS, FSS, FSMC. Mood: PHQ-9, GAD-7, MHI-18. Symptoms: SymptoMScreen and the MSQLI pain, bladder, bowel, vision and sexual satisfaction scales. Walking and motor: MSWS-12, T25FW, 9-HPT, 6MWT, 2MWT, TUG, ABC, FES-I, low-contrast letter acuity and the Modified Ashworth Scale. Quality of life: MSQOL-54, PROMIS-29, MSIS-29, PROMIS pain intensity and MOS social support. Disability and activity: PDDS, MS severity (ARMSS by age, MSSS by duration), annualized relapse rate, confirmed disability progression, NEDA and the MSFC composite. Each comes with clinical interpretation, severity bands, and optional normalization (z-score &amp; percentile). Self-report questionnaires can be filled by the patient; performance tests and composites are entered by a clinician. Nothing is stored.</p>
     </details>
     <details class="about-toggle"><summary>⚖️ Disclaimer &amp; terms of use</summary>
       <p><b>Not a diagnosis or medical advice.</b> MSpectrum computes outcome-measure scores and applies published diagnostic criteria, and explains what they mean. It supports clinical judgement but does not itself establish a diagnosis, does not recommend, start, stop or change any treatment, and is not a substitute for examination, testing, or the judgment of a qualified clinician. Using it creates no doctor-patient relationship.</p>
@@ -3977,7 +3977,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <div class="ref-item"><span class="ref-name">MFIS</span><span class="ref-cite">Modified from Fisk JD et al. <em>Clin Infect Dis</em> 1994;18(Suppl 1):S79&ndash;83. 21-item MFIS: MS Council for Clinical Practice Guidelines, 1998 (National MS Society).</span></div>
       <div class="ref-item"><span class="ref-name">FSS</span><span class="ref-cite">Krupp LB, LaRocca NG, Muir-Nash J, Steinberg AD. <em>Arch Neurol</em> 1989;46(10):1121&ndash;3.</span></div>
       <div class="ref-item"><span class="ref-name">MSQOL-54</span><span class="ref-cite">Vickrey BG, Hays RD, Harooni R, Myers LW, Ellison GW. <em>Qual Life Res</em> 1995. &copy; UCLA.</span></div>
-      <div class="ref-item"><span class="ref-name">PROMIS-29</span><span class="ref-cite">Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. Profile v2.1, HealthMeasures (Northwestern).</span></div>
+      <div class="ref-item"><span class="ref-name">PROMIS-29</span><span class="ref-cite">Cella D et al. <em>J Clin Epidemiol</em> 2010;63(11):1179&ndash;94. Profile v2.1, HealthMeasures (Northwestern); raw sums only.</span></div>
       <div class="ref-item"><span class="ref-name">PHQ-9</span><span class="ref-cite">Kroenke K, Spitzer RL, Williams JBW. <em>J Gen Intern Med</em> 2001;16(9):606&ndash;13. Public domain (Pfizer).</span></div>
       <div class="ref-item"><span class="ref-name">GAD-7</span><span class="ref-cite">Spitzer RL, Kroenke K, Williams JBW, L&ouml;we B. <em>Arch Intern Med</em> 2006;166(10):1092&ndash;7. Public domain (Pfizer).</span></div>
       <div class="ref-item"><span class="ref-name">MS severity (ARMSS/MSSS)</span><span class="ref-cite">Manouchehrinia A, Westerlind H, Kingwell E et al. <em>Mult Scler</em> 2017;23(14):1938&ndash;46 (ARMSS). Roxburgh RH et al. <em>Neurology</em> 2005;64(7):1144&ndash;51 (MSSS). Matrices from the 2017 article's Supplementary Files 1 and 2 (CC BY-NC 4.0; non-commercial use).</span></div>
@@ -3985,11 +3985,15 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <div class="ref-item"><span class="ref-name">MSFC / T25FW</span><span class="ref-cite">Fischer JS, Rudick RA, Cutter GR, Reingold SC. <em>Mult Scler</em> 1999;5(4):244&ndash;50.</span></div>
       <div class="ref-item"><span class="ref-name">9-HPT</span><span class="ref-cite">Mathiowetz V, Weber K, Kashman N, Volland G. <em>Occup Ther J Res</em> 1985;5(1):24&ndash;38.</span></div>
       <div class="ref-item"><span class="ref-name">BICAMS</span><span class="ref-cite">Langdon DW, Amato MP, Boringa J et al. <em>Mult Scler J</em> 2012;18(6):891&ndash;8.</span></div>
+      <div class="ref-item"><span class="ref-name">MSQLI scales</span><span class="ref-cite">Ritvo PG, Fischer JS, Miller DM, Andrews H, Paty DW, LaRocca NG. <em>Multiple Sclerosis Quality of Life Inventory: A User&rsquo;s Manual</em>. National Multiple Sclerosis Society; 1997 (PES, BLCS, BWCS, IVIS, SSS, PDQ, MHI-18, MOS-SSS).</span></div>
+      <div class="ref-item"><span class="ref-name">TUG / 2MWT</span><span class="ref-cite">Podsiadlo D, Richardson S. <em>J Am Geriatr Soc</em> 1991;39(2):142&ndash;8; Kalron A et al. <em>Eur J Phys Rehabil Med</em> 2017;53(6):841&ndash;7; Scalzitti DA et al. <em>Int J MS Care</em> 2018;20(4):158&ndash;63.</span></div>
+      <div class="ref-item"><span class="ref-name">Other Score Hub tools</span><span class="ref-cite">Full references for every Score Hub tool (SymptoMScreen, FSMC, 6MWT, ABC, FES-I, LCVA, Modified Ashworth, ARR, CDP, NEDA, PROMIS Cognitive 4a and pain) are in the Score Hub&rsquo;s own References list.</span></div>
       <div class="ref-cat">MS Criteria Checker - McDonald 2024</div>
       <div class="ref-item"><span class="ref-name">McDonald 2024</span><span class="ref-cite">Montalban X, Lebrun-Fr&eacute;nay C, Oh J et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em> 2025;24(10):850&ndash;865. DOI:10.1016/S1474-4422(25)00270-4.</span></div>
       <div class="ref-item"><span class="ref-name">MRI consensus</span><span class="ref-cite">2024 MAGNIMS&ndash;CMSC&ndash;NAIMS consensus recommendations on the use of MRI for the diagnosis of multiple sclerosis. <em>Lancet Neurol</em> 2025. DOI:10.1016/S1474-4422(25)00304-7.</span></div>
       <div class="ref-item"><span class="ref-name">Differential diagnosis</span><span class="ref-cite">Solomon AJ, Arrambide G, Brownlee WJ et al. Differential diagnosis of suspected multiple sclerosis: an updated consensus approach. <em>Lancet Neurol</em> 2023;22:750&ndash;68.</span></div>
       <div class="ref-item"><span class="ref-name">RIS conversion</span><span class="ref-cite">Lebrun-Fr&eacute;nay C, Kantarci O, Siva A et al. Radiologically isolated syndrome: 10-year risk estimate of a clinical event. <em>Ann Neurol</em> 2020;88(2):407&ndash;17.</span></div>
+      <div class="ref-item"><span class="ref-name">&kappa;-FLC index</span><span class="ref-cite">Hegen H et al. <em>Mult Scler</em> 2023;29:169&ndash;81 (cut-off 6.1). Reiber H et al. <em>Clin Chim Acta</em> 2019;497:153&ndash;62 (hyperbolic reference range).</span></div>
     </div>
     <p style="font-size:12px;color:var(--ink-faint);margin-top:8px">Proprietary instruments (BVMT-R, CVLT-II, SDMT) are scored from entered numeric results only; their stimuli and norm tables are not reproduced here.</p>
     </details>
@@ -8000,8 +8004,8 @@ async function emailFinalSheet() {
   const dt = (typeof FORM_STATE !== "undefined" && FORM_STATE.pt_exam) ? FORM_STATE.pt_exam : new Date().toISOString().slice(0,10);
   const edss = document.getElementById("edss-step-val")?.value?.trim() || document.getElementById("edss-live")?.textContent?.trim() || "-";
   const fname = ("EDSS_" + pt + "_" + dt + ".pdf").replace(/[^A-Za-z0-9_.-]+/g, "_");
-  const subj = "[Confidential] EDSS Assessment \u2014 " + pt + " \u2014 " + dt;
-  const body = "EDSS scoring sheet attached (PDF).\nFinal EDSS step: " + edss + ".\n\nCompleted using AutoEDSSguide.\nConfidential \u2014 may contain protected patient information.";
+  const subj = "[Confidential] EDSS Assessment: " + pt + ", " + dt;
+  const body = "EDSS scoring sheet attached (PDF).\nFinal EDSS step: " + edss + ".\n\nCompleted using AutoEDSSguide.\nConfidential; may contain protected patient information.";
   const pages = document.querySelectorAll("#fs-sheet-container .sc-page");
   if (!pages.length) { showToast("Open the Final Sheet tab first, then press Email again."); return; }
   try {
@@ -8038,10 +8042,10 @@ async function emailFinalSheet() {
     const a = document.createElement("a");
     a.href = url; a.download = fname; document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(url), 5000);
-    showToast("PDF saved \u2014 attach \"" + fname + "\" to the email that just opened.");
+    showToast("PDF saved. Attach \"" + fname + "\" to the email that just opened.");
     setTimeout(() => { window.location.href = "mailto:?subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body + "\n\n(Please attach the downloaded file: " + fname + ")"); }, 700);
   } catch (err) {
-    showToast("Couldn't build the PDF automatically \u2014 use \"Print / Export to PDF\", then attach it to email.");
+    showToast("Couldn't build the PDF automatically. Use \"Print / Export to PDF\", then attach it to email.");
     setTimeout(() => { window.location.href = "mailto:?subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body); }, 700);
   }
 }
