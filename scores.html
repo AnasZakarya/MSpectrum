@@ -957,7 +957,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     <div class="result" id="fsmc_out"></div>
     <details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div>
 <b>Scoring:</b> 20 items &times; 1&ndash;5; total 20&ndash;100. Cognitive subscale = items 1, 4, 7, 8, 11, 13, 15, 17, 18, 20; Motor subscale = items 2, 3, 5, 6, 9, 10, 12, 14, 16, 19 (each 10&ndash;50). Higher = more fatigue.<br>
-<b>Total cut-offs (Penner 2009):</b> &lt; 43 no fatigue &middot; &ge; 43 mild &middot; &ge; 53 moderate &middot; &ge; 63 severe.<br>
+<b>Total cut-offs (Penner 2009, Table 7):</b> &lt; 43 no fatigue &middot; &ge; 43 mild &middot; &ge; 53 moderate &middot; &ge; 63 severe. <b>Motor:</b> &ge; 22 mild, &ge; 27 moderate, &ge; 32 severe. <b>Cognitive:</b> &ge; 22 mild, &ge; 28 moderate, &ge; 34 severe.<br>
 <b>Reference:</b> Penner IK, Raselli C, St&ouml;cklin M, Opwis K, Kappos L, Calabrese P. <em>Mult Scler</em> 2009;15(12):1509&ndash;17.
 </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('fsmc','FSMC')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('fsmc','FSMC')">Researcher: CSV</button></div>
@@ -1178,7 +1178,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
         <li><b>&lt; 50%:</b> Low level of physical functioning.</li>
       </ul>
       Bands from Myers AM, Fletcher PC, Myers AH, Sherk W. <em>J Gerontol A Biol Sci Med Sci</em> 1998;53(4):M287&ndash;94 (older adults).<br>
-      <b>Fall risk threshold:</b> below 67% predicts falls in community-dwelling older adults (Lajoie Y, Gallagher SP. <em>Arch Gerontol Geriatr</em> 2004;38:11&ndash;26). MS-specific cut-offs vary between studies; use the value as a guide, not a rule.<br>
+      <b>Fall risk threshold:</b> below 67% predicts falls in community-dwelling older adults (Lajoie Y, Gallagher SP. <em>Arch Gerontol Geriatr</em> 2004;38:11&ndash;26). This cut-off (sensitivity 84.4%, specificity 87.5%) comes from older adults, not people with MS; use it as a guide, not a rule.<br>
       <b>Reference:</b> Powell LE, Myers AM. <em>J Gerontol A Biol Sci Med Sci</em> 1995;50A(1):M28-34.
     </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('abc','ABC Scale')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('abc','ABC Scale')">📊 Researcher: CSV</button></div>
@@ -1205,7 +1205,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
         <li><b>20 &ndash; 27:</b> Moderate concern of falling.</li>
         <li><b>28 &ndash; 64:</b> High concern of falling.</li>
       </ul>
-      <b>Reference:</b> Items: Yardley L, Beyer N, Hauer K, Kempen G, Piot-Ziegler C, Todd C. <em>Age Ageing</em> 2005;34(6):614&ndash;9. FES-I is free for researchers and clinicians when referenced (University of Manchester). Cut-points (16&ndash;19, 20&ndash;27, 28&ndash;64): Delbaere K, Close JCT, Mikolaizak AS et al. <em>Age Ageing</em> 2010;39(2):210&ndash;6.
+      <b>Reference:</b> Items: Yardley L, Beyer N, Hauer K, Kempen G, Piot-Ziegler C, Todd C. <em>Age Ageing</em> 2005;34(6):614&ndash;9. FES-I is free for researchers and clinicians when referenced (University of Manchester). Cut-points (16&ndash;19 low, 20&ndash;27 moderate, 28&ndash;64 high concern): Delbaere K, Close JCT, Mikolaizak AS et al. <em>Age Ageing</em> 2010;39(2):210&ndash;6, from community-dwelling adults aged 70&ndash;90; the authors call them preliminary.
     </div></details>
     <div class="actions no-print"><button class="btn" onclick="patientSummary('fesi','FES-I')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('fesi','FES-I')">📊 Researcher: CSV</button></div>
   </section>
@@ -2599,7 +2599,7 @@ function calcFSMC(){const o=readFSMC();const r=scoreFSMC(o);if(r.answered===0){e
   const cls=r.total>=63?"bad":r.total>=43?"warn":"good";
   const band=r.total>=63?"severe fatigue":r.total>=53?"moderate fatigue":r.total>=43?"mild fatigue":"no fatigue";
   const msg="Total "+r.total+"/100 - "+band+" (Penner 2009: &ge; 43 mild, &ge; 53 moderate, &ge; 63 severe).";
-  const note=(r.answered<20?("&#9888; "+r.answered+"/20 answered - scores use answered items only. "):"")+"Motor "+r.motor+"/50 &middot; Cognitive "+r.cognitive+"/50. Higher = more fatigue.";
+  const note=(r.answered<20?("&#9888; "+r.answered+"/20 answered - scores use answered items only. "):"")+"Motor "+r.motor+"/50 ("+(r.motor>=32?"severe":r.motor>=27?"moderate":r.motor>=22?"mild":"below cut-off")+") &middot; Cognitive "+r.cognitive+"/50 ("+(r.cognitive>=34?"severe":r.cognitive>=28?"moderate":r.cognitive>=22?"mild":"below cut-off")+"). Subscale cut-offs (Penner 2009, Table 7): motor 22 / 27 / 32, cognitive 22 / 28 / 34 for mild / moderate / severe. Higher = more fatigue.";
   el("fsmc_out").innerHTML='<div class="scoreline"><div class="bigscore">'+r.total+'<small> / 100</small></div></div>'+interp(cls,msg)+'<div class="note">'+note+'</div>';}
 function fillFSMC(v){for(let i=1;i<=20;i++)el("fsmc_"+i).value=v;calcFSMC();}
 function clearFSMC(){for(let i=1;i<=20;i++){el("fsmc_"+i).value="";const e=el("fsmc_"+i);if(e)e.classList.remove("blank");}el("fsmc_out").innerHTML="";}

@@ -64,6 +64,11 @@
 - **References list completed** (Score Hub): Modified Ashworth (Bohannon 1987), PIRA / RAW (Müller 2023; Kappos 2020), MFIS cut-off (Flachenecker 2002), PHQ-9 cut-point in MS (Patten 2015), GAD-7 change (Toussaint 2020), 2MWT change (Baert 2014).
 - **Paste answers**: FSS, MSWS-12, MSIS-29, FSMC, ABC, MSQOL-54, PROMIS-29 and PROMIS Cognitive 4a can be filled from one pasted line, with the converter's range checks (hidden in the patient pathway).
 
+### Checked against the original papers (Nour's PDFs)
+- FES-I cut-points 16-19 / 20-27 / 28-64 match Delbaere 2010 exactly; the text now says they come from adults aged 70-90 and that the authors call them preliminary.
+- FSMC cut-offs match Penner 2009 Table 7 (total 43/53/63, cognitive 22/28/34, motor 22/27/32); the motor and cognitive subscales are now graded too (only the total was).
+- ABC 67% matches Lajoie 2004 (sensitivity 84.4%, specificity 87.5%, older adults); the unsourced "MS-specific cut-offs vary" sentence was replaced.
+
 ### Result charts (neutral colours; a line only where a published cut-off exists)
 - **BICAMS**: the three z-scores on one axis with a dashed line at z = -1.5 (impaired range shaded). **MSFC**: the three component z-scores on one axis (no cut-off; 0 = Task Force MS reference mean).
 - **SDMT**: the change since the last visit, drawn against the Strober 2022 reliable-change bands (70%, 80%, 90%).
