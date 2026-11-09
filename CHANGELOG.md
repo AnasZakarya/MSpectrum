@@ -1,5 +1,28 @@
 # Changelog
 
+## Unreleased (after v36): one disclaimer box and a short footer
+
+- **"Use and limitations" box** (was "Not a diagnosis") only on the main pages: the AutoEDSSguide mode picker, the Score Hub home, the Check my MS start page and the Criteria Checker. Same layout everywhere: one sentence written for that page, one point for that page (Training; Questionnaires and norms; If you feel unsafe, with the 988 line), then the same 3 shared points in the same order (Not a medical device, Privacy, Independence), and a last line with copyright, About, Full disclaimer, Cite and Contact.
+- Removed: the box on the home page, the box inside each AutoEDSSguide mode and Score Hub tool, the Sheet Scanner yellow bar, the Neurostatus line in the footer, and the repeated "the diagnosis stays with the treating neurologist" in the Criteria Checker header. Neurostatus is named once in the AutoEDSSguide box; the full trademark notice stays in About, which now also names the instrument owners.
+- **Sub-pages** (each mode and tool) end with a 2-line footer: "Supports, but does not replace, clinical judgment. Not an official product of, or endorsed by, any university, hospital or government agency." and copyright with the links. The Disclaimer link opens "Disclaimer & terms of use" in About from any page.
+- Less empty space below the box (Score Hub bottom padding 80 to 24 px on desktop; mobile keeps room for the floating buttons).
+- One spelling: "judgment". Mobile: the Clinical EDSS header no longer scrolls sideways at 390 px.
+- Dead CSS removed (disclaimer bar, warning card, old box footer). New test: tests/disclaimer.test.js.
+- Print and PDF disclaimers and tool-specific notes (Quick Check, sEDSS, PHQ-9/GAD-7, PIRA) are unchanged.
+
+### Check my MS: 13 questionnaires
+- Added to the guided flow, all with item wording that may be shown: PDQ (everyday thinking and memory), BLCS (bladder), BWCS (bowel), SCI (sleep) and RAND-36 (general health and quality of life). The report shows each with its range; only SCI has a published cut-off (16 or less, probable insomnia disorder, Espie 2014), so only SCI can raise a flag.
+- Removed leftover checklist entries for steps no longer in the flow (MSWS-12, PROMIS Cognitive 4a, MSIS-29, MSQOL-54).
+- New test: tests/checkmyms.test.js.
+
+### Gemini round 7 (checked against the code; 8 of 10 points fixed)
+- PIRA chart and PIRA / RAW badges now follow dark mode (theme colours instead of fixed dark colours).
+- The norms caveat "(Marrie 2021)" now gives the full citation: Marrie RA et al. Front Neurol 2021;11:621010 (checked in PubMed). The Marrie norms themselves stay removed.
+- Kappos 2020 added to the AutoEDSSguide reference list (it is cited on the final sheet).
+- Score Hub: PROMIS-29 card no longer says "with severity bands"; MSFC group subtitle says "NMSS Task Force reference".
+- README: Marrie removed from the norms line; Train mode added (six modes); privacy line mentions "Save to browser"; Check my MS lists its 13 questionnaires.
+- Not adopted: the ".viz-t endpoint labels" point (no such class or function exists in the code); the "Assessment 2021" journal for Marrie (that text is not in the files; the old citation was already Front Neurol).
+
 ## v36 (2026-11-09): RAND-36, SCI, P-MSSS, PIRA/RAW module, harmonized worsening thresholds, Gemini review fixes
 
 ### MS Score Hub

@@ -1,10 +1,10 @@
 # MSpectrum
 
-**MSpectrum** is a free, browser-based, privacy-first hub for the outcome measures used in multiple sclerosis. Everything is computed in your browser; nothing is uploaded or stored. It has four parts:
+**MSpectrum** is a free, browser-based, privacy-first hub for the outcome measures used in multiple sclerosis. Everything is computed in your browser; nothing is uploaded, and nothing is saved unless you press "Save to browser" in AutoEDSSguide. It has four parts:
 
 - **AutoEDSSguide** (`index.html`): the full EDSS exam, scored with the published Neurostatus conventions (Kappos 2011) and the algorithmic combination rules of Fouad et al. 2023, plus the streamlined EDSS (sEDSS, Baldassari 2018) and a patient self-report EDSS range (SRDSS, Kaufmann 2020, with PDDS) fast modes, a print-ready EDSS sheet in the standard FS layout used on research and clinical-trial forms, and an OCR sheet scanner.
 - **MS Score Hub** (`scores.html`): stateless calculators and full questionnaires for the cognition, fatigue, mood, walking, quality-of-life and disease-severity measures used alongside the EDSS, each with automatic published norms (z / T / percentile) and a plain-language interpretation.
-- **Check my MS** (`scores.html#report`): a guided, patient-facing pathway that walks through the self-report questionnaires and produces one plain-language summary of how MS is affecting the person, for understanding and discussion rather than diagnosis.
+- **Check my MS** (`scores.html#report`): a guided, patient-facing pathway that walks through 13 self-report questionnaires (EDSS and age, PDDS, FES-I, MFIS, PDQ, SymptoMScreen, BLCS, BWCS, SCI, PHQ-9, GAD-7, pain, RAND-36) and produces one plain-language summary of how MS is affecting the person, for understanding and discussion rather than diagnosis.
 - **MS Criteria Checker** (`mcdonald.html`): an adaptive wizard that applies the 2024 revisions of the McDonald criteria (Montalban et al., Lancet Neurol 2025) to reach an MS diagnosis across relapsing, progressive and RIS onset, covering the five DIS regions (incl. optic nerve), DIT, CSF (OCB / k-FLC) and susceptibility markers (CVS, PRL), with older-onset and mimic safeguards and a printable summary.
 
 MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency.
@@ -19,7 +19,7 @@ No installation. No login. Works in any modern browser.
 
 ---
 
-## AutoEDSSguide: five ways to use it
+## AutoEDSSguide: six ways to use it
 
 | Mode | For whom | What it is |
 |------|----------|------------|
@@ -28,6 +28,7 @@ No installation. No login. Works in any modern browser.
 | **Clinical EDSS** | Neurologists | Fast adaptive follow-up scoring (streamlined sEDSS, Baldassari 2018). |
 | **Quick Check** | People with MS | Four published self-report questions: SRDSS (Kaufmann 2020) gives an EDSS range; PDDS adds the disease step. |
 | **Sheet Scanner** | Raters | Upload or photograph a completed EDSS scoring sheet (standard research layout); fields are OCR-extracted and scored. |
+| **Train mode** | Raters in training | 20 reference cases (four are the published worked examples in Sen 2018): read the FS grades and Ambulation Score, pick the EDSS, and compare with the engine step and the rule behind it. A practice aid, not a certification. |
 
 All modes compute through a **single shared engine**, so the header, roadmap, printed sheet, and scanner always produce identical EDSS values.
 
@@ -61,13 +62,13 @@ Extras: result charts (BICAMS and MSFC z-scores, SDMT reliable change, ARMSS/MSS
 
 A **Score & norm converter** turns a whole list of patients into finished scores at once: pick a questionnaire or test, paste one patient per line (values separated by comma, space or tab, with an optional leading ID), and get a downloadable results table. It covers **34 instruments** in eight groups: patient-reported questionnaires (PHQ-9, GAD-7, MFIS, FSS, MSWS-12, MSIS-29, MSQOL-54, SymptoMScreen, FSMC, PDDS, ABC, FES-I), the eight MSQLI scales (PES, BLCS, BWCS, IVIS, SSS, PDQ, MHI-18, MOS-SSS), RAND-36 and the Sleep Condition Indicator, P-MSSS from PDDS, norm-based cognitive tests that use age/sex/education (SDMT, BVMT-R, CVLT-II), cognitive/motor tests scored against a fixed reference (PASAT-3, T25FW, 9-HPT), PROMIS (raw sums per domain for PROMIS-29 and PROMIS Cognitive 4a), and disease severity (ARMSS, MSSS). This complements data platforms such as **REDCap**, giving the norm-based z/T scores those platforms store the answers for but do not compute. For a single patient with the full breakdown and interpretation, each tool's own page is used instead. Everything runs in the browser; nothing is uploaded.
 
-> **Decision support, not a diagnosis.** MSpectrum computes outcome-measure scores and applies published diagnostic criteria, and explains what the results mean. It supports clinical judgement but does not itself diagnose; interpretation, diagnosis and treatment remain the decision of a qualified clinician. See the in-app **Disclaimer & terms of use** for the full medico-legal notice.
+> **Decision support, not a diagnosis.** MSpectrum computes outcome-measure scores and applies published diagnostic criteria, and explains what the results mean. It supports clinical judgment but does not itself diagnose; interpretation, diagnosis and treatment remain the decision of a qualified clinician. See the in-app **Disclaimer & terms of use** for the full medico-legal notice.
 
 ---
 
 ## Offline & privacy
 
-Works fully offline once loaded (open `index.html` directly). No account, no tracking, nothing uploaded or stored. Do not enter patient names or identifiers (PHI); use a non-identifying code.
+Works fully offline once loaded (open `index.html` directly). No account, no tracking, nothing uploaded; nothing is saved unless you press "Save to browser" in AutoEDSSguide. Do not enter patient names or identifiers (PHI); use a non-identifying code.
 
 Fonts, the PDF/export libraries and the OCR libraries are **self-hosted**, so a normal session makes no third-party requests. Public CDN copies are used only as a fallback if a self-hosted file fails to load; images are always processed in the browser. Saved data lives only in your browser; a **Clear saved data** button wipes it, which is useful on shared computers. For the deployment security model and a HIPAA-conscious usage guide, see [SECURITY.md](SECURITY.md) and [PRIVACY-and-HIPAA.md](PRIVACY-and-HIPAA.md).
 
@@ -120,7 +121,7 @@ The AGPL-3.0 licence covers MSpectrum's own code, algorithms and interface - **n
 - **Item wording shown in full, with citation** (public domain or free to use): PHQ-9, GAD-7 (Pfizer, no permission required), MFIS (public domain), PDDS (not copyrighted; provided by the NARCOMS Registry), SymptoMScreen (CC BY 4.0), FES-I (free when referenced), the MSQLI scales (NMSS 1997 manual, provided for photocopying and use), the RAND-36 (RAND: no written permission needed; credit line given), the Sleep Condition Indicator (Sleepio, CC BY-NC 4.0) and the 0-10 pain rating. See [LICENSES-INSTRUMENTS.md](LICENSES-INSTRUMENTS.md) for one row per instrument.
 - **Number-entry only, item wording not reproduced** (copyrighted; short topic labels only): FSS, MSQOL-54, ABC, MSWS-12, MSIS-29, PROMIS-29 and PROMIS Cognitive Function 4a, plus the licensed performance tests SDMT, BVMT-R, CVLT-II, LCVA/Sloan and FSMC. Enter answers from your own copy of the official form.
 
-PROMIS T-scores are not computed: HealthMeasures holds copyright in the scoring tables, so MSpectrum shows raw sums only until written permission is given. PROMIS® is a registered trademark of the U.S. Department of Health and Human Services. BVMT-R and CVLT-II norms come from peer-reviewed papers (Parmenter 2010; Marrie 2021), not from the test manuals. If you reuse MSpectrum, you are responsible for complying with each instrument's own terms.
+PROMIS T-scores are not computed: HealthMeasures holds copyright in the scoring tables, so MSpectrum shows raw sums only until written permission is given. PROMIS® is a registered trademark of the U.S. Department of Health and Human Services. BVMT-R and CVLT-II norms come from peer-reviewed papers (Parmenter 2010), not from the test manuals. If you reuse MSpectrum, you are responsible for complying with each instrument's own terms.
 
 ---
 

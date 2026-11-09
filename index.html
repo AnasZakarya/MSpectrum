@@ -130,6 +130,15 @@ html[data-theme="dark"] .tool-hero-desc{background:#1e2636;border-color:var(--ru
 .tool-disclaimer p{margin:0}
 @media(max-width:700px){.fab-clear{padding-bottom:64px!important}}
 .disc-list{margin:10px 0 0;padding-left:18px;font-size:12.5px;line-height:1.5;color:var(--ink-soft)}.disc-list li{margin:3px 0}.disc-list b{color:var(--ink)}
+.site-foot{max-width:1100px;margin:16px auto 0;padding:14px 16px 26px;border-top:1px solid var(--rule);text-align:center;font-size:11.5px;line-height:1.6;color:var(--ink-faint);background:transparent}
+.site-foot p{margin:2px 0}.site-foot a{color:var(--ink-soft);text-decoration:none}.site-foot a:hover{color:var(--accent);text-decoration:underline}.site-foot .dot{margin:0 2px;color:var(--rule-strong)}
+.app-foot-legal{text-align:center;font-size:11.5px;color:rgba(255,255,255,0.6);margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.12);line-height:1.6}.app-foot-legal p{margin:2px 0}.app-foot-legal a{color:rgba(255,255,255,0.8);text-decoration:none}.app-foot-legal a:hover{text-decoration:underline}.app-foot-legal .dot{margin:0 2px;color:rgba(255,255,255,0.35)}
+html[data-theme="dark"] .site-foot{background:transparent!important;border-top-color:var(--rule)!important;color:var(--ink-faint)!important}
+.disc-foot{margin-top:10px;padding-top:8px;border-top:1px dashed var(--rule);font-size:11.5px;color:var(--ink-faint);text-align:center;line-height:1.7}.disc-foot a{color:var(--ink-faint);text-decoration:none}.disc-foot a:hover{color:var(--accent);text-decoration:underline}.disc-foot .dot{margin:0 2px;color:var(--rule-strong)}.disc-foot a,.site-foot a,.app-foot-legal a,.nw{white-space:nowrap}
+.tool-disclaimer{margin-top:28px!important}.tool-disclaimer::before{top:-14px!important}
+.tool-disclaimer,.tool-disclaimer .disc-list{text-align:left}
+@media(max-width:700px){.site-foot.fab-clear,.app-foot-legal.fab-clear{padding-bottom:72px!important}.tool-disclaimer{margin-bottom:64px!important}}
+#landing.active ~ .site-foot{display:none}
 
 .tool-disclaimer b{color:var(--ink)}
 .tool-disclaimer::before{
@@ -143,26 +152,6 @@ html[data-theme="dark"] .tool-hero-desc{background:#1e2636;border-color:var(--ru
   pointer-events:none;
 }
 /* ==== Enhancement pack: disclaimer footer, focus, print, mobile ==== */
-.tool-disclaimer-footer{
-  margin-top:12px;
-  padding-top:10px;
-  border-top:1px dashed var(--rule);
-  font-size:11.5px;
-  color:var(--ink-faint);
-  text-align:center;
-  line-height:1.7;
-}
-.tool-disclaimer-footer a{
-  color:var(--ink-faint);
-  text-decoration:none;
-  margin:0 4px;
-  transition:color .18s ease;
-}
-.tool-disclaimer-footer a:hover{color:var(--accent);text-decoration:underline}
-.tool-disclaimer-footer .dot{color:var(--rule-strong);margin:0 2px}
-html[data-theme="dark"] .tool-disclaimer-footer{color:var(--ink-faint);border-top-color:var(--rule)}
-html[data-theme="dark"] .tool-disclaimer-footer a{color:var(--ink-soft)}
-html[data-theme="dark"] .tool-disclaimer-footer .dot{color:var(--rule)}
 html[data-theme="dark"] .tool-disclaimer::before{background:linear-gradient(90deg,transparent 0%,var(--rule-strong) 20%,var(--rule-strong) 80%,transparent 100%)}
 
 /* Accessibility: keyboard focus outline on interactive elements */
@@ -198,8 +187,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 }
 
 /* Dark mode polish for new elements */
-html[data-theme="dark"] .tool-disclaimer-footer{border-top-color:var(--rule-strong)!important}
-html[data-theme="dark"] .tool-disclaimer-footer .dot{color:var(--ink-faint)}
 html[data-theme="dark"] .tool-search input::placeholder{color:var(--ink-faint);opacity:0.75}
 html[data-theme="dark"] .tool-search-empty{color:var(--ink-soft)}
 html[data-theme="dark"] .tool-search .clear-btn{color:var(--ink-soft)}
@@ -898,6 +885,7 @@ html[data-theme="dark"] .cite-box { background: #1e2636; border-color: var(--rul
 .clinical-brand em { color:#e65c00; font-style: normal; }
 .clinical-progress-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; min-width: 180px; }
 .clinical-progress-bar { width: 160px; height: 6px; background: var(--rule); border-radius: 3px; overflow: hidden; }
+@media (max-width: 600px) { .clinical-progress-wrap { min-width: 0; } .clinical-progress-bar { width: 90px; } }
 .clinical-progress-fill { height: 100%; background: linear-gradient(90deg, #7b3fa0 0%, #a855c8 100%); border-radius: 3px; transition: width 0.3s; }
 .clinical-progress-text { font-size: 11px; font-variant: small-caps; letter-spacing: 0.1em; color: var(--ink-faint); font-weight: 500; }
 .clinical-main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 40px 24px 80px; }
@@ -3070,24 +3058,6 @@ input[type="checkbox"] {
 .sc-review-banner{margin:0 0 12px;padding:12px 16px;border-radius:8px;font-size:13.5px;line-height:1.5;border-left:5px solid #f57c00;background:#fff8ec;color:#7a4a00;font-weight:600;}
 .sc-review-banner.clean{border-left-color:#2e7d32;background:#eef8ee;color:#1b5e20;}
 
-/* Disclaimer bar */
-.disclaimer-bar {
-  background:#fffbeb;
-  border-top: 1px solid #f59e0b;
-  border-bottom: 1px solid #f59e0b;
-  padding: 8px 20px;
-  font-size: 11px;
-  color:#78350f;
-  line-height: 1.5;
-  text-align: center;
-}
-.disclaimer-bar strong { font-weight: 700; }
-@media print {
-  .disclaimer-bar { display: block !important; border: none !important; background: white !important; color:#777777 !important; font-size: 7pt !important; padding: 2px 0 !important; margin-bottom: 2px !important; }
-  .disclaimer-bar strong, .disclaimer-bar br { display: none !important; }
-  .disclaimer-bar::before { content: "AutoEDSSguide provides automated scoring for guidance purposes only. Results must be verified by a qualified neurologist prior to any clinical or research use."; }
-  .disclaimer-bar * { display: none !important; }
-}
 /* Way card for scanner on landing */
 .branch-head{font-family:var(--serif);font-size:32px;color:var(--accent-ink);margin:0 0 6px;display:flex;align-items:center;gap:8px;letter-spacing:-0.01em}
 .usenote{background:#eef4f8;border:1px solid #cfe0ec;border-radius:var(--radius-sm);padding:11px 14px;font-size:13px;color:#274b63;margin:14px 0 0;line-height:1.6}
@@ -3490,7 +3460,6 @@ html[data-theme="dark"] .sc-align-panel{background:#1a2130!important;}
 html[data-theme="dark"] .sc-align-stage{background:#1a2130!important;}
 html[data-theme="dark"] .sc-review-banner{background:#322611!important;color:#f0c987!important;}
 html[data-theme="dark"] .sc-review-banner.clean{background:#14271a!important;color:#a5d6a7!important;}
-html[data-theme="dark"] .disclaimer-bar{background:#322611!important;color:#f0c987!important;border-color:#5c4000!important;}
 html[data-theme="dark"] .usenote{background:#16283a!important;color:#bcd6f0!important;border-color:#2c4a63!important;}
 html[data-theme="dark"] .usenote-green{background:#14271a!important;color:#a5d6a7!important;border-color:#1e5631!important;}
 html[data-theme="dark"] .about-toggle{background:#1a2130!important;}
@@ -3672,11 +3641,8 @@ html[data-theme="dark"] .tab-progress { background: #2a3446; }
 .info-card-head { display: flex; align-items: center; gap: 8px; }
 .info-ico { font-size: 18px; line-height: 1; }
 .info-title { font-weight: 700; font-size: 13.5px; color: var(--accent-ink); }
-.info-card-warn { background: #fff8ee; border-color: #f0cba8; }
-.info-card-warn .info-title { color: #7a4a1c; }
 @media (max-width: 860px) { .info-cards { grid-template-columns: 1fr; } }
 html[data-theme="dark"] .info-card { background: #1e2636; border-color: var(--rule); }
-html[data-theme="dark"] .info-card-warn { background: #322611; border-color: #5c4000; }
 /* D9: one info rail (Who / How / Disclaimer) instead of stacked notice boxes */
 .info-rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper-tint); margin: 0 0 22px; overflow: hidden; }
 .info-cell { padding: 10px 14px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 3px; min-width: 0; }
@@ -3876,15 +3842,16 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     </div>
     <div class="cta-row">
 
-    <div class="tool-disclaimer no-print">
-      <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
-      <p>MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is uploaded, and nothing is saved unless you press &ldquo;Save to browser&rdquo;.</p>
-      <div class="tool-disclaimer-footer no-print">
-        <a href="index.html#about-mspectrum">About</a><span class="dot">·</span>
-        <a href="index.html#cite">Cite</a><span class="dot">·</span>
-        <a href="mailto:nour.anas@wayne.edu">Contact</a><span class="dot">·</span>
-        <span>&copy; 2026 Anas Z. Nourelden</span>
-      </div>
+    <!-- MSpectrum disclaimer: page sentence + page point, then the 3 shared points (same text on every main page) -->
+    <div class="tool-disclaimer no-print" data-disc="edss">
+      <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Use and limitations</span></div>
+      <p>AutoEDSSguide calculates the EDSS from the findings you enter, using the published Neurostatus scoring conventions (MSpectrum is not affiliated with Neurostatus-UHB AG). It supports, but does not replace, the judgment of a trained examiner.</p><ul class="disc-list">
+      <li><b>Training.</b> Does not replace a full neurological examination or the rater certification a study may require.</li>
+      <li><b>Not a medical device.</b> Not reviewed, cleared or approved by the U.S. FDA. Provided &quot;as is&quot;, without warranty; the authors accept no liability for its use.</li>
+      <li><b>Privacy.</b> Everything runs on your device; nothing is uploaded or transmitted. Nothing is kept unless you choose to save it in this browser. Avoid entering names or other identifiers.</li>
+      <li><b>Independence.</b> MSpectrum is an independent project. It is not an official product of, or endorsed by, any university, hospital, government agency or instrument owner; copyrights and trademarks belong to their owners.</li>
+      </ul>
+      <div class="disc-foot"><span class="nw">&copy; 2026 Anas Z. Nourelden</span> <span class="dot">·</span> <a href="#about-mspectrum">About</a> <span class="dot">·</span> <a href="#about-disclaimer">Full disclaimer</a> <span class="dot">·</span> <a href="#cite">Cite</a> <span class="dot">·</span> <a href="mailto:nour.anas@wayne.edu">Contact</a></div>
     </div>
     </div>
     </div><!-- /edss-modes -->
@@ -3952,9 +3919,9 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     <details class="about-toggle"><summary>📊 MS Score Hub: cognition, fatigue, mood, symptoms, walking &amp; quality of life</summary>
       <p>43 stateless calculators / questionnaires. Cognition: SDMT, BVMT-R, CVLT-II, PASAT-3, the BICAMS battery, PROMIS Cognitive 4a and the PDQ. Fatigue: MFIS, FSS, FSMC. Mood: PHQ-9, GAD-7, MHI-18. Symptoms and sleep: SymptoMScreen, PROMIS pain intensity, the MSQLI pain, bladder, bowel and sexual satisfaction scales, and the Sleep Condition Indicator. Vision: low-contrast letter acuity and the MSQLI vision scale (IVIS). Walking, balance and motor: MSWS-12, T25FW, 9-HPT, 6MWT, 2MWT, TUG, ABC, FES-I and the Modified Ashworth Scale. Quality of life: MSQOL-54, RAND-36, PROMIS-29, MSIS-29 and MOS social support. Disability and activity: PDDS with P-MSSS, MS severity (ARMSS by age, MSSS by duration), annualized relapse rate, confirmed disability progression, PIRA / RAW across visits, NEDA and the MSFC composite. Each comes with an interpretation, plus published cut-offs, bands or norms (z-score &amp; percentile) where they exist. Self-report questionnaires can be filled by the patient; performance tests and composites are entered by a clinician. Nothing is stored.</p>
     </details>
-    <details class="about-toggle"><summary>⚖️ Disclaimer &amp; terms of use</summary>
-      <p><b>Not a diagnosis or medical advice.</b> MSpectrum computes outcome-measure scores and applies published diagnostic criteria, and explains what they mean. It supports clinical judgement but does not itself establish a diagnosis, does not recommend, start, stop or change any treatment, and is not a substitute for examination, testing, or the judgment of a qualified clinician. Using it creates no doctor-patient relationship.</p>
-      <p><b>Independence and trademarks.</b> MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is not affiliated with or endorsed by Neurostatus-UHB AG, and uses only its published scoring conventions. All outcome-measure and instrument copyrights and trademarks belong to their owners.</p>
+    <details class="about-toggle" id="about-disclaimer"><summary>⚖️ Disclaimer &amp; terms of use</summary>
+      <p><b>Not a diagnosis or medical advice.</b> MSpectrum computes outcome-measure scores and applies published diagnostic criteria, and explains what they mean. It supports clinical judgment but does not itself establish a diagnosis, does not recommend, start, stop or change any treatment, and is not a substitute for examination, testing, or the judgment of a qualified clinician. Using it creates no doctor-patient relationship.</p>
+      <p><b>Independence and trademarks.</b> MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is not affiliated with or endorsed by Neurostatus-UHB AG, the National MS Society, Western Psychological Services, PAR, Pearson or any other instrument owner, and uses only the published Neurostatus scoring conventions. All outcome-measure and instrument copyrights and trademarks belong to their owners.</p>
       <p><b>What it is for.</b> It is intended for research, education, and to support - not replace - decisions made by patients and their care teams. Diagnosis, interpretation and treatment remain the responsibility of a qualified clinician who knows the individual.</p>
       <p><b>Scores and estimates are approximations.</b> Self-report tools (including the Quick Check EDSS range, PDDS and the patient questionnaires) reflect what a person reports and are not the same as a clinician-examined EDSS or a formal assessment. Norm-based results (z-scores, T-scores, percentiles) are population-level comparisons; they describe how a score relates to a reference group and do not, on their own, establish impairment in an individual.</p>
       <p><b>Accuracy &amp; verification.</b> Scoring rules are implemented faithfully from the cited primary sources, but no guarantee is made that every result is error-free or current. Verify any score locally against the original instrument before clinical or trial use. The cognitive tests (SDMT, BVMT-R, CVLT-II) must be administered and interpreted by a trained professional.</p>
@@ -3995,7 +3962,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <div class="ref-item"><span class="ref-name">RAND-36</span><span class="ref-cite">Hays RD, Sherbourne CD, Mazel RM. The RAND 36-Item Health Survey 1.0. <em>Health Econ</em> 1993;2(3):217&ndash;27. Developed at RAND as part of the Medical Outcomes Study.</span></div>
       <div class="ref-item"><span class="ref-name">SCI</span><span class="ref-cite">Espie CA et al. The Sleep Condition Indicator. <em>BMJ Open</em> 2014;4(3):e004183. &copy; Sleepio Limited, CC BY-NC 4.0.</span></div>
       <div class="ref-item"><span class="ref-name">P-MSSS</span><span class="ref-cite">Kister I, Chamot E, Salter AR, Cutter GR, Bacon TE, Herbert J. Disability in multiple sclerosis: a reference for patients and clinicians. <em>Neurology</em> 2013;80(11):1018&ndash;24.</span></div>
-      <div class="ref-item"><span class="ref-name">Disability worsening</span><span class="ref-cite">M&uuml;ller J et al. Harmonizing definitions for progression independent of relapse activity in multiple sclerosis. <em>JAMA Neurol</em> 2023;80(11):1232&ndash;45 (thresholds for change vs baseline and CDP).</span></div>
+      <div class="ref-item"><span class="ref-name">Disability worsening</span><span class="ref-cite">Kappos L et al. <em>JAMA Neurol</em> 2020;77(9):1132&ndash;40. &middot; M&uuml;ller J et al. Harmonizing definitions for progression independent of relapse activity in multiple sclerosis. <em>JAMA Neurol</em> 2023;80(11):1232&ndash;45 (thresholds for change vs baseline and CDP).</span></div>
       <div class="ref-item"><span class="ref-name">Other Score Hub tools</span><span class="ref-cite">Full references for every Score Hub tool (SymptoMScreen, FSMC, 6MWT, ABC, FES-I, LCVA, Modified Ashworth, ARR, CDP, NEDA, PROMIS Cognitive 4a and pain) are in the Score Hub&rsquo;s own References list.</span></div>
       <div class="ref-cat">MS Criteria Checker - McDonald 2024</div>
       <div class="ref-item"><span class="ref-name">McDonald 2024</span><span class="ref-cite">Montalban X, Lebrun-Fr&eacute;nay C, Oh J et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em> 2025;24(10):850&ndash;865. DOI:10.1016/S1474-4422(25)00270-4.</span></div>
@@ -4034,8 +4001,10 @@ details.card-optional .card-optional-body { margin-top: 12px; }
         </div>
       </div>
     </div>
-    <div style="text-align:center;font-size:11.5px;color:rgba(255,255,255,0.55);margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.12);line-height:1.6">MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean; <b style="color:rgba(255,255,255,0.8)">it supports clinical judgement but does not itself diagnose</b>.<br>Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research and educational use; nothing is uploaded.</div>
-     <div style="text-align:center;font-size:11px;color:rgba(255,255,255,0.5);margin-top:8px;line-height:1.6" class="fab-clear">&copy; 2026 Anas Z. Nourelden<br>MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency. Instrument copyrights and trademarks belong to their owners.</div>
+    <div class="app-foot-legal fab-clear">
+      <p>MSpectrum supports, but does not replace, clinical judgment. It is not an official product of, or endorsed by, any university, hospital or government agency.</p>
+      <p><span class="nw">&copy; 2026 Anas Z. Nourelden</span> <span class="dot">·</span> <a href="#about-mspectrum">About</a> <span class="dot">·</span> <a href="#about-disclaimer">Disclaimer</a> <span class="dot">·</span> <a href="#cite">Cite</a> <span class="dot">·</span> <a href="mailto:nour.anas@wayne.edu">Contact</a></p>
+    </div>
   </footer>
 </section>
 
@@ -4472,9 +4441,6 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     </div><!-- /sc-review -->
 
     <!-- Results -->
-    <div class="disclaimer-bar no-print" style="margin:12px 0 0;">
-AutoEDSSguide provides automated scoring for guidance purposes only and does not replace clinical judgment. Results must be verified by a qualified neurologist prior to any clinical or research use.
-    </div>
     <div class="sc-results" id="sc-results">
       <div class="sc-sheet-wrap">
         <div style="padding:12px 20px 0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
@@ -4611,14 +4577,13 @@ AutoEDSSguide provides automated scoring for guidance purposes only and does not
   <main class="app-main">
     <div id="form-root"></div>
   </main>
-  <div class="no-print" style="max-width:1100px;margin:28px auto 0;padding:0 16px"><div class="info-card info-card-warn"><div class="info-card-head"><span class="info-ico">⚠️</span><span class="info-title">Not a diagnosis</span></div><p>AutoEDSSguide automates EDSS scoring from the data you enter using the published Neurostatus conventions. It provides guidance only and does not replace clinical judgment; results must be verified by a qualified neurologist before any clinical or research use.</p><ul class="disc-list">
-<li><b>Not a medical device.</b> Not reviewed, cleared or approved by the U.S. FDA. Provided &quot;as is&quot;, without warranty; the authors accept no liability for any use of this tool or its results.</li>
-<li><b>Training and licences.</b> Does not replace a full neurological examination or certified rater training. Users are responsible for any licence or rater certification their study requires (for example Neurostatus-EDSS certification in clinical trials).</li>
-<li><b>Privacy.</b> Everything runs on your device; nothing is uploaded or transmitted. The form is kept only if you press &ldquo;Save to browser&rdquo;, and only in this browser. Use study IDs rather than names.</li>
-<li><b>Independence.</b> Content and views are the authors&rsquo; own. MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency, and is not affiliated with Neurostatus-UHB AG, the National MS Society, Western Psychological Services, PAR, Pearson or any other instrument owner. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; instrument copyrights and trademarks belong to their owners.</li>
-</ul></div></div>
-  <div class="no-print fab-clear" style="text-align:center;font-size:11px;color:var(--ink-faint);padding:14px 16px 26px;line-height:1.6;margin-top:10px">&copy; 2026 Anas Z. Nourelden</div>
 </section>
+
+<!-- MSpectrum footer for sub-pages (main pages carry the same line inside the disclaimer box) -->
+<footer class="site-foot no-print fab-clear">
+  <p>MSpectrum supports, but does not replace, clinical judgment. It is not an official product of, or endorsed by, any university, hospital or government agency.</p>
+  <p><span class="nw">&copy; 2026 Anas Z. Nourelden</span> <span class="dot">·</span> <a href="#about-mspectrum">About</a> <span class="dot">·</span> <a href="#about-disclaimer">Disclaimer</a> <span class="dot">·</span> <a href="#cite">Cite</a> <span class="dot">·</span> <a href="mailto:nour.anas@wayne.edu">Contact</a></p>
+</footer>
 
 <!-- ========================================================== -->
 <!-- Explain modal                                               -->
@@ -6696,8 +6661,7 @@ function renderPTPanel(){
   var box=document.getElementById("pt-box");
   if(!box){ box=document.createElement("div"); box.id="pt-box"; }
   var _act=document.querySelector(".tab-panel.active"); if(_act && _act.getAttribute("data-section")==="finalsheet"){ box.style.display="none"; box.innerHTML=""; if(box.parentNode)box.parentNode.removeChild(box); return; }
-  var _disc=_act?_act.querySelector(".disclaimer-bar"):null;
-  if(_disc&&_disc.parentNode){ _disc.parentNode.insertBefore(box,_disc); } else { fr.parentNode.insertBefore(box, fr.nextSibling); }
+  fr.parentNode.insertBefore(box, fr.nextSibling);
   if(!abn.length){ box.style.display="none"; box.innerHTML=""; }
   else{
     var avail=abn.filter(function(a){return !PT_FLAGS[a.id];});
@@ -9320,7 +9284,7 @@ function clinShowResult(stage) {
           <button class="clinical-btn" onclick="clinGoHome()">← Home</button>
         </div>
         <div class="clinical-disclaimer">
-          ⚠️ sEDSS from a streamlined exam. For research or trial use, the full standardized EDSS exam (Roadmap or System view) is recommended. Clinical judgement always takes precedence.
+          ⚠️ sEDSS from a streamlined exam. For research or trial use, the full standardized EDSS exam (Roadmap or System view) is recommended. Clinical judgment always takes precedence.
         </div>
       </div>
     </div>`;
@@ -9414,7 +9378,7 @@ function clinSaveAsImage(edssText, labelText, fs, collectedIds) {
   // Disclaimer
   ctx.fillStyle = "#94a3b8";
   ctx.font = "400 15px 'IBM Plex Sans', sans-serif";
-  wrapText(ctx, "sEDSS (Baldassari et al., Mult Scler 2018). Clinical judgement takes precedence.", W/2, 900, W-200, 24);
+  wrapText(ctx, "sEDSS (Baldassari et al., Mult Scler 2018). Clinical judgment takes precedence.", W/2, 900, W-200, 24);
 
   // Date
   ctx.fillStyle = "#cbd5e1";
@@ -11518,6 +11482,19 @@ window.scExtractAllZones = async function(){
     }
   }
   window.addEventListener('scroll', onScroll, {passive:true});
+})();
+</script>
+<script>
+/* Footer / About links (#about-mspectrum, #about-disclaimer, #cite): go to the home page and open that section. */
+(function(){
+  var IDS=["about-mspectrum","about-disclaimer","about-sources","cite"];
+  function go(){ var id=(location.hash||"").slice(1); if(IDS.indexOf(id)<0) return;
+    ["app","scanner","clinical","quickcheck","train"].forEach(function(v){ var e=document.getElementById(v); if(e) e.classList.remove("active"); });
+    var L=document.getElementById("landing"); if(L){ L.classList.add("active"); L.classList.remove("picking"); }
+    var t=document.getElementById(id); if(!t) return; if(t.tagName==="DETAILS") t.open=true;
+    setTimeout(function(){ t.scrollIntoView({block:"start"}); },30); }
+  window.addEventListener("hashchange",go); window.addEventListener("load",go);
+  document.addEventListener("click",function(ev){ var a=ev.target.closest&&ev.target.closest('a[href^="#"]'); if(a&&a.getAttribute("href")===location.hash) setTimeout(go,0); });
 })();
 </script>
 </body>

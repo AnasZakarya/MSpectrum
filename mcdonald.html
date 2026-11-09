@@ -263,6 +263,13 @@
     }
     .tool-disclaimer p{margin:0}
 .disc-list{margin:10px 0 0;padding-left:18px;font-size:12.5px;line-height:1.5;color:var(--ink-soft)}.disc-list li{margin:3px 0}.disc-list b{color:var(--ink)}
+.site-foot{max-width:1100px;margin:16px auto 0;padding:14px 16px 26px;border-top:1px solid var(--rule);text-align:center;font-size:11.5px;line-height:1.6;color:var(--ink-faint);background:transparent}
+.site-foot p{margin:2px 0}.site-foot a{color:var(--ink-soft);text-decoration:none}.site-foot a:hover{color:var(--accent);text-decoration:underline}.site-foot .dot{margin:0 2px;color:var(--rule-strong)}
+html[data-theme="dark"] .site-foot{background:transparent!important;border-top-color:var(--rule)!important;color:var(--ink-faint)!important}
+.disc-foot{margin-top:10px;padding-top:8px;border-top:1px dashed var(--rule);font-size:11.5px;color:var(--ink-faint);text-align:center;line-height:1.7}.disc-foot a{color:var(--ink-faint);text-decoration:none}.disc-foot a:hover{color:var(--accent);text-decoration:underline}.disc-foot .dot{margin:0 2px;color:var(--rule-strong)}.disc-foot a,.site-foot a,.app-foot-legal a,.nw{white-space:nowrap}
+.tool-disclaimer{margin-top:28px!important}.tool-disclaimer::before{top:-14px!important}
+.tool-disclaimer,.tool-disclaimer .disc-list{text-align:left}
+@media(max-width:700px){.site-foot.fab-clear,.app-foot-legal.fab-clear{padding-bottom:72px!important}.tool-disclaimer{margin-bottom:64px!important}}
 
     .tool-disclaimer b{color:var(--ink)}
     .tool-disclaimer::before{
@@ -276,26 +283,6 @@
       pointer-events:none;
     }
     /* ==== Enhancement pack: disclaimer footer, focus, print, mobile ==== */
-    .tool-disclaimer-footer{
-      margin-top:12px;
-      padding-top:10px;
-      border-top:1px dashed var(--rule);
-      font-size:11.5px;
-      color:var(--ink-faint);
-      text-align:center;
-      line-height:1.7;
-    }
-    .tool-disclaimer-footer a{
-      color:var(--ink-faint);
-      text-decoration:none;
-      margin:0 4px;
-      transition:color .18s ease;
-    }
-    .tool-disclaimer-footer a:hover{color:var(--accent);text-decoration:underline}
-    .tool-disclaimer-footer .dot{color:var(--rule-strong);margin:0 2px}
-    html[data-theme="dark"] .tool-disclaimer-footer{color:var(--ink-faint);border-top-color:var(--rule)}
-    html[data-theme="dark"] .tool-disclaimer-footer a{color:var(--ink-soft)}
-    html[data-theme="dark"] .tool-disclaimer-footer .dot{color:var(--rule)}
     html[data-theme="dark"] .tool-disclaimer::before{background:linear-gradient(90deg,transparent 0%,var(--rule-strong) 20%,var(--rule-strong) 80%,transparent 100%)}
 
     /* Accessibility: keyboard focus outline on interactive elements */
@@ -331,8 +318,6 @@
     }
 
     /* Dark mode polish for new elements */
-    html[data-theme="dark"] .tool-disclaimer-footer{border-top-color:var(--rule-strong)!important}
-    html[data-theme="dark"] .tool-disclaimer-footer .dot{color:var(--ink-faint)}
     html[data-theme="dark"] .tool-search input::placeholder{color:var(--ink-faint);opacity:0.75}
     html[data-theme="dark"] .tool-search-empty{color:var(--ink-soft)}
     html[data-theme="dark"] .tool-search .clear-btn{color:var(--ink-soft)}
@@ -591,11 +576,8 @@
     .info-card-head { display: flex; align-items: center; gap: 8px; }
     .info-ico { font-size: 18px; line-height: 1; }
     .info-title { font-weight: 700; font-size: 13.5px; color: var(--accent-ink); }
-    .info-card-warn { background: var(--hl-soft); border-color: #f0cba8; }
-    .info-card-warn .info-title { color: #7a4a1c; }
     @media (max-width: 860px) { .info-cards { grid-template-columns: 1fr; } }
     html[data-theme="dark"] .info-card { background: #1e2636; border-color: var(--rule); }
-    html[data-theme="dark"] .info-card-warn { background: #322611; border-color: #5c4000; }
     .info-rail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--rule); border-radius: 10px; background: var(--paper-tint); margin: 6px 0 0; overflow: hidden; text-align: left; }
     .info-cell { padding: 10px 14px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 3px; min-width: 0; }
     .info-cell:last-child { border-right: none; }
@@ -1093,7 +1075,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       <section class="hero">
         <div class="tool-hero">
           <div class="tool-hero-frame"><h1><span class="tool-hero-icon">🔎</span>MS Criteria Checker</h1></div>
-          <div class="tool-hero-desc">Enter the onset course, MRI regions, CSF and susceptibility findings, and the checker tells you which 2024 McDonald category they fulfil and what is still missing, with built-in mimic and older-onset checks. It applies the criteria; the diagnosis stays with the treating neurologist.</div>
+          <div class="tool-hero-desc">Enter the onset course, MRI regions, CSF and susceptibility findings, and the checker tells you which 2024 McDonald category they fulfil and what is still missing, with built-in mimic and older-onset checks.</div>
         </div>
       </section>
 
@@ -2818,20 +2800,15 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
   </script>
   <div style="max-width:920px;margin:auto auto 0 auto;padding:0 18px;width:100%">
     
-    <div class="tool-disclaimer no-print">
-      <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
-      <p>This tool automates the 2024 McDonald calculations from the entries you provide. <b>It supports, but does not replace, expert neurological judgement.</b> Always exclude better explanations and mimics (for example MOGAD, NMOSD or vascular disease); the output is not a diagnosis.</p><ul class="disc-list">
-<li><b>Not a medical device.</b> Not reviewed, cleared or approved by the U.S. FDA. Provided &quot;as is&quot;, without warranty; the authors accept no liability for any use of this tool or its results.</li>
-<li><b>Training and licences.</b> Does not replace a full neurological examination or certified rater training. Users are responsible for any licence or rater certification their study requires (for example Neurostatus-EDSS certification in clinical trials).</li>
-<li><b>Privacy.</b> Everything runs on your device; nothing is uploaded, stored or transmitted. Use study IDs rather than names.</li>
-<li><b>Independence.</b> Content and views are the authors&rsquo; own. MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency, and is not affiliated with Neurostatus-UHB AG, the National MS Society, Western Psychological Services, PAR, Pearson or any other instrument owner. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; instrument copyrights and trademarks belong to their owners.</li>
-</ul>
-      <div class="tool-disclaimer-footer no-print">
-        <a href="index.html#about-mspectrum">About</a><span class="dot">·</span>
-        <a href="index.html#cite">Cite</a><span class="dot">·</span>
-        <a href="mailto:nour.anas@wayne.edu">Contact</a><span class="dot">·</span>
-        <span>&copy; 2026 Anas Z. Nourelden</span>
-      </div>
+    <!-- MSpectrum disclaimer: page sentence + page point, then the 3 shared points (same text on every main page) -->
+    <div class="tool-disclaimer no-print" data-disc="mcd">
+      <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Use and limitations</span></div>
+      <p>The checker applies the 2024 McDonald criteria to the findings you enter. It does not make the diagnosis: always exclude better explanations and mimics (for example MOGAD, NMOSD or vascular disease). The diagnosis stays with the treating neurologist.</p><ul class="disc-list">
+      <li><b>Not a medical device.</b> Not reviewed, cleared or approved by the U.S. FDA. Provided &quot;as is&quot;, without warranty; the authors accept no liability for its use.</li>
+      <li><b>Privacy.</b> Everything runs on your device; nothing is uploaded or transmitted. Nothing is kept unless you choose to save it in this browser. Avoid entering names or other identifiers.</li>
+      <li><b>Independence.</b> MSpectrum is an independent project. It is not an official product of, or endorsed by, any university, hospital, government agency or instrument owner; copyrights and trademarks belong to their owners.</li>
+      </ul>
+      <div class="disc-foot"><span class="nw">&copy; 2026 Anas Z. Nourelden</span> <span class="dot">·</span> <a href="index.html#about-mspectrum">About</a> <span class="dot">·</span> <a href="index.html#about-disclaimer">Full disclaimer</a> <span class="dot">·</span> <a href="index.html#cite">Cite</a> <span class="dot">·</span> <a href="mailto:nour.anas@wayne.edu">Contact</a></div>
     </div>
   </div>
 <script>

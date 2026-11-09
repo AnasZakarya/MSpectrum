@@ -43,7 +43,8 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);background-image:radial-gradient(circle at 50% -5%, rgba(30,74,110,0.07), transparent 55%), radial-gradient(rgba(30,74,110,0.09) 1px, transparent 1px);background-size:100% 100%, 22px 22px;background-attachment:fixed;color:var(--ink);font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;line-height:1.5}
 a{color:var(--accent)}
-.wrap{max-width:920px;margin:0 auto;padding:0 18px 80px}
+.wrap{max-width:920px;margin:0 auto;padding:0 18px 24px}
+@media(max-width:700px){.wrap{padding-bottom:72px}}
 header.top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:2px solid var(--accent);}
 .top-inner{max-width:920px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:14px 18px}
 .brand{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--accent-ink);display:flex;align-items:center;font-variation-settings:"opsz" 60;letter-spacing:-0.02em}
@@ -223,6 +224,14 @@ html[data-theme="dark"] .tool-hero-desc{background:#1e2636;border-color:var(--ru
 }
 .tool-disclaimer p{margin:0}
 .disc-list{margin:10px 0 0;padding-left:18px;font-size:12.5px;line-height:1.5;color:var(--ink-soft)}.disc-list li{margin:3px 0}.disc-list b{color:var(--ink)}
+.site-foot{max-width:1100px;margin:16px auto 0;padding:14px 16px 26px;border-top:1px solid var(--rule);text-align:center;font-size:11.5px;line-height:1.6;color:var(--ink-faint);background:transparent}
+.site-foot p{margin:2px 0}.site-foot a{color:var(--ink-soft);text-decoration:none}.site-foot a:hover{color:var(--accent);text-decoration:underline}.site-foot .dot{margin:0 2px;color:var(--rule-strong)}
+html[data-theme="dark"] .site-foot{background:transparent!important;border-top-color:var(--rule)!important;color:var(--ink-faint)!important}
+.disc-foot{margin-top:10px;padding-top:8px;border-top:1px dashed var(--rule);font-size:11.5px;color:var(--ink-faint);text-align:center;line-height:1.7}.disc-foot a{color:var(--ink-faint);text-decoration:none}.disc-foot a:hover{color:var(--accent);text-decoration:underline}.disc-foot .dot{margin:0 2px;color:var(--rule-strong)}.disc-foot a,.site-foot a,.app-foot-legal a,.nw{white-space:nowrap}
+.tool-disclaimer{margin-top:28px!important}.tool-disclaimer::before{top:-14px!important}
+body:has(#home:not([style*="none"])) .site-foot,body:has(#p_report.active) .site-foot{display:none}
+.tool-disclaimer,.tool-disclaimer .disc-list{text-align:left}
+@media(max-width:700px){.site-foot.fab-clear,.app-foot-legal.fab-clear{padding-bottom:72px!important}}
 
 .tool-disclaimer b{color:var(--ink)}
 .tool-disclaimer::before{
@@ -236,26 +245,6 @@ html[data-theme="dark"] .tool-hero-desc{background:#1e2636;border-color:var(--ru
   pointer-events:none;
 }
 /* ==== Enhancement pack: disclaimer footer, focus, print, mobile ==== */
-.tool-disclaimer-footer{
-  margin-top:12px;
-  padding-top:10px;
-  border-top:1px dashed var(--rule);
-  font-size:11.5px;
-  color:var(--ink-faint);
-  text-align:center;
-  line-height:1.7;
-}
-.tool-disclaimer-footer a{
-  color:var(--ink-faint);
-  text-decoration:none;
-  margin:0 4px;
-  transition:color .18s ease;
-}
-.tool-disclaimer-footer a:hover{color:var(--accent);text-decoration:underline}
-.tool-disclaimer-footer .dot{color:var(--rule-strong);margin:0 2px}
-html[data-theme="dark"] .tool-disclaimer-footer{color:var(--ink-faint);border-top-color:var(--rule)}
-html[data-theme="dark"] .tool-disclaimer-footer a{color:var(--ink-soft)}
-html[data-theme="dark"] .tool-disclaimer-footer .dot{color:var(--rule)}
 
 /* Smoother panel fade + Check my MS Start button emphasis */
 .panel{opacity:1;transition:opacity .18s ease}
@@ -385,8 +374,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 }
 
 /* Dark mode polish for new elements */
-html[data-theme="dark"] .tool-disclaimer-footer{border-top-color:var(--rule-strong)!important}
-html[data-theme="dark"] .tool-disclaimer-footer .dot{color:var(--ink-faint)}
 html[data-theme="dark"] .tool-search input::placeholder{color:var(--ink-faint);opacity:0.75}
 html[data-theme="dark"] .tool-search-empty{color:var(--ink-soft)}
 html[data-theme="dark"] .tool-search .clear-btn{color:var(--ink-soft)}
@@ -399,11 +386,8 @@ html[data-theme="dark"] .tool-disclaimer{background:#1a2432;border-color:#2a3548
 html[data-theme="dark"] .tool-disclaimer-head,
 html[data-theme="dark"] .tool-disclaimer b{color:var(--ink)}
 
-.info-card-warn{background:#fff8ee;border-color:#f0cba8}
-.info-card-warn .info-title{color:#7a4a1c}
 @media(max-width:860px){.info-cards{grid-template-columns:1fr}}
 html[data-theme="dark"] .info-card{background:#1e2636;border-color:var(--rule)}
-html[data-theme="dark"] .info-card-warn{background:#322611;border-color:#5c4000}
 .src-divider{display:flex;align-items:center;gap:10px;margin:26px 0 8px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint,#6b7280)}
 .src-divider::before,.src-divider::after{content:"";flex:1;border-top:1px solid var(--rule-strong,#c9d3dd)}
 .panel-main details.howto-read{margin-top:0}
@@ -478,6 +462,10 @@ body.patient-flow .panel .actions.fill-row{display:none}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .chip{background:#eef2f6;border-radius:18px;padding:5px 12px;font-size:13px}
 .chip b{color:var(--accent-ink)}
+.chip-pira{background:#fdeaea;color:#9b2c2c;font-weight:700}.chip-raw{background:#fef3e2;color:#8a5a12;font-weight:700}
+.pira-rel{fill:#fdf3e2}.pira-ev-pira{fill:#fbeaea}.pira-ev-raw{fill:#fdecc8}
+html[data-theme="dark"] .chip-pira{background:#4a2326!important;color:#f6c4c4!important}html[data-theme="dark"] .chip-raw{background:#4a3a1c!important;color:#f0d49a!important}
+html[data-theme="dark"] .pira-rel{fill:#3a3020}html[data-theme="dark"] .pira-ev-pira{fill:#4a2326}html[data-theme="dark"] .pira-ev-raw{fill:#463718}
 .chip small{color:var(--ink-faint)}
 .interp{margin-top:14px;padding:12px 14px;border-radius:var(--radius-sm);font-size:14px}
 .interp.good{background:var(--good-bg);color:var(--good)} .interp.warn{background:var(--warn-bg);color:var(--warn)} .interp.bad{background:var(--bad-bg);color:var(--bad)} .interp.neutral{background:#eef2f6;color:var(--ink-soft)}
@@ -626,6 +614,17 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
     <div class="grid" id="toolgrid"></div>
     <div class="tool-search-empty" id="toolSearchEmpty">No tools match your search. Try another word (e.g. "cognition", "walk", "quality").</div>
     <div style="text-align:center;margin-top:20px"><button class="btn" onclick="openClin()" style="background:var(--accent);color:#ffffff;border-color:var(--accent);font-size:14px;padding:10px 18px">📋 Compile clinician summary (all entered tools)</button></div>
+    <!-- MSpectrum disclaimer: page sentence + page point, then the 3 shared points (same text on every main page) -->
+    <div class="tool-disclaimer no-print" data-disc="hub">
+      <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Use and limitations</span></div>
+      <p>The Score Hub scores published instruments from the answers or numbers you enter and explains what the results mean. Interpretation, diagnosis and treatment remain the decision of a qualified clinician.</p><ul class="disc-list">
+      <li><b>Questionnaires and norms.</b> Copyrighted questionnaires are scored from the numbers you enter; use the official forms. Norm-based results compare a score with a reference group and do not, on their own, show impairment in one person. Cognitive tests must be given and interpreted by a trained professional.</li>
+      <li><b>Not a medical device.</b> Not reviewed, cleared or approved by the U.S. FDA. Provided &quot;as is&quot;, without warranty; the authors accept no liability for its use.</li>
+      <li><b>Privacy.</b> Everything runs on your device; nothing is uploaded or transmitted. Nothing is kept unless you choose to save it in this browser. Avoid entering names or other identifiers.</li>
+      <li><b>Independence.</b> MSpectrum is an independent project. It is not an official product of, or endorsed by, any university, hospital, government agency or instrument owner; copyrights and trademarks belong to their owners.</li>
+      </ul>
+      <div class="disc-foot"><span class="nw">&copy; 2026 Anas Z. Nourelden</span> <span class="dot">·</span> <a href="index.html#about-mspectrum">About</a> <span class="dot">·</span> <a href="index.html#about-disclaimer">Full disclaimer</a> <span class="dot">·</span> <a href="index.html#cite">Cite</a> <span class="dot">·</span> <a href="mailto:nour.anas@wayne.edu">Contact</a></div>
+    </div>
   </div>
 
   <section class="panel" id="p_sdmt">
@@ -688,7 +687,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       <div class="fld"><label>Sex</label><select id="bvmt_sex" oninput="calcBVMT()"><option value="">- select -</option><option value="1">Male</option><option value="2">Female</option></select></div>
       <div class="fld"><label>Education (years) <span class="hint">e.g. 12&ndash;18</span></label><input type="number" id="bvmt_edu" min="0" max="25" oninput="calcBVMT()"></div>
     </div>
-    <div class="note">Enter age, sex &amp; education for z + T scores (impaired at z &le; &minus;1.5 / T &le; 35). Published norms can misclassify impairment when applied to a different population (Marrie 2021); interpret with clinical context.</div>
+    <div class="note">Enter age, sex &amp; education for z + T scores (impaired at z &le; &minus;1.5 / T &le; 35). Published norms can misclassify impairment when applied to a different population (Marrie RA et al. <em>Front Neurol</em> 2021;11:621010); interpret with clinical context.</div>
     <div class="result" id="bvmt_out"></div>
     <details class="howto-read" open><summary>&#8505; Scoring and sources</summary><div>
 <b>Total score (T1+T2+T3):</b> 2 points per correctly reproduced figure in the correct location (6 figures &times; 3 trials = max 36). Higher = better visual memory.<br>
@@ -718,7 +717,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       <div class="fld"><label>Sex</label><select id="cvlt_sex" oninput="calcCVLT()"><option value="">- select -</option><option value="1">Male</option><option value="2">Female</option></select></div>
       <div class="fld"><label>Education (years) <span class="hint">e.g. 12&ndash;18</span></label><input type="number" id="cvlt_edu" min="0" max="25" oninput="calcCVLT()"></div>
     </div>
-    <div class="note">Enter age, sex &amp; education for z + T scores (impaired at z &le; &minus;1.5 / T &le; 35). Published norms can misclassify impairment when applied to a different population (Marrie 2021); interpret with clinical context.</div>
+    <div class="note">Enter age, sex &amp; education for z + T scores (impaired at z &le; &minus;1.5 / T &le; 35). Published norms can misclassify impairment when applied to a different population (Marrie RA et al. <em>Front Neurol</em> 2021;11:621010); interpret with clinical context.</div>
     <div class="subhead">Optional - recognition &amp; delayed sub-scores (raw)</div><div class="note" style="margin:-4px 0 8px">Fill these if they were administered; leave blank if not. SDFR = Short-Delay Free Recall; LDFR = Long-Delay Free Recall.</div><div>
     <div class="row">
       <div class="fld"><label>Short-Delay Free Recall <span class="hint">0&ndash;16</span></label><input type="number" id="cvlt_sdfr" min="0" max="16" oninput="calcCVLT()"></div>
@@ -970,12 +969,23 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
     </div>
     <div class="info-cards" role="note">
       <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><p>Answer the questionnaires in order: press <b>Start</b> and you are guided from one to the next, or open any of them from the list below in any order. Stop and come back any time. At the end you get a single plain-language summary. Everything runs in your browser and <b>nothing is stored</b>.</p></div>
-      <div class="info-card"><div class="info-card-head"><span class="info-ico">📋</span><span class="info-title">What this covers</span></div><p>Eight questionnaires you can answer yourself: your EDSS and age (if you know your EDSS from your neurologist), PDDS, FES-I, MFIS, SymptoMScreen, PHQ-9, GAD-7 and a 0&ndash;10 pain rating. It does <b>not</b> include an examined EDSS or the clinician cognitive tests (SDMT, BVMT-R, CVLT-II), so a normal report does not rule out cognitive change.</p><p style="margin-top:6px">This summary helps you understand your results and discuss them with your care team. It is not a diagnosis or medical advice. If you have thoughts of harming yourself, call or text <b>988</b> (U.S.) or your local emergency number now.</p></div>
+      <div class="info-card"><div class="info-card-head"><span class="info-ico">📋</span><span class="info-title">What this covers</span></div><p>Thirteen short questionnaires you can answer yourself: your EDSS and age (if you know your EDSS from your neurologist), disability (PDDS), falls concern (FES-I), fatigue (MFIS), everyday thinking (PDQ), symptoms (SymptoMScreen), bladder (BLCS), bowel (BWCS), sleep (SCI), mood (PHQ-9, GAD-7), pain (0&ndash;10) and quality of life (RAND-36). Skip any you prefer. It does <b>not</b> include an examined EDSS or the clinician cognitive tests (SDMT, BVMT-R, CVLT-II), so a normal report does not rule out cognitive change.</p></div>
     </div>
     <div class="report-flow" style="background:#eef5fb;border:1px solid #cfe0ec;border-radius:14px;padding:16px 16px 8px;margin-top:14px">
     <div id="report_checklist"></div>
     <div class="result" id="report_out"></div>
     <div class="actions no-print" id="report_actions" style="display:none"><button class="btn" onclick="reportPDF()">📄 Save my report</button></div>
+    </div>
+    <!-- MSpectrum disclaimer: page sentence + page point, then the 3 shared points (same text on every main page) -->
+    <div class="tool-disclaimer no-print" data-disc="report">
+      <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Use and limitations</span></div>
+      <p>This report is built from your own answers. It helps you understand how MS affects you and what to discuss with your care team. It is not a diagnosis and does not replace a visit.</p><ul class="disc-list">
+      <li><b>If you feel unsafe.</b> If you have thoughts of self-harm, or someone may be in danger, call or text 988 in the US, or contact local emergency services.</li>
+      <li><b>Not a medical device.</b> Not reviewed, cleared or approved by the U.S. FDA. Provided &quot;as is&quot;, without warranty; the authors accept no liability for its use.</li>
+      <li><b>Privacy.</b> Everything runs on your device; nothing is uploaded or transmitted. Nothing is kept unless you choose to save it in this browser. Avoid entering names or other identifiers.</li>
+      <li><b>Independence.</b> MSpectrum is an independent project. It is not an official product of, or endorsed by, any university, hospital, government agency or instrument owner; copyrights and trademarks belong to their owners.</li>
+      </ul>
+      <div class="disc-foot"><span class="nw">&copy; 2026 Anas Z. Nourelden</span> <span class="dot">·</span> <a href="index.html#about-mspectrum">About</a> <span class="dot">·</span> <a href="index.html#about-disclaimer">Full disclaimer</a> <span class="dot">·</span> <a href="index.html#cite">Cite</a> <span class="dot">·</span> <a href="mailto:nour.anas@wayne.edu">Contact</a></div>
     </div>
   </section>
 
@@ -1385,21 +1395,11 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 
 </div>
 
-  <div class="tool-disclaimer no-print">
-    <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
-    <p>MSpectrum computes outcome-measure scores from published scoring rules and explains what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research and educational use; verify locally before clinical or trial use.</p><ul class="disc-list">
-<li><b>Not a medical device.</b> Not reviewed, cleared or approved by the U.S. FDA. Provided &quot;as is&quot;, without warranty; the authors accept no liability for any use of this tool or its results.</li>
-<li><b>Training and licences.</b> Does not replace a full neurological examination or certified rater training. Users are responsible for any licence or rater certification their study requires (for example Neurostatus-EDSS certification in clinical trials).</li>
-<li><b>Privacy.</b> Everything runs on your device; nothing is uploaded, stored or transmitted. Use study IDs rather than names.</li>
-<li><b>Independence.</b> Content and views are the authors&rsquo; own. MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency, and is not affiliated with Neurostatus-UHB AG, the National MS Society, Western Psychological Services, PAR, Pearson or any other instrument owner. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; instrument copyrights and trademarks belong to their owners.</li>
-</ul>
-    <div class="tool-disclaimer-footer no-print">
-      <a href="index.html#about-mspectrum">About</a><span class="dot">·</span>
-      <a href="index.html#cite">Cite</a><span class="dot">·</span>
-      <a href="mailto:nour.anas@wayne.edu">Contact</a><span class="dot">·</span>
-      <span>&copy; 2026 Anas Z. Nourelden</span>
-    </div>
-  </div>
+<!-- MSpectrum footer for sub-pages (main pages carry the same line inside the disclaimer box) -->
+<footer class="site-foot no-print fab-clear">
+  <p>MSpectrum supports, but does not replace, clinical judgment. It is not an official product of, or endorsed by, any university, hospital or government agency.</p>
+  <p><span class="nw">&copy; 2026 Anas Z. Nourelden</span> <span class="dot">·</span> <a href="index.html#about-mspectrum">About</a> <span class="dot">·</span> <a href="index.html#about-disclaimer">Disclaimer</a> <span class="dot">·</span> <a href="index.html#cite">Cite</a> <span class="dot">·</span> <a href="mailto:nour.anas@wayne.edu">Contact</a></p>
+</footer>
 </div>
 
 <script>
@@ -1594,7 +1594,7 @@ const TOOLS=[
   {id:"cvlt", ic:"🗣️", name:"CVLT-II", tag:"Cognition · verbal memory", desc:"California Verbal Learning Test–II."},
   {id:"mfis", ic:"🔋", name:"MFIS", tag:"Fatigue impact", desc:"Modified Fatigue Impact Scale (21 items)."},
   {id:"msqol", ic:"💗", name:"MSQOL-54", tag:"Quality of life", desc:"MS Quality of Life-54: 12 subscales + 2 composites."},
-  {id:"promis", ic:"📊", name:"PROMIS-29", tag:"Symptoms · QoL profile", desc:"7 domains + pain intensity, with severity bands."},
+  {id:"promis", ic:"📊", name:"PROMIS-29", tag:"Symptoms · QoL profile", desc:"7 domains (raw sums) + pain intensity (0-10)."},
   {id:"fss", ic:"🪫", name:"FSS", tag:"Fatigue severity", desc:"Fatigue Severity Scale (9 items, mean 1–7)."},
   {id:"phq9", ic:"🌧️", name:"PHQ-9", tag:"Depression screen", desc:"Patient Health Questionnaire-9 (0–27)."},
   {id:"gad7", ic:"💭", name:"GAD-7", tag:"Anxiety screen", desc:"Generalized Anxiety Disorder-7 (0–21)."},
@@ -1721,7 +1721,7 @@ const GROUPS=[
  {name:"Spasticity &amp; tone", sub:"Clinician-rated muscle tone on the Modified Ashworth Scale.", ids:["mas"]},
  {name:"Walking, balance &amp; motor function", sub:"MSWS-12, ABC and FES-I are self-report; T25FW, 9-HPT, 6MWT, 2MWT &amp; TUG are clinician-administered.", ids:["msws","t25fw","nhpt","sixmwt","twomwt","tug","abc","fesi"]},
  {name:"Quality of life &amp; impact", sub:"Self-report.", ids:["msqol","rand36","promis","msis","mosss"]},
- {name:"Composite - MSFC", sub:"Arm + leg + cognition combined into one z-score (needs reference values).", ids:["msfc"]},
+ {name:"Composite - MSFC", sub:"Arm + leg + cognition combined into one z-score (NMSS Task Force reference).", ids:["msfc"]},
  {name:"Conversion &amp; bulk tools", sub:"Convert a whole spreadsheet of raw answers into finished scores at once - totals, subscales and norm-based scores. Works with any dataset (REDCap export, Excel, or manual entry).", ids:["batch"]}
 ];
 let _ci=0;
@@ -1931,7 +1931,7 @@ function sdmtNorm(){ const raw=_num(el("sdmt_raw").value), age=_num(el("sdmt_age
    if(age<18||age>74) return {oor:true,range:"18-74 (Strober 2020 US oral SDMT norms)"};
    const eb=edu<16?"lo":"hi"; const ms=SDMT_NORM[eb][sex][_ageBand(age)]; const z=(raw-ms[0])/ms[1];
    return {mean:ms[0],sd:ms[1],z:z,pct:Math.max(1,Math.min(99,Math.round(_normCDF(z)*100))),
-     src:"Strober LB et al. Oral SDMT US normative data, 675 healthy adults stratified by age × sex × education, Mult Scler Relat Disord 2020;43:102154."+" Published norms can misclassify impairment when applied to a different population (Marrie 2021); interpret z-scores with clinical context. They are not a diagnosis"};
+     src:"Strober LB et al. Oral SDMT US normative data, 675 healthy adults stratified by age × sex × education, Mult Scler Relat Disord 2020;43:102154."+" Published norms can misclassify impairment when applied to a different population (Marrie RA et al. <em>Front Neurol</em> 2021;11:621010); interpret z-scores with clinical context. They are not a diagnosis"};
  }
  return null; }
 function calcSDMT(){ const r=_num(el("sdmt_raw").value);
@@ -2702,7 +2702,7 @@ function calcEDSSage(){ const e=el("edss_v").value, ag=_num(el("edss_age").value
 let GUIDED=false, GSTEP=0;
 // v28: the guided patient flow uses only instruments whose wording may be shown (public domain or free to use).
 // MSWS-12, PROMIS Cog 4a, MSIS-29 and MSQOL-54 stay available in the Score Hub as number-entry tools.
-const GFLOW=[["edss","EDSS & age"],["pdds","Disability (PDDS)"],["fesi","Falls concern (FES-I)"],["mfis","Fatigue (MFIS)"],["smscreen","Symptoms (SymptoMScreen)"],["phq9","Mood - depression (PHQ-9)"],["gad7","Mood - anxiety (GAD-7)"],["promispain","Pain (0-10)"]];
+const GFLOW=[["edss","EDSS & age"],["pdds","Disability (PDDS)"],["fesi","Falls concern (FES-I)"],["mfis","Fatigue (MFIS)"],["pdq","Thinking & memory (PDQ)"],["smscreen","Symptoms (SymptoMScreen)"],["blcs","Bladder (BLCS)"],["bwcs","Bowel (BWCS)"],["sci","Sleep (SCI)"],["phq9","Mood - depression (PHQ-9)"],["gad7","Mood - anxiety (GAD-7)"],["promispain","Pain (0-10)"],["rand36","Quality of life (RAND-36)"]];
 function openReport(){ const g=el("gnav"); if(g)g.style.display="none"; GUIDED=false; showTool('report'); renderChecklist(); }
 function startGuided(){ GUIDED=true; GSTEP=0; _gstep(); }
 function _gstep(){ showTool(GFLOW[GSTEP][0]); const g=el("gnav"); g.style.display="flex";
@@ -2717,17 +2717,20 @@ function _cnt(reader){ try{return Object.values(reader()).filter(v=>v!=null).len
 const GFLOW_META={
   edss:{sub:"your EDSS from your neurologist, plus your age (optional)",min:1,done:()=>el('edss_v').value!==""},
   pdds:{sub:"walking and disability, one step",min:1,done:()=>el('pdds_v').value!==""},
-  msws:{sub:"how walking is affected, 12 items",min:2,done:()=>_cnt(readMSWS)>0},
   fesi:{sub:"concern about falling, 16 items",min:3,done:()=>_cnt(readFesi)>0},
-  smscreen:{sub:"common MS symptoms, 12 items",min:2,done:()=>_cnt(readSMS)>0},
   mfis:{sub:"fatigue impact, 21 items",min:4,done:()=>_cnt(readMFIS)>0},
-  promiscog:{sub:"thinking and memory, 4 items",min:1,done:()=>_cnt(readPromisCog)>0},
+  pdq:{sub:"everyday thinking and memory, 20 items",min:4,done:()=>_msqliVals("pdq").some(v=>v!=null)},
+  smscreen:{sub:"common MS symptoms, 12 items",min:2,done:()=>_cnt(readSMS)>0},
+  blcs:{sub:"bladder control, 4 items",min:1,done:()=>_msqliVals("blcs").some(v=>v!=null)},
+  bwcs:{sub:"bowel control, 5 items",min:1,done:()=>_msqliVals("bwcs").some(v=>v!=null)},
+  sci:{sub:"sleep, 8 items",min:2,done:()=>_msqliVals("sci").some(v=>v!=null)},
   phq9:{sub:"low mood, 9 items",min:2,done:()=>_cnt(readPHQ)>0},
   gad7:{sub:"anxiety, 7 items",min:1,done:()=>_cnt(readGAD)>0},
   promispain:{sub:"pain intensity, 1 item",min:1,done:()=>(el('promispain_1')&&el('promispain_1').value!=="")},
-  msis:{sub:"overall impact of MS, 29 items",min:5,done:()=>_cnt(readMSIS)>0},
-  msqol:{sub:"quality of life, 54 items",min:8,done:()=>_cnt(readMSQOL)>0}
+  rand36:{sub:"general health and quality of life, 36 items",min:7,done:()=>_msqliVals("rand36").some(v=>v!=null)}
 };
+// Item answers of a data-driven scale (MSQLI_SCALES: PDQ, BLCS, BWCS, SCI, RAND-36 ...), in item order.
+function _msqliVals(id){ const S=(typeof MSQLI_SCALES!=="undefined")?MSQLI_SCALES[id]:null; if(!S) return []; return S.items.map((_,k)=>{ const e=el(id+"_"+(k+1)); return e?_num(e.value):null; }); }
 function _gflowDone(id){ const m=GFLOW_META[id]; try{ return !!(m&&m.done()); }catch(e){ return false; } }
 function _startGuidedAt(i){ GUIDED=true; GSTEP=i; _gstep(); }
 function renderChecklist(){
@@ -2913,6 +2916,24 @@ function buildReport(){
       "neutral", d]);
   }
 
+  // ── v37: PDQ, bladder, bowel, sleep, RAND-36 (Check my MS) ─────────
+  { const v=_msqliVals("pdq"), a=v.filter(x=>x!=null).length;
+    if(a===v.length&&a>0){ const t=v.reduce((x,y)=>x+y,0);
+      rows.push(["Thinking & memory in daily life (PDQ)", t+"/80", "neutral", "How often you notice problems with attention, memory and planning: "+t+" out of 80 (higher = more problems). There is no published cut-off. This is your own view, not a test of thinking; only a clinician test (such as the SDMT) measures it."]); }
+    else if(a>0) rows.push(["Thinking & memory in daily life (PDQ)", a+" of "+v.length+" answered", "neutral", "Incomplete: the total needs every item."]); }
+  [["blcs","Bladder control (BLCS)",22,"bladder"],["bwcs","Bowel control (BWCS)",26,"bowel"]].forEach(function(c){ const v=_msqliVals(c[0]), a=v.filter(x=>x!=null).length;
+    if(a===v.length&&a>0){ const t=v.reduce((x,y)=>x+y,0);
+      rows.push([c[1], t+"/"+c[2], "neutral", "How much "+c[3]+" control problems affect you: "+t+" out of "+c[2]+" (0 = none, higher = more problems). There is no published cut-off; any "+c[3]+" problem is worth raising with your care team."]); }
+    else if(a>0) rows.push([c[1], a+" of "+v.length+" answered", "neutral", "Incomplete: the total needs every item."]); });
+  { const v=_msqliVals("sci"), a=v.filter(x=>x!=null).length;
+    if(a===v.length&&a>0){ const t=v.reduce((x,y)=>x+y,0);
+      rows.push(["Sleep (SCI)", t+"/32", t<=16?"warn":"good", t<=16?"A total of 16 or less suggests probable insomnia disorder (Espie 2014); worth discussing with your care team.":"Above 16, the cut-off for probable insomnia disorder (Espie 2014)."]);
+      if(t<=16) flags.push("Sleep (SCI "+t+"/32): 16 or less suggests probable insomnia disorder (Espie 2014)."); }
+    else if(a>0) rows.push(["Sleep (SCI)", a+" of "+v.length+" answered", "neutral", "Incomplete: the total needs every item."]); }
+  { const v=_msqliVals("rand36");
+    if(v.some(x=>x!=null)){ const sc=rand36Scores(v).filter(x=>x.score!=null);
+      if(sc.length) rows.push(["General health & quality of life (RAND-36)", sc.length+" of 8 scales", "neutral", sc.map(x=>x.name+" <b>"+Math.round(x.score)+"</b>").join(" · ")+". Each scale is 0&ndash;100; higher = better. There is no published cut-off; follow the change over time."]); } }
+
   // ── Render ───────────────────────────────────────────────────────
   if(rows.length===0 && !urgent){
     el("report_out").innerHTML=interp("neutral","Fill at least one questionnaire (use the buttons above), then press Generate my report.");
@@ -2926,7 +2947,7 @@ function buildReport(){
   } else {
     html+=interp("good","None of the questionnaires you completed reached a flag level. This does not mean MS is inactive. Keep up regular follow-up with your MS team.");
   }
-  html+='<div class="note keep">This summary reflects only the questionnaires you completed and is not a diagnosis. MSWS-12, MSIS-29, MSQOL-54, the SymptoMScreen total and the MFIS cognitive items have no published cut-offs, so they are shown without a severity colour. Bring it to your neurologist / MS team to discuss.</div>';
+  html+='<div class="note keep">This summary reflects only the questionnaires you completed and is not a diagnosis. MSWS-12, MSIS-29, MSQOL-54, RAND-36, PDQ, BLCS, BWCS, the SymptoMScreen total and the MFIS cognitive items have no published cut-offs, so they are shown without a severity colour. Bring it to your neurologist / MS team to discuss.</div>';
   el("report_out").innerHTML=html; el("report_actions").style.display="flex";
   el("report_out").scrollIntoView({behavior:"smooth",block:"nearest"});
 }
@@ -2987,7 +3008,7 @@ function calcBICAMS(){
   }
   if(have===0){ el("bicams_out").innerHTML=interp("neutral","Open the SDMT, CVLT-II and BVMT-R tools and enter the raw scores, plus the demographics above, then it computes here."); return; }
   const summary= zc>0 ? (imp+" of "+zc+" cognitive domain(s) impaired (z &le; -1.5).") : "Raw scores captured. Enter age, sex &amp; education above to get z-scores and impairment flags.";
-  el("bicams_out").innerHTML='<div class="subhead">BICAMS cognitive battery</div>'+_zStripHTML(tests.map(x=>({label:x.n.split(" (")[0],z:x.z})),{title:"z-scores vs matched healthy adults",cut:-1.5,note:"Dashed line: z = -1.5, the impairment cut-off used here; shaded area = impaired range."})+rows+interp(imp>0?"warn":"good",summary)+'<div class="note">Norms (all peer-reviewed, regression-based or age-stratified): SDMT = Strober 2020 US (oral, age × sex × education) or Fellows 2020 US (written, regression on age, sex and education). CVLT-II &amp; BVMT-R = <b>Parmenter 2010 MACFIMS</b> (US, MS-validated regression). Impaired at z &le; &minus;1.5 per domain. Published norms can misclassify impairment when applied to a different population (Marrie 2021); interpret z-scores with clinical context. They are not a diagnosis. Research use only.</div>'; }
+  el("bicams_out").innerHTML='<div class="subhead">BICAMS cognitive battery</div>'+_zStripHTML(tests.map(x=>({label:x.n.split(" (")[0],z:x.z})),{title:"z-scores vs matched healthy adults",cut:-1.5,note:"Dashed line: z = -1.5, the impairment cut-off used here; shaded area = impaired range."})+rows+interp(imp>0?"warn":"good",summary)+'<div class="note">Norms (all peer-reviewed, regression-based or age-stratified): SDMT = Strober 2020 US (oral, age × sex × education) or Fellows 2020 US (written, regression on age, sex and education). CVLT-II &amp; BVMT-R = <b>Parmenter 2010 MACFIMS</b> (US, MS-validated regression). Impaired at z &le; &minus;1.5 per domain. Published norms can misclassify impairment when applied to a different population (Marrie RA et al. <em>Front Neurol</em> 2021;11:621010); interpret z-scores with clinical context. They are not a diagnosis. Research use only.</div>'; }
 
 // ===== MSFC (arm 1/9HPT + leg T25FW + cognition SDMT) =====
 function calcPASAT(){ const p=_num(el("pasat_raw").value); if(p==null){el("pasat_out").innerHTML="";return;}
@@ -3484,16 +3505,16 @@ function _piraChart(vs,rel,trace,events){ const ev=vs.filter(v=>v.edss!=null); i
   const ys=ev.map(v=>v.edss).concat(trace.filter(x=>x!=null)); const lo=Math.max(0,Math.floor(Math.min(...ys))-0.5), hi=Math.min(10,Math.ceil(Math.max(...ys))+0.5);
   const X=t=>L+(t-t0)/span*(W-L-R), Y=e=>T+(hi-e)/(hi-lo||1)*(H-T-B);
   let g='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="EDSS over time with roving reference">';
-  rel.forEach(r=>{ const a=Math.max(L,X(r-30*PIRA_DAY)), b=Math.min(W-R,X(r+90*PIRA_DAY)); if(b>a) g+='<rect x="'+a+'" y="'+T+'" width="'+(b-a)+'" height="'+(H-T-B)+'" fill="#fdf3e2"/>'; if(r>=t0&&r<=t1) g+='<polygon points="'+(X(r)-6)+','+(H-B-2)+' '+X(r)+','+(H-B-12)+' '+(X(r)+6)+','+(H-B-2)+'" fill="#b7791f"/>'; });
-  events.filter(e=>(e.type==="PIRA"||e.type==="RAW")&&e.m==="EDSS").forEach(e=>{ const a=X(vs[e.i].t), b=X(vs[e.j].t); g+='<rect x="'+a+'" y="'+T+'" width="'+Math.max(4,b-a)+'" height="'+(H-T-B)+'" fill="'+(e.type==="PIRA"?"#fbeaea":"#fdecc8")+'"/>'; });
-  for(let e=Math.ceil(lo);e<=hi;e++){ g+='<line x1="'+L+'" y1="'+Y(e)+'" x2="'+(W-R)+'" y2="'+Y(e)+'" stroke="#eee"/><text x="10" y="'+(Y(e)+4)+'" font-size="11" fill="#8a8f9d">'+e.toFixed(1)+'</text>'; }
-  g+='<line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-R)+'" y2="'+(H-B)+'" stroke="#c8c2b0"/>';
-  const y0=new Date(t0).getUTCFullYear(), y1=new Date(t1).getUTCFullYear(); for(let y=y0;y<=y1+1;y++){ const t=Date.UTC(y,0,1); if(t>=t0&&t<=t1) g+='<text x="'+X(t)+'" y="'+(H-12)+'" font-size="11" fill="#8a8f9d" text-anchor="middle">'+y+'</text>'; }
+  rel.forEach(r=>{ const a=Math.max(L,X(r-30*PIRA_DAY)), b=Math.min(W-R,X(r+90*PIRA_DAY)); if(b>a) g+='<rect x="'+a+'" y="'+T+'" width="'+(b-a)+'" height="'+(H-T-B)+'" class="pira-rel"/>'; if(r>=t0&&r<=t1) g+='<polygon points="'+(X(r)-6)+','+(H-B-2)+' '+X(r)+','+(H-B-12)+' '+(X(r)+6)+','+(H-B-2)+'" fill="#b7791f"/>'; });
+  events.filter(e=>(e.type==="PIRA"||e.type==="RAW")&&e.m==="EDSS").forEach(e=>{ const a=X(vs[e.i].t), b=X(vs[e.j].t); g+='<rect x="'+a+'" y="'+T+'" width="'+Math.max(4,b-a)+'" height="'+(H-T-B)+'" class="'+(e.type==="PIRA"?"pira-ev-pira":"pira-ev-raw")+'"/>'; });
+  for(let e=Math.ceil(lo);e<=hi;e++){ g+='<line x1="'+L+'" y1="'+Y(e)+'" x2="'+(W-R)+'" y2="'+Y(e)+'" style="stroke:var(--rule)"/><text x="10" y="'+(Y(e)+4)+'" font-size="11" style="fill:var(--ink-faint)">'+e.toFixed(1)+'</text>'; }
+  g+='<line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-R)+'" y2="'+(H-B)+'" style="stroke:var(--rule-strong)"/>';
+  const y0=new Date(t0).getUTCFullYear(), y1=new Date(t1).getUTCFullYear(); for(let y=y0;y<=y1+1;y++){ const t=Date.UTC(y,0,1); if(t>=t0&&t<=t1) g+='<text x="'+X(t)+'" y="'+(H-12)+'" font-size="11" style="fill:var(--ink-faint)" text-anchor="middle">'+y+'</text>'; }
   let rp="", prev=null; vs.forEach((v,k)=>{ const r=trace[k]; if(r==null) return; const x=X(v.t); rp+=(prev==null?"":(" "+x+","+Y(prev)))+" "+x+","+Y(r); prev=r; });
-  g+='<polyline points="'+rp.trim()+'" fill="none" stroke="#1e4a6e" stroke-width="2" stroke-dasharray="6 4"/>';
-  g+='<polyline points="'+ev.map(v=>X(v.t)+","+Y(v.edss)).join(" ")+'" fill="none" stroke="#1a1f2e" stroke-width="2"/>';
-  ev.forEach(v=>{ g+='<circle cx="'+X(v.t)+'" cy="'+Y(v.edss)+'" r="4" fill="#1a1f2e"/>'; });
-  return g+'</svg><div class="note" style="display:flex;gap:14px;flex-wrap:wrap"><span>&#9472; EDSS</span><span style="color:#1e4a6e">- - roving EDSS reference</span><span style="color:#b7791f">&#9650; relapse onset (shaded: 30 days before to 90 days after)</span></div>'; }
+  g+='<polyline points="'+rp.trim()+'" fill="none" style="stroke:var(--accent)" stroke-width="2" stroke-dasharray="6 4"/>';
+  g+='<polyline points="'+ev.map(v=>X(v.t)+","+Y(v.edss)).join(" ")+'" fill="none" style="stroke:var(--ink)" stroke-width="2"/>';
+  ev.forEach(v=>{ g+='<circle cx="'+X(v.t)+'" cy="'+Y(v.edss)+'" r="4" style="fill:var(--ink)"/>'; });
+  return g+'</svg><div class="note" style="display:flex;gap:14px;flex-wrap:wrap"><span>&#9472; EDSS</span><span style="color:var(--accent)">- - roving EDSS reference</span><span style="color:#b7791f">&#9650; relapse onset (shaded: 30 days before to 90 days after)</span></div>'; }
 function _pf(m,x){ return m==="EDSS"?Number(x).toFixed(1):String(x); }
 function calcPIRA(){ const vs=_piraRead(), rel=PIRA_REL.map(_pd).filter(x=>x!=null).sort((a,b)=>a-b), comp=el("pira_comp")?el("pira_comp").checked:true;
   if(vs.length<2){ el("pira_out").innerHTML=interp("neutral","Enter at least two dated visits."); return; }
@@ -3503,7 +3524,7 @@ function calcPIRA(){ const vs=_piraRead(), rel=PIRA_REL.map(_pd).filter(x=>x!=nu
   const nP=new Set(E.filter(e=>e.type==="PIRA").map(e=>e.i)).size, nR=new Set(E.filter(e=>e.type==="RAW").map(e=>e.i)).size;
   const yrs=((vs[vs.length-1].t-vs[0].t)/PIRA_DAY/365.25).toFixed(1);
   const V=i=>"Visit "+(vs[i].row+1);
-  const tag=t=>({PIRA:'<span class="chip" style="background:#fbeaea;color:#9b2c2c"><b>PIRA</b></span>',RAW:'<span class="chip" style="background:#fdf3e2;color:#8a5a12"><b>RAW</b></span>',ref:'<span class="chip">New reference</span>',unconfirmed:'<span class="chip">Not confirmed</span>',pending:'<span class="chip">Needs a visit &ge; 3 months later</span>',unclassified:'<span class="chip">Unclassified</span>'})[t];
+  const tag=t=>({PIRA:'<span class="chip chip-pira">PIRA</span>',RAW:'<span class="chip chip-raw">RAW</span>',ref:'<span class="chip">New reference</span>',unconfirmed:'<span class="chip">Not confirmed</span>',pending:'<span class="chip">Needs a visit &ge; 3 months later</span>',unclassified:'<span class="chip">Unclassified</span>'})[t];
   const rows=E.map(e=>'<tr><td>'+V(e.i)+'</td><td>'+tag(e.type)+'</td><td>'+e.m+'</td><td>'+(e.type==="ref"?_pf(e.m,e.r)+' &rarr; '+_pf(e.m,e.x):_pf(e.m,e.r))+'</td><td>'+(e.type==="ref"?"":e.chg)+'</td><td>'+(e.need||"")+'</td><td>'+(e.j!=null&&e.type!=="ref"?V(e.j)+(e.months!=null?" ("+e.months+" mo)":""):(e.type==="ref"?V(e.j):""))+'</td><td style="white-space:normal;min-width:240px">'+(e.why||(e.type==="ref"?"Better score confirmed at the next visit":e.type==="unconfirmed"?"Not sustained at the first visit &ge; 3 months later":e.type==="pending"?"No later visit yet":""))+'</td></tr>').join("");
   const head=(nP||nR)?interp(nP?"bad":"warn","<b>"+nP+" PIRA</b> and <b>"+nR+" RAW</b> visit(s) with confirmed worsening over "+yrs+" years of follow-up."):interp("good","No confirmed disability worsening over "+yrs+" years of follow-up.");
   el("pira_out").innerHTML=head+_piraChart(vs,rel,r.refTrace,E)+(rows?'<div style="overflow-x:auto;margin-top:8px"><table class="ptab" style="border-collapse:collapse;width:100%;font-size:13px"><thead><tr><th>Event</th><th>Type</th><th>Measure</th><th>Reference</th><th>Change</th><th>Needed</th><th>Confirmed at</th><th>Why</th></tr></thead><tbody>'+rows+'</tbody></table></div>':"")
