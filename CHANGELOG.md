@@ -1,5 +1,79 @@
 # Changelog
 
+## v36 (2026-11-09): RAND-36, SCI, P-MSSS, PIRA/RAW module, harmonized worsening thresholds, Gemini review fixes
+
+### MS Score Hub
+- **RAND-36** (RAND 36-Item Health Survey 1.0): items from Hays 1993 (Appendix), scored with the RAND instructions (Table 1 recoding, Table 2 scales; blank items left out of the mean). 8 scales, 0-100, with the MOS reference means (Table 3) for context; item 2 (health change) shown on its own. RAND credit line and "electronic format, wording unchanged" note. Added to the converter.
+- **Sleep Condition Indicator (SCI)**: 8 items and answer options from Espie 2014 (Appendix), total 0-32, 0-10 format, items at threshold (scores 0-2) and the 16-or-less probable insomnia screen. © Sleepio Limited, CC BY-NC 4.0 notice. Added to the converter.
+- **P-MSSS** in the PDDS tool: optional "years since first MS symptoms" gives the disease-duration-adjusted PDDS rank from Kister 2013 (Figure 2, 0-45 years). Values transcribed and checked twice against the figure; the table itself is not displayed. Converter entry added.
+- **SymptoMScreen** now matches Figure 1 of Green 2016 exactly: domain names (Walking/Mobility, Bodily Pain, Sensory symptoms), the short descriptor under each domain, the full answer options (for example "moderate limitation/ I reduced my daily activities") and the instruction. Licence stated as CC BY 4.0.
+- **Parmenter 2010 range note**: its controls were aged 20-60 with 12-18 years of education; outside that range the BVMT-R/CVLT-II Parmenter z/T is flagged as an extrapolation (tool pages and converter).
+- **CDP tool**: thresholds follow the harmonized definition (Müller 2023): +1.5 from 0, +1.0 from 1.0-5.0, +0.5 from 5.5 or more; 48-week confirmation option; relapse window 30 days before to 90 days after a relapse onset.
+
+### AutoEDSSguide
+- Change vs baseline uses the same Müller 2023 thresholds (baseline 5.5 now needs +0.5) and says the confirming visit should be at least 3 months later (preferably 6 or 12).
+
+### New tool
+- **PIRA / RAW across visits** (Disease activity & progression): enter dated visits (EDSS, optional T25FW, 9-HPT, SDMT) and relapse onsets; each confirmed worsening is classed as PIRA or RAW with the harmonized definition (Müller 2023): roving reference, EDSS thresholds by reference score, T25FW/9-HPT > 20%, SDMT ≥ 4 points or > 10%, confirmation ≥ 3 months, relapse window 30 days before to 90 days after. Chart with the roving reference, event table, paste from a spreadsheet, CSV. Built from the approved mockup.
+
+### Fixes from the Gemini round-4 review (each checked against the code and the sources)
+- **McDonald**: an optic nerve lesion on orbital MRI was wiped when "Visual tests" was not ticked; now MRI, OCT and VEP are cleared only when their own test is unavailable. Progressive course without MRI now says "brain MRI required". The single-region progressive branch now shows the age ≥ 50 / vascular-risk caution (as the multi-region branch did). The unused "CNS sites on examination" field was removed from the progressive inputs. Companion references corrected to the exact PubMed titles and authors (Saidha 2025, Barkhof 2025); the unverifiable "Fluid biomarkers 2025" item was replaced by Hegen 2023 and Reiber 2019. Toast now fires on "Save as PDF".
+- **sEDSS**: fine finger movements become required when strength is normal ("required if UE strength 5/5", Appendix 1). Correlation text corrected to Spearman rho 0.99 (pilot, n=102) and 0.93 (CombiRx, n=968).
+- **Converter**: answers outside each tool's range are rejected (for example 99 on the PHQ-9), blank items are no longer counted as 0, ABC needs 12 answers; MSQOL-54 now returns all 12 subscales and both composites to one decimal; the written SDMT example has 4 values.
+- **Text**: the "Who can use each tool" card no longer says full item text is shown for copyrighted questionnaires; the BICAMS sources name Strober 2020, Fellows 2020 and Parmenter 2010 (not Marrie 2021); index references name Parmenter 2010 as the primary BVMT-R/CVLT-II norm; Visual grade 3 label says "or worse-eye VA".
+- **Code**: dead `promisBand` (old PROMIS raw cut-offs) and an unused sensory variable removed; exports stamp `MSpectrum-v36`; `edss_calc.py` header and Fouad citation updated; README now says CDN copies are only a fallback.
+
+### Citation and claim audit (every citation checked in PubMed; every number checked against its source)
+- **Removed** statements with no source: LCVA "typical ranges" (35-50 / 20-40 letters) and the ≥ 5-letter asymmetry flag (the inter-eye difference is now shown without a judgement); MSWS-12 "typical cohort range"; MSIS-29 "> 50 = substantial impact"; MSQOL-54 "< 50 = below average"; MFIS "cut-offs vary 34-43"; ARR activity bands and untreated-rate range; 6MWT % predicted grades; 9-HPT healthy range; PDDS "≥ 1 step is meaningful" (not in Learmonth 2013).
+- **Corrected sources**: LCVA 7-letter change now cites Balcer 2017 (Mult Scler 23(5):734-47; the 2007 trials used 10 letters); PHQ-9 cut-point 11 in MS now cites Patten 2015 (was a review that does not state it); GAD-7 4-point change now cites Toussaint 2020 (the earlier "Rubin 2016" could not be found in PubMed); ABC bands now cite Myers 1998; RIS 5-year risk cites Okuda 2014 (34%) and 10-year risk Lebrun-Frénay 2020 (51%); Flachenecker 2002 now has volume and pages.
+- **Repository**: the unused Wayne State logo file is removed (no institutional logo on the site).
+- **Added published values**: 6MWT and 2MWT meaningful change in MS (Baert 2014: about 22 m and 10 m from the patient's view).
+
+### Organization
+- Score Hub groups: new **Vision** group (LCVA, IVIS; LCVA was under walking); "Walking, balance & motor function" (MSWS-12, ABC and FES-I named as self-report); PROMIS pain intensity moved to Symptom burden; Disease activity subtitle now names PIRA / RAW. MSFC subtitle on patient summaries now says "Walking, hand and cognitive function".
+- README instrument table now lists every Score Hub tool with its source.
+
+### Gemini round-5 fixes (each checked against the code)
+- **Ambulation**: bilateral aid with no distance now defaults to AS 7 (EDSS 6.0), the same conservative choice as the unilateral default (was AS 8, EDSS 6.5), in JS and Python; a new check asks for the distance walked with the aid.
+- **Quick Check**: the SRDSS question wording is unchanged (CC BY-NC-ND); the "Yes" answer now says "For example a cane or a rollator".
+- **Check my MS**: the EDSS step now says to skip it when only a Quick Check range is known (severity scores need an exact EDSS); it no longer suggests picking a value inside the range.
+- **Score Hub**: quick-fill buttons hidden in the patient flow for PROMIS Cognitive 4a, ABC and FES-I; scale answer labels enlarged from 7.5 px to 9.5 px; the 0-10 MSQLI items no longer repeat the number under each button; 6MWT explains in the result box why no % predicted is shown outside ages 40-80; image-export message no longer says internet is needed (the renderer is bundled).
+- **Mobile result box**: on screens under 1000 px the sticky result box has a "Minimize result" button that folds it to the main score line, so the questions and sources can be read; "Show full result" opens it again. Hidden on desktop and in the patient flow.
+- MFIS result text now names Flachenecker 2002 for the 38 cut-off.
+
+### Institutional neutrality and home page
+- The Wayne State University shield and name block were removed from the home footer; the university is named only as the author's affiliation. The page metadata (JSON-LD) now names the author, not the university, as publisher; "Developed at Wayne State University" and the university as citation publisher were removed (README, Cite us); the no-warranty clause no longer speaks for the university.
+- New sentence on every page and in the README: "MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency."
+- Home footer: disclaimer in two balanced lines, then the copyright; the Neurostatus trademark line moved to the AutoEDSSguide footer and to About > Disclaimer ("Independence and trademarks").
+- Home content: AutoEDSSguide "6 modes" (Train mode counted); unsourced "7-10 min" for sEDSS removed; feature cards list the current tools (PDDS no longer under quality of life); "full question text" now says copyrighted questionnaires take answers from the official form; "Validated" card renamed "Published rules, norms & checks"; plain-language card says peer comparison applies where norms exist; About lists the new Vision group; MRI consensus reference has authors and pages; RIS reference adds Okuda 2014.
+- "Not a diagnosis" boxes (AutoEDSSguide, Score Hub, Criteria Checker): the long legal paragraph is now four short points (Not a medical device; Training and licences; Privacy; Independence); duplicated sentences removed; the AutoEDSSguide footer now shows only the copyright. Home page: less empty space under About and the footer.
+
+### Gemini round-6 review (each point checked against the code and, for PIRA, against the Müller 2023 PDF)
+- **PIRA / RAW**: (1) the roving reference skipped the visit that confirmed an improvement, so a second step down (for example 3.0 -> 2.5 -> 1.5) was missed and a later PIRA could be missed; the reference now resets at every confirmed lower score ("confirmed at the following visit", Müller 2023). (2) A confirmation visit inside a relapse window no longer confirms the event or raises the reference; the next visit at least 3 months later and outside every relapse window is used ("should not happen 30 days before and 90 days after the onset of a relapse"). The >20% threshold for T25FW and 9-HPT was kept: Müller 2023 says ">20%" (Gemini's ">=20%" was not adopted). (3) "Researcher: CSV" now exports one row per visit with each event, reference, change, confirming visit and the relapse dates (it exported almost nothing). (4) Paste accepts MM/DD/YYYY and reports skipped lines.
+- **Sheet Scanner**: the seven FS score boxes called a missing function (`updateConvertedScores`) or were overwritten on the next keystroke. They are now read-only and computed from the sheet items, the single source used for the synopsis, table and EDSS. The cerebral "FS = 0" hint no longer states a wrong rule ("2 items needed").
+- **Converter**: MSQOL-54 answers are checked item by item (item 53 = 99 was scored as 990); SDMT, BVMT-R, CVLT-II, T25FW, 9-HPT, ARMSS and MSSS fields are range-checked (EDSS in 0.5 steps).
+- **Text**: PASAT "practice effect" line removed (it cited Rao 1991, which does not report it); README says CSV export (Score Hub has no JSON export); OCR debug text names the current button; AutoEDSSguide privacy text now mentions the optional "Save to browser".
+- **Code clean-up**: unused functions removed (refreshChipDetails, qcCheckEarlyExit, scUpdateEdssLive, snapZones and its 4 helpers, normBlock, _Tsc, exportJSON, _sdmtBulkZ, pcDownloadPDF, lpToggle), plus unused variables, a dead JSON-import handler and a dead synopsis builder. 6MWT has its Clear button. ARMSS colour readable in dark mode.
+- **Not adopted (Gemini wrong after checking)**: WSU shield "still on the landing page" (no such element); "no Content-Security-Policy" (all three pages have one); "AS 16 = death" (EDSS 10 is not an ambulation grade); Fellows written-SDMT equation and sign (Gemini quoted an equation that is not in the code); McDonald copy summary "missing what would complete the criteria" (already included); adding an id to the scanner synopsis grid (would have replaced the working grid); several table rows describing fields that do not exist (binocular LCLA, 6MWT minute splits, TUG and ABC cut-offs from Sebastião or Cattaneo); Müller PMID 37782491 (correct PMID 37782515).
+- Tests: v36 suite now 37 checks (PIRA stepwise reference, exact 20%, relapse-window confirmation, converter ranges).
+
+### Final source pass and Nour's decisions (2026-11-09)
+- **Marrie 2021 (Canadian) norms removed** from BVMT-R, CVLT-II, BICAMS and the converter, with the race fields; Parmenter 2010 (US) is the only BVMT-R/CVLT-II norm. Marrie 2021 stays cited only for its finding that published norms can misclassify impairment when applied to a different population.
+- **Self-made bands removed**: MSWS-12, MSIS-29, MSQOL-54, SymptoMScreen total and MFIS cognitive items had site-made severity bands in the tool pages and the Check my MS report; they are now shown without a severity colour, with a sourced meaningful-change value where one exists (MSWS-12 Baert 2014, MSIS-29 physical Costelloe 2007). FSS "5 or more = severe" removed (only the cut-off of 4 is sourced). MFIS 38 is described as "clinically significant fatigue impact" (Flachenecker 2002), not "severe". FES-I and pain bands name their sources; a pain score of 0 now reads "No pain".
+- **Unsourced numbers removed** in AutoEDSSguide: "1 city block = 200 m" and "observe 130 m with assistance" (replaced by the Neurostatus distance thresholds).
+- **References list completed** (Score Hub): Modified Ashworth (Bohannon 1987), PIRA / RAW (Müller 2023; Kappos 2020), MFIS cut-off (Flachenecker 2002), PHQ-9 cut-point in MS (Patten 2015), GAD-7 change (Toussaint 2020), 2MWT change (Baert 2014).
+- **Paste answers**: FSS, MSWS-12, MSIS-29, FSMC, ABC, MSQOL-54, PROMIS-29 and PROMIS Cognitive 4a can be filled from one pasted line, with the converter's range checks (hidden in the patient pathway).
+
+### Result charts (neutral colours; a line only where a published cut-off exists)
+- **BICAMS**: the three z-scores on one axis with a dashed line at z = -1.5 (impaired range shaded). **MSFC**: the three component z-scores on one axis (no cut-off; 0 = Task Force MS reference mean).
+- **SDMT**: the change since the last visit, drawn against the Strober 2022 reliable-change bands (70%, 80%, 90%).
+- **ARMSS / MSSS**: position on the 0-10 scale (5 = middle of people with MS of the same age or disease duration). The ARMSS number is no longer coloured green/amber/red (those bands had no source).
+- **RAND-36**: the 8 scales as bars with the MOS reference mean (RAND Table 3) as a tick. **MSQOL-54**: the subscale profile as bars (no cut-offs).
+
+### Site
+- Home page: 43 tools; About and References list RAND-36, SCI, P-MSSS and Müller 2023. Converter: 34 instruments in eight groups.
+- New `tests/v36_scorehub.test.js` (29 hand-computed checks).
+
 ## v35 (2026-11-08): new tools wired into every part of the site
 
 - **Score & norm converter**: the eight MSQLI scales were added (new group "MSQLI scales"; 31 instruments in six groups). Same rules as the tool pages; out-of-range answers are flagged; MHI-18 accepts NA for skipped items.

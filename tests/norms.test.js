@@ -34,13 +34,9 @@ for (const edu of ['lo','hi']) for (const sex of ['M','F']) for (let b=0;b<6;b++
   results.push({name:`SDMT ${edu}/${sex}/band${b} = ${T5[edu][sex][b][0]}(${T5[edu][sex][b][1]})`, ok});
 }
 
-// --- BVMT-R / CVLT-II: Marrie 2021 Table 3 regression coefficients (verified vs Norms/CVLT-II.pdf & BVMT-R.pdf) ---
-// age=36.12 -> centered age 0, so these exercise Constant+Sex+Educ(+Race) and SD.
+// --- BVMT-R / CVLT-II: Marrie 2021 (Canadian) norms removed in v36 (US norms only: Parmenter 2010) ---
 function zclose(name, got, want){ results.push({name, ok: got!=null && Math.abs(got-want)<0.01}); }
-zclose('CVLT-II z (no race)',  global.cvltNorm(50,36.12,1,12,'') && global.cvltNorm(50,36.12,1,12,'').z, 0.528);
-zclose('CVLT-II z (with race)',global.cvltNorm(50,36.12,1,12,'1') && global.cvltNorm(50,36.12,1,12,'1').z, 0.422);
-zclose('BVMT-R z (no race)',   global.bvmtNorm(24,36.12,1,12,'') && global.bvmtNorm(24,36.12,1,12,'').z, -0.448);
-zclose('BVMT-R z (with race)', global.bvmtNorm(24,36.12,1,12,'1') && global.bvmtNorm(24,36.12,1,12,'1').z, -0.544);
+results.push({name:'Marrie 2021 Canadian norms removed (cvltNorm/bvmtNorm undefined)', ok: typeof global.cvltNorm==='undefined' && typeof global.bvmtNorm==='undefined'});
 
 // --- MSFC / PASAT-3 / T25FW / 9-HPT: Fischer 2001 reference (verified vs Norms/MSFC_Manual.pdf) ---
 const srcHasRef = html.includes('pegM:0.0439') && html.includes('pegSD:0.0101') && html.includes('walkM:9.5353')

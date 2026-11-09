@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="MS Criteria Checker - 2024 McDonald Criteria for MS diagnosis">
 <meta name="twitter:description" content="A free, step-by-step checker that applies the 2024 McDonald criteria to the findings you enter (relapsing, progressive or RIS onset; DIS, DIT, CSF and susceptibility biomarkers) and reports which category is fulfilled, with mimic and older-onset safeguards.">
 <meta name="twitter:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png?v=2">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MS Criteria Checker - 2024 McDonald Criteria for MS diagnosis","url":"https://anaszakarya.github.io/MSpectrum/mcdonald.html","description":"A free, step-by-step checker that applies the 2024 McDonald criteria to the findings you enter (relapsing, progressive or RIS onset; DIS, DIT, CSF and susceptibility biomarkers) and reports which category is fulfilled, with mimic and older-onset safeguards.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"}],"publisher":{"@type":"Organization","name":"Wayne State University, Department of Neurology"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MS Criteria Checker - 2024 McDonald Criteria for MS diagnosis","url":"https://anaszakarya.github.io/MSpectrum/mcdonald.html","description":"A free, step-by-step checker that applies the 2024 McDonald criteria to the findings you enter (relapsing, progressive or RIS onset; DIS, DIT, CSF and susceptibility biomarkers) and reports which category is fulfilled, with mimic and older-onset safeguards.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"}],"publisher":{"@type":"Person","name":"Anas Nourelden"}}</script>
   
   <!-- Fonts -->
   <link rel="preload" href="fonts/fraunces-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -262,6 +262,8 @@
       color:var(--ink);
     }
     .tool-disclaimer p{margin:0}
+.disc-list{margin:10px 0 0;padding-left:18px;font-size:12.5px;line-height:1.5;color:var(--ink-soft)}.disc-list li{margin:3px 0}.disc-list b{color:var(--ink)}
+
     .tool-disclaimer b{color:var(--ink)}
     .tool-disclaimer::before{
       content:"";
@@ -1298,15 +1300,6 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
                 <input type="number" id="prog_months" min="1" placeholder="e.g. 14">
                 <span class="range-warn" id="prog-months-warn" style="display: none;">PPMS requires at least 12 months of steady progression.</span>
               </div>
-              <div class="fld">
-                <label for="prog_lesions">CNS sites with objective evidence on examination <span class="help-icon" data-tooltip="Number of separate CNS sites with objective signs on the neurological exam.">?</span></label>
-                <select id="prog_lesions">
-                  <option value="">-- Select Progressive Lesions --</option>
-                  <option value="2">&ge; 2 lesions</option>
-                  <option value="1">1 lesion</option>
-                  <option value="0">0 lesions</option>
-                </select>
-              </div>
             </div>
 
             <!-- RIS inputs -->
@@ -1534,21 +1527,26 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
         <div class="ref-cat">Companion Papers</div>
         <div class="ref-item">
           <span class="ref-name">Saidha 2025</span>
-          <span class="ref-cite">Saidha S, Bsteh G, Zimmermann H et al. Consensus recommendations on the role of the visual system in the diagnosis of multiple sclerosis (OCT and VEP). <em>The Lancet Neurology</em> 2025;24(10):880-892.</span>
+          <span class="ref-cite">Saidha S, Green AJ, Leocani L, Vidal-Jordana A et al. The use of optical coherence tomography and visual evoked potentials in the 2024 McDonald diagnostic criteria for multiple sclerosis. <em>The Lancet Neurology</em> 2025;24(10):880-892. doi:10.1016/S1474-4422(25)00275-3.</span>
         </div>
         <div class="ref-item">
           <span class="ref-name">Barkhof 2025</span>
-          <span class="ref-cite">Barkhof F, Sastre-Garriga J, Rocca MA et al. Consensus recommendations on MRI in the 2024 revisions of the McDonald criteria (typical lesions, central vein sign, paramagnetic rim lesions). <em>The Lancet Neurology</em> 2025;24(10):866-879.</span>
+          <span class="ref-cite">Barkhof F, Reich DS, Oh J, Rocca MA et al. 2024 MAGNIMS-CMSC-NAIMS consensus recommendations on the use of MRI for the diagnosis of multiple sclerosis. <em>The Lancet Neurology</em> 2025;24(10):866-879. doi:10.1016/S1474-4422(25)00304-7.</span>
         </div>
         <div class="ref-item">
-          <span class="ref-name">Fluid biomarkers 2025</span>
-          <span class="ref-cite">Consensus recommendations on fluid and body biomarkers (kappa free light chain index, oligoclonal bands) in MS diagnosis. <em>The Lancet Neurology</em> 2025; companion paper to the 2024 revisions.</span>
+          <span class="ref-name">&kappa;-FLC index</span>
+          <span class="ref-cite">Hegen H, Walde J, Berek K et al. Cerebrospinal fluid kappa free light chains for the diagnosis of multiple sclerosis: a systematic review and meta-analysis. <em>Mult Scler</em> 2023;29(2):169-181 (cut-off 6.1). Reiber H et al. <em>Clin Chim Acta</em> 2019;497:153-162 (hyperbolic reference range).</span>
         </div>
 
         <div class="ref-cat">Differential Diagnosis &amp; Mimics</div>
         <div class="ref-item">
           <span class="ref-name">Solomon 2023</span>
           <span class="ref-cite">Solomon AJ, Arrambide G, Brownlee WJ et al. Differential diagnosis of suspected multiple sclerosis: an updated consensus approach. <em>The Lancet Neurology</em> 2023;22:750–68.</span>
+        </div>
+        <div class="ref-cat">Radiologically isolated syndrome</div>
+        <div class="ref-item">
+          <span class="ref-name">RIS risk</span>
+          <span class="ref-cite">Okuda DT, Siva A, Kantarci O et al. Radiologically isolated syndrome: 5-year risk for an initial clinical event. <em>PLoS One</em> 2014;9(3):e90509. Lebrun-Fr&eacute;nay C, Kantarci O, Siva A et al. Radiologically isolated syndrome: 10-year risk estimate of a clinical event. <em>Ann Neurol</em> 2020;88(2):407-417.</span>
         </div>
       </details>
     </div>
@@ -1700,7 +1698,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 
     // Inputs triggers
     const inputIds = [
-      'age', 'course', 'attacks', 'clinical_lesions', 'prog_months', 'prog_lesions',
+      'age', 'course', 'attacks', 'clinical_lesions', 'prog_months',
       'vasc_hypertension', 'vasc_diabetes', 'vasc_smoking', 'vasc_hyperlipidemia',
       'flag_letm', 'flag_bilateral_on', 'flag_disc_edema', 'flag_area_postrema', 'flag_encephalopathy', 'flag_atypical_csf',
       'avail_mri', 'avail_csf', 'avail_visual', 'avail_susc',
@@ -1805,12 +1803,10 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
         document.getElementById('dit_simul').checked = false;
         document.getElementById('dit_historical').checked = false;
       }
-      if (!hasVisual || !hasMri) {
-        document.getElementById('dis_on').checked = false;
-        document.getElementById('on_mri').checked = false;
-        document.getElementById('on_oct').checked = false;
-        document.getElementById('on_vep').checked = false;
-      }
+      // Optic nerve: an orbital MRI lesion needs MRI; OCT/VEP need visual tests. Clear only what is unavailable.
+      if (!hasMri) document.getElementById('on_mri').checked = false;
+      if (!hasVisual) { document.getElementById('on_oct').checked = false; document.getElementById('on_vep').checked = false; }
+      if (!hasVisual && !hasMri) document.getElementById('dis_on').checked = false;
       if (!hasCsf) {
         document.getElementById('bio_ocb').checked = false;
         document.getElementById('bio_kflc').checked = false;
@@ -1926,7 +1922,6 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
         else if (courseVal === 'progressive') {
           const progMonths = parseFloat(document.getElementById('prog_months').value);
           const progWarn = document.getElementById('prog-months-warn');
-          const lesionsVal = document.getElementById('prog_lesions').value;
           let valid = true;
 
           if (isNaN(progMonths) || progMonths < 1) {
@@ -1936,13 +1931,6 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
           } else {
             progWarn.style.display = 'none';
             document.getElementById('prog_months').classList.remove('oor');
-          }
-
-          if (!lesionsVal) {
-            document.getElementById('prog_lesions').classList.add('blank');
-            valid = false;
-          } else {
-            document.getElementById('prog_lesions').classList.remove('blank');
           }
 
           if (!valid) return;
@@ -2038,7 +2026,6 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       document.getElementById('attacks').value = "";
       document.getElementById('clinical_lesions').value = "";
       document.getElementById('prog_months').value = "";
-      document.getElementById('prog_lesions').value = "";
       document.getElementById('clinical-shortcut-callout').style.display = 'none';
 
       // Clean up course-dependent subgroups so no stale state leaks into the engine
@@ -2207,7 +2194,6 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       showStep(activeSteps[currentStepIndex]);
     });
 
-    function lpToggle(id){ document.querySelectorAll('.landing-panel').forEach(function(pn){ pn.hidden = (pn.id !== id) ? true : !pn.hidden; }); document.querySelectorAll('#landing-links a').forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + id && !document.getElementById(id).hidden); }); return false; }
     // -------------------------------------------------------------
     // Core Diagnostic Calculation Engine
     // -------------------------------------------------------------
@@ -2267,7 +2253,6 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       const attacks = (course === 'relapsing') ? parseInt(document.getElementById('attacks').value) : 0;
       const clinicalLesions = (course === 'relapsing') ? parseInt(document.getElementById('clinical_lesions').value) : 0;
       const progMonths = (course === 'progressive') ? parseFloat(document.getElementById('prog_months').value) : 0;
-      const progLesions = (course === 'progressive') ? parseInt(document.getElementById('prog_lesions').value) : 0;
 
       // DIS locations (MRI must be available)
       let pv = hasMri && document.getElementById('dis_pv').checked;
@@ -2280,9 +2265,9 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       // as a DIS location ONLY with objective supporting evidence (orbital MRI lesion, OCT
       // inter-eye thinning, or delayed VEP). Ticking the box alone no longer adds a zone.
       let onChecked = (hasMri || hasVisual) && document.getElementById('dis_on').checked;
-      let on_mri = onChecked && document.getElementById('on_mri').checked;
-      let on_oct = onChecked && document.getElementById('on_oct').checked;
-      let on_vep = onChecked && document.getElementById('on_vep').checked;
+      let on_mri = onChecked && hasMri && document.getElementById('on_mri').checked;
+      let on_oct = onChecked && hasVisual && document.getElementById('on_oct').checked;
+      let on_vep = onChecked && hasVisual && document.getElementById('on_vep').checked;
       let on = onChecked && (on_mri || on_oct || on_vep);
 
       let disCount = 0;
@@ -2390,6 +2375,15 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
 
       // 3. Primary Progressive (PPMS) Pathway
       else if (course === 'progressive') {
+        if (!hasMri) {
+          status = "Incomplete - brain MRI required";
+          basis.push("Progressive course entered, but no MRI is available. In progressive disease, dissemination in space is shown on MRI (2 of 5 regions or &ge; 2 spinal cord lesions).");
+          alertMsg = "Brain and spinal cord MRI are needed to apply the 2024 criteria to a progressive course.";
+          alertType = "warn";
+          nextSteps.push("Obtain brain and spinal cord MRI.");
+          updateUI(status, basis, alertMsg, alertType, nextSteps, disLocationsList, ageVal, course, needsSpecific, attacks, csfPositive, isDitMet, cvs, prl, complete);
+          return;
+        }
         if (progMonths < 12) {
           status = "Possible MS (Under Evaluation)";
           basis.push("Progressive symptoms from onset, but progression duration is under 12 months.");
@@ -2444,6 +2438,12 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
             if (combCsfPrl) basis.push("Met via CSF positivity + &ge; 1 PRL.");
             if (combDitCvs) basis.push("Met via DIT + select-6 CVS.");
             if (combDitPrl) basis.push("Met via DIT + &ge; 1 PRL.");
+            // Older-onset / vascular-risk safety guard (Panel 6), as in the multi-region branch above.
+            if (needsSpecific && !(sc || csfPositive || cvs)) {
+              alertMsg = `CAUTION (${specificWho}): confirm with at least one highly specific marker (spinal cord lesion, positive CSF, or select-6 CVS) to exclude small-vessel mimics.`;
+              alertType = "danger";
+              nextSteps.push("Obtain spinal cord MRI, lumbar puncture (OCB/k-FLC), or susceptibility MRI (CVS).");
+            }
           } else {
             status = "Possible Multiple Sclerosis";
             basis.push(`Progressive course for ${progMonths} months, but dissemination in space is not yet met (single region).`);
@@ -2659,7 +2659,7 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
       } else if (status.indexOf("not met") !== -1) {
         itext = "The entered findings do not satisfy the 2024 McDonald criteria at this time. This does not exclude MS; new findings on follow-up may change the category.";
       } else if (status === "Radiologically Isolated Syndrome (RIS)") {
-        itext = "Incidental MS-like lesions meeting dissemination in space only, not MS yet. In cohort studies about 35% of people with RIS have a first clinical event by 5 years and about 51% by 10 years; risk is higher with positive CSF, spinal cord or infratentorial lesions, or age under 37 (Lebrun-Fr&eacute;nay et al., Ann Neurol 2020).";
+        itext = "Incidental MS-like lesions meeting dissemination in space only, not MS yet. In cohort studies about 34% of people with RIS have a first clinical event by 5 years (Okuda et al., PLoS One 2014; higher risk with age under 37, male sex, spinal cord lesions) and about 51% by 10 years (Lebrun-Fr&eacute;nay et al., Ann Neurol 2020; higher risk with younger age, CSF oligoclonal bands, infratentorial or spinal cord lesions).";
       } else if (isAdem) {
         itext = "In a child with an ADEM presentation, MS cannot be diagnosed until a new non-ADEM attack or new MRI lesions appear more than 90 days after onset.";
       } else if (status.indexOf("Unlikely") !== -1) {
@@ -2820,12 +2820,17 @@ body:has(#gnav[style*="flex"]) #fab-dock{ bottom:76px; }
     
     <div class="tool-disclaimer no-print">
       <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
-      <p>This tool automates the 2024 McDonald calculations from the entries you provide. <b>It supports, but does not replace, expert neurological judgement.</b> Always exclude better explanations and mimics (MOGAD, NMOSD, vascular disease) before finalising a diagnosis. An MS diagnosis requires a clinician to exclude better explanations; the output is not a diagnosis. All computation is local; nothing is stored.</p><p style="margin-top:8px;font-size:12px">MSpectrum is a free research and education tool for trained clinicians and researchers. It does not replace clinical judgment, a full neurological examination, or certified rater training; a qualified clinician must check every result before use in care or research. MSpectrum has not been reviewed, cleared, or approved by the U.S. Food and Drug Administration. Provided &quot;as is&quot;, without warranty of any kind; the authors accept no liability for any use of this tool or its results. Privacy: all processing happens on your device; MSpectrum does not upload, store, or transmit any data. Use study IDs rather than names where possible. Content and views are the authors&rsquo; own and do not represent the official position of any institution. Instrument copyrights and trademarks belong to their owners. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is independent and is not affiliated with or endorsed by Neurostatus-UHB AG, the National MS Society, Western Psychological Services, PAR, Pearson or any other instrument owner. Users are responsible for any licence or rater certification their study requires (for example Neurostatus-EDSS certification in clinical trials).</p>
+      <p>This tool automates the 2024 McDonald calculations from the entries you provide. <b>It supports, but does not replace, expert neurological judgement.</b> Always exclude better explanations and mimics (for example MOGAD, NMOSD or vascular disease); the output is not a diagnosis.</p><ul class="disc-list">
+<li><b>Not a medical device.</b> Not reviewed, cleared or approved by the U.S. FDA. Provided &quot;as is&quot;, without warranty; the authors accept no liability for any use of this tool or its results.</li>
+<li><b>Training and licences.</b> Does not replace a full neurological examination or certified rater training. Users are responsible for any licence or rater certification their study requires (for example Neurostatus-EDSS certification in clinical trials).</li>
+<li><b>Privacy.</b> Everything runs on your device; nothing is uploaded, stored or transmitted. Use study IDs rather than names.</li>
+<li><b>Independence.</b> Content and views are the authors&rsquo; own. MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency, and is not affiliated with Neurostatus-UHB AG, the National MS Society, Western Psychological Services, PAR, Pearson or any other instrument owner. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; instrument copyrights and trademarks belong to their owners.</li>
+</ul>
       <div class="tool-disclaimer-footer no-print">
         <a href="index.html#about-mspectrum">About</a><span class="dot">·</span>
         <a href="index.html#cite">Cite</a><span class="dot">·</span>
         <a href="mailto:nour.anas@wayne.edu">Contact</a><span class="dot">·</span>
-        <span>&copy; 2026 MSpectrum</span>
+        <span>&copy; 2026 Anas Z. Nourelden</span>
       </div>
     </div>
   </div>
@@ -3097,7 +3102,7 @@ html[data-theme="dark"] .box-cover .info-title{color:#a5d6a7 !important;}
 (function(){
   document.addEventListener('DOMContentLoaded', function(){
     // Look for print/save buttons and wire toast to them
-    var savePDFBtns = document.querySelectorAll('button[onclick*="printPDF"],button[onclick*="window.print"],button[onclick*="savePDF"],button[onclick*="exportPDF"]');
+    var savePDFBtns = document.querySelectorAll('#btn-print,#btn-export-txt,button[onclick*="printPDF"],button[onclick*="window.print"],button[onclick*="savePDF"],button[onclick*="exportPDF"]');
     savePDFBtns.forEach(function(b){
       b.addEventListener('click', function(){
         if(window.mspectrumToast) window.mspectrumToast('Report ready');

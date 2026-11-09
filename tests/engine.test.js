@@ -119,6 +119,8 @@ eq('unilateral exactly 50 m -> AS 8 (manual: more than 50 m = 6.0)', E.calcAmbul
 eq('unilateral 51 m -> AS 6', E.calcAmbulationScore({ assistance: 'unilateral', distance_m: 51 }), 6);
 eq('bilateral exactly 120 m -> AS 9', E.calcAmbulationScore({ assistance: 'bilateral', distance_m: 120 }), 9);
 eq('bilateral 121 m -> AS 7', E.calcAmbulationScore({ assistance: 'bilateral', distance_m: 121 }), 7);
+eq('bilateral, no distance -> AS 7 (conservative, EDSS 6.0)', E.calcAmbulationScore({ assistance: 'bilateral', distance_m: null }), 7);
+eq('unilateral, no distance -> AS 6 (conservative, EDSS 6.0)', E.calcAmbulationScore({ assistance: 'unilateral', distance_m: null }), 6);
 const tr = E.calcEDSSStepTrace({ visual: 0, brainstem: 0, pyramidal: 3, cerebellar: 3, sensory: 0, bb: 0, cerebral: 0 }, 0);
 eq('trace: two FS 3 unrestricted -> 3.5 by fs_pattern', tr.edss === 3.5 && tr.branch === 'fs_pattern', true);
 const tr2 = E.calcEDSSStepTrace({ visual: 0, brainstem: 0, pyramidal: 0, cerebellar: 0, sensory: 0, bb: 0, cerebral: 0 }, 3);

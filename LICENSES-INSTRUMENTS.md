@@ -1,6 +1,6 @@
 # Instruments: owners, status and how MSpectrum uses them
 
-The AGPL-3.0 licence covers MSpectrum's own code and interface only. Each instrument below stays the property of its authors or publisher. This table is MSpectrum's own reading of the published terms (version 35, November 2026). It is not legal advice. If you reuse MSpectrum, you are responsible for each instrument's own terms, licences and rater certification.
+The AGPL-3.0 licence covers MSpectrum's own code and interface only. Each instrument below stays the property of its authors or publisher. This table is MSpectrum's own reading of the published terms (version 36, November 2026). It is not legal advice. If you reuse MSpectrum, you are responsible for each instrument's own terms, licences and rater certification.
 
 How to read the "Use in MSpectrum" column:
 
@@ -27,7 +27,7 @@ How to read the "Use in MSpectrum" column:
 | PHQ-9, GAD-7 | Pfizer | No permission required | Full text | Citation |
 | MFIS | Fisk JD et al. 1994; MSQLI (NMSS) | Public domain | Full text | Citation |
 | FES-I | Yardley L et al. 2005 | Free when referenced | Full text (official 16 items, order and instructions) | Citation |
-| SymptoMScreen | Green R et al. 2017 | Free to use | Full text (official domain names, instruction and anchor labels) | Citation |
+| SymptoMScreen | Green R et al. Appl Neuropsychol Adult 2016/2017 | CC BY 4.0 ("freely available for use to clinicians and researchers, with attributions") | Full text as in the article's Figure 1 (domains, descriptors, answer options, instruction) | Citation and licence |
 | MSQLI: PES, BLCS, BWCS, IVIS, SSS, PDQ, MHI-18, MOS-SSS | Ritvo PG et al. MSQLI User's Manual, National MS Society, 1997 ("copies of all the MSQLI scales are included so that the user can photocopy these and use them immediately"). Source instruments: PDQ (Sullivan 1990), MHI (Veit & Ware 1983, RAND), MOS Social Support Survey (Sherbourne & Stewart 1991, RAND) | Free NMSS manual | Full text, scored as in the manual | Citation and NMSS non-affiliation line |
 | SDMT | Smith A; Western Psychological Services | Copyrighted test | Numbers only | WPS non-affiliation line |
 | SDMT oral norms | Strober LB et al. Mult Scler Relat Disord 2020;43:102154 | Published article | Method only (published tables) | Citation |
@@ -35,14 +35,21 @@ How to read the "Use in MSpectrum" column:
 | SDMT written norms | Fellows RP, Schmitter-Edgecombe M. Arch Clin Neuropsychol 2020;35(1):105-15 | Published regression equations | Method only | Citation |
 | BVMT-R | Benedict RHB; PAR | Copyrighted test | Numbers only; norms from peer-reviewed papers, not the manual | PAR non-affiliation line |
 | CVLT-II | Delis DC et al.; Pearson | Copyrighted test | Numbers only; norms from peer-reviewed papers, not the manual | Pearson non-affiliation line |
-| BVMT-R / CVLT-II norms | Parmenter 2010; Marrie RA et al. Front Neurol 2021;11:621010 (ages 18-65) | Published articles | Method only | Citation |
+| BVMT-R / CVLT-II norms | Parmenter BA et al. J Int Neuropsychol Soc 2010;16(1):6-16 (US MACFIMS regression) | Published articles | Method only | Citation |
 | PASAT-3, T25FW, 9-HPT, MSFC | Fischer JS et al. 1999 / 2001; NMSS Task Force | Published method | Method only | Citation and NMSS non-affiliation line |
+| RAND-36 | RAND Health Care; items in Hays RD et al. Health Econ 1993 (Appendix); RAND scoring instructions | RAND: "No further written permission is needed for use of this Health Survey"; credit line required; changes must be identified | Full text, scored with RAND Tables 1-2 | RAND credit line; electronic format noted; not affiliated with RAND |
+| Sleep Condition Indicator (SCI) | Espie CA et al. BMJ Open 2014 (Appendix); copyright Sleepio Limited | Licensed free for non-commercial use under CC BY-NC 4.0 | Full text, unchanged | Copyright and licence line; not affiliated with Sleepio/Big Health |
+| P-MSSS | Kister I et al. Neurology 2013;80(11):1018-24, Figure 2 | Published reference table (factual values), same basis as the MSSS table | Values used for lookup only; the table is not displayed | Citation |
 | TUG | Podsiadlo D, Richardson S. J Am Geriatr Soc 1991;39(2):142-8 | Published method | Method only; MS reference values from Kalron 2017 and Nilsagård 2007 | Citation |
 | 2MWT, 6MWT | Published methods; Scalzitti DA et al. Int J MS Care 2018;20(4):158-63 | Published method | Method only | Citation |
 | FSS, MSWS-12, MSIS-29, MSQOL-54, ABC, FSMC | Their authors or publishers | Copyrighted | Numbers only (short topic labels) | Citation |
+
+Note on MSQOL-54: its 54 items are the 36 RAND-36 items plus 18 MS-specific items (Vickrey 1995, UCLA). The RAND-36 part is free to use, but the combined questionnaire is distributed by its authors, so MSpectrum keeps MSQOL-54 as number entry and shows the RAND-36 as its own tool.
+
 | PROMIS-29 v2.1, PROMIS Cognitive Function 4a, PROMIS pain intensity | HealthMeasures / PROMIS Health Organization | Item text and T-score tables copyrighted | Numbers only; raw sums only, no T-scores | PROMIS trademark line |
 | LCVA (Sloan) | Published method | Charts are commercial products | Numbers only | Citation |
 | Modified Ashworth, ARR, CDP, NEDA-3/4 | Published methods | Published method | Method only | Citation |
+| CDP, change vs baseline, PIRA / RAW across visits | Müller J et al. JAMA Neurol 2023;80(11):1232-45; Kappos L et al. JAMA Neurol 2020 | Published method | Method only (thresholds, windows, roving reference) | Citation |
 | ARMSS | Manouchehrinia A et al. Mult Scler 2017;23(14):1938-46, Supplementary Files 1 and 2 | CC BY-NC 4.0 | Published lookup data | Citation and licence |
 | MSSS | Roxburgh RH et al. Neurology 2005 | Published method | Published lookup data | Citation |
 
@@ -57,5 +64,4 @@ How to read the "Use in MSpectrum" column:
 
 - PROMIS T-score and SE tables: HealthMeasures claims copyright; removed in v33 until written permission.
 - Written SDMT norms from Centofanti 1975 (via Sheridan 2006): may match the WPS manual tables; replaced by Fellows 2020 in v33.
-- RAND-36 and SCI-8: need the official form (RAND survey PDF; SCI form in Espie 2014) before building.
 - Patient-reported EDSS questionnaires other than the SRDSS: the full items or scoring are not openly published under terms that allow reuse; permission requests to the authors are planned.

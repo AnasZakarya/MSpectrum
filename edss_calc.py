@@ -3,14 +3,14 @@ MSpectrum AutoEDSSguide - EDSS calculation engine (Python reference)
 ====================================================================
 
 Pure Python port of the JavaScript engine in index.html (calculateFullEDSS and
-the functions it calls). v29: re-synchronised line by line with the JS engine
-("MSpectrum scoring rules v3.2"), and locked by tests/parity_check.py, which runs
+the functions it calls). Kept line-by-line in sync with the JS engine (currently
+"MSpectrum scoring rules v3.3", MSpectrum v36) and locked by tests/parity_check.py, which runs
 the same inputs through both engines and requires identical results.
 
 Scoring sources:
 - Kurtzke JF. Neurology 1983;33:1444-52 (EDSS, Functional Systems).
 - Kappos L. Neurostatus scoring definitions, v04/10.2, 2011 (scoring conventions).
-- Fouad S et al. Mult Scler J Exp Transl Clin 2023 (algorithmic combination rules).
+- Fouad AM, Abdel Naseer M, Farghaly M, Hegazy MI. Mult Scler J Exp Transl Clin 2023;9(1):20552173231155055 (algorithmic combination rules).
 
 MSpectrum is independent and is not affiliated with or endorsed by Neurostatus-UHB AG.
 
@@ -357,7 +357,7 @@ def calc_ambulation_score(assistance=None, distance_m=None, is_normal=False) -> 
         return 6 if d > 50 else 8
     if assistance == "bilateral":
         if d is None:
-            return 8
+            return 7  # conservative default (EDSS 6.0), same as the unilateral default
         return 7 if d > 120 else 9
     if assistance in (None, "", "none"):
         if is_normal is True:

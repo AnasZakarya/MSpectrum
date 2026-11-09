@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://docs.opencv.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://tessdata.projectnaptha.com https://docs.opencv.org; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="description" content="MSpectrum - a free, browser-based hub for multiple sclerosis outcome measures and diagnosis: the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a 2024 McDonald-criteria diagnostic checker.">
 <title>MSpectrum - Comprehensive MS scoring & diagnosis (EDSS & beyond)</title>
-<meta name="keywords" content="multiple sclerosis, MS, EDSS, EDSS calculator, MS outcome measures, MS scores, SDMT, BICAMS, MSFC, PDDS, MSSS, ARMSS, MFIS, FSS, MSWS-12, PROMIS-29, MSQOL-54, MSQLI, MHI-18, TUG, 2MWT, sEDSS, SRDSS, kappa free light chain index, McDonald criteria 2024, MS diagnosis">
+<meta name="keywords" content="multiple sclerosis, MS, EDSS, EDSS calculator, MS outcome measures, MS scores, SDMT, BICAMS, MSFC, PDDS, MSSS, ARMSS, MFIS, FSS, MSWS-12, PROMIS-29, MSQOL-54, MSQLI, MHI-18, RAND-36, Sleep Condition Indicator, P-MSSS, TUG, 2MWT, sEDSS, SRDSS, kappa free light chain index, McDonald criteria 2024, MS diagnosis">
 <meta name="author" content="Anas Nourelden - Wayne State University, Department of Neurology">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#1e4a6e">
@@ -23,7 +23,7 @@
 <meta name="twitter:title" content="MSpectrum - MS scoring & diagnosis (EDSS & beyond)">
 <meta name="twitter:description" content="A free, browser-based, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.">
 <meta name="twitter:image" content="https://anaszakarya.github.io/MSpectrum/og-image.png?v=2">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MSpectrum - MS scoring & diagnosis (EDSS & beyond)","url":"https://anaszakarya.github.io/MSpectrum/","description":"A free, browser-based, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"}],"publisher":{"@type":"Organization","name":"Wayne State University, Department of Neurology"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MSpectrum - MS scoring & diagnosis (EDSS & beyond)","url":"https://anaszakarya.github.io/MSpectrum/","description":"A free, browser-based, privacy-first hub for multiple sclerosis outcome measures and diagnosis: the full EDSS, cognition, fatigue, mood, walking, quality-of-life and severity scores, plus a 2024 McDonald-criteria diagnostic checker.","applicationCategory":"MedicalApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":[{"@type":"Person","name":"Anas Nourelden"}],"publisher":{"@type":"Person","name":"Anas Nourelden"}}</script>
 <link rel="preload" href="fonts/fraunces-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/ibm-plex-sans-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style id="mspectrum-fonts">/* self-hosted fonts (privacy-first, no third-party requests) */
@@ -128,6 +128,9 @@ html[data-theme="dark"] .tool-hero-desc{background:#1e2636;border-color:var(--ru
   color:var(--ink);
 }
 .tool-disclaimer p{margin:0}
+@media(max-width:700px){.fab-clear{padding-bottom:64px!important}}
+.disc-list{margin:10px 0 0;padding-left:18px;font-size:12.5px;line-height:1.5;color:var(--ink-soft)}.disc-list li{margin:3px 0}.disc-list b{color:var(--ink)}
+
 .tool-disclaimer b{color:var(--ink)}
 .tool-disclaimer::before{
   content:"";
@@ -772,6 +775,7 @@ html[data-theme="dark"] .cite-box { background: #1e2636; border-color: var(--rul
 
 .about-block {
   max-width: 760px;
+  padding-bottom: 32px !important;
 }
 .about-block p {
   font-family: var(--serif);
@@ -3786,15 +3790,15 @@ details.card-optional .card-optional-body { margin-top: 12px; }
         <button type="button" class="way-card recommended" id="open-edss-hub" aria-label="Open AutoEDSSguide">
           <span class="badge">EDSS</span>
           <h3>🧠 AutoEDSSguide</h3>
-          <div class="way-sub">EDSS assessment · 5 modes</div>
-          <p>Full EDSS exam scored with the published Neurostatus conventions in real time, a print-ready sheet and OCR scanner, plus a fast Clinical mode (sEDSS) and a patient Quick Check (SRDSS + PDDS).</p>
+          <div class="way-sub">EDSS assessment · 6 modes</div>
+          <p>Full EDSS exam scored with the published Neurostatus conventions in real time, a print-ready sheet and OCR scanner, plus a fast Clinical mode (sEDSS), a patient Quick Check (SRDSS + PDDS) and a Train mode for raters.</p>
           <span class="way-cta">Open AutoEDSSguide →</span>
         </button>
         <a class="way-card hub-card" href="scores.html" style="text-decoration:none;" aria-label="Open MS Score Hub">
-          <span class="badge" style="background:#2a9d8f;color:white;">40 tools</span>
+          <span class="badge" style="background:#2a9d8f;color:white;">43 tools</span>
           <h3>📊 MS Score Hub</h3>
-          <div class="way-sub">SDMT · BICAMS · PDDS · MFIS · PHQ-9 · GAD-7 · MSWS-12 · MSIS-29 · MSQOL-54 · PROMIS-29 · T25FW · 9-HPT · TUG · 2MWT · SymptoMScreen · MSQLI scales · MS severity · and more</div>
-          <p>Stateless calculators &amp; questionnaires for cognition, fatigue, mood, symptoms, walking and quality of life - each with plain-language interpretation and optional normalization.</p>
+          <div class="way-sub">SDMT · BICAMS · PDDS · MFIS · PHQ-9 · GAD-7 · MSWS-12 · MSIS-29 · MSQOL-54 · PROMIS-29 · T25FW · 9-HPT · TUG · 2MWT · SymptoMScreen · MSQLI scales · RAND-36 · SCI · MS severity · and more</div>
+          <p>Calculators and questionnaires for cognition, fatigue, mood, symptoms, vision, walking, quality of life and disease activity - each with plain-language interpretation and published norms or cut-offs where they exist.</p>
           <span class="way-cta">Open Score Hub →</span>
         </a>
         <a class="way-card checker-card" href="mcdonald.html" style="text-decoration:none;" aria-label="Open MS Criteria Checker">
@@ -3820,7 +3824,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <div class="tool-hero-desc">AutoEDSSguide scores the EDSS in real time from a full standardized neurological exam, with a print-ready sheet, OCR scanner and inconsistency flags. Choose how you want to work below: a guided exam, the classic system layout, a paper-sheet scanner, a fast clinical mode, or a plain-language self-check for people with MS.</div>
     </div>
     <div class="info-cards" role="note">
-      <div class="info-card"><div class="info-card-head"><span class="info-ico">👥</span><span class="info-title">Who can use each mode</span></div><p><b>Roadmap</b> and <b>System view</b> are for clinicians performing a full standardized EDSS exam. <b>Sheet Scanner</b> processes a completed paper form automatically. <b>Clinical EDSS</b> is the streamlined EDSS (sEDSS), a 7–10 min version for routine follow-up. <b>Quick Check</b> is for <b>people with MS</b>: four published self-report questions that estimate an EDSS range without a clinical exam. <b>Train mode</b> lets raters practise the FS-to-EDSS step on reference cases.</p></div>
+      <div class="info-card"><div class="info-card-head"><span class="info-ico">👥</span><span class="info-title">Who can use each mode</span></div><p><b>Roadmap</b> and <b>System view</b> are for clinicians performing a full standardized EDSS exam. <b>Sheet Scanner</b> processes a completed paper form automatically. <b>Clinical EDSS</b> is the streamlined EDSS (sEDSS, Baldassari 2018), a shorter version for routine follow-up. <b>Quick Check</b> is for <b>people with MS</b>: four published self-report questions that estimate an EDSS range without a clinical exam. <b>Train mode</b> lets raters practise the FS-to-EDSS step on reference cases.</p></div>
       <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><p>Choose a mode below. Scores update <b>automatically</b> in real time as you enter exam findings; there is no Calculate button. The Roadmap guides you step by step; System view follows the classic FS layout used on research EDSS forms. You can switch modes any time without losing your data, and "How was this scored?" shows the rule behind the number.</p></div>
     </div>
     <p class="ways-group-label" style="font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);margin:20px 0 12px;border-bottom:2px solid var(--rule);padding-bottom:6px;display:block;">Full EDSS - detailed assessment</p>
@@ -3851,7 +3855,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <button type="button" class="way-card clinical-waycard" id="clinical-way-btn" aria-label="Start Clinical EDSS">
         <span class="badge" style="background:#7b3fa0;color:white;">For neurologists</span>
         <h3>Clinical EDSS</h3>
-        <div class="way-sub">7–10 min · sEDSS · Routine follow-up</div>
+        <div class="way-sub">sEDSS · Routine follow-up</div>
         <p>The streamlined EDSS (sEDSS, Baldassari 2018) for clinic visits: fewer maneuvers, each functional system scored as its highest subscore, walking by patient report. Ambulation comes first; if the patient uses a wheelchair, scoring ends in under a minute.</p>
         <span class="way-cta">Start Clinical →</span>
       </button>
@@ -3874,12 +3878,12 @@ details.card-optional .card-optional-body { margin-top: 12px; }
 
     <div class="tool-disclaimer no-print">
       <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Not a diagnosis</span></div>
-      <p>MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is stored.</p>
+      <p>MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean. <b>It supports clinical judgement but does not itself diagnose.</b> Interpretation, diagnosis and treatment remain the decision of a qualified clinician. All computation is local; nothing is uploaded, and nothing is saved unless you press &ldquo;Save to browser&rdquo;.</p>
       <div class="tool-disclaimer-footer no-print">
         <a href="index.html#about-mspectrum">About</a><span class="dot">·</span>
         <a href="index.html#cite">Cite</a><span class="dot">·</span>
         <a href="mailto:nour.anas@wayne.edu">Contact</a><span class="dot">·</span>
-        <span>&copy; 2026 MSpectrum</span>
+        <span>&copy; 2026 Anas Z. Nourelden</span>
       </div>
     </div>
     </div>
@@ -3893,7 +3897,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <div class="feature-card">
         <div class="feature-icon">🧩</div>
         <h3>Comprehensive MS measures</h3>
-        <p>The EDSS plus the scores that go with it - cognition (SDMT, BVMT-R, CVLT-II), fatigue (MFIS, FSS), mood (PHQ-9, GAD-7), walking (MSWS-12), quality of life (PDDS, MSQOL-54, PROMIS-29, MSIS-29) and disease severity (ARMSS, MSSS) - all in one place.</p>
+        <p>The EDSS plus the scores that go with it - cognition (SDMT, BVMT-R, CVLT-II), fatigue (MFIS, FSS), mood (PHQ-9, GAD-7), symptoms and sleep (SymptoMScreen, SCI), walking (MSWS-12, T25FW, 6MWT), quality of life (MSQOL-54, RAND-36, PROMIS-29, MSIS-29), disability and severity (PDDS, ARMSS, MSSS) and disease activity (ARR, PIRA / RAW, NEDA) - all in one place.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">⚡</div>
@@ -3903,12 +3907,12 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <div class="feature-card">
         <div class="feature-icon">🗣️</div>
         <h3>Results in plain language</h3>
-        <p>Every score is explained in everyday words and shows where the person sits versus others - so a patient understands their own result, not just a number.</p>
+        <p>Every score is explained in everyday words and, where published norms exist, shows where the person sits versus others - so a patient understands their own result, not just a number.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">👥</div>
         <h3>For clinicians and patients</h3>
-        <p>Self-report questionnaires can be completed by the patient, with full question text and written options. The full EDSS exam and performance tests are driven by the clinician.</p>
+        <p>Self-report questionnaires can be completed by the patient: freely available ones show the full question text, and copyrighted ones take the answers from the official form. The full EDSS exam and performance tests are driven by the clinician.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📤</div>
@@ -3932,8 +3936,8 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       </div>
       <div class="feature-card">
         <div class="feature-icon">📊</div>
-        <h3>Validated, normed &amp; flagged</h3>
-        <p>Every score implements a published rule, standardised into z-scores, T-scores and percentiles where norms exist (Strober, Fellows, Marrie, Parmenter, ARMSS/MSSS) with each source cited. EDSS mismatches and cross-system conflicts are flagged, and missing items handled transparently.</p>
+        <h3>Published rules, norms &amp; checks</h3>
+        <p>Every score implements a published rule, standardised into z-scores, T-scores and percentiles where norms exist (Strober, Fellows, Parmenter, ARMSS/MSSS) with each source cited. EDSS mismatches and cross-system conflicts are flagged, and missing items handled transparently.</p>
       </div>
     </div>
   </div>
@@ -3941,22 +3945,23 @@ details.card-optional .card-optional-body { margin-top: 12px; }
   <div class="section-block about-block" id="about-mspectrum">
     <h2>About MSpectrum</h2>
     <div class="section-rule"></div>
-    <p>MSpectrum is a free, browser-based, privacy-first hub for the outcome measures used in multiple sclerosis - the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a diagnostic checker for the 2024 McDonald criteria. Everything is computed in your browser; nothing is uploaded or stored. Built for research (reproducible, granular scoring for trials and registries) and useful for routine clinical and educational use.</p>
+    <p>MSpectrum is a free, browser-based, privacy-first hub for the outcome measures used in multiple sclerosis - the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a diagnostic checker for the 2024 McDonald criteria. Everything is computed in your browser; nothing is uploaded. Built for research (reproducible, granular scoring for trials and registries) and useful for routine clinical and educational use.</p>
     <details class="about-toggle"><summary>🧠 AutoEDSSguide: EDSS assessment</summary>
       <p>Full EDSS exam, scored with the published Neurostatus conventions, with real-time scoring across the 7 Functional Systems + ambulation, a print-ready EDSS sheet, an OCR sheet scanner, inconsistency flags, and REDCap/CSV export. Includes a fast <strong>Clinical</strong> mode (streamlined sEDSS, for neurologists) and a plain-language <strong>Quick Check</strong> for people with MS. One shared engine, built on the published Kurtzke, Neurostatus and Fouad rules, drives every view.</p>
     </details>
     <details class="about-toggle"><summary>📊 MS Score Hub: cognition, fatigue, mood, symptoms, walking &amp; quality of life</summary>
-      <p>40 stateless calculators / questionnaires. Cognition: SDMT, BVMT-R, CVLT-II, PASAT-3, the BICAMS battery, PROMIS Cognitive 4a and the PDQ. Fatigue: MFIS, FSS, FSMC. Mood: PHQ-9, GAD-7, MHI-18. Symptoms: SymptoMScreen and the MSQLI pain, bladder, bowel, vision and sexual satisfaction scales. Walking and motor: MSWS-12, T25FW, 9-HPT, 6MWT, 2MWT, TUG, ABC, FES-I, low-contrast letter acuity and the Modified Ashworth Scale. Quality of life: MSQOL-54, PROMIS-29, MSIS-29, PROMIS pain intensity and MOS social support. Disability and activity: PDDS, MS severity (ARMSS by age, MSSS by duration), annualized relapse rate, confirmed disability progression, NEDA and the MSFC composite. Each comes with clinical interpretation, severity bands, and optional normalization (z-score &amp; percentile). Self-report questionnaires can be filled by the patient; performance tests and composites are entered by a clinician. Nothing is stored.</p>
+      <p>43 stateless calculators / questionnaires. Cognition: SDMT, BVMT-R, CVLT-II, PASAT-3, the BICAMS battery, PROMIS Cognitive 4a and the PDQ. Fatigue: MFIS, FSS, FSMC. Mood: PHQ-9, GAD-7, MHI-18. Symptoms and sleep: SymptoMScreen, PROMIS pain intensity, the MSQLI pain, bladder, bowel and sexual satisfaction scales, and the Sleep Condition Indicator. Vision: low-contrast letter acuity and the MSQLI vision scale (IVIS). Walking, balance and motor: MSWS-12, T25FW, 9-HPT, 6MWT, 2MWT, TUG, ABC, FES-I and the Modified Ashworth Scale. Quality of life: MSQOL-54, RAND-36, PROMIS-29, MSIS-29 and MOS social support. Disability and activity: PDDS with P-MSSS, MS severity (ARMSS by age, MSSS by duration), annualized relapse rate, confirmed disability progression, PIRA / RAW across visits, NEDA and the MSFC composite. Each comes with an interpretation, plus published cut-offs, bands or norms (z-score &amp; percentile) where they exist. Self-report questionnaires can be filled by the patient; performance tests and composites are entered by a clinician. Nothing is stored.</p>
     </details>
     <details class="about-toggle"><summary>⚖️ Disclaimer &amp; terms of use</summary>
       <p><b>Not a diagnosis or medical advice.</b> MSpectrum computes outcome-measure scores and applies published diagnostic criteria, and explains what they mean. It supports clinical judgement but does not itself establish a diagnosis, does not recommend, start, stop or change any treatment, and is not a substitute for examination, testing, or the judgment of a qualified clinician. Using it creates no doctor-patient relationship.</p>
+      <p><b>Independence and trademarks.</b> MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is not affiliated with or endorsed by Neurostatus-UHB AG, and uses only its published scoring conventions. All outcome-measure and instrument copyrights and trademarks belong to their owners.</p>
       <p><b>What it is for.</b> It is intended for research, education, and to support - not replace - decisions made by patients and their care teams. Diagnosis, interpretation and treatment remain the responsibility of a qualified clinician who knows the individual.</p>
       <p><b>Scores and estimates are approximations.</b> Self-report tools (including the Quick Check EDSS range, PDDS and the patient questionnaires) reflect what a person reports and are not the same as a clinician-examined EDSS or a formal assessment. Norm-based results (z-scores, T-scores, percentiles) are population-level comparisons; they describe how a score relates to a reference group and do not, on their own, establish impairment in an individual.</p>
       <p><b>Accuracy &amp; verification.</b> Scoring rules are implemented faithfully from the cited primary sources, but no guarantee is made that every result is error-free or current. Verify any score locally against the original instrument before clinical or trial use. The cognitive tests (SDMT, BVMT-R, CVLT-II) must be administered and interpreted by a trained professional.</p>
       <p><b>Licensed &amp; proprietary instruments.</b> Some instruments are licensed or proprietary (e.g. the MSWS-12 and MSIS-29 wording, and the SDMT / BVMT-R / CVLT-II stimuli and norm tables). Their full content is not reproduced here - short functional labels are shown for orientation only. Use the official forms for clinical or research use and ensure you hold any required licence.</p>
       <p><b>Mental-health screens.</b> PHQ-9 and GAD-7 are screening tools, not diagnoses. If thoughts of self-harm are reported, or if you or someone else may be in danger, seek help immediately - in the US you can call or text 988 (Suicide &amp; Crisis Lifeline), or contact local emergency services.</p>
-      <p><b>Privacy &amp; your responsibility.</b> All computation is local to your browser; nothing is uploaded, stored or transmitted, and there is no account or tracking. Prefer a non-identifying code over patient names or identifiers (PHI). Anything you do enter stays on this device only; it is never uploaded, and handling it lawfully remains your responsibility. You are responsible for using the tool in line with the privacy, data-protection and professional rules that apply to you (e.g. HIPAA, GDPR, local regulations).</p>
-      <p><b>No warranty.</b> MSpectrum is provided &ldquo;as is&rdquo;, without warranty of any kind, express or implied. To the maximum extent permitted by law, the authors and Wayne State University accept no liability for any loss or harm arising from its use. Use is at your own discretion and risk.</p>
+      <p><b>Privacy &amp; your responsibility.</b> All computation is local to your browser; nothing is uploaded or transmitted, and there is no account or tracking. Nothing is saved unless you press &ldquo;Save to browser&rdquo; in AutoEDSSguide, which keeps the form only in this browser until you clear it. Prefer a non-identifying code over patient names or identifiers (PHI). Anything you do enter stays on this device only; it is never uploaded, and handling it lawfully remains your responsibility. You are responsible for using the tool in line with the privacy, data-protection and professional rules that apply to you (e.g. HIPAA, GDPR, local regulations).</p>
+      <p><b>No warranty.</b> MSpectrum is provided &ldquo;as is&rdquo;, without warranty of any kind, express or implied. To the maximum extent permitted by law, the authors accept no liability for any loss or harm arising from its use. Use is at your own discretion and risk.</p>
     </details>
     <details class="about-toggle" id="about-sources"><summary>📚 References &amp; scoring sources</summary>
     <p style="color:var(--ink-soft);font-size:13.5px;margin:8px 0 8px">Every score implements a published, peer-reviewed scoring rule. Primary sources, grouped by branch:</p>
@@ -3969,8 +3974,8 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <div class="ref-item"><span class="ref-name">Quick Check (SRDSS + PDDS)</span><span class="ref-cite">Kaufmann M, Salmen A, Barin L et al. Development and validation of the self-reported disability status scale (SRDSS) to estimate EDSS-categories. <em>Mult Scler Relat Disord</em> 2020;42:102148 (CC BY-NC-ND 4.0; used unchanged). &middot; PDDS: Hohol MJ et al. <em>Neurology</em> 1995;45:251&ndash;5; Learmonth YC et al. <em>BMC Neurol</em> 2013;13:37. The PDDS is provided for use by the NARCOMS Registry (www.narcoms.org/pdds). NARCOMS is supported in part by the Consortium of Multiple Sclerosis Centers (CMSC) and the CMSC Foundation.</span></div>
       <div class="ref-cat">MS Score Hub</div>
       <div class="ref-item"><span class="ref-name">SDMT</span><span class="ref-cite">Smith A. Symbol Digit Modalities Test. Western Psychological Services, 1982. US norms: Strober LB et al. <em>Mult Scler Relat Disord</em> 2020;43:102154 (oral, stratified norms); Fellows RP, Schmitter-Edgecombe M. <em>Arch Clin Neuropsychol</em> 2020;35(1):105&ndash;115 (written, regression norms). Reliable change: Strober LB et al. <em>Mult Scler Relat Disord</em> 2022;57:103405.</span></div>
-      <div class="ref-item"><span class="ref-name">BVMT-R</span><span class="ref-cite">Benedict RHB. Brief Visuospatial Memory Test&ndash;Revised. PAR, 1997. Healthy-control regression norms: Marrie RA et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
-      <div class="ref-item"><span class="ref-name">CVLT-II</span><span class="ref-cite">Delis DC, Kramer JH, Kaplan E, Ober BA. California Verbal Learning Test&ndash;II. Pearson, 2000. Healthy-control regression norms: Marrie RA et al. <em>Front Neurol</em> 2021;11:621010. LDFR T: Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
+      <div class="ref-item"><span class="ref-name">BVMT-R</span><span class="ref-cite">Benedict RHB. Brief Visuospatial Memory Test&ndash;Revised. PAR, 1997. Norms (Total Recall and Delayed Recall T): Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
+      <div class="ref-item"><span class="ref-name">CVLT-II</span><span class="ref-cite">Delis DC, Kramer JH, Kaplan E, Ober BA. California Verbal Learning Test&ndash;II. Pearson, 2000. Norms (Total Recall and LDFR T): Parmenter BA et al. <em>J Int Neuropsychol Soc</em> 2010;16(1):6&ndash;16.</span></div>
       <div class="ref-item"><span class="ref-name">PDDS</span><span class="ref-cite">Hohol MJ, Orav EJ, Weiner HL. <em>Neurology</em> 1995; validated by Learmonth YC et al. <em>BMC Neurol</em> 2013.</span></div>
       <div class="ref-item"><span class="ref-name">MSWS-12</span><span class="ref-cite">Hobart JC, Riazi A, Lamping DL, Fitzpatrick R, Thompson AJ. <em>Neurology</em> 2003;60(1):31&ndash;6.</span></div>
       <div class="ref-item"><span class="ref-name">MSIS-29</span><span class="ref-cite">Hobart J, Lamping D, Fitzpatrick R, Riazi A, Thompson A. <em>Brain</em> 2001;124(Pt 5):962&ndash;73.</span></div>
@@ -3987,19 +3992,23 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       <div class="ref-item"><span class="ref-name">BICAMS</span><span class="ref-cite">Langdon DW, Amato MP, Boringa J et al. <em>Mult Scler J</em> 2012;18(6):891&ndash;8.</span></div>
       <div class="ref-item"><span class="ref-name">MSQLI scales</span><span class="ref-cite">Ritvo PG, Fischer JS, Miller DM, Andrews H, Paty DW, LaRocca NG. <em>Multiple Sclerosis Quality of Life Inventory: A User&rsquo;s Manual</em>. National Multiple Sclerosis Society; 1997 (PES, BLCS, BWCS, IVIS, SSS, PDQ, MHI-18, MOS-SSS).</span></div>
       <div class="ref-item"><span class="ref-name">TUG / 2MWT</span><span class="ref-cite">Podsiadlo D, Richardson S. <em>J Am Geriatr Soc</em> 1991;39(2):142&ndash;8; Kalron A et al. <em>Eur J Phys Rehabil Med</em> 2017;53(6):841&ndash;7; Scalzitti DA et al. <em>Int J MS Care</em> 2018;20(4):158&ndash;63.</span></div>
+      <div class="ref-item"><span class="ref-name">RAND-36</span><span class="ref-cite">Hays RD, Sherbourne CD, Mazel RM. The RAND 36-Item Health Survey 1.0. <em>Health Econ</em> 1993;2(3):217&ndash;27. Developed at RAND as part of the Medical Outcomes Study.</span></div>
+      <div class="ref-item"><span class="ref-name">SCI</span><span class="ref-cite">Espie CA et al. The Sleep Condition Indicator. <em>BMJ Open</em> 2014;4(3):e004183. &copy; Sleepio Limited, CC BY-NC 4.0.</span></div>
+      <div class="ref-item"><span class="ref-name">P-MSSS</span><span class="ref-cite">Kister I, Chamot E, Salter AR, Cutter GR, Bacon TE, Herbert J. Disability in multiple sclerosis: a reference for patients and clinicians. <em>Neurology</em> 2013;80(11):1018&ndash;24.</span></div>
+      <div class="ref-item"><span class="ref-name">Disability worsening</span><span class="ref-cite">M&uuml;ller J et al. Harmonizing definitions for progression independent of relapse activity in multiple sclerosis. <em>JAMA Neurol</em> 2023;80(11):1232&ndash;45 (thresholds for change vs baseline and CDP).</span></div>
       <div class="ref-item"><span class="ref-name">Other Score Hub tools</span><span class="ref-cite">Full references for every Score Hub tool (SymptoMScreen, FSMC, 6MWT, ABC, FES-I, LCVA, Modified Ashworth, ARR, CDP, NEDA, PROMIS Cognitive 4a and pain) are in the Score Hub&rsquo;s own References list.</span></div>
       <div class="ref-cat">MS Criteria Checker - McDonald 2024</div>
       <div class="ref-item"><span class="ref-name">McDonald 2024</span><span class="ref-cite">Montalban X, Lebrun-Fr&eacute;nay C, Oh J et al. Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria. <em>Lancet Neurol</em> 2025;24(10):850&ndash;865. DOI:10.1016/S1474-4422(25)00270-4.</span></div>
-      <div class="ref-item"><span class="ref-name">MRI consensus</span><span class="ref-cite">2024 MAGNIMS&ndash;CMSC&ndash;NAIMS consensus recommendations on the use of MRI for the diagnosis of multiple sclerosis. <em>Lancet Neurol</em> 2025. DOI:10.1016/S1474-4422(25)00304-7.</span></div>
+      <div class="ref-item"><span class="ref-name">MRI consensus</span><span class="ref-cite">Barkhof F, Reich DS, Oh J, Rocca MA et al. 2024 MAGNIMS&ndash;CMSC&ndash;NAIMS consensus recommendations on the use of MRI for the diagnosis of multiple sclerosis. <em>Lancet Neurol</em> 2025;24(10):866&ndash;79. DOI:10.1016/S1474-4422(25)00304-7.</span></div>
       <div class="ref-item"><span class="ref-name">Differential diagnosis</span><span class="ref-cite">Solomon AJ, Arrambide G, Brownlee WJ et al. Differential diagnosis of suspected multiple sclerosis: an updated consensus approach. <em>Lancet Neurol</em> 2023;22:750&ndash;68.</span></div>
-      <div class="ref-item"><span class="ref-name">RIS conversion</span><span class="ref-cite">Lebrun-Fr&eacute;nay C, Kantarci O, Siva A et al. Radiologically isolated syndrome: 10-year risk estimate of a clinical event. <em>Ann Neurol</em> 2020;88(2):407&ndash;17.</span></div>
+      <div class="ref-item"><span class="ref-name">RIS conversion</span><span class="ref-cite">Okuda DT, Siva A, Kantarci O et al. Radiologically isolated syndrome: 5-year risk for an initial clinical event. <em>PLoS One</em> 2014;9(3):e90509. Lebrun-Fr&eacute;nay C, Kantarci O, Siva A et al. Radiologically isolated syndrome: 10-year risk estimate of a clinical event. <em>Ann Neurol</em> 2020;88(2):407&ndash;17.</span></div>
       <div class="ref-item"><span class="ref-name">&kappa;-FLC index</span><span class="ref-cite">Hegen H et al. <em>Mult Scler</em> 2023;29:169&ndash;81 (cut-off 6.1). Reiber H et al. <em>Clin Chim Acta</em> 2019;497:153&ndash;62 (hyperbolic reference range).</span></div>
     </div>
     <p style="font-size:12px;color:var(--ink-faint);margin-top:8px">Proprietary instruments (BVMT-R, CVLT-II, SDMT) are scored from entered numeric results only; their stimuli and norm tables are not reproduced here.</p>
     </details>
     <details class="about-toggle" id="cite"><summary>📌 Cite us</summary>
       <p>If you are a researcher and used MSpectrum for research purposes, please cite it:</p>
-      <p id="cite-text" style="background:#f3f7f0;border:1px solid #d7e4cf;border-radius:8px;padding:10px 12px;font-size:13px">Nourelden A. <em>MSpectrum: a free, browser-based toolkit for multiple sclerosis outcome measures and diagnosis (AutoEDSSguide, MS Score Hub and MS Criteria Checker)</em>. Wayne State University, Department of Neurology; 2026. Available from: https://github.com/AnasZakarya/MSpectrum.</p>
+      <p id="cite-text" style="background:#f3f7f0;border:1px solid #d7e4cf;border-radius:8px;padding:10px 12px;font-size:13px">Nourelden A. <em>MSpectrum: a free, browser-based toolkit for multiple sclerosis outcome measures and diagnosis (AutoEDSSguide, MS Score Hub and MS Criteria Checker)</em>. 2026. Available from: https://github.com/AnasZakarya/MSpectrum.</p>
       <button type="button" class="btn-cta secondary cite-copy" onclick="(function(b){var t=document.getElementById('cite-text').textContent; var done=function(){ b.textContent='Copied'; setTimeout(function(){ b.textContent='Copy citation'; },1500); }; if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done).catch(done); } else { done(); } })(this)">Copy citation</button>
     </details>
   </div>
@@ -4024,24 +4033,9 @@ details.card-optional .card-optional-body { margin-top: 12px; }
           <a href="mailto:nour.anas@wayne.edu" style="color:rgba(255,255,255,0.7);text-decoration:none">nour.anas@wayne.edu</a>
         </div>
       </div>
-      <div style="margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:10px;padding-left:20px;border-left:1px solid rgba(255,255,255,0.2)">
-        <div style="display:flex;flex-direction:column;gap:2px;line-height:1.25;text-align:right">
-          <span style="font-size:11.5px;font-weight:700;color:rgba(255,255,255,0.9);white-space:nowrap">Wayne State University</span>
-          <span style="font-size:10.5px;color:rgba(255,255,255,0.55);white-space:nowrap">School of Medicine</span>
-        </div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="38" height="35" viewBox="0 0 247 224.36" aria-hidden="true" style="flex-shrink:0;opacity:0.92">
-          <g>
-            <path d="m245.15 23.498s-60.798-22.629-121.74-22.629c-60.937 0-121.88 22.629-121.88 22.629s-16.99 116.25 121.88 199.73c138.65-83.49 121.74-199.73 121.74-199.73z" fill="#F9C932"/>
-            <path d="m123.41 0.86892c61.021 0 121.82 22.629 121.82 22.629s16.83 116.25-121.82 199.73z" fill="#e6b800"/>
-            <path d="m123.41 200.48v-182.21c-47.259 0-104.16 17.952-104.16 17.952s-3.4119 99.437 104.16 164.26zm104.16-164.26s-56.959-17.952-104.16-17.952v182.21c107.42-64.822 104.16-164.26 104.16-164.26z" fill="#1a5632"/>
-            <path d="m123.41 18.269c47.28 0 104.28 17.952 104.28 17.952s3.1443 99.437-104.28 164.26z" fill="#0f3d24"/>
-            <path d="m144.93 73.574-7.7375 17.358 7.7375 17.094c26.735-18.991 31.575-38.58 31.575-38.58l-15.298-17.379h42.951c0 29.595-19.238 64.311-65.353 101.44l-15.399-39.594-15.583 39.598c-46.071-37.127-65.353-71.844-65.353-101.44h43.072l-15.235 17.379s4.7599 19.585 31.492 38.58l7.741-17.094-7.741-17.358h43.135z" fill="#fff"/>
-          </g>
-        </svg>
-      </div>
     </div>
-    <div style="text-align:center;font-size:11.5px;color:rgba(255,255,255,0.55);margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.12);line-height:1.5">MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean; <b style="color:rgba(255,255,255,0.8)">it supports clinical judgement but does not itself diagnose</b>. Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research / educational use; nothing is uploaded or stored.</div>
-     <div style="text-align:center;font-size:11px;color:rgba(255,255,255,0.5);margin-top:8px;line-height:1.6">&copy; 2026 Anas Z. Nourelden &middot; Wayne State University, Dept. of Neurology<br>Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is not affiliated with or endorsed by Neurostatus-UHB AG &middot; all outcome-measure &amp; instrument copyrights belong to their respective owners</div>
+    <div style="text-align:center;font-size:11.5px;color:rgba(255,255,255,0.55);margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.12);line-height:1.6">MSpectrum computes outcome-measure scores and applies published diagnostic criteria, explaining what the results mean; <b style="color:rgba(255,255,255,0.8)">it supports clinical judgement but does not itself diagnose</b>.<br>Interpretation, diagnosis and treatment remain the decision of a qualified clinician. Research and educational use; nothing is uploaded.</div>
+     <div style="text-align:center;font-size:11px;color:rgba(255,255,255,0.5);margin-top:8px;line-height:1.6" class="fab-clear">&copy; 2026 Anas Z. Nourelden<br>MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency. Instrument copyrights and trademarks belong to their owners.</div>
   </footer>
 </section>
 
@@ -4262,7 +4256,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
                   <div class="sc-table-header-row"><span class="sc-col-label">&nbsp;</span><div class="sc-col-boxes-headers"><span>OD</span><span>OS</span></div></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Scotoma</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input" id="v-scotoma-od" data-section="visual" oninput="scSheetCalc()"><input type="text" class="sc-box-input" id="v-scotoma-os" data-section="visual" oninput="scSheetCalc()"></div></div>
                   <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Disc pallor</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input optional" id="v-pallor-od" oninput="scSheetCalc()"><input type="text" class="sc-box-input optional" id="v-pallor-os" oninput="scSheetCalc()"></div></div>
-                  <div class="sc-fs-score-row"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><div class="sc-fs-boxes"><input type="text" class="sc-box-input fs-box" id="fs-visual-raw" oninput="updateConvertedScores()"><span class="sc-arrow-symbol">&rarr;</span><input type="text" class="sc-box-input fs-box converted" id="fs-visual-conv" readonly><span class="sc-sup-label">1</span></div></div>
+                  <div class="sc-fs-score-row"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><div class="sc-fs-boxes"><input type="text" class="sc-box-input fs-box" id="fs-visual-raw" readonly title="Computed from the items on this sheet. Change the items to change this score."><span class="sc-arrow-symbol">&rarr;</span><input type="text" class="sc-box-input fs-box converted" id="fs-visual-conv" readonly><span class="sc-sup-label">1</span></div></div>
                 </div>
               </div>
 
@@ -4282,7 +4276,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Dysarthria</span><input type="text" class="sc-box-input" id="b-dysarthria" oninput="scSheetCalc()"></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Dysphagia</span><input type="text" class="sc-box-input" id="b-dysphagia" oninput="scSheetCalc()"></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Other cranial nerve functions</span><input type="text" class="sc-box-input" id="b-other" oninput="scSheetCalc()"></div>
-                  <div class="sc-fs-score-row"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><input type="text" class="sc-box-input fs-box" id="fs-brainstem" oninput="calculateEDSS()"></div>
+                  <div class="sc-fs-score-row"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><input type="text" class="sc-box-input fs-box" id="fs-brainstem" readonly title="Computed from the items on this sheet. Change the items to change this score."></div>
                 </div>
               </div>
 
@@ -4326,7 +4320,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Legs</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input spasticity-val" id="p-spas-legs-r" oninput="scSheetCalc()"><input type="text" class="sc-box-input spasticity-val" id="p-spas-legs-l" oninput="scSheetCalc()"></div></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Gait</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input spasticity-val" id="p-spas-gait-r" oninput="scSheetCalc()"><input type="text" class="sc-box-input spasticity-val" id="p-spas-gait-l" oninput="scSheetCalc()"></div></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label" title="Motor fatigability / reduced performance on demanding tasks (0 = none)">Overall motor performance</span><input type="text" class="sc-box-input" id="p-overall-motor" oninput="scSheetCalc()"></div>
-                  <div class="sc-fs-score-row" style="margin-top:25px;"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><input type="text" class="sc-box-input fs-box" id="fs-pyramidal" oninput="calculateEDSS()"></div>
+                  <div class="sc-fs-score-row" style="margin-top:25px;"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><input type="text" class="sc-box-input fs-box" id="fs-pyramidal" readonly title="Computed from the items on this sheet. Change the items to change this score."></div>
                 </div>
               </div>
               <div class="sc-page-number" style="position:static;text-align:right;margin-top:10px;font-size:9px;font-weight:700;color:#475569;">Page 1</div>
@@ -4355,7 +4349,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Gait ataxia</span><input type="text" class="sc-box-input" id="c-gait-ataxia" oninput="scSheetCalc()"></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Romberg test</span><input type="text" class="sc-box-input" id="c-romberg" oninput="scSheetCalc()"></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Other, e.g. rebound</span><input type="text" class="sc-box-input" id="c-other-rebound" oninput="scSheetCalc()"></div>
-                  <div class="sc-fs-score-row"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><input type="text" class="sc-box-input fs-box" id="fs-cerebellar" oninput="calculateEDSS()"></div>
+                  <div class="sc-fs-score-row"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><input type="text" class="sc-box-input fs-box" id="fs-cerebellar" readonly title="Computed from the items on this sheet. Change the items to change this score."></div>
                 </div>
               </div>
 
@@ -4378,7 +4372,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
                   <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Paraesthesiae UE</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input optional" id="s-para-ue-r"><input type="text" class="sc-box-input optional" id="s-para-ue-l"></div></div>
                   <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Paraesthesiae trunk</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input optional" id="s-para-trunk-r"><input type="text" class="sc-box-input optional" id="s-para-trunk-l"></div></div>
                   <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Paraesthesiae LE</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input optional" id="s-para-le-r"><input type="text" class="sc-box-input optional" id="s-para-le-l"></div></div>
-                  <div class="sc-fs-score-row"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><input type="text" class="sc-box-input fs-box" id="fs-sensory" oninput="calculateEDSS()"></div>
+                  <div class="sc-fs-score-row"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><input type="text" class="sc-box-input fs-box" id="fs-sensory" readonly title="Computed from the items on this sheet. Change the items to change this score."></div>
                 </div>
               </div>
 
@@ -4395,7 +4389,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
                   <div class="sc-table-header-row"><span class="sc-col-label">&nbsp;</span><div class="sc-col-boxes-headers"><span>&nbsp;</span></div></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Bowel dysfunction</span><input type="text" class="sc-box-input" id="bb-bowel" oninput="scSheetCalc()"></div>
                   <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Sexual dysfunction</span><input type="text" class="sc-box-input optional" id="bb-sexual" oninput="scSheetCalc()"></div>
-                  <div class="sc-fs-score-row" style="margin-top:15px;"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><div class="sc-fs-boxes"><input type="text" class="sc-box-input fs-box" id="fs-bowel-bladder-raw" oninput="updateConvertedScores()"><span class="sc-arrow-symbol">&rarr;</span><input type="text" class="sc-box-input fs-box converted" id="fs-bowel-bladder-conv" readonly><span class="sc-sup-label">1</span></div></div>
+                  <div class="sc-fs-score-row" style="margin-top:15px;"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><div class="sc-fs-boxes"><input type="text" class="sc-box-input fs-box" id="fs-bowel-bladder-raw" readonly title="Computed from the items on this sheet. Change the items to change this score."><span class="sc-arrow-symbol">&rarr;</span><input type="text" class="sc-box-input fs-box converted" id="fs-bowel-bladder-conv" readonly><span class="sc-sup-label">1</span></div></div>
                 </div>
               </div>
 
@@ -4411,7 +4405,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
                   <div class="sc-table-header-row"><span class="sc-col-label">&nbsp;</span><div class="sc-col-boxes-headers"><span>&nbsp;</span></div></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Decrease in mentation</span><input type="text" class="sc-box-input" id="cb-mentation" oninput="scSheetCalc()"></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label font-italic">+ Fatigue</span><input type="text" class="sc-box-input" id="cb-fatigue" oninput="scSheetCalc()"></div>
-                  <div class="sc-fs-score-row"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><input type="text" class="sc-box-input fs-box" id="fs-cerebral" oninput="calculateEDSS()"></div>
+                  <div class="sc-fs-score-row"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><input type="text" class="sc-box-input fs-box" id="fs-cerebral" readonly title="Computed from the items on this sheet. Change the items to change this score."></div>
                 </div>
               </div>
 
@@ -4617,8 +4611,13 @@ AutoEDSSguide provides automated scoring for guidance purposes only and does not
   <main class="app-main">
     <div id="form-root"></div>
   </main>
-  <div class="no-print" style="max-width:1100px;margin:28px auto 0;padding:0 16px"><div class="info-card info-card-warn"><div class="info-card-head"><span class="info-ico">⚠️</span><span class="info-title">Not a diagnosis</span></div><p>AutoEDSSguide automates EDSS scoring from the data you enter using the published Neurostatus conventions. It provides guidance only and does not replace clinical judgment; results must be verified by a qualified neurologist before any clinical or research use.</p><p style="margin-top:8px;font-size:12px">MSpectrum is a free research and education tool for trained clinicians and researchers. It does not replace clinical judgment, a full neurological examination, or certified rater training; a qualified clinician must check every result before use in care or research. MSpectrum has not been reviewed, cleared, or approved by the U.S. Food and Drug Administration. Provided &quot;as is&quot;, without warranty of any kind; the authors accept no liability for any use of this tool or its results. Privacy: all processing happens on your device; MSpectrum does not upload, store, or transmit any data. Use study IDs rather than names where possible. Content and views are the authors&rsquo; own and do not represent the official position of any institution. Instrument copyrights and trademarks belong to their owners. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is independent and is not affiliated with or endorsed by Neurostatus-UHB AG, the National MS Society, Western Psychological Services, PAR, Pearson or any other instrument owner. Users are responsible for any licence or rater certification their study requires (for example Neurostatus-EDSS certification in clinical trials).</p></div></div>
-  <div class="no-print" style="text-align:center;font-size:11px;color:var(--ink-faint);padding:14px 16px 26px;line-height:1.6;margin-top:10px">&copy; 2026 Anas Z. Nourelden &middot; Wayne State University, Dept. of Neurology<br>Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is not affiliated with or endorsed by Neurostatus-UHB AG &middot; all outcome-measure &amp; instrument copyrights belong to their respective owners</div>
+  <div class="no-print" style="max-width:1100px;margin:28px auto 0;padding:0 16px"><div class="info-card info-card-warn"><div class="info-card-head"><span class="info-ico">⚠️</span><span class="info-title">Not a diagnosis</span></div><p>AutoEDSSguide automates EDSS scoring from the data you enter using the published Neurostatus conventions. It provides guidance only and does not replace clinical judgment; results must be verified by a qualified neurologist before any clinical or research use.</p><ul class="disc-list">
+<li><b>Not a medical device.</b> Not reviewed, cleared or approved by the U.S. FDA. Provided &quot;as is&quot;, without warranty; the authors accept no liability for any use of this tool or its results.</li>
+<li><b>Training and licences.</b> Does not replace a full neurological examination or certified rater training. Users are responsible for any licence or rater certification their study requires (for example Neurostatus-EDSS certification in clinical trials).</li>
+<li><b>Privacy.</b> Everything runs on your device; nothing is uploaded or transmitted. The form is kept only if you press &ldquo;Save to browser&rdquo;, and only in this browser. Use study IDs rather than names.</li>
+<li><b>Independence.</b> Content and views are the authors&rsquo; own. MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency, and is not affiliated with Neurostatus-UHB AG, the National MS Society, Western Psychological Services, PAR, Pearson or any other instrument owner. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; instrument copyrights and trademarks belong to their owners.</li>
+</ul></div></div>
+  <div class="no-print fab-clear" style="text-align:center;font-size:11px;color:var(--ink-faint);padding:14px 16px 26px;line-height:1.6;margin-top:10px">&copy; 2026 Anas Z. Nourelden</div>
 </section>
 
 <!-- ========================================================== -->
@@ -4905,7 +4904,6 @@ function _deepScore({ vib_ue_R, vib_ue_L, vib_le_R, vib_le_L, pos_ue_R, pos_ue_L
 
     const pos_max = Math.max(...pos_limbs);
     const n_pos_severe = pos_limbs.filter(x => x >= 3).length;
-    const n_pos_moderate = pos_limbs.filter(x => x >= 2).length;
 
     const vib_max = Math.max(...vib_limbs);
     const n_vib_max = vib_limbs.filter(x => x === vib_max).length;
@@ -5002,8 +5000,8 @@ function calcAmbulationScore({ assistance, distance_m, is_normal } = {}) {
     }
     if (assistance === "bilateral") {
         // Neurostatus manual, ambulation exceptions 1 and 2: more than 120 m with two aids -> AS 7 (6.0); 10 to 120 m -> AS 9 (6.5)
-        // If no distance entered, default to AS 8 (between 7 and 9) - conservative
-        if (d === null) return 8;
+        // If no distance entered, default to AS 7 (EDSS 6.0) - conservative, same as the unilateral default
+        if (d === null) return 7;
         return d > 120 ? 7 : 9;  // Neurostatus: "more than 120 m" with two sticks -> 6.0; 10-120 -> 6.5
     }
     // No assistance
@@ -5057,9 +5055,7 @@ function _fsOnlyStep(fs_list) {
 
     const nN    = fs_list.filter(v => v === N).length;           // times N appears
     const rest  = fs_list.filter(v => v !== N);                   // all others
-    const anyGt0 = rest.some(v => v > 0);                        // any other ≥1
     const anyGt1 = rest.some(v => v > 1);                        // any other ≥2
-    const nOnes  = rest.filter(v => v === 1).length;
 
     // ── N = 1 ─────────────────────────────────────────────────────────────────
     // EDSS 1.0 = 1 FS grade 1; EDSS 1.5 = ≥2 FS grade 1
@@ -5384,7 +5380,7 @@ const CARDS = {
       { type: "number", id: "amb_distance_measured", label: "Distance measured (m) - observed walk", min: 0, max: 5000,
         hint: "Measured during examination. If entered, this takes priority over reported distance for AS calculation." },
       { type: "number", id: "amb_distance_reported", label: "Distance reported (m) - patient estimate", min: 0, max: 5000,
-        hint: "Patient's own estimate; ask in city blocks (~200 m each) if unsure." },
+        hint: "Patient's own estimate; if unsure, ask about a familiar route and convert it to metres." },
       { type: "number", id: "amb_time_reported", label: "Time reported (min)", min: 0, max: 240 },
       { type: "checkbox", id: "amb_is_normal", label: "Patient walks fully normally - no restriction at all (sets Ambulation Score = 0)",
         hint: "Check this ONLY if walking is completely unrestricted compared to peers of similar age. Walking >500 m without aid but with any subjective restriction → leave unchecked (Ambulation Score = 1)." },
@@ -5394,7 +5390,7 @@ const CARDS = {
       <li><span class="cmd">"Do you have any difficulty walking?"</span></li>
       <li><span class="cmd">"Do you need a cane, walker, or help from another person? One or two?"</span></li>
       <li><span class="cmd">"How far can you walk without stopping - unassisted? With your device?"</span></li>
-      <li>If unsure about meters: <span class="cmd">"How many city blocks? (1 block ≈ 200 m)"</span></li>
+      <li>If unsure about meters: <span class="cmd">"How far is a familiar walk, for example from the car park to the clinic?"</span> and convert it to metres.</li>
       </ul>
       <p><strong>Distance (no aid):</strong> Normal=0 · &gt;500 m=1 · 300–500=2 · 200–300=3 · 100–200=4 · &lt;100=5</p>
       <p><strong>Unilateral aid:</strong> &gt;50 m=AS 6 · &lt;50 m=AS 8 &nbsp;|&nbsp; <strong>Bilateral aid:</strong> &gt;120 m=AS 7 · &lt;120 m=AS 9</p>
@@ -5402,7 +5398,7 @@ const CARDS = {
   },
   amb_observed: {
     title: "Ambulation - observed",
-    question: "Observe walking for at least 500 m unassisted, or 130 m with assistance, if possible.",
+    question: "If possible, observe walking far enough to decide the step: 500 m without aid, or more than 120 m with bilateral aid (more than 50 m with one aid).",
     fields: [],
   },
   amb_score: {
@@ -6279,9 +6275,6 @@ document.addEventListener("change", ev => {
   if (t && t.type === "radio" && t.closest && t.closest(".score-chips")) _chipDetailUpdate(t.name);
 });
 window.addEventListener("beforeprint", () => { document.querySelectorAll("details.card-optional").forEach(d => { d.open = true; }); });
-function refreshChipDetails() {
-  document.querySelectorAll(".score-chips[data-chips]").forEach(g => _chipDetailUpdate(g.getAttribute("data-chips")));
-}
 
 function renderBilateral(bl) {
   const headers = `<tr><th>Item</th><th>Right</th><th>Left</th></tr>`;
@@ -6944,7 +6937,7 @@ const FS_SCORE_REF = {
     [0,"Normal"],
     [1,"Disc pallor or small scotoma or VA 20/20–20/30 (worse eye)"],
     [2,"VA 20/30–20/59 worse eye"],
-    [3,"Large scotoma, or moderate decrease in fields, with worse-eye VA 20/60–20/99"],
+    [3,"Large scotoma, or moderate decrease in fields, or worse-eye VA 20/60–20/99"],
     [4,"Marked field loss or VA 20/100–20/200; or grade 3 + better eye ≤20/60"],
     [5,"Worse eye VA <20/200; or grade 4 + better eye ≤20/60"],
     [6,"Grade 5 + better eye VA ≤20/60"],
@@ -7215,8 +7208,7 @@ function runConsistencyCheck(inp, r) {
   // Pallor without VA/VF abnormality at FS ≥ 1
   const pallorOD = !isMissing(inp.v_pallor_od) && inp.v_pallor_od !== "none" && inp.v_pallor_od !== "0";
   const pallorOS = !isMissing(inp.v_pallor_os) && inp.v_pallor_os !== "none" && inp.v_pallor_os !== "0";
-  const vaOD = inp.v_va_od; const vaOS = inp.v_va_os;
-  const vfOD = inp.v_vf_od; const vfOS = inp.v_vf_os;
+  const vaOD = inp.v_va_od;
   if ((pallorOD || pallorOS) && visFS === 0 && !isMissing(vaOD)) {
     issues.push({ sev: "info", tab: "visual",
       msg: "Disc pallor recorded but Visual FS = 0. Disc pallor alone scores FS = 1 under the published scoring conventions (even with normal acuity/fields). Check if pallor was graded correctly." });
@@ -7303,6 +7295,13 @@ function runConsistencyCheck(inp, r) {
       issues.push({ sev: "warning", tab: "ambulation",
         msg: `Walking distance ~${ambD} m (limited) but Ambulation Score = ${AS} (minimal). Verify AS or the recorded distance.` });
     }
+  }
+
+  // ── 9b. Walking aid recorded without the distance walked with it ──
+  if ((inp.amb_assistance === "unilateral" || inp.amb_assistance === "bilateral") && ambD === null) {
+    const _uni = inp.amb_assistance === "unilateral";
+    issues.push({ sev: "warning", tab: "ambulation",
+      msg: `${_uni ? "Unilateral" : "Bilateral"} aid recorded without a walking distance, so AS ${_uni ? 6 : 7} (EDSS 6.0) was used. Enter the distance walked with the aid: ${_uni ? "50 m or less" : "120 m or less"} gives AS ${_uni ? 8 : 9} (EDSS 6.5).` });
   }
 
   // ── 10. Recorded ambulation aid ↔ EDSS floor ────────────────
@@ -8054,7 +8053,7 @@ document.addEventListener("click", function(e) {
   if (e.target && e.target.id === "btn-email-sheet") { emailFinalSheet(); }
 });
 
-["landing-start-btn", "hero-start-btn", "ways-start-btn"].forEach(id => {
+["landing-start-btn", "hero-start-btn"].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener("click", () => {
     { const _ex=document.getElementById("explore"); if(_ex) _ex.scrollIntoView({ behavior: "smooth", block: "center" }); }
@@ -8165,8 +8164,6 @@ document.addEventListener("click", (ev) => {
     a.download = `edss_${ptId}_${date}.json`;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(url);
-  } else if (t.id === "btn-import-json") {
-    document.getElementById("file-import").click();
   } else if (t.id === "btn-export-redcap") {
     exportREDCapCSV();
   } else if (t.id === "btn-export-dict") {
@@ -8184,24 +8181,6 @@ document.addEventListener("click", (ev) => {
 
 document.getElementById("explain-overlay").addEventListener("click", (ev) => {
   if (ev.target.id === "explain-overlay") toggleExplain(false);
-});
-
-document.addEventListener("change", (ev) => {
-  if (ev.target.id === "file-import") {
-    const file = ev.target.files[0];
-    if (!file) return;
-    const fr = new FileReader();
-    fr.onload = () => {
-      try {
-        FORM_STATE = JSON.parse(fr.result);
-        applyState();
-        recalc();
-        showToast("Imported");
-      } catch (e) { showToast("Invalid JSON file"); }
-    };
-    fr.readAsText(file);
-    ev.target.value = "";
-  }
 });
 
 // ============================================================
@@ -8436,7 +8415,7 @@ const QC_QUESTIONS = [
     title: "Are you currently using a walking aid (rollator)?",
     help: "SRDSS question 2 of 3. A cane or a rollator counts as a walking aid.",
     options: [
-      { icon: "🦯", title: "Yes", desc: "", value: 1 },
+      { icon: "🦯", title: "Yes", desc: "For example a cane or a rollator", value: 1 },
       { icon: "🚶", title: "No", desc: "", value: 0 },
     ]
   },
@@ -8481,7 +8460,6 @@ function qcSRDSS(walk, aid, wc) {
   return (aid === 1 || wc === 1) ? { cat: "4.0–6.5", lo: 4, hi: 6.5 } : { cat: "≤3.5", lo: 0, hi: 3.5 };
 }
 
-function qcCheckEarlyExit() { return null; }
 function qcGetVisibleQuestions() { return QC_QUESTIONS; }
 
 function qcRender() {
@@ -9108,7 +9086,9 @@ const CLIN_AMB_TEXT = {
 
 function _clinSubsDone(step) {
   const has = k => CLIN_STATE[k] !== undefined && CLIN_STATE[k] !== null;
-  return step.subs.filter(s => !s.optional).every(s => has(s.id));
+  // Baldassari 2018 Appendix 1: fine finger movements are "required if UE strength 5/5" (strength subscore 0).
+  const req = s => !s.optional || (s.id === "pyr_fing" && CLIN_STATE.pyr_str === 0);
+  return step.subs.filter(req).every(s => has(s.id));
 }
 function _clinSubsMax(step) {
   const vals = step.subs.map(s => CLIN_STATE[s.id]).filter(v => v !== undefined && v !== null);
@@ -9333,7 +9313,7 @@ function clinShowResult(stage) {
         <div class="clinical-fs-grid">${fsGrid}</div>
         <p style="font-size:11px;color:var(--ink-faint);text-align:center;margin:0 0 6px;">N/C = not calculated (walking alone sets the step). Functional system scores are sEDSS scores (highest subscore; no conversion).</p>
         <p style="font-size:12px;color:var(--ink-soft);text-align:center;margin:0 0 12px;">${escHtml(_clinRule)}</p>
-        <p style="font-size:11px;color:var(--ink-faint);text-align:center;margin:0 0 16px;">Streamlined EDSS (sEDSS): Baldassari LE et al. <em>Mult Scler</em> 2018;24(10):1347&ndash;55. It correlates closely with the full EDSS (Spearman rho 0.97 to 0.99) but is not identical to it. Use the Roadmap or System view for a full standardized EDSS exam.</p>
+        <p style="font-size:11px;color:var(--ink-faint);text-align:center;margin:0 0 16px;">Streamlined EDSS (sEDSS): Baldassari LE et al. <em>Mult Scler</em> 2018;24(10):1347&ndash;55. It correlated closely with the full EDSS (Spearman rho 0.99 in the 102-patient pilot cohort and 0.93 in 968 CombiRx patients) but is not identical to it. Use the Roadmap or System view for a full standardized EDSS exam.</p>
         <div class="clinical-result-actions">
           <button class="clinical-btn primary" onclick="clinRestart()">New Assessment</button>
           <button class="clinical-btn" id="clin-export-btn">Save as image</button>
@@ -9676,7 +9656,7 @@ function buildFlatRecord() {
     worsening_type: (_ch ? _ch.type : ""),
     relapse_last_90d: (g("pt_relapse90") === true || g("pt_relapse90") === "true") ? 1 : 0,
     // Metadata
-    tool_version: "MSpectrum-v29",
+    tool_version: "MSpectrum-v36",
     export_timestamp: new Date().toISOString(),
     engine_version: ENGINE_VERSION,
   };
@@ -9727,15 +9707,16 @@ function v31Severity(inp, edss) {
   return out;
 }
 
-// Change vs a baseline EDSS. Worsening thresholds: +1.5 from 0.0, +1.0 from 1.0-5.5, +0.5 from 6.0 or more.
-// One visit can only flag a POSSIBLE worsening: confirmed disability progression (CDP) needs a later
-// confirming visit (commonly 3 or 6 months). With a relapse in the last 90 days it may be
-// relapse-associated worsening (RAW); otherwise, if confirmed, it fits PIRA (Kappos L et al. JAMA Neurol 2020).
+// Change vs a baseline EDSS. Worsening thresholds follow the harmonized PIRA definition (Muller J et al.
+// JAMA Neurol 2023;80(11):1232-45): +1.5 from 0.0, +1.0 from 1.0-5.0, +0.5 from 5.5 or more.
+// One visit can only flag a POSSIBLE worsening: it needs a confirming visit no earlier than 3 months
+// (preferably 6 or 12). With a relapse onset in the last 90 days it may be relapse-associated worsening
+// (RAW); otherwise, if confirmed, it fits PIRA (Kappos L et al. JAMA Neurol 2020; Muller 2023).
 function v31Change(inp, edss) {
   const base = _numOrNull(inp.pt_baseline_edss);
   if (base == null || edss == null) return null;
   const delta = Math.round((edss - base) * 10) / 10;
-  const thr = base === 0 ? 1.5 : (base <= 5.5 ? 1.0 : 0.5);
+  const thr = base === 0 ? 1.5 : (base <= 5.0 ? 1.0 : 0.5);
   const relapse = inp.pt_relapse90 === true || inp.pt_relapse90 === "true" || inp.pt_relapse90 === 1;
   let flag = "no_change", type = "";
   if (delta >= thr - 1e-9) { flag = "worsening"; type = relapse ? "possible RAW (relapse in last 90 days)" : "possible PIRA if confirmed (no relapse in last 90 days)"; }
@@ -9762,7 +9743,7 @@ function v31RenderExtras(inp, r) {
   let chHtml = "";
   if (ch) {
     const sign = ch.delta > 0 ? "+" : "";
-    const msg = ch.flag === "worsening" ? `worsening threshold met (+${ch.thr.toFixed(1)}): <b>${ch.type}</b>. Needs a confirming visit (commonly 3 or 6 months) before it counts as confirmed disability progression.`
+    const msg = ch.flag === "worsening" ? `worsening threshold met (+${ch.thr.toFixed(1)}): <b>${ch.type}</b>. Needs a confirming visit at least 3 months later (preferably 6 or 12; Müller 2023) before it counts as confirmed disability progression.`
       : ch.flag === "improvement" ? `improvement of at least ${ch.thr.toFixed(1)}.` : `below the worsening threshold (+${ch.thr.toFixed(1)}).`;
     chHtml = `<div><b>Change vs baseline</b> ${ch.base.toFixed(1)} &rarr; ${edss.toFixed(1)} (${sign}${ch.delta.toFixed(1)}): ${msg}</div>`;
   }
@@ -9997,11 +9978,9 @@ function exportREDCapDictionary() {
 // ============================================================
 // SCANNER VIEW
 // ============================================================
-let SC_PAGES = [null, null];
 let SC_PDF_CANVASES = [null, null];      // final FLAT canvases used for zone reading
 let SC_RAW_PAGES = [null, null];         // raw uploaded/camera images (pre-warp) per page
 let SC_CORNERS = [null, null];           // chosen sheet corners per page (src-image coords)
-let SC_CAM_PAGE = 0;
 let SC_CAM_STREAM = null;
 let SC_ALIGN_QUEUE = [];                 // pages awaiting corner alignment
 let SC_ALIGN_CUR = -1;                   // page currently shown in the align overlay
@@ -10061,13 +10040,6 @@ function scInitUI() {
     }, true);
   }
 
-  // Build synopsis grid
-  const syn = document.getElementById("sc-synopsis-grid");
-  if (syn) syn.innerHTML = ['1. Visual','2. Brainstem','3. Pyramidal','4. Cerebellar','5. Sensory','6. B/B','7. Cerebral'].map((label,i)=>`
-    <div class="sc-syn-item">
-      <div class="sc-syn-label">${label}</div>
-      <div class="sc-syn-box"><input type="text" id="sc-syn_fs${i+1}" maxlength="2" placeholder="-"></div>
-    </div>`).join('');
 }
 
 async function scHandleFile(file) {
@@ -10363,7 +10335,7 @@ function scShowDebug(){
   box.appendChild(head);
   if(!dbg || !dbg.pages || !dbg.pages.length){
     const p=document.createElement("p"); p.style.cssText="font-size:12px;color:#aa3333;margin:0 0 8px";
-    p.innerHTML="No OCR run captured yet. Click <b>“Align &amp; read sheet (on-device v2)”</b> first, then reopen OCR debug.";
+    p.innerHTML="No OCR run captured yet. Click <b>“Align &amp; read sheet”</b> first, then reopen OCR debug.";
     box.appendChild(p); if(box.scrollIntoView) box.scrollIntoView({behavior:"smooth"}); return;
   }
   const info=document.createElement("p"); info.style.cssText="font-size:12px;color:#555555;margin:0 0 8px";
@@ -10506,10 +10478,6 @@ function scCalculate() {
   window.scrollTo({ top: document.getElementById("sc-results").offsetTop - 60, behavior:"smooth" });
 }
 
-function scUpdateEdssLive() {
-  // lightweight live update of EDSS display during review
-  // just updates the display label, doesn't render full results
-}
 
 function scRunFlags(fs, edss, ambScore) {
   const flags = [];
@@ -10528,7 +10496,7 @@ function scRunFlags(fs, edss, ambScore) {
   const dep  = parseInt(document.getElementById("cb-depression")?.value)||0;
   const euph = parseInt(document.getElementById("cb-euphoria")?.value)||0;
   const fat  = parseInt(document.getElementById("cb-fatigue")?.value)||0;
-  if (ment === 0 && (dep>=1||euph>=1||fat>=1) && mFS===0) flags.push({ type:"info", title:"Mood/fatigue present, FS=0", body:"Depression, euphoria, or fatigue items filled but Cerebral FS calculates 0. ≥2 of these items must be present for FS≥1.", targetId:"cb-depression" });
+  if (ment === 0 && (dep>=1||euph>=1||fat>=1) && mFS===0) flags.push({ type:"info", title:"Mood/fatigue present, FS=0", body:"Depression, euphoria or fatigue is marked but Cerebral FS is 0. Check whether fatigue is excluded for this study; a single mild fatigue grade, or depression/euphoria alone, normally gives Cerebral FS 1 (mood alone does not change the EDSS step).", targetId:"cb-depression" });
   // v29: >=500 m with the Assistance box empty is ambiguous (AS 0 unrestricted vs AS 1 restricted). The engine assumes AS 1; ask the reviewer.
   { const _at=(document.getElementById("amb-assistance-text")?.value||"").trim();
     const _d=Math.max(parseFloat(document.getElementById("amb-meters-reported")?.value)||0, parseFloat(document.getElementById("amb-meters-actual")?.value)||0);
@@ -10976,61 +10944,7 @@ function detectBoxes(cvs){
   return boxes;
 }
 // pure-JS 2D similarity (Umeyama) from matched pairs -> 3x3
-function fitSimilarity(src,dst){
-  const n=src.length; if(n<2) return null;
-  let msx=0,msy=0,mdx=0,mdy=0;
-  for(let i=0;i<n;i++){msx+=src[i][0];msy+=src[i][1];mdx+=dst[i][0];mdy+=dst[i][1];}
-  msx/=n;msy/=n;mdx/=n;mdy/=n;
-  let sxx=0,a=0,b=0;
-  for(let i=0;i<n;i++){const x=src[i][0]-msx,y=src[i][1]-msy,u=dst[i][0]-mdx,v=dst[i][1]-mdy;
-    sxx+=x*x+y*y; a+=x*u+y*v; b+=x*v-y*u;}
-  if(sxx<1e-9) return null;
-  const c=a/sxx, s=b/sxx;                          // rotation*scale
-  const tx=mdx-(c*msx-s*msy), ty=mdy-(s*msx+c*msy);
-  return [[c,-s,tx],[s,c,ty],[0,0,1]];
-}
-function applyH(H,x,y){ const w=H[2][0]*x+H[2][1]*y+H[2][2];
-  return [(H[0][0]*x+H[0][1]*y+H[0][2])/w,(H[1][0]*x+H[1][1]*y+H[1][2])/w]; }
-function findHomographyCV(src,dst){
-  const n=src.length; if(n<4) return null;
-  const s=cv.matFromArray(n,1,cv.CV_32FC2,[].concat(...src));
-  const d=cv.matFromArray(n,1,cv.CV_32FC2,[].concat(...dst));
-  const m=cv.findHomography(s,d,cv.RANSAC,6.0);
-  let H=null;
-  if(m&&m.rows===3){ H=[[m.data64F[0],m.data64F[1],m.data64F[2]],[m.data64F[3],m.data64F[4],m.data64F[5]],[m.data64F[6],m.data64F[7],m.data64F[8]]]; }
-  s.delete();d.delete(); if(m) m.delete();
-  return H;
-}
 // ICP-style snap: template zone-centres -> detected box centres, annealing tolerance
-function bboxOf(pts){ let a=[1e9,1e9,-1e9,-1e9]; for(const p of pts){ const x=(p[0]!==undefined?p[0]:p.cx), y=(p[1]!==undefined?p[1]:p.cy);
-  if(x<a[0])a[0]=x; if(y<a[1])a[1]=y; if(x>a[2])a[2]=x; if(y>a[3])a[3]=y; } return a; }
-function snapZones(tmpl, det, cvs){
-  const sx=cvs.width/(PDF_W*SCALE);
-  let H=[[1,0,0],[0,1,0],[0,0,1]];
-  // Bootstrap: align template box-cloud to detected box-cloud (scale+translate) so ICP converges
-  // even when the photo was not pre-warped (rotated / on a busy background / off-centre).
-  if(det.length>=8){
-    const tb=bboxOf(tmpl), db=bboxOf(det);
-    const s=(( (db[2]-db[0])/Math.max(1,tb[2]-tb[0]) )+( (db[3]-db[1])/Math.max(1,tb[3]-tb[1]) ))/2;
-    if(s>0.2 && s<5) H=[[s,0, db[0]-s*tb[0]],[0,s, db[1]-s*tb[1]],[0,0,1]];
-  }
-  const tol0=60*sx; let pairsN=0, matchMap=new Array(tmpl.length).fill(-1);
-  for(let it=0; it<12; it++){
-    const tol=Math.max(14*sx, tol0*Math.pow(0.8,it));
-    const s=[],d=[],idx=[];
-    for(let i=0;i<tmpl.length;i++){
-      const p=applyH(H,tmpl[i][0],tmpl[i][1]);
-      let bj=-1,bd=1e9;
-      for(let j=0;j<det.length;j++){const dd=Math.hypot(det[j].cx-p[0],det[j].cy-p[1]); if(dd<bd){bd=dd;bj=j;}}
-      if(bj>=0&&bd<=tol){s.push(tmpl[i]); d.push([det[bj].cx,det[bj].cy]); idx.push([i,bj]);}
-    }
-    if(s.length<8) break;
-    let nH = it<3 ? fitSimilarity(s,d) : (findHomographyCV(s,d)||fitSimilarity(s,d));
-    if(!nH) break;
-    H=nH; pairsN=s.length; matchMap=new Array(tmpl.length).fill(-1); idx.forEach(([i,j])=>matchMap[i]=j);
-  }
-  return {H,pairsN,matchMap};
-}
 // Section key: zones in the same block share a local alignment (handles per-region version shifts)
 function secKey(id){
   const ps=['v_','b_','p_refl','p_plantar','p_cut','p_palm','p_str','p_spast','p_gait','c_','s_','bb_','m_','amb_'];

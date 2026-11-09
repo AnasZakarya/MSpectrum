@@ -543,6 +543,10 @@ class TestAmbulationFSCombinations(unittest.TestCase):
     def test_AS7_bilateral(self):
         self.assertEqual(calc_edss_step(FSScores(), 7), 6.0)
 
+    def test_bilateral_no_distance_conservative(self):
+        from edss_calc import calc_ambulation_score
+        self.assertEqual(calc_ambulation_score("bilateral", None), 7)
+
     def test_AS8_unilateral_short(self):
         self.assertEqual(calc_edss_step(FSScores(), 8), 6.5)
 
