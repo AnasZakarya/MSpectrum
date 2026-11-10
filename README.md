@@ -9,6 +9,8 @@
 
 MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency.
 
+If you use a result from MSpectrum in research or publication, please cite the original source shown for each tool and cite MSpectrum as listed in CITATION.cff.
+
 ---
 
 ## Try it now
