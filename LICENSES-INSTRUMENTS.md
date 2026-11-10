@@ -1,6 +1,6 @@
 # Instruments: owners, status and how MSpectrum uses them
 
-The AGPL-3.0 licence covers MSpectrum's own code and interface only. Each instrument below stays the property of its authors or publisher. This table is MSpectrum's own reading of the published terms (version 36, November 2026). It is not legal advice. If you reuse MSpectrum, you are responsible for each instrument's own terms, licences and rater certification.
+The AGPL-3.0 licence covers MSpectrum's own code and interface only. Each instrument below stays the property of its authors or publisher. This table is MSpectrum's own reading of the published terms (version 36.3, November 2026). It is not legal advice. If you reuse MSpectrum, you are responsible for each instrument's own terms, licences and rater certification.
 
 How to read the "Use in MSpectrum" column:
 
@@ -12,7 +12,7 @@ How to read the "Use in MSpectrum" column:
 
 | Instrument | Owner / source | Status | Use in MSpectrum | Notice shown |
 |---|---|---|---|---|
-| EDSS (Kurtzke) | Kurtzke JF. Neurology 1983;33:1444-52 | Published method | Method only; FS definitions are summaries written by the MSpectrum authors | Citation |
+| EDSS (Kurtzke) | Kurtzke JF. Neurology 1983;33:1444-52 | Public domain per Kurtzke 2015 (VA work) and Kappos et al. 2015 | Method only; FS definitions are summaries written by the MSpectrum authors | Citation |
 | Standardized EDSS scoring rules | Kurtzke 1983 and 1989 (US Government work, public domain per Kurtzke 2015); Kappos et al. 2015; Sen 2018; Piri Çınar 2018; Fouad 2023 (CC BY-NC 4.0); edss (MIT) | Neurostatus booklet, form, name and certification belong to Neurostatus-UHB AG; its authors state they claim no rights on the EDSS or its FS, only on their training and documentation tools (Kappos et al. 2015) | Scoring rules only, implemented from published papers; MSpectrum's own wording, labels and record layout; no Neurostatus form or text copied | Trademark and non-affiliation notice; trials need their own Neurostatus licence and certification |
 | Algorithmic EDSS rules | Fouad AM et al. Mult Scler J Exp Transl Clin 2023;9(1):20552173231155055 | CC BY-NC 4.0 | Method only | Citation |
 | Visual and Bowel/Bladder conversion, worked cases | Şen S. Arch Neuropsychiatry 2018;55(Suppl 1):S80-S83; Piri Çınar B, Güven Yorgun Y. Arch Neuropsychiatry 2018;55(Suppl 1):S69-S75 | Open-access articles | Method only | Citation |
@@ -43,15 +43,15 @@ How to read the "Use in MSpectrum" column:
 | TUG | Podsiadlo D, Richardson S. J Am Geriatr Soc 1991;39(2):142-8 | Published method | Method only; MS reference values from Kalron 2017 and Nilsagård 2007 | Citation |
 | 2MWT, 6MWT | Published methods; Scalzitti DA et al. Int J MS Care 2018;20(4):158-63 | Published method | Method only | Citation |
 | FSS, MSWS-12, MSIS-29, MSQOL-54, ABC, FSMC | Their authors or publishers | Copyrighted | Numbers only (short topic labels) | Citation |
-
-Note on MSQOL-54: its 54 items are the 36 RAND-36 items plus 18 MS-specific items (Vickrey 1995, UCLA). The RAND-36 part is free to use, but the combined questionnaire is distributed by its authors, so MSpectrum keeps MSQOL-54 as number entry and shows the RAND-36 as its own tool.
-
 | PROMIS-29 v2.1, PROMIS Cognitive Function 4a, PROMIS pain intensity | HealthMeasures / PROMIS Health Organization | Item text and T-score tables copyrighted | Numbers only; raw sums only, no T-scores | PROMIS trademark line |
-| LCVA (Sloan) | Published method | Charts are commercial products | Numbers only | Citation |
-| Modified Ashworth, ARR, CDP, NEDA-3/4 | Published methods | Published method | Method only | Citation |
+| LCVA (Sloan) | Balcer LJ et al. Mult Scler 2017;23(5):734-47 | Charts are commercial products | Numbers only | Citation |
+| Modified Ashworth Scale | Bohannon RW, Smith MB. Phys Ther 1987;67(2):206-7 | Published method | Grade definitions summarized, with citation | Citation |
+| ARR, NEDA-3/4 | Published methods | Published method | Method only | Citation |
 | CDP, change vs baseline, PIRA / RAW across visits | Müller J et al. JAMA Neurol 2023;80(11):1232-45; Kappos L et al. JAMA Neurol 2020 | Published method | Method only (thresholds, windows, roving reference) | Citation |
 | ARMSS | Manouchehrinia A et al. Mult Scler 2017;23(14):1938-46, Supplementary Files 1 and 2 | CC BY-NC 4.0 | Published lookup data | Citation and licence |
-| MSSS | Roxburgh RH et al. Neurology 2005 | Published method | Published lookup data | Citation |
+| MSSS | Roxburgh RH et al. Neurology 2005 (original); updated global matrix from Manouchehrinia A et al. Mult Scler 2017 | Published method; updated matrix CC BY-NC 4.0 | Published lookup data | Citation and licence |
+
+Note on MSQOL-54: its 54 items are the 36 RAND-36 items plus 18 MS-specific items (Vickrey 1995, UCLA). The RAND-36 part is free to use, but the combined questionnaire is distributed by its authors, so MSpectrum keeps MSQOL-54 as number entry and shows the RAND-36 as its own tool.
 
 ## MS Criteria Checker (mcdonald.html)
 
@@ -62,6 +62,6 @@ Note on MSQOL-54: its 54 items are the 36 RAND-36 items plus 18 MS-specific item
 
 ## Not included, and why
 
-- PROMIS T-score and SE tables: HealthMeasures claims copyright; removed in v33 until written permission.
-- Written SDMT norms from Centofanti 1975 (via Sheridan 2006): may match the WPS manual tables; replaced by Fellows 2020 in v33.
-- Patient-reported EDSS questionnaires other than the SRDSS: the full items or scoring are not openly published under terms that allow reuse; permission requests to the authors are planned.
+- PROMIS T-score and SE tables: HealthMeasures claims copyright on them, so MSpectrum reports raw sums only. They would be added only with written permission.
+- Written SDMT norms: MSpectrum uses the published regression norms of Fellows 2020, not tables taken from or based on the test manual.
+- Patient-reported EDSS questionnaires other than the SRDSS: their full items or scoring are not openly published under terms that allow reuse.
