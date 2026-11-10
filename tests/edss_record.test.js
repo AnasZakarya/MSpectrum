@@ -14,8 +14,10 @@ ok(missing.length === 0, 'every sheet value box is in the transcription list; mi
 ok(/const ER_KURTZKE_ORDER = \["P","C","BS","S","BB","V","CB"\]/.test(s), 'page 1 in Kurtzke 1983 order');
 ok(/const ER_PAPER_ORDER = \["V","BS","P","C","S","BB","CB","A"\]/.test(s), 'page 2 in paper-form sequence');
 ok(/container\.innerHTML = buildEdssRecordHTML\(r\)/.test(s), 'Final Sheet uses the MSpectrum record');
-ok(/function scExportSheet\(\)\{[\s\S]{0,1500}buildEdssRecordHTML\(r\)/.test(s), 'scanner export uses the same record');
-ok((s.match(/legacyCloneFinalSheet\(/g)||[]).length===1 && (s.match(/scExportSheetLegacy\(/g)||[]).length===1 && (s.match(/_syncExplainSheetPage\(/g)||[]).length===1, 'legacy paper-form outputs kept in code but never called');
+ok(/function scExportSheet\(\)\{[\s\S]{0,1500}buildEdssRecordHTML\(r(, \{ scanner: true \})?\)/.test(s), 'scanner export uses the same record');
+ok(!/legacyCloneFinalSheet|scExportSheetLegacy|_syncExplainSheetPage|source\.cloneNode\(true\)/.test(s), 'legacy paper-form output removed from the public file (kept locally)');
+ok(/cerebellar_x && fsv\.C/.test(s) && /not due to MS; not scored/.test(s) && /Severity and change/.test(s) && /buildEdssRecordHTML\(r, \{ scanner: true \}\)/.test(s), 'record shows X, P/T note and severity/change line (guided only, not scanner)');
+ok(!/tandem walking not possible|tandem not possible|clinically detectable dysarthria|misses many movements|Not stable with eyes|unable to discriminate sharp/.test(s), 'second wording pass applied');
 ok(!/Centre Nr\/Country|Name of EDSS rater|v04\/10\.2|Kappos 2011/.test(s), 'no form header labels or booklet citation');
 const ns = (s.match(/neurostatus/gi) || []).length;
 ok(ns <= 8, 'Neurostatus only in the trademark notice and paper titles (' + ns + ')');

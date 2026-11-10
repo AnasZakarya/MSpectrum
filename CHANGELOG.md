@@ -1,5 +1,13 @@
 # Changelog
 
+## v36.3 (2026-11-10): EDSS record details and second wording pass
+
+- **EDSS record:** the Cerebellar FS shows the X marker ("1 X") in the FS bars, the findings card, the transcription list and the summary line. Findings marked P / T (not due to MS) show "(not due to MS; not scored)" on page 1 and keep the P / T suffix on page 2. A "Severity and change" line (ARMSS, MSSS, change vs baseline, with sources) is printed when those values exist; it is left out of the Sheet Scanner export, which has no such inputs.
+- **Wording, second pass:** about 25 short phrases close to a proprietary scoring booklet were rewritten in MSpectrum's own words with the same meaning (cerebellar FS grades 2 to 4 now use Kurtzke 1983 wording; mentation, bladder, swallowing, speech, facial palsy, nystagmus, facial sensation, sensory grades, position sense, Romberg and truncal ataxia labels).
+- The legacy paper-form output code was removed from the public file (kept locally by the author, not deployed).
+- **Sources:** Kurtzke 2015 ("On the origin of EDSS" and "Further to the origin of EDSS") added. The About and README note now says plainly that Kurtzke 1983 defines the scale and that the later standardized trial rules (Visual and Bowel/Bladder conversion, disc pallor as grade 1, walking-distance cut-offs) are not part of his scale, per Kurtzke 2015, and that the authors of those rules claim no rights on the EDSS or its FS, only on their training and documentation tools (Kappos et al. 2015). Scanner button renamed "EDSS record". The Sheet Scanner check screen now states that it follows the scanned sheet only for comparison, that only the numbers are used, and that downloads are the MSpectrum record and summary table ("4 steps" heading fixed).
+- edss_calc.py docstring now says "scoring rules v3.4", matching the JS engine. Scores unchanged (2000/2000 parity).
+
 ## v36.2 (2026-11-10): EDSS record, own wording and sources, saving results
 
 ### EDSS record (Final Sheet)

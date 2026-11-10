@@ -4,7 +4,7 @@ MSpectrum AutoEDSSguide - EDSS calculation engine (Python reference)
 
 Pure Python port of the JavaScript engine in index.html (calculateFullEDSS and
 the functions it calls). Kept line-by-line in sync with the JS engine (currently
-"MSpectrum scoring rules v3.3", MSpectrum v36) and locked by tests/parity_check.py, which runs
+"MSpectrum scoring rules v3.4", MSpectrum v36) and locked by tests/parity_check.py, which runs
 the same inputs through both engines and requires identical results.
 
 Scoring sources:
