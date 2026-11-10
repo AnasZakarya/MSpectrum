@@ -60,6 +60,12 @@ Note on MSQOL-54: its 54 items are the 36 RAND-36 items plus 18 MS-specific item
 | 2024 McDonald criteria | Montalban X et al. Lancet Neurol 2025;24(10):850-65 | Published criteria | Method only; wording is MSpectrum's own | Citation |
 | κ-FLC index | Hegen H et al. Mult Scler 2023;29:169-81 (cut-off 6.1); Reiber H et al. Clin Chim Acta 2019;497:153-62 | Published formulas | Method only; the helper informs and does not tick the criterion | Citation |
 
+
+## Norms and reference values
+
+All norms and reference values come from peer-reviewed articles or from the free NMSS MSFC Scoring Manual (Fischer 2001); none are taken from commercial test manuals. Regression norms (Fellows 2020; Parmenter 2010) are applied as published formulas, and published lookup tables (Strober 2020; ARMSS; MSSS; P-MSSS) are used only to calculate the result.
+
+
 ## Not included, and why
 
 - PROMIS T-score and SE tables: HealthMeasures claims copyright on them, so MSpectrum reports raw sums only. They would be added only with written permission.
