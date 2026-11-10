@@ -2,7 +2,7 @@
 
 **MSpectrum** is a free, browser-based, privacy-first hub for the outcome measures used in multiple sclerosis. Everything is computed in your browser; nothing is uploaded, and nothing is saved unless you press "Save to browser" in AutoEDSSguide. It has four parts:
 
-- **AutoEDSSguide** (`index.html`): the full EDSS exam, scored with the published Neurostatus conventions (Kappos 2011) and the algorithmic combination rules of Fouad et al. 2023, plus the streamlined EDSS (sEDSS, Baldassari 2018) and a patient self-report EDSS range (SRDSS, Kaufmann 2020, with PDDS) fast modes, a print-ready EDSS sheet in the standard FS layout used on research and clinical-trial forms, and an OCR sheet scanner.
+- **AutoEDSSguide** (`index.html`): the full EDSS exam, scored with Kurtzke's EDSS and the standardized scoring rules published in the literature (see Algorithm & scoring sources), plus the streamlined EDSS (sEDSS, Baldassari 2018) and a patient self-report EDSS range (SRDSS, Kaufmann 2020, with PDDS) fast modes, a print-ready EDSS record, and an OCR sheet scanner.
 - **MS Score Hub** (`scores.html`): stateless calculators and full questionnaires for the cognition, fatigue, mood, walking, quality-of-life and disease-severity measures used alongside the EDSS, each with automatic published norms (z / T / percentile) and a plain-language interpretation.
 - **Check my MS** (`scores.html#report`): a guided, patient-facing pathway that walks through 13 self-report questionnaires (EDSS and age, PDDS, FES-I, MFIS, PDQ, SymptoMScreen, BLCS, BWCS, SCI, PHQ-9, GAD-7, pain, RAND-36) and produces one plain-language summary of how MS is affecting the person, for understanding and discussion rather than diagnosis.
 - **MS Criteria Checker** (`mcdonald.html`): an adaptive wizard that applies the 2024 revisions of the McDonald criteria (Montalban et al., Lancet Neurol 2025) to reach an MS diagnosis across relapsing, progressive and RIS onset, covering the five DIS regions (incl. optic nerve), DIT, CSF (OCB / k-FLC) and susceptibility markers (CVS, PRL), with older-onset and mimic safeguards and a printable summary.
@@ -24,13 +24,15 @@ No installation. No login. Works in any modern browser.
 | Mode | For whom | What it is |
 |------|----------|------------|
 | **Roadmap** | Raters / research | Full standardized EDSS exam, guided step-by-step in exam order (history, then cranial nerves, then body). |
-| **System view** | Raters | All 7 Functional Systems on one page, in the classic FS layout used on research EDSS forms. |
+| **System view** | Raters | All 7 Functional Systems on one page, in the usual paper-form order. |
 | **Clinical EDSS** | Neurologists | Fast adaptive follow-up scoring (streamlined sEDSS, Baldassari 2018). |
 | **Quick Check** | People with MS | Four published self-report questions: SRDSS (Kaufmann 2020) gives an EDSS range; PDDS adds the disease step. |
 | **Sheet Scanner** | Raters | Upload or photograph a completed EDSS scoring sheet (standard research layout); fields are OCR-extracted and scored. |
 | **Train mode** | Raters in training | 20 reference cases (four are the published worked examples in Sen 2018): read the FS grades and Ambulation Score, pick the EDSS, and compare with the engine step and the rule behind it. A practice aid, not a certification. |
 
 All modes compute through a **single shared engine**, so the header, roadmap, printed sheet, and scanner always produce identical EDSS values.
+
+The Final Sheet (and the Sheet Scanner export) prints an **MSpectrum EDSS record**: page 1 is a summary (EDSS step and how it was reached, walking, the 7 Functional Systems in Kurtzke order, abnormal findings only, signature); page 2 is a transcription list with every recorded value in the sequence of common paper EDSS forms, so a rater can copy the numbers onto a paper record. MSpectrum does not reproduce any paper form layout.
 
 ---
 
@@ -97,14 +99,18 @@ If you used MSpectrum in research, please cite it:
 
 ## Algorithm & scoring sources
 
-- Kappos L. *Neurostatus scoring definitions* (v04/10.2), 2011.
+- Kurtzke JF. *Rating neurologic impairment in multiple sclerosis: an expanded disability status scale (EDSS).* Neurology 1983;33:1444-52. Kurtzke JF. *The Disability Status Scale for multiple sclerosis: apologia pro DSS sua.* Neurology 1989;39:291-302.
+- Kappos L, D'Souza M, Lechner-Scott J, Lienert C. *On the origin of Neurostatus.* Mult Scler Relat Disord 2015;4(3):182-5. DOI: [10.1016/j.msard.2015.04.001](https://doi.org/10.1016/j.msard.2015.04.001).
 - Fouad AM, Abdel Naseer M, Farghaly M, Hegazy MI. *New algorithmic approach for easier and faster extended disability status scale calculation.* Mult Scler J Exp Transl Clin 2023;9(1):20552173231155055. DOI: [10.1177/20552173231155055](https://doi.org/10.1177/20552173231155055).
 - Sen S. *Neurostatus and EDSS calculation with cases.* Arch Neuropsychiatry 2018;55(Suppl 1):S80-S83. DOI: [10.29399/npa.23412](https://doi.org/10.29399/npa.23412).
+- Piri Çınar B, Güven Yorgun Y. *What we learned from the history of multiple sclerosis measurement: Expanded Disability Status Scale.* Arch Neuropsychiatry 2018;55(Suppl 1):S69-S75. DOI: [10.29399/npa.23343](https://doi.org/10.29399/npa.23343).
+- Open-source implementation: [edss](https://github.com/adobrasinovic/edss) (Dobrašinović A, 2020; MIT licence).
+- These EDSS sources describe the same rules and complement each other; where they differ (for example five FS grade 2 = EDSS 3.5), MSpectrum follows Kurtzke 1983.
 - Kaufmann M et al. *Development and validation of the self-reported disability status scale (SRDSS) to estimate EDSS-categories.* Mult Scler Relat Disord 2020;42:102148 (Quick Check; CC BY-NC-ND 4.0, used unchanged).
 - Baldassari LE et al. *Streamlined EDSS for use in multiple sclerosis clinical practice.* Mult Scler 2018;24(10):1347-55 (Clinical mode, sEDSS).
 - MS Score Hub instruments are cited in full inside the app (References & scoring sources).
 - Montalban X, Lebrun-Frénay C, Oh J et al. *Diagnosis of multiple sclerosis: 2024 revisions of the McDonald criteria.* Lancet Neurol (2025);24(10):850–865 (MS Criteria Checker), with companion consensus papers (2024 MAGNIMS–CMSC–NAIMS MRI recommendations; visual system; kFLC / OCB) and Solomon AJ et al. Lancet Neurol 2023;22:750–68 (differential diagnosis).
-- Functional-System scoring follows the published **Neurostatus v04/10.2 scoring conventions** (implemented from the rules, with MSpectrum's own wording), including the Cerebellar (severe-ataxia) and Bowel/Bladder (loss-of-function to FS 5/6) rules, and an optional toggle to exclude fatigue from the Cerebral FS per study protocol.
+- Functional-System scoring follows the standardized rules in the sources above (implemented from the rules, with MSpectrum's own wording), including the Cerebellar (severe-ataxia) and Bowel/Bladder (loss-of-function to FS 5/6) rules, and an optional toggle to exclude fatigue from the Cerebral FS per study protocol.
 
 ---
 
@@ -127,7 +133,7 @@ PROMIS T-scores are not computed: HealthMeasures holds copyright in the scoring 
 
 ## Disclaimer
 
-For clinical, research and educational use. Not a diagnosis and not a substitute for a clinician. The final EDSS step remains the responsibility of the examining clinician; validate locally before any trial or registry use. EDSS scoring follows the Kurtzke EDSS (Kurtzke 1983), the published Neurostatus scoring conventions (Kappos 2011) and the algorithmic rules of Fouad et al. 2023 (CC BY-NC 4.0). MSpectrum is independent: it is not affiliated with, endorsed by, or licensed by Neurostatus-UHB AG or the University Hospital Basel, and Neurostatus-UHB AG was not involved in its development or validation. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG, named here only to identify the published conventions. The definitions shown in the tool are summaries written by the MSpectrum authors, not the official Neurostatus definitions; obtain official materials and rater certification from Neurostatus-UHB AG when a study requires them. Train mode is a practice aid, not Neurostatus training or certification.
+For clinical, research and educational use. Not a diagnosis and not a substitute for a clinician. The final EDSS step remains the responsibility of the examining clinician; validate locally before any trial or registry use. EDSS scoring follows the Kurtzke EDSS (Kurtzke 1983) and the standardized scoring rules described in the published sources listed above. MSpectrum is independent: it is not affiliated with, endorsed by, or licensed by Neurostatus-UHB AG or the University Hospital Basel, and Neurostatus-UHB AG was not involved in its development or validation. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG, named here only to identify the rating system that some of the cited papers describe. The definitions shown in the tool are summaries written by the MSpectrum authors, not the official Neurostatus definitions; obtain official materials and rater certification from Neurostatus-UHB AG when a study requires them. Train mode is a practice aid, not Neurostatus training or certification.
 
 MSpectrum has not been reviewed, cleared, or approved by the U.S. Food and Drug Administration. It is provided "as is", without warranty of any kind; the authors accept no liability for any use of the tool or its results. All processing happens on the user's device; MSpectrum does not upload, store, or transmit data. Content and views are the authors' own and do not represent the official position of any institution.
 

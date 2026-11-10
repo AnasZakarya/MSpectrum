@@ -1,6 +1,22 @@
 # Changelog
 
-## Unreleased (after v36): one disclaimer box and a short footer
+## v36.2 (2026-11-10): EDSS record, own wording and sources, saving results
+
+### EDSS record (Final Sheet)
+- The Final Sheet no longer copies the paper-form layout. It is now an **MSpectrum EDSS record**: page 1 summary (EDSS step and how it was reached, walking first, the 7 Functional Systems in Kurtzke 1983 order with bars, abnormal findings only, signature); page 2 transcription list (every value box of the sheet, numbered, in the sequence of common paper forms, with MSpectrum's own labels and no form boxes or header). Print, PDF and email use it; the Sheet Scanner export uses the same record. The separate export-only interpretation page is folded into page 1.
+- Sheet header fields "Centre Nr/Country" and "Name of EDSS rater" renamed "Site" and "Rater".
+
+### Wording and sources
+- About 20 definition labels that matched a proprietary scoring booklet were rewritten in MSpectrum's own words with the same meaning (mentation, hearing, facial weakness, position sense, spasticity, gait spasticity, limb ataxia, nystagmus, ataxic gait, drift / heel-toe walking options, single-leg raise, other cerebellar signs).
+- EDSS sources are now one combined list that complement each other: Kurtzke 1983 and 1989; Kappos et al. 2015; Sen 2018; Piri Çınar 2018; Fouad et al. 2023; the open-source edss library (MIT). Where they differ, MSpectrum follows Kurtzke 1983. The citation of an unpublished definitions booklet (v04/10.2) was removed.
+- The rating-system name now appears only in the trademark / non-affiliation sentence in About, in README / LICENSES, and in the titles of cited papers. Code comments cite the published sources instead. Engine label: "MSpectrum scoring rules v3.4 (Kurtzke EDSS; published standardized rules)"; scores are unchanged (2000/2000 parity).
+- New tests: tests/edss_record.test.js.
+
+### Saving results
+- "Save patient summary" (image or PDF) added to the four Score Hub tools that lacked it: MS severity (ARMSS/MSSS), ARR, CDP and NEDA, with a CSV button like the other tools. The PIRA button now has the same label.
+- The "summary saved" / "report saved" message no longer appears when the summary preview opens (nothing is saved at that point). A message now appears only after a file is actually produced: "Image saved: <file>.png" or "Downloaded <file>.csv". "Save PDF / print" opens the browser's print dialog, so no message is shown there.
+
+## v36.1 (2026-11-09): one disclaimer box and a short footer
 
 - **"Use and limitations" box** (was "Not a diagnosis") only on the main pages: the AutoEDSSguide mode picker, the Score Hub home, the Check my MS start page and the Criteria Checker. Same layout everywhere: one sentence written for that page, one point for that page (Training; Questionnaires and norms; If you feel unsafe, with the 988 line), then the same 3 shared points in the same order (Not a medical device, Privacy, Independence), and a last line with copyright, About, Full disclaimer, Cite and Contact.
 - Removed: the box on the home page, the box inside each AutoEDSSguide mode and Score Hub tool, the Sheet Scanner yellow bar, the Neurostatus line in the footer, and the repeated "the diagnosis stays with the treating neurologist" in the Criteria Checker header. Neurostatus is named once in the AutoEDSSguide box; the full trademark notice stays in About, which now also names the instrument owners.

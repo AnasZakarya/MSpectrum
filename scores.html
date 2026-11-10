@@ -892,6 +892,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
 <b>These are cross-sectional severity benchmarks, not prognostic tools</b> - they show where the patient stands relative to the MS population, not where they are headed.<br>
 <b>Both ARMSS (Manouchehrinia 2017) and MSSS (Roxburgh 2005) are validated, published research measures</b> for comparing disability with peers; use them for research and context, not as a stand-alone individual clinical decision.
 </div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('edss','MS severity')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('edss','MS severity')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_smscreen">
@@ -1269,6 +1270,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
       <b>ARR = number of relapses &divide; years observed.</b> Example: 2 relapses over 18 months = 2 &divide; 1.5 = 1.33/year.<br>
       ARR is a group measure and a descriptive rate, not an individual target or a treatment decision. MSpectrum reports the rate without grading it.
     </div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('arr','ARR')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('arr','ARR')">Researcher: CSV</button></div>
   </section>
 
   <!-- PANEL: CDP -->
@@ -1286,6 +1288,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
       <b>Progression threshold (increase from baseline EDSS):</b> baseline 0 &rarr; &ge; 1.5; baseline 1.0&ndash;5.0 &rarr; &ge; 1.0; baseline 5.5 or more &rarr; &ge; 0.5 (harmonized definition, M&uuml;ller 2023).<br>
       <b>Confirmed</b> means the higher EDSS is sustained at a repeat assessment no earlier than 3 months later (preferably 6 or 12 months); a single-visit increase is only <em>possible</em> progression. Older trials used 1.0&ndash;5.5 / 6.0 or more, so cut-offs vary slightly between studies. Reference definition, not a diagnosis.
     </div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('cdp','CDP')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('cdp','CDP')">Researcher: CSV</button></div>
   </section>
 
 
@@ -1309,7 +1312,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
       <b>Rules (M&uuml;ller 2023):</b> roving reference, reset when a lower (better) score is confirmed at the next visit, or to the sustained level after a confirmed worsening (including a relapse with residual disability); EDSS increase &ge; 1.5 from 0, &ge; 1.0 from 1.0&ndash;5.0, &ge; 0.5 from 5.5 or more; T25FW or 9-HPT more than 20% slower; SDMT &ge; 4 points or more than 10% lower; confirmation at the first visit at least 3 months (12 weeks) later; for PIRA, no relapse onset from 30 days before to 90 days after the increase or the confirmation. A confirmed worsening whose increase falls in a relapse window is RAW. Each measure is followed against its own reference.<br>
       <b>Reference:</b> M&uuml;ller J, Cagol A, Lorscheider J et al. Harmonizing definitions for progression independent of relapse activity in multiple sclerosis: a systematic review. <em>JAMA Neurol</em> 2023;80(11):1232&ndash;45. RAW: Kappos L et al. <em>JAMA Neurol</em> 2020;77(9):1132&ndash;40.
     </div></details>
-    <div class="actions no-print"><button class="btn" onclick="patientSummary('pira','PIRA / RAW')">📄 Save summary</button><button class="btn" onclick="piraExportCSV()">📊 Researcher: CSV</button></div>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('pira','PIRA / RAW')">📄 Save patient summary</button><button class="btn" onclick="piraExportCSV()">📊 Researcher: CSV</button></div>
   </section>
   <!-- PANEL: NEDA -->
   <section class="panel" id="p_neda">
@@ -1328,6 +1331,7 @@ Higher score = greater MS impact on that domain. Items are rated 1 (not at all) 
       <b>NEDA-4</b> adds a fourth criterion: annualized brain volume loss &le; 0.4%.<br>
       Any single item present = evidence of disease activity, and NEDA is not met. A snapshot status, not a diagnosis.
     </div></details>
+    <div class="actions no-print"><button class="btn" onclick="patientSummary('neda','NEDA')">📄 Save patient summary</button><button class="btn" onclick="exportCSV('neda','NEDA')">Researcher: CSV</button></div>
   </section>
 
   <section class="panel" id="p_batch">
@@ -2321,7 +2325,8 @@ function _collectInputs(toolId){ const ids=EXPORT_SRC[toolId]||[toolId]; const o
 function _resultText(toolId){ const r=el(toolId+"_out"); return r? r.textContent.replace(/\s+/g," ").trim() : ""; }
 function _download(fn,txt,mime){ const b=new Blob([txt],{type:mime}); const u=URL.createObjectURL(b);
   const a=document.createElement("a"); a.href=u; a.download=fn; document.body.appendChild(a); a.click();
-  a.remove(); setTimeout(()=>URL.revokeObjectURL(u),1500); }
+  a.remove(); setTimeout(()=>URL.revokeObjectURL(u),1500);
+  try{ if(window.mspectrumToast) window.mspectrumToast("Downloaded "+fn); }catch(e){} }
 function _csvSan(v){ return String(v).replace(/\u2265/g,">=").replace(/\u2264/g,"<=").replace(/\u2212/g,"-").replace(/\u00b1/g,"+/-").replace(/\u2248/g,"~").replace(/\u2192/g,"->").replace(/\u00b7/g,"-").replace(/\u2013/g,"-").replace(/\u2014/g,"-").replace(/\u2032/g,"'").replace(/[\u2018\u2019]/g,"'").replace(/[\u201c\u201d]/g,'"').replace(/\u00d7/g,"x").replace(/\u2026/g,"..."); }
 function _csvHeader(id){ var mm=id.match(/^([a-z]+)_(\d+)$/); if(mm){ var _CSV_TEXTMAP={mq:MSQOL_Q,pr:PROMIS_Q,mf:MFIS_TEXT,fss:FSS_TEXT,phq:PHQ_TEXT,gad:GAD_TEXT,msws:MSWS_TEXT,msis:MSIS_TEXT}; var t=_CSV_TEXTMAP[mm[1]]; if(t&&t[+mm[2]]){ var ss=String(t[+mm[2]]).replace(/<[^>]+>/g,"").replace(/&[a-z]+;/g," ").trim(); if(ss.length>50)ss=ss.slice(0,50)+"..."; return "Q"+mm[2]+" "+ss; } } return id; }
 function exportCSV(toolId,name){ const res=_resultText(toolId); const inp=_collectInputs(toolId);
@@ -2480,7 +2485,11 @@ const TOOL_INFO={
   mosss:"MOS Modified Social Support Survey (MSQLI) · Perceived social support",
   rand36:"RAND 36-Item Health Survey 1.0 · Eight health-related quality-of-life scales",
   sci:"Sleep Condition Indicator · Insomnia screen",
-  pira:"PIRA / RAW across visits · Harmonized definition (Müller 2023)"
+  pira:"PIRA / RAW across visits · Harmonized definition (Müller 2023)",
+  edss:"ARMSS by age and MSSS by disease duration · Disability compared with peers",
+  arr:"Annualized relapse rate · Relapses per year",
+  cdp:"Confirmed disability progression · Harmonized EDSS thresholds (Müller 2023)",
+  neda:"No evidence of disease activity · NEDA-3 / NEDA-4"
 };
 function patientSummary(toolId,name){ const r=el(toolId+"_out");
   if(!r||!r.textContent.trim()){alert("Enter values first.");return;}
@@ -2507,6 +2516,7 @@ function pcSaveImage(){
   holder.appendChild(tmp); document.body.appendChild(holder);
   html2canvas(holder,{scale:2,useCORS:true,backgroundColor:"#ffffff",logging:false}).then(function(canvas){
     holder.remove(); var a=document.createElement("a"); a.download=fn+".png"; a.href=canvas.toDataURL("image/png"); a.click();
+    try{ if(window.mspectrumToast) window.mspectrumToast("Image saved: "+fn+".png"); }catch(e){}
   }).catch(function(){ holder.remove(); alert("Could not render image. Use 'Save PDF / print' instead."); });
 }
 function _printCard(){
@@ -3906,9 +3916,6 @@ function clearMAS(){ MAS_MUSCLES.forEach(function(m){ ["R","L"].forEach(function
     };
   }
   document.addEventListener('DOMContentLoaded', function(){
-    wrap('exportCSV', function(a){ return (a[1]||'Tool')+' CSV downloaded'; });
-    wrap('patientSummary', function(a){ return (a[1]||'Tool')+' summary saved'; });
-    wrap('reportPDF', function(){ return 'Report saved'; });
     wrap('openClin', function(){ return 'Clinician summary opened'; });
   });
 })();

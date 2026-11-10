@@ -9,10 +9,10 @@ the same inputs through both engines and requires identical results.
 
 Scoring sources:
 - Kurtzke JF. Neurology 1983;33:1444-52 (EDSS, Functional Systems).
-- Kappos L. Neurostatus scoring definitions, v04/10.2, 2011 (scoring conventions).
+- Standardized scoring rules as published in Sen 2018 (Arch Neuropsychiatry) and Fouad et al. 2023 (Mult Scler J Exp Transl Clin).
 - Fouad AM, Abdel Naseer M, Farghaly M, Hegazy MI. Mult Scler J Exp Transl Clin 2023;9(1):20552173231155055 (algorithmic combination rules).
 
-MSpectrum is independent and is not affiliated with or endorsed by Neurostatus-UHB AG.
+MSpectrum is independent and is not affiliated with any rating-system owner.
 
 Conventions:
 - Inputs are integers (or None / "" when missing). Numeric strings are accepted.
@@ -24,7 +24,7 @@ Conventions:
 from typing import Optional, Dict, Any
 from dataclasses import dataclass
 
-ENGINE_VERSION = "MSpectrum scoring rules v3.3 (Neurostatus conventions 04/10.2)"
+ENGINE_VERSION = "MSpectrum scoring rules v3.4 (Kurtzke EDSS; published standardized rules)"
 
 
 # ============================================================

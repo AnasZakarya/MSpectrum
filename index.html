@@ -32,9 +32,6 @@
 @font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("fonts/ibm-plex-mono-400-normal.woff2") format("woff2")}
 @font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("fonts/ibm-plex-mono-500-normal.woff2") format("woff2")}
 @font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:swap;src:url("fonts/ibm-plex-mono-600-normal.woff2") format("woff2")}
-/* export-only EDSS interpretation page: hidden on screen, printed as page 3 */
-#sc-page-explain{display:none}
-@media print{#sc-page-explain{display:block!important}}
 
 /* Sources link - pill-style link that fits the card design */
 .sources-link-row{margin-top:32px;text-align:center;}
@@ -3757,7 +3754,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
           <span class="badge">EDSS</span>
           <h3>🧠 AutoEDSSguide</h3>
           <div class="way-sub">EDSS assessment · 6 modes</div>
-          <p>Full EDSS exam scored with the published Neurostatus conventions in real time, a print-ready sheet and OCR scanner, plus a fast Clinical mode (sEDSS), a patient Quick Check (SRDSS + PDDS) and a Train mode for raters.</p>
+          <p>Full EDSS exam scored in real time with Kurtzke&rsquo;s EDSS and the standardized rules published in the literature, a print-ready sheet and OCR scanner, plus a fast Clinical mode (sEDSS), a patient Quick Check (SRDSS + PDDS) and a Train mode for raters.</p>
           <span class="way-cta">Open AutoEDSSguide →</span>
         </button>
         <a class="way-card hub-card" href="scores.html" style="text-decoration:none;" aria-label="Open MS Score Hub">
@@ -3845,7 +3842,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     <!-- MSpectrum disclaimer: page sentence + page point, then the 3 shared points (same text on every main page) -->
     <div class="tool-disclaimer no-print" data-disc="edss">
       <div class="tool-disclaimer-head"><span aria-hidden="true">ℹ️</span><span>Use and limitations</span></div>
-      <p>AutoEDSSguide calculates the EDSS from the findings you enter, using the published Neurostatus scoring conventions (MSpectrum is not affiliated with Neurostatus-UHB AG). It supports, but does not replace, the judgment of a trained examiner.</p><ul class="disc-list">
+      <p>AutoEDSSguide calculates the EDSS from the findings you enter, following Kurtzke&rsquo;s EDSS and the standardized scoring rules published in the literature (sources in About). It supports, but does not replace, the judgment of a trained examiner.</p><ul class="disc-list">
       <li><b>Training.</b> Does not replace a full neurological examination or the rater certification a study may require.</li>
       <li><b>Not a medical device.</b> Not reviewed, cleared or approved by the U.S. FDA. Provided &quot;as is&quot;, without warranty; the authors accept no liability for its use.</li>
       <li><b>Privacy.</b> Everything runs on your device; nothing is uploaded or transmitted. Nothing is kept unless you choose to save it in this browser. Avoid entering names or other identifiers.</li>
@@ -3914,14 +3911,14 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     <div class="section-rule"></div>
     <p>MSpectrum is a free, browser-based, privacy-first hub for the outcome measures used in multiple sclerosis - the full EDSS plus cognition, fatigue, mood, walking, quality-of-life and disease-severity scores, a guided patient report, and a diagnostic checker for the 2024 McDonald criteria. Everything is computed in your browser; nothing is uploaded. Built for research (reproducible, granular scoring for trials and registries) and useful for routine clinical and educational use.</p>
     <details class="about-toggle"><summary>🧠 AutoEDSSguide: EDSS assessment</summary>
-      <p>Full EDSS exam, scored with the published Neurostatus conventions, with real-time scoring across the 7 Functional Systems + ambulation, a print-ready EDSS sheet, an OCR sheet scanner, inconsistency flags, and REDCap/CSV export. Includes a fast <strong>Clinical</strong> mode (streamlined sEDSS, for neurologists) and a plain-language <strong>Quick Check</strong> for people with MS. One shared engine, built on the published Kurtzke, Neurostatus and Fouad rules, drives every view.</p>
+      <p>Full EDSS exam, scored with Kurtzke&rsquo;s EDSS and the standardized rules published in the literature, with real-time scoring across the 7 Functional Systems + ambulation, a print-ready EDSS sheet, an OCR sheet scanner, inconsistency flags, and REDCap/CSV export. Includes a fast <strong>Clinical</strong> mode (streamlined sEDSS, for neurologists) and a plain-language <strong>Quick Check</strong> for people with MS. One shared engine, built on these published rules, drives every view.</p>
     </details>
     <details class="about-toggle"><summary>📊 MS Score Hub: cognition, fatigue, mood, symptoms, walking &amp; quality of life</summary>
       <p>43 stateless calculators / questionnaires. Cognition: SDMT, BVMT-R, CVLT-II, PASAT-3, the BICAMS battery, PROMIS Cognitive 4a and the PDQ. Fatigue: MFIS, FSS, FSMC. Mood: PHQ-9, GAD-7, MHI-18. Symptoms and sleep: SymptoMScreen, PROMIS pain intensity, the MSQLI pain, bladder, bowel and sexual satisfaction scales, and the Sleep Condition Indicator. Vision: low-contrast letter acuity and the MSQLI vision scale (IVIS). Walking, balance and motor: MSWS-12, T25FW, 9-HPT, 6MWT, 2MWT, TUG, ABC, FES-I and the Modified Ashworth Scale. Quality of life: MSQOL-54, RAND-36, PROMIS-29, MSIS-29 and MOS social support. Disability and activity: PDDS with P-MSSS, MS severity (ARMSS by age, MSSS by duration), annualized relapse rate, confirmed disability progression, PIRA / RAW across visits, NEDA and the MSFC composite. Each comes with an interpretation, plus published cut-offs, bands or norms (z-score &amp; percentile) where they exist. Self-report questionnaires can be filled by the patient; performance tests and composites are entered by a clinician. Nothing is stored.</p>
     </details>
     <details class="about-toggle" id="about-disclaimer"><summary>⚖️ Disclaimer &amp; terms of use</summary>
       <p><b>Not a diagnosis or medical advice.</b> MSpectrum computes outcome-measure scores and applies published diagnostic criteria, and explains what they mean. It supports clinical judgment but does not itself establish a diagnosis, does not recommend, start, stop or change any treatment, and is not a substitute for examination, testing, or the judgment of a qualified clinician. Using it creates no doctor-patient relationship.</p>
-      <p><b>Independence and trademarks.</b> MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is not affiliated with or endorsed by Neurostatus-UHB AG, the National MS Society, Western Psychological Services, PAR, Pearson or any other instrument owner, and uses only the published Neurostatus scoring conventions. All outcome-measure and instrument copyrights and trademarks belong to their owners.</p>
+      <p><b>Independence and trademarks.</b> MSpectrum is not an official product of, and is not endorsed by, any university, hospital or government agency. Neurostatus and Neurostatus-EDSS are trademarks of Neurostatus-UHB AG; MSpectrum is not affiliated with or endorsed by Neurostatus-UHB AG, the National MS Society, Western Psychological Services, PAR, Pearson or any other instrument owner. MSpectrum&rsquo;s scoring follows Kurtzke&rsquo;s EDSS and standardized rules described in published papers (see References); its forms, labels and wording are its own. All outcome-measure and instrument copyrights and trademarks belong to their owners.</p>
       <p><b>What it is for.</b> It is intended for research, education, and to support - not replace - decisions made by patients and their care teams. Diagnosis, interpretation and treatment remain the responsibility of a qualified clinician who knows the individual.</p>
       <p><b>Scores and estimates are approximations.</b> Self-report tools (including the Quick Check EDSS range, PDDS and the patient questionnaires) reflect what a person reports and are not the same as a clinician-examined EDSS or a formal assessment. Norm-based results (z-scores, T-scores, percentiles) are population-level comparisons; they describe how a score relates to a reference group and do not, on their own, establish impairment in an individual.</p>
       <p><b>Accuracy &amp; verification.</b> Scoring rules are implemented faithfully from the cited primary sources, but no guarantee is made that every result is error-free or current. Verify any score locally against the original instrument before clinical or trial use. The cognitive tests (SDMT, BVMT-R, CVLT-II) must be administered and interpreted by a trained professional.</p>
@@ -3934,9 +3931,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     <p style="color:var(--ink-soft);font-size:13.5px;margin:8px 0 8px">Every score implements a published, peer-reviewed scoring rule. Primary sources, grouped by branch:</p>
     <div class="ref-list">
       <div class="ref-cat">EDSS - AutoEDSSguide</div>
-      <div class="ref-item"><span class="ref-name">EDSS / Neurostatus</span><span class="ref-cite">Kurtzke JF. <em>Neurology</em> 1983;33:1444&ndash;52. &middot; Kappos L. Neurostatus Scoring Definitions (v04/10.2), 2011.</span></div>
-      <div class="ref-item"><span class="ref-name">Combination algorithm</span><span class="ref-cite">Fouad AM, Abdel Naseer M, Farghaly M, Hegazy MI. New algorithmic approach for easier and faster extended disability status scale calculation. <em>Mult Scler J Exp Transl Clin</em> 2023;9(1):20552173231155055.</span></div>
-      <div class="ref-item"><span class="ref-name">FS conversions &amp; worked cases</span><span class="ref-cite">Sen S. Neurostatus and EDSS calculation with cases. <em>Arch Neuropsychiatry</em> 2018;55(Suppl 1):S80&ndash;S83. DOI:10.29399/npa.23412. &middot; Piri &Ccedil;&#305;nar B, G&uuml;ven Yorgun Y. What we learned from the history of multiple sclerosis measurement: Expanded Disability Status Scale. <em>Arch Neuropsychiatry</em> 2018;55(Suppl 1):S69&ndash;S75. DOI:10.29399/npa.23343.</span></div>
+      <div class="ref-item"><span class="ref-name">EDSS scoring</span><span class="ref-cite">Kurtzke JF. <em>Neurology</em> 1983;33:1444&ndash;52. &middot; Kurtzke JF. <em>Neurology</em> 1989;39:291&ndash;302. &middot; Kappos L, D&rsquo;Souza M, Lechner-Scott J, Lienert C. On the origin of Neurostatus. <em>Mult Scler Relat Disord</em> 2015;4(3):182&ndash;5. &middot; Sen S. Neurostatus and EDSS calculation with cases. <em>Arch Neuropsychiatry</em> 2018;55(Suppl 1):S80&ndash;S83. DOI:10.29399/npa.23412. &middot; Piri &Ccedil;&#305;nar B, G&uuml;ven Yorgun Y. What we learned from the history of multiple sclerosis measurement: Expanded Disability Status Scale. <em>Arch Neuropsychiatry</em> 2018;55(Suppl 1):S69&ndash;S75. DOI:10.29399/npa.23343. &middot; Fouad AM, Abdel Naseer M, Farghaly M, Hegazy MI. New algorithmic approach for easier and faster extended disability status scale calculation. <em>Mult Scler J Exp Transl Clin</em> 2023;9(1):20552173231155055. &middot; Open-source implementation: edss (Dobra&scaron;inovi&cacute; A, 2020; MIT licence). These sources describe the same scoring rules and complement each other; where they differ (for example five FS grade 2 = EDSS 3.5), MSpectrum follows Kurtzke 1983.</span></div>
       <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE et al. Streamlined EDSS for use in multiple sclerosis clinical practice: development and cross-sectional validation. <em>Mult Scler</em> 2018;24(10):1347&ndash;55 (Supplementary Appendix 1: sEDSS scoring, implemented as published).</span></div>
       <div class="ref-item"><span class="ref-name">Quick Check (SRDSS + PDDS)</span><span class="ref-cite">Kaufmann M, Salmen A, Barin L et al. Development and validation of the self-reported disability status scale (SRDSS) to estimate EDSS-categories. <em>Mult Scler Relat Disord</em> 2020;42:102148 (CC BY-NC-ND 4.0; used unchanged). &middot; PDDS: Hohol MJ et al. <em>Neurology</em> 1995;45:251&ndash;5; Learmonth YC et al. <em>BMC Neurol</em> 2013;13:37. The PDDS is provided for use by the NARCOMS Registry (www.narcoms.org/pdds). NARCOMS is supported in part by the Consortium of Multiple Sclerosis Centers (CMSC) and the CMSC Foundation.</span></div>
       <div class="ref-cat">MS Score Hub</div>
@@ -4126,7 +4121,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
               <div class="sc-page-header">
                 <div class="sc-logo-area">
                   <div style="font-family:Georgia,serif;font-size:22px;font-weight:700;letter-spacing:-0.5px;line-height:1;"><span style="color:#1a1a1a;">Auto</span><span style="color:#e07b00;">EDSS</span><span style="color:#1a1a1a;">guide</span></div>
-                  <div class="sc-logo-sub">EDSS Examination Record<br><span style="font-size:9px;color:#555555;font-weight:400;">Kurtzke EDSS, scored with published Neurostatus conventions (Kappos 2011)</span></div>
+                  <div class="sc-logo-sub">EDSS Examination Record<br><span style="font-size:9px;color:#555555;font-weight:400;">Kurtzke EDSS with standardized scoring rules from published sources</span></div>
                 </div>
               </div>
 
@@ -4153,11 +4148,11 @@ details.card-optional .card-optional-body { margin-top: 12px; }
                     </div>
                   </div>
                   <div class="sc-field-row label-aligned">
-                    <span class="sc-label">Centre Nr/Country</span>
+                    <span class="sc-label">Site</span>
                     <input type="text" class="sc-rect-input wide-input" id="centre-nr">
                   </div>
                   <div class="sc-field-row label-aligned">
-                    <span class="sc-label">Name of EDSS rater</span>
+                    <span class="sc-label">Rater</span>
                     <input type="text" class="sc-rect-input wide-input" id="rater-name">
                   </div>
                   <div class="sc-field-row label-aligned">
@@ -4280,7 +4275,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
                   <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Position test UE, pronation</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input optional" id="p-opt-pron-r"><input type="text" class="sc-box-input optional" id="p-opt-pron-l"></div></div>
                   <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Position test UE, downward drift</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input optional" id="p-opt-drift-r"><input type="text" class="sc-box-input optional" id="p-opt-drift-l"></div></div>
                   <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Position test LE, sinking</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input optional" id="p-opt-sink-r"><input type="text" class="sc-box-input optional" id="p-opt-sink-l"></div></div>
-                  <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">Lifts only one leg at a time (degrees)</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input optional" id="p-opt-lift-r"><input type="text" class="sc-box-input optional" id="p-opt-lift-l"></div></div>
+                  <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">Single-leg raise (degrees)</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input optional" id="p-opt-lift-r"><input type="text" class="sc-box-input optional" id="p-opt-lift-l"></div></div>
                   <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Walking on heels</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input optional" id="p-opt-heels-r"><input type="text" class="sc-box-input optional" id="p-opt-heels-l"></div></div>
                   <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Walking on toes</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input optional" id="p-opt-toes-r"><input type="text" class="sc-box-input optional" id="p-opt-toes-l"></div></div>
                   <div class="sc-field-row input-boxes-row muted-field"><span class="sc-row-label">* Hopping on one foot</span><div class="sc-boxes-pair"><input type="text" class="sc-box-input optional" id="p-opt-hop-r"><input type="text" class="sc-box-input optional" id="p-opt-hop-l"></div></div>
@@ -4317,7 +4312,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Tandem walking</span><input type="text" class="sc-box-input" id="c-tandem-walk" oninput="scSheetCalc()"></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Gait ataxia</span><input type="text" class="sc-box-input" id="c-gait-ataxia" oninput="scSheetCalc()"></div>
                   <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Romberg test</span><input type="text" class="sc-box-input" id="c-romberg" oninput="scSheetCalc()"></div>
-                  <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Other, e.g. rebound</span><input type="text" class="sc-box-input" id="c-other-rebound" oninput="scSheetCalc()"></div>
+                  <div class="sc-field-row input-boxes-row"><span class="sc-row-label">Other cerebellar signs (e.g. rebound)</span><input type="text" class="sc-box-input" id="c-other-rebound" oninput="scSheetCalc()"></div>
                   <div class="sc-fs-score-row"><span class="sc-fs-label">FUNCTIONAL SYSTEM SCORE</span><input type="text" class="sc-box-input fs-box" id="fs-cerebellar" readonly title="Computed from the items on this sheet. Change the items to change this score."></div>
                 </div>
               </div>
@@ -4416,12 +4411,12 @@ details.card-optional .card-optional-body { margin-top: 12px; }
                 </div>
                 <div style="font-size:7.5px;color:#64748b;line-height:1.6;margin-bottom:6px;">
                   <span style="font-weight:700;">References</span><br>
-                  Kurtzke JF. Neurology 1983;33:1444&ndash;52 (EDSS). Kappos L. Neurostatus scoring definitions, v04/10.2, 2011 (scoring conventions). Fouad AM et al. Mult Scler J Exp Transl Clin 2023;9(1) (algorithmic combination rules). Sen S. Arch Neuropsychiatry 2018;55(Suppl 1):S80-S83 (Visual and Bowel/Bladder conversion).<br>
+                  Kurtzke JF. Neurology 1983;33:1444&ndash;52 and 1989;39:291&ndash;302. Kappos L et al. Mult Scler Relat Disord 2015;4:182&ndash;5. Sen S. Arch Neuropsychiatry 2018;55(Suppl 1):S80&ndash;S83. Fouad AM et al. Mult Scler J Exp Transl Clin 2023;9(1). Full list in About.<br>
                   Generated by MSpectrum AutoEDSSguide, https://anaszakarya.github.io/MSpectrum/
                 </div>
                 <div style="font-size:7.5px;color:#64748b;line-height:1.5;">
                   <span style="font-weight:700;">Disclaimer</span><br>
-                  Not an official Neurostatus form. MSpectrum is independent and is not affiliated with or endorsed by Neurostatus-UHB AG. Neurostatus-EDSS is a trademark of Neurostatus-UHB AG. Clinical trials using the Neurostatus-EDSS need their own Neurostatus licence and rater certification; this record does not replace them. Automated scoring for guidance only; a qualified clinician must verify all results.
+                  Independent record produced by MSpectrum; not affiliated with any rating-system or instrument owner. Studies that require a specific licensed EDSS form or rater certification still need them. Automated scoring for guidance only; a qualified clinician must verify all results.
                 </div>
               </div>
               <div class="sc-page-number" style="position:static;text-align:right;margin-top:8px;font-size:9px;font-weight:700;color:#475569;">Page 2</div>
@@ -4638,7 +4633,7 @@ details.card-optional .card-optional-body { margin-top: 12px; }
 <script>
 /* AutoEDSSguide - EDSS Calculation Engine (JavaScript port)
  * 1:1 translation of edss_calc.py (Python)
- * Algorithm source: Kappos L. Neurostatus Scoring Definitions (2011)
+ * Algorithm sources: Kurtzke 1983; standardized rules as published in Sen 2018 and Fouad 2023
  */
 
 // ============================================================
@@ -4649,7 +4644,7 @@ function _maxOrNone(...values) {
     return vals.length ? Math.max(...vals) : null;
 }
 // Engine version: printed on the Final Sheet and written into every export (G5).
-const ENGINE_VERSION = "MSpectrum scoring rules v3.3 (Neurostatus conventions 04/10.2)";
+const ENGINE_VERSION = "MSpectrum scoring rules v3.4 (Kurtzke EDSS; published standardized rules)";
 function _safe(v, def = 0) {
     return (v === null || v === undefined || Number.isNaN(v)) ? def : v;
 }
@@ -4660,7 +4655,7 @@ function escHtml(v) {
 // ============================================================
 // Visual FS
 // ============================================================
-// Neurostatus visual-acuity FS grades (worse eye):
+// Visual-acuity FS grades (worse eye), standardized rules (Sen 2018):
 //   1 = worse than 20/20 but better than 20/30  -> 20/25
 //   2 = 20/30 to 20/59                          -> 20/30, 20/40, 20/50
 //   3 = 20/60 to 20/99                          -> 20/60, 20/70, 20/80
@@ -4683,9 +4678,9 @@ function snellenToScore(snellen) {
 }
 
 function calcVisualFS({ va_od, va_os, vf_od, vf_os, scotoma_od, scotoma_os, pallor_od, pallor_os } = {}) {
-    // disc pallor is a Neurostatus grade-1 sign, so a present pallor
+    // disc pallor is a grade-1 sign in the standardized rules (Sen 2018), so a present pallor
     // contributes a capped grade of 1 to that eye (won't inflate beyond worse-eye logic).
-    // Neurostatus conversion: the field/scotoma EXAM grade maps to a HIGHER FS grade
+    // Standardized conversion: the field/scotoma EXAM grade maps to a HIGHER FS grade
     // than its raw item value. FS grade 3 = "large scotoma and/or moderate field decrease
     // and/or VA 20/60-20/99"; grade 4 = "marked field decrease...". So fields: 0->0,
     // signs-only 1->1, moderate 2->3, marked 3->4; scotoma: small 1->1, large 2->3.
@@ -4705,7 +4700,7 @@ function calcVisualFS({ va_od, va_os, vf_od, vf_os, scotoma_od, scotoma_os, pall
 }
 
 function visualFSConverted(visual_fs) {
-    // Neurostatus: converted Visual FS = raw 1->1, 2->2, 3->2, 4->3, 5->3, 6->4.
+    // Converted Visual FS (Sen 2018, Table 1) = raw 1->1, 2->2, 3->2, 4->3, 5->3, 6->4.
     const table = [0, 1, 2, 2, 3, 3, 4];
     return table[Math.min(visual_fs, 6)];
 }
@@ -4755,7 +4750,7 @@ function calcPyramidalFS({ strength, overall_motor, plantar, reflexes, spasticit
     const UE_Rp = limbMax(ueMuscles,"R") <= 1, UE_Lp = limbMax(ueMuscles,"L") <= 1, LE_Rp = limbMax(leMuscles,"R") <= 1, LE_Lp = limbMax(leMuscles,"L") <= 1;
     const plegic = [UE_Rp, UE_Lp, LE_Rp, LE_Lp];
 
-    // --- Strength / fatigability grade (Neurostatus BMRC-based cascade) -----------
+    // --- Strength / fatigability grade (BMRC-based cascade, Fouad 2023) -----------
     const strengthGrade = (function () {
         if (plegic.every(Boolean)) return 6;                        // tetraplegia
         if (LE_Rp && LE_Lp) return 5;                               // paraplegia
@@ -4766,7 +4761,7 @@ function calcPyramidalFS({ strength, overall_motor, plantar, reflexes, spasticit
         if (limbs.filter(x => x <= 3).length >= 3) return 4;        // moderate tetraparesis
         // Severe monoparesis exceeding the FS-3 limit: FS 3 "severe monoparesis" is officially
         // "BMRC <=2 in ONE muscle group". A single limb with BMRC <=2 in >=2 groups (but not a
-        // full monoplegia, already caught above) exceeds that limit -> per the Neurostatus
+        // full monoplegia, already caught above) exceeds that limit -> per the published
         // "exceed one level, take the next" rule -> FS 4.
         const _leq2InLimb = (muscles, side) => muscles.reduce((n, m) =>
             n + ((((strength[m] && strength[m][side] !== undefined) ? strength[m][side] : 5) <= 2) ? 1 : 0), 0);
@@ -4780,14 +4775,14 @@ function calcPyramidalFS({ strength, overall_motor, plantar, reflexes, spasticit
         return 0;
     })();
 
-    // --- Grade-1 pyramidal SIGNS (Neurostatus: "abnormal signs without disability") -
+    // --- Grade-1 pyramidal SIGNS (Kurtzke 1983: "abnormal signs without disability") -
     // Extensor plantar (Babinski), clonus (reflex 4-5), OR exaggerated reflexes (grade 3).
     const _babinski = _safe(plantar && plantar.R) >= 2 || _safe(plantar && plantar.L) >= 2;
     const _briskOrClonus = Object.values(reflexes || {}).some(v => _safe(v) >= 3);
     const _cutAbsent = _safe(cutaneous) >= 2;   // absent superficial abdominal reflex = UMN (pyramidal) sign
     const signFloor = (_babinski || _briskOrClonus || _cutAbsent) ? 1 : 0;
 
-    // --- Spasticity (Neurostatus grades spasticity within the pyramidal FS) --------
+    // --- Spasticity (spasticity is graded within the pyramidal FS) --------
     // mild spasticity w/o weakness = abnormal sign (FS1); gait spasticity "evident:
     // minor interference"(2) or severe limb tone(3) = minimal disability (FS2);
     // gait spasticity "permanent shuffling: major interference"(3) = FS3.
@@ -4828,7 +4823,7 @@ function calcCerebellarFS({
     const gait = _safe(gait_ataxia, 0);
     const trunc = _safe(truncal_ataxia, 0);
 
-    // RULE (Neurostatus v04/10.2 - Cerebellar FS):
+    // RULE (published standardized rules - Cerebellar FS):
     //   5 = unable to perform coordinated movements (proxy: >=3 SEVERE limbs AND severe gait AND severe truncal)
     //   4 = SEVERE gait/truncal ataxia plus SEVERE ataxia of 3-4 limbs
     //   3 = moderate limb ataxia and/or moderate-to-severe gait or truncal ataxia
@@ -4859,7 +4854,7 @@ function _superficialScore({ sup_ue_R, sup_ue_L, sup_trunk_R, sup_trunk_L, sup_l
     if (overall_max === 4) return n_limbs_at_max <= 2 ? 4 : 5;
     if (overall_max === 3) return n_limbs_at_max <= 2 ? 3 : 4;
     if (overall_max === 2) return n_limbs_above_2 <= 2 ? 2 : 3;
-    if (overall_max === 1) return n_limbs_at_max >= 3 ? 2 : 1; // Neurostatus FS2(b): signs-only (temp/figure) alone in 3-4 limbs
+    if (overall_max === 1) return n_limbs_at_max >= 3 ? 2 : 1; // published rule FS2(b): signs-only (temp/figure) alone in 3-4 limbs
     return 0;
 }
 
@@ -4879,8 +4874,8 @@ function _deepScore({ vib_ue_R, vib_ue_L, vib_le_R, vib_le_L, pos_ue_R, pos_ue_L
     if (pos_max === 1) return 2;
 
     if (vib_max >= 3) return n_vib_severe <= 2 ? 3 : 4;
-    if (vib_max === 2) return 2; // moderate vibration ALONE = FS2 (Neurostatus FS3 needs ALL proprioceptive tests, i.e. position too)
-    if (vib_max === 1) return n_vib_max >= 3 ? 2 : 1; // Neurostatus FS2(b): mild vibration alone in 3-4 limbs
+    if (vib_max === 2) return 2; // moderate vibration ALONE = FS2 (FS3 needs ALL proprioceptive tests, i.e. position too)
+    if (vib_max === 1) return n_vib_max >= 3 ? 2 : 1; // published rule FS2(b): mild vibration alone in 3-4 limbs
     return 0;
 }
 
@@ -4901,7 +4896,7 @@ function calcBBFS({ hesitancy, urgency, catheterisation, bowel } = {}) {
     const c = _safe(catheterisation);
     const b = _safe(bowel);
 
-    // RULE (Neurostatus v04/10.2 - Bowel/Bladder FS):
+    // RULE (published standardized rules - Bowel/Bladder FS):
     //   loss of BLADDER function = hesitancy 4 (overflow) OR urgency 4 (loss of control)
     //   loss of BOWEL   function = bowel 4 (complete loss)
     //   6 = loss of BOTH · 5 = loss of EITHER · 4 = almost constant catheterisation (c=2)
@@ -4928,12 +4923,12 @@ function bbFSConverted(bb_fs) {
 function calcCerebralFS({ mentation, fatigue, exclude_fatigue } = {}) {
     const m = _safe(mentation);
     const f = exclude_fatigue ? 0 : _safe(fatigue);
-    // RULE (Neurostatus v04/10.2 - Cerebral FS): FS = worse of mentation and fatigue.
+    // RULE (published standardized rules - Cerebral FS): FS = worse of mentation and fatigue.
     // mild fatigue -> 1; moderate/severe fatigue -> 2. Depression/euphoria never contribute to the step.
     // Some studies exclude fatigue; the "Exclude fatigue" toggle drops its contribution.
     return Math.max(m, f >= 2 ? 2 : (f >= 1 ? 1 : 0));
 }
-// Neurostatus manual: depression and/or euphoria alone gives Cerebral FS 1 on the sheet, but does not contribute to the EDSS step.
+// Standardized rule: depression and/or euphoria alone gives Cerebral FS 1 on the sheet, but does not contribute to the EDSS step.
 function cerebralMoodOnly(cerebral_fs, depression, euphoria) {
     return cerebral_fs === 0 && (_safe(depression) >= 1 || _safe(euphoria) >= 1);
 }
@@ -4958,22 +4953,22 @@ function calcAmbulationScore({ assistance, distance_m, is_normal } = {}) {
         ? null : Number(distance_m);
 
     if (assistance === "unilateral") {
-        // Neurostatus manual, ambulation exceptions 3 and 4: more than 50 m with one aid -> AS 6 (6.0); 50 m or less -> AS 8 (6.5)
+        // Ambulation rules (Sen 2018, categories 6 and 8): more than 50 m with one aid -> AS 6 (6.0); 50 m or less -> AS 8 (6.5)
         // If no distance entered, default to AS 6 (EDSS 6.0) - conservative estimate
         if (d === null) return 6;
-        return d > 50 ? 6 : 8;  // Neurostatus: "more than 50 m" with one stick -> 6.0; 50 or less -> 6.5
+        return d > 50 ? 6 : 8;  // "more than 50 m" with one stick -> 6.0; 50 or less -> 6.5
     }
     if (assistance === "bilateral") {
-        // Neurostatus manual, ambulation exceptions 1 and 2: more than 120 m with two aids -> AS 7 (6.0); 10 to 120 m -> AS 9 (6.5)
+        // Ambulation rules (Sen 2018, categories 7 and 9): more than 120 m with two aids -> AS 7 (6.0); 10 to 120 m -> AS 9 (6.5)
         // If no distance entered, default to AS 7 (EDSS 6.0) - conservative, same as the unilateral default
         if (d === null) return 7;
-        return d > 120 ? 7 : 9;  // Neurostatus: "more than 120 m" with two sticks -> 6.0; 10-120 -> 6.5
+        return d > 120 ? 7 : 9;  // "more than 120 m" with two sticks -> 6.0; 10-120 -> 6.5
     }
     // No assistance
     if (assistance === "none" || assistance === undefined || assistance === null || assistance === "") {
         if (is_normal === true) return 0;
         if (d === null) return null;
-        if (d >= 500) return 1;   // >=500 m (restricted) is AS 1 per Neurostatus; was d>500 so exactly 500 fell through to AS 2
+        if (d >= 500) return 1;   // >=500 m (restricted) is AS 1 per the published ambulation rules; was d>500 so exactly 500 fell through to AS 2
         if (d >= 300) return 2;
         if (d >= 200) return 3;
         if (d >= 100) return 4;
@@ -5011,7 +5006,7 @@ function shouldSuggestCerebellarX(strength, sensoryArgs) {
 // Final EDSS step
 // ============================================================
 function _fsOnlyStep(fs_list) {
-    // Neurostatus / Fouad 2023 combination rules.
+    // Kurtzke 1983 / Fouad 2023 combination rules.
     // Final FS-only step = N, N+0.5, or N+1 where N = max FS grade.
     // Determination: (a) count of N occurrences; (b) whether others are 0, =1, or >1.
 
@@ -5027,10 +5022,10 @@ function _fsOnlyStep(fs_list) {
     if (N === 1) return nN >= 2 ? 1.5 : 1.0;
 
     // ── N = 2 ─────────────────────────────────────────────────────────────────
-    // ≥5 FS at grade 2 (others 0/1) → 3.5 per Kurtzke ("fully ambulatory with five FS grade 2")
+    // ≥5 FS at grade 2 (others 0/1) → 3.5 (Kurtzke 1983: "or five FS grade 2 (others 0 or 1)")
     if (N === 2) {
         if (nN >= 5) return 3.5;
-        // 1×N:  one FS grade 2 → 2.0 regardless of grade-1 others (Neurostatus: "others 0 or 1"); 2.5 requires TWO FS grade 2
+        // 1×N:  one FS grade 2 → 2.0 regardless of grade-1 others (Kurtzke 1983: "others 0 or 1"); 2.5 requires TWO FS grade 2
         if (nN === 1) return 2.0;
         // 2×N:  others 0 or 1 → 2.5;  any other >1 → 3.0
         if (nN === 2) return anyGt1 ? 3.0 : 2.5;
@@ -5039,7 +5034,7 @@ function _fsOnlyStep(fs_list) {
     }
 
     // ── N = 3 ─────────────────────────────────────────────────────────────────
-    // Neurostatus 3.5: one FS 3 with one or two FS 2 (others 0/1), or two FS 3 (others 0/1),
+    // EDSS 3.5 (Kurtzke 1983): one FS 3 with one or two FS 2 (others 0/1), or two FS 3 (others 0/1),
     // or five FS 2. Anything beyond that "exceeds the limits of previous steps" -> 4.0.
     if (N === 3) {
         const nTwos = rest.filter(v => v === 2).length;
@@ -5053,7 +5048,7 @@ function _fsOnlyStep(fs_list) {
     // ── N = 4 ─────────────────────────────────────────────────────────────────
     // 1×N:  others 0 → 4.0;  any 1 → 4.5;  any >1 → 5.0
     if (N === 4) {
-        // Neurostatus exact:
+        // Published rule:
         // EDSS 4.0 = 1 FS=4, others all 0 or 1
         // EDSS 4.5 = 1 FS=4 + 1 other ≥2 (combinations exceeding 4.0)
         // EDSS 5.0 = 1 FS=4 + ≥2 others ≥2, OR ≥2 FS=4
@@ -5063,8 +5058,8 @@ function _fsOnlyStep(fs_list) {
             if (nGt1 === 1) return 4.5;   // 1 other ≥2
             return 5.0;                   // ≥2 others ≥2
         }
-        // ≥2 FS=4 → 5.0. The FS pattern alone never exceeds 5.0: per the Neurostatus
-        // conventions, steps 5.5 to 8.0 depend on ambulation alone (Kappos 2011)
+        // ≥2 FS=4 → 5.0. The FS pattern alone never exceeds 5.0: per the published
+        // rules, steps 5.5 to 8.0 depend on ambulation alone (Sen 2018)
         // (Sen 2018 example: pyramidal 4, sensory 4, cerebellar 3, AS 0 = 5.0).
         return 5.0;
     }
@@ -5079,7 +5074,7 @@ function _fsOnlyStep(fs_list) {
     return 6.0;
 }
 
-// Ambulation Score -> fixed EDSS step (Neurostatus AS table). AS 5-15 are ambulation-dominant.
+// Ambulation Score -> fixed EDSS step (published ambulation categories, Sen 2018). AS 5-15 are ambulation-dominant.
 const AS_FIXED_EDSS = { 5: 6.0, 6: 6.0, 7: 6.0, 8: 6.5, 9: 6.5, 10: 7.0, 11: 7.5, 12: 8.0, 13: 8.5, 14: 9.0, 15: 9.5 };
 // AS 1-4: the FS pattern still counts, but ambulation sets a floor.
 const AS_FLOOR_EDSS = { 1: 2.0, 2: 4.5, 3: 5.0, 4: 5.5 };
@@ -5119,7 +5114,7 @@ function calcEDSSStepTrace(fs, ambulation_score) {
              reason: `Walking unrestricted (Ambulation Score 0); the EDSS comes from the FS pattern: ${_fsPatternText(fs_list)}.` };
 }
 
-// Plain sentence for the FS pattern used by _fsOnlyStep (Kurtzke 1983 / Neurostatus).
+// Plain sentence for the FS pattern used by _fsOnlyStep (Kurtzke 1983 / published rules).
 function _fsPatternText(fs_list) {
     const N = Math.max(...fs_list);
     if (N === 0) return "all seven FS are 0";
@@ -5402,9 +5397,9 @@ const CARDS = {
       { type: "list", id: "m_ment", label: "Decrease in mentation",
         options: [
           $(0, "0 - None"),
-          $(1, "1 - Signs only (not apparent to patient)"),
+          $(1, "1 - Abnormal on testing only; the patient does not notice it"),
           $(2, "2 - Mild: changes noticed by patient/significant other"),
-          $(3, "3 - Moderate: definite abnormalities on mental status testing, but still oriented to person/place/time"),
+          $(3, "3 - Moderate decrease in mentation: clear deficits on testing, orientation preserved"),
           $(4, "4 - Marked: not oriented in 1–2 spheres"),
           $(5, "5 - Dementia / confusion / complete disorientation"),
         ]},
@@ -5573,7 +5568,7 @@ const CARDS = {
         options: [
           $(0, "0 - Normal"),
           $(1, "1 - Signs only: reduced finger-rub hearing or lateralized Weber; patient unaware"),
-          $(2, "2 - Mild: same as grade 1 but patient is aware of hearing problem"),
+          $(2, "2 - Mild: grade 1 findings, and the patient notices the hearing loss"),
           $(3, "3 - Moderate: finger-rub not heard; some whispered numbers missed"),
           $(4, "4 - Marked: nearly all whispered numbers missed"),
         ]},
@@ -5581,9 +5576,9 @@ const CARDS = {
         options: [
           $(0, "0 - Normal"),
           $(1, "1 - Signs only: detectable by examiner, patient not aware"),
-          $(2, "2 - Mild: clinically detectable facial weakness, patient aware"),
+          $(2, "2 - Mild: facial weakness visible on exam and noticed by the patient"),
           $(3, "3 - Moderate: incomplete facial palsy (e.g., weak eye closure or drooling)"),
-          $(4, "4 - Marked: complete unilateral or bilateral palsy with lagophthalmos"),
+          $(4, "4 - Marked: complete facial palsy (one or both sides) with incomplete eye closure"),
         ]},
       { type: "list", id: "b_eom", label: "EOM impairment (III/IV/VI)",
         options: [
@@ -5597,7 +5592,7 @@ const CARDS = {
         options: [
           $(0, "0 - Normal"),
           $(1, "1 - Mild: gaze-evoked nystagmus below moderate threshold (= BS FS 1 equivalent)"),
-          $(2, "2 - Moderate: nystagmus that persists at 30° horizontal or vertical gaze, absent in primary position"),
+          $(2, "2 - Moderate: sustained nystagmus on 30° gaze (horizontal or vertical), none in primary gaze"),
           $(3, "3 - Severe: sustained in primary position; or INO with abducting eye nystagmus; or oscillopsia"),
         ]},
       { type: "list", id: "b_trig", label: "Trigeminal damage (V)",
@@ -5667,7 +5662,7 @@ const CARDS = {
     title: "Position sense (proprioception)",
     question: "Close your eyes - tell me if I move your toe/finger up or down.",
     tip: `<p><span class="cmd">"Close your eyes. Tell me if I move your toe up or down."</span> Test big toe and index finger (R &amp; L). Start distal; test proximal joints if distal is impaired.</p>
-      <p><strong>0</strong>=normal · <strong>1</strong>=mild (1&ndash;2 wrong, distal only) · <strong>2</strong>=moderate (misses many, or proximal joints) · <strong>3</strong>=marked (no perception of movement).</p>`,
+      <p><strong>0</strong>=normal · <strong>1</strong>=mild (1&ndash;2 wrong, distal only) · <strong>2</strong>=moderate (misses many, or proximal joints) · <strong>3</strong>=marked (movement not perceived).</p>`,
     bilateral: {
       rows: [
         ["s_pos_ue", "Position sense UE"],
@@ -5676,9 +5671,9 @@ const CARDS = {
       options: [
         ["", "-"],
         [0,"0 Normal"],
-        [1,"1 Mild - 1–2 incorrect responses, distal joints only"],
+        [1,"1 Mild - one or two errors, distal joints only"],
         [2,"2 Moderate - misses many movements, or proximal joints affected"],
-        [3,"3 Marked - no perception of movement"],
+        [3,"3 Marked - movement not perceived"],
       ],
     },
   },
@@ -5748,7 +5743,7 @@ const CARDS = {
   pyramidal_spasticity: {
     title: "Spasticity",
     tip: `<p><span class="cmd">"Just relax and let me move your arm/leg for you."</span> Rapidly flex/extend wrist, elbow, shoulder (UE) then ankle, knee, hip (LE) - both sides.</p>
-      <p>0=none · 1=mild (barely increased) · 2=moderate (can overcome, full ROM) · 3=severe (cannot overcome, ROM limited) · 4=contracted.</p>`,
+      <p>0=none · 1=mild (slight increase) · 2=moderate (can overcome, full ROM) · 3=severe (cannot overcome, ROM limited) · 4=contracted.</p>`,
     bilateral: {
       rows: [
         ["p_spast_arms", "Arms"],
@@ -5757,7 +5752,7 @@ const CARDS = {
       options: [
         ["", "-"],
         [0,"0 None"],
-        [1,"1 Mild: barely increased muscle tone"],
+        [1,"1 Mild: slight increase in tone"],
         [2,"2 Moderate: increased tone, can be overcome, full ROM possible"],
         [3,"3 Severe: markedly increased, very difficult to overcome, ROM limited"],
         [4,"4 Contracted: fixed contracture"],
@@ -5767,7 +5762,7 @@ const CARDS = {
       options: [
         $(0, "0 - None"),
         $(1, "1 - Barely perceptible: slight stiffness visible on walking"),
-        $(2, "2 - Evident: minor interference with walking function"),
+        $(2, "2 - Clear: slightly affects walking"),
         $(3, "3 - Permanent shuffling gait: major interference with walking function"),
       ]},
   },
@@ -5813,14 +5808,14 @@ const CARDS = {
     title: "Optional & functional tests",
     desc: "Documented for completeness - do NOT contribute to the Pyramidal FS score. Highly recommended to refine BMRC grades 3–5.",
     fields: [
-      { type: "list-compact", id: "p_walk_heels",  label: "Walking on heels *",       options: [$(0,"Normal"),$(1,"Impaired"),$(2,"Not possible")]},
-      { type: "list-compact", id: "p_walk_toes",   label: "Walking on toes *",        options: [$(0,"Normal"),$(1,"Impaired"),$(2,"Not possible")]},
-      { type: "list-compact", id: "p_hop_R",       label: "Hopping - Right *",        options: [$(0,"Normal"),$(1,"6–10×"),$(2,"1–5×"),$(3,"Not possible")]},
-      { type: "list-compact", id: "p_hop_L",       label: "Hopping - Left *",         options: [$(0,"Normal"),$(1,"6–10×"),$(2,"1–5×"),$(3,"Not possible")]},
-      { type: "list-compact", id: "p_pronator_R",  label: "Position test UE, pronation - R *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
-      { type: "list-compact", id: "p_pronator_L",  label: "Position test UE, pronation - L *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
-      { type: "list-compact", id: "p_drift_R",     label: "Position test UE, downward drift - R *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
-      { type: "list-compact", id: "p_drift_L",     label: "Position test UE, downward drift - L *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Evident")]},
+      { type: "list-compact", id: "p_walk_heels",  label: "Walking on heels *",       options: [$(0,"Normal"),$(1,"Abnormal"),$(2,"Unable")]},
+      { type: "list-compact", id: "p_walk_toes",   label: "Walking on toes *",        options: [$(0,"Normal"),$(1,"Abnormal"),$(2,"Unable")]},
+      { type: "list-compact", id: "p_hop_R",       label: "Hopping - Right *",        options: [$(0,"Normal"),$(1,"6–10×"),$(2,"1–5×"),$(3,"Unable")]},
+      { type: "list-compact", id: "p_hop_L",       label: "Hopping - Left *",         options: [$(0,"Normal"),$(1,"6–10×"),$(2,"1–5×"),$(3,"Unable")]},
+      { type: "list-compact", id: "p_pronator_R",  label: "Position test UE, pronation - R *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Clear")]},
+      { type: "list-compact", id: "p_pronator_L",  label: "Position test UE, pronation - L *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Clear")]},
+      { type: "list-compact", id: "p_drift_R",     label: "Position test UE, downward drift - R *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Clear")]},
+      { type: "list-compact", id: "p_drift_L",     label: "Position test UE, downward drift - L *",  options: [$(0,"None"),$(1,"Mild"),$(2,"Clear")]},
       { type: "list-compact", id: "p_pos_test_R",  label: "Position test LE, sinking - R *",   options: [$(0,"None"),$(1,"Mild sinking"),$(2,"Evident"),$(3,"One leg only"),$(4,"Cannot lift")]},
       { type: "list-compact", id: "p_pos_test_L",  label: "Position test LE, sinking - L *",   options: [$(0,"None"),$(1,"Mild sinking"),$(2,"Evident"),$(3,"One leg only"),$(4,"Cannot lift")]},
       { type: "list-compact", id: "p_palmomental", label: "Palmomental reflex *",     options: [$(0,"Normal"),$(1,"Weak"),$(2,"Absent")]},
@@ -5859,7 +5854,7 @@ const CARDS = {
     title: "Limb tremor / dysmetria (finger-nose / heel-shin)",
     tip: `<p><strong>Finger-nose (UE):</strong> <span class="cmd">"Touch your nose with your index finger, then touch my finger. Repeat. Switch hands."</span> 2× each side.</p>
       <p><strong>Heel-shin (LE):</strong> <span class="cmd">"Slide your heel from knee down the opposite shin to the ankle."</span> 2× each side.</p>
-      <p>0=none · 1=signs only · 2=mild (minor interference) · 3=moderate (interferes all spheres) · 4=severe.</p>`,
+      <p>0=none · 1=signs only · 2=mild (slight effect on function) · 3=moderate (interferes all spheres) · 4=severe.</p>`,
     bilateral: {
       rows: [
         ["c_tremor_ue", "Upper extremity"],
@@ -5869,7 +5864,7 @@ const CARDS = {
         ["", "-"],
         [0,"0 None"],
         [1,"1 Signs only: tremor/clumsy movements visible, no functional impact"],
-        [2,"2 Mild: easily seen, minor interference with function"],
+        [2,"2 Mild: clearly visible, slight effect on function"],
         [3,"3 Moderate: tremor or clumsiness impairs function in every area"],
         [4,"4 Severe: most functions very difficult"],
       ],
@@ -5887,7 +5882,7 @@ const CARDS = {
         ["", "-"],
         [0,"0 None"],
         [1,"1 Signs only"],
-        [2,"2 Mild: slowed, minor interference"],
+        [2,"2 Mild: slowed, slight effect on function"],
         [3,"3 Moderate: significantly impaired alternating movements"],
         [4,"4 Severe: most functions very difficult due to dysdiadochokinesia"],
       ],
@@ -5903,7 +5898,7 @@ const CARDS = {
       <li><span class="cmd">"Can you hop on one foot? Try the other."</span> → pyramidal functional</li>
       <li><span class="cmd">"Stand with feet together, arms at sides. Eyes open, then close."</span> → Romberg (cerebellar)</li>
       </ul>
-      <p><strong>Special rule:</strong> Severe gait and/or truncal ataxia alone (no severe ataxia in 3–4 limbs) → Cerebellar FS = 3.</p>
+      <p><strong>Special rule:</strong> When severe ataxia is limited to gait and/or trunk (not 3–4 limbs), Cerebellar FS = 3.</p>
       <p><strong>X marker:</strong> If pyramidal weakness (BMRC ≤3) or sensory loss confound ataxia testing → add X after FS score.</p>`,
     fields: [
       { type: "list", id: "c_gait_ataxia", label: "Gait ataxia",
@@ -6078,7 +6073,7 @@ const ROADMAP_VIEW = [
     phase: { label: "Phase 3", title: "Examination only", desc: "Objective bedside testing of sensation, coordination, strength, reflexes, and gait." },
     notes: `<ul>
       <li><strong>Pyramidal FS:</strong> Tetraplegia=6 · Paraplegia/hemiplegia/marked tetraparesis=5 · Monoplegia=4 · BMRC 4 in &gt;2 groups=3 · BMRC 4 in 1–2 groups=2 · Signs only=1.</li>
-      <li><strong>Cerebellar FS:</strong> Severe gait+truncal ataxia alone (without 3–4 limb ataxia) → FS=3. Add X if weakness or proprioceptive loss confounds testing.</li>
+      <li><strong>Cerebellar FS:</strong> Severe ataxia limited to gait and/or trunk (not 3–4 limbs) → FS=3. Add X if weakness or proprioceptive loss confounds testing.</li>
       <li><strong>Sensory FS:</strong> Based on worst combination across superficial (touch/pain), vibration, and proprioception - all limbs and trunk.</li>
       <li>Items marked * = optional, documented only - do <strong>not</strong> contribute to FS score.</li>
       </ul>`,
@@ -6106,7 +6101,7 @@ const ROADMAP_VIEW = [
   },
 ];
 
-// System view: classic Neurostatus order (7 FS + ambulation)
+// System view: the usual paper-form order (7 FS + ambulation)
 const SYSTEM_VIEW = [
   { id: "patient", num: "i", title: "Patient & Study", subtitle: "Identifying info", cards: ["patient_id"] },
   { id: "ambulation", num: "A", title: "Ambulation", subtitle: "Walking history & score",
@@ -6163,7 +6158,7 @@ function renderField(f) {
     </label>${hint}</div>`;
   }
   if ((f.type === "list" || f.type === "list-compact") && _CHIP_MODE) {
-    // Chip layout (pilot): grade on top, short label under it, full Neurostatus text in the
+    // Chip layout (pilot): grade on top, short label under it, full MSpectrum definition text in the
     // tooltip and in the line under the chips once a grade is chosen. Same name/value pairs.
     const fulls = f.options.map(o => String(o.t).replace(/^\d+ - /, ""));
     const shorts = _chipShorts(fulls);
@@ -6215,7 +6210,7 @@ function _chipClause(text) {
   return t;
 }
 function _chipShort(full) {
-  // First clause of the Neurostatus text, cut at ":", " - ", "(", "," or ";", at most five words.
+  // First clause of the definition text, cut at ":", " - ", "(", "," or ";", at most five words.
   return _chipClause(String(full).split(/:| - |\(|,|;/)[0]);
 }
 function _chipShorts(fulls) {
@@ -6431,7 +6426,7 @@ function renderSysScoreRef(s) {
   if (!rows) return "";
   const refRows = rows.map(([sc, desc]) => `<tr><td class="fsref-score">${sc}</td><td class="fsref-desc">${desc}</td></tr>`).join("");
   return `<div class="fsref-toggle sys-scoreref no-print" onclick="this.classList.toggle('open')">
-      <span class="fsref-toggle-label">Score reference (summary of published FS definitions; Kappos 2011)</span>
+      <span class="fsref-toggle-label">Score reference (summary of published FS definitions)</span>
       <table class="fsref-table"><tbody>${refRows}</tbody></table>
     </div>`;
 }
@@ -6511,7 +6506,7 @@ function renderTabs(view) {
 }
 
 // ============================================================
-// Final Sheet (2-page Neurostatus, viewable in browser AND printable)
+// Final Sheet: MSpectrum EDSS record (summary + transcription list), viewable and printable
 // ============================================================
 function renderFinalSheet() {
   return `
@@ -6873,7 +6868,7 @@ function _ambGuidanceNote() {
   const wrap = (body) => `<div class="amb-guidance-note" style="background:var(--hl-soft,#fdf2e9);border-left:3px solid var(--hl,#b85c1a);border-radius:6px;padding:9px 12px;margin-bottom:10px;font-size:12.5px;line-height:1.55;color:var(--ink,#222222);">${body}</div>`;
   if (!a) return wrap(`<strong>Pick an assistance type above.</strong> The distance brackets you need to ask about will appear here.`);
   if (a === "none") return wrap(`<strong>No aid - ask how far they walk, and whether it is truly unrestricted:</strong><br>Fully normal for their age &rarr; tick &ldquo;walks fully normally&rdquo; (AS 0) &middot; &gt;500 m but with any restriction &rarr; AS 1 &middot; 300&ndash;500 m &rarr; AS 2 &middot; 200&ndash;300 m &rarr; AS 3 &middot; 100&ndash;200 m &rarr; AS 4 &middot; &lt;100 m &rarr; AS 5`);
-  if (a === "unilateral") return wrap(`<strong>Unilateral aid (one cane/crutch/brace) - ask the distance with the aid:</strong><br>more than 50 m &rarr; AS 6 (EDSS 6.0) &middot; 50 m or less &rarr; AS 8 (EDSS 6.5). Rate the best performance. The published rule (Kappos 2011) is &ldquo;more than 50 m&rdquo;, so exactly 50 m scores AS 8.`);
+  if (a === "unilateral") return wrap(`<strong>Unilateral aid (one cane/crutch/brace) - ask the distance with the aid:</strong><br>more than 50 m &rarr; AS 6 (EDSS 6.0) &middot; 50 m or less &rarr; AS 8 (EDSS 6.5). Rate the best performance. The published rule (Sen 2018) is &ldquo;more than 50 m&rdquo;, so exactly 50 m scores AS 8.`);
   if (a === "bilateral") return wrap(`<strong>Bilateral aid (two aids or another person) - ask the distance:</strong><br>more than 120 m &rarr; AS 7 (EDSS 6.0) &middot; 10 to 120 m &rarr; AS 9 (EDSS 6.5)`);
   if (a === "wheelchair_indep") return wrap(`<strong>Wheelchair, self-propelled / transfers alone &rarr; AS 10 (EDSS 7.0).</strong> Distance not needed.`);
   if (a === "wheelchair_help") return wrap(`<strong>Wheelchair, needs help to wheel or transfer &rarr; AS 11 (EDSS 7.5).</strong> Distance not needed.`);
@@ -7063,7 +7058,7 @@ function setPill(tabId, fs, xMarker) {
 
 // ============================================================
 // Inconsistency Checker
-// Based on Kappos Neurostatus 2011 + Clario/ERT eClinical rules
+// MSpectrum's own consistency checks, built from the published scoring rules (Kurtzke 1983; Sen 2018; Fouad 2023)
 // ============================================================
 function runConsistencyCheck(inp, r) {
   const issues = []; // [{sev:"error"|"warning"|"info", tab:"pyramidal"|..., msg:"..."}]
@@ -7095,7 +7090,7 @@ function runConsistencyCheck(inp, r) {
     const severeMono = limbs.some(a => a.filter(v => v <= 2).length >= 2 && Math.max(...a) > 1);
     if (severeMono && weakLimbs === 1 && pyrFS === 4) {
       issues.push({ sev: "info", tab: "pyramidal",
-        msg: "Pyramidal FS = 4: a severe monoparesis (BMRC ≤2 in more than one muscle group of a single limb) exceeds the FS 3 definition (\"≤2 in one muscle group\"), so it is scored one level up under the published scoring conventions (Kappos 2011)." });
+        msg: "Pyramidal FS = 4: a severe monoparesis (BMRC ≤2 in more than one muscle group of a single limb) exceeds the FS 3 definition (\"≤2 in one muscle group\"), so it is scored one level up under the published scoring rules (Fouad 2023)." });
     }
   })();
 
@@ -7151,7 +7146,7 @@ function runConsistencyCheck(inp, r) {
 
   if (pyrFS !== null && pyrFS >= 2 && hasAnyAtaxia && !r.cerebellar_x) {
     issues.push({ sev: "info", tab: "cerebellar",
-      msg: `Pyramidal FS = ${pyrFS} (weakness present) with cerebellar findings recorded but X marker not set. Consider marking X if weakness confounds ataxia assessment (Kappos 2011 conventions).` });
+      msg: `Pyramidal FS = ${pyrFS} (weakness present) with cerebellar findings recorded but X marker not set. Consider marking X if weakness confounds ataxia assessment (Kurtzke 1983).` });
   }
 
   // ── 3. CROSS-SYSTEM: Cerebellar FS ≥ 3 without X → ambulation ─
@@ -7162,10 +7157,10 @@ function runConsistencyCheck(inp, r) {
   }
 
   // ── 4. CROSS-SYSTEM: Bowel/Bladder FS ↔ Ambulation ─────────
-  // Plausibility hint only: severe sphincter loss usually goes with restricted ambulation. Not a Neurostatus rule.
+  // Plausibility hint only: severe sphincter loss usually goes with restricted ambulation. Not a scoring rule.
   if (bbFS !== null && bbFS >= 4 && edss !== null && edss < 6.0) {
     issues.push({ sev: "info", tab: "bowelbladder",
-      msg: `Bowel/Bladder FS (converted) = ${bbFS} (loss of bladder or bowel function) with EDSS = ${edss.toFixed(1)}. Severe sphincter loss usually goes with restricted ambulation. Are the bowel/bladder entries correct? (plausibility hint, not a Neurostatus rule)` });
+      msg: `Bowel/Bladder FS (converted) = ${bbFS} (loss of bladder or bowel function) with EDSS = ${edss.toFixed(1)}. Severe sphincter loss usually goes with restricted ambulation. Are the bowel/bladder entries correct? (plausibility hint, not a scoring rule)` });
   }
 
   // ── 5. INTRA-SYSTEM: Visual ──────────────────────────────────
@@ -7483,6 +7478,173 @@ function syncPatientHeader(inp) {
   _fillDateBoxes("doe", inp.pt_exam, 2);
 }
 
+// ============================================================
+// MSpectrum EDSS record (Final Sheet print / PDF / email, and the Sheet Scanner export).
+// Built from the sheet values, so the guided exam and the scanner share one renderer.
+// Page 1: summary (walking first, systems in Kurtzke 1983 order, abnormal findings only).
+// Page 2: transcription list - every recorded item in the usual paper-form sequence,
+// with MSpectrum's own labels, to copy values onto a paper record. No form layout is reproduced.
+// ============================================================
+// [section, label, sheet ids (R/OD then L/OS, or one), normal kind, extra sheet ids covered]
+// normal kind: "z" = 0 is normal, "s" = strength (5), "r" = reflex (2), "va" = acuity (20/20), "t" = text (never flagged)
+const ER_ROWS = [
+  ["V","Visual acuity (best corrected)",["v-acuity-od","v-acuity-os"],"va",["v-cc-od","v-sc-od"]],
+  ["V","Visual fields",["v-fields-od","v-fields-os"],"z"],
+  ["V","Scotoma",["v-scotoma-od","v-scotoma-os"],"z"],
+  ["V","Disc pallor",["v-pallor-od","v-pallor-os"],"z"],
+  ["BS","Eye movements",["b-eom"],"z"],["BS","Nystagmus",["b-nystagmus"],"z"],["BS","Trigeminal",["b-trigeminal"],"z"],
+  ["BS","Facial weakness",["b-facial"],"z"],["BS","Hearing",["b-hearing"],"z"],["BS","Dysarthria",["b-dysarthria"],"z"],
+  ["BS","Dysphagia",["b-dysphagia"],"z"],["BS","Other cranial nerves",["b-other"],"z"],
+  ["P","Biceps reflex",["p-ref-biceps-r","p-ref-biceps-l"],"r",["p-ref-biceps-asym"]],
+  ["P","Triceps reflex",["p-ref-triceps-r","p-ref-triceps-l"],"r",["p-ref-triceps-asym"]],
+  ["P","Brachioradialis reflex",["p-ref-brach-r","p-ref-brach-l"],"r",["p-ref-brach-asym"]],
+  ["P","Knee reflex",["p-ref-knee-r","p-ref-knee-l"],"r",["p-ref-knee-asym"]],
+  ["P","Ankle reflex",["p-ref-ankle-r","p-ref-ankle-l"],"r",["p-ref-ankle-asym"]],
+  ["P","Plantar response",["p-ref-plantar-r","p-ref-plantar-l"],"z",["p-ref-plantar-asym"]],
+  ["P","Abdominal reflexes",["p-ref-cut-r","p-ref-cut-l"],"z",["p-ref-cut-asym"]],
+  ["P","Palmomental reflex",["p-ref-palmo-r","p-ref-palmo-l"],"z",["p-ref-palmo-asym"]],
+  ["P","Deltoids",["p-str-deltoids-r","p-str-deltoids-l"],"s"],["P","Biceps strength",["p-str-biceps-r","p-str-biceps-l"],"s"],
+  ["P","Triceps strength",["p-str-triceps-r","p-str-triceps-l"],"s"],["P","Wrist / finger flexors",["p-str-wristflex-r","p-str-wristflex-l"],"s"],
+  ["P","Wrist / finger extensors",["p-str-wristext-r","p-str-wristext-l"],"s"],["P","Hip flexors",["p-str-hipflex-r","p-str-hipflex-l"],"s"],
+  ["P","Knee flexors",["p-str-kneeflex-r","p-str-kneeflex-l"],"s"],["P","Knee extensors",["p-str-kneeext-r","p-str-kneeext-l"],"s"],
+  ["P","Plantar flexion",["p-str-plantar-r","p-str-plantar-l"],"s"],["P","Dorsiflexion",["p-str-dorsi-r","p-str-dorsi-l"],"s"],
+  ["P","Arm drift, pronation",["p-opt-pron-r","p-opt-pron-l"],"z"],["P","Arm drift, downward",["p-opt-drift-r","p-opt-drift-l"],"z"],
+  ["P","Leg hold, sinking",["p-opt-sink-r","p-opt-sink-l"],"z"],["P","Single-leg raise (degrees)",["p-opt-lift-r","p-opt-lift-l"],"t"],
+  ["P","Heel walking",["p-opt-heels-r","p-opt-heels-l"],"z"],["P","Toe walking",["p-opt-toes-r","p-opt-toes-l"],"z"],
+  ["P","Hopping",["p-opt-hop-r","p-opt-hop-l"],"z"],
+  ["P","Spasticity, arms",["p-spas-arms-r","p-spas-arms-l"],"z"],["P","Spasticity, legs",["p-spas-legs-r","p-spas-legs-l"],"z"],
+  ["P","Spasticity, gait",["p-spas-gait-r","p-spas-gait-l"],"z"],["P","Overall motor performance",["p-overall-motor"],"z"],
+  ["C","Head tremor",["c-head-tremor"],"z"],["C","Truncal ataxia",["c-truncal-ataxia"],"z"],
+  ["C","Tremor / dysmetria, arms",["c-tremor-ue-r","c-tremor-ue-l"],"z"],["C","Tremor / dysmetria, legs",["c-tremor-le-r","c-tremor-le-l"],"z"],
+  ["C","Rapid alternating, arms",["c-ram-ue-r","c-ram-ue-l"],"z"],["C","Rapid alternating, legs",["c-ram-le-r","c-ram-le-l"],"z"],
+  ["C","Tandem walking",["c-tandem-walk"],"z"],["C","Gait ataxia",["c-gait-ataxia"],"z"],["C","Romberg",["c-romberg"],"z"],
+  ["C","Other cerebellar signs (e.g. rebound)",["c-other-rebound"],"z"],
+  ["S","Superficial sensation, arms",["s-sup-ue-r","s-sup-ue-l"],"z"],["S","Superficial sensation, trunk",["s-sup-trunk-r","s-sup-trunk-l"],"z"],
+  ["S","Superficial sensation, legs",["s-sup-le-r","s-sup-le-l"],"z"],["S","Vibration, arms",["s-vib-ue-r","s-vib-ue-l"],"z"],
+  ["S","Vibration, legs",["s-vib-le-r","s-vib-le-l"],"z"],["S","Position sense, arms",["s-pos-ue-r","s-pos-ue-l"],"z"],
+  ["S","Position sense, legs",["s-pos-le-r","s-pos-le-l"],"z"],["S","Lhermitte's sign",["s-lhermitte"],"z"],
+  ["S","Paraesthesiae, arms",["s-para-ue-r","s-para-ue-l"],"z"],["S","Paraesthesiae, trunk",["s-para-trunk-r","s-para-trunk-l"],"z"],
+  ["S","Paraesthesiae, legs",["s-para-le-r","s-para-le-l"],"z"],
+  ["BB","Hesitancy / retention",["bb-hesitancy"],"z"],["BB","Urgency / incontinence",["bb-urgency"],"z"],["BB","Catheter use",["bb-catheter"],"z"],
+  ["BB","Bowel dysfunction",["bb-bowel"],"z"],["BB","Sexual dysfunction",["bb-sexual"],"z"],
+  ["CB","Depression",["cb-depression"],"z"],["CB","Euphoria",["cb-euphoria"],"z"],["CB","Decrease in mentation",["cb-mentation"],"z"],["CB","Fatigue",["cb-fatigue"],"z"],
+  ["A","Distance reported (m)",["amb-meters-reported"],"t"],["A","Time reported (min)",["amb-min-reported"],"t"],
+  ["A","Help used",["amb-assistance-text"],"t"],["A","Distance measured (m)",["amb-meters-actual"],"t"]
+];
+const ER_SEC = { V:"Visual", BS:"Brainstem", P:"Pyramidal", C:"Cerebellar", S:"Sensory", BB:"Bowel & bladder", CB:"Cerebral", A:"Walking" };
+const ER_PAPER_ORDER = ["V","BS","P","C","S","BB","CB","A"];   // usual paper-form sequence (page 2)
+const ER_KURTZKE_ORDER = ["P","C","BS","S","BB","V","CB"];     // Kurtzke 1983 order (page 1)
+const ER_FSMAX = { P:6, C:5, BS:5, S:6, BB:6, V:6, CB:5 };
+const ER_CSS = '<style id="er-css">' +
+ '.er-doc{color:#1a1f2e;font-family:"IBM Plex Sans",Arial,sans-serif}' +
+ '.er-page{background:#fff;color:#1a1f2e;max-width:794px;margin:0 auto 18px;padding:30px 38px;border:1px solid #d9dee5;border-radius:6px;box-sizing:border-box;line-height:1.4}' +
+ '.er-top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid #1e4a6e;padding-bottom:8px;gap:12px}' +
+ '.er-brand{font-family:Fraunces,Georgia,serif;font-size:20px;font-weight:700;color:#1e4a6e}.er-brand em{color:#e65c00;font-style:normal}' +
+ '.er-brand small{display:block;font-family:"IBM Plex Sans",Arial,sans-serif;font-size:10.5px;font-weight:500;color:#5a6272;letter-spacing:.08em;text-transform:uppercase}' +
+ '.er-docid{text-align:right;font-size:10.5px;color:#5a6272}.er-docid b{display:block;font-size:14px;color:#1a1f2e}' +
+ '.er-meta{display:grid;grid-template-columns:repeat(4,1fr);margin:12px 0 14px;border:1px solid #d9dee5;border-radius:8px;overflow:hidden}' +
+ '.er-meta div{padding:6px 10px;border-right:1px solid #d9dee5;font-size:12px;min-height:34px}.er-meta div:last-child{border-right:none}' +
+ '.er-k{display:block;font-size:9.5px;color:#6b7383;text-transform:uppercase;letter-spacing:.06em}' +
+ '.er-result{display:grid;grid-template-columns:140px 1fr;gap:14px;margin-bottom:12px}' +
+ '.er-step{background:#1e4a6e;color:#fff;border-radius:12px;text-align:center;padding:12px 6px}.er-step span{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.85}' +
+ '.er-step b{display:block;font-size:42px;line-height:1.05}.er-why{border:1px solid #d9dee5;border-radius:12px;padding:9px 13px;font-size:12px}' +
+ '.er-h{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#1e4a6e;margin:14px 0 7px;display:flex;align-items:center;gap:8px;font-weight:700}' +
+ '.er-h:after{content:"";flex:1;height:1px;background:#d9dee5}' +
+ '.er-amb{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;font-size:12px}.er-amb div{border:1px solid #d9dee5;border-radius:8px;padding:5px 9px}' +
+ '.er-fs{display:grid;grid-template-columns:140px 1fr 78px;gap:5px 10px;align-items:center;font-size:12.5px}' +
+ '.er-bar{height:11px;background:#eef1f5;border-radius:99px;position:relative;overflow:hidden}.er-bar i{position:absolute;left:0;top:0;bottom:0;background:#5b8bb5;border-radius:99px}' +
+ '.er-bar.hi i{background:#e65c00}.er-val{font-weight:700;text-align:right}.er-val small{font-weight:400;color:#6b7383}' +
+ '.er-find{display:grid;grid-template-columns:1fr 1fr;gap:8px}.er-card{border:1px solid #d9dee5;border-radius:10px;padding:7px 11px;font-size:11.5px;break-inside:avoid}' +
+ '.er-card b{display:block;font-size:12px;margin-bottom:2px}.er-card ul{margin:0;padding-left:16px}.er-ok{color:#6b7383}' +
+ '.er-sign{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-top:22px;font-size:10.5px;color:#6b7383}.er-sign div{border-top:1px solid #1a1f2e;padding-top:3px}' +
+ '.er-foot{margin-top:14px;font-size:9.5px;color:#6b7383;border-top:1px solid #d9dee5;padding-top:6px}' +
+ '.er-intro{font-size:10.5px;color:#5a6272;margin:8px 0 8px}' +
+ '.er-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}' +
+ '.er-sec{margin-bottom:8px;break-inside:avoid}.er-sec h4{margin:0 0 2px;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#1e4a6e;display:flex;justify-content:space-between;border-bottom:1px solid #c9d2dc;padding-bottom:2px}' +
+ '.er-sec h4 span{color:#1a1f2e;letter-spacing:0;text-transform:none}' +
+ '.er-sec table{width:100%;border-collapse:collapse;font-size:10.5px}.er-sec td{padding:1.5px 4px;border-bottom:1px solid #f0f2f5;vertical-align:top}' +
+ '.er-sec td.n{width:22px;color:#8a8f9d;text-align:right}.er-sec td.v{width:40px;text-align:center;font-weight:600}.er-sec th{font-size:9px;color:#8a8f9d;font-weight:500;text-align:center}' +
+ '.er-sec tr.ab td{background:#fff3e6}' +
+ '.er-sum{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;margin-top:6px}.er-sum div{border:1px solid #c9d2dc;border-radius:6px;padding:3px 9px}' +
+ '@media (max-width:700px){.er-page{padding:16px 14px}.er-meta{grid-template-columns:1fr 1fr}.er-result{grid-template-columns:1fr}.er-amb{grid-template-columns:1fr 1fr}.er-fs{grid-template-columns:110px 1fr 60px}.er-find,.er-cols{grid-template-columns:1fr}}' +
+ '@media print{html,body,.app-view,.app-main,#tab-finalsheet,.final-sheet-wrap,#fs-sheet-container{background:#fff!important}.er-page{border:none;border-radius:0;margin:0;max-width:none;width:210mm;padding:9mm 11mm}.er-page:not(:last-child){page-break-after:always;break-after:page}.er-sec td{padding:1px 4px}.er-sec table{font-size:9.6px}.er-sec{margin-bottom:6px}.er-intro{margin:6px 0}}' +
+ '</style>';
+function _erVal(id) {
+  const e = document.getElementById(id); if (!e) return "";
+  if (e.type === "checkbox") return e.checked ? "1" : "";
+  return String(e.value == null ? "" : e.value).trim();
+}
+function _erAbn(kind, v) {
+  if (v === "" || v === "-" || kind === "t") return false;
+  if (/[PT]$/i.test(v)) return true;
+  const norm = kind === "s" ? "5" : kind === "r" ? "2" : kind === "va" ? "20/20" : "0";
+  return String(v).replace(/\s+/g, "").toLowerCase() !== norm.toLowerCase();
+}
+// Rows with their current values (used by page 1, page 2 and the tests).
+function edssRecordData() {
+  return ER_ROWS.map(function (row) {
+    const vals = row[2].map(_erVal);
+    let label = row[1];
+    if (row[0] === "V" && row[3] === "va") { if (_erVal("v-cc-od") === "1") label += ", corrected"; }
+    return { sec: row[0], label: label, vals: vals, two: row[2].length === 2, abn: vals.some(function (v) { return _erAbn(row[3], v); }) };
+  });
+}
+function buildEdssRecordHTML(r) {
+  const E = (typeof escHtml === "function") ? escHtml : function (x) { return String(x); };
+  const rows = edssRecordData();
+  const fsv = { V: _erVal("fs-visual-raw"), Vc: _erVal("fs-visual-conv"), BS: _erVal("fs-brainstem"), P: _erVal("fs-pyramidal"), C: _erVal("fs-cerebellar"),
+    S: _erVal("fs-sensory"), BB: _erVal("fs-bowel-bladder-raw"), BBc: _erVal("fs-bowel-bladder-conv"), CB: _erVal("fs-cerebral") };
+  const as = _erVal("sc-amb-score-display") || (r && r.ambulation_score != null ? String(r.ambulation_score) : "");
+  const step = _erVal("edss-step-val") || (r && r.edss_step != null ? Number(r.edss_step).toFixed(1) : "-");
+  const d = [_erVal("doe-d1") + _erVal("doe-d2"), _erVal("doe-m1") + _erVal("doe-m2") + _erVal("doe-m3"), _erVal("doe-y1") + _erVal("doe-y2")];
+  const exam = (d[0] && d[1] && d[2]) ? d[0] + "-" + d[1] + "-20" + d[2] : "";
+  const meta = [["Patient code", _erVal("patient-id")], ["Exam date", exam], ["Rater", _erVal("rater-name")], ["Site / study", [_erVal("centre-nr"), _erVal("study-name")].filter(Boolean).join(" · ")]];
+  const metaHTML = '<div class="er-meta">' + meta.map(function (m) { return '<div><span class="er-k">' + m[0] + '</span>' + E(m[1] || "") + '</div>'; }).join("") + '</div>';
+  const top = function (title, sub) { return '<div class="er-top"><div class="er-brand">Auto<em>EDSS</em>guide<small>MSpectrum · EDSS record</small></div><div class="er-docid"><b>' + title + '</b>' + sub + '</div></div>'; };
+  const conv = function (k) { return k === "V" ? (fsv.V !== "" && fsv.Vc !== "" && fsv.V !== fsv.Vc ? " &rarr;" + E(fsv.Vc) : "") : k === "BB" ? (fsv.BB !== "" && fsv.BBc !== "" && fsv.BB !== fsv.BBc ? " &rarr;" + E(fsv.BBc) : "") : ""; };
+  const fsNum = ER_KURTZKE_ORDER.map(function (k) { return Number(fsv[k]) || 0; });
+  const fsMax = Math.max.apply(null, fsNum);
+  // ---- Page 1
+  const amb = rows.filter(function (x) { return x.sec === "A"; });
+  let p1 = top("EDSS record", "Generated " + new Date().toISOString().slice(0, 10) + " · " + E(ENGINE_VERSION)) + metaHTML;
+  const why = r ? ((typeof explainRule === "function" ? explainRule(r) : "") + (typeof edssPlainLanguage === "function" ? '<div style="margin-top:4px;color:#33414f">' + edssPlainLanguage(r) + '</div>' : "")) : "";
+  p1 += '<div class="er-result"><div class="er-step"><span>EDSS</span><b>' + E(step) + '</b></div><div class="er-why"><span class="er-k">How this step was reached</span>' + why + '</div></div>';
+  p1 += '<div class="er-h">Walking</div><div class="er-amb">' + amb.map(function (x) { return '<div><span class="er-k">' + E(x.label) + '</span>' + (E(x.vals[0]) || "&ndash;") + '</div>'; }).join("") + '<div><span class="er-k">Ambulation score</span>' + (E(as) || "&ndash;") + '</div></div>';
+  p1 += '<div class="er-h">Functional systems (Kurtzke order)</div><div class="er-fs">' + ER_KURTZKE_ORDER.map(function (k, i) {
+    const n = fsNum[i], pct = Math.max(0, Math.min(100, n / ER_FSMAX[k] * 100));
+    return '<div>' + ER_SEC[k] + '</div><div class="er-bar' + (n > 0 && n === fsMax ? " hi" : "") + '"><i style="width:' + pct.toFixed(0) + '%"></i></div><div class="er-val">' + (fsv[k] === "" ? "&ndash;" : E(fsv[k])) + ' <small>/' + ER_FSMAX[k] + conv(k) + '</small></div>';
+  }).join("") + '</div><div style="font-size:9.5px;color:#8a8f9d;margin-top:3px">&rarr; = value used for the EDSS step (Visual and Bowel &amp; bladder conversion).</div>';
+  const normalSecs = [];
+  const cards = ER_KURTZKE_ORDER.map(function (k) {
+    const ab = rows.filter(function (x) { return x.sec === k && x.abn; });
+    if (!ab.length) { normalSecs.push(ER_SEC[k]); return ""; }
+    return '<div class="er-card"><b>' + ER_SEC[k] + ' &middot; FS ' + (fsv[k] === "" ? "&ndash;" : E(fsv[k])) + '</b><ul>' + ab.map(function (x) {
+      return '<li>' + E(x.label) + ': ' + (x.two ? (x.vals[0] !== "" && x.vals[0] === x.vals[1] ? "both sides " + E(x.vals[0]) : (x.sec === "V" ? "OD " : "R ") + (E(x.vals[0]) || "&ndash;") + (x.sec === "V" ? ", OS " : ", L ") + (E(x.vals[1]) || "&ndash;")) : E(x.vals[0])) + '</li>'; }).join("") + '</ul></div>';
+  }).join("");
+  p1 += '<div class="er-h">Abnormal findings by system</div><div class="er-find">' + cards +
+    (normalSecs.length ? '<div class="er-card"><b>' + normalSecs.join(" · ") + '</b><div class="er-ok">No abnormal findings recorded.</div></div>' : "") + '</div>';
+  p1 += '<div class="er-sign"><div>Rater signature</div><div>Date</div></div>';
+  p1 += '<div class="er-foot">Scoring: Kurtzke JF. Neurology 1983;33:1444&ndash;52, with the standardized rules described in Sen 2018 and Fouad et al. 2023 (full list in About). P / T = finding not due to MS (permanent / temporary): recorded, not scored. Depression, euphoria and fatigue are hard to rate objectively; some protocols leave them out of the Cerebral FS and the EDSS step.<br>Independent record produced by MSpectrum; not affiliated with any rating-system or instrument owner. Studies that require a specific licensed EDSS form or rater certification still need them. Automated scoring for guidance only; a qualified clinician must verify all results.</div>';
+  // ---- Page 2 (transcription list, usual paper-form sequence)
+  let num = 0;
+  const secHTML = function (k) {
+    const list = rows.filter(function (x) { return x.sec === k; });
+    const head = k === "A" ? "AS " + (E(as) || "&ndash;") : "FS " + (fsv[k] === "" ? "&ndash;" : E(fsv[k])) + conv(k);
+    const anyTwo = list.some(function (x) { return x.two; });
+    const rl = k === "V" ? ["OD", "OS"] : ["R", "L"];
+    return '<div class="er-sec"><h4>' + ER_SEC[k] + '<span>' + head + '</span></h4><table>' + (anyTwo ? '<tr><td></td><td></td><th>' + rl[0] + '</th><th>' + rl[1] + '</th></tr>' : "") +
+      list.map(function (x) { num++; return '<tr' + (x.abn ? ' class="ab"' : "") + '><td class="n">' + num + '</td><td>' + E(x.label) + '</td><td class="v">' + (E(x.vals[0]) || "&ndash;") + '</td>' + (anyTwo ? '<td class="v">' + (x.two ? (E(x.vals[1]) || "&ndash;") : "") + '</td>' : "") + '</tr>'; }).join("") + '</table></div>';
+  };
+  const left = ["V", "BS", "P"].map(secHTML).join(""), right = ["C", "S", "BB", "CB", "A"].map(secHTML).join("");
+  let p2 = top("Transcription list", (E(_erVal("patient-id")) || "") + (exam ? " · " + exam : ""));
+  p2 += '<div class="er-intro">All entered values in the sequence used by common paper EDSS forms, to copy onto a paper record. Labels are MSpectrum&rsquo;s own. Shaded = abnormal. &ldquo;&ndash;&rdquo; = not entered.</div>';
+  p2 += '<div class="er-cols"><div>' + left + '</div><div>' + right + '</div></div>';
+  p2 += '<div class="er-sum"><div><b>EDSS ' + E(step) + '</b></div><div>' + ER_PAPER_ORDER.filter(function (k) { return k !== "A"; }).map(function (k) { return ER_SEC[k] + " " + (fsv[k] === "" ? "&ndash;" : E(fsv[k])) + conv(k); }).join(" · ") + " · Walking " + (E(as) || "&ndash;") + '</div></div>';
+  p2 += '<div class="er-foot">Generated by MSpectrum AutoEDSSguide. Independent tool; studies that require a specific licensed EDSS form or rater certification still need them.</div>';
+  return '<div class="er-doc"><div class="er-page sc-page">' + p1 + '</div><div class="er-page sc-page">' + p2 + '</div></div>';
+}
+function _ensureErCss() { if (!document.getElementById("er-css")) document.head.insertAdjacentHTML("beforeend", ER_CSS); }
+
 function syncFinalSheet(inp, r) {
   // The OCR scanner and the guided sheet share the same box IDs. While the scanner review
   // is active it owns those boxes (computed from the scanned sheet), so the guided-form
@@ -7670,22 +7832,9 @@ function syncFinalSheet(inp, r) {
     if (_e && r.edss_step !== undefined && r.edss_step !== null) _e.value = r.edss_step.toFixed(1);
   }
 
-  // ── Clone the sheet into the final-sheet container ──
+  // ── Final sheet = MSpectrum EDSS record (summary + transcription list), built from the sheet values ──
   const container = document.getElementById("fs-sheet-container");
-  const source = document.querySelector("#sc-review .sc-sheet-wrap");
-  if (container && source) {
-    const clone = source.cloneNode(true);
-    // Remove image preview sections from the clone (not needed in final sheet)
-    clone.querySelectorAll("[id^='sc-img-preview']").forEach(el => el.remove());
-    // Remove oninput handlers from clone inputs (read-only display)
-    clone.querySelectorAll("input").forEach(el => {
-      el.removeAttribute("oninput");
-      el.setAttribute("readonly", "readonly");
-    });
-    container.innerHTML = "";
-    container.appendChild(clone);
-  }
-  _syncExplainSheetPage(container, r);
+  if (container) { _ensureErCss(); container.innerHTML = buildEdssRecordHTML(r); }
 }
 
 // ============================================================
@@ -8247,47 +8396,15 @@ function fsRadarSVG(r, fixed) {
     '<text x="140" y="130" text-anchor="middle" font-size="9" fill="' + M + '">0</text><text x="140" y="' + (132 - R + 8) + '" text-anchor="middle" font-size="8" fill="' + M + '">6</text></svg>';
 }
 
-// Build the export-only "EDSS interpretation" page (radar + plain-language + FS table + rule).
-function _explainPageInner(r) {
-  var step = (r.edss_step == null) ? "-" : Number(r.edss_step).toFixed(1);
-  var rows = [["Visual (converted)", r.visual_fs_conv + " (raw " + r.visual_fs + ")"], ["Brainstem", String(r.brainstem_fs)],
-    ["Pyramidal", String(r.pyramidal_fs)], ["Cerebellar", r.cerebellar_fs + (r.cerebellar_x ? " X" : "")], ["Sensory", String(r.sensory_fs)],
-    ["Bowel/Bladder (converted)", r.bb_fs_conv + " (raw " + r.bb_fs + ")"], ["Cerebral", String(r.cerebral_fs)],
-    ["Ambulation Score", r.ambulation_score + " (" + r.ambulation_source + ")"]];
-  var tbl = rows.map(function (x) { return '<tr><td style="padding:3px 8px;border-bottom:1px solid #e3e8ee">' + x[0] + '</td><td style="padding:3px 8px;border-bottom:1px solid #e3e8ee;text-align:right;font-weight:700">' + x[1] + '</td></tr>'; }).join("");
-  return '<div style="color:#1a2330;padding:4mm 2mm">' +
-    '<div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid #1e4a6e;padding-bottom:6px;margin-bottom:12px"><div style="font-size:15pt;font-weight:800;color:#1e4a6e">EDSS interpretation</div><div style="font-size:14pt;font-weight:800">EDSS ' + step + '</div></div>' +
-    '<div style="font-size:10.5pt;line-height:1.5;margin-bottom:12px">' + edssPlainLanguage(r) + '</div>' +
-    '<div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start">' +
-      '<div style="flex:1 1 250px;min-width:230px">' + fsRadarSVG(r, true) + '</div>' +
-      '<div style="flex:1 1 230px;min-width:210px"><div style="font-weight:700;margin-bottom:4px;font-size:10pt">Functional systems (grade 0 to 6)</div><table style="width:100%;border-collapse:collapse;font-size:9.5pt">' + tbl + '</table></div>' +
-    '</div>' +
-    '<div style="margin-top:12px;font-size:9pt;color:#33414f"><b>Combination rule:</b> ' + explainRule(r) + '</div>' +
-    '<div style="margin-top:14px;font-size:8pt;color:#7a8896;border-top:1px solid #e3e8ee;padding-top:6px">Generated by MSpectrum &middot; ' + ENGINE_VERSION + '. Decision support, not a diagnosis; the final EDSS step remains the examiner\'s responsibility.</div>' +
-    '</div>';
-}
-// Append the export-only interpretation page to the cloned final sheet (hidden on screen, shown in print/PDF).
-function _syncExplainSheetPage(container, r) {
-  try {
-    if (!container) return;
-    var host = container.querySelector(".sc-pages-container") || container.querySelector(".sc-sheet-wrap") || container;
-    var old = container.querySelector("#sc-page-explain"); if (old) old.remove();
-    var pg = document.createElement("div");
-    pg.className = "sc-page"; pg.id = "sc-page-explain";
-    pg.innerHTML = _explainPageInner(r);
-    host.appendChild(pg);
-  } catch (e) {}
-}
-
 function explainRule(r) {
   if (r.edss_step == null) return "Fill the form to compute EDSS.";
   const tr = r.edss_trace || calcEDSSStepTrace({
     visual: r.visual_fs_conv, brainstem: r.brainstem_fs, pyramidal: r.pyramidal_fs, cerebellar: r.cerebellar_fs,
     sensory: r.sensory_fs, bb: r.bb_fs_conv, cerebral: r.cerebral_fs_step != null ? r.cerebral_fs_step : r.cerebral_fs,
   }, r.ambulation_score);
-  const src = tr.branch === "fs_pattern" ? "[Kurtzke 1983; Kappos 2011; Fouad 2023]"
-            : tr.branch === "as_fixed" ? "[Kappos 2011 ambulation rules; Sen 2018]"
-            : "[Kappos 2011 ambulation rules; Kurtzke 1983 FS combinations]";
+  const src = tr.branch === "fs_pattern" ? "[Kurtzke 1983; Fouad 2023]"
+            : tr.branch === "as_fixed" ? "[ambulation rules: Sen 2018; Fouad 2023]"
+            : "[ambulation rules: Sen 2018; FS combinations: Kurtzke 1983]";
   let extra = "";
   if (r.cerebral_mood_only) extra += " Depression or euphoria alone gives Cerebral FS 1 on the sheet and is not counted in the step.";
   if (r.ambulation_source === "incomplete") extra += " Ambulation not entered: assumed unrestricted (AS 0); the step is provisional.";
@@ -8674,7 +8791,7 @@ function drawSpacedText(ctx, text, x, y, spacing, align = "center") {
 // ============================================================
 // Each case gives the seven FS grades as they stand on the sheet (visual and bowel/bladder
 // already converted) and the Ambulation Score. The expected EDSS is computed by the engine
-// (calcEDSSStepTrace) under the Neurostatus conventions listed in About, so the answer key
+// (calcEDSSStepTrace) under the published rules listed in About, so the answer key
 // and the explanation are always the same rule the app applies.
 const TRAIN_CASES = [
   { title: "Isolated mild sign", fs: { visual: 0, brainstem: 0, pyramidal: 1, cerebellar: 0, sensory: 0, bb: 0, cerebral: 0 }, as: 0, note: "Brisk reflexes with a Babinski sign, no functional deficit." },
@@ -8723,7 +8840,7 @@ function trainRender() {
       ${TRAIN_ANSWERS.map((a, i) => `<tr class="${a.correct ? "ok" : "miss"}"><td>${i + 1}. ${TRAIN_CASES[i].title}</td><td>${a.given.toFixed(1)}</td><td>${a.expected.toFixed(1)}</td><td>${a.correct ? "\u2713" : a.reason}</td></tr>`).join("")}
       </tbody></table>
       <div class="qc-nav" style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="btn-cta" onclick="showTrain()">Run again</button><button type="button" class="btn-cta secondary" onclick="backToEdssModes()">Back to AutoEDSSguide</button></div>
-      <p class="qc-question-help" style="margin-top:14px">Reference cases are scored by the MSpectrum engine under the Neurostatus conventions listed in About; four are the published worked examples in Sen S, Neurostatus and EDSS calculation with cases, Arch Neuropsychiatry 2018;55(Suppl 1):S80-3, which the engine reproduces. They train the FS-to-EDSS step, not the examination itself, and are not a substitute for certified Neurostatus training.</p></div>`;
+      <p class="qc-question-help" style="margin-top:14px">Reference cases are scored by the MSpectrum engine with the published rules listed in About; four are the published worked examples in Sen S, Neurostatus and EDSS calculation with cases, Arch Neuropsychiatry 2018;55(Suppl 1):S80-3, which the engine reproduces. They train the FS-to-EDSS step, not the examination itself, and are not a substitute for certified rater training.</p></div>`;
     return;
   }
   const c = TRAIN_CASES[TRAIN_INDEX];
@@ -8748,7 +8865,7 @@ function trainAnswer(v) {
   TRAIN_ANSWERS[TRAIN_INDEX] = { given: v, expected: tr.edss, correct, reason: tr.reason };
   document.querySelectorAll("#train-pick .train-chip").forEach(b => { b.disabled = true; b.classList.toggle("is-picked", parseFloat(b.getAttribute("data-v")) === v); b.classList.toggle("is-answer", Math.abs(parseFloat(b.getAttribute("data-v")) - tr.edss) < 0.01); });
   const fb = document.getElementById("train-feedback");
-  fb.innerHTML = `<div class="train-result ${correct ? "ok" : "miss"}"><b>${correct ? "Correct." : "Engine says " + tr.edss.toFixed(1) + "."}</b> ${tr.reason} <span class="train-src">[Kurtzke 1983; Neurostatus FS combination table]</span></div>
+  fb.innerHTML = `<div class="train-result ${correct ? "ok" : "miss"}"><b>${correct ? "Correct." : "Engine says " + tr.edss.toFixed(1) + "."}</b> ${tr.reason} <span class="train-src">[Kurtzke 1983; published FS combination rules]</span></div>
     <div class="qc-nav" style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="btn-cta" onclick="TRAIN_INDEX++; trainRender(); window.scrollTo({top:0,behavior:'smooth'});">${TRAIN_INDEX + 1 < TRAIN_CASES.length ? "Next case \u2192" : "See results"}</button></div>`;
 }
 document.getElementById("train-home-btn")?.addEventListener("click", backToEdssModes);
@@ -8879,7 +8996,7 @@ function clinBuildSteps() {
         _sub("cer_ul", "Upper limb ataxia or intention tremor (rapid alternating movements, finger-nose-finger)", [
           "Normal",
           "Subtle; no interference with function",
-          "Mild, one or both sides; minor interference with function",
+          "Mild, one or both sides; slight effect on function",
           "Moderate, one or both sides; clearly interferes with function",
           "Severe or non-functional, one or both sides",
         ]),
@@ -8889,7 +9006,7 @@ function clinBuildSteps() {
           "Minimal: subtle impairment on turns",
           "Mild: mildly wide base, extra steps on turns",
           "Moderate: moderately wide base and unsafe on turns, or moderate sway with feet together and eyes open",
-          "Severe: unable to walk more than a few steps unassisted because of ataxia",
+          "Severe: ataxia prevents walking more than a few steps without help",
         ]),
       ]
     },
@@ -8909,7 +9026,7 @@ function clinBuildSteps() {
         _sub("bst_nys", "Nystagmus", [
           "Normal",
           "Mild gaze-evoked nystagmus",
-          "Nystagmus at 30 degrees but not in primary gaze",
+          "Sustained nystagmus on 30° gaze, none in primary gaze",
           "Nystagmus in primary gaze, or oscillopsia",
         ]),
         _sub("bst_trig", "Trigeminal", [
@@ -9620,7 +9737,7 @@ function buildFlatRecord() {
     worsening_type: (_ch ? _ch.type : ""),
     relapse_last_90d: (g("pt_relapse90") === true || g("pt_relapse90") === "true") ? 1 : 0,
     // Metadata
-    tool_version: "MSpectrum-v36",
+    tool_version: "MSpectrum-v36.2",
     export_timestamp: new Date().toISOString(),
     engine_version: ENGINE_VERSION,
   };
@@ -9726,7 +9843,7 @@ function v31BuildEMRNote() {
   const dist = _firstVal(inp.amb_distance_measured, inp.amb_distance_reported);
   if (dist != null) amb.push(dist + " m");
   const lines = [
-    `EDSS ${r.edss_step != null ? r.edss_step.toFixed(1) : "-"} (exam ${d}; Kurtzke EDSS scored with the published Neurostatus conventions)`,
+    `EDSS ${r.edss_step != null ? r.edss_step.toFixed(1) : "-"} (exam ${d}; Kurtzke EDSS with published standardized scoring rules)`,
     `FS: Visual ${r.visual_fs} (converted ${r.visual_fs_conv}), Brainstem ${r.brainstem_fs}, Pyramidal ${r.pyramidal_fs}, Cerebellar ${r.cerebellar_fs}${x}, Sensory ${r.sensory_fs}, Bowel/Bladder ${r.bb_fs} (converted ${r.bb_fs_conv}), Cerebral ${r.cerebral_fs}${mood}.`,
     `Ambulation: AS ${r.ambulation_score} (${AS_LABEL[Math.min(r.ambulation_score, 15)] || ""})${amb.length ? "; " + amb.join(", ") : ""}.`,
   ];
@@ -10527,6 +10644,71 @@ function scJumpToField(fieldId) {
 function scExportSheet(){
   var wrap=document.querySelector("#sc-review .sc-sheet-wrap");
   if(!wrap){ alert("Read or fill a sheet first."); return; }
+  var r=null; try{ r=calculateFullEDSS(scSheetToEngineInputs()); }catch(e){}
+  var w=window.open("","_blank","width=920,height=1040"); if(!w){ alert("Allow pop-ups to export the sheet."); return; }
+  var fonts=document.getElementById("mspectrum-fonts"); var fontCss=fonts?fonts.outerHTML:"";
+  w.document.write("<!DOCTYPE html><html><head><meta charset=utf-8><base href=\""+location.href.replace(/[^/]*$/,"")+"\"><title>EDSS record</title>"+fontCss+ER_CSS+"<style>@page{size:A4;margin:0}body{margin:0;background:#ffffff}</style></head><body>"+buildEdssRecordHTML(r)+"<scr"+"ipt>window.onload=function(){setTimeout(function(){window.print();},300);};</scr"+"ipt></body></html>");
+  w.document.close();
+}
+// ============================================================
+// LEGACY OUTPUT (kept for reference; NOT called anywhere).
+// Before v36.2 the Final Sheet was a clone of the Sheet Scanner page (paper-form layout) plus an
+// export-only interpretation page, and the scanner export printed that layout. Replaced by the
+// MSpectrum EDSS record (buildEdssRecordHTML). Kept in case a future decision needs it; to reuse,
+// call legacyCloneFinalSheet from syncFinalSheet and scExportSheetLegacy from the scanner button.
+// ============================================================
+function legacyCloneFinalSheet(r) {
+  // ── Clone the sheet into the final-sheet container ──
+  const container = document.getElementById("fs-sheet-container");
+  const source = document.querySelector("#sc-review .sc-sheet-wrap");
+  if (container && source) {
+    const clone = source.cloneNode(true);
+    // Remove image preview sections from the clone (not needed in final sheet)
+    clone.querySelectorAll("[id^='sc-img-preview']").forEach(el => el.remove());
+    // Remove oninput handlers from clone inputs (read-only display)
+    clone.querySelectorAll("input").forEach(el => {
+      el.removeAttribute("oninput");
+      el.setAttribute("readonly", "readonly");
+    });
+    container.innerHTML = "";
+    container.appendChild(clone);
+  }
+}
+// Build the export-only "EDSS interpretation" page (radar + plain-language + FS table + rule).
+function _explainPageInner(r) {
+  var step = (r.edss_step == null) ? "-" : Number(r.edss_step).toFixed(1);
+  var rows = [["Visual (converted)", r.visual_fs_conv + " (raw " + r.visual_fs + ")"], ["Brainstem", String(r.brainstem_fs)],
+    ["Pyramidal", String(r.pyramidal_fs)], ["Cerebellar", r.cerebellar_fs + (r.cerebellar_x ? " X" : "")], ["Sensory", String(r.sensory_fs)],
+    ["Bowel/Bladder (converted)", r.bb_fs_conv + " (raw " + r.bb_fs + ")"], ["Cerebral", String(r.cerebral_fs)],
+    ["Ambulation Score", r.ambulation_score + " (" + r.ambulation_source + ")"]];
+  var tbl = rows.map(function (x) { return '<tr><td style="padding:3px 8px;border-bottom:1px solid #e3e8ee">' + x[0] + '</td><td style="padding:3px 8px;border-bottom:1px solid #e3e8ee;text-align:right;font-weight:700">' + x[1] + '</td></tr>'; }).join("");
+  return '<div style="color:#1a2330;padding:4mm 2mm">' +
+    '<div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid #1e4a6e;padding-bottom:6px;margin-bottom:12px"><div style="font-size:15pt;font-weight:800;color:#1e4a6e">EDSS interpretation</div><div style="font-size:14pt;font-weight:800">EDSS ' + step + '</div></div>' +
+    '<div style="font-size:10.5pt;line-height:1.5;margin-bottom:12px">' + edssPlainLanguage(r) + '</div>' +
+    '<div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start">' +
+      '<div style="flex:1 1 250px;min-width:230px">' + fsRadarSVG(r, true) + '</div>' +
+      '<div style="flex:1 1 230px;min-width:210px"><div style="font-weight:700;margin-bottom:4px;font-size:10pt">Functional systems (grade 0 to 6)</div><table style="width:100%;border-collapse:collapse;font-size:9.5pt">' + tbl + '</table></div>' +
+    '</div>' +
+    '<div style="margin-top:12px;font-size:9pt;color:#33414f"><b>Combination rule:</b> ' + explainRule(r) + '</div>' +
+    '<div style="margin-top:14px;font-size:8pt;color:#7a8896;border-top:1px solid #e3e8ee;padding-top:6px">Generated by MSpectrum &middot; ' + ENGINE_VERSION + '. Decision support, not a diagnosis; the final EDSS step remains the examiner\'s responsibility.</div>' +
+    '</div>';
+}
+// Append the export-only interpretation page to the cloned final sheet (hidden on screen, shown in print/PDF).
+function _syncExplainSheetPage(container, r) {
+  try {
+    if (!container) return;
+    var host = container.querySelector(".sc-pages-container") || container.querySelector(".sc-sheet-wrap") || container;
+    var old = container.querySelector("#sc-page-explain"); if (old) old.remove();
+    var pg = document.createElement("div");
+    pg.className = "sc-page"; pg.id = "sc-page-explain";
+    pg.innerHTML = _explainPageInner(r);
+    host.appendChild(pg);
+  } catch (e) {}
+}
+
+function scExportSheetLegacy(){
+  var wrap=document.querySelector("#sc-review .sc-sheet-wrap");
+  if(!wrap){ alert("Read or fill a sheet first."); return; }
   var clone=wrap.cloneNode(true);
   clone.querySelectorAll(".no-print").forEach(function(e){e.remove();});
   clone.querySelectorAll("[id^='sc-img-preview']").forEach(function(e){e.remove()});
@@ -10658,7 +10840,7 @@ function resetEDSSOverride() {
 
 // Scanner stores visual acuity as a DECIMAL (1.0=20/20, 0.5=20/40, ...). The engine
 // expects a Snellen string, so map the decimal to the representative Snellen of its
-// Neurostatus grade band.
+// Published grade band.
 function scDecimalToSnellen(v) {
   if (v === null || v === undefined || v === "") return "";
   const d = parseFloat(v);
@@ -10749,7 +10931,7 @@ function scSheetToEngineInputs() {
 
   // Ambulation. Mirror scAmbSync(): map the free-text
   // assistance field to the engine enum, accepting BOTH words and numeric codes
-  // (0=none, 1=unilateral, 2=bilateral) as written on the Neurostatus sheet.
+  // (0=none, 1=unilateral, 2=bilateral) as written on the paper sheet.
   (function(){
     const distReported = val("amb-meters-reported");
     const distActual   = val("amb-meters-actual");
@@ -10830,7 +11012,7 @@ const ZONES = [{"id": "v_va_od", "page": 0, "x": 243.6, "y": 323.2, "w": 26, "h"
 // Value whitelist / type per field. Conservative; tune freely. review=acuity fraction, multi=multi-digit.
 function ruleFor(z){
   const id=z.id;
-  // Per-field valid values (Neurostatus grades). Tight ranges reject impossible/out-of-range reads.
+  // Per-field valid values (standard grades). Tight ranges reject impossible/out-of-range reads.
   if(id.startsWith('v_va'))       return {type:'acuity', wl:'0123456789/'};   // Snellen fraction
   if(id==='amb_reported'||id==='amb_time') return {type:'multi', wl:'0123456789'}; // multi-digit (e.g. 750, 12)
   if(id.endsWith('_mid'))         return {type:'asym'};                        // >< symmetry: a sign, not a number

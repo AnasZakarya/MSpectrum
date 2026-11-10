@@ -25,7 +25,9 @@ for (const k of Object.keys(boxes)) {
   ok(li(b.body).length === (k === 'mcd' ? 3 : 4), k + ': at most one page point');
   ok(/&copy; 2026 Anas Z\. Nourelden/.test(b.foot) && /#about-disclaimer">Full disclaimer</.test(b.foot) && /#cite"/.test(b.foot) && /mailto:/.test(b.foot), k + ': copyright and links inside the box');
 }
-ok((boxes.edss.body.match(/Neurostatus/g) || []).length === 2, 'Neurostatus named once (one sentence) in the AutoEDSSguide box');
+ok(!/Neurostatus/.test(boxes.edss.body) && /Kurtzke/.test(boxes.edss.body), 'AutoEDSSguide box cites Kurtzke and published rules, no Neurostatus name');
+ok(!/Centre Nr\/Country|Name of EDSS rater|v04\/10\.2|Not an official Neurostatus form/.test(files['index.html']), 'no Neurostatus form labels or booklet citation');
+ok(/On the origin of Neurostatus/.test(files['index.html']) && /Fouad AM/.test(files['index.html']) && /Sen S\./.test(files['index.html']) && /edss \(Dobra/.test(files['index.html']), 'combined EDSS sources in About');
 const FOOT1 = 'MSpectrum supports, but does not replace, clinical judgment. It is not an official product of, or endorsed by, any university, hospital or government agency.';
 for (const [f, s] of Object.entries(files)) {
   for (const gone of ['disclaimer-bar', 'info-card-warn', 'tool-disclaimer-footer', 'Not a diagnosis</span>']) ok(!s.includes(gone), f + ': no ' + gone);
