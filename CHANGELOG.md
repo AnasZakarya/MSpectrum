@@ -1,5 +1,13 @@
 # Changelog
 
+## v36.4 (2026-11-17): EDSS Calculator
+
+- New AutoEDSSguide mode, **EDSS Calculator**, for Functional System grades that are already known. Walking comes first: the help used (none, one-sided aid, two-sided aid, wheelchair, bed or chair), then the distance or level that fits it. Each FS grade is chosen from MSpectrum's own short description; a chosen grade folds to one line and can be changed.
+- Same engine as the full exam: Visual and Bowel/Bladder raw grades are converted, Cerebral grade 1 from mood change alone can be marked as not counted, and the Cerebellar X is recorded. The result shows the EDSS, the rule behind it and the FS used; an EDSS pill in the header follows the result (useful on phones).
+- Flags for results that need a second look: walking not entered (provisional FS pattern), FS not entered, limited walking with Pyramidal, Cerebellar and Sensory 0 to 1, Pyramidal or Cerebellar 4 or more with normal walking, an FS pattern of 5.0 or more with 500 m or more of walking, and FS pattern and walking far apart.
+- "Copy summary" copies a one-line text summary; the message appears only after the browser confirms the copy.
+- Tests: tests/fscalc.test.js (25 checks, including 2000 random cases identical to the engine step function and the walking choices matching the Ambulation Score rules).
+
 ## v36.3 (2026-11-10): EDSS record details and second wording pass
 
 - **EDSS record:** the Cerebellar FS shows the X marker ("1 X") in the FS bars, the findings card, the transcription list and the summary line. Findings marked P / T (not due to MS) show "(not due to MS; not scored)" on page 1 and keep the P / T suffix on page 2. A "Severity and change" line (ARMSS, MSSS, change vs baseline, with sources) is printed when those values exist; it is left out of the Sheet Scanner export, which has no such inputs.

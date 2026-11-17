@@ -28,6 +28,7 @@ No installation. No login. Works in any modern browser.
 | **Roadmap** | Raters / research | Full standardized EDSS exam, guided step-by-step in exam order (history, then cranial nerves, then body). |
 | **System view** | Raters | All 7 Functional Systems on one page, in the usual paper-form order. |
 | **Clinical EDSS** | Neurologists | Fast adaptive follow-up scoring (streamlined sEDSS, Baldassari 2018). |
+| **EDSS Calculator** | Clinicians | Functional System grades already known (each grade shown with a short description) plus walking (help used first, then distance); same conversions and step rules as the full exam, with flags for results that need a second look. |
 | **Quick Check** | People with MS | Four published self-report questions: SRDSS (Kaufmann 2020) gives an EDSS range; PDDS adds the disease step. |
 | **Sheet Scanner** | Raters | Upload or photograph a completed EDSS scoring sheet (standard research layout); fields are OCR-extracted and scored. |
 | **Train mode** | Raters in training | 20 reference cases (four are the published worked examples in Sen 2018): read the FS grades and Ambulation Score, pick the EDSS, and compare with the engine step and the rule behind it. A practice aid, not a certification. |

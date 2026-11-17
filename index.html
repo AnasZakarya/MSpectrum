@@ -952,6 +952,42 @@ html[data-theme="dark"] .cite-box { background: #1e2636; border-color: var(--rul
 .clinical-exit-body { flex: 1; }
 .clinical-exit-title { font-weight: 700; font-size: 15px; color:#7a4500; margin-bottom: 4px; }
 .clinical-exit-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+/* EDSS Calculator (known FS grades + walking) */
+.fsc-main { padding: 24px 16px 80px; }
+.fsc-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 20px; width: 100%; max-width: 1120px; align-items: start; }
+.fsc-side { position: sticky; top: 84px; max-height: calc(100vh - 100px); overflow-y: auto; border-radius: 14px; }
+@media (max-width: 900px) { .fsc-layout { grid-template-columns: 1fr; } .fsc-side { position: static; } }
+.fsc-card { background: var(--paper); border-radius: 14px; box-shadow: 0 2px 14px rgba(0,0,0,0.07); padding: 18px 20px; margin-bottom: 14px; }
+.fsc-intro { font-size: 13.5px; color: var(--ink-soft); line-height: 1.5; margin: 0 0 4px; }
+.fsc-group { font-size: 12.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--accent-ink); margin: 18px 0 10px; border-bottom: 2px solid var(--rule); padding-bottom: 6px; }
+.fsc-h { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 2px; }
+.fsc-h h3 { margin: 0; font-size: 16px; color: var(--ink); }
+.fsc-grade { font-size: 13px; font-weight: 700; color: #1e4fa3; white-space: nowrap; }
+.fsc-sub { font-size: 12px; color: var(--ink-soft); margin: 0 0 10px; }
+.fsc-step { font-size: 12px; font-weight: 700; color: var(--ink-soft); margin: 12px 0 6px; }
+.fsc-opts { display: flex; flex-direction: column; gap: 6px; }
+.fsc-opts .clinical-opt { padding: 8px 12px; gap: 10px; }
+.fsc-opts .clinical-opt-key { width: 24px; height: 24px; font-size: 12px; flex-shrink: 0; }
+.fsc-opts .clinical-opt-title { font-size: 13px; font-weight: 600; }
+.fsc-pill { font: inherit; font-size: 13px; font-weight: 800; color: #fff; background: #1e4fa3; border: 0; border-radius: 999px; padding: 6px 12px; cursor: pointer; white-space: nowrap; }
+.fsc-pill.prov { background: #8a94a6; }
+@media (max-width: 600px) { #fscalc .clinical-btn#fsc-reset-btn { display: none; } }
+.fsc-change { margin-left: 8px; font: inherit; font-size: 11.5px; font-weight: 600; color: #1e4fa3; background: none; border: 1px solid var(--rule); border-radius: 999px; padding: 1px 9px; cursor: pointer; text-transform: none; letter-spacing: 0; }
+html[data-theme="dark"] .fsc-change { color: #bcd6f0 !important; }
+.fsc-check { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; color: var(--ink-soft); margin-top: 10px; cursor: pointer; }
+.fsc-check input { margin-top: 2px; }
+.fsc-flag { border-radius: 8px; padding: 8px 10px; font-size: 12.5px; line-height: 1.45; margin-top: 8px; text-align: left; }
+.fsc-flag.warn { background: #fff6e6; border-left: 4px solid #e09a24; color: #5a3a00; }
+.fsc-flag.info { background: #eef4fa; border-left: 4px solid #1e4a6e; color: #1f2a37; }
+.fsc-why { font-size: 13px; color: var(--ink); line-height: 1.5; text-align: left; margin-top: 12px; }
+.fsc-why b { display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 2px; }
+.fsc-src { font-size: 11px; color: var(--ink-faint); margin-top: 12px; text-align: left; line-height: 1.45; }
+.fsc-side .clinical-result-score { font-size: 60px; }
+.fsc-side .clinical-fs-grid { margin: 12px 0 4px; }
+.fsc-side .clinical-fs-val small { font-size: 11px; font-weight: 600; color: var(--ink-soft); }
+html[data-theme="dark"] .fsc-flag.warn { background: #3a2c12 !important; color: #f3dcb0 !important; }
+html[data-theme="dark"] .fsc-flag.info { background: #16283a !important; color: #cfe0f2 !important; }
+html[data-theme="dark"] .fsc-grade { color: #bcd6f0 !important; }
 .clinical-result { text-align: center; padding: 8px 0; }
 .clinical-result-label { font-size: 13px; color: var(--ink-soft); margin-bottom: 8px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
 .clinical-result-score { font-size: 72px; font-weight: 900; line-height: 1; color:#1e4fa3; margin-bottom: 8px; }
@@ -3784,10 +3820,10 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     <button type="button" class="back-to-explore" id="back-to-explore">← Back to MSpectrum</button>
     <div class="tool-hero">
       <div class="tool-hero-frame"><h3><span class="tool-hero-icon">🧠</span>AutoEDSSguide</h3></div>
-      <div class="tool-hero-desc">AutoEDSSguide scores the EDSS in real time from a full standardized neurological exam, with a print-ready sheet, OCR scanner and inconsistency flags. Choose how you want to work below: a guided exam, the classic system layout, a paper-sheet scanner, a fast clinical mode, or a plain-language self-check for people with MS.</div>
+      <div class="tool-hero-desc">AutoEDSSguide scores the EDSS in real time from a full standardized neurological exam, with a print-ready sheet, OCR scanner and inconsistency flags. Choose how you want to work below: a guided exam, the classic system layout, a paper-sheet scanner, a fast clinical mode, a calculator for FS grades you already have, or a plain-language self-check for people with MS.</div>
     </div>
     <div class="info-cards" role="note">
-      <div class="info-card"><div class="info-card-head"><span class="info-ico">👥</span><span class="info-title">Who can use each mode</span></div><p><b>Roadmap</b> and <b>System view</b> are for clinicians performing a full standardized EDSS exam. <b>Sheet Scanner</b> processes a completed paper form automatically. <b>Clinical EDSS</b> is the streamlined EDSS (sEDSS, Baldassari 2018), a shorter version for routine follow-up. <b>Quick Check</b> is for <b>people with MS</b>: four published self-report questions that estimate an EDSS range without a clinical exam. <b>Train mode</b> lets raters practise the FS-to-EDSS step on reference cases.</p></div>
+      <div class="info-card"><div class="info-card-head"><span class="info-ico">👥</span><span class="info-title">Who can use each mode</span></div><p><b>Roadmap</b> and <b>System view</b> are for clinicians performing a full standardized EDSS exam. <b>Sheet Scanner</b> processes a completed paper form automatically. <b>Clinical EDSS</b> is the streamlined EDSS (sEDSS, Baldassari 2018), a shorter version for routine follow-up. <b>EDSS Calculator</b> takes Functional System grades you already have, plus walking, and applies the EDSS step rules. <b>Quick Check</b> is for <b>people with MS</b>: four published self-report questions that estimate an EDSS range without a clinical exam. <b>Train mode</b> lets raters practise the FS-to-EDSS step on reference cases.</p></div>
       <div class="info-card"><div class="info-card-head"><span class="info-ico">⚡</span><span class="info-title">How it works</span></div><p>Choose a mode below. Scores update <b>automatically</b> in real time as you enter exam findings; there is no Calculate button. The Roadmap guides you step by step; System view follows the classic FS layout used on research EDSS forms. You can switch modes any time without losing your data, and "How was this scored?" shows the rule behind the number.</p></div>
     </div>
     <p class="ways-group-label" style="font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);margin:20px 0 12px;border-bottom:2px solid var(--rule);padding-bottom:6px;display:block;">Full EDSS - detailed assessment</p>
@@ -3814,13 +3850,20 @@ details.card-optional .card-optional-body { margin-top: 12px; }
       </button>
     </div>
     <p class="ways-group-label" style="font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);margin:20px 0 12px;border-bottom:2px solid var(--rule);padding-bottom:6px;display:block;">Quick &amp; tailored</p>
-    <div class="ways-grid ways-grid-3">
+    <div class="ways-grid ways-grid-2">
       <button type="button" class="way-card clinical-waycard" id="clinical-way-btn" aria-label="Start Clinical EDSS">
         <span class="badge" style="background:#7b3fa0;color:white;">For neurologists</span>
         <h3>Clinical EDSS</h3>
         <div class="way-sub">sEDSS · Routine follow-up</div>
         <p>The streamlined EDSS (sEDSS, Baldassari 2018) for clinic visits: fewer maneuvers, each functional system scored as its highest subscore, walking by patient report. Ambulation comes first; if the patient uses a wheelchair, scoring ends in under a minute.</p>
         <span class="way-cta">Start Clinical →</span>
+      </button>
+      <button type="button" class="way-card clinical-waycard" id="fscalc-way-btn" aria-label="Open EDSS Calculator">
+        <span class="badge" style="background:#1e4fa3;color:white;">For clinicians</span>
+        <h3>EDSS Calculator</h3>
+        <div class="way-sub">Known FS grades + walking &middot; About 1 minute</div>
+        <p>Already graded the seven Functional Systems? Choose each grade from its short description and the walking level; the EDSS updates as you go, with the rule behind it and flags for results that need a second look.</p>
+        <span class="way-cta">Open Calculator →</span>
       </button>
       <button type="button" class="way-card train-card" data-enter-view="train" aria-label="Start Train mode">
         <span class="badge" style="background:#4a6b8a;color:white;">Learn</span>
@@ -4493,6 +4536,22 @@ details.card-optional .card-optional-body { margin-top: 12px; }
   </header>
   <main class="clinical-main">
     <div id="clin-stage"></div>
+  </main>
+</section>
+
+<!-- ========================================================== -->
+<!-- EDSS CALCULATOR (known FS grades + walking) -->
+<section class="clinical-view" id="fscalc">
+  <header class="clinical-header">
+    <button class="home-btn" id="fsc-home-btn" aria-label="Back to AutoEDSSguide modes">&larr; Home</button>
+    <div class="clinical-brand brand-mark">Auto<em>EDSS</em>guide &middot; EDSS Calculator</div>
+    <div style="display:flex;gap:8px;align-items:center"><button type="button" class="fsc-pill" id="fsc-pill" aria-label="Go to the EDSS result">EDSS &ndash;</button><button type="button" class="clinical-btn" id="fsc-reset-btn">Reset</button></div>
+  </header>
+  <main class="clinical-main fsc-main">
+    <div class="fsc-layout">
+      <div id="fsc-form"></div>
+      <aside class="fsc-side" id="fsc-result" aria-live="polite"></aside>
+    </div>
   </main>
 </section>
 
@@ -5267,6 +5326,74 @@ function calculateFullEDSS(inputs) {
     };
 }
 
+
+// ============================================================
+// EDSS Calculator: EDSS from Functional System grades already known plus walking.
+// Uses the same conversions and step rules as the full exam (one rule source).
+// ============================================================
+// Walking choices: help used first, then the distance or level that fits it.
+// Each choice maps to the Ambulation Score categories of calcAmbulationScore / AS_LABEL.
+const FSC_WALK = {
+  none: [["Normal walking, no limits", 0], ["500 m or more, but walking is limited", 1], ["300 to 499 m without rest", 2],
+         ["200 to 299 m without rest", 3], ["100 to 199 m without rest", 4], ["Less than 100 m without rest", 5]],
+  uni:  [["More than 50 m", 6], ["50 m or less", 8]],
+  bi:   [["More than 120 m", 7], ["10 to 120 m", 9]],
+  wc:   [["Wheels self and transfers alone", 10], ["Needs help to transfer or to move the wheelchair", 11]],
+  bed:  [["Out of bed much of the day; effective use of arms", 12], ["In bed much of the day; some effective use of arm(s)", 13],
+         ["Helpless in bed; can communicate and eat", 14], ["Totally helpless; cannot communicate effectively or eat/swallow", 15]],
+};
+const FSC_KEYS = ["pyramidal", "cerebellar", "brainstem", "sensory", "bb", "visual", "cerebral"];
+const FSC_NAMES = { pyramidal: "Pyramidal", cerebellar: "Cerebellar", brainstem: "Brainstem", sensory: "Sensory", bb: "Bowel & bladder", visual: "Visual", cerebral: "Cerebral" };
+
+function fsCalcCompute(st) {
+    st = st || {};
+    const raw = {}, missing = [];
+    FSC_KEYS.forEach(k => {
+        const v = st[k];
+        if (v === null || v === undefined || v === "") { raw[k] = 0; missing.push(k); } else raw[k] = Number(v);
+    });
+    const moodOnly = raw.cerebral === 1 && st.cerebral_mood_only === true;
+    const fs = {
+        visual: visualFSConverted(raw.visual), brainstem: raw.brainstem, pyramidal: raw.pyramidal,
+        cerebellar: raw.cerebellar, sensory: raw.sensory, bb: bbFSConverted(raw.bb), cerebral: moodOnly ? 0 : raw.cerebral,
+    };
+    const AS = (st.as === null || st.as === undefined || st.as === "") ? null : Number(st.as);
+    const tr = calcEDSSStepTrace(fs, AS === null ? 0 : AS);
+    let reason = tr.reason;
+    if (AS === null) {
+        const list = [fs.visual, fs.brainstem, fs.pyramidal, fs.cerebellar, fs.sensory, fs.bb, fs.cerebral];
+        reason = `Walking not entered. The FS pattern (${_fsPatternText(list)}) gives ${tr.fs_step.toFixed(1)}; a walking limit can only raise it.`;
+    }
+    const out = { edss: tr.edss, fs_step: tr.fs_step, provisional: AS === null, as: AS, trace: tr, reason, fs, raw, missing,
+                  moodOnly, x: st.cerebellar_x === true, empty: missing.length === FSC_KEYS.length && AS === null };
+    out.flags = fsCalcFlags(out);
+    return out;
+}
+
+// Checks for results that do not fit the usual rules well. Each flag: { level: "warn" | "info", text }.
+function fsCalcFlags(r) {
+    const f = [], raw = r.raw, AS = r.as, tr = r.trace;
+    const motor = Math.max(raw.pyramidal, raw.cerebellar, raw.sensory);
+    if (r.empty) return f;
+    if (r.provisional) f.push({ level: "warn", text: "Walking is not entered, so this is the FS pattern only. Choose the help used and the distance to finish." });
+    if (r.missing.length && r.missing.length < FSC_KEYS.length) f.push({ level: "info", text: "Not entered, counted as 0: " + r.missing.map(k => FSC_NAMES[k]).join(", ") + "." });
+    if (raw.visual !== r.fs.visual) f.push({ level: "info", text: `Visual grade ${raw.visual} counts as ${r.fs.visual} for the EDSS step (converted grade).` });
+    if (raw.bb !== r.fs.bb) f.push({ level: "info", text: `Bowel & bladder grade ${raw.bb} counts as ${r.fs.bb} for the EDSS step (converted grade).` });
+    if (r.moodOnly) f.push({ level: "info", text: "Cerebral grade 1 from mood change alone is not counted in the EDSS step (counted as 0)." });
+    if (r.x) f.push({ level: "info", text: "Cerebellar X: weakness or sensory loss limits cerebellar testing. The grade is kept as entered." });
+    if (AS !== null && AS >= 2 && motor <= 1)
+        f.push({ level: "warn", text: "Walking is limited, but Pyramidal, Cerebellar and Sensory are 0 or 1. Check these grades, or note a cause that is not MS (for example pain or orthopedic)." });
+    if (AS !== null && AS <= 1 && Math.max(raw.pyramidal, raw.cerebellar) >= 4)
+        f.push({ level: "warn", text: "Pyramidal or Cerebellar grade 4 or more usually limits walking. Check the walking distance." });
+    if (AS !== null && AS <= 1 && tr.fs_step >= 5.0)
+        f.push({ level: "warn", text: `The FS pattern reaches ${tr.fs_step.toFixed(1)} while the patient walks 500 m or more. Steps from 5.0 up are usually set by walking; check the distance.` });
+    if (AS !== null && AS >= 1 && AS <= 4 && Math.abs(tr.fs_step - tr.floor) >= 1.5)
+        f.push({ level: "warn", text: `The FS pattern (${tr.fs_step.toFixed(1)}) and walking (at least ${tr.floor.toFixed(1)}) are far apart. The EDSS takes the higher one; check both.` });
+    if (AS !== null && AS >= 5 && motor === 2)
+        f.push({ level: "warn", text: `Walking sets the EDSS at ${tr.edss.toFixed(1)}, but Pyramidal, Cerebellar and Sensory are 2 or less. Check the grades or a cause that is not MS.` });
+    return f;
+}
+
 // Export for node testing
 if (false) {
     module.exports = {
@@ -5276,6 +5403,7 @@ if (false) {
         calcAmbulationScore, shouldSuggestCerebellarX, cerebralMoodOnly,
         calcEDSSStep, calcEDSSStepTrace, calculateFullEDSS, MUSCLE_KEYS,
         AS_FIXED_EDSS, AS_FLOOR_EDSS, AS_LABEL, ENGINE_VERSION,
+        fsCalcCompute, fsCalcFlags, FSC_WALK, FSC_KEYS,
     };
 }
 
@@ -7949,7 +8077,7 @@ document.getElementById("view-toggle").addEventListener("click", (ev) => {
 function showApp(forceView) {
   // Hide landing (including .picking) and any other open view — no stacking
   document.getElementById("landing").classList.remove("active","picking");
-  ["scanner","clinical","quickcheck","train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
+  ["scanner","clinical","fscalc","quickcheck","train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
   document.getElementById("app").classList.add("active");
   // If user picked a specific view from landing, honor it
   if (forceView && (forceView === "roadmap" || forceView === "system")) {
@@ -7974,7 +8102,7 @@ function backToEdssModes() {
   var _fab=document.getElementById("tips-fab"); if(_fab) _fab.style.display="none";
   try { FORM_STATE = { ...FORM_STATE, ...captureState() }; } catch (e) {}
   try { scStopCamera(); } catch (e) {}
-  ["app","scanner","clinical","quickcheck","train"].forEach(id => {
+  ["app","scanner","clinical","fscalc","quickcheck","train"].forEach(id => {
     const el = document.getElementById(id); if (el) el.classList.remove("active");
   });
   const L = document.getElementById("landing");
@@ -8825,7 +8953,7 @@ const TRAIN_STEPS = [0, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 
 let TRAIN_INDEX = 0, TRAIN_ANSWERS = [];
 function showTrain() {
   document.getElementById("landing").classList.remove("active","picking");
-  ["app","scanner","clinical","quickcheck"].forEach(id => document.getElementById(id)?.classList.remove("active"));
+  ["app","scanner","clinical","fscalc","quickcheck"].forEach(id => document.getElementById(id)?.classList.remove("active"));
   refreshTipsFab();
   document.getElementById("train").classList.add("active");
   TRAIN_INDEX = 0; TRAIN_ANSWERS = [];
@@ -8877,7 +9005,7 @@ document.getElementById("train-home-btn")?.addEventListener("click", backToEdssM
 
 function showQuickCheck() {
   document.getElementById("landing").classList.remove("active","picking");
-  ["app","scanner","clinical","train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
+  ["app","scanner","clinical","fscalc","train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
   refreshTipsFab();
   document.getElementById("quickcheck").classList.add("active");
   QC_ANSWERS = {}; QC_INDEX = 0; QC_EARLY_EXIT = null; QC_EE_DISMISSED = false;
@@ -9594,7 +9722,7 @@ function clinGoHome() { backToEdssModes(); }
 
 function showClinical() {
   document.getElementById("landing").classList.remove("active","picking");
-  ["app","scanner","quickcheck","train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
+  ["app","scanner","fscalc","quickcheck","train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
   refreshTipsFab();
   document.getElementById("clinical").classList.add("active");
   CLIN_STATE = {}; CLIN_STEP = 0;
@@ -9603,6 +9731,155 @@ function showClinical() {
 }
 
 document.getElementById("clin-home-btn")?.addEventListener("click", clinGoHome);
+
+// ============================================================
+// EDSS Calculator UI (state -> fsCalcCompute in the engine)
+// ============================================================
+let FSC_STATE = {};
+let FSC_EDIT = null;   // block reopened for editing after a value was chosen ("help", "as" or an FS key)
+const FSC_HELP = [
+  ["none", "No help", "Walks without a cane, crutch, brace or walker"],
+  ["uni", "One-sided aid", "Cane, single crutch or brace"],
+  ["bi", "Two-sided aid", "Two canes or crutches, or a walker"],
+  ["wc", "Wheelchair", "Cannot walk more than about 5 m even with aids"],
+  ["bed", "Bed or chair", "Restricted to bed or chair"],
+];
+const FSC_FS_SUB = {
+  pyramidal: "Strength and motor signs", cerebellar: "Limb and gait ataxia, tremor", brainstem: "Eye movements, nystagmus, face, speech, swallowing",
+  sensory: "Touch, pain, vibration and position sense", bb: "Enter the raw grade (0 to 6); MSpectrum converts it for the EDSS step",
+  visual: "Enter the raw grade (0 to 6); MSpectrum converts it for the EDSS step", cerebral: "Mentation and fatigue",
+};
+
+function showFsCalc() {
+  document.getElementById("landing").classList.remove("active", "picking");
+  ["app", "scanner", "clinical", "quickcheck", "train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
+  refreshTipsFab();
+  document.getElementById("fscalc").classList.add("active");
+  fscRender();
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+function _fscOpt(attr, val, key, title, selected) {
+  return `<div class="clinical-opt${selected ? " selected" : ""}" role="button" tabindex="0" ${attr}="${val}">
+      <div class="clinical-opt-key">${key}</div>
+      <div class="clinical-opt-body"><div class="clinical-opt-title">${escHtml(title)}</div></div></div>`;
+}
+
+function fscRender() {
+  const S = FSC_STATE;
+  let h = `<div class="fsc-card"><p class="fsc-intro">Use this when the Functional System grades are already known, for example from your own exam or a record. Choose walking first, then each grade from its short description. The EDSS updates on the right.</p></div>`;
+  // Walking
+  h += `<div class="fsc-group">Walking</div><div class="fsc-card"><div class="fsc-h"><h3>Walking</h3><span class="fsc-grade">${S.as != null ? "Ambulation Score " + S.as : "Not entered"}</span></div>`;
+  const openHelp = !S.help || FSC_EDIT === "help";
+  h += `<div class="fsc-step">1. Help used for walking${openHelp ? "" : ` <button type="button" class="fsc-change" data-fsc-edit="help">Change</button>`}</div><div class="fsc-opts">` +
+       FSC_HELP.map((o, i) => (openHelp || S.help === o[0]) ? _fscOpt("data-fsc-help", o[0], i + 1, o[1] + " · " + o[2], S.help === o[0]) : "").join("") + `</div>`;
+  if (S.help) {
+    const lab = S.help === "none" ? "2. Distance without rest" : S.help === "wc" ? "2. Wheelchair use" : S.help === "bed" ? "2. Level of dependence" : "2. Distance with the aid, without rest";
+    const openAs = S.as == null || FSC_EDIT === "as";
+    h += `<div class="fsc-step">${lab}${openAs ? "" : ` <button type="button" class="fsc-change" data-fsc-edit="as">Change</button>`}</div><div class="fsc-opts">` +
+         FSC_WALK[S.help].map((o, i) => (openAs || S.as === o[1]) ? _fscOpt("data-fsc-as", o[1], String.fromCharCode(97 + i), o[0], S.as === o[1]) : "").join("") + `</div>`;
+    if (S.help === "bi") h += `<div class="fsc-sub" style="margin-top:8px">Less than about 5 m even with aids: choose Wheelchair.</div>`;
+  }
+  h += `</div>`;
+  // Functional systems
+  h += `<div class="fsc-group">Functional systems <button type="button" class="clinical-btn" id="fsc-allnormal" style="float:right;padding:3px 10px;font-size:11px;text-transform:none;letter-spacing:0">All normal (0)</button></div>`;
+  FSC_KEYS.forEach(k => {
+    const ref = FS_SCORE_REF[k] || [];
+    const v = S[k];
+    const open = v == null || FSC_EDIT === k;
+    h += `<div class="fsc-card"><div class="fsc-h"><h3>${FSC_NAMES[k]}</h3><span class="fsc-grade">${v != null ? "Grade " + v + (k === "cerebellar" && S.cerebellar_x ? " X" : "") : "Not entered"}${open ? "" : ` <button type="button" class="fsc-change" data-fsc-edit="${k}">Change</button>`}</span></div>${open ? `<div class="fsc-sub">${FSC_FS_SUB[k]}</div>` : ""}<div class="fsc-opts">` +
+         ref.map(g => (open || v === g[0]) ? _fscOpt("data-fsc-fs", k + ":" + g[0], g[0], g[1], v === g[0]) : "").join("") + `</div>`;
+    if (k === "cerebellar") h += `<label class="fsc-check"><input type="checkbox" id="fsc-x" ${S.cerebellar_x ? "checked" : ""}> X: weakness or sensory loss limits cerebellar testing (recorded, does not change the grade)</label>`;
+    if (k === "cerebral") h += `<label class="fsc-check"><input type="checkbox" id="fsc-mood" ${S.cerebral_mood_only ? "checked" : ""} ${v === 1 ? "" : "disabled"}> Grade 1 is from mood change only (depression or euphoria); not counted in the EDSS step</label>`;
+    h += `</div>`;
+  });
+  document.getElementById("fsc-form").innerHTML = h;
+  fscRenderResult();
+}
+
+function fscRenderResult() {
+  const el = document.getElementById("fsc-result");
+  const r = fsCalcCompute(FSC_STATE);
+  const pill = document.getElementById("fsc-pill");
+  if (pill) { pill.textContent = r.empty ? "EDSS \u2013" : "EDSS " + r.edss.toFixed(1) + (r.provisional ? "?" : ""); pill.classList.toggle("prov", r.empty || r.provisional); }
+  if (r.empty) {
+    el.innerHTML = `<div class="fsc-card"><div class="clinical-result"><div class="clinical-result-label">EDSS</div><div class="clinical-result-score" style="color:var(--ink-faint)">&ndash;</div><div class="clinical-result-desc" style="font-size:13px;color:var(--ink-soft)">Choose walking and the FS grades to see the EDSS.</div></div></div>`;
+    return;
+  }
+  const order = FSC_KEYS;
+  const grid = order.map(k => {
+    const raw = FSC_STATE[k], conv = r.fs[k];
+    let val = raw == null ? "&ndash;" : String(raw);
+    if (raw != null && (k === "visual" || k === "bb") && conv !== raw) val += ` <small>&rarr; ${conv}</small>`;
+    if (k === "cerebellar" && raw != null && r.x) val += " X";
+    if (k === "cerebral" && r.moodOnly) val += ` <small>&rarr; 0</small>`;
+    return `<div class="clinical-fs-item"><div class="clinical-fs-name">${FSC_NAMES[k]}</div><div class="clinical-fs-val">${val}</div></div>`;
+  }).join("") + `<div class="clinical-fs-item"><div class="clinical-fs-name">Ambulation Score</div><div class="clinical-fs-val">${r.as != null ? r.as : "&ndash;"}</div></div>`;
+  const flags = r.flags.map(f => `<div class="fsc-flag ${f.level}">${escHtml(f.text)}</div>`).join("");
+  el.innerHTML = `<div class="fsc-card"><div class="clinical-result">
+      <div class="clinical-result-label">${r.provisional ? "EDSS (FS pattern only)" : "EDSS"}</div>
+      <div class="clinical-result-score">${r.edss.toFixed(1)}</div>
+      <div class="clinical-result-desc" style="margin-bottom:8px">${escHtml(r.provisional ? "Provisional: walking not entered" : clinEdssLabel(r.edss))}</div>
+      <div class="clinical-fs-grid">${grid}</div>
+      <div class="fsc-why"><b>How this step was reached</b>${escHtml(r.reason)}</div>
+      ${flags}
+      <div class="clinical-nav" style="margin-top:14px;flex-wrap:wrap">
+        <button type="button" class="clinical-btn primary" id="fsc-copy-btn">Copy summary</button>
+        <button type="button" class="clinical-btn" id="fsc-reset-btn2">Reset</button>
+      </div>
+      <div class="fsc-src">Same conversions and step rules as the full AutoEDSSguide exam: Kurtzke 1983 and the published standardized rules (Sen 2018; Fouad 2023; full list in About). FS descriptions are short summaries; grade each system from your own standardized exam. Supports, but does not replace, clinical judgment.</div>
+    </div></div>`;
+}
+
+function fscSummaryText() {
+  const r = fsCalcCompute(FSC_STATE);
+  const fsTxt = FSC_KEYS.map(k => {
+    const raw = FSC_STATE[k];
+    if (raw == null) return FSC_NAMES[k] + " not entered";
+    let t = FSC_NAMES[k] + " " + raw;
+    if ((k === "visual" || k === "bb") && r.fs[k] !== raw) t += " (counts as " + r.fs[k] + ")";
+    if (k === "cerebellar" && r.x) t += " X";
+    if (k === "cerebral" && r.moodOnly) t += " (mood only, not counted)";
+    return t;
+  }).join("; ");
+  const walk = r.as != null ? "Ambulation Score " + r.as + " (" + AS_LABEL[r.as] + ")" : "walking not entered";
+  return `EDSS ${r.edss.toFixed(1)}${r.provisional ? " (provisional, FS pattern only)" : ""}. Walking: ${walk}. FS: ${fsTxt}. ${r.reason} (MSpectrum AutoEDSSguide, EDSS Calculator)`;
+}
+
+function fscReset() { FSC_STATE = {}; FSC_EDIT = null; fscRender(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+
+document.getElementById("fscalc-way-btn")?.addEventListener("click", showFsCalc);
+document.getElementById("fsc-home-btn")?.addEventListener("click", backToEdssModes);
+document.getElementById("fsc-reset-btn")?.addEventListener("click", fscReset);
+document.getElementById("fsc-pill")?.addEventListener("click", () => document.getElementById("fsc-result")?.scrollIntoView({ behavior: "smooth", block: "start" }));
+(function () {
+  const root = document.getElementById("fscalc");
+  if (!root) return;
+  function act(t) {
+    const help = t.closest("[data-fsc-help]"), as = t.closest("[data-fsc-as]"), fs = t.closest("[data-fsc-fs]");
+    const ed = t.closest("[data-fsc-edit]");
+    if (ed) { FSC_EDIT = ed.getAttribute("data-fsc-edit"); fscRender(); return true; }
+    if (help) { const v = help.getAttribute("data-fsc-help"); if (FSC_STATE.help !== v) { FSC_STATE.help = v; FSC_STATE.as = null; } FSC_EDIT = null; fscRender(); return true; }
+    if (as) { FSC_STATE.as = Number(as.getAttribute("data-fsc-as")); FSC_EDIT = null; fscRender(); return true; }
+    if (fs) { const p = fs.getAttribute("data-fsc-fs").split(":"); FSC_STATE[p[0]] = Number(p[1]); if (p[0] === "cerebral" && Number(p[1]) !== 1) FSC_STATE.cerebral_mood_only = false; FSC_EDIT = null; fscRender(); return true; }
+    if (t.closest("#fsc-allnormal")) { FSC_KEYS.forEach(k => { FSC_STATE[k] = 0; }); FSC_STATE.cerebral_mood_only = false; FSC_EDIT = null; fscRender(); return true; }
+    if (t.closest("#fsc-reset-btn2")) { fscReset(); return true; }
+    if (t.closest("#fsc-copy-btn")) {
+      const txt = fscSummaryText();
+      try { navigator.clipboard.writeText(txt).then(() => showToast("Summary copied"), () => showToast("Copy not allowed by the browser")); }
+      catch (e) { showToast("Copy not allowed by the browser"); }
+      return true;
+    }
+    return false;
+  }
+  root.addEventListener("click", e => { act(e.target); });
+  root.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches(".clinical-opt")) { e.preventDefault(); act(e.target); } });
+  root.addEventListener("change", e => {
+    if (e.target.id === "fsc-x") { FSC_STATE.cerebellar_x = e.target.checked; fscRender(); }
+    if (e.target.id === "fsc-mood") { FSC_STATE.cerebral_mood_only = e.target.checked; fscRender(); }
+  });
+})();
+
 
 // ============================================================
 // Privacy banner (first visit)
@@ -9619,7 +9896,7 @@ if (!_privSeen) {
   // Shown the first time an app view opens (the landing page already carries the privacy tag under the hero).
   window._privacyPending = true;
   window._privacyShow = function(){ if(!window._privacyPending) return; window._privacyPending=false; document.getElementById("privacy-banner")?.classList.add("show"); setTimeout(_privacyDismiss, 8000); };
-  document.addEventListener("click", function(ev){ if(ev.target.closest && ev.target.closest("[data-enter-view], #clinical-way-btn")) setTimeout(window._privacyShow, 400); });
+  document.addEventListener("click", function(ev){ if(ev.target.closest && ev.target.closest("[data-enter-view], #clinical-way-btn, #fscalc-way-btn")) setTimeout(window._privacyShow, 400); });
 }
 document.getElementById("privacy-dismiss")?.addEventListener("click", _privacyDismiss);
 
@@ -9742,7 +10019,7 @@ function buildFlatRecord() {
     worsening_type: (_ch ? _ch.type : ""),
     relapse_last_90d: (g("pt_relapse90") === true || g("pt_relapse90") === "true") ? 1 : 0,
     // Metadata
-    tool_version: "MSpectrum-v36.3",
+    tool_version: "MSpectrum-v36.4",
     export_timestamp: new Date().toISOString(),
     engine_version: ENGINE_VERSION,
   };
@@ -10078,7 +10355,7 @@ let SC_ZONE_ADJ = { dx:0, dy:0, sc:1 };  // manual grid nudge (PDF points / scal
 
 function showScanner() {
   document.getElementById("landing").classList.remove("active","picking");
-  ["app","clinical","quickcheck","train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
+  ["app","clinical","fscalc","quickcheck","train"].forEach(id => document.getElementById(id)?.classList.remove("active"));
   document.getElementById("scanner").classList.add("active");
   window.scrollTo({ top:0, behavior:"instant" });
   scInitUI();
@@ -11606,7 +11883,7 @@ window.scExtractAllZones = async function(){
 (function(){
   var IDS=["about-mspectrum","about-disclaimer","about-sources","cite"];
   function go(){ var id=(location.hash||"").slice(1); if(IDS.indexOf(id)<0) return;
-    ["app","scanner","clinical","quickcheck","train"].forEach(function(v){ var e=document.getElementById(v); if(e) e.classList.remove("active"); });
+    ["app","scanner","clinical","fscalc","quickcheck","train"].forEach(function(v){ var e=document.getElementById(v); if(e) e.classList.remove("active"); });
     var L=document.getElementById("landing"); if(L){ L.classList.add("active"); L.classList.remove("picking"); }
     var t=document.getElementById(id); if(!t) return; if(t.tagName==="DETAILS") t.open=true;
     setTimeout(function(){ t.scrollIntoView({block:"start"}); },30); }
