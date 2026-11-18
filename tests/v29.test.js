@@ -7,9 +7,9 @@ results.push({ name: 'p_gait_spast=3 (guided form) -> Pyramidal FS 3', ok: fs({ 
 results.push({ name: 'p_gait_spast=2 -> Pyramidal FS 2', ok: fs({ p_gait_spast: 2 }) === 2 });
 results.push({ name: 'p_gait_spast_R/L (scanner) still used', ok: fs({ p_gait_spast_R: 3, p_gait_spast_L: 0 }) === 3 });
 results.push({ name: 'empty p_gait_spast -> Pyramidal FS 0', ok: fs({ p_gait_spast: '' }) === 0 });
-// 50 m rule with one aid follows the Neurostatus manual ("more than 50 m")
+// 50 m rule with one aid: 50 m or more = AS 6 (standardized ambulation score)
 const asOf = (inp) => E.calculateFullEDSS(inp).ambulation_score;
-results.push({ name: 'unilateral 50 m -> AS 8 (6.5)', ok: asOf({ amb_assistance: 'unilateral', amb_distance_reported: 50 }) === 8 });
+results.push({ name: 'unilateral 50 m -> AS 6 (6.0)', ok: asOf({ amb_assistance: 'unilateral', amb_distance_reported: 50 }) === 6 });
 results.push({ name: 'unilateral 51 m -> AS 6 (6.0)', ok: asOf({ amb_assistance: 'unilateral', amb_distance_reported: 51 }) === 6 });
 // v33: Visual FS better-eye bump depends on the better eye's ACUITY only (Kurtzke 1983)
 const vis = (inp) => E.calculateFullEDSS(inp).visual_fs;

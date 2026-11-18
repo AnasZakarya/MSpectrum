@@ -112,7 +112,9 @@ def visual_fs_converted(visual_fs: int) -> int:
 # ============================================================
 def calc_brainstem_fs(eom=None, nystagmus=None, trigeminal=None, facial=None,
                       hearing=None, dysarthria=None, dysphagia=None, other_cn=None) -> int:
-    return _safe(_max_or_none(eom, nystagmus, trigeminal, facial, hearing, dysarthria, dysphagia, other_cn), 0)
+    # Moderate EOM impairment = FS 2, marked = FS 3; signs only and mild = FS 1.
+    eom_fs = eom if eom is None or eom == "" else [0, 1, 1, 2, 3][min(_safe(eom), 4)]
+    return _safe(_max_or_none(eom_fs, nystagmus, trigeminal, facial, hearing, dysarthria, dysphagia, other_cn), 0)
 
 
 # ============================================================
@@ -169,7 +171,8 @@ def calc_pyramidal_fs(strength: Optional[Dict[str, Dict[str, int]]] = None,
         if leq2(UE_MUSCLES, "R") >= 2 or leq2(UE_MUSCLES, "L") >= 2 or \
            leq2(LE_MUSCLES, "R") >= 2 or leq2(LE_MUSCLES, "L") >= 2:
             return 4
-        vals = list(muscle_min.values())
+        # Each side is its own muscle group.
+        vals = [side_val(m, s) for m in muscle_min for s in ("R", "L")]
         if len([v for v in vals if v <= 3]) >= 1:
             return 3
         if len([v for v in vals if v == 4]) > 2:
@@ -271,7 +274,7 @@ def _deep_score(vib_ue_R=None, vib_ue_L=None, vib_le_R=None, vib_le_L=None,
     n_vib_max = len([x for x in vib if x == vib_max])
     n_vib_severe = len([x for x in vib if x >= 3])
     if pos_max >= 3:
-        return 5 if n_pos_severe > 2 else 4
+        return 5 if (n_pos_severe == 4 and n_vib_severe == 4) else 4
     if pos_max == 2:
         return 3
     if pos_max == 1:
@@ -354,11 +357,15 @@ def calc_ambulation_score(assistance=None, distance_m=None, is_normal=False) -> 
     if assistance == "unilateral":
         if d is None:
             return 6
-        return 6 if d > 50 else 8
+        if d < 5:
+            return 10  # unable to walk 5 m even with aid -> EDSS 7.0
+        return 6 if d >= 50 else 8
     if assistance == "bilateral":
         if d is None:
             return 7  # conservative default (EDSS 6.0), same as the unilateral default
-        return 7 if d > 120 else 9
+        if d < 5:
+            return 10
+        return 7 if d >= 120 else 9
     if assistance in (None, "", "none"):
         if is_normal is True:
             return 0
@@ -409,41 +416,30 @@ class FSScores:
 
 
 def _fs_only_step(fs_list) -> float:
+    """Standardized FS-combination rules (Kurtzke 1983; Sen 2018; Fouad 2023). Mirrors _fsOnlyStep in index.html."""
     N = max(fs_list)
     if N == 0:
         return 0.0
-    nN = fs_list.count(N)
-    rest = [v for v in fs_list if v != N]
-    any_gt1 = any(v > 1 for v in rest)
+    n = fs_list.count
     if N == 1:
-        return 1.5 if nN >= 2 else 1.0
+        return 1.5 if n(1) >= 2 else 1.0
     if N == 2:
-        if nN >= 5:
-            return 3.5
-        if nN == 1:
-            return 2.0
-        if nN == 2:
-            return 3.0 if any_gt1 else 2.5
-        return 3.5 if any_gt1 else 3.0
+        c = n(2)
+        return 2.0 if c == 1 else 2.5 if c == 2 else 3.0 if c <= 4 else 3.5 if c == 5 else 4.0
     if N == 3:
-        n_twos = rest.count(2)
-        if nN == 1:
-            return 3.0 if n_twos == 0 else (3.5 if n_twos <= 2 else 4.0)
-        if nN == 2:
-            return 4.0 if any_gt1 else 3.5
-        return 4.5 if any_gt1 else 4.0
+        c3, c2 = n(3), n(2)
+        if c3 == 1:
+            return 3.0 if c2 == 0 else (3.5 if c2 <= 2 else 4.0)
+        if c3 == 2:
+            return 3.5 if c2 == 0 else 4.0
+        return 4.0 if c3 <= 4 else (4.5 if c3 == 5 else 5.0)
     if N == 4:
-        if nN == 1:
-            n_gt1 = len([v for v in rest if v > 1])
-            if n_gt1 == 0:
-                return 4.0
-            if n_gt1 == 1:
-                return 4.5
+        if n(4) >= 2:
             return 5.0
-        return 5.0
-    if N == 5:
-        return 5.0
-    return 6.0
+        if n(3) == 0 and n(2) == 0:
+            return 4.0
+        return 5.0 if n(3) + 1 >= 6 else 4.5
+    return 5.0  # highest grade 5 or 6; steps above 5.0 are set by walking alone
 
 
 AS_FIXED_EDSS = {5: 6.0, 6: 6.0, 7: 6.0, 8: 6.5, 9: 6.5, 10: 7.0, 11: 7.5, 12: 8.0, 13: 8.5, 14: 9.0, 15: 9.5}
@@ -519,7 +515,7 @@ def calculate_full_edss(inputs: Dict[str, Any]) -> Dict[str, Any]:
 
     cerebral_fs_step = calc_cerebral_fs(g("m_ment"), g("m_fat"), exclude_fatigue=_truthy(g("m_fat_excl")))
     mood_only = cerebral_mood_only(cerebral_fs_step, g("m_depress"), g("m_euph"))
-    cerebral_fs = 1 if mood_only else cerebral_fs_step
+    cerebral_fs = cerebral_fs_step
 
     manual_as = inputs.get("a_score")
     if manual_as is not None and manual_as != "":

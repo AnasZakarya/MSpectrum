@@ -85,6 +85,20 @@ class TestBrainstem(unittest.TestCase):
         # dysphagia=5 → max=5
         self.assertEqual(calc_brainstem_fs(dysphagia=5), 5)
 
+    def test_eom_mapping(self):
+        # Moderate EOM impairment = FS 2, marked = FS 3
+        self.assertEqual(calc_brainstem_fs(eom=3), 2)
+        self.assertEqual(calc_brainstem_fs(eom=4), 3)
+        self.assertEqual(calc_brainstem_fs(eom=2), 1)
+
+    def test_rule_decisions_v366(self):
+        from edss_calc import calc_pyramidal_fs, calc_sensory_fs, calc_ambulation_score
+        self.assertEqual(calc_pyramidal_fs(strength={"hipflex": {"R": 4, "L": 4}, "kneeflex": {"R": 4, "L": 5}}), 3)
+        self.assertEqual(calc_pyramidal_fs(strength={"deltoid": {"R": 4, "L": 4}}), 2)
+        self.assertEqual(calc_sensory_fs(pos_ue_R=3, pos_le_R=3, pos_le_L=3), 4)
+        self.assertEqual(calc_ambulation_score(assistance="unilateral", distance_m=3), 10)
+        self.assertEqual(calc_ambulation_score(assistance="bilateral", distance_m=5), 9)
+
     def test_max_of_multiple(self):
         # Max of all subscores
         self.assertEqual(
@@ -271,9 +285,9 @@ class TestCerebral(unittest.TestCase):
     def test_depression_does_not_count(self):
         # Depression doesn't add to FS
         self.assertEqual(calc_cerebral_fs(mentation=0, depression=1), 0)
-        # mood alone: sheet 1, step unaffected
+        # mood alone: recorded, sheet 0, step unaffected
         r = calculate_full_edss({"m_depress": 1})
-        self.assertEqual(r["cerebral_fs"], 1)
+        self.assertEqual(r["cerebral_fs"], 0)
         self.assertEqual(r["cerebral_fs_step"], 0)
         self.assertTrue(r["cerebral_mood_only"])
         self.assertEqual(r["edss_step"], 0.0)
@@ -335,8 +349,8 @@ class TestEDSSStep(unittest.TestCase):
         self.assertEqual(calc_edss_step(FSScores(pyramidal=5, sensory=3)), 5.0)
         self.assertEqual(calc_edss_step(FSScores(pyramidal=5, cerebellar=5)), 5.0)
         self.assertEqual(calc_edss_step(FSScores(pyramidal=4, cerebellar=4, sensory=3)), 5.0)
-        # a FS grade 6 keeps the EDSS at 6.0 or above
-        self.assertEqual(calc_edss_step(FSScores(sensory=6)), 6.0)
+        # a FS grade 6 alone gives 5.0: steps above 5.0 are set by walking alone (standardized table)
+        self.assertEqual(calc_edss_step(FSScores(sensory=6)), 5.0)
 
     def test_one_fs_three(self):
         fs = FSScores(pyramidal=3)
@@ -515,8 +529,8 @@ class TestAmbulationFSCombinations(unittest.TestCase):
         self.assertEqual(calc_edss_step(FSScores(pyramidal=5), 3), 5.0)
 
     def test_AS3_fs6(self):
-        # FS=6 (tetraplegia) overrides AS=3 floor
-        self.assertEqual(calc_edss_step(FSScores(pyramidal=6), 3), 6.0)
+        # FS=6 counts as 5.0; AS=3 sets 5.0
+        self.assertEqual(calc_edss_step(FSScores(pyramidal=6), 3), 5.0)
 
     # ========== AS=4 (100-199m) - fixed 5.5 ==========
     def test_AS4_no_fs(self):
@@ -526,8 +540,8 @@ class TestAmbulationFSCombinations(unittest.TestCase):
         self.assertEqual(calc_edss_step(FSScores(pyramidal=1), 4), 5.5)
 
     def test_AS4_fs6(self):
-        # FS=6 overrides
-        self.assertEqual(calc_edss_step(FSScores(pyramidal=6), 4), 6.0)
+        # FS=6 counts as 5.0; AS=4 sets 5.5
+        self.assertEqual(calc_edss_step(FSScores(pyramidal=6), 4), 5.5)
 
     # ========== AS=5+ (no aid <100m or with aid) - ambulation only ==========
     def test_AS5(self):
@@ -727,6 +741,33 @@ class TestNeurostatusForumVerified(unittest.TestCase):
         not unrestricted) with all FS = 0 should give EDSS 2.0, not 4.0.
         Ambulation Score alone does not impose a hard 4.0 floor here."""
         self.assertEqual(calc_edss_step(FSScores(), ambulation_score=1), 2.0)
+
+
+
+
+class TestStandardizedTable(unittest.TestCase):
+    """FS combinations from the standardized step table (v36.6)."""
+    def test_table(self):
+        cases = [
+            (dict(pyramidal=2, cerebellar=2, brainstem=2, sensory=2, bb=2, visual=2), 4.0),          # six FS 2
+            (dict(pyramidal=2, cerebellar=2, brainstem=2, sensory=2, bb=2), 3.5),                    # five FS 2
+            (dict(pyramidal=3, cerebellar=3, sensory=3, bb=2), 4.0),                                 # three FS 3 + FS 2
+            (dict(pyramidal=3, cerebellar=3, sensory=3, bb=3, brainstem=3), 4.5),                    # five FS 3
+            (dict(pyramidal=3, cerebellar=3, sensory=3, bb=3, brainstem=3, cerebral=3), 5.0),        # six FS 3
+            (dict(pyramidal=4, cerebellar=3, sensory=3), 4.5),                                       # FS 4 + two FS 3
+            (dict(pyramidal=4, cerebellar=2, sensory=2), 4.5),                                       # FS 4 + two FS 2
+            (dict(pyramidal=4, cerebellar=4), 5.0),                                                  # two FS 4
+        ]
+        for fs, want in cases:
+            self.assertEqual(calc_edss_step(FSScores(**fs)), want, fs)
+
+
+class TestSen2018Table3(unittest.TestCase):
+    """Sen 2018 (Arch Neuropsychiatry 55 Suppl 1:S80-3), Table 3: the ten worked examples."""
+    def test_rows(self):
+        rows = [(0, 3, 0, 0, 0, 0, 0, 3.0), (1, 3, 0, 0, 0, 0, 0, 3.0), (1, 3, 1, 1, 0, 0, 1, 3.0), (2, 3, 0, 0, 0, 0, 0, 3.5), (2, 3, 1, 1, 1, 0, 0, 3.5), (1, 3, 1, 1, 3, 0, 1, 3.5), (1, 3, 1, 3, 3, 1, 0, 4.0), (0, 1, 4, 2, 1, 0, 0, 4.5), (0, 1, 4, 3, 3, 1, 0, 4.5), (0, 1, 4, 3, 4, 1, 1, 5.0)]
+        for v, bs, p, c, s, bb, cb, want in rows:
+            self.assertEqual(calc_edss_step(FSScores(visual=v, brainstem=bs, pyramidal=p, cerebellar=c, sensory=s, bb=bb, cerebral=cb), 0), want)
 
 
 if __name__ == "__main__":

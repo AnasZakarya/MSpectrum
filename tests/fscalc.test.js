@@ -33,7 +33,7 @@ ok(has(C({ ...z, pyramidal: 4, as: 0 }), /usually limits walking/), 'pyramidal 4
 ok(has(C({ ...z, pyramidal: 4, cerebellar: 4, as: 0 }), /reaches 5\.0/), 'FS pattern 5.0 with full walking flagged');
 // not entered / not assessed -> range
 const n = C({ pyramidal: 2, as: 0 });
-ok(n.range && n.range[0] === 2.0 && n.range[1] > 2.0 && has(n, /Not entered yet: Cerebellar/), 'unentered FS give a range');
+ok(n.range && n.range[0] === 2.0 && n.range[1] > 2.0 && has(n, /Not entered yet: Visual, Brainstem, Cerebellar/), 'unentered FS give a range');
 const na = C({ ...z, pyramidal: 3, visual: 'na', as: 0 });
 ok(na.range && na.range[0] === 3.0 && na.range[1] === 4.5 && has(na, /Not assessed: Visual/), 'visual not assessed: 3.0 to 4.5 (visual up to converted 4)');
 ok(C({ ...z, pyramidal: 2, visual: 'na', as: 10 }).range === null, 'not assessed FS cannot change a walking-fixed step: no range');
@@ -52,8 +52,8 @@ ok(W.none[0][1] === A({ assistance: 'none', is_normal: true }), 'normal walking 
 ok(W.none[1][1] === A({ assistance: 'none', distance_m: 500 }) && W.none[2][1] === A({ assistance: 'none', distance_m: 300 })
    && W.none[3][1] === A({ assistance: 'none', distance_m: 200 }) && W.none[4][1] === A({ assistance: 'none', distance_m: 100 })
    && W.none[5][1] === A({ assistance: 'none', distance_m: 50 }), 'no-aid distances = AS 1-5');
-ok(W.uni[0][1] === A({ assistance: 'unilateral', distance_m: 60 }) && W.uni[1][1] === A({ assistance: 'unilateral', distance_m: 50 }), 'one-sided aid = AS 6/8');
-ok(W.bi[0][1] === A({ assistance: 'bilateral', distance_m: 130 }) && W.bi[1][1] === A({ assistance: 'bilateral', distance_m: 120 }), 'two-sided aid = AS 7/9');
+ok(W.uni[0][1] === A({ assistance: 'unilateral', distance_m: 60 }) && W.uni[1][1] === A({ assistance: 'unilateral', distance_m: 40 }), 'one-sided aid = AS 6/8');
+ok(W.bi[0][1] === A({ assistance: 'bilateral', distance_m: 130 }) && W.bi[1][1] === A({ assistance: 'bilateral', distance_m: 100 }), 'two-sided aid = AS 7/9');
 ok(W.wc[0][1] === A({ assistance: 'wheelchair_indep' }) && W.wc[1][1] === A({ assistance: 'wheelchair_help' }), 'wheelchair = AS 10/11');
 ok(W.bed.map(x => x[1]).join() === [A({ assistance: 'bedbound' }), A({ assistance: 'bed_much' }), A({ assistance: 'bed_helpless' }), A({ assistance: 'bed_nocomm' })].join(), 'bed = AS 12-15');
 // same result as the full engine step function on random complete cases

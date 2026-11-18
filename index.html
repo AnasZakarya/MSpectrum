@@ -969,8 +969,9 @@ html[data-theme="dark"] .cite-box { background: #1e2636; border-color: var(--rul
 .fsc-opts .clinical-opt { padding: 8px 12px; gap: 10px; }
 .fsc-opts .clinical-opt-key { width: 24px; height: 24px; font-size: 12px; flex-shrink: 0; }
 .fsc-opts .clinical-opt-title { font-size: 13px; font-weight: 600; }
-.fsc-pill { font: inherit; font-size: 13px; font-weight: 800; color: #fff; background: #1e4fa3; border: 0; border-radius: 999px; padding: 6px 12px; cursor: pointer; white-space: nowrap; }
-.fsc-pill.prov { background: #8a94a6; }
+#fscalc .edss-readout-value { white-space: nowrap; }
+html[data-theme="dark"] .edss-explain-btn { background: #16283a !important; color: #bcd6f0 !important; border-color: #2a3446 !important; }
+@media (max-width: 600px) { #fscalc .clinical-brand { font-size: 14px; } #fscalc .edss-explain-btn { display: none; } }
 @media (max-width: 600px) { #fscalc .clinical-btn#fsc-reset-btn { display: none; } }
 .fsc-change { margin-left: 8px; font: inherit; font-size: 11.5px; font-weight: 600; color: #1e4fa3; background: none; border: 1px solid var(--rule); border-radius: 999px; padding: 1px 9px; cursor: pointer; text-transform: none; letter-spacing: 0; }
 html[data-theme="dark"] .fsc-change { color: #bcd6f0 !important; }
@@ -3979,8 +3980,8 @@ details.card-optional .card-optional-body { margin-top: 12px; }
     <p style="color:var(--ink-soft);font-size:13.5px;margin:8px 0 8px">Every score implements a published, peer-reviewed scoring rule. Primary sources, grouped by branch:</p>
     <div class="ref-list">
       <div class="ref-cat">EDSS - AutoEDSSguide</div>
-      <div class="ref-item"><span class="ref-name">How the EDSS engine is checked</span><span class="ref-cite">Every release runs the public test suite in the repository (<code>tests/</code>): engine checks of the Functional System and step rules, a second, independent Python implementation (<code>edss_calc.py</code>, with its own tests) that must give identical results to the JavaScript engine on 2000 random cases, and checks of each AutoEDSSguide mode, including the EDSS Calculator. Results are reproducible with <code>node tests/run.js</code>.</span></div>
-      <div class="ref-item"><span class="ref-name">EDSS scoring</span><span class="ref-cite">Kurtzke JF. <em>Neurology</em> 1983;33:1444&ndash;52. &middot; Kurtzke JF. <em>Neurology</em> 1989;39:291&ndash;302. &middot; Kurtzke JF. On the origin of EDSS. <em>Mult Scler Relat Disord</em> 2015;4(2):95&ndash;103. &middot; Kurtzke JF. Further to the origin of EDSS. <em>Mult Scler Relat Disord</em> 2015;4(3):186. &middot; Kappos L, D&rsquo;Souza M, Lechner-Scott J, Lienert C. On the origin of Neurostatus. <em>Mult Scler Relat Disord</em> 2015;4(3):182&ndash;5. &middot; Sen S. Neurostatus and EDSS calculation with cases. <em>Arch Neuropsychiatry</em> 2018;55(Suppl 1):S80&ndash;S83. DOI:10.29399/npa.23412. &middot; Piri &Ccedil;&#305;nar B, G&uuml;ven Yorgun Y. What we learned from the history of multiple sclerosis measurement: Expanded Disability Status Scale. <em>Arch Neuropsychiatry</em> 2018;55(Suppl 1):S69&ndash;S75. DOI:10.29399/npa.23343. &middot; Fouad AM, Abdel Naseer M, Farghaly M, Hegazy MI. New algorithmic approach for easier and faster extended disability status scale calculation. <em>Mult Scler J Exp Transl Clin</em> 2023;9(1):20552173231155055. &middot; Open-source implementation: edss (Dobra&scaron;inovi&cacute; A, 2020; MIT licence). Kurtzke 1983 defines the Functional Systems and the EDSS steps (a US Government work in the public domain; Kurtzke 2015). The later papers describe standardized scoring rules added for clinical trials (Visual and Bowel/Bladder conversion, optic disc pallor as Visual grade 1, fatigue in the Cerebral FS, walking-distance cut-offs); Kurtzke (2015) stated that these are not part of his scale, and their authors state that they claim no rights on the EDSS or its Functional Systems, only on their training and documentation tools (Kappos et al. 2015). MSpectrum applies them because current trials and raters use them, and follows Kurtzke 1983 where the two give different steps (for example five FS grade 2 = EDSS 3.5).</span></div>
+      <div class="ref-item"><span class="ref-name">How the EDSS engine is checked</span><span class="ref-cite">Every release runs the public test suite in the repository (<code>tests/</code>): engine checks of the Functional System and step rules (including the ten worked examples of Sen 2018, Table 3), a second, independent Python implementation (<code>edss_calc.py</code>, with its own tests) that must give identical results to the JavaScript engine on 2000 random cases, and checks of each AutoEDSSguide mode, including the EDSS Calculator. Results are reproducible with <code>node tests/run.js</code>.</span></div>
+      <div class="ref-item"><span class="ref-name">EDSS scoring</span><span class="ref-cite">Kurtzke JF. <em>Neurology</em> 1983;33:1444&ndash;52. &middot; Kurtzke JF. <em>Neurology</em> 1989;39:291&ndash;302. &middot; Kurtzke JF. On the origin of EDSS. <em>Mult Scler Relat Disord</em> 2015;4(2):95&ndash;103. &middot; Kurtzke JF. Further to the origin of EDSS. <em>Mult Scler Relat Disord</em> 2015;4(3):186. &middot; Kappos L, D&rsquo;Souza M, Lechner-Scott J, Lienert C. On the origin of Neurostatus. <em>Mult Scler Relat Disord</em> 2015;4(3):182&ndash;5. &middot; Sen S. Neurostatus and EDSS calculation with cases. <em>Arch Neuropsychiatry</em> 2018;55(Suppl 1):S80&ndash;S83. DOI:10.29399/npa.23412. &middot; Piri &Ccedil;&#305;nar B, G&uuml;ven Yorgun Y. What we learned from the history of multiple sclerosis measurement: Expanded Disability Status Scale. <em>Arch Neuropsychiatry</em> 2018;55(Suppl 1):S69&ndash;S75. DOI:10.29399/npa.23343. &middot; Fouad AM, Abdel Naseer M, Farghaly M, Hegazy MI. New algorithmic approach for easier and faster extended disability status scale calculation. <em>Mult Scler J Exp Transl Clin</em> 2023;9(1):20552173231155055. &middot; Open-source implementation: edss (Dobra&scaron;inovi&cacute; A, 2020; MIT licence). Kurtzke 1983 defines the Functional Systems and the EDSS steps (a US Government work in the public domain; Kurtzke 2015). The later papers describe standardized scoring rules added for clinical trials (Visual and Bowel/Bladder conversion, optic disc pallor as Visual grade 1, fatigue in the Cerebral FS, walking-distance cut-offs); Kurtzke (2015) stated that these are not part of his scale, and their authors state that they claim no rights on the EDSS or its Functional Systems, only on their training and documentation tools (Kappos et al. 2015). MSpectrum applies them because current trials and raters use them, for every combination of Functional System grades and walking.</span></div>
       <div class="ref-item"><span class="ref-name">Clinical (sEDSS)</span><span class="ref-cite">Baldassari LE et al. Streamlined EDSS for use in multiple sclerosis clinical practice: development and cross-sectional validation. <em>Mult Scler</em> 2018;24(10):1347&ndash;55 (Supplementary Appendix 1: sEDSS scoring, implemented as published).</span></div>
       <div class="ref-item"><span class="ref-name">Quick Check (SRDSS + PDDS)</span><span class="ref-cite">Kaufmann M, Salmen A, Barin L et al. Development and validation of the self-reported disability status scale (SRDSS) to estimate EDSS-categories. <em>Mult Scler Relat Disord</em> 2020;42:102148 (CC BY-NC-ND 4.0; used unchanged). &middot; PDDS: Hohol MJ et al. <em>Neurology</em> 1995;45:251&ndash;5; Learmonth YC et al. <em>BMC Neurol</em> 2013;13:37. The PDDS is provided for use by the NARCOMS Registry (www.narcoms.org/pdds). NARCOMS is supported in part by the Consortium of Multiple Sclerosis Centers (CMSC) and the CMSC Foundation.</span></div>
       <div class="ref-cat">MS Score Hub</div>
@@ -4551,7 +4552,17 @@ details.card-optional .card-optional-body { margin-top: 12px; }
   <header class="clinical-header">
     <button class="home-btn" id="fsc-home-btn" aria-label="Back to AutoEDSSguide modes">&larr; Home</button>
     <div class="clinical-brand brand-mark">Auto<em>EDSS</em>guide &middot; EDSS Calculator</div>
-    <div style="display:flex;gap:8px;align-items:center"><button type="button" class="fsc-pill" id="fsc-pill" aria-label="Go to the EDSS result">EDSS &ndash;</button><button type="button" class="clinical-btn" id="fsc-reset-btn">Reset</button></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div class="edss-readout" id="fsc-readout">
+        <div>
+          <div class="edss-readout-label">EDSS</div>
+          <div class="edss-readout-value" id="fsc-live">-</div>
+        </div>
+        <button type="button" class="edss-explain-btn" id="fsc-explain-btn" aria-label="Show how this EDSS was calculated">How was this scored?</button>
+        <div class="edss-scale" aria-hidden="true"><i id="fsc-scale-marker"></i></div>
+      </div>
+      <button type="button" class="clinical-btn" id="fsc-reset-btn">Reset</button>
+    </div>
   </header>
   <main class="clinical-main fsc-main">
     <div class="fsc-layout">
@@ -4670,18 +4681,18 @@ details.card-optional .card-optional-body { margin-top: 12px; }
         <li><span class="es-step">1.0</span><span class="es-desc">No disability; minimal signs in 1 FS (grade 1).</span></li>
         <li><span class="es-step">1.5</span><span class="es-desc">No disability; minimal signs in &gt;1 FS (grade 1).</span></li>
         <li><span class="es-step">2.0</span><span class="es-desc">Minimal disability in 1 FS (grade 2, others ≤1).</span></li>
-        <li><span class="es-step">2.5</span><span class="es-desc">Mild disability in 1 FS grade 2; or minimal disability in 2 FS grade 2.</span></li>
+        <li><span class="es-step">2.5</span><span class="es-desc">Minimal disability in 2 FS (2 FS grade 2, others ≤1).</span></li>
         <li><span class="es-step">3.0</span><span class="es-desc">Moderate disability in 1 FS (grade 3), or mild in 3–4 FS grade 2; fully ambulatory.</span></li>
-        <li><span class="es-step">3.5</span><span class="es-desc">Fully ambulatory; moderate in 1 FS grade 3 + 1–2 FS grade 2; or 2 FS grade 3; or 5 FS grade 2.</span></li>
-        <li><span class="es-step">4.0</span><span class="es-desc">Ambulatory ≥500 m without aid; severe disability in 1 FS grade 4 (or combinations).</span></li>
-        <li><span class="es-step">4.5</span><span class="es-desc">Ambulatory ≥300 m without aid; relatively severe disability.</span></li>
-        <li><span class="es-step">5.0</span><span class="es-desc">Ambulatory ≥200 m without aid; disability impairs full daily activities (AS = 3).</span></li>
-        <li><span class="es-step">5.5</span><span class="es-desc">Ambulatory ≥100 m without aid; disability precludes full daily activities (AS = 4).</span></li>
-        <li><span class="es-step">6.0</span><span class="es-desc">Requires unilateral or bilateral assistance to walk ≥100 m (AS 5–7).</span></li>
-        <li><span class="es-step">6.5</span><span class="es-desc">Requires bilateral assistance to walk ≤20 m (AS 8–9).</span></li>
+        <li><span class="es-step">3.5</span><span class="es-desc">Fully ambulatory; moderate in 1 FS grade 3 + 1–2 FS grade 2; or 2 FS grade 3 (others ≤1); or 5 FS grade 2.</span></li>
+        <li><span class="es-step">4.0</span><span class="es-desc">Fully ambulatory; relatively severe disability: 1 FS grade 4 (others ≤1), 3–4 FS grade 3, 2 FS grade 3 plus any grade 2, or 6–7 FS grade 2.</span></li>
+        <li><span class="es-step">4.5</span><span class="es-desc">Walks 300 m or more without aid (AS = 2); or 5 FS grade 3, or 1 FS grade 4 with 1–2 FS grade 3.</span></li>
+        <li><span class="es-step">5.0</span><span class="es-desc">Walks 200 m or more without aid (AS = 3); or 6–7 FS grade 3, 2 or more FS grade 4, or any FS grade 5–6.</span></li>
+        <li><span class="es-step">5.5</span><span class="es-desc">Walks 100 to 199 m without aid (AS = 4).</span></li>
+        <li><span class="es-step">6.0</span><span class="es-desc">Walks less than 100 m without aid (AS 5); one aid, 50 m or more (AS 6); or two aids, 120 m or more (AS 7).</span></li>
+        <li><span class="es-step">6.5</span><span class="es-desc">One aid, less than 50 m (AS 8); or two aids, about 5 to 119 m (AS 9).</span></li>
         <li><span class="es-step">7.0</span><span class="es-desc">Unable to walk beyond ~5 m; restricted to wheelchair; wheels self (AS = 10).</span></li>
-        <li><span class="es-step">7.5</span><span class="es-desc">Unable to take a few steps; restricted to wheelchair; may need help to transfer (AS = 11).</span></li>
-        <li><span class="es-step">8.0</span><span class="es-desc">Essentially restricted to bed/chair; retains some self-care; effective use of arms.</span></li>
+        <li><span class="es-step">7.5</span><span class="es-desc">Unable to take more than a few steps; restricted to wheelchair; may need help to transfer (AS = 11).</span></li>
+        <li><span class="es-step">8.0</span><span class="es-desc">Essentially restricted to bed or chair; retains many self-care functions; effective use of arms (AS = 12).</span></li>
         <li><span class="es-step">8.5</span><span class="es-desc">Essentially restricted to bed; some effective arm function; some self-care.</span></li>
         <li><span class="es-step">9.0</span><span class="es-desc">Helpless bed patient; can communicate and eat.</span></li>
         <li><span class="es-step">9.5</span><span class="es-desc">Totally helpless bed patient; unable to effectively communicate, eat, or swallow.</span></li>
@@ -4774,7 +4785,10 @@ function visualFSConverted(visual_fs) {
 // Brainstem FS
 // ============================================================
 function calcBrainstemFS({ eom, nystagmus, trigeminal, facial, hearing, dysarthria, dysphagia, other_cn } = {}) {
-    return _safe(_maxOrNone(eom, nystagmus, trigeminal, facial, hearing, dysarthria, dysphagia, other_cn), 0);
+    // Eye movements are graded 0-4; FS 2 needs MODERATE EOM impairment and FS 3 MARKED
+    // impairment (Kurtzke 1983; standardized rules). Signs only and mild (grade 1-2) = FS 1.
+    const eomFS = (eom === null || eom === undefined || eom === "") ? eom : [0, 1, 1, 2, 3][Math.min(_safe(eom), 4)];
+    return _safe(_maxOrNone(eomFS, nystagmus, trigeminal, facial, hearing, dysarthria, dysphagia, other_cn), 0);
 }
 
 // ============================================================
@@ -4832,7 +4846,9 @@ function calcPyramidalFS({ strength, overall_motor, plantar, reflexes, spasticit
             n + ((((strength[m] && strength[m][side] !== undefined) ? strength[m][side] : 5) <= 2) ? 1 : 0), 0);
         if (_leq2InLimb(ueMuscles, "R") >= 2 || _leq2InLimb(ueMuscles, "L") >= 2 ||
             _leq2InLimb(leMuscles, "R") >= 2 || _leq2InLimb(leMuscles, "L") >= 2) return 4;
-        const muscleVals = Object.values(muscle_min);
+        // Each side is its own muscle group (right and left deltoid = two groups).
+        const muscleVals = [];
+        for (const m of Object.keys(muscle_min)) { muscleVals.push(_safe(strength[m].R, 5), _safe(strength[m].L, 5)); }
         if (muscleVals.filter(v => v <= 3).length >= 1) return 3;   // BMRC<=3 in >=1 group
         if (muscleVals.filter(v => v === 4).length > 2) return 3;   // BMRC4 in >2 groups
         if (muscleVals.filter(v => v === 4).length >= 1) return 2;  // BMRC4 in 1-2 groups
@@ -4934,7 +4950,9 @@ function _deepScore({ vib_ue_R, vib_ue_L, vib_le_R, vib_le_L, pos_ue_R, pos_ue_L
     const n_vib_max = vib_limbs.filter(x => x === vib_max).length;
     const n_vib_severe = vib_limbs.filter(x => x >= 3).length;
 
-    if (pos_max >= 3) return n_pos_severe > 2 ? 5 : 4;
+    // Marked loss of position sense = 4, also in more than two limbs (FS 4 definition).
+    // 5 ("most of the body below the head") only when position AND vibration are lost in all four limbs.
+    if (pos_max >= 3) return (n_pos_severe === 4 && n_vib_severe === 4) ? 5 : 4;
     if (pos_max === 2) return 3;
     if (pos_max === 1) return 2;
 
@@ -5018,16 +5036,18 @@ function calcAmbulationScore({ assistance, distance_m, is_normal } = {}) {
         ? null : Number(distance_m);
 
     if (assistance === "unilateral") {
-        // Ambulation rules (Sen 2018, categories 6 and 8): more than 50 m with one aid -> AS 6 (6.0); 50 m or less -> AS 8 (6.5)
+        // Ambulation rules (Sen 2018, categories 6 and 8): 50 m or more with one aid -> AS 6 (6.0); less than 50 m -> AS 8 (6.5)
         // If no distance entered, default to AS 6 (EDSS 6.0) - conservative estimate
         if (d === null) return 6;
-        return d > 50 ? 6 : 8;  // "more than 50 m" with one stick -> 6.0; 50 or less -> 6.5
+        if (d < 5) return 10;    // unable to walk 5 m even with aid -> EDSS 7.0
+        return d >= 50 ? 6 : 8;  // 50 m or more with one stick -> 6.0; less than 50 m -> 6.5
     }
     if (assistance === "bilateral") {
-        // Ambulation rules (Sen 2018, categories 7 and 9): more than 120 m with two aids -> AS 7 (6.0); about 5 to 120 m -> AS 9 (6.5); below about 5 m = wheelchair (Kurtzke 1983 step 7.0)
+        // Ambulation rules (Sen 2018, categories 7 and 9): 120 m or more with two aids -> AS 7 (6.0); about 5 to 119 m -> AS 9 (6.5); below about 5 m = wheelchair (Kurtzke 1983 step 7.0)
         // If no distance entered, default to AS 7 (EDSS 6.0) - conservative, same as the unilateral default
         if (d === null) return 7;
-        return d > 120 ? 7 : 9;  // "more than 120 m" with two sticks -> 6.0; about 5-120 -> 6.5
+        if (d < 5) return 10;    // unable to walk 5 m even with aid -> EDSS 7.0
+        return d >= 120 ? 7 : 9;  // 120 m or more with two sticks -> 6.0; about 5-119 -> 6.5
     }
     // No assistance
     if (assistance === "none" || assistance === undefined || assistance === null || assistance === "") {
@@ -5071,72 +5091,32 @@ function shouldSuggestCerebellarX(strength, sensoryArgs) {
 // Final EDSS step
 // ============================================================
 function _fsOnlyStep(fs_list) {
-    // Kurtzke 1983 / Fouad 2023 combination rules.
-    // Final FS-only step = N, N+0.5, or N+1 where N = max FS grade.
-    // Determination: (a) count of N occurrences; (b) whether others are 0, =1, or >1.
-
+    // Standardized FS-combination rules (Kurtzke 1983; Sen 2018; Fouad 2023): the step follows the highest
+    // grade and how many systems share it, with lower grades counted where the rules use them.
     const N = Math.max(...fs_list);
     if (N === 0) return 0.0;
-
-    const nN    = fs_list.filter(v => v === N).length;           // times N appears
-    const rest  = fs_list.filter(v => v !== N);                   // all others
-    const anyGt1 = rest.some(v => v > 1);                        // any other ≥2
-
-    // ── N = 1 ─────────────────────────────────────────────────────────────────
-    // EDSS 1.0 = 1 FS grade 1; EDSS 1.5 = ≥2 FS grade 1
-    if (N === 1) return nN >= 2 ? 1.5 : 1.0;
-
-    // ── N = 2 ─────────────────────────────────────────────────────────────────
-    // ≥5 FS at grade 2 (others 0/1) → 3.5 (Kurtzke 1983: "or five FS grade 2 (others 0 or 1)")
-    if (N === 2) {
-        if (nN >= 5) return 3.5;
-        // 1×N:  one FS grade 2 → 2.0 regardless of grade-1 others (Kurtzke 1983: "others 0 or 1"); 2.5 requires TWO FS grade 2
-        if (nN === 1) return 2.0;
-        // 2×N:  others 0 or 1 → 2.5;  any other >1 → 3.0
-        if (nN === 2) return anyGt1 ? 3.0 : 2.5;
-        // 3–4×N: others 0 or 1 → 3.0;  any other >1 → 3.5
-        return anyGt1 ? 3.5 : 3.0;
-    }
-
-    // ── N = 3 ─────────────────────────────────────────────────────────────────
-    // EDSS 3.5 (Kurtzke 1983): one FS 3 with one or two FS 2 (others 0/1), or two FS 3 (others 0/1),
-    // or five FS 2. Anything beyond that "exceeds the limits of previous steps" -> 4.0.
+    const n = g => fs_list.filter(v => v === g).length;
+    // Highest grade 1: one system 1.0; two or more 1.5.
+    if (N === 1) return n(1) >= 2 ? 1.5 : 1.0;
+    // Highest grade 2: one 2.0, two 2.5, three or four 3.0, five 3.5, six or seven 4.0.
+    if (N === 2) { const c = n(2); return c === 1 ? 2.0 : c === 2 ? 2.5 : c <= 4 ? 3.0 : c === 5 ? 3.5 : 4.0; }
+    // Highest grade 3: one 3 alone 3.0, with one or two 2s 3.5, with more 4.0; two 3s alone 3.5, with any 2 4.0;
+    // three or four 3s 4.0; five 3s 4.5; six or seven 3s 5.0.
     if (N === 3) {
-        const nTwos = rest.filter(v => v === 2).length;
-        if (nN === 1) return nTwos === 0 ? 3.0 : (nTwos <= 2 ? 3.5 : 4.0);
-        // 2×N:  others 0 or 1 → 3.5;  any FS 2 → 4.0
-        if (nN === 2) return anyGt1 ? 4.0 : 3.5;
-        // ≥3×N: 4.0 (4.5 if any other FS 2, exceeding the limits of step 4.0)
-        return anyGt1 ? 4.5 : 4.0;
+        const c3 = n(3), c2 = n(2);
+        if (c3 === 1) return c2 === 0 ? 3.0 : c2 <= 2 ? 3.5 : 4.0;
+        if (c3 === 2) return c2 === 0 ? 3.5 : 4.0;
+        return c3 <= 4 ? 4.0 : c3 === 5 ? 4.5 : 5.0;
     }
-
-    // ── N = 4 ─────────────────────────────────────────────────────────────────
-    // 1×N:  others 0 → 4.0;  any 1 → 4.5;  any >1 → 5.0
+    // Highest grade 4: one 4 with the others 0 or 1 is 4.0; one 4 with lower grades of 2 or 3 is 4.5
+    // (5.0 once six or more systems are 3 or higher, as for six or seven 3s); two or more 4s 5.0.
     if (N === 4) {
-        // Published rule:
-        // EDSS 4.0 = 1 FS=4, others all 0 or 1
-        // EDSS 4.5 = 1 FS=4 + 1 other ≥2 (combinations exceeding 4.0)
-        // EDSS 5.0 = 1 FS=4 + ≥2 others ≥2, OR ≥2 FS=4
-        if (nN === 1) {
-            const nGt1 = rest.filter(v => v > 1).length;
-            if (nGt1 === 0) return 4.0;   // others all 0 or 1
-            if (nGt1 === 1) return 4.5;   // 1 other ≥2
-            return 5.0;                   // ≥2 others ≥2
-        }
-        // ≥2 FS=4 → 5.0. The FS pattern alone never exceeds 5.0: per the published
-        // rules, steps 5.5 to 8.0 depend on ambulation alone (Sen 2018)
-        // (Sen 2018 example: pyramidal 4, sensory 4, cerebellar 3, AS 0 = 5.0).
-        return 5.0;
+        if (n(4) >= 2) return 5.0;
+        if (n(3) === 0 && n(2) === 0) return 4.0;
+        return (n(3) + 1) >= 6 ? 5.0 : 4.5;
     }
-
-    // ── N = 5 ─────────────────────────────────────────────────────────────────
-    // One or more FS 5 → 5.0 (steps above 5.0 are set by ambulation only).
-    if (N === 5) return 5.0;
-
-    // ── N ≥ 6 ────────────────────────────────────────────────────────────────
-    // The EDSS step is never below the highest single FS grade (visual and
-    // bowel/bladder excepted; they enter here already converted, so their max is 4 and 5).
-    return 6.0;
+    // Highest grade 5 or 6: 5.0. Steps above 5.0 are set by walking alone.
+    return 5.0;
 }
 
 // Ambulation Score -> fixed EDSS step (published ambulation categories, Sen 2018). AS 5-15 are ambulation-dominant.
@@ -5145,8 +5125,8 @@ const AS_FIXED_EDSS = { 5: 6.0, 6: 6.0, 7: 6.0, 8: 6.5, 9: 6.5, 10: 7.0, 11: 7.5
 const AS_FLOOR_EDSS = { 1: 2.0, 2: 4.5, 3: 5.0, 4: 5.5 };
 const AS_LABEL = {
     0: "unrestricted walking", 1: "walks 500 m or more, but restricted", 2: "walks 300 to 499 m", 3: "walks 200 to 299 m",
-    4: "walks 100 to 199 m", 5: "walks less than 100 m without aid", 6: "unilateral aid, more than 50 m",
-    7: "bilateral aid, more than 120 m", 8: "unilateral aid, 50 m or less", 9: "bilateral aid, about 5 to 120 m",
+    4: "walks 100 to 199 m", 5: "walks less than 100 m without aid", 6: "unilateral aid, 50 m or more",
+    7: "bilateral aid, 120 m or more", 8: "unilateral aid, less than 50 m", 9: "bilateral aid, about 5 to 119 m",
     10: "wheelchair, self-propelled", 11: "wheelchair, needs help", 12: "restricted to bed or chair, effective arm use",
     13: "in bed much of the day, some arm use", 14: "helpless bed patient, can communicate and eat", 15: "cannot communicate effectively or eat",
 };
@@ -5274,7 +5254,7 @@ function calculateFullEDSS(inputs) {
         exclude_fatigue: g("m_fat_excl") === true || g("m_fat_excl") === "true" || g("m_fat_excl") === 1,
     });
     const cerebral_mood_only = cerebralMoodOnly(cerebral_fs_step, g("m_depress"), g("m_euph"));
-    const cerebral_fs = cerebral_mood_only ? 1 : cerebral_fs_step; // sheet value (mood alone = 1, not counted in the step)
+    const cerebral_fs = cerebral_fs_step; // mood change alone is recorded but not used for the FS or the step
 
     // Ambulation: prefer manual override; otherwise auto-calc from inputs
     let ambulation_score;
@@ -5342,13 +5322,13 @@ function calculateFullEDSS(inputs) {
 const FSC_WALK = {
   none: [["Normal walking, no limits", 0], ["500 m or more, but walking is limited", 1], ["300 to 499 m without rest", 2],
          ["200 to 299 m without rest", 3], ["100 to 199 m without rest", 4], ["Less than 100 m without rest", 5]],
-  uni:  [["More than 50 m", 6], ["50 m or less", 8]],
-  bi:   [["More than 120 m", 7], ["About 5 to 120 m", 9]],
+  uni:  [["50 m or more", 6], ["Less than 50 m", 8]],
+  bi:   [["120 m or more", 7], ["About 5 to 119 m", 9]],
   wc:   [["Wheels self and transfers alone", 10], ["Needs help to transfer or to move the wheelchair", 11]],
   bed:  [["Out of bed much of the day; effective use of arms", 12], ["In bed much of the day; some effective use of arm(s)", 13],
          ["Helpless in bed; can communicate and eat", 14], ["Totally helpless; cannot communicate effectively or eat/swallow", 15]],
 };
-const FSC_KEYS = ["pyramidal", "cerebellar", "brainstem", "sensory", "bb", "visual", "cerebral"];
+const FSC_KEYS = ["visual", "brainstem", "pyramidal", "cerebellar", "sensory", "bb", "cerebral"];   // usual paper-form order
 const FSC_NAMES = { pyramidal: "Pyramidal", cerebellar: "Cerebellar", brainstem: "Brainstem", sensory: "Sensory", bb: "Bowel & bladder", visual: "Visual", cerebral: "Cerebral" };
 const FSC_MAX = { pyramidal: 6, cerebellar: 5, brainstem: 5, sensory: 6, bb: 6, visual: 6, cerebral: 5 };
 
@@ -5415,10 +5395,14 @@ function fsCalcFlags(r) {
         f.push({ level: "warn", text: `The FS pattern reaches ${tr.fs_step.toFixed(1)} while the patient walks 500 m or more. Steps from 5.0 up usually come with a walking limit; check the distance.` });
     if (AS !== null && AS >= 1 && AS <= 4 && Math.abs(tr.fs_step - tr.floor) >= 1.5)
         f.push({ level: "warn", text: `The FS pattern (${tr.fs_step.toFixed(1)}) and walking (at least ${tr.floor.toFixed(1)}) are far apart. The EDSS takes the higher one; check both.` });
+    if (!r.range && (AS === null || AS <= 4) && tr.edss === tr.fs_step) {
+        const gap = edssStepGapNote([r.fs.visual, r.fs.brainstem, r.fs.pyramidal, r.fs.cerebellar, r.fs.sensory, r.fs.bb, r.fs.cerebral]);
+        if (gap) f.push({ level: "info", text: "Rule note: " + gap });
+    }
     // Steps 4.0 and 4.5 reached by combinations of lower grades: the published wording has no exact limits there.
     const maxFS = Math.max(r.fs.visual, r.fs.brainstem, r.fs.pyramidal, r.fs.cerebellar, r.fs.sensory, r.fs.bb, r.fs.cerebral);
     if (!r.range && (AS === null || AS <= 4) && tr.edss === tr.fs_step && (tr.edss === 4.0 || tr.edss === 4.5) && (maxFS <= 3 || (maxFS === 4 && tr.edss === 4.5)))
-        f.push({ level: "info", text: "This step comes from a combination of lower grades. The published definitions describe such combinations without exact limits, so trained raters can differ by half a step here." });
+        f.push({ level: "info", text: "This step comes from a combination of lower grades rather than one high grade, so one grade more or less in a single system can change it. Check each grade." });
     return f;
 }
 
@@ -5445,11 +5429,94 @@ function fsCalcNearby(st, r) {
     return out.slice(0, 4);
 }
 
+// ============================================================
+// Rule notes: shown next to the score when the published definitions leave a gap
+// and MSpectrum applies a stated rule. They never change the score.
+// ============================================================
+function edssStepGapNote(fs_list) {
+    const N = Math.max(...fs_list), n = g => fs_list.filter(v => v === g).length;
+    if (N === 4 && n(4) === 1 && n(3) === 0 && n(2) >= 1)
+        return "One FS at grade 4 with grade-2 systems but no grade 3 is not listed in the step table. It is scored 4.5 because it exceeds the 4.0 row (one grade 4, others 0 or 1).";
+    if (N === 4 && n(4) === 1 && n(3) >= 3)
+        return "One FS at grade 4 with three or more systems at grade 3 is not listed in the step table. It is scored 4.5, and 5.0 once six or more systems are at grade 3 or higher (as for six or seven grade-3 systems).";
+    if (N === 3 && n(3) === 1 && n(2) >= 3)
+        return "One FS at grade 3 with three or more systems at grade 2 is not listed in the step table. It is scored 4.0 because it exceeds the 3.5 row (one grade 3 with one or two grade 2).";
+    return null;
+}
+
+function edssRuleNotes(inp, r) {
+    const out = [], add = (tab, msg) => out.push({ tab, msg: "Rule note: " + msg + " Check against your own judgment." });
+    const num = v => { const x = parseFloat(v); return isNaN(x) ? null : x; };
+    const v = k => num(inp[k]);
+    // Step table gaps (only when the FS pattern sets the step)
+    const fsl = [r.visual_fs_conv, r.brainstem_fs, r.pyramidal_fs, r.cerebellar_fs, r.sensory_fs, r.bb_fs_conv, r.cerebral_fs_step].map(x => _safe(x));
+    const tr = calcEDSSStepTrace({ visual: fsl[0], brainstem: fsl[1], pyramidal: fsl[2], cerebellar: fsl[3], sensory: fsl[4], bb: fsl[5], cerebral: fsl[6] }, r.ambulation_score);
+    const gap = edssStepGapNote(fsl);
+    if (gap && tr.branch === "fs_pattern") add(null, gap);
+    // Pyramidal
+    const UE = ["deltoid", "biceps", "triceps", "wflex", "wext"], LE = ["hipflex", "kneeflex", "kneeext", "ankdorsi", "ankplant"];
+    const grp = (ms, side) => ms.map(m => { const x = v("p_str_" + m + "_" + side); return x === null ? 5 : x; });
+    const limbs = [grp(UE, "R"), grp(UE, "L"), grp(LE, "R"), grp(LE, "L")];
+    const plegic = limbs.map(a => Math.max(...a) <= 1);
+    const weak2 = limbs.filter(a => Math.min(...a) <= 2), weak3 = limbs.filter(a => Math.min(...a) <= 3);
+    const P = r.pyramidal_fs;
+    const severeMono = limbs.some((a, i) => !plegic[i] && a.filter(x => x <= 2).length >= 2);
+    if (P === 4 && severeMono && weak2.length === 1 && !plegic.some(Boolean))
+        add("pyramidal", "Pyramidal FS 4: BMRC 2 or less in more than one muscle group of one limb exceeds the FS 3 definition (BMRC 2 or less in one muscle group) and is scored one level up.");
+    if (P >= 4 && !plegic.some(Boolean)) {
+        const t = weak2.length >= 2 ? 2 : (weak3.length >= 3 ? 3 : null);
+        if (t !== null && limbs.some(a => Math.min(...a) <= t && a.filter(x => x <= t).length === 1))
+            add("pyramidal", `Pyramidal FS ${P}: a limb is counted as weak (BMRC ${t} or less) when at least one of its muscle groups reaches that grade.`);
+    }
+    const all = limbs.flat();
+    if (P === 3 && all.filter(x => x === 3).length >= 3 && weak3.length < 3 && !all.some(x => x <= 2))
+        add("pyramidal", "Pyramidal FS 3: BMRC 3 in more than two muscle groups but in fewer than three limbs is kept at FS 3 (moderate weakness). FS 4 needs BMRC 2, plegia of a limb, or BMRC 3 in three or more limbs.");
+    const spast = Math.max(...["p_spast_arms_R", "p_spast_arms_L", "p_spast_legs_R", "p_spast_legs_L"].map(k => v(k) || 0));
+    if (spast >= 3 && P === 2)
+        add("pyramidal", "Severe limb spasticity sets Pyramidal FS 2 at least; the FS definitions do not grade spasticity further, so check strength and function.");
+    // Sensory
+    const sa = {}; ["sup_ue_R", "sup_ue_L", "sup_trunk_R", "sup_trunk_L", "sup_le_R", "sup_le_L", "vib_ue_R", "vib_ue_L", "vib_le_R", "vib_le_L", "pos_ue_R", "pos_ue_L", "pos_le_R", "pos_le_L"].forEach(k => sa[k] = v("s_" + k));
+    const sup = _superficialScore(sa), deep = _deepScore(sa), S = r.sensory_fs;
+    const pos = [sa.pos_ue_R, sa.pos_ue_L, sa.pos_le_R, sa.pos_le_L].map(x => x || 0), vib = [sa.vib_ue_R, sa.vib_ue_L, sa.vib_le_R, sa.vib_le_L].map(x => x || 0);
+    const nPos3 = pos.filter(x => x >= 3).length;
+    if (deep === S && nPos3 >= 1 && nPos3 <= 2 && S === 4)
+        add("sensory", "Sensory FS 4: marked loss of position sense in one or two limbs is not placed by the FS definitions (moderate loss = FS 3). It is scored 4.");
+    if (deep === S && nPos3 >= 3 && S === 4)
+        add("sensory", "Sensory FS 4: marked loss of position sense in more than two limbs = FS 4. FS 5 from deep sensation needs position and vibration lost in all four limbs.");
+    if (deep === S && S === 5 && sup < 5)
+        add("sensory", "Sensory FS 5: position and vibration are lost in all four limbs, taken as most of the body below the head.");
+    if (sup === 4 && deep === 4 && S === 5)
+        add("sensory", "Sensory FS 5: superficial and deep sensation both at level 4 are combined one level up (Fouad 2023).");
+    if (deep === S && S === 2 && Math.max(...pos) === 0 && vib.filter(x => x === 2).length > 2)
+        add("sensory", "Sensory FS 2: moderate vibration loss alone in more than two limbs stays at FS 2; FS 3 needs moderate loss in all proprioceptive tests (position sense too).");
+    // Brainstem
+    if (v("b_eom") === 2 && r.brainstem_fs === 1)
+        add("brainstem", "Brainstem FS 1: mild eye-movement impairment is scored 1, because FS 2 needs moderate impairment.");
+    // Visual
+    if ((v("v_vf_od") === 1 || v("v_vf_os") === 1) && r.visual_fs === 1)
+        add("visual", "Visual FS 1: a field deficit found only on formal testing is not listed in the FS definitions and is scored 1.");
+    // Cerebellar
+    if (r.cerebellar_fs === 5)
+        add("cerebellar", "Cerebellar FS 5 (unable to perform coordinated movements) is taken as severe ataxia in three or four limbs plus severe gait and truncal ataxia.");
+    if (v("c_romberg") === 3 && r.cerebellar_fs === 2)
+        add("cerebellar", "Cerebellar FS 2: severe Romberg instability is not placed higher than moderate by the FS definitions.");
+    if ((v("c_head") || 0) >= 2 && r.cerebellar_fs === 1)
+        add("cerebellar", "Cerebellar FS 1: head tremor is not graded in the FS definitions and counts as a sign only.");
+    // Bowel and bladder
+    if (v("bb_cath") === 2 && r.bb_fs === 4)
+        add("bowelbladder", "Bowel/Bladder FS 4: constant catheterisation is scored as almost constant (4). An indwelling or external catheter is FS 5; record it as loss of bladder function.");
+    // Walking
+    const dist = num(_firstVal(inp.amb_distance_measured, inp.amb_distance_reported));
+    if ((inp.amb_assistance === "unilateral" || inp.amb_assistance === "bilateral") && dist !== null && dist < 5 && r.ambulation_score === 10)
+        add("ambulation", "Ambulation Score 10 (EDSS 7.0): less than 5 m even with aid means the patient is essentially restricted to a wheelchair.");
+    return out;
+}
+
 // Export for node testing
 if (false) {
     module.exports = {
         snellenToScore, calcVisualFS, visualFSConverted,
-        calcBrainstemFS, calcPyramidalFS, calcCerebellarFS,
+        calcBrainstemFS, calcPyramidalFS, calcCerebellarFS, edssRuleNotes, edssStepGapNote,
         calcSensoryFS, calcBBFS, bbFSConverted, calcCerebralFS,
         calcAmbulationScore, shouldSuggestCerebellarX, cerebralMoodOnly,
         calcEDSSStep, calcEDSSStepTrace, calculateFullEDSS, MUSCLE_KEYS,
@@ -5522,7 +5589,7 @@ const CARDS = {
         hint: "Patient's own estimate; if unsure, ask about a familiar route and convert it to metres." },
       { type: "number", id: "amb_time_reported", label: "Time reported (min)", min: 0, max: 240 },
       { type: "checkbox", id: "amb_is_normal", label: "Patient walks fully normally - no restriction at all (sets Ambulation Score = 0)",
-        hint: "Check this ONLY if walking is completely unrestricted compared to peers of similar age. Walking >500 m without aid but with any subjective restriction → leave unchecked (Ambulation Score = 1)." },
+        hint: "Check this ONLY if walking is completely unrestricted compared to peers of similar age. Walking 500 m or more without aid but with any subjective restriction → leave unchecked (Ambulation Score = 1)." },
     ],
     layout: "split-2",
     tip: `<p><strong>Ask:</strong></p><ul>
@@ -5531,13 +5598,13 @@ const CARDS = {
       <li><span class="cmd">"How far can you walk without stopping - unassisted? With your device?"</span></li>
       <li>If unsure about meters: <span class="cmd">"How far is a familiar walk, for example from the car park to the clinic?"</span> and convert it to metres.</li>
       </ul>
-      <p><strong>Distance (no aid):</strong> Normal=0 · &gt;500 m=1 · 300–500=2 · 200–300=3 · 100–200=4 · &lt;100=5</p>
-      <p><strong>Unilateral aid:</strong> &gt;50 m=AS 6 · &lt;50 m=AS 8 &nbsp;|&nbsp; <strong>Bilateral aid:</strong> &gt;120 m=AS 7 · &lt;120 m=AS 9</p>
+      <p><strong>Distance (no aid):</strong> Normal=0 · 500 m or more=1 · 300–499=2 · 200–299=3 · 100–199=4 · &lt;100=5</p>
+      <p><strong>Unilateral aid:</strong> 50 m or more=AS 6 · &lt;50 m=AS 8 &nbsp;|&nbsp; <strong>Bilateral aid:</strong> 120 m or more=AS 7 · &lt;120 m=AS 9</p>
       <p><em>Auto-calc runs from assistance + distance above. Override manually only if needed.</em></p>`,
   },
   amb_observed: {
     title: "Ambulation - observed",
-    question: "If possible, observe walking far enough to decide the step: 500 m without aid, or more than 120 m with bilateral aid (more than 50 m with one aid).",
+    question: "If possible, observe walking far enough to decide the step: 500 m without aid, or 120 m with bilateral aid (50 m with one aid).",
     fields: [],
   },
   amb_score: {
@@ -5554,10 +5621,10 @@ const CARDS = {
           $(3, "3 - 200–299 m without help (→ EDSS ≥5.0)"),
           $(4, "4 - 100–199 m without help (→ EDSS 5.5)"),
           $(5, "5 - Less than 100 m without assistance (→ EDSS 6.0)"),
-          $(6, "6 - Unilateral assistance, more than 50 m (→ EDSS 6.0)"),
-          $(7, "7 - Bilateral assistance, more than 120 m (→ EDSS 6.0)"),
-          $(8, "8 - Unilateral assistance, 50 m or less (→ EDSS 6.5)"),
-          $(9, "9 - Bilateral assistance, about 5 to 120 m (→ EDSS 6.5)"),
+          $(6, "6 - Unilateral assistance, 50 m or more (→ EDSS 6.0)"),
+          $(7, "7 - Bilateral assistance, 120 m or more (→ EDSS 6.0)"),
+          $(8, "8 - Unilateral assistance, less than 50 m (→ EDSS 6.5)"),
+          $(9, "9 - Bilateral assistance, about 5 to 119 m (→ EDSS 6.5)"),
           $(10, "10 - Wheelchair without help (→ EDSS 7.0)"),
           $(11, "11 - Wheelchair with help (→ EDSS 7.5)"),
           $(12, "12 - Restricted to bed or chair, effective use of arms (→ EDSS 8.0)"),
@@ -6213,7 +6280,7 @@ const ROADMAP_VIEW = [
     cards: ["amb_history", "amb_score", "mental", "bb"],
     fsSummaries: [],
     notes: `<ul>
-      <li><span class="rule">EDSS &gt; 5.0 requires ambulation restriction</span> - AS must be ≥ 4 (walking distance 100–200 m without aid). You cannot reach EDSS 6.0+ on FS pattern alone.</li>
+      <li><span class="rule">EDSS &gt; 5.0 requires ambulation restriction</span> - AS must be 4 or more (walking 100–199 m without aid, or worse). You cannot reach EDSS 6.0+ on FS pattern alone.</li>
       <li>If the patient <span class="rule">cannot walk without assistance</span> → EDSS 6.0 or 6.5 (based on distance + type of aid).</li>
       <li>If the patient <span class="rule">requires a wheelchair</span> → EDSS ≥ 7.0.</li>
       <li>If the patient is <span class="rule">essentially bedbound</span> → EDSS ≥ 8.0.</li>
@@ -7046,9 +7113,9 @@ function _ambGuidanceNote() {
   const a = (typeof FORM_STATE !== "undefined") ? FORM_STATE["amb_assistance"] : "";
   const wrap = (body) => `<div class="amb-guidance-note" style="background:var(--hl-soft,#fdf2e9);border-left:3px solid var(--hl,#b85c1a);border-radius:6px;padding:9px 12px;margin-bottom:10px;font-size:12.5px;line-height:1.55;color:var(--ink,#222222);">${body}</div>`;
   if (!a) return wrap(`<strong>Pick an assistance type above.</strong> The distance brackets you need to ask about will appear here.`);
-  if (a === "none") return wrap(`<strong>No aid - ask how far they walk, and whether it is truly unrestricted:</strong><br>An ankle-foot orthosis alone counts as no aid. Fully normal for their age &rarr; tick &ldquo;walks fully normally&rdquo; (AS 0) &middot; &gt;500 m but with any restriction &rarr; AS 1 &middot; 300&ndash;500 m &rarr; AS 2 &middot; 200&ndash;300 m &rarr; AS 3 &middot; 100&ndash;200 m &rarr; AS 4 &middot; &lt;100 m &rarr; AS 5`);
-  if (a === "unilateral") return wrap(`<strong>Unilateral aid (one cane/crutch/brace) - ask the distance with the aid:</strong><br>more than 50 m &rarr; AS 6 (EDSS 6.0) &middot; 50 m or less &rarr; AS 8 (EDSS 6.5). Rate the best performance. The published rule (Sen 2018) is &ldquo;more than 50 m&rdquo;, so exactly 50 m scores AS 8.`);
-  if (a === "bilateral") return wrap(`<strong>Bilateral aid (two aids or another person) - ask the distance:</strong><br>more than 120 m &rarr; AS 7 (EDSS 6.0) &middot; about 5 to 120 m &rarr; AS 9 (EDSS 6.5). Less than about 5 m even with aids: choose Wheelchair. Help from another person counts as bilateral aid.`);
+  if (a === "none") return wrap(`<strong>No aid - ask how far they walk, and whether it is truly unrestricted:</strong><br>An ankle-foot orthosis alone counts as no aid. Fully normal for their age &rarr; tick &ldquo;walks fully normally&rdquo; (AS 0) &middot; 500 m or more but with any restriction &rarr; AS 1 &middot; 300&ndash;500 m &rarr; AS 2 &middot; 200&ndash;300 m &rarr; AS 3 &middot; 100&ndash;200 m &rarr; AS 4 &middot; &lt;100 m &rarr; AS 5`);
+  if (a === "unilateral") return wrap(`<strong>Unilateral aid (one cane/crutch/brace) - ask the distance with the aid:</strong><br>50 m or more &rarr; AS 6 (EDSS 6.0) &middot; less than 50 m &rarr; AS 8 (EDSS 6.5). Rate the best performance.`);
+  if (a === "bilateral") return wrap(`<strong>Bilateral aid (two aids or another person) - ask the distance:</strong><br>120 m or more &rarr; AS 7 (EDSS 6.0) &middot; about 5 to 119 m &rarr; AS 9 (EDSS 6.5). Less than 5 m even with aids counts as EDSS 7.0 (wheelchair level). Help from another person counts as bilateral aid.`);
   if (a === "wheelchair_indep") return wrap(`<strong>Wheelchair, self-propelled / transfers alone &rarr; AS 10 (EDSS 7.0).</strong> Distance not needed.`);
   if (a === "wheelchair_help") return wrap(`<strong>Wheelchair, needs help to wheel or transfer &rarr; AS 11 (EDSS 7.5).</strong> Distance not needed.`);
   if (a === "bedbound") return wrap(`<strong>Restricted to bed or chair with effective use of arms &rarr; AS 12 (EDSS 8.0).</strong> Choose AS 13, 14 or 15 in the assistance list if the patient is in bed much of the day, helpless, or unable to communicate or eat.`);
@@ -7117,15 +7184,15 @@ const FS_SCORE_REF = {
   bb: [
     [0,"Normal"],
     [1,"Mild urinary hesitancy/urgency or constipation"],
-    [2,"Moderate hesitancy/urgency or rare incontinence (<1×/week); or severe constipation"],
-    [3,"Frequent urinary incontinence, or regular self-catheterisation or enemas"],
+    [2,"Moderate hesitancy/urgency or rare incontinence (<1×/week); or moderate bowel problem (pads or lifestyle change)"],
+    [3,"Frequent urinary incontinence, or intermittent self-catheterisation, or enemas/manual help for bowels"],
     [4,"Almost constant catheterisation needed"],
     [5,"Loss of bladder or bowel function"],
     [6,"Loss of both bladder and bowel function"],
   ],
   cerebral: [
     [0,"Normal"],
-    [1,"Mood alteration alone (depression/euphoria) - does not affect EDSS; or mild fatigue; or signs-only mentation"],
+    [1,"Mild fatigue; or signs-only mentation (depression/euphoria is recorded but not counted)"],
     [2,"Mild mentation decrease; or moderate-severe fatigue"],
     [3,"Moderate mentation decrease - oriented but definite abnormalities on testing"],
     [4,"Marked decrease - disoriented in 1–2 spheres"],
@@ -7133,15 +7200,15 @@ const FS_SCORE_REF = {
   ],
   ambulation: [
     [0,"Unrestricted - normal walking"],
-    [1,"Fully ambulatory but walking is restricted (>500 m with some limitation)"],
+    [1,"Fully ambulatory but walking is restricted (500 m or more, with some limitation)"],
     [2,"300–499 m without aid → EDSS ≥4.5"],
     [3,"200–299 m without aid → EDSS 5.0"],
     [4,"100–199 m without aid → EDSS 5.5"],
     [5,"<100 m without aid → EDSS 6.0"],
-    [6,"Unilateral assistance, >50 m → EDSS 6.0"],
-    [7,"Bilateral assistance, >120 m → EDSS 6.0"],
-    [8,"Unilateral assistance, 50 m or less → EDSS 6.5"],
-    [9,"Bilateral assistance, about 5 to 120 m → EDSS 6.5"],
+    [6,"Unilateral assistance, 50 m or more → EDSS 6.0"],
+    [7,"Bilateral assistance, 120 m or more → EDSS 6.0"],
+    [8,"Unilateral assistance, less than 50 m → EDSS 6.5"],
+    [9,"Bilateral assistance, about 5 to 119 m → EDSS 6.5"],
     [10,"Wheelchair independent → EDSS 7.0"],
     [11,"Wheelchair with help → EDSS 7.5"],
     [12,"Bed/chair-bound, effective use of arms → EDSS 8.0"],
@@ -7157,9 +7224,9 @@ const FS_INTERP = {
   pyramidal: ["Normal","Signs only - no disability","Minimal: motor fatigability or BMRC 4 in 1–2 groups","Mild-moderate paraparesis/hemiparesis or severe monoparesis (BMRC ≤2 in 1 group)","Marked paraparesis/hemiparesis (BMRC 2 in 2 limbs) or monoplegia or moderate tetraparesis","Paraplegia (BMRC 0–1 all LL groups), marked tetraparesis, or hemiplegia","Tetraplegia (BMRC 0–1 all UL and LL groups)"],
   cerebellar: ["Normal","Abnormal signs, no disability","Mild ataxia, clear Romberg instability, or unable to tandem walk","Moderate truncal or limb ataxia","Severe ataxia in 3–4 limbs","Unable to perform coordinated movements due to ataxia"],
   sensory: ["Normal","Mild vibration in 1–2 limbs only","Mild touch/pain/position or moderate vibration in 1–2 limbs; or mild vibration in >2 limbs","Moderate touch/pain/position or marked vibration in 1–2 limbs; or mild touch/pain in >2 limbs","Marked decrease in touch/pain in 1–2 limbs; or moderate touch/pain + marked proprioception in >2 limbs","Loss of sensation in 1–2 limbs; or moderate touch + marked proprioception for most body below head","Sensation lost below the head"],
-  bb: ["Normal","Mild urinary hesitancy/urgency or constipation","Moderate hesitancy/urgency or rare incontinence (<1×/week); or severe constipation","Frequent urinary incontinence, or regular self-catheterisation or enemas","Almost constant catheterisation needed","Loss of bladder or bowel function","Loss of both bladder and bowel function"],
-  cerebral: ["Normal","Mood change only (depression or euphoria; not counted in the EDSS step), mild fatigue, or a mentation change seen only on testing","Mild mentation decrease; or moderate-severe fatigue","Moderate mentation decrease","Marked mentation decrease (disoriented in 1–2 spheres)","Dementia"],
-  ambulation: ["Unrestricted","Fully ambulatory >500 m (restricted but not impaired)","300–499 m unaided → EDSS ≥4.5","200–299 m unaided → EDSS 5.0","100–199 m unaided → EDSS 5.5","<100 m unaided → EDSS 6.0","Unilateral assistance >50 m → EDSS 6.0","Bilateral assistance >120 m → EDSS 6.0","Unilateral assistance ≤50 m → EDSS 6.5","Bilateral assistance 10–120 m → EDSS 6.5","Wheelchair independent → EDSS 7.0","Wheelchair with help → EDSS 7.5","Bed/chair-bound, uses arms → EDSS 8.0"],
+  bb: ["Normal","Mild urinary hesitancy/urgency or constipation","Moderate hesitancy/urgency or rare incontinence (<1×/week); or moderate bowel problem (pads or lifestyle change)","Frequent urinary incontinence, or intermittent self-catheterisation, or enemas/manual help for bowels","Almost constant catheterisation needed","Loss of bladder or bowel function","Loss of both bladder and bowel function"],
+  cerebral: ["Normal","Mild fatigue, or a mentation change seen only on testing (depression or euphoria is recorded but not counted)","Mild mentation decrease; or moderate-severe fatigue","Moderate mentation decrease","Marked mentation decrease (disoriented in 1–2 spheres)","Dementia"],
+  ambulation: ["Unrestricted","Fully ambulatory, 500 m or more, but walking is not fully normal","300–499 m unaided → EDSS ≥4.5","200–299 m unaided → EDSS 5.0","100–199 m unaided → EDSS 5.5","<100 m unaided → EDSS 6.0","Unilateral assistance 50 m or more → EDSS 6.0","Bilateral assistance 120 m or more → EDSS 6.0","Unilateral assistance <50 m → EDSS 6.5","Bilateral assistance about 5–119 m → EDSS 6.5","Wheelchair independent → EDSS 7.0","Wheelchair with help → EDSS 7.5","Bed/chair-bound, uses arms → EDSS 8.0","In bed much of the day, some arm use → EDSS 8.5","Helpless in bed, can communicate and eat → EDSS 9.0","Cannot communicate effectively or eat/swallow → EDSS 9.5"],
 };
 
 const FS_COLORS = ["#2e7d32","#558b2f","#f9a825","#e65100","#b71c1c","#880e4f","#4a148c"];
@@ -7256,22 +7323,8 @@ function runConsistencyCheck(inp, r) {
   const num = (v) => { const n = parseFloat(v); return isNaN(n) ? null : n; };
   const isMissing = (v) => v === undefined || v === null || v === "" || v === "0" || v === 0;
 
-  // ── 0. Transparency note - fires ONLY when the "exceed one level" rule escalated a severe
-  //      monoparesis from FS 3 to FS 4 (BMRC ≤2 in >1 muscle group of a single limb, not a
-  //      full monoplegia). Explains WHY the score is one level higher than the raw grade. ──
-  (function () {
-    const g = id => { const n = parseFloat(inp[id]); return isNaN(n) ? 5 : n; };
-    const grp = (muscles, side) => muscles.map(m => g("p_str_" + m + "_" + side));
-    const UE = ["deltoid", "biceps", "triceps", "wflex", "wext"];
-    const LE = ["hipflex", "kneeflex", "kneeext", "ankdorsi", "ankplant"];
-    const limbs = [grp(UE, "R"), grp(UE, "L"), grp(LE, "R"), grp(LE, "L")];
-    const weakLimbs = limbs.filter(a => Math.min(...a) <= 2).length;
-    const severeMono = limbs.some(a => a.filter(v => v <= 2).length >= 2 && Math.max(...a) > 1);
-    if (severeMono && weakLimbs === 1 && pyrFS === 4) {
-      issues.push({ sev: "info", tab: "pyramidal",
-        msg: "Pyramidal FS = 4: a severe monoparesis (BMRC ≤2 in more than one muscle group of a single limb) exceeds the FS 3 definition (\"≤2 in one muscle group\"), so it is scored one level up under the published scoring rules (Fouad 2023)." });
-    }
-  })();
+  // ── 0. Rule notes where the published definitions leave a gap (never change the score) ──
+  try { for (const _n of edssRuleNotes(inp, r)) issues.push({ sev: "info", tab: _n.tab, msg: _n.msg }); } catch (e) { /* notes are optional */ }
 
   // ── 1. CROSS-SYSTEM: Pyramidal ↔ Ambulation ─────────────────
   // Paraplegia (both lower limb strength ≤1 / p_overall ≥4) → AS must be ≥ 9
@@ -7418,7 +7471,7 @@ function runConsistencyCheck(inp, r) {
   }
   if (AS !== null && AS === 6 && edss !== null && edss !== 6.0) {
     issues.push({ sev: "info", tab: "ambulation",
-      msg: `Ambulation Score = 6 (unilateral aid, more than 50 m) → EDSS should be 6.0, but shows ${edss.toFixed(1)}. This may indicate a manual override - verify the final EDSS is 6.0.` });
+      msg: `Ambulation Score = 6 (unilateral aid, 50 m or more) → EDSS should be 6.0, but shows ${edss.toFixed(1)}. This may indicate a manual override - verify the final EDSS is 6.0.` });
   }
 
   // ── 9. Ambulation distance ↔ Ambulation Score ───────────────
@@ -7439,7 +7492,7 @@ function runConsistencyCheck(inp, r) {
   if ((inp.amb_assistance === "unilateral" || inp.amb_assistance === "bilateral") && ambD === null) {
     const _uni = inp.amb_assistance === "unilateral";
     issues.push({ sev: "warning", tab: "ambulation",
-      msg: `${_uni ? "Unilateral" : "Bilateral"} aid recorded without a walking distance, so AS ${_uni ? 6 : 7} (EDSS 6.0) was used. Enter the distance walked with the aid: ${_uni ? "50 m or less" : "120 m or less"} gives AS ${_uni ? 8 : 9} (EDSS 6.5).` });
+      msg: `${_uni ? "Unilateral" : "Bilateral"} aid recorded without a walking distance, so AS ${_uni ? 6 : 7} (EDSS 6.0) was used. Enter the distance walked with the aid: ${_uni ? "less than 50 m" : "less than 120 m"} gives AS ${_uni ? 8 : 9} (EDSS 6.5).` });
   }
 
   // ── 10. Recorded ambulation aid ↔ EDSS floor ────────────────
@@ -8524,22 +8577,49 @@ function fillExplainPanel(r) {
 }
 
 // Plain-language, one-line clinical summary of the EDSS + what is driving it.
+// Short meaning of an EDSS step in MSpectrum's own words. When the Ambulation Score is known, the walking
+// part describes what was entered (so 6.0 from "less than 100 m without aid" is not described as needing an aid).
+const EDSS_FS_PHRASE = {
+  0: "normal neurological examination", 1: "no disability, minimal signs in one functional system",
+  1.5: "no disability, minimal signs in more than one functional system", 2: "minimal disability in one functional system",
+  2.5: "minimal disability in two functional systems",
+  3: "moderate disability in one functional system, or mild disability in three or four, while fully ambulatory",
+  3.5: "fully ambulatory, with moderate disability in one or two functional systems and milder disability in others",
+  4: "fully ambulatory without aid despite relatively severe disability",
+};
+const EDSS_WALK_PHRASE = {
+  1: "walks 500 m or more without aid, but walking is not fully normal", 2: "walks 300 to 499 m without aid or rest",
+  3: "walks 200 to 299 m without aid or rest", 4: "walks 100 to 199 m without aid or rest", 5: "walks less than 100 m without aid",
+  6: "needs one aid (cane, crutch or brace) and walks 50 m or more", 7: "needs two aids or another person and walks 120 m or more",
+  8: "needs one aid and walks less than 50 m", 9: "needs two aids or another person to walk about 5 to 119 m",
+  10: "uses a wheelchair; wheels self and transfers alone", 11: "uses a wheelchair and needs help to transfer or to wheel",
+  12: "restricted to bed or chair, with effective use of the arms", 13: "in bed much of the day, with some effective use of the arms",
+  14: "helpless in bed; can communicate and eat", 15: "totally helpless; cannot communicate effectively or eat/swallow",
+};
+const EDSS_STEP_ONLY_PHRASE = {
+  4.5: "fully ambulatory without aid for about 300 m, with relatively severe disability", 5: "walks about 200 m without aid; disability limits full daily activities",
+  5.5: "walks about 100 m without aid; disability prevents full daily activities", 6: "walks less than 100 m without aid, or needs one aid for 50 m or more, or two aids for 120 m or more",
+  6.5: "needs one aid and walks less than 50 m, or needs two aids to walk about 5 to 119 m", 7: "essentially restricted to a wheelchair", 7.5: "restricted to a wheelchair; may need help to transfer",
+  8: "essentially restricted to bed or chair", 8.5: "in bed much of the day", 9: "helpless in bed; can communicate and eat",
+  9.5: "totally helpless; cannot communicate effectively or eat/swallow",
+};
+function edssStepPhrase(step, AS) {
+  if (step == null || isNaN(step)) return "";
+  step = Number(step);
+  if (step >= 10) return "death due to MS";
+  const a = (AS === null || AS === undefined || AS === "" || isNaN(AS)) ? null : Number(AS);
+  if (a !== null && a >= 5) return EDSS_WALK_PHRASE[Math.min(a, 15)];
+  if (a !== null && a >= 1 && step === AS_FLOOR_EDSS[a]) return EDSS_WALK_PHRASE[a];
+  if (step <= 4) return EDSS_FS_PHRASE[step] || "";
+  if (a !== null && a >= 1) return "severe disability in the functional systems; " + EDSS_WALK_PHRASE[a];
+  if (a === 0) return "severe disability in the functional systems, while walking is unrestricted";
+  return EDSS_STEP_ONLY_PHRASE[step] || "";
+}
+function edssStepLabel(step, AS) { const t = edssStepPhrase(step, AS); return t ? t.charAt(0).toUpperCase() + t.slice(1) : ""; }
+
 function edssPlainLanguage(r) {
   var step = (r.edss_step == null) ? null : Number(r.edss_step);
-  var amb;
-  if (step == null) amb = "";
-  else if (step === 0) amb = "a normal neurological examination";
-  else if (step < 2) amb = "no disability, only minimal neurological signs";
-  else if (step < 3) amb = "minimal disability, fully ambulatory";
-  else if (step < 4) amb = "moderate disability but still fully ambulatory";
-  else if (step < 5) amb = "fully ambulatory without aid, walking a few hundred metres, with more significant disability";
-  else if (step < 6) amb = "ambulatory without aid for limited distances; disability begins to limit full daily activities";
-  else if (step < 6.5) amb = "needs intermittent or unilateral support to walk about 100 m";
-  else if (step < 7) amb = "needs bilateral support to walk about 20 m";
-  else if (step < 8) amb = "essentially restricted to a wheelchair";
-  else if (step < 9) amb = "essentially restricted to bed or a chair";
-  else if (step < 10) amb = "helpless and bed-bound";
-  else amb = "death attributable to MS";
+  var amb = (step == null) ? "" : edssStepPhrase(step, r.ambulation_source === "incomplete" ? null : r.ambulation_score);
   var axes = [
     ["visual", Number(r.visual_fs_conv) || 0], ["brainstem", Number(r.brainstem_fs) || 0],
     ["pyramidal (motor)", Number(r.pyramidal_fs) || 0], ["cerebellar (coordination)", Number(r.cerebellar_fs) || 0],
@@ -8549,7 +8629,7 @@ function edssPlainLanguage(r) {
   var maxv = Math.max.apply(null, axes.map(function (a) { return a[1]; }));
   var drivers = axes.filter(function (a) { return a[1] === maxv && maxv > 0; }).map(function (a) { return a[0]; });
   var driverTxt = maxv <= 0 ? "No functional-system involvement is recorded."
-    : ("The main " + (drivers.length > 1 ? "contributors are " : "contributor is ") + drivers.join(" and ") + " (grade " + maxv + ").");
+    : ("The main " + (drivers.length > 1 ? "contributors are " : "contributor is ") + (drivers.length > 2 ? drivers.slice(0, -1).join(", ") + " and " + drivers[drivers.length - 1] : drivers.join(" and ")) + " (grade " + maxv + ").");
   var ambNote = (r.ambulation_source === "auto" && Number(r.ambulation_score) >= 5) ? " Walking ability is the limiting factor here." : "";
   var head = (step == null) ? "EDSS not yet determined." : ("EDSS " + step.toFixed(1) + ": " + amb + ".");
   return "<b>In plain terms.</b> " + head + " " + driverTxt + ambNote;
@@ -8590,8 +8670,11 @@ function explainRule(r) {
             : tr.branch === "as_fixed" ? "[ambulation rules: Sen 2018; Fouad 2023]"
             : "[ambulation rules: Sen 2018; FS combinations: Kurtzke 1983]";
   let extra = "";
-  if (r.cerebral_mood_only) extra += " Depression or euphoria alone gives Cerebral FS 1 on the sheet and is not counted in the step.";
+  if (r.cerebral_mood_only) extra += " Depression or euphoria is recorded but is not used for the Cerebral FS or the step.";
   if (r.ambulation_source === "incomplete") extra += " Ambulation not entered: assumed unrestricted (AS 0); the step is provisional.";
+  const _mx = Math.max(_safe(r.visual_fs_conv), _safe(r.brainstem_fs), _safe(r.pyramidal_fs), _safe(r.cerebellar_fs), _safe(r.sensory_fs), _safe(r.bb_fs_conv), _safe(r.cerebral_fs_step != null ? r.cerebral_fs_step : r.cerebral_fs));
+  if (tr.branch === "fs_pattern" && (tr.edss === 4.0 || tr.edss === 4.5) && (_mx <= 3 || (_mx === 4 && tr.edss === 4.5)))
+    extra += " This step comes from a combination of lower grades rather than one high grade, so one grade more or less in a single system can change it.";
   return `EDSS ${tr.edss.toFixed(1)}. ${tr.reason} ${src}${extra}`;
 }
 
@@ -8780,9 +8863,9 @@ function qcComputeResult() {
 
 function qcInterpretation(sr) {
   if (!sr) return "We need all answers to estimate your EDSS range.";
-  if (sr.lo === 0) return "Your answers fit an EDSS of 3.5 or lower: walking is not limited, although MS may affect other functions.";
+  if (sr.lo === 0) return "Your answers fit an EDSS of 3.5 or lower: you walk 500 m or more without an aid, although MS may affect other functions.";
   if (sr.lo === 4) return "Your answers fit an EDSS between 4.0 and 6.5: walking is limited, or you use a walking aid.";
-  return "Your answers fit an EDSS of 7.0 or higher: walking is limited to a few steps, and a wheelchair is usually needed.";
+  return "Your answers fit an EDSS of 7.0 or higher: walking is limited to a few metres, and a wheelchair is usually needed.";
 }
 
 function qcShowResult() {
@@ -8990,7 +9073,7 @@ const TRAIN_CASES = [
   { title: "Restricted but 500 m or more", fs: { visual: 0, brainstem: 1, pyramidal: 1, cerebellar: 0, sensory: 1, bb: 0, cerebral: 1 }, as: 1, note: "Fully ambulatory, no aid, but the patient reports restriction of walking over long distances." },
   { title: "Walks 300 to 499 m", fs: { visual: 0, brainstem: 0, pyramidal: 3, cerebellar: 2, sensory: 2, bb: 1, cerebral: 0 }, as: 2, note: "Without aid or rest for about 400 m." },
   { title: "Walks 200 to 299 m", fs: { visual: 0, brainstem: 1, pyramidal: 3, cerebellar: 2, sensory: 1, bb: 1, cerebral: 0 }, as: 3, note: "Without aid or rest for about 250 m." },
-  { title: "Unilateral aid, more than 50 m", fs: { visual: 0, brainstem: 1, pyramidal: 3, cerebellar: 3, sensory: 2, bb: 2, cerebral: 0 }, as: 6, note: "Needs one cane to walk about 100 m." },
+  { title: "Unilateral aid, 50 m or more", fs: { visual: 0, brainstem: 1, pyramidal: 3, cerebellar: 3, sensory: 2, bb: 2, cerebral: 0 }, as: 6, note: "Needs one cane to walk about 100 m." },
   { title: "Wheelchair, transfers alone", fs: { visual: 1, brainstem: 2, pyramidal: 4, cerebellar: 3, sensory: 3, bb: 3, cerebral: 1 }, as: 10, note: "Walks no more than a few steps; wheels the chair and transfers without help." },
   { title: "Brainstem grade 3 alone (Sen 2018, example 1)", fs: { visual: 0, brainstem: 3, pyramidal: 0, cerebellar: 0, sensory: 0, bb: 0, cerebral: 0 }, as: 0, src: "Sen 2018", note: "Marked cranial-nerve findings, every other system normal, walking unrestricted." },
   { title: "Brainstem 3 with minimal signs elsewhere (Sen 2018, example 3)", fs: { visual: 1, brainstem: 3, pyramidal: 1, cerebellar: 1, sensory: 0, bb: 0, cerebral: 1 }, as: 0, src: "Sen 2018", note: "Grade 1 signs in visual, pyramidal, cerebellar and cerebral systems next to the brainstem grade 3." },
@@ -8998,7 +9081,7 @@ const TRAIN_CASES = [
   { title: "Two systems at grade 4 (Sen 2018, example 5)", fs: { visual: 0, brainstem: 1, pyramidal: 4, cerebellar: 3, sensory: 4, bb: 1, cerebral: 1 }, as: 0, src: "Sen 2018", note: "Pyramidal 4, sensory 4 and cerebellar 3 with unrestricted walking. The FS pattern alone never exceeds 5.0; steps 5.5 and above are set by ambulation." },
   { title: "One system at grade 3 with two at grade 2", fs: { visual: 0, brainstem: 2, pyramidal: 3, cerebellar: 0, sensory: 2, bb: 0, cerebral: 0 }, as: 0, note: "Moderate disability in one system, mild in two; fully ambulatory." },
   { title: "Grade 5 in one system, walking 100 to 199 m", fs: { visual: 0, brainstem: 0, pyramidal: 5, cerebellar: 2, sensory: 2, bb: 2, cerebral: 0 }, as: 4, note: "Paraplegia-range weakness; walks about 150 m without aid or rest." },
-  { title: "Bilateral aid, about 5 to 120 m", fs: { visual: 0, brainstem: 1, pyramidal: 4, cerebellar: 3, sensory: 3, bb: 3, cerebral: 1 }, as: 9, note: "Two crutches for about 60 m." }
+  { title: "Bilateral aid, about 5 to 119 m", fs: { visual: 0, brainstem: 1, pyramidal: 4, cerebellar: 3, sensory: 3, bb: 3, cerebral: 1 }, as: 9, note: "Two crutches for about 60 m." }
 ];
 const TRAIN_FS_NAMES = [["visual", "Visual"], ["brainstem", "Brainstem"], ["pyramidal", "Pyramidal"], ["cerebellar", "Cerebellar"], ["sensory", "Sensory"], ["bb", "Bowel/Bladder"], ["cerebral", "Cerebral"]];
 const TRAIN_STEPS = [0, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5];
@@ -9382,22 +9465,10 @@ function clinCalcEDSS() {
   if (AS >= 5) reason = `Walking: ${walk}. This sets the sEDSS at ${edss.toFixed(1)} (Kurtzke step definitions).`;
   else if (AS >= 2) reason = `Walking: ${walk} (at least ${tr.floor.toFixed(1)}). Functional system pattern: ${tr.fs_step.toFixed(1)}. sEDSS = the higher, ${edss.toFixed(1)}.`;
   else reason = `Walking: ${walk}. The sEDSS comes from the functional system pattern: ${_fsPatternText([vis, bst, pyr, cer, sen, bb, cbr])}.`;
-  const label = AS >= 5 ? walk.replace(/^./, c => c.toUpperCase()) : clinEdssLabel(edss);
+  const label = edssStepLabel(edss, AS);
   return { edss, fs, label, as: AS, trace: tr, reason };
 }
 
-function clinEdssLabel(e) {
-  if (e === 0)   return "Normal neurological exam";
-  if (e <= 1.5)  return "No disability, minimal signs";
-  if (e <= 2.5)  return "Minimal disability";
-  if (e <= 3.5)  return "Moderate disability in one FS";
-  if (e <= 4.5)  return "Relatively severe disability - fully ambulatory";
-  if (e <= 5.5)  return "Ambulatory for ~200 m without aid";
-  if (e <= 6.5)  return "Requires walking aid";
-  if (e <= 7.5)  return "Restricted to wheelchair";
-  if (e <= 8.5)  return "Restricted to bed/chair";
-  return "Bedbound";
-}
 
 // ---- Adaptive step sequence ----
 // v29: an FS counts as assessed only when its question was answered. "Get EDSS now" can skip
@@ -9865,8 +9936,15 @@ function fscRender() {
 function fscRenderResult() {
   const el = document.getElementById("fsc-result");
   const r = fsCalcCompute(FSC_STATE);
-  const pill = document.getElementById("fsc-pill");
-  if (pill) { pill.textContent = r.empty ? "EDSS –" : "EDSS " + _fscEdssTxt(r).replace(" to ", "–") + (r.provisional ? "?" : ""); pill.classList.toggle("prov", r.empty || r.provisional || !!r.range); }
+  const live = document.getElementById("fsc-live"), box = document.getElementById("fsc-readout");
+  if (live && box) {
+    live.textContent = r.empty ? "-" : _fscEdssTxt(r).replace(" to ", "\u2013");
+    const band = r.empty ? null : edssBand(r.edss);
+    if (band == null) box.removeAttribute("data-band"); else box.setAttribute("data-band", String(band));
+    box.classList.toggle("is-provisional", !r.empty && (r.provisional || !!r.range));
+    const mk = document.getElementById("fsc-scale-marker");
+    if (mk) mk.style.setProperty("--pos", (r.empty ? 0 : Math.max(0, Math.min(10, r.edss)) / 10 * 100) + "%");
+  }
   if (r.empty) {
     el.innerHTML = `<div class="fsc-card"><div class="clinical-result"><div class="clinical-result-label">EDSS</div><div class="clinical-result-score" style="color:var(--ink-faint)">&ndash;</div><div class="clinical-result-desc" style="font-size:13px;color:var(--ink-soft)">Choose walking and the FS grades to see the EDSS.</div></div></div>`;
     return;
@@ -9885,7 +9963,7 @@ function fscRenderResult() {
     plain = `<div class="fsc-why">${edssPlainLanguage({ edss_step: r.edss, visual_fs_conv: r.fs.visual, brainstem_fs: r.fs.brainstem, pyramidal_fs: r.fs.pyramidal, cerebellar_fs: r.fs.cerebellar, sensory_fs: r.fs.sensory, bb_fs_conv: r.fs.bb, cerebral_fs: r.fs.cerebral, ambulation_source: "auto", ambulation_score: r.as })}</div>`;
   const near = r.nearby.length ? `<div class="fsc-why"><b>What would change this step</b><ul class="fsc-near">${r.nearby.map(t => `<li>${escHtml(t)}</li>`).join("")}</ul></div>` : "";
   const label = r.range ? "EDSS range" : r.provisional ? "EDSS (FS pattern only)" : "EDSS";
-  const desc = r.range ? "Some systems are not entered or not assessed" : r.provisional ? "Provisional: walking not entered" : clinEdssLabel(r.edss);
+  const desc = r.range ? "Some systems are not entered or not assessed" : r.provisional ? "Provisional: walking not entered" : edssStepLabel(r.edss, r.as);
   el.innerHTML = `<div class="fsc-card"><div class="clinical-result">
       <div class="clinical-result-label">${label}</div>
       <div class="clinical-result-score${r.range ? " fsc-range" : ""}">${_fscEdssTxt(r).replace(" to ", "&ndash;")}</div>
@@ -9938,7 +10016,7 @@ function fscSaveImage() {
   x.fillStyle = "#6b7383"; x.font = "400 20px 'IBM Plex Sans', sans-serif"; x.fillText(new Date().toLocaleDateString(), P, 114);
   x.fillStyle = "#1e4fa3"; x.font = "800 110px 'IBM Plex Sans', sans-serif"; x.fillText(_fscEdssTxt(r).replace(" to ", "–"), P, 250);
   x.fillStyle = "#1f2a37"; x.font = "600 24px 'IBM Plex Sans', sans-serif";
-  x.fillText(r.range ? "EDSS range (systems not entered or not assessed)" : r.provisional ? "Provisional: walking not entered" : clinEdssLabel(r.edss), P, 296);
+  x.fillText(r.range ? "EDSS range (systems not entered or not assessed)" : r.provisional ? "Provisional: walking not entered" : edssStepLabel(r.edss, r.as), P, 296);
   let y = 350;
   x.font = "600 22px 'IBM Plex Sans', sans-serif"; x.fillText("Walking: " + _fscWalkTxt(r), P, y); y += 46;
   lines.forEach(l => { x.font = "400 22px 'IBM Plex Sans', sans-serif"; x.fillStyle = "#475569"; x.fillText(l[0], P, y); x.fillStyle = "#1f2a37"; x.font = "700 22px 'IBM Plex Sans', sans-serif"; x.fillText(l[1], P + 260, y); y += 40; });
@@ -9992,7 +10070,7 @@ function fscReset() { FSC_STATE = {}; FSC_EDIT = null; fscRender(); window.scrol
 document.getElementById("fscalc-way-btn")?.addEventListener("click", showFsCalc);
 document.getElementById("fsc-home-btn")?.addEventListener("click", backToEdssModes);
 document.getElementById("fsc-reset-btn")?.addEventListener("click", fscReset);
-document.getElementById("fsc-pill")?.addEventListener("click", () => document.getElementById("fsc-result")?.scrollIntoView({ behavior: "smooth", block: "start" }));
+["fsc-explain-btn", "fsc-live"].forEach(id => document.getElementById(id)?.addEventListener("click", () => document.getElementById("fsc-result")?.scrollIntoView({ behavior: "smooth", block: "start" })));
 (function () {
   const root = document.getElementById("fscalc");
   if (!root) return;
@@ -10163,7 +10241,7 @@ function buildFlatRecord() {
     worsening_type: (_ch ? _ch.type : ""),
     relapse_last_90d: (g("pt_relapse90") === true || g("pt_relapse90") === "true") ? 1 : 0,
     // Metadata
-    tool_version: "MSpectrum-v36.5",
+    tool_version: "MSpectrum-v36.6",
     export_timestamp: new Date().toISOString(),
     engine_version: ENGINE_VERSION,
   };
@@ -10263,7 +10341,7 @@ function v31BuildEMRNote() {
   const r = calculateFullEDSS(calcIn);
   const d = inp.pt_exam || new Date().toISOString().slice(0, 10);
   const x = r.cerebellar_x ? " (X)" : "";
-  const mood = r.cerebral_mood_only ? " (mood only; not counted in the step)" : "";
+  const mood = r.cerebral_mood_only ? " (mood change recorded; not counted)" : "";
   const amb = [];
   if (inp.amb_assistance && inp.amb_assistance !== "none") amb.push(String(inp.amb_assistance).replace(/_/g, " "));
   const dist = _firstVal(inp.amb_distance_measured, inp.amb_distance_reported);
@@ -10433,8 +10511,8 @@ function exportREDCapDictionary() {
     fs_sensory:           ["text","Sensory FS (0–6)","","integer","0","6","",""],
     fs_bowelbladder_raw:  ["text","Bowel/Bladder FS raw (0–6)","","integer","0","6","",""],
     fs_bowelbladder_conv: ["text","Bowel/Bladder FS converted (EDSS input)","","integer","0","5","",""],
-    fs_cerebral:          ["text","Cerebral FS (0–5); 1 may be mood alone, see fs_cerebral_mood_only","","integer","0","5","",""],
-    fs_cerebral_mood_only:["text","Cerebral FS 1 from depression/euphoria alone (1=yes; not counted in the EDSS step)","","integer","0","1","",""],
+    fs_cerebral:          ["text","Cerebral FS (0–5); mood change is not counted, see fs_cerebral_mood_only","","integer","0","5","",""],
+    fs_cerebral_mood_only:["text","Depression/euphoria recorded with no other cerebral finding (1=yes; not counted in the FS or the EDSS step)","","integer","0","1","",""],
     ambulation_score:     ["text","Ambulation Score AS (0–15)","","integer","0","15","",""],
     ambulation_source:    ["text","AS source (manual/auto/incomplete)","","","","","",""],
     edss_final:           ["text","Final EDSS step (0.0–10.0)","","number","0","10","",""],

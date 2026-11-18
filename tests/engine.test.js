@@ -33,6 +33,10 @@ eq('visualConv table @3', E.visualFSConverted(3), 2);
 
 // ---------- Brainstem ----------
 eq('brainstem max rule', E.calcBrainstemFS({ eom: 1, dysarthria: 3, hearing: 2 }), 3);
+eq('EOM moderate = FS 2', E.calcBrainstemFS({ eom: 3 }), 2);
+eq('EOM marked = FS 3', E.calcBrainstemFS({ eom: 4 }), 3);
+eq('EOM mild = FS 1', E.calcBrainstemFS({ eom: 2 }), 1);
+eq('EOM marked + dysarthria 4 = FS 4', E.calcBrainstemFS({ eom: 4, dysarthria: 4 }), 4);
 
 // ---------- Pyramidal ----------
 eq('pyramidal fatigability -> FS2', full({ p_overall: 1 }).pyramidal_fs, 2);
@@ -110,17 +114,36 @@ eq('AS 15 (cannot communicate/eat) -> 9.5', full({ amb_assistance: 'bed_nocomm' 
 eq('manual AS 14 -> 9.0', full({ a_score: 14 }).edss_step, 9.0);
 eq('bedbound stays 8.0', full({ amb_assistance: 'bedbound' }).edss_step, 8.0);
 const rm = full({ m_depress: 1 });
-eq('mood alone: sheet cerebral 1', rm.cerebral_fs, 1);
+eq('mood alone: sheet cerebral 0 (recorded only)', rm.cerebral_fs, 0);
 eq('mood alone: step cerebral 0', rm.cerebral_fs_step, 0);
 eq('mood alone: EDSS 0.0', rm.edss_step, 0.0);
 eq('mood alone flag', rm.cerebral_mood_only, true);
 eq('moderate fatigue -> cerebral 2 (manual)', E.calcCerebralFS({ mentation: 0, fatigue: 2 }), 2);
-eq('unilateral exactly 50 m -> AS 8 (manual: more than 50 m = 6.0)', E.calcAmbulationScore({ assistance: 'unilateral', distance_m: 50 }), 8);
+eq('unilateral exactly 50 m -> AS 6 (50 m or more = 6.0)', E.calcAmbulationScore({ assistance: 'unilateral', distance_m: 50 }), 6);
 eq('unilateral 51 m -> AS 6', E.calcAmbulationScore({ assistance: 'unilateral', distance_m: 51 }), 6);
-eq('bilateral exactly 120 m -> AS 9', E.calcAmbulationScore({ assistance: 'bilateral', distance_m: 120 }), 9);
+eq('bilateral exactly 120 m -> AS 7 (120 m or more = 6.0)', E.calcAmbulationScore({ assistance: 'bilateral', distance_m: 120 }), 7);
 eq('bilateral 121 m -> AS 7', E.calcAmbulationScore({ assistance: 'bilateral', distance_m: 121 }), 7);
 eq('bilateral, no distance -> AS 7 (conservative, EDSS 6.0)', E.calcAmbulationScore({ assistance: 'bilateral', distance_m: null }), 7);
 eq('unilateral, no distance -> AS 6 (conservative, EDSS 6.0)', E.calcAmbulationScore({ assistance: 'unilateral', distance_m: null }), 6);
+
+// Sen 2018, Table 3: all ten worked examples (converted Visual and Bowel/Bladder grades, Ambulation 0)
+eq('Sen 2018 Table 3 row 1', E.calcEDSSStep({ visual: 0, brainstem: 3, pyramidal: 0, cerebellar: 0, sensory: 0, bb: 0, cerebral: 0 }, 0), 3.0);
+eq('Sen 2018 Table 3 row 2', E.calcEDSSStep({ visual: 1, brainstem: 3, pyramidal: 0, cerebellar: 0, sensory: 0, bb: 0, cerebral: 0 }, 0), 3.0);
+eq('Sen 2018 Table 3 row 3', E.calcEDSSStep({ visual: 1, brainstem: 3, pyramidal: 1, cerebellar: 1, sensory: 0, bb: 0, cerebral: 1 }, 0), 3.0);
+eq('Sen 2018 Table 3 row 4', E.calcEDSSStep({ visual: 2, brainstem: 3, pyramidal: 0, cerebellar: 0, sensory: 0, bb: 0, cerebral: 0 }, 0), 3.5);
+eq('Sen 2018 Table 3 row 5', E.calcEDSSStep({ visual: 2, brainstem: 3, pyramidal: 1, cerebellar: 1, sensory: 1, bb: 0, cerebral: 0 }, 0), 3.5);
+eq('Sen 2018 Table 3 row 6', E.calcEDSSStep({ visual: 1, brainstem: 3, pyramidal: 1, cerebellar: 1, sensory: 3, bb: 0, cerebral: 1 }, 0), 3.5);
+eq('Sen 2018 Table 3 row 7', E.calcEDSSStep({ visual: 1, brainstem: 3, pyramidal: 1, cerebellar: 3, sensory: 3, bb: 1, cerebral: 0 }, 0), 4.0);
+eq('Sen 2018 Table 3 row 8', E.calcEDSSStep({ visual: 0, brainstem: 1, pyramidal: 4, cerebellar: 2, sensory: 1, bb: 0, cerebral: 0 }, 0), 4.5);
+eq('Sen 2018 Table 3 row 9', E.calcEDSSStep({ visual: 0, brainstem: 1, pyramidal: 4, cerebellar: 3, sensory: 3, bb: 1, cerebral: 0 }, 0), 4.5);
+eq('Sen 2018 Table 3 row 10', E.calcEDSSStep({ visual: 0, brainstem: 1, pyramidal: 4, cerebellar: 3, sensory: 4, bb: 1, cerebral: 1 }, 0), 5.0);
+const z0 = { visual: 0, brainstem: 0, pyramidal: 0, cerebellar: 0, sensory: 0, bb: 0, cerebral: 0 };
+[[{ pyramidal: 2, cerebellar: 2, brainstem: 2, sensory: 2, bb: 2, visual: 2 }, 4.0, 'six FS 2'],
+ [{ pyramidal: 3, cerebellar: 3, sensory: 3, bb: 2 }, 4.0, 'three FS 3 + FS 2'],
+ [{ pyramidal: 3, cerebellar: 3, sensory: 3, bb: 3, brainstem: 3 }, 4.5, 'five FS 3'],
+ [{ pyramidal: 3, cerebellar: 3, sensory: 3, bb: 3, brainstem: 3, cerebral: 3 }, 5.0, 'six FS 3'],
+ [{ pyramidal: 4, cerebellar: 3, sensory: 3 }, 4.5, 'FS 4 + two FS 3'],
+ [{ pyramidal: 4, cerebellar: 2, sensory: 2 }, 4.5, 'FS 4 + two FS 2']].forEach(([f, want, name]) => eq('table: ' + name, E.calcEDSSStep({ ...z0, ...f }, 0), want));
 const tr = E.calcEDSSStepTrace({ visual: 0, brainstem: 0, pyramidal: 3, cerebellar: 3, sensory: 0, bb: 0, cerebral: 0 }, 0);
 eq('trace: two FS 3 unrestricted -> 3.5 by fs_pattern', tr.edss === 3.5 && tr.branch === 'fs_pattern', true);
 const tr2 = E.calcEDSSStepTrace({ visual: 0, brainstem: 0, pyramidal: 0, cerebellar: 0, sensory: 0, bb: 0, cerebral: 0 }, 3);
@@ -140,9 +163,40 @@ eq('one FS 3 + three FS 2 -> 4.0', T({ pyramidal: 3, sensory: 2, cerebellar: 2, 
 eq('two FS 3 + FS 2 -> 4.0', T({ pyramidal: 3, sensory: 3, cerebellar: 2 }), 4.0);
 eq('FS 5 + FS 3, AS 0 -> 5.0 (5.5+ needs ambulation)', T({ pyramidal: 5, sensory: 3 }), 5.0);
 eq('two FS 5, AS 0 -> 5.0', T({ pyramidal: 5, cerebellar: 5 }), 5.0);
-eq('FS 6 -> 6.0 floor', T({ sensory: 6 }), 6.0);
+eq('FS 6 alone -> 5.0 (steps above 5.0 set by walking)', T({ sensory: 6 }), 5.0);
 eq('FS 5 with AS 4 -> 5.5 (ambulation)', T({ pyramidal: 5 }, 4), 5.5);
 eq('FS 2 with AS 3 -> 5.0 (ambulation floor)', T({ pyramidal: 2 }, 3), 5.0);
+
+// v36.6 rule decisions
+eq('BMRC 4 in hip flexors R+L and knee flexor R = 3 groups -> FS 3', E.calcPyramidalFS({ strength: { hipflex: { R: 4, L: 4 }, kneeflex: { R: 4, L: 5 } } }), 3);
+eq('BMRC 4 in deltoid R+L = 2 groups -> FS 2', E.calcPyramidalFS({ strength: { deltoid: { R: 4, L: 4 } } }), 2);
+eq('marked position sense in 3 limbs -> FS 4', E.calcSensoryFS({ pos_ue_R: 3, pos_le_R: 3, pos_le_L: 3 }), 4);
+eq('marked position + vibration in all 4 limbs -> FS 5', E.calcSensoryFS({ pos_ue_R: 3, pos_ue_L: 3, pos_le_R: 3, pos_le_L: 3, vib_ue_R: 3, vib_ue_L: 3, vib_le_R: 3, vib_le_L: 3 }), 5);
+eq('one aid, 3 m -> AS 10 (EDSS 7.0)', E.calcAmbulationScore({ assistance: 'unilateral', distance_m: 3 }), 10);
+eq('two aids, 4 m -> AS 10 (EDSS 7.0)', E.calcAmbulationScore({ assistance: 'bilateral', distance_m: 4 }), 10);
+eq('two aids, exactly 5 m -> AS 9', E.calcAmbulationScore({ assistance: 'bilateral', distance_m: 5 }), 9);
+
+// Rule notes (shown next to the score where the definitions leave a gap; never change the score)
+{
+  const notes = inp => { const r = E.calculateFullEDSS(inp); return { r, n: E.edssRuleNotes(inp, r).map(x => x.msg).join(' | ') }; };
+  let t = notes({ p_str_deltoid_R: 2, p_str_biceps_R: 2 });
+  eq('note: severe monoparesis FS 4', t.r.pyramidal_fs, 4); eq('note text: monoparesis', /exceeds the FS 3 definition/.test(t.n), true);
+  t = notes({ p_str_hipflex_R: 3, p_str_hipflex_L: 3, p_str_deltoid_R: 3 });
+  eq('note: one weak group = weak limb, FS 4', t.r.pyramidal_fs, 4); eq('note text: limb counted', /counted as weak/.test(t.n), true);
+  t = notes({ p_str_hipflex_R: 3, p_str_kneeflex_R: 3, p_str_ankdorsi_R: 3 });
+  eq('note: BMRC 3 in 3 groups, 1 limb = FS 3', t.r.pyramidal_fs, 3); eq('note text: kept at 3', /kept at FS 3/.test(t.n), true);
+  t = notes({ s_pos_ue_R: 3, s_pos_le_R: 3, s_pos_le_L: 3 });
+  eq('note: position 3 limbs', /more than two limbs = FS 4/.test(t.n), true);
+  t = notes({ b_eom: 2 });
+  eq('note: mild EOM', /mild eye-movement/.test(t.n), true);
+  t = notes({ amb_assistance: 'bilateral', amb_distance_measured: 3 });
+  eq('note: under 5 m with aid', t.r.ambulation_score === 10 && /less than 5 m/.test(t.n), true);
+  eq('gap note: FS4 + FS2 only', /no grade 3/.test(E.edssStepGapNote([4, 2, 0, 0, 0, 0, 0])), true);
+  eq('gap note: FS3 + three FS2', /exceeds the 3.5 row/.test(E.edssStepGapNote([3, 2, 2, 2, 0, 0, 0])), true);
+  eq('gap note: table row has none', E.edssStepGapNote([4, 3, 0, 0, 0, 0, 0]), null);
+  t = notes({});
+  eq('no notes for a normal exam', t.n, '');
+}
 
 module.exports = { cases };
 
