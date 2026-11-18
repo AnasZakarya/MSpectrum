@@ -1,5 +1,15 @@
 # Changelog
 
+## v36.5 (2026-11-18): EDSS Calculator upgrade and walking definitions
+
+- **EDSS Calculator:** a system can be marked "Not assessed"; systems not entered or not assessed give an EDSS range (lowest and highest step they allow) instead of being counted as 0. New "What would change this step" list (one grade down or up in a system, or the next walking level). A note when 4.0 or 4.5 comes from a combination of lower grades, where the published definitions have no exact limits. The plain-language meaning of the step is shown under the result. Save options: copy summary, image, PDF / print and a CSV row for research.
+- **Same plausibility rule as the full exam:** restricted walking (Ambulation Score 1 to 4) without a Pyramidal or Cerebellar grade of 2 or more is flagged; walking-set steps (6.0 and above) with Pyramidal and Cerebellar 0 or 1 are flagged.
+- **Walking definitions (all modes):** an ankle-foot orthosis alone counts as no aid; help from another person counts as bilateral aid; with two aids, the lower limit is about 5 m (below that, wheelchair), as in Sen 2018 and Kurtzke 1983 step 7.0. The 50 m and 120 m cut-offs are unchanged ("more than 50 m" and "more than 120 m", Sen 2018).
+- **Quick Check:** a short "How to read the EDSS" note on the result.
+- **About:** "How the EDSS engine is checked" (public test suite, independent Python implementation, 2000-case parity).
+- AutoEDSSguide card on the home page: 7 modes.
+- Tests: tests/fscalc.test.js 34 checks.
+
 ## v36.4 (2026-11-17): EDSS Calculator
 
 - New AutoEDSSguide mode, **EDSS Calculator**, for Functional System grades that are already known. Walking comes first: the help used (none, one-sided aid, two-sided aid, wheelchair, bed or chair), then the distance or level that fits it. Each FS grade is chosen from MSpectrum's own short description; a chosen grade folds to one line and can be changed.
